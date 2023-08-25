@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
+   <children>
+      <Button fx:id="easyBtn" layoutX="141.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Dobby" />
+      <Button fx:id="mediumBtn" layoutX="241.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Harry">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="hardBtn" layoutX="340.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Voldemort">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="twoMinBtn" layoutX="141.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="2">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="fourMinBtn" layoutX="241.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="sixMinBtn" layoutX="340.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="6">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="259.0" layoutY="336.0" mnemonicParsing="false" text="START">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Text layoutX="252.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="245.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="172.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
