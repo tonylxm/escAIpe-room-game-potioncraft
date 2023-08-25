@@ -11,7 +11,8 @@ public class SceneManager {
     BOOKSHELF,
     CAULDRON,
     SHELF_LEFT,
-    SHELF_RIGHT
+    SHELF_RIGHT,
+    GAME_OVER
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

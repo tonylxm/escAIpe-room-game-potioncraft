@@ -1,58 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
    <children>
-      <Button fx:id="easyBtn" layoutX="141.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Dobby" />
-      <Button fx:id="mediumBtn" layoutX="241.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Harry">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="hardBtn" layoutX="340.0" layoutY="136.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Voldemort">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="twoMinBtn" layoutX="141.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="2">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="fourMinBtn" layoutX="241.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="4">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="sixMinBtn" layoutX="340.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="6">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button layoutX="259.0" layoutY="336.0" mnemonicParsing="false" text="START">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Text layoutX="252.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+      <Button layoutX="248.0" layoutY="337.0" mnemonicParsing="false" text="START">
          <font>
             <Font size="20.0" />
          </font>
+      </Button>
+      <Text layoutX="241.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+         <font>
+            <Font size="25.0" />
+         </font>
       </Text>
-      <Text layoutX="245.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
+      <Text layoutX="233.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="146.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Text>
+      <ToggleButton blendMode="DARKEN" layoutX="66.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="2">
+         <toggleGroup>
+            <ToggleGroup fx:id="TimeLimit" />
+         </toggleGroup>
          <font>
             <Font size="20.0" />
          </font>
-      </Text>
-      <Text layoutX="172.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
+      </ToggleButton>
+      <ToggleButton blendMode="DARKEN" layoutX="216.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="4" toggleGroup="$TimeLimit">
          <font>
-            <Font size="45.0" />
+            <Font size="20.0" />
          </font>
-      </Text>
+      </ToggleButton>
+      <ToggleButton blendMode="DARKEN" layoutX="366.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="6" toggleGroup="$TimeLimit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton layoutX="66.0" layoutY="128.0" mnemonicParsing="false" prefWidth="150.0" text="Dobby">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="Difficulty" />
+         </toggleGroup>
+      </ToggleButton>
+      <ToggleButton layoutX="216.0" layoutY="128.0" mnemonicParsing="false" prefWidth="150.0" text="Harry" toggleGroup="$Difficulty">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton layoutX="366.0" layoutY="128.0" mnemonicParsing="false" prefWidth="150.0" text="Voldemort" toggleGroup="$Difficulty">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </ToggleButton>
    </children>
 </Pane>
