@@ -29,7 +29,7 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <ToggleButton blendMode="DARKEN" layoutX="66.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="2">
+      <ToggleButton layoutX="66.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="2">
          <toggleGroup>
             <ToggleGroup fx:id="TimeLimit" />
          </toggleGroup>
@@ -37,12 +37,12 @@
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <ToggleButton blendMode="DARKEN" layoutX="216.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="4" toggleGroup="$TimeLimit">
+      <ToggleButton layoutX="216.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="4" toggleGroup="$TimeLimit">
          <font>
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <ToggleButton blendMode="DARKEN" layoutX="366.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="6" toggleGroup="$TimeLimit">
+      <ToggleButton layoutX="366.0" layoutY="230.0" mnemonicParsing="false" prefWidth="150.0" text="6" toggleGroup="$TimeLimit">
          <font>
             <Font size="20.0" />
          </font>
