@@ -1,8 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class ShelfLeftController {
     @FXML private Rectangle itemOneRect;
@@ -11,7 +16,12 @@ public class ShelfLeftController {
     @FXML private Rectangle itemFourRect;
     @FXML private Rectangle itemFiveRect;
     @FXML private Polygon rightShpe;
+    @FXML private Button rightBtn;
 
-    @FXML public void goT=Right(){
+    @FXML 
+    public void goRight(MouseEvent event){
+        System.out.println("SHELF LEFT > CAULDRON ROOM");
+        Scene currentScene = rightBtn.getScene();
+        currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     }
 }
