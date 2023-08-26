@@ -30,4 +30,6 @@ public class TransitionAnimation {
     fadeOut.setToValue(toValue);
     fadeOut.play();
   }
+
+  public void fadeScene(Node obj, double ocpacity) {}
 }

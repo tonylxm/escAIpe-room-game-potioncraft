@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -28,6 +29,7 @@ public class MainMenuController {
   private TimeLimit timeLimit;
   private TransitionAnimation animation = new TransitionAnimation();
 
+  @FXML private Pane pane;
   @FXML private Button playBtn;
   @FXML private Button startBtn;
   @FXML private Text difficultyTxt;
@@ -131,6 +133,8 @@ public class MainMenuController {
     fadeAndDisableSettingsBtns(true, 0.0);
 
     // NEXT: FADE SCENES IN AND OUT
+    // animation.fade(pane, 1.0);
+
     System.out.println("CAULDRON ROOM");
     Scene sceneButtonIsIn = startBtn.getScene();
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
