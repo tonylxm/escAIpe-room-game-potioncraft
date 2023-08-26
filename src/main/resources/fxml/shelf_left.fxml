@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane id="rightBtn" fx:id="rightBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle id="itemOneRect" fx:id="itemOneRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="56.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
+      <Rectangle id="itemTwoRect" fx:id="itemTwoRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="261.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
+      <Rectangle id="itemThreeRect" fx:id="itemThreeRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="468.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
+      <Rectangle id="itemFourRect" fx:id="itemFourRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="162.0" layoutY="161.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
+      <Rectangle id="itemFiveRect" fx:id="itemFiveRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="370.0" layoutY="161.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
+      <Polygon id="rightShape" fx:id="rightShape" fill="DODGERBLUE" layoutX="360.0" layoutY="300.0" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="547.0" layoutY="227.0" mnemonicParsing="false" text="&gt;" />
+   </children>
+</Pane>
