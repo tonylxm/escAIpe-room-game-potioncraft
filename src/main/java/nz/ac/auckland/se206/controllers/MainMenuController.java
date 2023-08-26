@@ -41,78 +41,94 @@ public class MainMenuController {
 
   @FXML
   public void playGame() throws InterruptedException {
-    animation.fade(playBtn, false);
+    animation.fade(playBtn, 0.0);
     playBtn.setDisable(true);
 
-    Task<Void> fadeInTask =
+    Task<Void> fadeInSettingsBtnsTask =
         new Task<Void>() {
 
           @Override
           protected Void call() throws Exception {
             Thread.sleep(1000);
-            fadeAndDisableSettingsBtns(false, true);
+            fadeAndDisableSettingsBtns(false, 1.0);
             return null;
           }
         };
-    Thread fadeInThread = new Thread(fadeInTask, "Fade In Thread");
-    fadeInThread.start();
+    Thread fadeInSettingsBtnsThread =
+        new Thread(fadeInSettingsBtnsTask, "fadeIn settings btns thread");
+    fadeInSettingsBtnsThread.start();
   }
 
   // tf stands for true/false
-  public void fadeAndDisableSettingsBtns(boolean tf, boolean appear) {
+  public void fadeAndDisableSettingsBtns(boolean tf, double ocpacity) {
     easyBtn.setDisable(tf);
     mediumBtn.setDisable(tf);
     hardBtn.setDisable(tf);
     twoMinBtn.setDisable(tf);
     fourMinBtn.setDisable(tf);
     sixMinBtn.setDisable(tf);
-    startBtn.setDisable(tf);
 
-    animation.fade(difficultyTxt, appear);
-    animation.fade(timeLimitTxt, appear);
-    animation.fade(easyBtn, appear);
-    animation.fade(mediumBtn, appear);
-    animation.fade(hardBtn, appear);
-    animation.fade(twoMinBtn, appear);
-    animation.fade(fourMinBtn, appear);
-    animation.fade(sixMinBtn, appear);
-    animation.fade(startBtn, appear);
+    startBtn.setDisable(true);
+
+    animation.fade(difficultyTxt, ocpacity);
+    animation.fade(timeLimitTxt, ocpacity);
+    animation.fade(easyBtn, ocpacity);
+    animation.fade(mediumBtn, ocpacity);
+    animation.fade(hardBtn, ocpacity);
+    animation.fade(twoMinBtn, ocpacity);
+    animation.fade(fourMinBtn, ocpacity);
+    animation.fade(sixMinBtn, ocpacity);
+    animation.fade(startBtn, 0.4);
   }
 
   @FXML
   public void setEasy() {
     difficulty = Difficulty.EASY;
+    startBtnEnable();
   }
 
   @FXML
   public void setMedium() {
     difficulty = Difficulty.MEDIUM;
+    startBtnEnable();
   }
 
   @FXML
   public void setHard() {
     difficulty = Difficulty.HARD;
+    startBtnEnable();
   }
 
   @FXML
   public void setTwoMin() {
     timeLimit = TimeLimit.TWO_MIN;
+    startBtnEnable();
   }
 
   @FXML
   public void setFourMin() {
     timeLimit = TimeLimit.FOUR_MIN;
+    startBtnEnable();
   }
 
   @FXML
   public void setSixMin() {
     timeLimit = TimeLimit.SIX_MIN;
+    startBtnEnable();
+  }
+
+  // Only set startBtn enabled when difficutly and time limit have been chosen
+  public void startBtnEnable() {
+    if (difficulty != null && timeLimit != null) {
+      startBtn.setDisable(false);
+      startBtn.setOpacity(1.0);
+    }
   }
 
   @FXML
   public void startGame() throws IOException {
-    animation.fade(startBtn, false);
-    fadeAndDisableSettingsBtns(true, false);
+    animation.fade(startBtn, 0.0);
+    fadeAndDisableSettingsBtns(true, 0.0);
 
     // NEXT: FADE SCENES IN AND OUT
     System.out.println("CAULDRON ROOM");
