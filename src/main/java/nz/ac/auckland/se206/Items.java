@@ -44,7 +44,7 @@ public class Items {
         int i = 0;
         while (i < 2*n) {
             // Method for getting a random item could be improved
-            Item item = list[random.nextInt(0, 10)];
+            Item item = list[random.nextInt(10)];
             if (!available.contains(item)) {
                 available.add(item);
                 if (necessary.size() < n) {
