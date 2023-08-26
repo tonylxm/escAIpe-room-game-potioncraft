@@ -7,9 +7,8 @@ public class SceneManager {
 
   public enum AppUi {
     MAIN_MENU,
-    ROOM,
+    CAULDRON_ROOM,
     BOOKSHELF,
-    CAULDRON,
     SHELF_LEFT,
     SHELF_RIGHT,
     GAME_OVER

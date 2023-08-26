@@ -1,7 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
@@ -79,7 +81,6 @@ public class MainMenuController {
 
   @FXML
   public void setEasy() {
-    System.out.println("Easy");
     difficulty = Difficulty.EASY;
   }
 
@@ -109,11 +110,13 @@ public class MainMenuController {
   }
 
   @FXML
-  public void startGame() {
+  public void startGame() throws IOException {
     animation.fade(startBtn, false);
     fadeAndDisableSettingsBtns(true, false);
 
+    // NEXT: FADE SCENES IN AND OUT
     System.out.println("CAULDRON ROOM");
-    SceneManager.getUiRoot(AppUi.CAULDRON);
+    Scene sceneButtonIsIn = startBtn.getScene();
+    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
 }
