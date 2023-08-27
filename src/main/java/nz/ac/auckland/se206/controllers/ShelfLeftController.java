@@ -24,7 +24,6 @@ public class ShelfLeftController {
     @FXML private Rectangle itemFiveRect;
     @FXML private Rectangle textRect;
     @FXML private Polygon rightShpe;
-    @FXML private Button rightBtn;
     @FXML private Label textLbl;
     @FXML private Label noLbl;
     @FXML private Label yesLbl;
@@ -42,7 +41,7 @@ public class ShelfLeftController {
     @FXML 
     public void goRight(MouseEvent event){
         System.out.println("SHELF LEFT > CAULDRON ROOM");
-        Scene currentScene = rightBtn.getScene();
+        Scene currentScene = rightShpe.getScene();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     }
 
