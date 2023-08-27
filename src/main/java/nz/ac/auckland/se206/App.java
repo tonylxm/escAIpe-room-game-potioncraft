@@ -45,7 +45,7 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     SceneManager.addAppUi(AppUi.MAIN_MENU, loadFxml("main_menu"));
-    SceneManager.addAppUi(AppUi.CAULDRON_ROOM, loadFxml("room"));
+    SceneManager.addAppUi(AppUi.CAULDRON_ROOM, loadFxml("cauldron_room"));
     SceneManager.addAppUi(AppUi.GAME_OVER, loadFxml("game_over"));
     // SceneManager.addAppUi(AppUi.SHELF_LEFT, loadFxml(""));
     // SceneManager.addAppUi(AppUi.SHELF_RIGHT, loadFxml(""));
