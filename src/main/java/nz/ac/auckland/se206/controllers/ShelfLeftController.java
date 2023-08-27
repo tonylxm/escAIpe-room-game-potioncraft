@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -23,5 +24,30 @@ public class ShelfLeftController {
         System.out.println("SHELF LEFT > CAULDRON ROOM");
         Scene currentScene = rightBtn.getScene();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    }
+
+    @FXML
+    public void itemOneGlow() {
+        itemOneRect.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void itemTwoGlow() {
+        itemTwoRect.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void itemThreeGlow() {
+        itemThreeRect.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void itemFourGlow() {
+        itemFourRect.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void itemFiveGlow() {
+        itemFiveRect.setStrokeWidth(5);
     }
 }
