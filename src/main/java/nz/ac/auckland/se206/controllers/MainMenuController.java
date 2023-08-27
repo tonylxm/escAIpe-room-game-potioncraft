@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.Inventory;
+import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
@@ -28,6 +30,9 @@ public class MainMenuController {
   private Difficulty difficulty;
   private TimeLimit timeLimit;
   private TransitionAnimation animation = new TransitionAnimation();
+
+  public static Items items;
+  public static Inventory inventory;
 
   @FXML private Pane pane;
   @FXML private Button playBtn;
@@ -131,6 +136,8 @@ public class MainMenuController {
   public void startGame() throws IOException {
     animation.fade(startBtn, 0.0);
     fadeAndDisableSettingsBtns(true, 0.0);
+    items = new Items(3);
+    inventory = new Inventory();
 
     // NEXT: FADE SCENES IN AND OUT
     // animation.fade(pane, 1.0);
