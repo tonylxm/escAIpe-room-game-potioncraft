@@ -50,6 +50,11 @@ public class ShelfLeftController {
         if (itemOnePicked) return;
         itemOneRect.setStrokeWidth(5);
     }
+
+    @FXML void itemOneGlowExit() {
+        if (itemOnePicked) return;
+        itemOneRect.setStrokeWidth(0);
+    }
     
     @FXML
     public void itemOneSelect() {
@@ -68,6 +73,12 @@ public class ShelfLeftController {
     public void itemTwoGlow() {
         if (itemTwoPicked) return;
         itemTwoRect.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void itemTwoGlowExit() {
+        if (itemTwoPicked) return;
+        itemTwoRect.setStrokeWidth(0);
     }
 
     @FXML
@@ -90,6 +101,12 @@ public class ShelfLeftController {
     }
 
     @FXML
+    public void itemThreeGlowExit() {
+        if (itemThreePicked) return;
+        itemThreeRect.setStrokeWidth(0);
+    }
+
+    @FXML
     public void itemThreeSelect() {
         if (itemThreePicked) return;
         textLbl.setText("Add to inventory?");
@@ -109,6 +126,12 @@ public class ShelfLeftController {
     }
 
     @FXML
+    public void itemFourGlowExit() {
+        if (itemFourPicked) return;
+        itemFourRect.setStrokeWidth(0);
+    }
+
+    @FXML
     public void itemFourSelect() {
         if (itemFourPicked) return;
         textLbl.setText("Add to inventory?");
@@ -125,6 +148,12 @@ public class ShelfLeftController {
     public void itemFiveGlow() {
         if (itemFivePicked) return;
         itemFiveRect.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void itemFiveGlowExit() {
+        if (itemFivePicked) return;
+        itemFiveRect.setStrokeWidth(0);
     }
 
     @FXML
