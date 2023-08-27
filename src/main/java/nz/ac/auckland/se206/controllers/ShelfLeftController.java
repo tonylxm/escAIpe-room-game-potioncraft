@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Iterator;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -202,6 +204,12 @@ public class ShelfLeftController {
                 itemFiveRect.setOpacity(0);
                 itemFivePicked = true;
                 break;
+        }
+
+        System.out.println();
+        Iterator itr = new MainMenuController().inventory.inventory.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
         }
     }
 
