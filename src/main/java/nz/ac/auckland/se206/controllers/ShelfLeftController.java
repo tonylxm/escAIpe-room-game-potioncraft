@@ -40,6 +40,7 @@ public class ShelfLeftController {
         readyToAdd = false;
     }
 
+    /** Changing scenes to the cauldron room */
     @FXML 
     public void goRight(MouseEvent event){
         System.out.println("SHELF LEFT > CAULDRON ROOM");
@@ -47,6 +48,18 @@ public class ShelfLeftController {
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     }
 
+    /** Highlighting when hovered over */
+    @FXML
+    public void goRightGlow() {
+        rightShpe.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void goRightGlowExit() {
+        rightShpe.setStrokeWidth(0);
+    }
+
+    /** Highlighting when hovered over */
     @FXML
     public void itemOneGlow() {
         if (itemOnePicked) return;
@@ -58,6 +71,7 @@ public class ShelfLeftController {
         itemOneRect.setStrokeWidth(0);
     }
     
+    /** Selecting item one and prompting user to add to inventory */
     @FXML
     public void itemOneSelect() {
         if (itemOnePicked) return;
@@ -71,6 +85,7 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemTwoGlow() {
         if (itemTwoPicked) return;
@@ -83,6 +98,7 @@ public class ShelfLeftController {
         itemTwoRect.setStrokeWidth(0);
     }
 
+    /** Selecting item two and prompting user to add to inventory */
     @FXML
     public void itemTwoSelect() {
         if (itemTwoPicked) return;
@@ -96,6 +112,7 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemThreeGlow() {
         if (itemThreePicked) return;
@@ -108,6 +125,7 @@ public class ShelfLeftController {
         itemThreeRect.setStrokeWidth(0);
     }
 
+    /** Selecting item three and prompting user to add to inventory */
     @FXML
     public void itemThreeSelect() {
         if (itemThreePicked) return;
@@ -121,6 +139,7 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemFourGlow() {
         if (itemFourPicked) return;
@@ -133,6 +152,7 @@ public class ShelfLeftController {
         itemFourRect.setStrokeWidth(0);
     }
 
+    /** Selecting item four and prompting user to add to inventory */
     @FXML
     public void itemFourSelect() {
         if (itemFourPicked) return;
@@ -146,6 +166,7 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemFiveGlow() {
         if (itemFivePicked) return;
@@ -158,6 +179,7 @@ public class ShelfLeftController {
         itemFiveRect.setStrokeWidth(0);
     }
 
+    /** Selecting item five and prompting user to add to inventory */
     @FXML
     public void itemFiveSelect() {
         if (itemFivePicked) return;
@@ -171,6 +193,7 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Adding item to inventory if an item is selected */
     @FXML
     public void addItem() {
         if (!readyToAdd) return;
@@ -213,6 +236,7 @@ public class ShelfLeftController {
         }
     }
 
+    /** Not adding a selected item to the inventory */
     @FXML
     public void noAdd() {
         if (!readyToAdd) return;
