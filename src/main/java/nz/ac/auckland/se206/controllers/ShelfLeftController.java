@@ -157,12 +157,20 @@ public class ShelfLeftController {
         System.out.println("Item not added to inventory");
     }
 
+    /**
+     * Making text box appear or dissapear with given text.
+     * 
+     * @param text the text to be displayed
+     * @param on whether the text box should be visible or not
+     */
     @FXML
     private void setText(String text, boolean on) {
         textLbl.setText(text);
         if (on) {
             textRect.setOpacity(1);
             textLbl.setOpacity(1);
+            // Desicion labels need to be refactored to deal with
+            // different room interactions, e.g. proceed.
             yesLbl.setOpacity(1);
             noLbl.setOpacity(1);
             dashLbl.setOpacity(1);
