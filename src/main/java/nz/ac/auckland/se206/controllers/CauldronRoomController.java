@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -55,16 +54,14 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
-    System.out.println("CAULDRON ROOM > SHELF LEFT");
-    Scene currentScene = cauldronRectangle.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
+    System.out.println("CAULDRON ROOM -> SHELF LEFT");
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
   }
 
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("CAULDRON ROOM > SHELF RIGHT");
-    Scene currentScene = cauldronRectangle.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
+    System.out.println("CAULDRON ROOM -> SHELF RIGHT");
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
   }
 
   @FXML
