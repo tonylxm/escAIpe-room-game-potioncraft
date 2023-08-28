@@ -15,6 +15,9 @@ public class CauldronRoomController {
   @FXML private Rectangle wizardRectangle;
   @FXML private Polygon rightArrow;
   @FXML private Polygon leftArrow;
+  @FXML private Rectangle bookFireRectangle;
+  @FXML private Rectangle bookWaterRectangle;
+  @FXML private Rectangle bookAirRectangle;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -41,6 +44,21 @@ public class CauldronRoomController {
       leftArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
       leftArrow.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+
+    if (bookFireRectangle != null) {
+      bookFireRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
+      bookFireRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+    }
+
+    if (bookWaterRectangle != null) {
+      bookWaterRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
+      bookWaterRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+    }
+
+    if (bookAirRectangle != null) {
+      bookAirRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
+      bookAirRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+    }
   }
 
   @FXML
@@ -51,6 +69,21 @@ public class CauldronRoomController {
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
+  }
+
+  @FXML
+  public void clickBookFire(MouseEvent event) {
+    System.out.println("book fire clicked");
+  }
+
+  @FXML
+  public void clickBookWater(MouseEvent event) {
+    System.out.println("book water clicked");
+  }
+
+  @FXML
+  public void clickBookAir(MouseEvent event) {
+    System.out.println("book air clicked");
   }
 
   @FXML
