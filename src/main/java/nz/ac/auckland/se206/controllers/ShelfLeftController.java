@@ -44,22 +44,27 @@ public class ShelfLeftController {
         if (itemOneRect != null) {
             itemOneRect.setOnMouseEntered(event -> interactionHandler.handle(event));
             itemOneRect.setOnMouseExited(event -> interactionHandler.handle(event));
+            itemOneRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
         }
         if (itemTwoRect != null) {
             itemTwoRect.setOnMouseEntered(event -> interactionHandler.handle(event));
             itemTwoRect.setOnMouseExited(event -> interactionHandler.handle(event));
+            itemTwoRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
         }
         if (itemThreeRect != null) {
             itemThreeRect.setOnMouseEntered(event -> interactionHandler.handle(event));
             itemThreeRect.setOnMouseExited(event -> interactionHandler.handle(event));
+            itemThreeRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
         }
         if (itemFourRect != null) {
             itemFourRect.setOnMouseEntered(event -> interactionHandler.handle(event));
             itemFourRect.setOnMouseExited(event -> interactionHandler.handle(event));
+            itemFourRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
         }
         if (itemFiveRect != null) {
             itemFiveRect.setOnMouseEntered(event -> interactionHandler.handle(event));
             itemFiveRect.setOnMouseExited(event -> interactionHandler.handle(event));
+            itemFiveRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
         }
         if (rightShpe != null) {
             rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -74,54 +79,35 @@ public class ShelfLeftController {
         Scene currentScene = rightShpe.getScene();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     }
-    
-    /** Selecting item one and prompting user to add to inventory */
-    @FXML
-    public void itemOneSelect() {
-        if (itemOnePicked) return;
-        setText("Add to inventory?", true);
-        item = Items.Item.ITEM_1;
-        readyToAdd = true;
-    }
 
-    /** Selecting item two and prompting user to add to inventory */
+    /** 
+     * Selecting the item and prompting user and prompting user to either 
+     * add or not add the item to their inventory. Does nothing if the item
+     * has already been added to the inventory.
+     */
     @FXML
-    public void itemTwoSelect() {
-        if (itemTwoPicked) return;
+    public void itemSelect(Items.Item item) {
+        switch (item) {
+            case ITEM_1:
+                if (itemOnePicked) return;
+                break;
+            case ITEM_2:
+                if (itemTwoPicked) return;
+                break;
+            case ITEM_3:
+                if (itemThreePicked) return;
+                break;
+            case ITEM_4:
+                if (itemFourPicked) return;
+                break;
+            case ITEM_5:
+                if (itemFivePicked) return;
+                break;
+        }
+        this.item = item;
         setText("Add to inventory?", true);
-        item = Items.Item.ITEM_2;
         readyToAdd = true;
-        System.out.println("item two clicked");
-    }
-
-    /** Selecting item three and prompting user to add to inventory */
-    @FXML
-    public void itemThreeSelect() {
-        if (itemThreePicked) return;
-        setText("Add to inventory?", true);
-        item = Items.Item.ITEM_3;
-        readyToAdd = true;
-        System.out.println("item three clicked");
-    }
-
-    /** Selecting item four and prompting user to add to inventory */
-    @FXML
-    public void itemFourSelect() {
-        if (itemFourPicked) return;
-        setText("Add to inventory?", true);
-        item = Items.Item.ITEM_4;
-        readyToAdd = true;
-        System.out.println("item four clicked");
-    }
-
-    /** Selecting item five and prompting user to add to inventory */
-    @FXML
-    public void itemFiveSelect() {
-        if (itemFivePicked) return;
-        setText("Add to inventory?", true);
-        item = Items.Item.ITEM_5;
-        readyToAdd = true;
-        System.out.println("item five clicked");
+        System.out.println(item + " clicked");
     }
 
     /** Adding item to inventory if an item is selected */
@@ -158,7 +144,7 @@ public class ShelfLeftController {
         System.out.println("Current Inventory:");
         Iterator itr = new MainMenuController().inventory.inventory.iterator();
         while (itr.hasNext()) {
-            System.out.println(itr.next());
+            System.out.println("  " + itr.next());
         }
     }
 
