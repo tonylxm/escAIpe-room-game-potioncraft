@@ -4,12 +4,11 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CauldronRoomController">
    <children>
-      <Rectangle fx:id="cauldronRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="135.0" layoutX="219.0" layoutY="160.0" onMouseClicked="#clickCauldron" stroke="BLACK" strokeType="INSIDE" width="135.0" />
-      <Rectangle fx:id="wizardRecatngle" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="168.0" layoutX="474.0" layoutY="32.0" onMouseClicked="#clickWizard" stroke="BLACK" strokeType="INSIDE" width="62.0" />
-      <Polygon fx:id="rightArrow" fill="#ffec1f" layoutX="70.0" layoutY="210.0" onMouseClicked="#goLeft" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="INSIDE" />
-      <Polygon fx:id="leftArrow" fill="#ffec1f" layoutX="578.0" layoutY="210.0" onMouseClicked="#goRight" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="INSIDE" />
+      <Rectangle fx:id="cauldronRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="135.0" layoutX="219.0" layoutY="160.0" onMouseClicked="#clickCauldron" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="135.0" />
+      <Rectangle fx:id="wizardRectangle" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="168.0" layoutX="474.0" layoutY="32.0" onMouseClicked="#clickWizard" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="62.0" />
+      <Polygon fx:id="rightArrow" fill="#ffec1f" layoutX="70.0" layoutY="210.0" onMouseClicked="#goLeft" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="leftArrow" fill="#ffec1f" layoutX="578.0" layoutY="210.0" onMouseClicked="#goRight" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>
