@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Iterator;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,6 +40,7 @@ public class ShelfLeftController {
         readyToAdd = false;
     }
 
+    /** Changing scenes to the cauldron room */
     @FXML 
     public void goRight(MouseEvent event){
         System.out.println("SHELF LEFT > CAULDRON ROOM");
@@ -45,12 +48,30 @@ public class ShelfLeftController {
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     }
 
+    /** Highlighting when hovered over */
+    @FXML
+    public void goRightGlow() {
+        rightShpe.setStrokeWidth(5);
+    }
+
+    @FXML
+    public void goRightGlowExit() {
+        rightShpe.setStrokeWidth(0);
+    }
+
+    /** Highlighting when hovered over */
     @FXML
     public void itemOneGlow() {
         if (itemOnePicked) return;
         itemOneRect.setStrokeWidth(5);
     }
+
+    @FXML void itemOneGlowExit() {
+        if (itemOnePicked) return;
+        itemOneRect.setStrokeWidth(0);
+    }
     
+    /** Selecting item one and prompting user to add to inventory */
     @FXML
     public void itemOneSelect() {
         if (itemOnePicked) return;
@@ -64,12 +85,20 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemTwoGlow() {
         if (itemTwoPicked) return;
         itemTwoRect.setStrokeWidth(5);
     }
 
+    @FXML
+    public void itemTwoGlowExit() {
+        if (itemTwoPicked) return;
+        itemTwoRect.setStrokeWidth(0);
+    }
+
+    /** Selecting item two and prompting user to add to inventory */
     @FXML
     public void itemTwoSelect() {
         if (itemTwoPicked) return;
@@ -83,12 +112,20 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemThreeGlow() {
         if (itemThreePicked) return;
         itemThreeRect.setStrokeWidth(5);
     }
 
+    @FXML
+    public void itemThreeGlowExit() {
+        if (itemThreePicked) return;
+        itemThreeRect.setStrokeWidth(0);
+    }
+
+    /** Selecting item three and prompting user to add to inventory */
     @FXML
     public void itemThreeSelect() {
         if (itemThreePicked) return;
@@ -102,12 +139,20 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemFourGlow() {
         if (itemFourPicked) return;
         itemFourRect.setStrokeWidth(5);
     }
 
+    @FXML
+    public void itemFourGlowExit() {
+        if (itemFourPicked) return;
+        itemFourRect.setStrokeWidth(0);
+    }
+
+    /** Selecting item four and prompting user to add to inventory */
     @FXML
     public void itemFourSelect() {
         if (itemFourPicked) return;
@@ -121,12 +166,20 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Highlighting when hovered over */
     @FXML
     public void itemFiveGlow() {
         if (itemFivePicked) return;
         itemFiveRect.setStrokeWidth(5);
     }
 
+    @FXML
+    public void itemFiveGlowExit() {
+        if (itemFivePicked) return;
+        itemFiveRect.setStrokeWidth(0);
+    }
+
+    /** Selecting item five and prompting user to add to inventory */
     @FXML
     public void itemFiveSelect() {
         if (itemFivePicked) return;
@@ -140,6 +193,7 @@ public class ShelfLeftController {
         readyToAdd = true;
     }
 
+    /** Adding item to inventory if an item is selected */
     @FXML
     public void addItem() {
         if (!readyToAdd) return;
@@ -174,8 +228,15 @@ public class ShelfLeftController {
                 itemFivePicked = true;
                 break;
         }
+
+        System.out.println();
+        Iterator itr = new MainMenuController().inventory.inventory.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
     }
 
+    /** Not adding a selected item to the inventory */
     @FXML
     public void noAdd() {
         if (!readyToAdd) return;
