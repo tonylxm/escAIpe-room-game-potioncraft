@@ -76,6 +76,8 @@ public class ShelfRightController {
     @FXML
     public void goLeft(MouseEvent event) {
         System.out.println("SHELF RIGHT > CAULDRON ROOM");
+        setText("", false);
+        readyToAdd = false;
         Scene currentScene = leftShpe.getScene();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     }
