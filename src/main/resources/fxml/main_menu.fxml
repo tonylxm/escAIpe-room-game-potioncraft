@@ -9,27 +9,27 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
    <children>
-      <Button fx:id="startBtn" disable="true" layoutX="258.0" layoutY="337.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+      <Button fx:id="startBtn" disable="true" layoutX="258.0" layoutY="341.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Text fx:id="difficultyTxt" layoutX="241.0" layoutY="121.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+      <Text fx:id="difficultyTxt" layoutX="251.0" layoutY="125.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="timeLimitTxt" layoutX="233.0" layoutY="216.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
+      <Text fx:id="timeLimitTxt" layoutX="243.0" layoutY="227.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text layoutX="146.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
+      <Text layoutX="155.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
          <font>
             <Font size="50.0" />
          </font>
       </Text>
-      <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="66.0" layoutY="230.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="150.0" text="2">
+      <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="75.0" layoutY="234.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="150.0" text="2">
          <toggleGroup>
             <ToggleGroup fx:id="TimeLimit" />
          </toggleGroup>
@@ -37,17 +37,17 @@
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="216.0" layoutY="230.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="150.0" text="4" toggleGroup="$TimeLimit">
+      <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="225.0" layoutY="234.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="150.0" text="4" toggleGroup="$TimeLimit">
          <font>
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="366.0" layoutY="230.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="150.0" text="6" toggleGroup="$TimeLimit">
+      <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="375.0" layoutY="234.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="150.0" text="6" toggleGroup="$TimeLimit">
          <font>
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="easyBtn" disable="true" layoutX="66.0" layoutY="128.0" mnemonicParsing="false" onAction="#setEasy" opacity="0.0" prefWidth="150.0" text="Dobby">
+      <ToggleButton fx:id="easyBtn" disable="true" layoutX="75.0" layoutY="132.0" mnemonicParsing="false" onAction="#setEasy" opacity="0.0" prefWidth="150.0" text="Dobby">
          <font>
             <Font size="20.0" />
          </font>
@@ -55,17 +55,17 @@
             <ToggleGroup fx:id="Difficulty" />
          </toggleGroup>
       </ToggleButton>
-      <ToggleButton fx:id="mediumBtn" disable="true" layoutX="216.0" layoutY="128.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="150.0" text="Harry" toggleGroup="$Difficulty">
+      <ToggleButton fx:id="mediumBtn" disable="true" layoutX="225.0" layoutY="132.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="150.0" text="Harry" toggleGroup="$Difficulty">
          <font>
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="hardBtn" disable="true" layoutX="366.0" layoutY="128.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefWidth="150.0" text="Voldemort" toggleGroup="$Difficulty">
+      <ToggleButton fx:id="hardBtn" disable="true" layoutX="375.0" layoutY="132.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefWidth="150.0" text="Voldemort" toggleGroup="$Difficulty">
          <font>
             <Font size="20.0" />
          </font>
       </ToggleButton>
-      <Button fx:id="playBtn" layoutX="264.0" layoutY="337.0" mnemonicParsing="false" onAction="#playGame" text="PLAY">
+      <Button fx:id="playBtn" layoutX="264.0" layoutY="341.0" mnemonicParsing="false" onAction="#playGame" text="PLAY">
          <font>
             <Font size="20.0" />
          </font>
