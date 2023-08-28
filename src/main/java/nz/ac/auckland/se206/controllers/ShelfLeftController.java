@@ -84,6 +84,8 @@ public class ShelfLeftController {
      * Selecting the item and prompting user and prompting user to either 
      * add or not add the item to their inventory. Does nothing if the item
      * has already been added to the inventory.
+     * 
+     * @param item the item clicked by user
      */
     @FXML
     public void itemSelect(Items.Item item) {
@@ -102,6 +104,8 @@ public class ShelfLeftController {
                 break;
             case ITEM_5:
                 if (itemFivePicked) return;
+                break;
+            default:
                 break;
         }
         this.item = item;
@@ -138,6 +142,8 @@ public class ShelfLeftController {
             case ITEM_5:
                 itemFiveRect.setOpacity(0);
                 itemFivePicked = true;
+                break;
+            default:
                 break;
         }
         System.out.println("Item added to inventory");

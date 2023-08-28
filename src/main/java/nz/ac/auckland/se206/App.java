@@ -48,7 +48,7 @@ public class App extends Application {
     SceneManager.addAppUi(AppUi.CAULDRON_ROOM, loadFxml("cauldron_room"));
     SceneManager.addAppUi(AppUi.GAME_OVER, loadFxml("game_over"));
     SceneManager.addAppUi(AppUi.SHELF_LEFT, loadFxml("shelf_left"));
-    // SceneManager.addAppUi(AppUi.SHELF_RIGHT, loadFxml(""));
+    SceneManager.addAppUi(AppUi.SHELF_RIGHT, loadFxml("shelf_right"));
 
     Parent root = SceneManager.getUiRoot(AppUi.MAIN_MENU);
     scene = new Scene(root);
