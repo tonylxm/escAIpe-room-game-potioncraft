@@ -44,8 +44,8 @@ public class MainMenuController {
   @FXML private ToggleButton sixMinBtn;
 
   public void initialize() {
-    pane.setOpacity(1);
-    playBtn.setOpacity(1);
+    // pane.setOpacity(1);
+    // playBtn.setOpacity(1);
   }
 
   @FXML
