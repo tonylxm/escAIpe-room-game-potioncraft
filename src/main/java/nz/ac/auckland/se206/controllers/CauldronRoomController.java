@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -9,6 +10,9 @@ import javafx.scene.shape.Shape;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.gpt.ChatHandler;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
   @FXML private Rectangle cauldronRectangle;
@@ -20,6 +24,9 @@ public class CauldronRoomController {
   @FXML private Rectangle bookAirRectangle;
 
   @FXML private ShapeInteractionHandler interactionHandler;
+  boolean wizardFirstTime = true;
+  private String book;
+  private String[] options = {"fire", "water", "air"};
 
   @FXML
   public void initialize() {
@@ -69,6 +76,32 @@ public class CauldronRoomController {
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
+    if (wizardFirstTime) {
+
+      book = getRandomBook();
+
+      ChatHandler chatHandler = new ChatHandler();
+      try {
+        chatHandler.initialize();
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+      Task<Void> bookRiddleTask =
+          new Task<Void>() {
+
+            @Override
+            protected Void call() throws Exception {
+              String response = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
+              System.out.println(response);
+              return null;
+            }
+          };
+      new Thread(bookRiddleTask).start();
+
+      wizardFirstTime = false;
+    } else {
+
+    }
   }
 
   @FXML
@@ -108,5 +141,11 @@ public class CauldronRoomController {
   @FXML
   private void unglowThis(Shape shape) {
     shape.setStroke(null); // Remove the stroke to "unglow"
+  }
+
+  private String getRandomBook() {
+    int randomIndex = (int) (Math.random() * options.length);
+    System.out.println(options[randomIndex]);
+    return options[randomIndex];
   }
 }
