@@ -3,14 +3,12 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.Inventory;
 import nz.ac.auckland.se206.Items;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 
@@ -29,7 +27,6 @@ public class MainMenuController {
 
   private Difficulty difficulty;
   private TimeLimit timeLimit;
-  private TransitionAnimation animation = new TransitionAnimation();
 
   public static Items items;
   public static Inventory inventory;
@@ -48,7 +45,7 @@ public class MainMenuController {
 
   @FXML
   public void playGame() throws InterruptedException {
-    animation.fade(playBtn, 0.0);
+    TransitionAnimation.fade(playBtn, 0.0);
     playBtn.setDisable(true);
 
     Task<Void> fadeInSettingsBtnsTask =
@@ -57,7 +54,7 @@ public class MainMenuController {
           @Override
           protected Void call() throws Exception {
             Thread.sleep(1000);
-            fadeAndDisableSettingsBtns(false, 1.0);
+            disableAndOrFadeSettingsBtns(false, 1.0, true);
             return null;
           }
         };
@@ -67,7 +64,7 @@ public class MainMenuController {
   }
 
   // tf stands for true/false
-  public void fadeAndDisableSettingsBtns(boolean tf, double ocpacity) {
+  public void disableAndOrFadeSettingsBtns(boolean tf, double ocpacity, boolean fade) {
     easyBtn.setDisable(tf);
     mediumBtn.setDisable(tf);
     hardBtn.setDisable(tf);
@@ -77,15 +74,17 @@ public class MainMenuController {
 
     startBtn.setDisable(true);
 
-    animation.fade(difficultyTxt, ocpacity);
-    animation.fade(timeLimitTxt, ocpacity);
-    animation.fade(easyBtn, ocpacity);
-    animation.fade(mediumBtn, ocpacity);
-    animation.fade(hardBtn, ocpacity);
-    animation.fade(twoMinBtn, ocpacity);
-    animation.fade(fourMinBtn, ocpacity);
-    animation.fade(sixMinBtn, ocpacity);
-    animation.fade(startBtn, 0.4);
+    if (fade) {
+      TransitionAnimation.fade(difficultyTxt, ocpacity);
+      TransitionAnimation.fade(timeLimitTxt, ocpacity);
+      TransitionAnimation.fade(easyBtn, ocpacity);
+      TransitionAnimation.fade(mediumBtn, ocpacity);
+      TransitionAnimation.fade(hardBtn, ocpacity);
+      TransitionAnimation.fade(twoMinBtn, ocpacity);
+      TransitionAnimation.fade(fourMinBtn, ocpacity);
+      TransitionAnimation.fade(sixMinBtn, ocpacity);
+      TransitionAnimation.fade(startBtn, 0.4);
+    }
   }
 
   @FXML
@@ -134,16 +133,13 @@ public class MainMenuController {
 
   @FXML
   public void startGame() throws IOException {
-    animation.fade(startBtn, 0.0);
-    fadeAndDisableSettingsBtns(true, 0.0);
+    // Item & inventory generation
     items = new Items(3);
     inventory = new Inventory();
 
-    // NEXT: FADE SCENES IN AND OUT
-    // animation.fade(pane, 1.0);
-
-    System.out.println("CAULDRON ROOM");
-    Scene sceneButtonIsIn = startBtn.getScene();
-    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    // Fade buttons and scene
+    disableAndOrFadeSettingsBtns(true, 0, false);
+    System.out.println("MAIN MENU > CAULDRON ROOM");
+    TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
   }
 }
