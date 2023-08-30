@@ -6,8 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -97,6 +98,8 @@ public class ChatController {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot("room");
+    System.out.println("CHAT > LAST ROOM VISITED"); // Save last room state in SceneManager?
+    // Change to last room visited
+    sendButton.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
 }

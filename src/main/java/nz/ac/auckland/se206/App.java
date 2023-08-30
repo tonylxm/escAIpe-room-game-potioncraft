@@ -49,6 +49,7 @@ public class App extends Application {
     SceneManager.addAppUi(AppUi.GAME_OVER, loadFxml("game_over"));
     SceneManager.addAppUi(AppUi.SHELF_LEFT, loadFxml("shelf_left"));
     SceneManager.addAppUi(AppUi.SHELF_RIGHT, loadFxml("shelf_right"));
+    SceneManager.addAppUi(AppUi.CHAT, loadFxml("chat"));
 
     Parent root = SceneManager.getUiRoot(AppUi.MAIN_MENU);
     scene = new Scene(root);
