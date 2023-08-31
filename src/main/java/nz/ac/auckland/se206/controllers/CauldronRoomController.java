@@ -43,6 +43,9 @@ public class CauldronRoomController {
       leftArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
       leftArrow.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+    // Some type of animation
+    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
+    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
   @FXML

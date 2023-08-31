@@ -4,6 +4,7 @@ import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +29,7 @@ public class ShelfLeftController {
   @FXML private Label noLbl;
   @FXML private Label yesLbl;
   @FXML private Label dashLbl;
+  @FXML private ImageView bookBtn;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -69,6 +71,9 @@ public class ShelfLeftController {
       rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
       rightShpe.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+    // Some type of animation
+    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
+    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
   /** Changing scenes to the cauldron room */
