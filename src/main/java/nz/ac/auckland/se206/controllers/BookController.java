@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Set;
+
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
@@ -30,7 +33,6 @@ public class BookController {
   @FXML private ImageView ttsBtn2;
 
   private ChatCompletionRequest chatCompletionRequest;
-  private TextToSpeech textToSpeech = new TextToSpeech();
   private Choice result;
 
   /**
@@ -118,13 +120,29 @@ public class BookController {
   }
 
   public void readIngredientList() {
-    textToSpeech.speak("Ingredient List");
-    for (int i = 0; i < Items.necessary.size(); i++) {
-      textToSpeech.speak(ingredientList.getItems().get(i));
-    }
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        App.textToSpeech.speak("Ingredient List");
+        for (int i = 0; i < Items.necessary.size(); i++) {
+          App.textToSpeech.speak(ingredientList.getItems().get(i));
+        }
+        return null;
+      }
+    };
+    Thread speakThread = new Thread(speakTask, "Speak Thread");
+    speakThread.start();
   }
 
   public void readGameMasterResponse() {
-    textToSpeech.speak(result.getChatMessage().getContent());
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        App.textToSpeech.speak(result.getChatMessage().getContent());
+        return null;
+      }
+    };
+    Thread speakThread = new Thread(speakTask, "Speak Thread");
+    speakThread.start();
   }
 }
