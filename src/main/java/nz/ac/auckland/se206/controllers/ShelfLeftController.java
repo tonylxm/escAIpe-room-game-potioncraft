@@ -2,8 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +28,7 @@ public class ShelfLeftController {
   @FXML private Label noLbl;
   @FXML private Label yesLbl;
   @FXML private Label dashLbl;
+  @FXML private ImageView bookBtn;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -69,12 +70,15 @@ public class ShelfLeftController {
       rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
       rightShpe.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+    // Some type of animation
+    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
+    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
   /** Changing scenes to the cauldron room */
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("SHELF LEFT -> CAULDRON ROOM");
+    System.out.println("SHELF LEFT > CAULDRON ROOM");
     setText("", false);
     readyToAdd = false;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
@@ -174,7 +178,8 @@ public class ShelfLeftController {
     if (on) {
       textRect.setOpacity(1);
       textLbl.setOpacity(1);
-      // Desicion labels need to be refactored to deal with
+
+      // Decision labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
       yesLbl.setOpacity(1);
       noLbl.setOpacity(1);
@@ -186,5 +191,12 @@ public class ShelfLeftController {
       noLbl.setOpacity(0);
       dashLbl.setOpacity(0);
     }
+  }
+
+  @FXML
+  void openBook() {
+    System.out.println("SHELF_LEFT > BOOK");
+    SceneManager.currScene = AppUi.SHELF_LEFT;
+    rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 }

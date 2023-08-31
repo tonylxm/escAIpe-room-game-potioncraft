@@ -2,8 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +28,7 @@ public class ShelfRightController {
   @FXML private Label noLbl;
   @FXML private Label yesLbl;
   @FXML private Label dashLbl;
+  @FXML private ImageView bookBtn;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -69,12 +70,15 @@ public class ShelfRightController {
       leftShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
       leftShpe.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+    // Some type of animation
+    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
+    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
   /** Changing scenes to the cauldron room */
   @FXML
   public void goLeft(MouseEvent event) {
-    System.out.println("SHELF RIGHT -> CAULDRON ROOM");
+    System.out.println("SHELF RIGHT > CAULDRON ROOM");
     setText("", false);
     readyToAdd = false;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
@@ -185,5 +189,12 @@ public class ShelfRightController {
       noLbl.setOpacity(0);
       dashLbl.setOpacity(0);
     }
+  }
+
+  @FXML
+  void openBook() {
+    System.out.println("SHELF_RIGHT > BOOK");
+    SceneManager.currScene = AppUi.SHELF_RIGHT;
+    leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 }

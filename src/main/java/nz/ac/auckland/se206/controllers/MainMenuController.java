@@ -46,6 +46,10 @@ public class MainMenuController {
   public void initialize() {
     // pane.setOpacity(1);
     // playBtn.setOpacity(1);
+    
+    // Item & inventory generation
+    items = new Items(3);
+    inventory = new Inventory();
   }
 
   @FXML
@@ -138,10 +142,6 @@ public class MainMenuController {
 
   @FXML
   public void startGame() throws IOException {
-    // Item & inventory generation
-    items = new Items(3);
-    inventory = new Inventory();
-
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON ROOM");

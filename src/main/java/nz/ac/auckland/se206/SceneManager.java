@@ -8,6 +8,7 @@ public class SceneManager {
   public enum AppUi {
     MAIN_MENU,
     CAULDRON_ROOM,
+    BOOK,
     BOOKSHELF,
     SHELF_LEFT,
     SHELF_RIGHT,
@@ -15,6 +16,7 @@ public class SceneManager {
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
+  public static AppUi currScene;
 
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);
