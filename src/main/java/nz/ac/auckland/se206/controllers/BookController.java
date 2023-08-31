@@ -101,7 +101,7 @@ public class BookController {
     appendChatMessage(msg);
     ChatMessage lastMsg = runGpt(msg);
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddleResolved = true;
+      GameState.isBookRiddleResolved = true;
     }
   }
 
