@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -15,6 +16,7 @@ public class CauldronRoomController {
   @FXML private Rectangle wizardRectangle;
   @FXML private Polygon rightArrow;
   @FXML private Polygon leftArrow;
+  @FXML private ImageView bookBtn;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -41,6 +43,9 @@ public class CauldronRoomController {
       leftArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
       leftArrow.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+    // Some type of animation
+    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
+    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
   @FXML
@@ -55,14 +60,14 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
-    System.out.println("CAULDRON ROOM > SHELF LEFT");
+    System.out.println("CAULDRON_ROOM > SHELF_LEFT");
     Scene currentScene = cauldronRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
   }
 
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("CAULDRON ROOM > SHELF RIGHT");
+    System.out.println("CAULDRON_ROOM > SHELF_RIGHT");
     Scene currentScene = cauldronRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
   }
@@ -75,5 +80,12 @@ public class CauldronRoomController {
   @FXML
   private void unglowThis(Shape shape) {
     shape.setStroke(null); // Remove the stroke to "unglow"
+  }
+
+  @FXML
+  void openBook() {
+    System.out.println("CAULDRON_ROOM > BOOK");
+    SceneManager.currScene = AppUi.CAULDRON_ROOM;
+    bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 }
