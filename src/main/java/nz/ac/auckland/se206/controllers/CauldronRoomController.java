@@ -1,17 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.gpt.ChatHandler;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
@@ -22,6 +20,9 @@ public class CauldronRoomController {
   @FXML private Rectangle bookFireRectangle;
   @FXML private Rectangle bookWaterRectangle;
   @FXML private Rectangle bookAirRectangle;
+  @FXML private Rectangle textRect;
+  @FXML private Rectangle wizardChatImage;
+  @FXML private Rectangle mouseTrackRegion;
 
   @FXML private ShapeInteractionHandler interactionHandler;
   boolean wizardFirstTime = true;
@@ -31,6 +32,10 @@ public class CauldronRoomController {
   @FXML
   public void initialize() {
     interactionHandler = new ShapeInteractionHandler();
+    // highlightThis(wizardRectangle);
+    mouseTrackRegion.setDisable(true);
+    textRect.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
 
     if (cauldronRectangle != null) {
       cauldronRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -86,21 +91,24 @@ public class CauldronRoomController {
       } catch (ApiProxyException e) {
         e.printStackTrace();
       }
-      Task<Void> bookRiddleTask =
-          new Task<Void>() {
+      // Task<Void> bookRiddleTask =
+      //     new Task<Void>() {
 
-            @Override
-            protected Void call() throws Exception {
-              String response = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
-              System.out.println(response);
-              return null;
-            }
-          };
-      new Thread(bookRiddleTask).start();
+      //       @Override
+      //       protected Void call() throws Exception {
+      //         String response = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
+      //         System.out.println(response);
+      //         return null;
+      //       }
+      //     };
+      showWizardChat();
+      // new Thread(bookRiddleTask).start();
 
       wizardFirstTime = false;
+      GameState.isBookRiddleGiven = true;
+      // unhighlightThis(wizardRectangle);
     } else {
-
+      showWizardChat();
     }
   }
 
@@ -134,18 +142,38 @@ public class CauldronRoomController {
   }
 
   @FXML
-  public void glowThis(Shape shape) {
-    shape.setStrokeWidth(5);
+  public void clickOff(MouseEvent event) {
+    System.out.println("click off");
+    wizardChatImage.setOpacity(0);
+    textRect.setDisable(true);
+    mouseTrackRegion.setDisable(true);
+    textRect.setOpacity(0);
+    mouseTrackRegion.setOpacity(0);
   }
 
-  @FXML
-  private void unglowThis(Shape shape) {
-    shape.setStroke(null); // Remove the stroke to "unglow"
-  }
+  // @FXML
+  // public void highlightThis(Shape shape) {
+  //   shape.setStroke(Color.GOLD);
+  //   shape.setStrokeWidth(5);
+  // }
+
+  // @FXML
+  // public void unhighlightThis(Shape shape) {
+  //   shape.setStrokeWidth(0);
+  //   shape.setStroke(Color.BLACK);
+  // }
 
   private String getRandomBook() {
     int randomIndex = (int) (Math.random() * options.length);
     System.out.println(options[randomIndex]);
     return options[randomIndex];
+  }
+
+  private void showWizardChat() {
+    wizardChatImage.setOpacity(100);
+    textRect.setDisable(false);
+    mouseTrackRegion.setDisable(false);
+    textRect.setOpacity(100);
+    mouseTrackRegion.setOpacity(0.5);
   }
 }
