@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
@@ -17,5 +19,10 @@
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="615.0" layoutX="-122.0" layoutY="-103.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="857.0" />
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="79.0" layoutY="122.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="44.0" layoutY="288.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="550.0" layoutY="350.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Picture1.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

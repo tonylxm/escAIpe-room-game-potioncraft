@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -23,6 +24,7 @@ public class CauldronRoomController {
   @FXML private Rectangle textRect;
   @FXML private Rectangle wizardChatImage;
   @FXML private Rectangle mouseTrackRegion;
+  @FXML private ImageView bookBtn;
 
   @FXML private ShapeInteractionHandler interactionHandler;
   boolean wizardFirstTime = true;
@@ -71,6 +73,9 @@ public class CauldronRoomController {
       bookAirRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       bookAirRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+    // Some type of animation
+    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
+    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
   @FXML
@@ -129,16 +134,14 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
-    System.out.println("CAULDRON ROOM > SHELF LEFT");
-    Scene currentScene = cauldronRectangle.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
+    System.out.println("CAULDRON ROOM -> SHELF LEFT");
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
   }
 
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("CAULDRON ROOM > SHELF RIGHT");
-    Scene currentScene = cauldronRectangle.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
   }
 
   @FXML
@@ -175,5 +178,12 @@ public class CauldronRoomController {
     mouseTrackRegion.setDisable(false);
     textRect.setOpacity(100);
     mouseTrackRegion.setOpacity(0.5);
+  }
+
+  @FXML
+  void openBook() {
+    System.out.println("CAULDRON_ROOM > BOOK");
+    SceneManager.currScene = AppUi.CAULDRON_ROOM;
+    bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 }
