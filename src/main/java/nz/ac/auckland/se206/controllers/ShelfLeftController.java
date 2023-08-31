@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -82,8 +81,7 @@ public class ShelfLeftController {
     System.out.println("SHELF LEFT > CAULDRON ROOM");
     setText("", false);
     readyToAdd = false;
-    Scene currentScene = rightShpe.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
 
   /**
@@ -180,7 +178,7 @@ public class ShelfLeftController {
     if (on) {
       textRect.setOpacity(1);
       textLbl.setOpacity(1);
-      // Desicion labels need to be refactored to deal with
+      // Decision labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
       yesLbl.setOpacity(1);
       noLbl.setOpacity(1);
