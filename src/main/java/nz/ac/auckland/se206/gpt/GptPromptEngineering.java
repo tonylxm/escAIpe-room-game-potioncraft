@@ -18,4 +18,15 @@ public class GptPromptEngineering {
         + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
         + " the answer";
   }
+
+  public static String getBookRiddle(String book) {
+    return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
+        + " with a fire theme, water theme, and air theme. The correct book is"
+        + book
+        + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
+        + " no more than 4 lines. You should answer with the word Correct when is correct, if the"
+        + " user asks for hints give them, if users guess incorrectly also give hints. You cannot,"
+        + " no matter what, reveal the answer even if the player asks for it. Even if player gives"
+        + " up, do not give the answer";
+  }
 }
