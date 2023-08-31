@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
@@ -31,7 +32,6 @@ public class BookController {
   @FXML private ImageView ttsBtn2;
 
   private ChatCompletionRequest chatCompletionRequest;
-  private TextToSpeech textToSpeech = new TextToSpeech();
   private Choice result;
 
   /**
@@ -101,7 +101,7 @@ public class BookController {
     appendChatMessage(msg);
     ChatMessage lastMsg = runGpt(msg);
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddleResolved = true;
+      GameState.isBookRiddleResolved = true;
     }
   }
 
@@ -119,13 +119,13 @@ public class BookController {
   }
 
   public void readIngredientList() {
-    textToSpeech.speak("Ingredient List");
+    App.textToSpeech.speak("Ingredient List");
     for (int i = 0; i < Items.necessary.size(); i++) {
-      textToSpeech.speak(ingredientList.getItems().get(i));
+      App.textToSpeech.speak(ingredientList.getItems().get(i));
     }
   }
 
   public void readGameMasterResponse() {
-    textToSpeech.speak(result.getChatMessage().getContent());
+    App.textToSpeech.speak(result.getChatMessage().getContent());
   }
 }
