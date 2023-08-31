@@ -7,8 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Inventory;
 import nz.ac.auckland.se206.Items;
+import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 
@@ -46,16 +48,21 @@ public class MainMenuController {
   public void initialize() {
     // pane.setOpacity(1);
     // playBtn.setOpacity(1);
-    
+
     // Item & inventory generation
     items = new Items(3);
     inventory = new Inventory();
   }
 
   @FXML
-  public void playGame() throws InterruptedException {
+  public void playGame() throws InterruptedException, IOException {
     TransitionAnimation.fade(playBtn, 0.0);
     playBtn.setDisable(true);
+
+    SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
+    SceneManager.addAppUi(AppUi.SHELF_LEFT, App.loadFxml("shelf_left"));
+    SceneManager.addAppUi(AppUi.SHELF_RIGHT, App.loadFxml("shelf_right"));
+    SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
 
     Task<Void> fadeInSettingsBtnsTask =
         new Task<Void>() {
