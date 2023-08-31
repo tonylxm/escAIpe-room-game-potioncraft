@@ -48,7 +48,7 @@ public class MainMenuController {
   public void initialize() {
     // pane.setOpacity(1);
     // playBtn.setOpacity(1);
-    
+
     // Item & inventory generation
     items = new Items(3);
     inventory = new Inventory();
