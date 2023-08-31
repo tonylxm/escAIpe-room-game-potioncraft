@@ -1,0 +1,1 @@
+- "Text to Speech" icon by Cuputo, from thenounproject.com.
