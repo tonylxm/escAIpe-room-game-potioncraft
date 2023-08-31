@@ -16,6 +16,7 @@ public class SceneManager {
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
+  public static AppUi currScene;
 
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);
