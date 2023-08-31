@@ -44,6 +44,9 @@ public class MainMenuController {
   @FXML private ToggleButton sixMinBtn;
 
   public void initialize() {
+    // pane.setOpacity(1);
+    // playBtn.setOpacity(1);
+    
     // Item & inventory generation
     items = new Items(3);
     inventory = new Inventory();
@@ -59,7 +62,7 @@ public class MainMenuController {
 
           @Override
           protected Void call() throws Exception {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             disableAndOrFadeSettingsBtns(false, 1.0, true);
             return null;
           }
@@ -141,7 +144,7 @@ public class MainMenuController {
   public void startGame() throws IOException {
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
-    System.out.println("MAIN MENU > CAULDRON ROOM");
+    System.out.println("MAIN MENU -> CAULDRON ROOM");
     TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
   }
 }

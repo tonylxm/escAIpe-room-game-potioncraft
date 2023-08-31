@@ -178,6 +178,7 @@ public class ShelfLeftController {
     if (on) {
       textRect.setOpacity(1);
       textLbl.setOpacity(1);
+
       // Decision labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
       yesLbl.setOpacity(1);
