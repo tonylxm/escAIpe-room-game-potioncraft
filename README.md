@@ -1,4 +1,17 @@
 # SOFTENG 206 - EscAIpe Room
+Project for SOFTENG 206 (Software Engineering Design 1) in Part II of our Software Engineering degree @The University of Auckland.
+
+# Developers:
+- Tony Lim
+- Adam Bodicoat
+- Andy Zhang
+
+### Built With
+- Java
+- JavaFX
+
+## Project Requirements
+- TODO
 
 ## Usage
 
