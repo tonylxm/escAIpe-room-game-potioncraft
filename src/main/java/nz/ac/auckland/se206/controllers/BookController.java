@@ -1,26 +1,37 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Items;
+import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the chat view. */
 public class BookController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private ListView<String> ingredientList;
+  @FXML private ImageView ttsBtn1;
+  @FXML private ImageView ttsBtn2;
 
   private ChatCompletionRequest chatCompletionRequest;
+  private TextToSpeech textToSpeech = new TextToSpeech();
+  private Choice result;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -32,6 +43,13 @@ public class BookController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+    writeRecipeIngredients(Items.necessary);
+  }
+
+  private void writeRecipeIngredients(Set<Item> necessary) {
+    for (Item item : necessary) {
+      ingredientList.getItems().add(item.toString());
+    }
   }
 
   /**
@@ -54,12 +72,11 @@ public class BookController {
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
+      result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
       appendChatMessage(result.getChatMessage());
       return result.getChatMessage();
     } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
       e.printStackTrace();
       return null;
     }
@@ -83,7 +100,7 @@ public class BookController {
     appendChatMessage(msg);
     ChatMessage lastMsg = runGpt(msg);
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddleResolved = true;
+      GameState.isBookRiddleResolved = true;
     }
   }
 
@@ -98,5 +115,16 @@ public class BookController {
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println("BOOK > " + SceneManager.currScene);
     chatTextArea.getScene().setRoot(SceneManager.getUiRoot(SceneManager.currScene));
+  }
+
+  public void readIngredientList() {
+    textToSpeech.speak("Ingredient List");
+    for (int i = 0; i < Items.necessary.size(); i++) {
+      textToSpeech.speak(ingredientList.getItems().get(i));
+    }
+  }
+
+  public void readGameMasterResponse() {
+    textToSpeech.speak(result.getChatMessage().getContent());
   }
 }

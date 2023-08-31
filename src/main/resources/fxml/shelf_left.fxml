@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
@@ -35,5 +37,10 @@
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="550.0" layoutY="350.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Picture1.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
