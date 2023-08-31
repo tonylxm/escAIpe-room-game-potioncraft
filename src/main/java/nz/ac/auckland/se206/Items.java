@@ -19,8 +19,8 @@ public class Items {
         ITEM_10
     }
 
-    public Set<Item> available;
-    public Set<Item> necessary;
+    public static Set<Item> available;
+    public static Set<Item> necessary;
     private Item[] list = new Item[]{
         Item.ITEM_1, Item.ITEM_2, Item.ITEM_3, Item.ITEM_4, 
         Item.ITEM_5, Item.ITEM_6, Item.ITEM_7, Item.ITEM_8, 

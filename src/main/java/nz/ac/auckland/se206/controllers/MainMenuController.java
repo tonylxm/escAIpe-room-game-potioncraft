@@ -43,6 +43,12 @@ public class MainMenuController {
   @FXML private ToggleButton fourMinBtn;
   @FXML private ToggleButton sixMinBtn;
 
+  public void initialize() {
+    // Item & inventory generation
+    items = new Items(3);
+    inventory = new Inventory();
+  }
+
   @FXML
   public void playGame() throws InterruptedException {
     TransitionAnimation.fade(playBtn, 0.0);
@@ -133,10 +139,6 @@ public class MainMenuController {
 
   @FXML
   public void startGame() throws IOException {
-    // Item & inventory generation
-    items = new Items(3);
-    inventory = new Inventory();
-
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU > CAULDRON ROOM");
