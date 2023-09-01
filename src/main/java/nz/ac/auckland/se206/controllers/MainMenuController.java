@@ -57,8 +57,8 @@ public class MainMenuController {
   @FXML
   public void playGame() throws InterruptedException, IOException {
     SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-    SceneManager.addAppUi(AppUi.SHELF_LEFT, App.loadFxml("shelf_left"));
-    SceneManager.addAppUi(AppUi.SHELF_RIGHT, App.loadFxml("shelf_right"));
+    SceneManager.addAppUi(AppUi.SHELF_LEFT, App.loadFxml("library_room"));
+    SceneManager.addAppUi(AppUi.SHELF_RIGHT, App.loadFxml("treasure_room"));
     SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
 
     TransitionAnimation.fade(playBtn, 0.0);

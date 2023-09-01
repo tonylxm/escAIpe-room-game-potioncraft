@@ -133,13 +133,13 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
-    System.out.println("CAULDRON ROOM -> SHELF LEFT");
+    System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
   }
 
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("CAULDRON ROOM > SHELF RIGHT");
+    System.out.println("CAULDRON_ROOM > LIBRARY_ROOM");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
   }
 

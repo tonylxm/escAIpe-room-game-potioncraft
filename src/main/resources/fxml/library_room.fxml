@@ -8,11 +8,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ShelfLeftController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LibraryRoomController">
    <children>
       <ImageView fitHeight="683.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/library-transformed.jpeg" />
+            <Image url="@../images/library-room.jpeg" />
          </image>
       </ImageView>
       <Rectangle id="itemOneRect" fx:id="itemOneRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="118.0" layoutY="333.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
