@@ -20,7 +20,7 @@
       <Rectangle id="itemThreeRect" fx:id="itemThreeRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="823.0" layoutY="122.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
       <Rectangle id="itemFourRect" fx:id="itemFourRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="443.0" layoutY="161.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
       <Rectangle id="itemFiveRect" fx:id="itemFiveRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="273.0" layoutY="318.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
-      <Polygon id="rightShpe" fx:id="rightShpe" fill="#0084ff" layoutX="787.0" layoutY="401.0" onMouseClicked="#goRight" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon id="rightShpe" fx:id="rightShpe" fill="#0084ff" layoutX="799.0" layoutY="401.0" onMouseClicked="#goRight" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
          <font>
