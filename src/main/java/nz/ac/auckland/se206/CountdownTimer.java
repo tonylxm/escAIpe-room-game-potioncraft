@@ -2,17 +2,16 @@ package nz.ac.auckland.se206;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 public class CountdownTimer {
   private int initialSeconds;
   private int currentSeconds;
-  private Label timerLabel;
   private Timeline timeline;
 
-  public CountdownTimer(Label timerLabel, int initialSeconds) {
-    this.timerLabel = timerLabel;
+  public CountdownTimer(int initialSeconds) {
     this.initialSeconds = initialSeconds;
     this.currentSeconds = initialSeconds;
 
@@ -25,12 +24,12 @@ public class CountdownTimer {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  updateTimerLabel();
+                  currentSeconds--;
                   if (currentSeconds <= 0) {
                     handleTimeout();
                     timeline.stop();
                   } else {
-                    currentSeconds--;
+                    updateTimerLabel();
                   }
                 }));
     timeline.setCycleCount(Timeline.INDEFINITE);
@@ -49,7 +48,15 @@ public class CountdownTimer {
   }
 
   private void updateTimerLabel() {
-    timerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
+    Parent currentSceneRoot = SceneManager.getUiRoot(SceneManager.getCurrentScene());
+
+    if (currentSceneRoot != null) {
+      Label timerLabel =
+          (Label) currentSceneRoot.lookup("#timerLabel"); // Assuming the ID is "timerLabel"
+      if (timerLabel != null) {
+        timerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
+      }
+    }
   }
 
   private void handleTimeout() {
