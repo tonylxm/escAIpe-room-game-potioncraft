@@ -13,6 +13,5 @@ public class GameOverController {
   public void playAgain() throws IOException {
     System.out.println("GAME OVER -> MAIN MENU");
     App.setRoot("main_menu");
-    // TODO: RESET ALL SCENES!!!
   }
 }
