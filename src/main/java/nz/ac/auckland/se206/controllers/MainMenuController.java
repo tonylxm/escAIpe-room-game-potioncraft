@@ -56,10 +56,21 @@ public class MainMenuController {
 
   @FXML
   public void playGame() throws InterruptedException, IOException {
-    SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-    SceneManager.addAppUi(AppUi.SHELF_LEFT, App.loadFxml("library_room"));
-    SceneManager.addAppUi(AppUi.SHELF_RIGHT, App.loadFxml("treasure_room"));
-    SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
+    Task<Void> instantiateScenes =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
+            SceneManager.addAppUi(AppUi.SHELF_LEFT, App.loadFxml("library_room"));
+            SceneManager.addAppUi(AppUi.SHELF_RIGHT, App.loadFxml("treasure_room"));
+            SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
+            return null;
+          }
+        };
+    Thread instantiateScenesThread =
+        new Thread(instantiateScenes, "instantiate scenes upon starting game");
+    instantiateScenesThread.start();
 
     TransitionAnimation.fade(playBtn, 0.0);
     playBtn.setDisable(true);
