@@ -12,7 +12,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
-public class ShelfLeftController {
+public class LibraryRoomController {
   public boolean itemOnePicked, itemTwoPicked, itemThreePicked, itemFourPicked, itemFivePicked;
   public boolean readyToAdd;
   public Items.Item item;
@@ -78,7 +78,7 @@ public class ShelfLeftController {
   /** Changing scenes to the cauldron room */
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("SHELF LEFT > CAULDRON ROOM");
+    System.out.println("LIBRARY_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
@@ -195,7 +195,7 @@ public class ShelfLeftController {
 
   @FXML
   void openBook() {
-    System.out.println("SHELF_LEFT > BOOK");
+    System.out.println("LIBRARY_ROOM > BOOK");
     SceneManager.currScene = AppUi.SHELF_LEFT;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
