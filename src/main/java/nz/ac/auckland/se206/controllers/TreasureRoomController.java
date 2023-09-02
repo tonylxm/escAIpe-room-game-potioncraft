@@ -14,18 +14,18 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
-public class ShelfLeftController {
-  public boolean itemOnePicked, itemTwoPicked, itemThreePicked, itemFourPicked, itemFivePicked;
+public class TreasureRoomController {
+  public boolean itemSixPicked, itemSevenPicked, itemEightPicked, itemNinePicked, itemTenPicked;
   public boolean readyToAdd;
   public Items.Item item;
 
-  @FXML private Rectangle itemOneRect;
-  @FXML private Rectangle itemTwoRect;
-  @FXML private Rectangle itemThreeRect;
-  @FXML private Rectangle itemFourRect;
-  @FXML private Rectangle itemFiveRect;
+  @FXML private Rectangle itemSixRect;
+  @FXML private Rectangle itemSevenRect;
+  @FXML private Rectangle itemEightRect;
+  @FXML private Rectangle itemNineRect;
+  @FXML private Rectangle itemTenRect;
   @FXML private Rectangle textRect;
-  @FXML private Polygon rightShpe;
+  @FXML private Polygon leftShpe;
   @FXML private Label textLbl;
   @FXML private Label noLbl;
   @FXML private Label yesLbl;
@@ -39,44 +39,44 @@ public class ShelfLeftController {
 
   public void initialize() {
     countdownTimer = App.getCountdownTimer();
-    countdownTimer.setLeftTimerLabel(timerLabel);
+    countdownTimer.setRightTimerLabel(timerLabel);
 
-    itemOnePicked = false;
-    itemTwoPicked = false;
-    itemThreePicked = false;
-    itemFourPicked = false;
-    itemFivePicked = false;
+    itemSixPicked = false;
+    itemSevenPicked = false;
+    itemEightPicked = false;
+    itemNinePicked = false;
+    itemTenPicked = false;
     readyToAdd = false;
 
     interactionHandler = new ShapeInteractionHandler();
-    if (itemOneRect != null) {
-      itemOneRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemOneRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemOneRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
+    if (itemSixRect != null) {
+      itemSixRect.setOnMouseEntered(event -> interactionHandler.handle(event));
+      itemSixRect.setOnMouseExited(event -> interactionHandler.handle(event));
+      itemSixRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_6));
     }
-    if (itemTwoRect != null) {
-      itemTwoRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemTwoRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemTwoRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
+    if (itemSevenRect != null) {
+      itemSevenRect.setOnMouseEntered(event -> interactionHandler.handle(event));
+      itemSevenRect.setOnMouseExited(event -> interactionHandler.handle(event));
+      itemSevenRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_7));
     }
-    if (itemThreeRect != null) {
-      itemThreeRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemThreeRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemThreeRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
+    if (itemEightRect != null) {
+      itemEightRect.setOnMouseEntered(event -> interactionHandler.handle(event));
+      itemEightRect.setOnMouseExited(event -> interactionHandler.handle(event));
+      itemEightRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_8));
     }
-    if (itemFourRect != null) {
-      itemFourRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemFourRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemFourRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
+    if (itemNineRect != null) {
+      itemNineRect.setOnMouseEntered(event -> interactionHandler.handle(event));
+      itemNineRect.setOnMouseExited(event -> interactionHandler.handle(event));
+      itemNineRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_9));
     }
-    if (itemFiveRect != null) {
-      itemFiveRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemFiveRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemFiveRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
+    if (itemTenRect != null) {
+      itemTenRect.setOnMouseEntered(event -> interactionHandler.handle(event));
+      itemTenRect.setOnMouseExited(event -> interactionHandler.handle(event));
+      itemTenRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_10));
     }
-    if (rightShpe != null) {
-      rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
-      rightShpe.setOnMouseExited(event -> interactionHandler.handle(event));
+    if (leftShpe != null) {
+      leftShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
+      leftShpe.setOnMouseExited(event -> interactionHandler.handle(event));
     }
     // Some type of animation
     // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -85,12 +85,12 @@ public class ShelfLeftController {
 
   /** Changing scenes to the cauldron room */
   @FXML
-  public void goRight(MouseEvent event) {
-    System.out.println("SHELF LEFT > CAULDRON ROOM");
+  public void goLeft(MouseEvent event) {
+    System.out.println("TREASURE_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
 
   /**
@@ -102,20 +102,20 @@ public class ShelfLeftController {
   @FXML
   public void itemSelect(Items.Item item) {
     switch (item) {
-      case ITEM_1:
-        if (itemOnePicked) return;
+      case ITEM_6:
+        if (itemSixPicked) return;
         break;
-      case ITEM_2:
-        if (itemTwoPicked) return;
+      case ITEM_7:
+        if (itemSevenPicked) return;
         break;
-      case ITEM_3:
-        if (itemThreePicked) return;
+      case ITEM_8:
+        if (itemEightPicked) return;
         break;
-      case ITEM_4:
-        if (itemFourPicked) return;
+      case ITEM_9:
+        if (itemNinePicked) return;
         break;
-      case ITEM_5:
-        if (itemFivePicked) return;
+      case ITEM_10:
+        if (itemTenPicked) return;
         break;
       default:
         break;
@@ -123,10 +123,9 @@ public class ShelfLeftController {
     this.item = item;
     setText("Add to inventory?", true);
     readyToAdd = true;
-    System.out.println(item + " clicked");
   }
 
-  /** Adding item to inventory if an item is selected */
+  /** Adding a selected item to the inventory */
   @FXML
   public void addItem() {
     if (!readyToAdd) return;
@@ -135,25 +134,25 @@ public class ShelfLeftController {
     readyToAdd = false;
 
     switch (item) {
-      case ITEM_1:
-        itemOneRect.setOpacity(0);
-        itemOnePicked = true;
+      case ITEM_6:
+        itemSixRect.setOpacity(0);
+        itemSixPicked = true;
         break;
-      case ITEM_2:
-        itemTwoRect.setOpacity(0);
-        itemTwoPicked = true;
+      case ITEM_7:
+        itemSevenRect.setOpacity(0);
+        itemSevenPicked = true;
         break;
-      case ITEM_3:
-        itemThreeRect.setOpacity(0);
-        itemThreePicked = true;
+      case ITEM_8:
+        itemEightRect.setOpacity(0);
+        itemEightPicked = true;
         break;
-      case ITEM_4:
-        itemFourRect.setOpacity(0);
-        itemFourPicked = true;
+      case ITEM_9:
+        itemNineRect.setOpacity(0);
+        itemNinePicked = true;
         break;
-      case ITEM_5:
-        itemFiveRect.setOpacity(0);
-        itemFivePicked = true;
+      case ITEM_10:
+        itemTenRect.setOpacity(0);
+        itemTenPicked = true;
         break;
       default:
         break;
@@ -187,8 +186,7 @@ public class ShelfLeftController {
     if (on) {
       textRect.setOpacity(1);
       textLbl.setOpacity(1);
-
-      // Decision labels need to be refactored to deal with
+      // Desicion labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
       yesLbl.setOpacity(1);
       noLbl.setOpacity(1);
@@ -204,8 +202,8 @@ public class ShelfLeftController {
 
   @FXML
   void openBook() {
-    System.out.println("SHELF_LEFT > BOOK");
-    SceneManager.currScene = AppUi.SHELF_LEFT;
-    rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+    System.out.println("TREASURE_ROOM > BOOK");
+    SceneManager.currScene = AppUi.SHELF_RIGHT;
+    leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 }

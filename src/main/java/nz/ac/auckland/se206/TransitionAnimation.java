@@ -35,7 +35,7 @@ public class TransitionAnimation {
   }
 
   public static void fadeScene(Node obj, double ocpacity, AppUi appUi) {
-    FadeTransition fadeSceneTransition = new FadeTransition(Duration.seconds(2.5), obj);
+    FadeTransition fadeSceneTransition = new FadeTransition(Duration.seconds(2), obj);
     // Fade in
     if (ocpacity == 1.0) {
       fromValue = 0.0;
