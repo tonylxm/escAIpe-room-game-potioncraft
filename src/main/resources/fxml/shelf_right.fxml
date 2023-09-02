@@ -47,5 +47,10 @@
             <Image url="@../images/Picture1.png" />
          </image>
       </ImageView>
+      <Label fx:id="timerLabel" layoutX="34.0" layoutY="20.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

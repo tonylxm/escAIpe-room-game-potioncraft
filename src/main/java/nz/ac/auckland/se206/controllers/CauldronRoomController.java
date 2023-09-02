@@ -1,10 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -24,14 +27,20 @@ public class CauldronRoomController {
   @FXML private Rectangle wizardChatImage;
   @FXML private Rectangle mouseTrackRegion;
   @FXML private ImageView bookBtn;
+  @FXML private Label timerLabel;
 
   @FXML private ShapeInteractionHandler interactionHandler;
   boolean wizardFirstTime = true;
   private String book;
   private String[] options = {"fire", "water", "air"};
 
+  private CountdownTimer countdownTimer;
+
   @FXML
   public void initialize() {
+    countdownTimer = App.getCountdownTimer();
+    countdownTimer.setCauldronTimerLabel(timerLabel);
+    countdownTimer.start();
     interactionHandler = new ShapeInteractionHandler();
     // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);
@@ -135,12 +144,14 @@ public class CauldronRoomController {
   public void goLeft(MouseEvent event) {
     System.out.println("CAULDRON ROOM -> SHELF LEFT");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
+    SceneManager.setTimerScene(AppUi.SHELF_LEFT);
   }
 
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("CAULDRON ROOM > SHELF RIGHT");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
+    SceneManager.setTimerScene(AppUi.SHELF_RIGHT);
   }
 
   @FXML
