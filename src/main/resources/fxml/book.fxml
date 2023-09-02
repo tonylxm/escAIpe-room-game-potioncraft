@@ -11,25 +11,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="324.0" layoutY="52.0" prefHeight="314.0" prefWidth="254.0" wrapText="true" />
-    <TextField fx:id="inputText" layoutX="324.0" layoutY="365.0" prefHeight="26.0" prefWidth="209.0" promptText="Ask me anything..." />
-    <Button fx:id="sendButton" layoutX="533.0" layoutY="365.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="554.0" layoutY="41.0" prefHeight="586.0" prefWidth="427.0" wrapText="true" />
+    <TextField fx:id="inputText" layoutX="555.0" layoutY="639.0" prefHeight="26.0" prefWidth="379.0" promptText="Ask me anything..." />
+    <Button fx:id="sendButton" layoutX="935.0" layoutY="639.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
     <Button layoutX="2.0" layoutY="1.0" mnemonicParsing="false" onAction="#onGoBack" text="X" />
-      <Line endX="-31.0" endY="247.00003051757812" layoutX="331.0" layoutY="153.0" startX="-31.0" startY="-153.0" />
-      <Text layoutX="25.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
+      <Line endX="181.0" endY="527.0" layoutX="331.0" layoutY="153.0" startX="181.0" startY="-153.0" />
+      <Text layoutX="42.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <ListView fx:id="ingredientList" layoutX="25.0" layoutY="52.0" prefHeight="326.0" prefWidth="254.0" />
-      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="256.0" layoutY="28.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
+      <ListView fx:id="ingredientList" layoutX="42.0" layoutY="41.0" prefHeight="586.0" prefWidth="427.0" />
+      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="446.0" layoutY="18.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="555.0" layoutY="28.0" onMouseClicked="#readGameMasterResponse" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="958.0" layoutY="19.0" onMouseClicked="#readGameMasterResponse" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
          </image>
