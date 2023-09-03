@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -29,10 +31,16 @@ public class TreasureRoomController {
   @FXML private Label yesLbl;
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
+  @FXML private Label timerLabel;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
+  private CountdownTimer countdownTimer;
+
   public void initialize() {
+    countdownTimer = App.getCountdownTimer();
+    countdownTimer.setRightTimerLabel(timerLabel);
+
     itemSixPicked = false;
     itemSevenPicked = false;
     itemEightPicked = false;
@@ -81,6 +89,7 @@ public class TreasureRoomController {
     System.out.println("TREASURE_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
+    SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
 

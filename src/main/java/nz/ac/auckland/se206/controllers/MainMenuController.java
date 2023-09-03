@@ -164,5 +164,6 @@ public class MainMenuController {
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON ROOM");
     TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
+    SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
   }
 }

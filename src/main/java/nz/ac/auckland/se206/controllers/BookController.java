@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Set;
-
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +20,6 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the chat view. */
 public class BookController {
@@ -120,28 +118,30 @@ public class BookController {
   }
 
   public void readIngredientList() {
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        App.textToSpeech.speak("Ingredient List");
-        for (int i = 0; i < Items.necessary.size(); i++) {
-          App.textToSpeech.speak(ingredientList.getItems().get(i));
-        }
-        return null;
-      }
-    };
+    Task<Void> speakTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            App.textToSpeech.speak("Ingredient List");
+            for (int i = 0; i < Items.necessary.size(); i++) {
+              App.textToSpeech.speak(ingredientList.getItems().get(i));
+            }
+            return null;
+          }
+        };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
   }
 
   public void readGameMasterResponse() {
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        App.textToSpeech.speak(result.getChatMessage().getContent());
-        return null;
-      }
-    };
+    Task<Void> speakTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            App.textToSpeech.speak(result.getChatMessage().getContent());
+            return null;
+          }
+        };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
   }
