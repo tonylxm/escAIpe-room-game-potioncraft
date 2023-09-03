@@ -33,12 +33,12 @@
             <Image url="@../images/Picture1.png" />
          </image>
       </ImageView>
+      <Circle fill="#3f4a54" layoutX="933.0" layoutY="644.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="810.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="timerLabel" layoutX="14.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="810.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="644.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
    </children>
 </Pane>
