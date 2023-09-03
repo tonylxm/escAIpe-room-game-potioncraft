@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -36,5 +38,7 @@
             <Font size="38.0" />
          </font>
       </Label>
+      <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="810.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
+      <Circle fill="#3f4a54" layoutX="933.0" layoutY="644.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
    </children>
 </Pane>

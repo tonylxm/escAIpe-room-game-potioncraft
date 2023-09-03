@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
@@ -17,6 +19,7 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 public class LibraryRoomController {
   public boolean itemOnePicked, itemTwoPicked, itemThreePicked, itemFourPicked, itemFivePicked;
   public boolean readyToAdd;
+  public boolean bagOpened;
   public Items.Item item;
 
   @FXML private Rectangle itemOneRect;
@@ -32,6 +35,7 @@ public class LibraryRoomController {
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
+  @FXML private ScrollPane libItemScroll;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -47,6 +51,7 @@ public class LibraryRoomController {
     itemFourPicked = false;
     itemFivePicked = false;
     readyToAdd = false;
+    bagOpened = false;
 
     interactionHandler = new ShapeInteractionHandler();
     if (itemOneRect != null) {
@@ -89,6 +94,8 @@ public class LibraryRoomController {
     System.out.println("LIBRARY_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
+    libItemScroll.setOpacity(0);
+    bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
@@ -134,6 +141,11 @@ public class LibraryRoomController {
     setText("", false);
     readyToAdd = false;
 
+    // Place holder image for now
+    // Real item images will be initialised in switch case statment
+    Image image = new Image("images/place_holder.png");
+
+    // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
         itemOneRect.setOpacity(0);
@@ -158,6 +170,13 @@ public class LibraryRoomController {
       default:
         break;
     }
+
+    // Using the inventory instance from the MainMenuController so that images
+    // added from other scenes are not lost
+    MainMenuController.inventory.box.getChildren().add(new ImageView(image));
+
+    // To see what is in the inventory in the terminal
+    // Can be removed later
     System.out.println("Item added to inventory");
     System.out.println("Current Inventory:");
     Iterator itr = new MainMenuController().inventory.inventory.iterator();
@@ -203,9 +222,24 @@ public class LibraryRoomController {
   }
 
   @FXML
-  void openBook() {
+  public void openBook() {
     System.out.println("LIBRARY_ROOM > BOOK");
     SceneManager.currScene = AppUi.SHELF_LEFT;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+  }
+
+  /** Dealing with the event where the bag icon is clicked */
+  @FXML
+  public void clickBag() {
+    if (!bagOpened) {
+      libItemScroll.setContent(MainMenuController.inventory.box);
+      libItemScroll.setOpacity(1);
+      bagOpened = true;
+      System.out.println("Bag opened");
+    } else {
+      libItemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
   }
 }

@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
@@ -28,16 +29,20 @@ public class CauldronRoomController {
   @FXML private Rectangle mouseTrackRegion;
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
+  @FXML private ScrollPane calItemScroll;
 
   @FXML private ShapeInteractionHandler interactionHandler;
   boolean wizardFirstTime = true;
   private String book;
   private String[] options = {"fire", "water", "air"};
 
+  public boolean bagOpened;
+
   private CountdownTimer countdownTimer;
 
   @FXML
   public void initialize() {
+    bagOpened = false;
     countdownTimer = App.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
     countdownTimer.start();
@@ -142,6 +147,8 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
+    calItemScroll.setOpacity(0);
+    bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
     SceneManager.setTimerScene(AppUi.SHELF_LEFT);
@@ -149,6 +156,8 @@ public class CauldronRoomController {
 
   @FXML
   public void goRight(MouseEvent event) {
+    calItemScroll.setOpacity(0);
+    bagOpened = false;
     System.out.println("CAULDRON_ROOM > LIBRARY_ROOM");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
     SceneManager.setTimerScene(AppUi.SHELF_RIGHT);
@@ -191,9 +200,24 @@ public class CauldronRoomController {
   }
 
   @FXML
-  void openBook() {
+  public void openBook() {
     System.out.println("CAULDRON_ROOM > BOOK");
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+  }
+
+  /** Dealing with the event where the bag icon is clicked */
+  @FXML
+  public void clickBag() {
+    if (!bagOpened) {
+      calItemScroll.setContent(MainMenuController.inventory.box);
+      calItemScroll.setOpacity(1);
+      bagOpened = true;
+      System.out.println("Bag opened");
+    } else {
+      calItemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
   }
 }
