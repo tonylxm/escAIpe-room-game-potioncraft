@@ -141,29 +141,33 @@ public class LibraryRoomController {
     setText("", false);
     readyToAdd = false;
 
-    // Place holder image for now
-    // Real item images will be initialised in switch case statment
+    // If no item is selected but still added, place holder image
     Image image = new Image("images/place_holder.png");
 
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
+        image = new Image("images/place_holder.png");
         itemOneRect.setOpacity(0);
         itemOnePicked = true;
         break;
       case ITEM_2:
+        image = new Image("images/place_holder.png");
         itemTwoRect.setOpacity(0);
         itemTwoPicked = true;
         break;
       case ITEM_3:
+        image = new Image("images/place_holder.png");
         itemThreeRect.setOpacity(0);
         itemThreePicked = true;
         break;
       case ITEM_4:
+        image = new Image("images/place_holder.png");
         itemFourRect.setOpacity(0);
         itemFourPicked = true;
         break;
       case ITEM_5:
+        image = new Image("images/place_holder.png");
         itemFiveRect.setOpacity(0);
         itemFivePicked = true;
         break;

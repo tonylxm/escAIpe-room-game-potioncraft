@@ -143,27 +143,32 @@ public class TreasureRoomController {
 
     // Place holder image for now
     // Real item images will be initialised in switch case statment
-    Image image = new Image("images/icon.png");
+    Image image = new Image("images/place_holder.png");
 
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_6:
+        image = new Image("images/icon.png");
         itemSixRect.setOpacity(0);
         itemSixPicked = true;
         break;
       case ITEM_7:
+        image = new Image("images/icon.png");
         itemSevenRect.setOpacity(0);
         itemSevenPicked = true;
         break;
       case ITEM_8:
+        image = new Image("images/icon.png");
         itemEightRect.setOpacity(0);
         itemEightPicked = true;
         break;
       case ITEM_9:
+        image = new Image("images/icon.png");
         itemNineRect.setOpacity(0);
         itemNinePicked = true;
         break;
       case ITEM_10:
+        image = new Image("images/icon.png");
         itemTenRect.setOpacity(0);
         itemTenPicked = true;
         break;
