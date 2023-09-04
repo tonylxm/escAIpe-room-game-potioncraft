@@ -40,7 +40,6 @@ public class CauldronRoomController {
   public void initialize() {
     countdownTimer = App.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
-    countdownTimer.start();
     interactionHandler = new ShapeInteractionHandler();
     // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);

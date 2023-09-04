@@ -165,5 +165,19 @@ public class MainMenuController {
     System.out.println("MAIN MENU -> CAULDRON ROOM");
     TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
+
+    Task<Void> timerStartTask =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            Thread.sleep(2000);
+            App.getCountdownTimer().start();
+            return null;
+          }
+        };
+
+    Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
+    timerStartThread.start();
   }
 }
