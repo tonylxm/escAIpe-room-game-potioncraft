@@ -28,6 +28,7 @@ public class TreasureRoomController {
   @FXML private Rectangle itemNineRect;
   @FXML private Rectangle itemTenRect;
   @FXML private Rectangle textRect;
+  @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon leftShpe;
   @FXML private Label textLbl;
   @FXML private Label noLbl;
@@ -52,6 +53,9 @@ public class TreasureRoomController {
     itemTenPicked = false;
     readyToAdd = false;
     bagOpened = false;
+
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
     if (itemSixRect != null) {
@@ -240,8 +244,21 @@ public class TreasureRoomController {
       treItemScroll.setContent(MainMenuController.inventory.box);
       treItemScroll.setOpacity(1);
       bagOpened = true;
+      mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
-    } else {
+    }
+  }
+
+  @FXML
+  public void clickOff(MouseEvent event) {
+    System.out.println("click off");
+    textRect.setDisable(true);
+    textRect.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
+    
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
       treItemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("Bag closed");

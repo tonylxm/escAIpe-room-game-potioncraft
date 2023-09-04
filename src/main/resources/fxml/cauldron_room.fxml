@@ -25,15 +25,15 @@
       <Rectangle fx:id="bookFireRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff2121" height="67.0" layoutX="720.0" layoutY="167.0" onMouseClicked="#clickBookFire" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookWaterRectangle" arcHeight="5.0" arcWidth="5.0" fill="#10d9e3" height="67.0" layoutX="756.0" layoutY="167.0" onMouseClicked="#clickBookWater" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookAirRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="792.0" layoutY="167.0" onMouseClicked="#clickBookAir" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
-      <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="215.0" layoutY="397.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
-      <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="116.0" layoutY="575.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
+      <Circle fill="#3f4a54" layoutX="933.0" layoutY="644.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
       <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="968.0" layoutY="622.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Picture1.png" />
          </image>
       </ImageView>
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="644.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="215.0" layoutY="397.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
+      <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="116.0" layoutY="575.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="810.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="timerLabel" layoutX="14.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>

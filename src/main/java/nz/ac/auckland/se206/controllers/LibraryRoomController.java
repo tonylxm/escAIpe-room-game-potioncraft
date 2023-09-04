@@ -28,6 +28,7 @@ public class LibraryRoomController {
   @FXML private Rectangle itemFourRect;
   @FXML private Rectangle itemFiveRect;
   @FXML private Rectangle textRect;
+  @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon rightShpe;
   @FXML private Label textLbl;
   @FXML private Label noLbl;
@@ -52,6 +53,9 @@ public class LibraryRoomController {
     itemFivePicked = false;
     readyToAdd = false;
     bagOpened = false;
+
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
     if (itemOneRect != null) {
@@ -240,8 +244,21 @@ public class LibraryRoomController {
       libItemScroll.setContent(MainMenuController.inventory.box);
       libItemScroll.setOpacity(1);
       bagOpened = true;
+      mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
-    } else {
+    }
+  }
+
+  @FXML
+  public void clickOff(MouseEvent event) {
+    System.out.println("click off");
+    textRect.setDisable(true);
+    textRect.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
+    
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
       libItemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("Bag closed");

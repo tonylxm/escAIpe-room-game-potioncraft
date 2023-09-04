@@ -54,7 +54,8 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <ScrollPane id="treItemScroll" fx:id="treItemScroll" layoutX="800.0" layoutY="400.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
       <Circle fill="#3f4a54" layoutX="928.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
+      <ScrollPane id="treItemScroll" fx:id="treItemScroll" layoutX="800.0" layoutY="400.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </Pane>

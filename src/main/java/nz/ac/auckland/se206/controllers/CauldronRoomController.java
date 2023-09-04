@@ -171,6 +171,13 @@ public class CauldronRoomController {
     mouseTrackRegion.setDisable(true);
     textRect.setOpacity(0);
     mouseTrackRegion.setOpacity(0);
+    
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
+      calItemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
   }
 
   // @FXML
@@ -214,11 +221,8 @@ public class CauldronRoomController {
       calItemScroll.setContent(MainMenuController.inventory.box);
       calItemScroll.setOpacity(1);
       bagOpened = true;
+      mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
-    } else {
-      calItemScroll.setOpacity(0);
-      bagOpened = false;
-      System.out.println("Bag closed");
     }
   }
 }
