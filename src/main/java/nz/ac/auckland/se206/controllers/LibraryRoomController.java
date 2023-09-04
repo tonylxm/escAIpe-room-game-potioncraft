@@ -239,6 +239,7 @@ public class LibraryRoomController {
   /** Dealing with the event where the bag icon is clicked */
   @FXML
   public void clickBag() {
+    if (MainMenuController.inventory.size() == 0) return;
     if (!bagOpened) {
       libItemScroll.setContent(null);
       libItemScroll.setContent(MainMenuController.inventory.box);

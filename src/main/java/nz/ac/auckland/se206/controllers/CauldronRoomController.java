@@ -216,6 +216,7 @@ public class CauldronRoomController {
   /** Dealing with the event where the bag icon is clicked */
   @FXML
   public void clickBag() {
+    if (MainMenuController.inventory.size() == 0) return;
     if (!bagOpened) {
       calItemScroll.setContent(null);
       calItemScroll.setContent(MainMenuController.inventory.box);
