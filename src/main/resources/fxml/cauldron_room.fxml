@@ -26,7 +26,7 @@
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-5.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="215.0" layoutY="397.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="116.0" layoutY="575.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
-      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="968.0" layoutY="622.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="972.0" layoutY="624.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Picture1.png" />
          </image>

@@ -8,9 +8,9 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class CountdownTimer {
-  private int minutes;
-  private int initialSeconds;
-  private int currentSeconds;
+  private static int minutes;
+  private static int initialSeconds;
+  private static int currentSeconds;
   private Timeline timeline;
   private Label cauldronTimerLabel;
   private Label leftTimerLabel;
@@ -24,6 +24,13 @@ public class CountdownTimer {
     currentSeconds = Integer.parseInt(time[1]);
 
     setupTimeline();
+  }
+
+  public static void setTimerLimit(String timeLimit) {
+    String[] time = timeLimit.split(":");
+    minutes = Integer.parseInt(time[0]);
+    initialSeconds = Integer.parseInt(time[1]);
+    currentSeconds = Integer.parseInt(time[1]);
   }
 
   // Set up the timer to count down every second

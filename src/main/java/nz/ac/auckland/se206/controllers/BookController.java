@@ -17,7 +17,6 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.TimerManager;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
@@ -45,7 +44,7 @@ public class BookController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    countdownTimer = TimerManager.getCountdownTimer();
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
 
     chatCompletionRequest =

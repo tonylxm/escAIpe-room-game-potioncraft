@@ -12,7 +12,6 @@ import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
-import nz.ac.auckland.se206.TimerManager;
 
 public class LibraryRoomController {
   public boolean itemOnePicked, itemTwoPicked, itemThreePicked, itemFourPicked, itemFivePicked;
@@ -38,7 +37,7 @@ public class LibraryRoomController {
   private CountdownTimer countdownTimer;
 
   public void initialize() {
-    countdownTimer = TimerManager.getCountdownTimer();
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLeftTimerLabel(timerLabel);
 
     itemOnePicked = false;
