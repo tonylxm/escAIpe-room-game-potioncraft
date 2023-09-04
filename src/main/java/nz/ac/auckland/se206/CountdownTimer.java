@@ -15,6 +15,7 @@ public class CountdownTimer {
   private Label cauldronTimerLabel;
   private Label leftTimerLabel;
   private Label rightTimerLabel;
+  private Label bookTimerLabel;
 
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
@@ -97,6 +98,10 @@ public class CountdownTimer {
       if (rightTimerLabel != null) {
         rightTimerLabel.setText(formatTimerText());
       }
+
+      if (bookTimerLabel != null) {
+        bookTimerLabel.setText(formatTimerText());
+      }
     }
   }
 
@@ -119,6 +124,10 @@ public class CountdownTimer {
 
   public void setRightTimerLabel(Label rightTimerLabel) {
     this.rightTimerLabel = rightTimerLabel;
+  }
+
+  public void setBookTimerLabel(Label bookTimerLabel) {
+    this.bookTimerLabel = bookTimerLabel;
   }
 
   // Logic that occurs when the timer reaches 0 - sets the scene to the game over scene
