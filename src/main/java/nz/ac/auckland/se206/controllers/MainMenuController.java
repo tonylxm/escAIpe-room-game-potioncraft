@@ -8,11 +8,11 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Inventory;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.TimerManager;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class MainMenuController {
@@ -166,7 +166,6 @@ public class MainMenuController {
   @FXML
   public void startGame() throws IOException {
     // Handle timer
-    App.countdownTimer = new CountdownTimer(stringTime);
 
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
@@ -180,7 +179,7 @@ public class MainMenuController {
           @Override
           protected Void call() throws Exception {
             Thread.sleep(2000);
-            App.getCountdownTimer().start();
+            TimerManager.getCountdownTimer().start();
             return null;
           }
         };

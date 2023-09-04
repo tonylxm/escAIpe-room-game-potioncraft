@@ -17,12 +17,6 @@ public class App extends Application {
 
   private static Scene scene;
   public static TextToSpeech textToSpeech = new TextToSpeech();
-  public static CountdownTimer countdownTimer = new CountdownTimer("2:00");
-
-  public static CountdownTimer getCountdownTimer() {
-    System.out.println("getting timer");
-    return countdownTimer;
-  }
 
   public static void main(final String[] args) {
     launch();
@@ -56,7 +50,7 @@ public class App extends Application {
     SceneManager.addAppUi(AppUi.GAME_OVER, loadFxml("game_over"));
 
     Parent root = SceneManager.getUiRoot(AppUi.MAIN_MENU);
-    SceneManager.setTimerScene(AppUi.MAIN_MENU);
+
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
