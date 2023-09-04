@@ -8,6 +8,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class CountdownTimer {
+  private int minute;
   private int initialSeconds;
   private int currentSeconds;
   private Timeline timeline;
@@ -29,15 +30,21 @@ public class CountdownTimer {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  currentSeconds--;
-                  if (currentSeconds <= -1) {
-                    handleTimeout();
-                    timeline.stop();
-                  } else {
-                    updateTimerLabel();
-                  }
+                  oneSecondPassed();
+                  updateTimerLabel();
                 }));
     timeline.setCycleCount(Timeline.INDEFINITE);
+  }
+
+  public void oneSecondPassed() {
+    if (currentSeconds == 0 && minute == 0) {
+      handleTimeout();
+      timeline.stop();
+    } else if (currentSeconds == 0) {
+      minute--;
+      currentSeconds = 60;
+    }
+    currentSeconds--;
   }
 
   // Start the timer
