@@ -231,6 +231,7 @@ public class TreasureRoomController {
   @FXML
   public void clickBag() {
     if (!bagOpened) {
+      treItemScroll.setContent(null);
       treItemScroll.setContent(MainMenuController.inventory.box);
       treItemScroll.setOpacity(1);
       bagOpened = true;

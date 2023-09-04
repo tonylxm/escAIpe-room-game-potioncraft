@@ -210,6 +210,7 @@ public class CauldronRoomController {
   @FXML
   public void clickBag() {
     if (!bagOpened) {
+      calItemScroll.setContent(null);
       calItemScroll.setContent(MainMenuController.inventory.box);
       calItemScroll.setOpacity(1);
       bagOpened = true;

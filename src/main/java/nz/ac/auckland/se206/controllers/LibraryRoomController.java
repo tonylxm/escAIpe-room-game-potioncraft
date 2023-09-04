@@ -232,6 +232,7 @@ public class LibraryRoomController {
   @FXML
   public void clickBag() {
     if (!bagOpened) {
+      libItemScroll.setContent(null);
       libItemScroll.setContent(MainMenuController.inventory.box);
       libItemScroll.setOpacity(1);
       bagOpened = true;
