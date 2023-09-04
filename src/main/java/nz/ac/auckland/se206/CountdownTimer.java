@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Parent;
@@ -40,15 +41,19 @@ public class CountdownTimer {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  oneSecondPassed();
+                  try {
+                    oneSecondPassed();
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
                   updateTimerLabel();
                 }));
     timeline.setCycleCount(Timeline.INDEFINITE);
   }
 
-  public void oneSecondPassed() {
+  public void oneSecondPassed() throws IOException {
     if (currentSeconds == 0 && minutes == 0) {
-      handleTimeout();
+      handleTimeOut();
       timeline.stop();
     } else if (currentSeconds == 0) {
       minutes--;
@@ -138,8 +143,8 @@ public class CountdownTimer {
   }
 
   // Logic that occurs when the timer reaches 0 - sets the scene to the game over scene
-  private void handleTimeout() {
-    cauldronTimerLabel.getScene().setRoot(SceneManager.getUiRoot(AppUi.GAME_OVER));
+  private void handleTimeOut() throws IOException {
+    App.setRoot("game_over"); // use App.setRoot() so that game over occurs in all scenes
     SceneManager.setTimerScene(AppUi.GAME_OVER);
   }
 }
