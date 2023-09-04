@@ -8,7 +8,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class CountdownTimer {
-  private int minute;
+  private int minutes;
   private int initialSeconds;
   private int currentSeconds;
   private Timeline timeline;
@@ -16,9 +16,11 @@ public class CountdownTimer {
   private Label leftTimerLabel;
   private Label rightTimerLabel;
 
-  public CountdownTimer(int initialSeconds) {
-    this.initialSeconds = initialSeconds;
-    this.currentSeconds = initialSeconds;
+  public CountdownTimer(String timeLimit) {
+    String[] time = timeLimit.split(":");
+    minutes = Integer.parseInt(time[0]);
+    initialSeconds = Integer.parseInt(time[1]);
+    currentSeconds = Integer.parseInt(time[1]);
 
     setupTimeline();
   }
@@ -37,11 +39,11 @@ public class CountdownTimer {
   }
 
   public void oneSecondPassed() {
-    if (currentSeconds == 0 && minute == 0) {
+    if (currentSeconds == 0 && minutes == 0) {
       handleTimeout();
       timeline.stop();
     } else if (currentSeconds == 0) {
-      minute--;
+      minutes--;
       currentSeconds = 60;
     }
     currentSeconds--;
@@ -81,18 +83,38 @@ public class CountdownTimer {
           (Label) currentSceneRoot.lookup("#timerLabel"); // Assuming the ID is "timerLabel"
 
       if (timerLabel != null) {
-        timerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
-
-        if (cauldronTimerLabel != null) {
-          cauldronTimerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
+        if (currentSeconds < 10) {
+          timerLabel.setText(
+              String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds));
+        } else {
+          timerLabel.setText(String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds));
         }
+      }
 
-        if (leftTimerLabel != null) {
-          leftTimerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
+      if (cauldronTimerLabel != null) {
+        if (currentSeconds < 10) {
+          timerLabel.setText(
+              String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds));
+        } else {
+          timerLabel.setText(String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds));
         }
+      }
 
-        if (rightTimerLabel != null) {
-          rightTimerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
+      if (leftTimerLabel != null) {
+        if (currentSeconds < 10) {
+          timerLabel.setText(
+              String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds));
+        } else {
+          timerLabel.setText(String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds));
+        }
+      }
+
+      if (rightTimerLabel != null) {
+        if (currentSeconds < 10) {
+          timerLabel.setText(
+              String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds));
+        } else {
+          timerLabel.setText(String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds));
         }
       }
     }

@@ -17,7 +17,8 @@ public class App extends Application {
 
   private static Scene scene;
   public static TextToSpeech textToSpeech = new TextToSpeech();
-  public static CountdownTimer countdownTimer = new CountdownTimer(120);
+  public static String timeLimit = "2:00";
+  public static CountdownTimer countdownTimer = new CountdownTimer(timeLimit);
 
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
