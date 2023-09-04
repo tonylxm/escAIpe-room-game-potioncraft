@@ -91,11 +91,11 @@ public class CountdownTimer {
       }
 
       if (leftTimerLabel != null) {
-        timerLabel.setText(formatTimerText());
+        leftTimerLabel.setText(formatTimerText());
       }
 
       if (rightTimerLabel != null) {
-        timerLabel.setText(formatTimerText());
+        rightTimerLabel.setText(formatTimerText());
       }
     }
   }
