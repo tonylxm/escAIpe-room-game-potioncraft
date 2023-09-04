@@ -171,7 +171,7 @@ public class MainMenuController {
 
           @Override
           protected Void call() throws Exception {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             App.getCountdownTimer().start();
             return null;
           }
