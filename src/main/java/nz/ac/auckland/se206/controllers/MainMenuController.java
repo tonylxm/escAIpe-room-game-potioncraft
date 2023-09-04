@@ -166,6 +166,7 @@ public class MainMenuController {
   @FXML
   public void startGame() throws IOException {
     // Handle timer
+    // TimerManager.countdownTimer = new CountdownTimer(stringTime);
 
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);

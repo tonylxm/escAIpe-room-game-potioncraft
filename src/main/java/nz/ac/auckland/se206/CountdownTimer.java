@@ -87,7 +87,7 @@ public class CountdownTimer {
       }
 
       if (cauldronTimerLabel != null) {
-        timerLabel.setText(formatTimerText());
+        cauldronTimerLabel.setText(formatTimerText());
       }
 
       if (leftTimerLabel != null) {
