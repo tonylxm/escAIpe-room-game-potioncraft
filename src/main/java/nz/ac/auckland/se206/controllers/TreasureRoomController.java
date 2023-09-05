@@ -22,11 +22,6 @@ public class TreasureRoomController {
   public boolean bagOpened;
   public Items.Item item;
 
-  @FXML private Rectangle itemSixRect;
-  @FXML private Rectangle itemSevenRect;
-  @FXML private Rectangle itemEightRect;
-  @FXML private Rectangle itemNineRect;
-  @FXML private Rectangle itemTenRect;
   @FXML private Rectangle textRect;
   @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon leftShpe;
@@ -37,6 +32,12 @@ public class TreasureRoomController {
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane treItemScroll;
+
+  @FXML private ImageView itemSixImg;
+  @FXML private ImageView itemSevenImg;
+  @FXML private ImageView itemEightImg;
+  @FXML private ImageView itemNineImg;
+  @FXML private ImageView itemTenImg;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -58,30 +59,30 @@ public class TreasureRoomController {
     mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
-    if (itemSixRect != null) {
-      itemSixRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemSixRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemSixRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_6));
+    if (itemSixImg != null) {
+      itemSixImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSixImg));
+      itemSixImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSixImg));
+      itemSixImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_6));
     }
-    if (itemSevenRect != null) {
-      itemSevenRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemSevenRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemSevenRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_7));
+    if (itemSevenImg != null) {
+      itemSevenImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSevenImg));
+      itemSevenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSevenImg));
+      itemSevenImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_7));
     }
-    if (itemEightRect != null) {
-      itemEightRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemEightRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemEightRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_8));
+    if (itemEightImg != null) {
+      itemEightImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemEightImg));
+      itemEightImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemEightImg));
+      itemEightImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_8));
     }
-    if (itemNineRect != null) {
-      itemNineRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemNineRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemNineRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_9));
+    if (itemNineImg != null) {
+      itemNineImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemNineImg));
+      itemNineImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemNineImg));
+      itemNineImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_9));
     }
-    if (itemTenRect != null) {
-      itemTenRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemTenRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemTenRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_10));
+    if (itemTenImg != null) {
+      itemTenImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTenImg));
+      itemTenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTenImg));
+      itemTenImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_10));
     }
     if (leftShpe != null) {
       leftShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -147,42 +148,44 @@ public class TreasureRoomController {
 
     // Place holder image for now
     // Real item images will be initialised in switch case statment
-    Image image = new Image("images/place_holder.png");
+    ImageView image = new ImageView(new Image("images/place_holder.png"));
 
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_6:
-        image = new Image("images/icon.png");
-        itemSixRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemSixImg.setOpacity(0);
         itemSixPicked = true;
         break;
       case ITEM_7:
-        image = new Image("images/icon.png");
-        itemSevenRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemSevenImg.setOpacity(0);
         itemSevenPicked = true;
         break;
       case ITEM_8:
-        image = new Image("images/icon.png");
-        itemEightRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemEightImg.setOpacity(0);
         itemEightPicked = true;
         break;
       case ITEM_9:
-        image = new Image("images/icon.png");
-        itemNineRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemNineImg.setOpacity(0);
         itemNinePicked = true;
         break;
       case ITEM_10:
-        image = new Image("images/icon.png");
-        itemTenRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemTenImg.setOpacity(0);
         itemTenPicked = true;
         break;
       default:
         break;
     }
 
+    image.setFitHeight(133);
+    image.setFitWidth(133);
     // Using the inventory instance from the MainMenuController so that images
     // added from other scenes are not lost
-    MainMenuController.inventory.box.getChildren().add(new ImageView(image));
+    MainMenuController.inventory.box.getChildren().add(image);
 
     // To see what is in the inventory in the terminal
     // Can be removed later
