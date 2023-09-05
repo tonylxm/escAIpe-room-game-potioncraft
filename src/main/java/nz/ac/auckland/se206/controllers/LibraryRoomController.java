@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
@@ -38,7 +37,7 @@ public class LibraryRoomController {
   private CountdownTimer countdownTimer;
 
   public void initialize() {
-    countdownTimer = App.getCountdownTimer();
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLeftTimerLabel(timerLabel);
 
     itemOnePicked = false;
