@@ -22,11 +22,6 @@ public class LibraryRoomController {
   public boolean bagOpened;
   public Items.Item item;
 
-  @FXML private Rectangle itemOneRect;
-  @FXML private Rectangle itemTwoRect;
-  @FXML private Rectangle itemThreeRect;
-  @FXML private Rectangle itemFourRect;
-  @FXML private Rectangle itemFiveRect;
   @FXML private Rectangle textRect;
   @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon rightShpe;
@@ -37,6 +32,12 @@ public class LibraryRoomController {
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane libItemScroll;
+
+  @FXML private ImageView itemOneImg;
+  @FXML private ImageView itemTwoImg;
+  @FXML private ImageView itemThreeImg;
+  @FXML private ImageView itemFourImg;
+  @FXML private ImageView itemFiveImg;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -58,30 +59,30 @@ public class LibraryRoomController {
     mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
-    if (itemOneRect != null) {
-      itemOneRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemOneRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemOneRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
+    if (itemOneImg != null) {
+      itemOneImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemOneImg));
+      itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg));
+      itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
     }
-    if (itemTwoRect != null) {
-      itemTwoRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemTwoRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemTwoRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
+    if (itemTwoImg != null) {
+      itemTwoImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTwoImg));
+      itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg));
+      itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
     }
-    if (itemThreeRect != null) {
-      itemThreeRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemThreeRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemThreeRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
+    if (itemThreeImg != null) {
+      itemThreeImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemThreeImg));
+      itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg));
+      itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
     }
-    if (itemFourRect != null) {
-      itemFourRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemFourRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemFourRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
+    if (itemFourImg != null) {
+      itemFourImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFourImg));
+      itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg));
+      itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
     }
-    if (itemFiveRect != null) {
-      itemFiveRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemFiveRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemFiveRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
+    if (itemFiveImg != null) {
+      itemFiveImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFiveImg));
+      itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg));
+      itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
     }
     if (rightShpe != null) {
       rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -146,42 +147,44 @@ public class LibraryRoomController {
     readyToAdd = false;
 
     // If no item is selected but still added, place holder image
-    Image image = new Image("images/place_holder.png");
+    ImageView image = new ImageView(new Image("images/place_holder.png"));
 
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
-        image = new Image("images/place_holder.png");
-        itemOneRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemOneImg.setOpacity(0);
         itemOnePicked = true;
         break;
       case ITEM_2:
-        image = new Image("images/place_holder.png");
-        itemTwoRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemTwoImg.setOpacity(0);
         itemTwoPicked = true;
         break;
       case ITEM_3:
-        image = new Image("images/place_holder.png");
-        itemThreeRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemThreeImg.setOpacity(0);
         itemThreePicked = true;
         break;
       case ITEM_4:
-        image = new Image("images/place_holder.png");
-        itemFourRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemFourImg.setOpacity(0);
         itemFourPicked = true;
         break;
       case ITEM_5:
-        image = new Image("images/place_holder.png");
-        itemFiveRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemFiveImg.setOpacity(0);
         itemFivePicked = true;
         break;
       default:
         break;
     }
 
+    image.setFitHeight(133);
+    image.setFitWidth(133);
     // Using the inventory instance from the MainMenuController so that images
     // added from other scenes are not lost
-    MainMenuController.inventory.box.getChildren().add(new ImageView(image));
+    MainMenuController.inventory.box.getChildren().add(image);
 
     // To see what is in the inventory in the terminal
     // Can be removed later

@@ -17,11 +17,31 @@
             <Image url="@../images/library-room.jpeg" />
          </image>
       </ImageView>
-      <Rectangle id="itemOneRect" fx:id="itemOneRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="118.0" layoutY="333.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
-      <Rectangle id="itemTwoRect" fx:id="itemTwoRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="631.0" layoutY="161.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
-      <Rectangle id="itemThreeRect" fx:id="itemThreeRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="823.0" layoutY="122.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
-      <Rectangle id="itemFourRect" fx:id="itemFourRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="443.0" layoutY="161.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
-      <Rectangle id="itemFiveRect" fx:id="itemFiveRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="273.0" layoutY="318.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="79.0" />
+      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="150.0" fitWidth="150.0" layoutX="69.0" layoutY="368.0">
+         <image>
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="150.0" fitWidth="150.0" layoutX="596.0" layoutY="125.0">
+         <image>
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="150.0" fitWidth="150.0" layoutX="787.0" layoutY="83.0">
+         <image>
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="150.0" fitWidth="150.0" layoutX="382.0" layoutY="98.0">
+         <image>
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="150.0" fitWidth="150.0" layoutX="227.0" layoutY="273.0">
+         <image>
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
+         </image>
+      </ImageView>
       <Polygon id="rightShpe" fx:id="rightShpe" fill="#0084ff" layoutX="799.0" layoutY="401.0" onMouseClicked="#goRight" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
@@ -55,7 +75,7 @@
          </font>
       </Label>
       <Circle fill="#3f4a54" layoutX="928.0" layoutY="648.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="6.0" layoutY="6.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
-      <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="786.0" layoutY="411.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
    </children>
 </Pane>

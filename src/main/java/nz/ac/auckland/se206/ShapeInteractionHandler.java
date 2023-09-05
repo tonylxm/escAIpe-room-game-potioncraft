@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import javafx.event.EventHandler;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -19,6 +21,14 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
     } else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
       unglowThis(shape);
     }
+  }
+
+  public void glowThis(ImageView image) {
+    image.setEffect(new Glow(0.8));
+  }
+
+  public void unglowThis(ImageView image) {
+    image.setEffect(new Glow(0));
   }
 
   private void glowThis(Shape shape) {
