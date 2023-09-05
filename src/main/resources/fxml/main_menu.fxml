@@ -14,17 +14,17 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Text fx:id="difficultyTxt" layoutX="464.0" layoutY="259.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+      <Text fx:id="difficultyTxt" fill="WHITE" layoutX="464.0" layoutY="259.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="timeLimitTxt" layoutX="423.0" layoutY="385.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
+      <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="423.0" layoutY="385.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text layoutX="338.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
+      <Text fill="WHITE" layoutX="338.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME">
          <font>
             <Font size="60.0" />
          </font>
