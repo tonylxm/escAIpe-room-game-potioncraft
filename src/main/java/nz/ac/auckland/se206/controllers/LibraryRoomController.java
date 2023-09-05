@@ -244,6 +244,7 @@ public class LibraryRoomController {
   public void clickBag() {
     if (MainMenuController.inventory.size() == 0) return;
     if (!bagOpened) {
+      libItemScroll.setVvalue(0);
       libItemScroll.setContent(null);
       libItemScroll.setContent(MainMenuController.inventory.box);
       libItemScroll.setOpacity(1);

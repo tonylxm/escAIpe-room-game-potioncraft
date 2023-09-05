@@ -244,6 +244,7 @@ public class TreasureRoomController {
   public void clickBag() {
     if (MainMenuController.inventory.size() == 0) return;
     if (!bagOpened) {
+      treItemScroll.setVvalue(0);
       treItemScroll.setContent(null);
       treItemScroll.setContent(MainMenuController.inventory.box);
       treItemScroll.setOpacity(1);
