@@ -19,27 +19,27 @@
       </ImageView>
       <ImageView fx:id="itemSixImg" fitHeight="150.0" fitWidth="150.0" layoutX="303.0" layoutY="174.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="150.0" fitWidth="150.0" layoutX="509.0" layoutY="208.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="129.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="150.0" fitWidth="150.0" layoutX="78.0" layoutY="378.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="150.0" fitWidth="150.0" layoutX="787.0" layoutY="208.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="244.0" layoutY="576.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />

@@ -19,27 +19,27 @@
       </ImageView>
       <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="150.0" fitWidth="150.0" layoutX="69.0" layoutY="368.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="150.0" fitWidth="150.0" layoutX="596.0" layoutY="125.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="150.0" fitWidth="150.0" layoutX="787.0" layoutY="83.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="150.0" fitWidth="150.0" layoutX="382.0" layoutY="98.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="150.0" fitWidth="150.0" layoutX="227.0" layoutY="273.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <Polygon id="rightShpe" fx:id="rightShpe" fill="#0084ff" layoutX="799.0" layoutY="401.0" onMouseClicked="#goRight" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -75,7 +75,7 @@
          </font>
       </Label>
       <Circle fill="#3f4a54" layoutX="928.0" layoutY="648.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-68.0" layoutY="20.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
    </children>
 </Pane>
