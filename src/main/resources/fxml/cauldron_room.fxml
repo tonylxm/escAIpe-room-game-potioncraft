@@ -35,7 +35,7 @@
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="215.0" layoutY="397.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="116.0" layoutY="575.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="858.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
-      <Label fx:id="timerLabel" layoutX="14.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>
             <Font size="38.0" />
          </font>

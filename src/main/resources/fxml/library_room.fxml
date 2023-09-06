@@ -69,7 +69,7 @@
             <Image url="@../images/Picture1.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="24.0" layoutY="10.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+      <Label fx:id="timerLabel" layoutX="774.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>
             <Font size="38.0" />
          </font>
