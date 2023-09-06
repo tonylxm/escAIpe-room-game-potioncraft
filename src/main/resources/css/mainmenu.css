@@ -1,7 +1,12 @@
 .root {
-    -fx-background-color: linear-gradient(to bottom, #7b00ff, #f178dd);
+    -fx-background-color: linear-gradient(to bottom, #7b00ff, #d886cb);
 }
 
 .button {
-    -fx-color: #7c36ff;
+    -fx-color: #7b00ff;
+}
+
+.button:hover {
+    -fx-color: #922dff;
+    -fx-cursor: HAND;
 }
