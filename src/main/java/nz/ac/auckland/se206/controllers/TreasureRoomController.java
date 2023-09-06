@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
@@ -16,14 +18,11 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 public class TreasureRoomController {
   public boolean itemSixPicked, itemSevenPicked, itemEightPicked, itemNinePicked, itemTenPicked;
   public boolean readyToAdd;
+  public boolean bagOpened;
   public Items.Item item;
 
-  @FXML private Rectangle itemSixRect;
-  @FXML private Rectangle itemSevenRect;
-  @FXML private Rectangle itemEightRect;
-  @FXML private Rectangle itemNineRect;
-  @FXML private Rectangle itemTenRect;
   @FXML private Rectangle textRect;
+  @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon leftShpe;
   @FXML private Label textLbl;
   @FXML private Label noLbl;
@@ -31,6 +30,13 @@ public class TreasureRoomController {
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
+  @FXML private ScrollPane treItemScroll;
+
+  @FXML private ImageView itemSixImg;
+  @FXML private ImageView itemSevenImg;
+  @FXML private ImageView itemEightImg;
+  @FXML private ImageView itemNineImg;
+  @FXML private ImageView itemTenImg;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -46,32 +52,36 @@ public class TreasureRoomController {
     itemNinePicked = false;
     itemTenPicked = false;
     readyToAdd = false;
+    bagOpened = false;
+
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
-    if (itemSixRect != null) {
-      itemSixRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemSixRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemSixRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_6));
+    if (itemSixImg != null) {
+      itemSixImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSixImg));
+      itemSixImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSixImg));
+      itemSixImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_6));
     }
-    if (itemSevenRect != null) {
-      itemSevenRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemSevenRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemSevenRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_7));
+    if (itemSevenImg != null) {
+      itemSevenImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSevenImg));
+      itemSevenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSevenImg));
+      itemSevenImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_7));
     }
-    if (itemEightRect != null) {
-      itemEightRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemEightRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemEightRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_8));
+    if (itemEightImg != null) {
+      itemEightImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemEightImg));
+      itemEightImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemEightImg));
+      itemEightImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_8));
     }
-    if (itemNineRect != null) {
-      itemNineRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemNineRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemNineRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_9));
+    if (itemNineImg != null) {
+      itemNineImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemNineImg));
+      itemNineImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemNineImg));
+      itemNineImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_9));
     }
-    if (itemTenRect != null) {
-      itemTenRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemTenRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemTenRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_10));
+    if (itemTenImg != null) {
+      itemTenImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTenImg));
+      itemTenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTenImg));
+      itemTenImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_10));
     }
     if (leftShpe != null) {
       leftShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -88,6 +98,8 @@ public class TreasureRoomController {
     System.out.println("TREASURE_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
+    treItemScroll.setOpacity(0);
+    bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
@@ -122,6 +134,7 @@ public class TreasureRoomController {
     this.item = item;
     setText("Add to inventory?", true);
     readyToAdd = true;
+    System.out.println(item + " clicked");
   }
 
   /** Adding a selected item to the inventory */
@@ -132,30 +145,49 @@ public class TreasureRoomController {
     setText("", false);
     readyToAdd = false;
 
+    // Place holder image for now
+    // Real item images will be initialised in switch case statment
+    ImageView image = new ImageView(new Image("images/place_holder.png"));
+
+    // Different controls are executed depending on the item
     switch (item) {
       case ITEM_6:
-        itemSixRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemSixImg.setOpacity(0);
         itemSixPicked = true;
         break;
       case ITEM_7:
-        itemSevenRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemSevenImg.setOpacity(0);
         itemSevenPicked = true;
         break;
       case ITEM_8:
-        itemEightRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemEightImg.setOpacity(0);
         itemEightPicked = true;
         break;
       case ITEM_9:
-        itemNineRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemNineImg.setOpacity(0);
         itemNinePicked = true;
         break;
       case ITEM_10:
-        itemTenRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemTenImg.setOpacity(0);
         itemTenPicked = true;
         break;
       default:
         break;
     }
+
+    image.setFitHeight(133);
+    image.setFitWidth(133);
+    // Using the inventory instance from the MainMenuController so that images
+    // added from other scenes are not lost
+    MainMenuController.inventory.box.getChildren().add(image);
+
+    // To see what is in the inventory in the terminal
+    // Can be removed later
     System.out.println("Item added to inventory");
     System.out.println("Current Inventory:");
     Iterator itr = new MainMenuController().inventory.inventory.iterator();
@@ -200,9 +232,40 @@ public class TreasureRoomController {
   }
 
   @FXML
-  void openBook() {
+  public void openBook() {
     System.out.println("TREASURE_ROOM > BOOK");
     SceneManager.currScene = AppUi.SHELF_RIGHT;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+  }
+
+  /** Dealing with the event where the bag icon is clicked */
+  @FXML
+  public void clickBag() {
+    if (MainMenuController.inventory.size() == 0) return;
+    if (!bagOpened) {
+      treItemScroll.setVvalue(0);
+      treItemScroll.setContent(null);
+      treItemScroll.setContent(MainMenuController.inventory.box);
+      treItemScroll.setOpacity(1);
+      bagOpened = true;
+      mouseTrackRegion.setDisable(false);
+      System.out.println("Bag opened");
+    }
+  }
+
+  @FXML
+  public void clickOff(MouseEvent event) {
+    System.out.println("click off");
+    textRect.setDisable(true);
+    textRect.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
+    
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
+      treItemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
   }
 }

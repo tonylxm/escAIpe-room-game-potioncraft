@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
@@ -16,14 +18,11 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 public class LibraryRoomController {
   public boolean itemOnePicked, itemTwoPicked, itemThreePicked, itemFourPicked, itemFivePicked;
   public boolean readyToAdd;
+  public boolean bagOpened;
   public Items.Item item;
 
-  @FXML private Rectangle itemOneRect;
-  @FXML private Rectangle itemTwoRect;
-  @FXML private Rectangle itemThreeRect;
-  @FXML private Rectangle itemFourRect;
-  @FXML private Rectangle itemFiveRect;
   @FXML private Rectangle textRect;
+  @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon rightShpe;
   @FXML private Label textLbl;
   @FXML private Label noLbl;
@@ -31,6 +30,13 @@ public class LibraryRoomController {
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
+  @FXML private ScrollPane libItemScroll;
+
+  @FXML private ImageView itemOneImg;
+  @FXML private ImageView itemTwoImg;
+  @FXML private ImageView itemThreeImg;
+  @FXML private ImageView itemFourImg;
+  @FXML private ImageView itemFiveImg;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -46,32 +52,36 @@ public class LibraryRoomController {
     itemFourPicked = false;
     itemFivePicked = false;
     readyToAdd = false;
+    bagOpened = false;
+
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
-    if (itemOneRect != null) {
-      itemOneRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemOneRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemOneRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
+    if (itemOneImg != null) {
+      itemOneImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemOneImg));
+      itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg));
+      itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
     }
-    if (itemTwoRect != null) {
-      itemTwoRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemTwoRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemTwoRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
+    if (itemTwoImg != null) {
+      itemTwoImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTwoImg));
+      itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg));
+      itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
     }
-    if (itemThreeRect != null) {
-      itemThreeRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemThreeRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemThreeRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
+    if (itemThreeImg != null) {
+      itemThreeImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemThreeImg));
+      itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg));
+      itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
     }
-    if (itemFourRect != null) {
-      itemFourRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemFourRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemFourRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
+    if (itemFourImg != null) {
+      itemFourImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFourImg));
+      itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg));
+      itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
     }
-    if (itemFiveRect != null) {
-      itemFiveRect.setOnMouseEntered(event -> interactionHandler.handle(event));
-      itemFiveRect.setOnMouseExited(event -> interactionHandler.handle(event));
-      itemFiveRect.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
+    if (itemFiveImg != null) {
+      itemFiveImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFiveImg));
+      itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg));
+      itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
     }
     if (rightShpe != null) {
       rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -88,6 +98,8 @@ public class LibraryRoomController {
     System.out.println("LIBRARY_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
+    libItemScroll.setOpacity(0);
+    bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
@@ -133,30 +145,48 @@ public class LibraryRoomController {
     setText("", false);
     readyToAdd = false;
 
+    // If no item is selected but still added, place holder image
+    ImageView image = new ImageView(new Image("images/place_holder.png"));
+
+    // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
-        itemOneRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemOneImg.setOpacity(0);
         itemOnePicked = true;
         break;
       case ITEM_2:
-        itemTwoRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemTwoImg.setOpacity(0);
         itemTwoPicked = true;
         break;
       case ITEM_3:
-        itemThreeRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemThreeImg.setOpacity(0);
         itemThreePicked = true;
         break;
       case ITEM_4:
-        itemFourRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemFourImg.setOpacity(0);
         itemFourPicked = true;
         break;
       case ITEM_5:
-        itemFiveRect.setOpacity(0);
+        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        itemFiveImg.setOpacity(0);
         itemFivePicked = true;
         break;
       default:
         break;
     }
+
+    image.setFitHeight(133);
+    image.setFitWidth(133);
+    // Using the inventory instance from the MainMenuController so that images
+    // added from other scenes are not lost
+    MainMenuController.inventory.box.getChildren().add(image);
+
+    // To see what is in the inventory in the terminal
+    // Can be removed later
     System.out.println("Item added to inventory");
     System.out.println("Current Inventory:");
     Iterator itr = new MainMenuController().inventory.inventory.iterator();
@@ -202,9 +232,40 @@ public class LibraryRoomController {
   }
 
   @FXML
-  void openBook() {
+  public void openBook() {
     System.out.println("LIBRARY_ROOM > BOOK");
     SceneManager.currScene = AppUi.SHELF_LEFT;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+  }
+
+  /** Dealing with the event where the bag icon is clicked */
+  @FXML
+  public void clickBag() {
+    if (MainMenuController.inventory.size() == 0) return;
+    if (!bagOpened) {
+      libItemScroll.setVvalue(0);
+      libItemScroll.setContent(null);
+      libItemScroll.setContent(MainMenuController.inventory.box);
+      libItemScroll.setOpacity(1);
+      bagOpened = true;
+      mouseTrackRegion.setDisable(false);
+      System.out.println("Bag opened");
+    }
+  }
+
+  @FXML
+  public void clickOff(MouseEvent event) {
+    System.out.println("click off");
+    textRect.setDisable(true);
+    textRect.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
+    
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
+      libItemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
   }
 }
