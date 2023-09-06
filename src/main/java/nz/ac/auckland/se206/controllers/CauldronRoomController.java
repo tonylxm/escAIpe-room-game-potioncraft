@@ -25,6 +25,9 @@ public class CauldronRoomController {
   @FXML private Rectangle bookFireRectangle;
   @FXML private Rectangle bookWaterRectangle;
   @FXML private Rectangle bookAirRectangle;
+  @FXML private Rectangle bookFireImage;
+  @FXML private Rectangle bookWaterImage;
+  @FXML private Rectangle bookAirImage;
   @FXML private Rectangle textRect;
   @FXML private Rectangle wizardChatImage;
   @FXML private Rectangle mouseTrackRegion;
@@ -32,6 +35,7 @@ public class CauldronRoomController {
   @FXML private Label timerLabel;
   @FXML private ScrollPane calItemScroll;
   @FXML private Label riddleSelectLabel;
+  @FXML private Label chooseLabel;
 
   @FXML private ShapeInteractionHandler interactionHandler;
   private ChatHandler chatHandler = new ChatHandler();
@@ -54,7 +58,9 @@ public class CauldronRoomController {
     mouseTrackRegion.setDisable(true);
     textRect.setDisable(true);
     riddleSelectLabel.setDisable(true);
+    disableBooks();
     mouseTrackRegion.setOpacity(0);
+    book = getRandomBook();
 
     if (cauldronRectangle != null) {
       cauldronRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -113,6 +119,24 @@ public class CauldronRoomController {
     // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
   }
 
+  private void disableBooks() {
+    bookFireRectangle.setDisable(true);
+    bookWaterRectangle.setDisable(true);
+    bookAirRectangle.setDisable(true);
+    bookFireRectangle.setOpacity(0);
+    bookWaterRectangle.setOpacity(0);
+    bookAirRectangle.setOpacity(0);
+  }
+
+  private void enableBooks() {
+    bookFireRectangle.setDisable(false);
+    bookWaterRectangle.setDisable(false);
+    bookAirRectangle.setDisable(false);
+    bookFireRectangle.setOpacity(100);
+    bookWaterRectangle.setOpacity(100);
+    bookAirRectangle.setOpacity(100);
+  }
+
   @FXML
   public void clickCauldron(MouseEvent event) {
     System.out.println("cauldron clicked");
@@ -121,9 +145,7 @@ public class CauldronRoomController {
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
-    if (wizardFirstTime) {
-
-      book = getRandomBook();
+    if (!GameState.isBookRiddleResolved) {
 
       showWizardChat();
 
@@ -131,23 +153,47 @@ public class CauldronRoomController {
       GameState.isBookRiddleGiven = true;
       // unhighlightThis(wizardRectangle);
     } else {
-      showWizardChat();
+      // showWizardChat();
     }
   }
 
   @FXML
   public void clickBookFire(MouseEvent event) {
     System.out.println("book fire clicked");
+    if (book == "fire") {
+      // remove the book from the scene
+      bookFireRectangle.setOpacity(0);
+      bookFireImage.setOpacity(0);
+      bookFireImage.setDisable(true);
+      bookFireRectangle.setDisable(true);
+      GameState.isBookRiddleResolved = true;
+    }
   }
 
   @FXML
   public void clickBookWater(MouseEvent event) {
     System.out.println("book water clicked");
+    if (book == "water") {
+      // remove the book from the scene
+      bookWaterRectangle.setOpacity(0);
+      bookWaterImage.setOpacity(0);
+      bookWaterImage.setDisable(true);
+      bookWaterRectangle.setDisable(true);
+      GameState.isBookRiddleResolved = true;
+    }
   }
 
   @FXML
   public void clickBookAir(MouseEvent event) {
     System.out.println("book air clicked");
+    if (book == "air") {
+      // remove the book from the scene
+      bookAirRectangle.setOpacity(0);
+      bookAirImage.setOpacity(0);
+      bookAirImage.setDisable(true);
+      bookAirRectangle.setDisable(true);
+      GameState.isBookRiddleResolved = true;
+    }
   }
 
   @FXML
@@ -180,6 +226,8 @@ public class CauldronRoomController {
     riddleSelectLabel.setOpacity(0);
     riddleSelectLabel.setText(">Riddle");
     riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
+    disableBooks();
+    chooseLabel.setOpacity(0);
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
@@ -242,5 +290,7 @@ public class CauldronRoomController {
   public void riddleSelect() {
     riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 12));
     riddleSelectLabel.setText(riddle);
+    chooseLabel.setOpacity(100);
+    enableBooks();
   }
 }
