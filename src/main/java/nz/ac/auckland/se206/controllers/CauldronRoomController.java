@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +14,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.gpt.ChatHandler;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
@@ -23,17 +25,24 @@ public class CauldronRoomController {
   @FXML private Rectangle bookFireRectangle;
   @FXML private Rectangle bookWaterRectangle;
   @FXML private Rectangle bookAirRectangle;
+  @FXML private Rectangle bookFireImage;
+  @FXML private Rectangle bookWaterImage;
+  @FXML private Rectangle bookAirImage;
   @FXML private Rectangle textRect;
   @FXML private Rectangle wizardChatImage;
   @FXML private Rectangle mouseTrackRegion;
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane calItemScroll;
+  @FXML private Label riddleSelectLabel;
+  @FXML private Label chooseLabel;
 
   @FXML private ShapeInteractionHandler interactionHandler;
+  private ChatHandler chatHandler = new ChatHandler();
   boolean wizardFirstTime = true;
   private String book;
   private String[] options = {"fire", "water", "air"};
+  private String riddle;
 
   public boolean bagOpened;
 
@@ -48,7 +57,10 @@ public class CauldronRoomController {
     // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);
     textRect.setDisable(true);
+    riddleSelectLabel.setDisable(true);
+    disableBooks();
     mouseTrackRegion.setOpacity(0);
+    book = getRandomBook();
 
     if (cauldronRectangle != null) {
       cauldronRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -84,9 +96,45 @@ public class CauldronRoomController {
       bookAirRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       bookAirRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
     }
+
+    try {
+      chatHandler.initialize();
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+    }
+    Task<Void> bookRiddleTask =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
+            System.out.println(riddle);
+            return null;
+          }
+        };
+    new Thread(bookRiddleTask).start();
+    System.out.println(riddle);
     // Some type of animation
     // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
     // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
+  }
+
+  private void disableBooks() {
+    bookFireRectangle.setDisable(true);
+    bookWaterRectangle.setDisable(true);
+    bookAirRectangle.setDisable(true);
+    bookFireRectangle.setOpacity(0);
+    bookWaterRectangle.setOpacity(0);
+    bookAirRectangle.setOpacity(0);
+  }
+
+  private void enableBooks() {
+    bookFireRectangle.setDisable(false);
+    bookWaterRectangle.setDisable(false);
+    bookAirRectangle.setDisable(false);
+    bookFireRectangle.setOpacity(100);
+    bookWaterRectangle.setOpacity(100);
+    bookAirRectangle.setOpacity(100);
   }
 
   @FXML
@@ -97,50 +145,55 @@ public class CauldronRoomController {
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
-    if (wizardFirstTime) {
+    if (!GameState.isBookRiddleResolved) {
 
-      book = getRandomBook();
-
-      ChatHandler chatHandler = new ChatHandler();
-      try {
-        chatHandler.initialize();
-      } catch (ApiProxyException e) {
-        e.printStackTrace();
-      }
-      // Task<Void> bookRiddleTask =
-      //     new Task<Void>() {
-
-      //       @Override
-      //       protected Void call() throws Exception {
-      //         String response = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
-      //         System.out.println(response);
-      //         return null;
-      //       }
-      //     };
       showWizardChat();
-      // new Thread(bookRiddleTask).start();
 
       wizardFirstTime = false;
       GameState.isBookRiddleGiven = true;
       // unhighlightThis(wizardRectangle);
     } else {
-      showWizardChat();
+      // showWizardChat();
     }
   }
 
   @FXML
   public void clickBookFire(MouseEvent event) {
     System.out.println("book fire clicked");
+    if (book == "fire") {
+      // remove the book from the scene
+      bookFireRectangle.setOpacity(0);
+      bookFireImage.setOpacity(0);
+      bookFireImage.setDisable(true);
+      bookFireRectangle.setDisable(true);
+      GameState.isBookRiddleResolved = true;
+    }
   }
 
   @FXML
   public void clickBookWater(MouseEvent event) {
     System.out.println("book water clicked");
+    if (book == "water") {
+      // remove the book from the scene
+      bookWaterRectangle.setOpacity(0);
+      bookWaterImage.setOpacity(0);
+      bookWaterImage.setDisable(true);
+      bookWaterRectangle.setDisable(true);
+      GameState.isBookRiddleResolved = true;
+    }
   }
 
   @FXML
   public void clickBookAir(MouseEvent event) {
     System.out.println("book air clicked");
+    if (book == "air") {
+      // remove the book from the scene
+      bookAirRectangle.setOpacity(0);
+      bookAirImage.setOpacity(0);
+      bookAirImage.setDisable(true);
+      bookAirRectangle.setDisable(true);
+      GameState.isBookRiddleResolved = true;
+    }
   }
 
   @FXML
@@ -169,7 +222,13 @@ public class CauldronRoomController {
     mouseTrackRegion.setDisable(true);
     textRect.setOpacity(0);
     mouseTrackRegion.setOpacity(0);
-    
+    riddleSelectLabel.setDisable(true);
+    riddleSelectLabel.setOpacity(0);
+    riddleSelectLabel.setText(">Riddle");
+    riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
+    disableBooks();
+    chooseLabel.setOpacity(0);
+
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
       calItemScroll.setOpacity(0);
@@ -201,6 +260,8 @@ public class CauldronRoomController {
     textRect.setDisable(false);
     mouseTrackRegion.setDisable(false);
     textRect.setOpacity(100);
+    riddleSelectLabel.setDisable(false);
+    riddleSelectLabel.setOpacity(100);
     mouseTrackRegion.setOpacity(0.5);
   }
 
@@ -224,5 +285,13 @@ public class CauldronRoomController {
       mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
     }
+  }
+
+  @FXML
+  public void riddleSelect() {
+    riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 12));
+    riddleSelectLabel.setText(riddle);
+    chooseLabel.setOpacity(100);
+    enableBooks();
   }
 }
