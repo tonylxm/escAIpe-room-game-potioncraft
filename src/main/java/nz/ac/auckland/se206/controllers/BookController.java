@@ -33,6 +33,7 @@ public class BookController {
   @FXML private ImageView ttsBtn1;
   @FXML private ImageView ttsBtn2;
   @FXML private Label timerLabel;
+  @FXML private ImageView itemViewer;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
@@ -41,10 +42,11 @@ public class BookController {
   /**
    * Initializes the chat view, loading the riddle.
    *
+   * @param <T>
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
-  public void initialize() throws ApiProxyException {
+  public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
 
