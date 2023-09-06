@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -56,6 +57,24 @@ public class BookController {
   private void writeRecipeIngredients(Set<Item> necessary) {
     for (Item item : necessary) {
       ingredientList.getItems().add(item.toString());
+    }
+  }
+
+  @FXML
+  public void onKeyPressed(KeyEvent event) throws ApiProxyException {
+    System.out.println("key " + event.getCode() + " pressed");
+    if (event.getCode().toString().equals("ENTER")) {
+      String message = inputText.getText();
+      if (message.trim().isEmpty()) {
+        return;
+      }
+      inputText.clear();
+      ChatMessage msg = new ChatMessage("user", message);
+      appendChatMessage(msg);
+      ChatMessage lastMsg = runGpt(msg);
+      if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
+        GameState.isBookRiddleResolved = true;
+      }
     }
   }
 
