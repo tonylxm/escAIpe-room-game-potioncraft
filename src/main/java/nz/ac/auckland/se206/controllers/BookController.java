@@ -54,6 +54,25 @@ public class BookController {
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
+
+    // ITEM VIEWER ON SELECT IN LISTVIEW IN BOOK NOT WORKING
+    // ingredientList
+    //     .getSelectionModel()
+    //     .selectedItemProperty()
+    //     .addListener(
+    //         new ChangeListener<String>() {
+
+    //           @Override
+    //           public void changed(
+    //               ObservableValue<? extends String> observable, String oldValue, String newValue)
+    // {
+    //
+    // System.out.println(ingredientList.getSelectionModel().getSelectedItem().toString());
+    //             InputStream inStream = getClass().getResourceAsStream("images/icon.png");
+    //             Image imageObject = new Image(inStream);
+    //             itemViewer.setImage(imageObject);
+    //           }
+    //         });
   }
 
   private void writeRecipeIngredients(Set<Item> necessary) {
