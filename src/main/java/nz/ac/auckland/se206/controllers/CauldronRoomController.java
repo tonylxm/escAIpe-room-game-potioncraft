@@ -277,6 +277,7 @@ public class CauldronRoomController {
   public void clickBag() {
     if (MainMenuController.inventory.size() == 0) return;
     if (!bagOpened) {
+      calItemScroll.setVvalue(0);
       calItemScroll.setContent(null);
       calItemScroll.setContent(MainMenuController.inventory.box);
       calItemScroll.setOpacity(1);
