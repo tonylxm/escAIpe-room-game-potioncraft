@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Parent;
@@ -8,18 +9,29 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class CountdownTimer {
-  private int initialSeconds;
-  private int currentSeconds;
+  private static int minutes;
+  private static int initialSeconds;
+  private static int currentSeconds;
   private Timeline timeline;
   private Label cauldronTimerLabel;
   private Label leftTimerLabel;
   private Label rightTimerLabel;
+  private Label bookTimerLabel;
 
-  public CountdownTimer(int initialSeconds) {
-    this.initialSeconds = initialSeconds;
-    this.currentSeconds = initialSeconds;
+  public CountdownTimer(String timeLimit) {
+    String[] time = timeLimit.split(":");
+    minutes = Integer.parseInt(time[0]);
+    initialSeconds = Integer.parseInt(time[1]);
+    currentSeconds = Integer.parseInt(time[1]);
 
     setupTimeline();
+  }
+
+  public static void setTimerLimit(String timeLimit) {
+    String[] time = timeLimit.split(":");
+    minutes = Integer.parseInt(time[0]);
+    initialSeconds = Integer.parseInt(time[1]);
+    currentSeconds = Integer.parseInt(time[1]);
   }
 
   // Set up the timer to count down every second
@@ -29,15 +41,25 @@ public class CountdownTimer {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  currentSeconds--;
-                  if (currentSeconds <= -1) {
-                    handleTimeout();
-                    timeline.stop();
-                  } else {
-                    updateTimerLabel();
+                  try {
+                    oneSecondPassed();
+                  } catch (IOException e) {
+                    e.printStackTrace();
                   }
+                  updateTimerLabel();
                 }));
     timeline.setCycleCount(Timeline.INDEFINITE);
+  }
+
+  public void oneSecondPassed() throws IOException {
+    if (currentSeconds == 0 && minutes == 0) {
+      handleTimeOut();
+      timeline.stop();
+    } else if (currentSeconds == 0) {
+      minutes--;
+      currentSeconds = 60;
+    }
+    currentSeconds--;
   }
 
   // Start the timer
@@ -74,20 +96,32 @@ public class CountdownTimer {
           (Label) currentSceneRoot.lookup("#timerLabel"); // Assuming the ID is "timerLabel"
 
       if (timerLabel != null) {
-        timerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
-
-        if (cauldronTimerLabel != null) {
-          cauldronTimerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
-        }
-
-        if (leftTimerLabel != null) {
-          leftTimerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
-        }
-
-        if (rightTimerLabel != null) {
-          rightTimerLabel.setText(String.format("Time left: %d seconds", currentSeconds));
-        }
+        timerLabel.setText(formatTimerText());
       }
+
+      if (cauldronTimerLabel != null) {
+        cauldronTimerLabel.setText(formatTimerText());
+      }
+
+      if (leftTimerLabel != null) {
+        leftTimerLabel.setText(formatTimerText());
+      }
+
+      if (rightTimerLabel != null) {
+        rightTimerLabel.setText(formatTimerText());
+      }
+
+      if (bookTimerLabel != null) {
+        bookTimerLabel.setText(formatTimerText());
+      }
+    }
+  }
+
+  public String formatTimerText() {
+    if (currentSeconds < 10) {
+      return String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds);
+    } else {
+      return String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds);
     }
   }
 
@@ -104,9 +138,13 @@ public class CountdownTimer {
     this.rightTimerLabel = rightTimerLabel;
   }
 
+  public void setBookTimerLabel(Label bookTimerLabel) {
+    this.bookTimerLabel = bookTimerLabel;
+  }
+
   // Logic that occurs when the timer reaches 0 - sets the scene to the game over scene
-  private void handleTimeout() {
-    cauldronTimerLabel.getScene().setRoot(SceneManager.getUiRoot(AppUi.GAME_OVER));
+  private void handleTimeOut() throws IOException {
+    App.setRoot("game_over"); // use App.setRoot() so that game over occurs in all scenes
     SceneManager.setTimerScene(AppUi.GAME_OVER);
   }
 }

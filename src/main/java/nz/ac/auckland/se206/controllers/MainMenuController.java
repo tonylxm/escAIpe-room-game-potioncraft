@@ -8,6 +8,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Inventory;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
@@ -29,6 +30,7 @@ public class MainMenuController {
 
   private Difficulty difficulty;
   private TimeLimit timeLimit;
+  public static CountdownTimer countdownTimer = new CountdownTimer("2:00");
 
   public static Items items;
   public static Inventory inventory;
@@ -135,18 +137,21 @@ public class MainMenuController {
   @FXML
   public void setTwoMin() {
     timeLimit = TimeLimit.TWO_MIN;
+    CountdownTimer.setTimerLimit("2:00");
     startBtnEnable();
   }
 
   @FXML
   public void setFourMin() {
     timeLimit = TimeLimit.FOUR_MIN;
+    CountdownTimer.setTimerLimit("4:00");
     startBtnEnable();
   }
 
   @FXML
   public void setSixMin() {
     timeLimit = TimeLimit.SIX_MIN;
+    CountdownTimer.setTimerLimit("6:00");
     startBtnEnable();
   }
 
@@ -158,6 +163,11 @@ public class MainMenuController {
     }
   }
 
+  public static CountdownTimer getCountdownTimer() {
+    System.out.println("getting timer");
+    return countdownTimer;
+  }
+
   @FXML
   public void startGame() throws IOException {
     // Fade buttons and scene
@@ -165,5 +175,18 @@ public class MainMenuController {
     System.out.println("MAIN MENU -> CAULDRON ROOM");
     TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
+
+    Task<Void> timerStartTask =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            Thread.sleep(2000);
+            countdownTimer.start();
+            return null;
+          }
+        };
+    Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
+    timerStartThread.start();
   }
 }

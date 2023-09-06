@@ -6,11 +6,13 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
@@ -29,9 +31,11 @@ public class BookController {
   @FXML private ListView<String> ingredientList;
   @FXML private ImageView ttsBtn1;
   @FXML private ImageView ttsBtn2;
+  @FXML private Label timerLabel;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
+  private CountdownTimer countdownTimer;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -40,6 +44,9 @@ public class BookController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    countdownTimer = MainMenuController.getCountdownTimer();
+    countdownTimer.setBookTimerLabel(timerLabel);
+
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
