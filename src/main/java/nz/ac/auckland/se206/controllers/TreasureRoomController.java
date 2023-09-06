@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
@@ -16,6 +18,7 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 public class TreasureRoomController {
   public boolean itemSixPicked, itemSevenPicked, itemEightPicked, itemNinePicked, itemTenPicked;
   public boolean readyToAdd;
+  public boolean bagOpened;
   public Items.Item item;
 
   @FXML private Rectangle itemSixRect;
@@ -24,6 +27,7 @@ public class TreasureRoomController {
   @FXML private Rectangle itemNineRect;
   @FXML private Rectangle itemTenRect;
   @FXML private Rectangle textRect;
+  @FXML private Rectangle mouseTrackRegion;
   @FXML private Polygon leftShpe;
   @FXML private Label textLbl;
   @FXML private Label noLbl;
@@ -31,6 +35,7 @@ public class TreasureRoomController {
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
   @FXML private Label timerLabel;
+  @FXML private ScrollPane treItemScroll;
 
   @FXML private ShapeInteractionHandler interactionHandler;
 
@@ -46,6 +51,10 @@ public class TreasureRoomController {
     itemNinePicked = false;
     itemTenPicked = false;
     readyToAdd = false;
+    bagOpened = false;
+
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
 
     interactionHandler = new ShapeInteractionHandler();
     if (itemSixRect != null) {
@@ -88,6 +97,8 @@ public class TreasureRoomController {
     System.out.println("TREASURE_ROOM > CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
+    treItemScroll.setOpacity(0);
+    bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
@@ -122,6 +133,7 @@ public class TreasureRoomController {
     this.item = item;
     setText("Add to inventory?", true);
     readyToAdd = true;
+    System.out.println(item + " clicked");
   }
 
   /** Adding a selected item to the inventory */
@@ -132,30 +144,47 @@ public class TreasureRoomController {
     setText("", false);
     readyToAdd = false;
 
+    // Place holder image for now
+    // Real item images will be initialised in switch case statment
+    Image image = new Image("images/place_holder.png");
+
+    // Different controls are executed depending on the item
     switch (item) {
       case ITEM_6:
+        image = new Image("images/icon.png");
         itemSixRect.setOpacity(0);
         itemSixPicked = true;
         break;
       case ITEM_7:
+        image = new Image("images/icon.png");
         itemSevenRect.setOpacity(0);
         itemSevenPicked = true;
         break;
       case ITEM_8:
+        image = new Image("images/icon.png");
         itemEightRect.setOpacity(0);
         itemEightPicked = true;
         break;
       case ITEM_9:
+        image = new Image("images/icon.png");
         itemNineRect.setOpacity(0);
         itemNinePicked = true;
         break;
       case ITEM_10:
+        image = new Image("images/icon.png");
         itemTenRect.setOpacity(0);
         itemTenPicked = true;
         break;
       default:
         break;
     }
+
+    // Using the inventory instance from the MainMenuController so that images
+    // added from other scenes are not lost
+    MainMenuController.inventory.box.getChildren().add(new ImageView(image));
+
+    // To see what is in the inventory in the terminal
+    // Can be removed later
     System.out.println("Item added to inventory");
     System.out.println("Current Inventory:");
     Iterator itr = new MainMenuController().inventory.inventory.iterator();
@@ -200,9 +229,39 @@ public class TreasureRoomController {
   }
 
   @FXML
-  void openBook() {
+  public void openBook() {
     System.out.println("TREASURE_ROOM > BOOK");
     SceneManager.currScene = AppUi.SHELF_RIGHT;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+  }
+
+  /** Dealing with the event where the bag icon is clicked */
+  @FXML
+  public void clickBag() {
+    if (MainMenuController.inventory.size() == 0) return;
+    if (!bagOpened) {
+      treItemScroll.setContent(null);
+      treItemScroll.setContent(MainMenuController.inventory.box);
+      treItemScroll.setOpacity(1);
+      bagOpened = true;
+      mouseTrackRegion.setDisable(false);
+      System.out.println("Bag opened");
+    }
+  }
+
+  @FXML
+  public void clickOff(MouseEvent event) {
+    System.out.println("click off");
+    textRect.setDisable(true);
+    textRect.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
+    
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
+      treItemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
   }
 }

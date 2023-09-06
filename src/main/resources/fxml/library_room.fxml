@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -52,5 +54,8 @@
             <Font size="38.0" />
          </font>
       </Label>
+      <Circle fill="#3f4a54" layoutX="928.0" layoutY="648.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="6.0" layoutY="6.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="786.0" layoutY="411.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </Pane>
