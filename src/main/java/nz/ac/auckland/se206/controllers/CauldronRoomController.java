@@ -167,6 +167,10 @@ public class CauldronRoomController {
       bookFireImage.setDisable(true);
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
+      chooseLabel.setOpacity(0);
+      riddleSelectLabel.setText(
+          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
+              + " wish to ask anything of me write in the book and I will respond.");
     }
   }
 
@@ -180,6 +184,10 @@ public class CauldronRoomController {
       bookWaterImage.setDisable(true);
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
+      chooseLabel.setOpacity(0);
+      riddleSelectLabel.setText(
+          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
+              + " wish to ask anything of me write in the book and I will respond.");
     }
   }
 
@@ -193,6 +201,10 @@ public class CauldronRoomController {
       bookAirImage.setDisable(true);
       bookAirRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
+      chooseLabel.setOpacity(0);
+      riddleSelectLabel.setText(
+          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
+              + " wish to ask anything of me write in the book and I will respond.");
     }
   }
 
@@ -228,6 +240,11 @@ public class CauldronRoomController {
     riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
     disableBooks();
     chooseLabel.setOpacity(0);
+
+    if (GameState.isBookRiddleResolved) {
+      wizardRectangle.setDisable(true);
+      wizardRectangle.setOpacity(0);
+    }
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
