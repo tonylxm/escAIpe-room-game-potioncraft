@@ -151,17 +151,17 @@ public class LibraryRoomController {
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/tail.png"));
         itemOneImg.setOpacity(0);
         itemOnePicked = true;
         break;
       case ITEM_2:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/iwings.png"));
         itemTwoImg.setOpacity(0);
         itemTwoPicked = true;
         break;
       case ITEM_3:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/flower.png"));
         itemThreeImg.setOpacity(0);
         itemThreePicked = true;
         break;
