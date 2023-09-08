@@ -84,8 +84,8 @@ public class TreasureRoomController {
       itemTenImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_10));
     }
     if (leftShpe != null) {
-      leftShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
-      leftShpe.setOnMouseExited(event -> interactionHandler.handle(event));
+      leftShpe.setOnMouseEntered(event -> leftShpe.setOpacity(0.9));
+      leftShpe.setOnMouseExited(event -> leftShpe.setOpacity(0.5));
     }
     // Some type of animation
     // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -95,7 +95,7 @@ public class TreasureRoomController {
   /** Changing scenes to the cauldron room */
   @FXML
   public void goLeft(MouseEvent event) {
-    System.out.println("TREASURE_ROOM > CAULDRON_ROOM");
+    System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
     treItemScroll.setOpacity(0);
@@ -260,7 +260,7 @@ public class TreasureRoomController {
     textRect.setOpacity(0);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
-    
+
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
       treItemScroll.setOpacity(0);

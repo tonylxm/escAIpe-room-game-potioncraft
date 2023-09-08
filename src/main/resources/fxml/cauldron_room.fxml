@@ -19,8 +19,8 @@
       </ImageView>
       <Rectangle fx:id="cauldronRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ffad21" height="135.0" layoutX="440.0" layoutY="432.0" onMouseClicked="#clickCauldron" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="135.0" />
       <Rectangle fx:id="wizardRectangle" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="168.0" layoutX="244.0" layoutY="264.0" onMouseClicked="#clickWizard" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="62.0" />
-      <Polygon fx:id="leftArrow" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.6" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Polygon fx:id="rightArrow" fill="WHITE" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" opacity="0.6" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="leftArrow" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="rightArrow" fill="WHITE" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" opacity="0.5" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b56e30" height="176.0" layoutX="705.0" layoutY="146.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="125.0" />
       <Rectangle fx:id="bookFireImage" arcHeight="5.0" arcWidth="5.0" fill="#ff6a6a" height="67.0" layoutX="720.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookWaterImage" arcHeight="5.0" arcWidth="5.0" fill="#94fdff" height="67.0" layoutX="756.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />

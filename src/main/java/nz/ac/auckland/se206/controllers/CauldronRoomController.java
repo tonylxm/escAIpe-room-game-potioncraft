@@ -72,13 +72,13 @@ public class CauldronRoomController {
     }
 
     if (rightArrow != null) {
-      rightArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
-      rightArrow.setOnMouseExited(event -> interactionHandler.handle(event));
+      rightArrow.setOnMouseEntered(event -> rightArrow.setOpacity(0.9));
+      rightArrow.setOnMouseExited(event -> rightArrow.setOpacity(0.5));
     }
 
     if (leftArrow != null) {
-      leftArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
-      leftArrow.setOnMouseExited(event -> interactionHandler.handle(event));
+      leftArrow.setOnMouseEntered(event -> leftArrow.setOpacity(0.9));
+      leftArrow.setOnMouseExited(event -> leftArrow.setOpacity(0.5));
     }
 
     if (bookFireRectangle != null) {
@@ -220,7 +220,7 @@ public class CauldronRoomController {
   public void goRight(MouseEvent event) {
     calItemScroll.setOpacity(0);
     bagOpened = false;
-    System.out.println("CAULDRON_ROOM > LIBRARY_ROOM");
+    System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
     SceneManager.setTimerScene(AppUi.SHELF_RIGHT);
   }
