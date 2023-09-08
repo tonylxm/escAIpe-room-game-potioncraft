@@ -18,14 +18,24 @@
             <Image url="@../images/library-room.jpeg" />
          </image>
       </ImageView>
-      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="150.0" fitWidth="150.0" layoutX="382.0" layoutY="98.0">
+      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="553.0" layoutY="173.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/iwings.png" />
          </image>
       </ImageView>
-      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="150.0" fitWidth="150.0" layoutX="227.0" layoutY="273.0">
+      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="85.0" layoutY="423.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/tail.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="754.0" layoutY="191.0">
+         <image>
+            <Image url="@../images/flower.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="122.0" fitWidth="122.0" layoutX="348.0" layoutY="107.0">
+         <image>
+            <Image url="@../images/scales.png" />
          </image>
       </ImageView>
       <Polygon id="rightShpe" fx:id="rightShpe" fill="#0084ff" layoutX="799.0" layoutY="401.0" onMouseClicked="#goRight" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -62,19 +72,9 @@
       </Label>
       <Circle fill="#3f4a54" layoutX="928.0" layoutY="648.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
       <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
-      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="754.0" layoutY="191.0">
+      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="92.0" fitWidth="168.0" layoutX="217.0" layoutY="275.0">
          <image>
-            <Image url="@../images/flower.png" />
-         </image>
-      </ImageView>
-      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="553.0" layoutY="173.0">
-         <image>
-            <Image url="@../images/iwings.png" />
-         </image>
-      </ImageView>
-      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="85.0" layoutY="423.0">
-         <image>
-            <Image url="@../images/tail.png" />
+            <Image url="@../images/powder.png" />
          </image>
       </ImageView>
    </children>

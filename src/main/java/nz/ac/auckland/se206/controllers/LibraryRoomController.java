@@ -166,12 +166,12 @@ public class LibraryRoomController {
         itemThreePicked = true;
         break;
       case ITEM_4:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/scales.png"));
         itemFourImg.setOpacity(0);
         itemFourPicked = true;
         break;
       case ITEM_5:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/powder.png"));
         itemFiveImg.setOpacity(0);
         itemFivePicked = true;
         break;
