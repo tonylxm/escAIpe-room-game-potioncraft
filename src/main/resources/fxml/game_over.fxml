@@ -5,19 +5,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" stylesheets="@../css/mainmenu.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
    <children>
-      <Text layoutX="377.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU WIN!">
+      <Text fill="WHITE" layoutX="332.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU WIN!">
          <font>
-            <Font size="60.0" />
+            <Font size="80.0" />
          </font>
       </Text>
-      <Button fx:id="playAgainBtn" layoutX="443.0" layoutY="623.0" mnemonicParsing="false" onAction="#playAgain" text="PLAY AGAIN">
+      <Button fx:id="playAgainBtn" layoutX="410.0" layoutY="600.0" mnemonicParsing="false" onAction="#playAgain" text="PLAY AGAIN">
          <font>
-            <Font size="20.0" />
+            <Font size="30.0" />
          </font>
       </Button>
-      <Text layoutX="443.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER">
+      <Text fill="WHITE" layoutX="443.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER">
          <font>
             <Font size="25.0" />
          </font>
