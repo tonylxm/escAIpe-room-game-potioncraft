@@ -147,31 +147,42 @@ public class LibraryRoomController {
 
     // If no item is selected but still added, place holder image
     ImageView image = new ImageView(new Image("images/place_holder.png"));
+    double ratio = 1;
 
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
-        image = new ImageView(new Image("images/tail.png"));
+        Image one = new Image("images/tail.png");
+        ratio = one.getHeight() / one.getWidth();
+        image = new ImageView(one);
         itemOneImg.setOpacity(0);
         itemOnePicked = true;
         break;
       case ITEM_2:
-        image = new ImageView(new Image("images/iwings.png"));
+        Image two = new Image("images/iwings.png");
+        ratio = two.getHeight() / two.getWidth();
+        image = new ImageView(two);
         itemTwoImg.setOpacity(0);
         itemTwoPicked = true;
         break;
       case ITEM_3:
-        image = new ImageView(new Image("images/flower.png"));
+        Image three = new Image("images/flower.png");
+        ratio = three.getHeight() / three.getWidth();
+        image = new ImageView(three);
         itemThreeImg.setOpacity(0);
         itemThreePicked = true;
         break;
       case ITEM_4:
-        image = new ImageView(new Image("images/scales.png"));
+        Image four = new Image("images/scales.png");
+        ratio = four.getHeight() / four.getWidth();
+        image = new ImageView(four);
         itemFourImg.setOpacity(0);
         itemFourPicked = true;
         break;
       case ITEM_5:
-        image = new ImageView(new Image("images/powder.png"));
+        Image five = new Image("images/powder.png");
+        ratio = five.getHeight() / five.getWidth();
+        image = new ImageView(five);
         itemFiveImg.setOpacity(0);
         itemFivePicked = true;
         break;
@@ -179,7 +190,7 @@ public class LibraryRoomController {
         break;
     }
 
-    image.setFitHeight(133);
+    image.setFitHeight(133 * ratio);
     image.setFitWidth(133);
     // Using the inventory instance from the MainMenuController so that images
     // added from other scenes are not lost
