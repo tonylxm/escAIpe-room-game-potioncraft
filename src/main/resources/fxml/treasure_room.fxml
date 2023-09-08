@@ -19,27 +19,27 @@
       </ImageView>
       <ImageView fx:id="itemSixImg" fitHeight="150.0" fitWidth="150.0" layoutX="303.0" layoutY="174.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="150.0" fitWidth="150.0" layoutX="509.0" layoutY="208.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="129.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="150.0" fitWidth="150.0" layoutX="78.0" layoutY="378.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="150.0" fitWidth="150.0" layoutX="787.0" layoutY="208.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/Poké_Ball_icon.svg.png" />
          </image>
       </ImageView>
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="244.0" layoutY="576.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
@@ -63,7 +63,6 @@
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <Polygon id="leftShpe" fx:id="leftShpe" fill="DODGERBLUE" layoutX="-145.0" layoutY="406.0" onMouseClicked="#goLeft" points="159.5, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
       <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Picture1.png" />
@@ -74,8 +73,9 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <Circle fill="#3f4a54" layoutX="928.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
       <ScrollPane id="treItemScroll" fx:id="treItemScroll" layoutX="853.0" layoutY="404.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
+      <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.6" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>
