@@ -24,7 +24,7 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
   }
 
   public void glowThis(ImageView image) {
-    image.setEffect(new Glow(0.8));
+    image.setEffect(new Glow(1.2));
   }
 
   public void unglowThis(ImageView image) {
