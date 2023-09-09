@@ -35,7 +35,17 @@ public class BookController {
   @FXML private ImageView ttsBtn1;
   @FXML private ImageView ttsBtn2;
   @FXML private Label timerLabel;
-  @FXML private ImageView itemViewer;
+
+  @FXML private ImageView itemOneImg;
+  @FXML private ImageView itemTwoImg;
+  @FXML private ImageView itemThreeImg;
+  @FXML private ImageView itemFourImg;
+  @FXML private ImageView itemFiveImg;
+  @FXML private ImageView itemSixImg;
+  @FXML private ImageView itemSevenImg;
+  @FXML private ImageView itemEightImg;
+  @FXML private ImageView itemNineImg;
+  @FXML private ImageView itemTenImg;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
@@ -54,10 +64,10 @@ public class BookController {
 
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+    // runGpt(new ChatMessage("user",
+    // GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
 
-    // ITEM VIEWER ON SELECT IN LISTVIEW IN BOOK NOT WORKING
     ingredientList
         .getSelectionModel()
         .selectedItemProperty()
@@ -67,12 +77,50 @@ public class BookController {
               @Override
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println(ingredientList.getSelectionModel().getSelectedItem());
                 String item = ingredientList.getSelectionModel().getSelectedItem();
+
+                itemOneImg.setOpacity(0);
+                itemTwoImg.setOpacity(0);
+                itemThreeImg.setOpacity(0);
+                itemFourImg.setOpacity(0);
+                itemFiveImg.setOpacity(0);
+                itemSixImg.setOpacity(0);
+                itemSevenImg.setOpacity(0);
+                itemEightImg.setOpacity(0);
+                itemNineImg.setOpacity(0);
+                itemTenImg.setOpacity(0);
 
                 switch (item) {
                   case "ITEM_1":
-                    itemViewer.setOpacity(1);
+                    itemOneImg.setOpacity(1);
+                    break;
+                  case "ITEM_2":
+                    itemTwoImg.setOpacity(1);
+                    break;
+                  case "ITEM_3":
+                    itemThreeImg.setOpacity(1);
+                    break;
+                  case "ITEM_4":
+                    itemFourImg.setOpacity(1);
+                    break;
+                  case "ITEM_5":
+                    itemFiveImg.setOpacity(1);
+                    break;
+                  case "ITEM_6":
+                    itemSixImg.setOpacity(1);
+                    break;
+                  case "ITEM_7":
+                    itemSevenImg.setOpacity(1);
+                    break;
+                  case "ITEM_8":
+                    itemEightImg.setOpacity(1);
+                    break;
+                  case "ITEM_9":
+                    itemNineImg.setOpacity(1);
+                    break;
+                  case "ITEM_10":
+                    itemTenImg.setOpacity(1);
+                    break;
                 }
               }
             });
