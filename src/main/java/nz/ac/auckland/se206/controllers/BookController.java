@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Set;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,23 +58,24 @@ public class BookController {
     writeRecipeIngredients(Items.necessary);
 
     // ITEM VIEWER ON SELECT IN LISTVIEW IN BOOK NOT WORKING
-    // ingredientList
-    //     .getSelectionModel()
-    //     .selectedItemProperty()
-    //     .addListener(
-    //         new ChangeListener<String>() {
+    ingredientList
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            new ChangeListener<String>() {
 
-    //           @Override
-    //           public void changed(
-    //               ObservableValue<? extends String> observable, String oldValue, String newValue)
-    // {
-    //
-    // System.out.println(ingredientList.getSelectionModel().getSelectedItem().toString());
-    //             InputStream inStream = getClass().getResourceAsStream("images/icon.png");
-    //             Image imageObject = new Image(inStream);
-    //             itemViewer.setImage(imageObject);
-    //           }
-    //         });
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(ingredientList.getSelectionModel().getSelectedItem());
+                String item = ingredientList.getSelectionModel().getSelectedItem();
+
+                switch (item) {
+                  case "ITEM_1":
+                    itemViewer.setOpacity(1);
+                }
+              }
+            });
   }
 
   private void writeRecipeIngredients(Set<Item> necessary) {
