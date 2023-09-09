@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -32,6 +33,7 @@ public class BookController {
   @FXML private ImageView ttsBtn1;
   @FXML private ImageView ttsBtn2;
   @FXML private Label timerLabel;
+  @FXML private ImageView itemViewer;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
@@ -40,10 +42,11 @@ public class BookController {
   /**
    * Initializes the chat view, loading the riddle.
    *
+   * @param <T>
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
-  public void initialize() throws ApiProxyException {
+  public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
 
@@ -56,6 +59,24 @@ public class BookController {
   private void writeRecipeIngredients(Set<Item> necessary) {
     for (Item item : necessary) {
       ingredientList.getItems().add(item.toString());
+    }
+  }
+
+  @FXML
+  public void onKeyPressed(KeyEvent event) throws ApiProxyException {
+    System.out.println("key " + event.getCode() + " pressed");
+    if (event.getCode().toString().equals("ENTER")) {
+      String message = inputText.getText();
+      if (message.trim().isEmpty()) {
+        return;
+      }
+      inputText.clear();
+      ChatMessage msg = new ChatMessage("user", message);
+      appendChatMessage(msg);
+      ChatMessage lastMsg = runGpt(msg);
+      if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
+        GameState.isBookRiddleResolved = true;
+      }
     }
   }
 

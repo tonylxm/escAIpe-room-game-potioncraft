@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
   <children>
     <TextArea fx:id="chatTextArea" editable="false" layoutX="554.0" layoutY="56.0" prefHeight="571.0" prefWidth="427.0" wrapText="true" />
     <TextField fx:id="inputText" layoutX="555.0" layoutY="639.0" prefHeight="26.0" prefWidth="379.0" promptText="Ask me anything..." />
@@ -41,4 +42,7 @@
          </font>
       </Label>
   </children>
+   <effect>
+      <Blend />
+   </effect>
 </AnchorPane>

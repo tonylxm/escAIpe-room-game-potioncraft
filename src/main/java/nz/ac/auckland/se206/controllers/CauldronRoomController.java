@@ -14,7 +14,6 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.gpt.ChatHandler;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
@@ -73,13 +72,13 @@ public class CauldronRoomController {
     }
 
     if (rightArrow != null) {
-      rightArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
-      rightArrow.setOnMouseExited(event -> interactionHandler.handle(event));
+      rightArrow.setOnMouseEntered(event -> rightArrow.setOpacity(0.9));
+      rightArrow.setOnMouseExited(event -> rightArrow.setOpacity(0.5));
     }
 
     if (leftArrow != null) {
-      leftArrow.setOnMouseEntered(event -> interactionHandler.handle(event));
-      leftArrow.setOnMouseExited(event -> interactionHandler.handle(event));
+      leftArrow.setOnMouseEntered(event -> leftArrow.setOpacity(0.9));
+      leftArrow.setOnMouseExited(event -> leftArrow.setOpacity(0.5));
     }
 
     if (bookFireRectangle != null) {
@@ -167,6 +166,10 @@ public class CauldronRoomController {
       bookFireImage.setDisable(true);
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
+      chooseLabel.setOpacity(0);
+      riddleSelectLabel.setText(
+          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
+              + " wish to ask anything of me write in the book and I will respond.");
     }
   }
 
@@ -180,6 +183,10 @@ public class CauldronRoomController {
       bookWaterImage.setDisable(true);
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
+      chooseLabel.setOpacity(0);
+      riddleSelectLabel.setText(
+          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
+              + " wish to ask anything of me write in the book and I will respond.");
     }
   }
 
@@ -193,6 +200,10 @@ public class CauldronRoomController {
       bookAirImage.setDisable(true);
       bookAirRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
+      chooseLabel.setOpacity(0);
+      riddleSelectLabel.setText(
+          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
+              + " wish to ask anything of me write in the book and I will respond.");
     }
   }
 
@@ -209,7 +220,7 @@ public class CauldronRoomController {
   public void goRight(MouseEvent event) {
     calItemScroll.setOpacity(0);
     bagOpened = false;
-    System.out.println("CAULDRON_ROOM > LIBRARY_ROOM");
+    System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
     SceneManager.setTimerScene(AppUi.SHELF_RIGHT);
   }
@@ -228,6 +239,11 @@ public class CauldronRoomController {
     riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
     disableBooks();
     chooseLabel.setOpacity(0);
+
+    if (GameState.isBookRiddleResolved) {
+      wizardRectangle.setDisable(true);
+      wizardRectangle.setOpacity(0);
+    }
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
