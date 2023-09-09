@@ -148,31 +148,42 @@ public class TreasureRoomController {
     // Place holder image for now
     // Real item images will be initialised in switch case statment
     ImageView image = new ImageView(new Image("images/place_holder.png"));
+    double ratio = 1;
 
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_6:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        Image six = new Image("images/talon.png");
+        ratio = six.getHeight() / six.getWidth();
+        image = new ImageView(six);
         itemSixImg.setOpacity(0);
         itemSixPicked = true;
         break;
       case ITEM_7:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        Image seven = new Image("images/stone.png");
+        ratio = seven.getHeight() / seven.getWidth();
+        image = new ImageView(seven);
         itemSevenImg.setOpacity(0);
         itemSevenPicked = true;
         break;
       case ITEM_8:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        Image eight = new Image("images/bwings.png");
+        ratio = eight.getHeight() / eight.getWidth();
+        image = new ImageView(eight);
         itemEightImg.setOpacity(0);
         itemEightPicked = true;
         break;
       case ITEM_9:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        Image nine = new Image("images/wreath.png");
+        ratio = nine.getHeight() / nine.getWidth();
+        image = new ImageView(nine);
         itemNineImg.setOpacity(0);
         itemNinePicked = true;
         break;
       case ITEM_10:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        Image ten = new Image("images/feather.png");
+        ratio = ten.getHeight() / ten.getWidth();
+        image = new ImageView(ten);
         itemTenImg.setOpacity(0);
         itemTenPicked = true;
         break;
@@ -180,7 +191,7 @@ public class TreasureRoomController {
         break;
     }
 
-    image.setFitHeight(133);
+    image.setFitHeight(133 * ratio);
     image.setFitWidth(133);
     // Using the inventory instance from the MainMenuController so that images
     // added from other scenes are not lost
