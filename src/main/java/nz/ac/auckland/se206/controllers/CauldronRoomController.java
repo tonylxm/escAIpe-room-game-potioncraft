@@ -107,7 +107,7 @@ public class CauldronRoomController {
           @Override
           protected Void call() throws Exception {
             // riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
-            System.out.println(riddle);
+            // System.out.println(riddle);
             return null;
           }
         };
