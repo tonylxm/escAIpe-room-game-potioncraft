@@ -61,27 +61,27 @@ public class LibraryRoomController {
     if (itemOneImg != null) {
       itemOneImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemOneImg));
       itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg));
-      itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_1));
+      itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.TAIL));
     }
     if (itemTwoImg != null) {
       itemTwoImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTwoImg));
       itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg));
-      itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_2));
+      itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.INSECT_WINGS));
     }
     if (itemThreeImg != null) {
       itemThreeImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemThreeImg));
       itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg));
-      itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_3));
+      itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.FLOWER));
     }
     if (itemFourImg != null) {
       itemFourImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFourImg));
       itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg));
-      itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_4));
+      itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.SCALES));
     }
     if (itemFiveImg != null) {
       itemFiveImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFiveImg));
       itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg));
-      itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
+      itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.POWDER));
     }
     if (rightShpe != null) {
       rightShpe.setOnMouseEntered(event -> rightShpe.setOpacity(0.9));
@@ -113,19 +113,19 @@ public class LibraryRoomController {
   @FXML
   public void itemSelect(Items.Item item) {
     switch (item) {
-      case ITEM_1:
+      case TAIL:
         if (itemOnePicked) return;
         break;
-      case ITEM_2:
+      case INSECT_WINGS:
         if (itemTwoPicked) return;
         break;
-      case ITEM_3:
+      case FLOWER:
         if (itemThreePicked) return;
         break;
-      case ITEM_4:
+      case SCALES:
         if (itemFourPicked) return;
         break;
-      case ITEM_5:
+      case POWDER:
         if (itemFivePicked) return;
         break;
       default:
@@ -151,35 +151,35 @@ public class LibraryRoomController {
 
     // Different controls are executed depending on the item
     switch (item) {
-      case ITEM_1:
+      case TAIL:
         Image one = new Image("images/tail.png");
         ratio = one.getHeight() / one.getWidth();
         image = new ImageView(one);
         itemOneImg.setOpacity(0);
         itemOnePicked = true;
         break;
-      case ITEM_2:
+      case INSECT_WINGS:
         Image two = new Image("images/iwings.png");
         ratio = two.getHeight() / two.getWidth();
         image = new ImageView(two);
         itemTwoImg.setOpacity(0);
         itemTwoPicked = true;
         break;
-      case ITEM_3:
+      case FLOWER:
         Image three = new Image("images/flower.png");
         ratio = three.getHeight() / three.getWidth();
         image = new ImageView(three);
         itemThreeImg.setOpacity(0);
         itemThreePicked = true;
         break;
-      case ITEM_4:
+      case SCALES:
         Image four = new Image("images/scales.png");
         ratio = four.getHeight() / four.getWidth();
         image = new ImageView(four);
         itemFourImg.setOpacity(0);
         itemFourPicked = true;
         break;
-      case ITEM_5:
+      case POWDER:
         Image five = new Image("images/powder.png");
         ratio = five.getHeight() / five.getWidth();
         image = new ImageView(five);
