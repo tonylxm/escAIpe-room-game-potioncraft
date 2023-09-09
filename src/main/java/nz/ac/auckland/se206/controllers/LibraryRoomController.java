@@ -84,8 +84,8 @@ public class LibraryRoomController {
       itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
     }
     if (rightShpe != null) {
-      rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
-      rightShpe.setOnMouseExited(event -> interactionHandler.handle(event));
+      rightShpe.setOnMouseEntered(event -> rightShpe.setOpacity(0.9));
+      rightShpe.setOnMouseExited(event -> rightShpe.setOpacity(0.5));
     }
     // Some type of animation
     // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -95,7 +95,7 @@ public class LibraryRoomController {
   /** Changing scenes to the cauldron room */
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("LIBRARY_ROOM > CAULDRON_ROOM");
+    System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
     libItemScroll.setOpacity(0);
@@ -271,7 +271,7 @@ public class LibraryRoomController {
     textRect.setOpacity(0);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
-    
+
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
       libItemScroll.setOpacity(0);

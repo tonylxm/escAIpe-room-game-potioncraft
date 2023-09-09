@@ -19,19 +19,19 @@
       </ImageView>
       <Rectangle fx:id="cauldronRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ffad21" height="135.0" layoutX="440.0" layoutY="432.0" onMouseClicked="#clickCauldron" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="135.0" />
       <Rectangle fx:id="wizardRectangle" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="168.0" layoutX="244.0" layoutY="264.0" onMouseClicked="#clickWizard" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="62.0" />
-      <Polygon fx:id="rightArrow" fill="#ffec1f" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Polygon fx:id="leftArrow" fill="#ffec1f" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="leftArrow" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="rightArrow" fill="WHITE" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" opacity="0.5" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b56e30" height="176.0" layoutX="705.0" layoutY="146.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="125.0" />
       <Rectangle fx:id="bookFireImage" arcHeight="5.0" arcWidth="5.0" fill="#ff6a6a" height="67.0" layoutX="720.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookWaterImage" arcHeight="5.0" arcWidth="5.0" fill="#94fdff" height="67.0" layoutX="756.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookAirImage" arcHeight="5.0" arcWidth="5.0" fill="#e6e6e6" height="67.0" layoutX="792.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="644.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
-      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="968.0" layoutY="622.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Picture1.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-5.0" layoutY="-58.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="215.0" layoutY="397.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="135.0" layoutX="116.0" layoutY="531.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="858.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
