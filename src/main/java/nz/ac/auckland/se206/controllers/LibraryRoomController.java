@@ -84,8 +84,8 @@ public class LibraryRoomController {
       itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.ITEM_5));
     }
     if (rightShpe != null) {
-      rightShpe.setOnMouseEntered(event -> interactionHandler.handle(event));
-      rightShpe.setOnMouseExited(event -> interactionHandler.handle(event));
+      rightShpe.setOnMouseEntered(event -> rightShpe.setOpacity(0.9));
+      rightShpe.setOnMouseExited(event -> rightShpe.setOpacity(0.5));
     }
     // Some type of animation
     // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
@@ -95,7 +95,7 @@ public class LibraryRoomController {
   /** Changing scenes to the cauldron room */
   @FXML
   public void goRight(MouseEvent event) {
-    System.out.println("LIBRARY_ROOM > CAULDRON_ROOM");
+    System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
     setText("", false);
     readyToAdd = false;
     libItemScroll.setOpacity(0);
@@ -151,27 +151,27 @@ public class LibraryRoomController {
     // Different controls are executed depending on the item
     switch (item) {
       case ITEM_1:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/tail.png"));
         itemOneImg.setOpacity(0);
         itemOnePicked = true;
         break;
       case ITEM_2:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/iwings.png"));
         itemTwoImg.setOpacity(0);
         itemTwoPicked = true;
         break;
       case ITEM_3:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/flower.png"));
         itemThreeImg.setOpacity(0);
         itemThreePicked = true;
         break;
       case ITEM_4:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/scales.png"));
         itemFourImg.setOpacity(0);
         itemFourPicked = true;
         break;
       case ITEM_5:
-        image = new ImageView(new Image("images/Poké_Ball_icon.svg.png"));
+        image = new ImageView(new Image("images/powder.png"));
         itemFiveImg.setOpacity(0);
         itemFivePicked = true;
         break;
@@ -260,7 +260,7 @@ public class LibraryRoomController {
     textRect.setOpacity(0);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
-    
+
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
       libItemScroll.setOpacity(0);
