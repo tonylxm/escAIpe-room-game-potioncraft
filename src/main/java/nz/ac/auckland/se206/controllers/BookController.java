@@ -26,7 +26,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
-/** Controller class for the chat view. */
+/** Controller class for the book view. */
 public class BookController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
@@ -64,8 +64,7 @@ public class BookController {
 
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    // runGpt(new ChatMessage("user",
-    // GptPromptEngineering.getRiddleWithGivenWord("vase")));
+    // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
 
     ingredientList
