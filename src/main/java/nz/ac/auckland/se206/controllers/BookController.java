@@ -36,6 +36,7 @@ public class BookController {
   @FXML private ImageView ttsBtn2;
   @FXML private Label timerLabel;
 
+  @FXML private ImageView placeholderImg;
   @FXML private ImageView itemOneImg;
   @FXML private ImageView itemTwoImg;
   @FXML private ImageView itemThreeImg;
@@ -78,6 +79,7 @@ public class BookController {
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 String item = ingredientList.getSelectionModel().getSelectedItem();
 
+                placeholderImg.setOpacity(0);
                 itemOneImg.setOpacity(0);
                 itemTwoImg.setOpacity(0);
                 itemThreeImg.setOpacity(0);
@@ -90,34 +92,34 @@ public class BookController {
                 itemTenImg.setOpacity(0);
 
                 switch (item) {
-                  case "ITEM_1":
+                  case "TAIL":
                     itemOneImg.setOpacity(1);
                     break;
-                  case "ITEM_2":
+                  case "INSECT_WINGS":
                     itemTwoImg.setOpacity(1);
                     break;
-                  case "ITEM_3":
+                  case "FLOWER":
                     itemThreeImg.setOpacity(1);
                     break;
-                  case "ITEM_4":
+                  case "SCALES":
                     itemFourImg.setOpacity(1);
                     break;
-                  case "ITEM_5":
+                  case "POWDER":
                     itemFiveImg.setOpacity(1);
                     break;
-                  case "ITEM_6":
+                  case "TALON":
                     itemSixImg.setOpacity(1);
                     break;
-                  case "ITEM_7":
+                  case "CRYSTAL":
                     itemSevenImg.setOpacity(1);
                     break;
-                  case "ITEM_8":
+                  case "BAT_WINGS":
                     itemEightImg.setOpacity(1);
                     break;
-                  case "ITEM_9":
+                  case "WREATH":
                     itemNineImg.setOpacity(1);
                     break;
-                  case "ITEM_10":
+                  case "FEATHER":
                     itemTenImg.setOpacity(1);
                     break;
                 }

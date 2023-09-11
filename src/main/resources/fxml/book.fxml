@@ -70,27 +70,32 @@
       </ImageView>
       <ImageView fx:id="itemSixImg" fitHeight="150.0" fitWidth="200.0" layoutX="693.0" layoutY="245.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon.png" />
+            <Image url="@../images/talon.png" />
          </image>
       </ImageView>
       <ImageView fx:id="itemSevenImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon.png" />
+            <Image url="@../images/stone.png" />
          </image>
       </ImageView>
       <ImageView fx:id="itemEightImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon.png" />
+            <Image url="@../images/bwings.png" />
          </image>
       </ImageView>
       <ImageView fx:id="itemNineImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon.png" />
+            <Image url="@../images/wreath.png" />
          </image>
       </ImageView>
       <ImageView fx:id="itemTenImg" fitHeight="150.0" fitWidth="200.0" layoutX="693.0" layoutY="245.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/icon.png" />
+            <Image url="@../images/feather.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeholderImg" fitHeight="150.0" fitWidth="200.0" layoutX="688.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/place_holder.png" />
          </image>
       </ImageView>
   </children>
