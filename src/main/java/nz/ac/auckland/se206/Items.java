@@ -7,24 +7,24 @@ import java.util.Set;
 public class Items {
   /** Possible items the user can interact with in the room */
   public enum Item {
-    ITEM_1,
-    ITEM_2,
-    ITEM_3,
-    ITEM_4,
-    ITEM_5,
-    ITEM_6,
-    ITEM_7,
-    ITEM_8,
-    ITEM_9,
-    ITEM_10
+    TAIL,
+    INSECT_WINGS,
+    FLOWER,
+    SCALES,
+    POWDER,
+    TALON,
+    CRYSTAL,
+    BAT_WINGS,
+    WREATH,
+    FEATHER
   }
 
     public static Set<Item> available;
     public static Set<Item> necessary;
     private Item[] list = new Item[]{
-        Item.ITEM_1, Item.ITEM_2, Item.ITEM_3, Item.ITEM_4, 
-        Item.ITEM_5, Item.ITEM_6, Item.ITEM_7, Item.ITEM_8, 
-        Item.ITEM_9, Item.ITEM_10
+        Item.TAIL, Item.INSECT_WINGS, Item.FLOWER, Item.SCALES, 
+        Item.POWDER, Item.TALON, Item.CRYSTAL, Item.BAT_WINGS, 
+        Item.WREATH, Item.FEATHER
       };
 
   /**
