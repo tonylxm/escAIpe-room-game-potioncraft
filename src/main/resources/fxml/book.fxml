@@ -28,7 +28,6 @@
     <TextArea fx:id="chatTextArea" editable="false" layoutX="7.0" layoutY="4.0" prefHeight="60.0" prefWidth="428.0" wrapText="true" />
     <TextField fx:id="inputText" layoutX="7.0" layoutY="34.0" prefHeight="26.0" prefWidth="379.0" promptText="Ask me anything..." />
     <Button fx:id="sendButton" layoutX="386.0" layoutY="34.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
-    <Button layoutX="976.0" layoutY="631.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="34.0" prefWidth="34.0" text="X" />
       <Text layoutX="173.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
          <font>
             <Font size="20.0" />
@@ -111,6 +110,12 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <Button layoutX="970.0" layoutY="631.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.0" prefHeight="34.0" prefWidth="34.0" text="X" />
+      <ImageView fx:id="backBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/back.png" />
+         </image>
+      </ImageView>
   </children>
    <effect>
       <Blend />
