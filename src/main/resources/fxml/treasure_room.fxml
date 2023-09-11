@@ -42,6 +42,18 @@
             <Image url="@../images/feather.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Picture1.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="244.0" layoutY="576.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="271.0" layoutY="604.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
          <font>
@@ -63,18 +75,6 @@
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Picture1.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
       <ScrollPane id="treItemScroll" fx:id="treItemScroll" layoutX="853.0" layoutY="404.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
       <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
