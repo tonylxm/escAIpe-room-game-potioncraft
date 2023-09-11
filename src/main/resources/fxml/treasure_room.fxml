@@ -17,29 +17,29 @@
             <Image url="@../images/treasure-room.jpeg" />
          </image>
       </ImageView>
-      <ImageView fx:id="itemSixImg" fitHeight="150.0" fitWidth="150.0" layoutX="303.0" layoutY="174.0">
+      <ImageView id="itemSixImg" fx:id="itemSixImg" fitHeight="141.0" fitWidth="141.0" layoutX="336.0" layoutY="133.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/talon.png" />
          </image>
       </ImageView>
-      <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="150.0" fitWidth="150.0" layoutX="509.0" layoutY="208.0">
+      <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="200.0" fitWidth="200.0" layoutX="517.0" layoutY="174.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/stone.png" />
          </image>
       </ImageView>
-      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="129.0">
+      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="200.0" fitWidth="160.0" layoutX="98.0" layoutY="74.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/bwings.png" />
          </image>
       </ImageView>
-      <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="150.0" fitWidth="150.0" layoutX="78.0" layoutY="378.0">
+      <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="133.0" fitWidth="150.0" layoutX="132.0" layoutY="350.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/wreath.png" />
          </image>
       </ImageView>
-      <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="150.0" fitWidth="150.0" layoutX="787.0" layoutY="208.0">
+      <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="171.0" fitWidth="171.0" layoutX="768.0" layoutY="218.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/feather.png" />
          </image>
       </ImageView>
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="244.0" layoutY="576.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
