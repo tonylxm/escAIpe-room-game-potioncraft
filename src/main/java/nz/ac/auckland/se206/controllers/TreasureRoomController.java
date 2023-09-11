@@ -16,10 +16,14 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
 public class TreasureRoomController {
-  public boolean itemSixPicked, itemSevenPicked, itemEightPicked, itemNinePicked, itemTenPicked;
   public boolean readyToAdd;
   public boolean bagOpened;
   public Items.Item item;
+
+  // Booleans to keep track of whether an item has been added to the inventory
+  public boolean itemSixAdded, itemSevenAdded, itemEightAdded, itemNineAdded, itemTenAdded;
+  // Booleans to keep track of if an item is clicked or selected
+  public boolean sixClicked, sevenClicked, eightClicked, nineClicked, tenClicked;
 
   @FXML private Rectangle textRect;
   @FXML private Rectangle mouseTrackRegion;
@@ -46,13 +50,20 @@ public class TreasureRoomController {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setRightTimerLabel(timerLabel);
 
-    itemSixPicked = false;
-    itemSevenPicked = false;
-    itemEightPicked = false;
-    itemNinePicked = false;
-    itemTenPicked = false;
+    itemSixAdded = false;
+    itemSevenAdded = false;
+    itemEightAdded = false;
+    itemNineAdded = false;
+    itemTenAdded = false;
+
     readyToAdd = false;
     bagOpened = false;
+
+    sixClicked = false;
+    sevenClicked = false;
+    eightClicked = false;
+    nineClicked = false;
+    tenClicked = false;
 
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
@@ -60,27 +71,27 @@ public class TreasureRoomController {
     interactionHandler = new ShapeInteractionHandler();
     if (itemSixImg != null) {
       itemSixImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSixImg));
-      itemSixImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSixImg));
+      itemSixImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSixImg, sixClicked));
       itemSixImg.setOnMouseClicked(event -> itemSelect(Items.Item.TALON));
     }
     if (itemSevenImg != null) {
       itemSevenImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSevenImg));
-      itemSevenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSevenImg));
+      itemSevenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemSevenImg, sevenClicked));
       itemSevenImg.setOnMouseClicked(event -> itemSelect(Items.Item.CRYSTAL));
     }
     if (itemEightImg != null) {
       itemEightImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemEightImg));
-      itemEightImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemEightImg));
+      itemEightImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemEightImg, eightClicked));
       itemEightImg.setOnMouseClicked(event -> itemSelect(Items.Item.BAT_WINGS));
     }
     if (itemNineImg != null) {
       itemNineImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemNineImg));
-      itemNineImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemNineImg));
+      itemNineImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemNineImg, nineClicked));
       itemNineImg.setOnMouseClicked(event -> itemSelect(Items.Item.WREATH));
     }
     if (itemTenImg != null) {
       itemTenImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTenImg));
-      itemTenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTenImg));
+      itemTenImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTenImg, tenClicked));
       itemTenImg.setOnMouseClicked(event -> itemSelect(Items.Item.FEATHER));
     }
     if (leftShpe != null) {
@@ -112,27 +123,39 @@ public class TreasureRoomController {
    */
   @FXML
   public void itemSelect(Items.Item item) {
+    // Items are are clicked, so their glow remains on until item is added or not added
     switch (item) {
       case TALON:
-        if (itemSixPicked) return;
+        if (itemSixAdded) return;
+        interactionHandler.glowThis(itemSixImg);
+        sixClicked = true;
         break;
       case CRYSTAL:
-        if (itemSevenPicked) return;
+        if (itemSevenAdded) return;
+        interactionHandler.glowThis(itemSevenImg);
+        sevenClicked = true;
         break;
       case BAT_WINGS:
-        if (itemEightPicked) return;
+        if (itemEightAdded) return;
+        interactionHandler.glowThis(itemEightImg);
+        eightClicked = true;
         break;
       case WREATH:
-        if (itemNinePicked) return;
+        if (itemNineAdded) return;
+        interactionHandler.glowThis(itemNineImg);
+        nineClicked = true;
         break;
       case FEATHER:
-        if (itemTenPicked) return;
+        if (itemTenAdded) return;
+        interactionHandler.glowThis(itemTenImg);
+        tenClicked = true;
         break;
       default:
         break;
     }
     this.item = item;
     setText("Add to inventory?", true);
+    mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
   }
@@ -157,35 +180,40 @@ public class TreasureRoomController {
         ratio = six.getHeight() / six.getWidth();
         image = new ImageView(six);
         itemSixImg.setOpacity(0);
-        itemSixPicked = true;
+        itemSixAdded = true;
+        sixClicked = false;
         break;
       case CRYSTAL:
         Image seven = new Image("images/stone.png");
         ratio = seven.getHeight() / seven.getWidth();
         image = new ImageView(seven);
         itemSevenImg.setOpacity(0);
-        itemSevenPicked = true;
+        itemSevenAdded = true;
+        sevenClicked = false;
         break;
       case BAT_WINGS:
         Image eight = new Image("images/bwings.png");
         ratio = eight.getHeight() / eight.getWidth();
         image = new ImageView(eight);
         itemEightImg.setOpacity(0);
-        itemEightPicked = true;
+        itemEightAdded = true;
+        eightClicked = false;
         break;
       case WREATH:
         Image nine = new Image("images/wreath.png");
         ratio = nine.getHeight() / nine.getWidth();
         image = new ImageView(nine);
         itemNineImg.setOpacity(0);
-        itemNinePicked = true;
+        itemNineAdded = true;
+        nineClicked = false;
         break;
       case FEATHER:
         Image ten = new Image("images/feather.png");
         ratio = ten.getHeight() / ten.getWidth();
         image = new ImageView(ten);
         itemTenImg.setOpacity(0);
-        itemTenPicked = true;
+        itemTenAdded = true;
+        tenClicked = false;
         break;
       default:
         break;
@@ -197,6 +225,7 @@ public class TreasureRoomController {
     // added from other scenes are not lost
     MainMenuController.inventory.box.getChildren().add(image);
 
+    mouseTrackRegion.setDisable(true);
     // To see what is in the inventory in the terminal
     // Can be removed later
     System.out.println("Item added to inventory");
@@ -213,6 +242,19 @@ public class TreasureRoomController {
     if (!readyToAdd) return;
     setText("", false);
     readyToAdd = false;
+
+    sixClicked = false;
+    interactionHandler.unglowThis(itemSixImg);
+    sevenClicked = false;
+    interactionHandler.unglowThis(itemSevenImg);
+    eightClicked = false;
+    interactionHandler.unglowThis(itemEightImg);
+    nineClicked = false;
+    interactionHandler.unglowThis(itemNineImg);
+    tenClicked = false;
+    interactionHandler.unglowThis(itemTenImg);
+
+    mouseTrackRegion.setDisable(true);
     System.out.println("Item not added to inventory");
   }
 
@@ -242,6 +284,7 @@ public class TreasureRoomController {
     }
   }
 
+  /** Chaning scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
@@ -264,13 +307,30 @@ public class TreasureRoomController {
     }
   }
 
+  /** 
+   * Dealing with closing the inventory or text box by clicking 
+   * a region outside of the inventory or text box.
+   * */
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
-    textRect.setDisable(true);
-    textRect.setOpacity(0);
+    setText("", false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
+
+    // Turning off the glow effect for all items
+    interactionHandler.unglowThis(itemSixImg);
+    interactionHandler.unglowThis(itemSevenImg);
+    interactionHandler.unglowThis(itemEightImg);
+    interactionHandler.unglowThis(itemNineImg);
+    interactionHandler.unglowThis(itemTenImg);
+
+    // None of the items are clicked anymore
+    sixClicked = false;
+    sevenClicked = false;
+    eightClicked = false;
+    nineClicked = false;
+    tenClicked = false;
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {

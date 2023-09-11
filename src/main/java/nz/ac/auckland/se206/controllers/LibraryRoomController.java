@@ -16,10 +16,14 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
 public class LibraryRoomController {
-  public boolean itemOnePicked, itemTwoPicked, itemThreePicked, itemFourPicked, itemFivePicked;
   public boolean readyToAdd;
   public boolean bagOpened;
   public Items.Item item;
+
+  // Booleans to keep track of whether an item has been added to the inventory
+  public boolean itemOneAdded, itemTwoAdded, itemThreeAdded, itemFourAdded, itemFiveAdded;
+  // Booleans to keep track of if an item is clicked or selected
+  public boolean oneClicked, twoClicked, threeClicked, fourClicked, fiveClicked;
 
   @FXML private Rectangle textRect;
   @FXML private Rectangle mouseTrackRegion;
@@ -46,13 +50,20 @@ public class LibraryRoomController {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLeftTimerLabel(timerLabel);
 
-    itemOnePicked = false;
-    itemTwoPicked = false;
-    itemThreePicked = false;
-    itemFourPicked = false;
-    itemFivePicked = false;
+    itemOneAdded = false;
+    itemTwoAdded = false;
+    itemThreeAdded = false;
+    itemFourAdded = false;
+    itemFiveAdded = false;
+
     readyToAdd = false;
     bagOpened = false;
+
+    oneClicked = false;
+    twoClicked = false;
+    threeClicked = false;
+    fourClicked = false;
+    fiveClicked = false;
 
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
@@ -60,27 +71,27 @@ public class LibraryRoomController {
     interactionHandler = new ShapeInteractionHandler();
     if (itemOneImg != null) {
       itemOneImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemOneImg));
-      itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg));
+      itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
       itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.TAIL));
     }
     if (itemTwoImg != null) {
       itemTwoImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTwoImg));
-      itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg));
+      itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
       itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.INSECT_WINGS));
     }
     if (itemThreeImg != null) {
       itemThreeImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemThreeImg));
-      itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg));
+      itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
       itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.FLOWER));
     }
     if (itemFourImg != null) {
       itemFourImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFourImg));
-      itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg));
+      itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
       itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.SCALES));
     }
     if (itemFiveImg != null) {
       itemFiveImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFiveImg));
-      itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg));
+      itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
       itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.POWDER));
     }
     if (rightShpe != null) {
@@ -112,27 +123,39 @@ public class LibraryRoomController {
    */
   @FXML
   public void itemSelect(Items.Item item) {
+    // Items are are clicked, so their glow remains on until item is added or not added
     switch (item) {
       case TAIL:
-        if (itemOnePicked) return;
+        if (itemOneAdded) return;
+        interactionHandler.glowThis(itemOneImg);
+        oneClicked = true;
         break;
       case INSECT_WINGS:
-        if (itemTwoPicked) return;
+        if (itemTwoAdded) return;
+        interactionHandler.glowThis(itemTwoImg);
+        twoClicked = true;
         break;
       case FLOWER:
-        if (itemThreePicked) return;
+        if (itemThreeAdded) return;
+        interactionHandler.glowThis(itemThreeImg);
+        threeClicked = true;
         break;
       case SCALES:
-        if (itemFourPicked) return;
+        if (itemFourAdded) return;
+        interactionHandler.glowThis(itemFourImg);
+        fourClicked = true;
         break;
       case POWDER:
-        if (itemFivePicked) return;
+        if (itemFiveAdded) return;
+        interactionHandler.glowThis(itemFiveImg);
+        fiveClicked = true;
         break;
       default:
         break;
     }
     this.item = item;
     setText("Add to inventory?", true);
+    mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
   }
@@ -156,35 +179,40 @@ public class LibraryRoomController {
         ratio = one.getHeight() / one.getWidth();
         image = new ImageView(one);
         itemOneImg.setOpacity(0);
-        itemOnePicked = true;
+        itemOneAdded = true;
+        oneClicked = false;
         break;
       case INSECT_WINGS:
         Image two = new Image("images/iwings.png");
         ratio = two.getHeight() / two.getWidth();
         image = new ImageView(two);
         itemTwoImg.setOpacity(0);
-        itemTwoPicked = true;
+        itemTwoAdded = true;
+        twoClicked = false;
         break;
       case FLOWER:
         Image three = new Image("images/flower.png");
         ratio = three.getHeight() / three.getWidth();
         image = new ImageView(three);
         itemThreeImg.setOpacity(0);
-        itemThreePicked = true;
+        itemThreeAdded = true;
+        threeClicked = false;
         break;
       case SCALES:
         Image four = new Image("images/scales.png");
         ratio = four.getHeight() / four.getWidth();
         image = new ImageView(four);
         itemFourImg.setOpacity(0);
-        itemFourPicked = true;
+        itemFourAdded = true;
+        fourClicked = false;
         break;
       case POWDER:
         Image five = new Image("images/powder.png");
         ratio = five.getHeight() / five.getWidth();
         image = new ImageView(five);
         itemFiveImg.setOpacity(0);
-        itemFivePicked = true;
+        itemFiveAdded = true;
+        fiveClicked = false;
         break;
       default:
         break;
@@ -196,6 +224,7 @@ public class LibraryRoomController {
     // added from other scenes are not lost
     MainMenuController.inventory.box.getChildren().add(image);
 
+    mouseTrackRegion.setDisable(true);
     // To see what is in the inventory in the terminal
     // Can be removed later
     System.out.println("Item added to inventory");
@@ -212,6 +241,19 @@ public class LibraryRoomController {
     if (!readyToAdd) return;
     setText("", false);
     readyToAdd = false;
+
+    oneClicked = false;
+    interactionHandler.unglowThis(itemOneImg);
+    twoClicked = false;
+    interactionHandler.unglowThis(itemTwoImg);
+    threeClicked = false;
+    interactionHandler.unglowThis(itemThreeImg);
+    fourClicked = false;
+    interactionHandler.unglowThis(itemFourImg);
+    fiveClicked = false;
+    interactionHandler.unglowThis(itemFiveImg);
+
+    mouseTrackRegion.setDisable(true);
     System.out.println("Item not added to inventory");
   }
 
@@ -242,6 +284,7 @@ public class LibraryRoomController {
     }
   }
 
+  /** Chaning scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
@@ -265,13 +308,30 @@ public class LibraryRoomController {
     }
   }
 
+  /**
+   * Dealing with closing the inventory or text box by clicking 
+   * a region outside of the inventory or text box.
+   */
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
-    textRect.setDisable(true);
-    textRect.setOpacity(0);
+    setText("", false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
+
+    // Turning off the glow effect for all items
+    interactionHandler.unglowThis(itemOneImg);
+    interactionHandler.unglowThis(itemTwoImg);
+    interactionHandler.unglowThis(itemThreeImg);
+    interactionHandler.unglowThis(itemFourImg);
+    interactionHandler.unglowThis(itemFiveImg);
+
+    // None of the items are clicked anymore
+    oneClicked = false;
+    twoClicked = false;
+    threeClicked = false;
+    fourClicked = false;
+    fiveClicked = false;
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
