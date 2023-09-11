@@ -5,7 +5,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -43,18 +42,6 @@
          </image>
       </ImageView>
       <Polygon fx:id="rightShpe" fill="WHITE" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" opacity="0.5" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Picture1.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="timerLabel" layoutX="774.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
          <font>
@@ -76,6 +63,22 @@
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/book_icon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
+      <ImageView fx:id="bagBtn" fitHeight="45.0" fitWidth="45.0" layoutX="911.0" layoutY="625.0" onMouseClicked="#clickBag" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bag_icon.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
