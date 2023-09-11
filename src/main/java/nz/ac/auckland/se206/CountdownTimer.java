@@ -6,7 +6,6 @@ import javafx.animation.Timeline;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class CountdownTimer {
   private static int minutes;
@@ -144,7 +143,7 @@ public class CountdownTimer {
 
   // Logic that occurs when the timer reaches 0 - sets the scene to the game over scene
   private void handleTimeOut() throws IOException {
-    App.setRoot("game_over"); // use App.setRoot() so that game over occurs in all scenes
-    SceneManager.setTimerScene(AppUi.GAME_OVER);
+    System.out.println(SceneManager.currScene + "-> GAME_OVER");
+    App.setRoot("you-lose"); // use App.setRoot() so that game over occurs in all scenes
   }
 }
