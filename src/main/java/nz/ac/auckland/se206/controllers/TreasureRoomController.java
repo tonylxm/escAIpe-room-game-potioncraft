@@ -287,8 +287,8 @@ public class TreasureRoomController {
   /** Chaning scenes to book view */
   @FXML
   public void openBook() {
-    System.out.println("TREASURE_ROOM > BOOK");
-    SceneManager.currScene = AppUi.SHELF_RIGHT;
+    System.out.println("TREASURE_ROOM -> BOOK");
+    SceneManager.currScene = AppUi.TREASURE_ROOM;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 

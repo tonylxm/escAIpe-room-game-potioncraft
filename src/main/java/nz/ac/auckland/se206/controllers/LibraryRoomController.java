@@ -287,8 +287,9 @@ public class LibraryRoomController {
   /** Chaning scenes to book view */
   @FXML
   public void openBook() {
-    System.out.println("LIBRARY_ROOM > BOOK");
-    SceneManager.currScene = AppUi.SHELF_LEFT;
+    System.out.println("LIBRARY_ROOM -> BOOK");
+    // BookController.bookBackgroundImg.setImage(new Image("/images/library-room.jpeg"));
+    SceneManager.currScene = AppUi.LIBRARY_ROOM;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 

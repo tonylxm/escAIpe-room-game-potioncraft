@@ -212,8 +212,8 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_LEFT));
-    SceneManager.setTimerScene(AppUi.SHELF_LEFT);
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
+    SceneManager.setTimerScene(AppUi.LIBRARY_ROOM);
   }
 
   @FXML
@@ -221,8 +221,8 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.SHELF_RIGHT));
-    SceneManager.setTimerScene(AppUi.SHELF_RIGHT);
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+    SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
   @FXML
@@ -283,7 +283,7 @@ public class CauldronRoomController {
 
   @FXML
   public void openBook() {
-    System.out.println("CAULDRON_ROOM > BOOK");
+    System.out.println("CAULDRON_ROOM -> BOOK");
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
