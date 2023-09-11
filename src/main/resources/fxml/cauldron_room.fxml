@@ -5,7 +5,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -25,10 +24,14 @@
       <Rectangle fx:id="bookFireImage" arcHeight="5.0" arcWidth="5.0" fill="#ff6a6a" height="67.0" layoutX="720.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookWaterImage" arcHeight="5.0" arcWidth="5.0" fill="#94fdff" height="67.0" layoutX="756.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookAirImage" arcHeight="5.0" arcWidth="5.0" fill="#e6e6e6" height="67.0" layoutX="792.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
+      <ImageView fx:id="bagBtn" fitHeight="45.0" fitWidth="45.0" layoutX="911.0" layoutY="625.0" onMouseClicked="#clickBag" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bag_icon.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Picture1.png" />
+            <Image url="@../images/book_icon.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-5.0" layoutY="-58.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />

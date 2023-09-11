@@ -87,9 +87,10 @@ public class LibraryRoomController {
       rightShpe.setOnMouseEntered(event -> rightShpe.setOpacity(0.9));
       rightShpe.setOnMouseExited(event -> rightShpe.setOpacity(0.5));
     }
-    // Some type of animation
-    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
-    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
+    if (bookBtn != null) {
+      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+    }
   }
 
   /** Changing scenes to the cauldron room */
