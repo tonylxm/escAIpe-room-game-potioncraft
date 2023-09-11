@@ -143,7 +143,7 @@ public class CountdownTimer {
 
   // Logic that occurs when the timer reaches 0 - sets the scene to the game over scene
   private void handleTimeOut() throws IOException {
-    System.out.println(SceneManager.currScene + "-> GAME_OVER");
+    System.out.println("GAME_OVER");
     App.setRoot("you-lose"); // use App.setRoot() so that game over occurs in all scenes
   }
 }
