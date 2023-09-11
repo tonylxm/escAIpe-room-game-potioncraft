@@ -23,15 +23,19 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
     }
   }
 
+  /** Adding specified glow to images in a room. */
   public void glowThis(ImageView image) {
     image.setEffect(new Glow(1.2));
   }
 
+  /** Turning off the glow of an image unless it's been clicked. */
   public void unglowThis(ImageView image, boolean clicked) {
     if (!clicked) {
       image.setEffect(new Glow(0));
     }
   }
+
+  /** Turning off the glow of an image no matter what. */
   public void unglowThis(ImageView image) {
     image.setEffect(new Glow(0));
   }
