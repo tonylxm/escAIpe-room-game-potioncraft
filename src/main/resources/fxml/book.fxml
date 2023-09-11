@@ -88,7 +88,7 @@
             <Image url="@../images/icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="itemTenImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="itemTenImg" fitHeight="150.0" fitWidth="200.0" layoutX="693.0" layoutY="245.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon.png" />
          </image>
