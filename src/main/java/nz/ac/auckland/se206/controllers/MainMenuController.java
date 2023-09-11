@@ -64,8 +64,8 @@ public class MainMenuController {
           @Override
           protected Void call() throws Exception {
             SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-            SceneManager.addAppUi(AppUi.SHELF_LEFT, App.loadFxml("library_room"));
-            SceneManager.addAppUi(AppUi.SHELF_RIGHT, App.loadFxml("treasure_room"));
+            SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
+            SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
             SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
             return null;
           }

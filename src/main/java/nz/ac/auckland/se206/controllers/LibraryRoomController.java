@@ -296,7 +296,7 @@ public class LibraryRoomController {
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
     // BookController.bookBackgroundImg.setImage(new Image("/images/library-room.jpeg"));
-    SceneManager.currScene = AppUi.SHELF_LEFT;
+    SceneManager.currScene = AppUi.LIBRARY_ROOM;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 
