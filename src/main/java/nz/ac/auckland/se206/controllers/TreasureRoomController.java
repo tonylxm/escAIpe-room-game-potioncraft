@@ -245,6 +245,7 @@ public class TreasureRoomController {
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
+    // BookController.bookBackgroundImg.setImage(new Image("/images/treasure-room.jpeg"));
     SceneManager.currScene = AppUi.SHELF_RIGHT;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }

@@ -244,7 +244,8 @@ public class LibraryRoomController {
 
   @FXML
   public void openBook() {
-    System.out.println("LIBRARY_ROOM > BOOK");
+    System.out.println("LIBRARY_ROOM -> BOOK");
+    // BookController.bookBackgroundImg.setImage(new Image("/images/library-room.jpeg"));
     SceneManager.currScene = AppUi.SHELF_LEFT;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }

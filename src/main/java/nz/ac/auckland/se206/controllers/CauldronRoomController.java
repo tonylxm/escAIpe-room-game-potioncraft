@@ -284,6 +284,7 @@ public class CauldronRoomController {
   @FXML
   public void openBook() {
     System.out.println("CAULDRON_ROOM -> BOOK");
+    // BookController.bookBackgroundImg.setImage(new Image("/images/cauldron-room.jpg"));
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
