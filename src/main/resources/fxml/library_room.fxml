@@ -52,7 +52,6 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <Circle fill="#3f4a54" layoutX="933.0" layoutY="647.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
