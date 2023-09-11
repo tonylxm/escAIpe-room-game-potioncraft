@@ -47,8 +47,6 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     SceneManager.addAppUi(AppUi.MAIN_MENU, loadFxml("main_menu"));
-    SceneManager.addAppUi(AppUi.YOU_WIN, loadFxml("you-win"));
-    SceneManager.addAppUi(AppUi.YOU_LOSE, loadFxml("you-lose"));
 
     Parent root = SceneManager.getUiRoot(AppUi.MAIN_MENU);
 

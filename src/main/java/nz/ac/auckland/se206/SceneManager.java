@@ -10,8 +10,8 @@ public class SceneManager {
     CAULDRON_ROOM,
     BOOK,
     BOOKSHELF,
-    SHELF_LEFT,
-    SHELF_RIGHT,
+    LIBRARY_ROOM,
+    TREASURE_ROOM,
     YOU_WIN,
     YOU_LOSE
   }
