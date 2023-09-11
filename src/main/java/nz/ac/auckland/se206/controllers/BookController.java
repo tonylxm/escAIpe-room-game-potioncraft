@@ -20,6 +20,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
@@ -31,6 +32,8 @@ public class BookController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private Button xBtn;
+  @FXML private ImageView backBtn;
   @FXML private ListView<String> ingredientList;
   @FXML private ImageView ttsBtn1;
   @FXML private ImageView ttsBtn2;
@@ -52,6 +55,7 @@ public class BookController {
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
   private CountdownTimer countdownTimer;
+  private ShapeInteractionHandler interactionHandler;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -70,6 +74,12 @@ public class BookController {
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
+
+    interactionHandler = new ShapeInteractionHandler();
+    if (xBtn != null) {
+      xBtn.setOnMouseEntered(event -> interactionHandler.glowThis(backBtn));
+      xBtn.setOnMouseExited(event -> interactionHandler.unglowThis(backBtn));
+    }
 
     ingredientList.setStyle("-fx-font-size: 1.5em ;");
     ingredientList
@@ -217,7 +227,7 @@ public class BookController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println("BOOK -> " + SceneManager.currScene);
-    chatTextArea.getScene().setRoot(SceneManager.getUiRoot(SceneManager.currScene));
+    backBtn.getScene().setRoot(SceneManager.getUiRoot(SceneManager.currScene));
   }
 
   public void readIngredientList() {

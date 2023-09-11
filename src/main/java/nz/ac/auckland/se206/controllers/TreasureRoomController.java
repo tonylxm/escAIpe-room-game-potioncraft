@@ -29,6 +29,7 @@ public class TreasureRoomController {
   @FXML private Label yesLbl;
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
+  @FXML private ImageView bagBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane treItemScroll;
 
@@ -87,9 +88,16 @@ public class TreasureRoomController {
       leftShpe.setOnMouseEntered(event -> leftShpe.setOpacity(0.9));
       leftShpe.setOnMouseExited(event -> leftShpe.setOpacity(0.5));
     }
-    // Some type of animation
-    // bookBtn.setOnMouseEntered(event -> interactionHandler.handle(event));
-    // bookBtn.setOnMouseExited(event -> interactionHandler.handle(event));
+    if (bookBtn != null) {
+      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+    }
+    if (bagBtn != null) {
+      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      // ELSE NO ITEMS IN BAG MESSAGE
+
+    }
   }
 
   /** Changing scenes to the cauldron room */

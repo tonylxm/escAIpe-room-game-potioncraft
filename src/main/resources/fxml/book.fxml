@@ -110,12 +110,12 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <ImageView fx:id="backBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="626.0" onMouseClicked="#onGoBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/back.png" />
          </image>
       </ImageView>
-      <Button layoutX="970.0" layoutY="631.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.001" prefHeight="34.0" prefWidth="34.0" text="X" />
+      <Button layoutX="970.0" layoutY="631.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.001" prefHeight="34.0" prefWidth="34.0" text="X" fx:id="xBtn" />
   </children>
    <effect>
       <Blend />

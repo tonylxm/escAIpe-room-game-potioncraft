@@ -31,6 +31,7 @@ public class CauldronRoomController {
   @FXML private Rectangle wizardChatImage;
   @FXML private Rectangle mouseTrackRegion;
   @FXML private ImageView bookBtn;
+  @FXML private ImageView bagBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane calItemScroll;
   @FXML private Label riddleSelectLabel;
@@ -65,32 +66,35 @@ public class CauldronRoomController {
       cauldronRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       cauldronRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
     }
-
     if (wizardRectangle != null) {
       wizardRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       wizardRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
     }
-
     if (rightArrow != null) {
       rightArrow.setOnMouseEntered(event -> rightArrow.setOpacity(0.9));
       rightArrow.setOnMouseExited(event -> rightArrow.setOpacity(0.5));
     }
-
     if (leftArrow != null) {
       leftArrow.setOnMouseEntered(event -> leftArrow.setOpacity(0.9));
       leftArrow.setOnMouseExited(event -> leftArrow.setOpacity(0.5));
     }
-
+    if (bookBtn != null) {
+      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+    }
+    if (bagBtn != null) {
+      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      // ELSE NO ITEMS IN BAG MESSAGE
+    }
     if (bookFireRectangle != null) {
       bookFireRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       bookFireRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
     }
-
     if (bookWaterRectangle != null) {
       bookWaterRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       bookWaterRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
     }
-
     if (bookAirRectangle != null) {
       bookAirRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
       bookAirRectangle.setOnMouseExited(event -> interactionHandler.handle(event));

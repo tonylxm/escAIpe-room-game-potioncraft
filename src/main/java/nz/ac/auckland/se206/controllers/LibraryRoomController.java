@@ -29,6 +29,7 @@ public class LibraryRoomController {
   @FXML private Label yesLbl;
   @FXML private Label dashLbl;
   @FXML private ImageView bookBtn;
+  @FXML private ImageView bagBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane libItemScroll;
 
@@ -90,6 +91,11 @@ public class LibraryRoomController {
     if (bookBtn != null) {
       bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
       bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+    }
+    if (bagBtn != null) {
+      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      // ELSE NO ITEMS IN BAG MESSAGE
     }
   }
 
