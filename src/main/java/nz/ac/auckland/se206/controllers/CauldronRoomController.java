@@ -283,7 +283,7 @@ public class CauldronRoomController {
 
   @FXML
   public void openBook() {
-    System.out.println("CAULDRON_ROOM > BOOK");
+    System.out.println("CAULDRON_ROOM -> BOOK");
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }

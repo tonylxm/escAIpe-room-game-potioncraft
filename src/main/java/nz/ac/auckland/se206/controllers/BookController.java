@@ -68,6 +68,7 @@ public class BookController {
     // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
 
+    ingredientList.setStyle("-fx-font-size: 1.5em ;");
     ingredientList
         .getSelectionModel()
         .selectedItemProperty()
@@ -212,7 +213,7 @@ public class BookController {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    System.out.println("BOOK > " + SceneManager.currScene);
+    System.out.println("BOOK -> " + SceneManager.currScene);
     chatTextArea.getScene().setRoot(SceneManager.getUiRoot(SceneManager.currScene));
   }
 

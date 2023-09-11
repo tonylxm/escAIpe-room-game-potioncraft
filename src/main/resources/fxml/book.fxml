@@ -9,95 +9,108 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="680.0" prefWidth="1024.0" stylesheets="@../css/book.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="554.0" layoutY="56.0" prefHeight="571.0" prefWidth="427.0" wrapText="true" />
-    <TextField fx:id="inputText" layoutX="555.0" layoutY="639.0" prefHeight="26.0" prefWidth="379.0" promptText="Ask me anything..." />
-    <Button fx:id="sendButton" layoutX="935.0" layoutY="639.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
-    <Button layoutX="2.0" layoutY="1.0" mnemonicParsing="false" onAction="#onGoBack" text="X" />
-      <Line endX="181.0" endY="527.0" layoutX="331.0" layoutY="153.0" startX="181.0" startY="-153.0" />
-      <Text layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
+      <ImageView fitHeight="692.0" fitWidth="1034.0" layoutX="-10.0" layoutY="-8.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/cauldron-room.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="689.0" fitWidth="1057.0" layoutX="-28.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/book_parchment.png" />
+         </image>
+      </ImageView>
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="7.0" layoutY="4.0" prefHeight="60.0" prefWidth="428.0" wrapText="true" />
+    <TextField fx:id="inputText" layoutX="7.0" layoutY="34.0" prefHeight="26.0" prefWidth="379.0" promptText="Ask me anything..." />
+    <Button fx:id="sendButton" layoutX="386.0" layoutY="34.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
+    <Button layoutX="976.0" layoutY="631.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="34.0" prefWidth="34.0" text="X" />
+      <Text layoutX="173.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
          <font>
-            <Font size="15.0" />
+            <Font size="20.0" />
          </font>
       </Text>
-      <ListView fx:id="ingredientList" layoutX="42.0" layoutY="56.0" prefHeight="571.0" prefWidth="427.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efd9b0" height="300.0" layoutX="618.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="446.0" layoutY="37.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
+      <ListView id="ListView" fx:id="ingredientList" layoutX="173.0" layoutY="127.0" prefHeight="478.0" prefWidth="318.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edd8af00" height="478.0" layoutX="544.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="318.0" />
+      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="468.0" layoutY="106.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="554.0" layoutY="37.0" onMouseClicked="#readGameMasterResponse" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="394.0" layoutY="12.0" onMouseClicked="#readGameMasterResponse" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="766.0" layoutY="1.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel">
+      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="688.0" layoutY="262.0" opacity="0.0">
-         <image>
-            <Image url="@../images/tail.png" />
-         </image>
-      </ImageView>
-      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="668.0" layoutY="274.0" opacity="0.0">
-         <image>
-            <Image url="@../images/iwings.png" />
-         </image>
-      </ImageView>
-      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="668.0" layoutY="220.0" opacity="0.0">
-         <image>
-            <Image url="@../images/flower.png" />
-         </image>
-      </ImageView>
-      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="122.0" fitWidth="122.0" layoutX="707.0" layoutY="259.0" opacity="0.0">
-         <image>
-            <Image url="@../images/scales.png" />
-         </image>
-      </ImageView>
-      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="92.0" fitWidth="168.0" layoutX="684.0" layoutY="274.0" opacity="0.0">
-         <image>
-            <Image url="@../images/powder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="itemSixImg" fitHeight="150.0" fitWidth="200.0" layoutX="693.0" layoutY="245.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/talon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="itemSevenImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/stone.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="itemEightImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/bwings.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="itemNineImg" fitHeight="150.0" fitWidth="200.0" layoutX="703.0" layoutY="255.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/wreath.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="itemTenImg" fitHeight="150.0" fitWidth="200.0" layoutX="693.0" layoutY="245.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/feather.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeholderImg" fitHeight="150.0" fitWidth="200.0" layoutX="688.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="placeholderImg" fitHeight="150.0" fitWidth="200.0" layoutX="628.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/place_holder.png" />
          </image>
       </ImageView>
+      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="625.0" layoutY="280.0" opacity="0.0">
+         <image>
+            <Image url="@../images/tail.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="603.0" layoutY="305.0" opacity="0.0">
+         <image>
+            <Image url="@../images/iwings.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="603.0" layoutY="250.0" opacity="0.0">
+         <image>
+            <Image url="@../images/flower.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="122.0" fitWidth="122.0" layoutX="642.0" layoutY="290.0" opacity="0.0">
+         <image>
+            <Image url="@../images/scales.png" />
+         </image>
+      </ImageView>
+      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="92.0" fitWidth="168.0" layoutX="619.0" layoutY="312.0" opacity="0.0">
+         <image>
+            <Image url="@../images/powder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="itemSixImg" fitHeight="150.0" fitWidth="200.0" layoutX="628.0" layoutY="276.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/talon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="itemSevenImg" fitHeight="150.0" fitWidth="200.0" layoutX="628.0" layoutY="276.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/stone.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="itemEightImg" fitHeight="150.0" fitWidth="200.0" layoutX="649.0" layoutY="274.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bwings.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="itemNineImg" fitHeight="150.0" fitWidth="200.0" layoutX="620.0" layoutY="276.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/wreath.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="itemTenImg" fitHeight="150.0" fitWidth="200.0" layoutX="628.0" layoutY="274.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/feather.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="547.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient Viewer">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
   </children>
    <effect>
       <Blend />
