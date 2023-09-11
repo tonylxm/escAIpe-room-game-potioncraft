@@ -65,20 +65,6 @@ public class BookController {
     countdownTimer.setBookTimerLabel(timerLabel);
 
     // bookBackgroundImg.setImage(new Image("/images/cauldron-room.jpg"));
-    // System.out.println(SceneManager.currScene);
-    // switch (SceneManager.currScene) {
-    //   case CAULDRON_ROOM:
-    //     bookBackgroundImg.setImage(new Image("/images/cauldron-room.jpg"));
-    //     break;
-    //   case SHELF_LEFT:
-    //     bookBackgroundImg.setImage(new Image("/images/library-room.jpeg"));
-    //     break;
-    //   case SHELF_RIGHT:
-    //     bookBackgroundImg.setImage(new Image("/images/treasure-room.jpeg"));
-    //     break;
-    //   default:
-    //     break;
-    // }
 
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
