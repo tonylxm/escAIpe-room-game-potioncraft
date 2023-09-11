@@ -52,7 +52,7 @@ public class MainMenuController {
     // playBtn.setOpacity(1);
 
     // Item & inventory generation
-    items = new Items(6);
+    items = new Items(5);
     inventory = new Inventory();
   }
 
