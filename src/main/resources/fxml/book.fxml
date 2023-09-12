@@ -28,14 +28,14 @@
     <TextArea fx:id="chatTextArea" editable="false" layoutX="7.0" layoutY="4.0" prefHeight="60.0" prefWidth="428.0" wrapText="true" />
     <TextField fx:id="inputText" layoutX="7.0" layoutY="34.0" prefHeight="26.0" prefWidth="379.0" promptText="Ask me anything..." />
     <Button fx:id="sendButton" layoutX="386.0" layoutY="34.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
-      <Text layoutX="173.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
+      <Text layoutX="173.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient List">
          <font>
-            <Font size="20.0" />
+            <Font name="Algerian" size="20.0" />
          </font>
       </Text>
       <ListView id="ListView" fx:id="ingredientList" layoutX="173.0" layoutY="127.0" prefHeight="478.0" prefWidth="318.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edd8af00" height="478.0" layoutX="544.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="318.0" />
-      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="468.0" layoutY="107.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edd8af00" height="478.0" layoutX="544.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="318.0" />
+      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="468.0" layoutY="98.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
          </image>
@@ -105,9 +105,9 @@
             <Image url="@../images/feather.png" />
          </image>
       </ImageView>
-      <Text layoutX="547.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient Viewer">
+      <Text layoutX="544.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient Viewer">
          <font>
-            <Font size="20.0" />
+            <Font name="Algerian" size="20.0" />
          </font>
       </Text>
       <ImageView fx:id="backBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
