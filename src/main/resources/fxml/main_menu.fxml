@@ -16,22 +16,22 @@
             <Image url="@../images/cauldron-room.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="startBtn" disable="true" layoutX="449.0" layoutY="614.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+      <Button fx:id="startBtn" disable="true" layoutX="447.0" layoutY="612.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
          <font>
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
       </Button>
-      <Text fx:id="difficultyTxt" fill="WHITE" layoutX="446.0" layoutY="252.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+      <Text fx:id="difficultyTxt" fill="WHITE" layoutX="445.0" layoutY="248.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
          <font>
             <Font name="Bookshelf Symbol 7" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="385.0" layoutY="379.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
+      <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="385.0" layoutY="405.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
          <font>
             <Font name="Bookshelf Symbol 7" size="35.0" />
          </font>
       </Text>
-      <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="243.0" layoutY="392.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="2">
+      <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="243.0" layoutY="423.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="2">
          <toggleGroup>
             <ToggleGroup fx:id="TimeLimit" />
          </toggleGroup>
@@ -39,12 +39,12 @@
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="423.0" layoutY="392.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="4" toggleGroup="$TimeLimit">
+      <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="423.0" layoutY="423.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="4" toggleGroup="$TimeLimit">
          <font>
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="603.0" layoutY="392.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="6" toggleGroup="$TimeLimit">
+      <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="603.0" layoutY="423.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="6" toggleGroup="$TimeLimit">
          <font>
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
@@ -57,17 +57,17 @@
             <ToggleGroup fx:id="Difficulty" />
          </toggleGroup>
       </ToggleButton>
-      <ToggleButton fx:id="mediumBtn" disable="true" layoutX="422.0" layoutY="266.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="180.0" styleClass="button" text="Harry" toggleGroup="$Difficulty">
+      <ToggleButton fx:id="mediumBtn" disable="true" layoutX="421.0" layoutY="266.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="180.0" styleClass="button" text="Harry" toggleGroup="$Difficulty">
          <font>
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
       </ToggleButton>
-      <ToggleButton fx:id="hardBtn" disable="true" layoutX="602.0" layoutY="266.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefHeight="52.0" prefWidth="180.0" styleClass="button" text="Voldemort" toggleGroup="$Difficulty">
+      <ToggleButton fx:id="hardBtn" disable="true" layoutX="601.0" layoutY="266.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefHeight="52.0" prefWidth="180.0" styleClass="button" text="Voldemort" toggleGroup="$Difficulty">
          <font>
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
       </ToggleButton>
-      <Button fx:id="playBtn" layoutX="459.0" layoutY="614.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
+      <Button fx:id="playBtn" layoutX="458.0" layoutY="612.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
          <font>
             <Font name="Bookshelf Symbol 7" size="30.0" />
          </font>
@@ -77,5 +77,20 @@
             <Image url="@../images/title.png" />
          </image>
       </ImageView>
+      <Text fx:id="hintFive" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="hintInfinity" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="hintZero" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

@@ -32,6 +32,8 @@ public class MainMenuController {
 
   public static Items items;
   public static Inventory inventory;
+  
+  private boolean difficultySelected;
 
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
@@ -65,12 +67,54 @@ public class MainMenuController {
   private ToggleButton sixMinBtn;
 
   public void initialize() {
-    // pane.setOpacity(1);
-    // playBtn.setOpacity(1);
-
     // Item & inventory generation
     items = new Items(5);
     inventory = new Inventory();
+
+    difficultySelected = false;
+    // Hover hints on difficulty selection
+    easyBtn.setOnMouseEntered(event -> difficultyHoverOn(hintInfinity));
+    easyBtn.setOnMouseExited(event -> difficultyHoverOff(hintInfinity));
+    easyBtn.setOnMouseClicked(event -> difficultySelect("EASY"));
+    mediumBtn.setOnMouseEntered(event -> difficultyHoverOn(hintFive));
+    mediumBtn.setOnMouseExited(event -> difficultyHoverOff(hintFive));
+    mediumBtn.setOnMouseClicked(event -> difficultySelect("MEDIUM"));
+    hardBtn.setOnMouseEntered(event -> difficultyHoverOn(hintZero));
+    hardBtn.setOnMouseExited(event -> difficultyHoverOff(hintZero));
+    hardBtn.setOnMouseClicked(event -> difficultySelect("HARD"));
+  }
+
+  public void difficultyHoverOn(Text hint) {
+    if (!difficultySelected) {
+      hint.setOpacity(1);
+    }
+  }
+
+  public void difficultyHoverOff(Text hint) {
+    if (!difficultySelected) {
+      hint.setOpacity(0);
+    }
+  }
+
+  public void difficultySelect(String difficulty) {
+    difficultySelected = true;
+    switch (difficulty) {
+      case "EASY":
+        hintInfinity.setOpacity(1);
+        hintFive.setOpacity(0);
+        hintZero.setOpacity(0);
+        break;
+      case "MEDIUM":
+        hintInfinity.setOpacity(0);
+        hintFive.setOpacity(1);
+        hintZero.setOpacity(0);
+        break;
+      case "HARD":
+        hintInfinity.setOpacity(0);
+        hintFive.setOpacity(0);
+        hintZero.setOpacity(1);
+        break;
+    }
   }
 
   /**
