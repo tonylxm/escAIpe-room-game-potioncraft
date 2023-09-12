@@ -135,6 +135,13 @@ public class TreasureRoomController extends itemRoomController {
           event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
+
+    if (wizardRectangle != null) {
+      wizardRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
+    }
   }
 
   /**
@@ -337,6 +344,9 @@ public class TreasureRoomController extends itemRoomController {
     setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
+
+    wizardChatImage.setOpacity(0);
+    wizardChatImage.setDisable(true);
 
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemSixImg);

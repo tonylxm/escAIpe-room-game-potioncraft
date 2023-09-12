@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 
 public abstract class itemRoomController {
@@ -93,5 +95,30 @@ public abstract class itemRoomController {
       mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
     }
+  }
+
+  @FXML
+  public void clickWizard(MouseEvent event) {
+    System.out.println("wizard clicked");
+    if (!GameState.isBookRiddleResolved) {
+      showWizardChat();
+      GameState.isBookRiddleGiven = true;
+      // unhighlightThis(wizardRectangle);
+    } else {
+      // showWizardChat();
+    }
+  }
+
+  /**
+   * Displaying wizard chat to user when prompted
+   */
+  private void showWizardChat() {
+    // Setting approrpiate fields to be visible and interactable
+    wizardChatImage.setDisable(false);
+    wizardChatImage.setOpacity(1);
+    textRect.setDisable(false);
+    mouseTrackRegion.setDisable(false);
+    setText("I'm keeping an eye on you", true, false);
+    mouseTrackRegion.setOpacity(0.5);
   }
 }
