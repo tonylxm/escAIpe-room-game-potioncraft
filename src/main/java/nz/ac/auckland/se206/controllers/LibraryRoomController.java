@@ -2,55 +2,60 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
-public class LibraryRoomController {
-  public boolean readyToAdd;
-  public boolean bagOpened;
-  public Items.Item item;
-
+public class LibraryRoomController extends itemRoomController {
   // Booleans to keep track of whether an item has been added to the inventory
-  public boolean itemOneAdded, itemTwoAdded, itemThreeAdded, itemFourAdded, itemFiveAdded;
+  private boolean itemOneAdded;
+  private boolean itemTwoAdded;
+  private boolean itemThreeAdded;
+  private boolean itemFourAdded;
+  private boolean itemFiveAdded;
   // Booleans to keep track of if an item is clicked or selected
-  public boolean oneClicked, twoClicked, threeClicked, fourClicked, fiveClicked;
+  private boolean oneClicked;
+  private boolean twoClicked;
+  private boolean threeClicked;
+  private boolean fourClicked;
+  private boolean fiveClicked;
 
-  @FXML private Rectangle textRect;
-  @FXML private Rectangle mouseTrackRegion;
-  @FXML private Polygon rightShpe;
-  @FXML private Label textLbl;
-  @FXML private Label noLbl;
-  @FXML private Label yesLbl;
-  @FXML private Label dashLbl;
-  @FXML private ImageView bookBtn;
-  @FXML private ImageView bagBtn;
-  @FXML private Label timerLabel;
-  @FXML private ScrollPane libItemScroll;
+  @FXML
+  private Polygon rightShpe;
+  @FXML
+  private ImageView itemOneImg;
+  @FXML
+  private ImageView itemTwoImg;
+  @FXML
+  private ImageView itemThreeImg;
+  @FXML
+  private ImageView itemFourImg;
+  @FXML
+  private ImageView itemFiveImg;
 
-  @FXML private ImageView itemOneImg;
-  @FXML private ImageView itemTwoImg;
-  @FXML private ImageView itemThreeImg;
-  @FXML private ImageView itemFourImg;
-  @FXML private ImageView itemFiveImg;
-
-  @FXML private ShapeInteractionHandler interactionHandler;
+  @FXML
+  private ShapeInteractionHandler interactionHandler;
 
   private CountdownTimer countdownTimer;
 
+  /**
+   * Setting the appropriate fields and listeners when scene is initialised.
+   * This includes initialising whether an item is clicked or already added
+   * to the inventory, whether an item is ready to be added, whether the bag
+   * is already opened, initialising the countdown timer and diabling the
+   * mouseTrackRegion appropriately.
+   */
   public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLeftTimerLabel(timerLabel);
 
+    // Setting appropriate boolean fields
     itemOneAdded = false;
     itemTwoAdded = false;
     itemThreeAdded = false;
@@ -69,43 +74,65 @@ public class LibraryRoomController {
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 
+    // Setting up listeners for the various items
     interactionHandler = new ShapeInteractionHandler();
     if (itemOneImg != null) {
-      itemOneImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemOneImg));
-      itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
-      itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.TAIL));
+      itemOneImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(itemOneImg));
+      itemOneImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
+      itemOneImg.setOnMouseClicked(
+          event -> itemSelect(Items.Item.TAIL));
     }
     if (itemTwoImg != null) {
-      itemTwoImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTwoImg));
-      itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
-      itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.INSECT_WINGS));
+      itemTwoImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(itemTwoImg));
+      itemTwoImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
+      itemTwoImg.setOnMouseClicked(
+          event -> itemSelect(Items.Item.INSECT_WINGS));
     }
     if (itemThreeImg != null) {
-      itemThreeImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemThreeImg));
-      itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
-      itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.FLOWER));
+      itemThreeImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(itemThreeImg));
+      itemThreeImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
+      itemThreeImg.setOnMouseClicked(
+          event -> itemSelect(Items.Item.FLOWER));
     }
     if (itemFourImg != null) {
-      itemFourImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFourImg));
-      itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
-      itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.SCALES));
+      itemFourImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(itemFourImg));
+      itemFourImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
+      itemFourImg.setOnMouseClicked(
+          event -> itemSelect(Items.Item.SCALES));
     }
     if (itemFiveImg != null) {
-      itemFiveImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFiveImg));
-      itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
-      itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.POWDER));
+      itemFiveImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(itemFiveImg));
+      itemFiveImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
+      itemFiveImg.setOnMouseClicked(
+          event -> itemSelect(Items.Item.POWDER));
     }
     if (rightShpe != null) {
-      rightShpe.setOnMouseEntered(event -> rightShpe.setOpacity(0.9));
-      rightShpe.setOnMouseExited(event -> rightShpe.setOpacity(0.5));
+      rightShpe.setOnMouseEntered(
+          event -> rightShpe.setOpacity(0.9));
+      rightShpe.setOnMouseExited(
+          event -> rightShpe.setOpacity(0.5));
     }
     if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+      bookBtn.setOnMouseEntered(
+          event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(
+          event -> interactionHandler.unglowThis(bookBtn));
     }
     if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      bagBtn.setOnMouseEntered(
+          event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(
+          event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
   }
@@ -114,52 +141,69 @@ public class LibraryRoomController {
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
+    // Resetting appropriate fields before changing scenes
     setText("", false);
     readyToAdd = false;
-    libItemScroll.setOpacity(0);
+    itemScroll.setOpacity(0);
     bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
   }
 
   /**
-   * Selecting the item and prompting user and prompting user to either add or not add the item to
-   * their inventory. Does nothing if the item has already been added to the inventory.
+   * Selecting the item and prompting user and prompting user to either add or not
+   * add the item to
+   * their inventory. Does nothing if the item has already been added to the
+   * inventory.
    *
    * @param item the item clicked by user
    */
   @FXML
   public void itemSelect(Items.Item item) {
-    // Items are are clicked, so their glow remains on until item is added or not added
+    // Items are are clicked, so their glow remains on until item is added or not
+    // added
     switch (item) {
       case TAIL:
-        if (itemOneAdded) return;
+        if (itemOneAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemOneImg);
         oneClicked = true;
         break;
       case INSECT_WINGS:
-        if (itemTwoAdded) return;
+        if (itemTwoAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemTwoImg);
         twoClicked = true;
         break;
       case FLOWER:
-        if (itemThreeAdded) return;
+        if (itemThreeAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemThreeImg);
         threeClicked = true;
         break;
       case SCALES:
-        if (itemFourAdded) return;
+        if (itemFourAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemFourImg);
         fourClicked = true;
         break;
       case POWDER:
-        if (itemFiveAdded) return;
+        if (itemFiveAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemFiveImg);
         fiveClicked = true;
         break;
       default:
         break;
     }
+    // Setting the appropriate text for the text box
+    // and setting the item to be added and letting the
+    // system know that an item is ready to be added
     this.item = item;
     setText("Add to inventory?", true);
     mouseTrackRegion.setDisable(false);
@@ -170,7 +214,9 @@ public class LibraryRoomController {
   /** Adding item to inventory if an item is selected */
   @FXML
   public void addItem() {
-    if (!readyToAdd) return;
+    if (!readyToAdd) {
+      return;
+    }
     MainMenuController.inventory.add(item);
     setText("", false);
     readyToAdd = false;
@@ -242,13 +288,18 @@ public class LibraryRoomController {
     }
   }
 
-  /** Not adding a selected item to the inventory */
+  /**
+   * Not adding a selected item to the inventory
+   */
   @FXML
   public void noAdd() {
-    if (!readyToAdd) return;
+    if (!readyToAdd) {
+      return;
+    }
     setText("", false);
     readyToAdd = false;
 
+    // Turning off the glow effect for all items
     oneClicked = false;
     interactionHandler.unglowThis(itemOneImg);
     twoClicked = false;
@@ -260,63 +311,23 @@ public class LibraryRoomController {
     fiveClicked = false;
     interactionHandler.unglowThis(itemFiveImg);
 
+    // Making sure the mouseTrackRegion is disabled
     mouseTrackRegion.setDisable(true);
     System.out.println("Item not added to inventory");
-  }
-
-  /**
-   * Making text box appear or dissapear with given text.
-   *
-   * @param text the text to be displayed
-   * @param on whether the text box should be visible or not
-   */
-  @FXML
-  private void setText(String text, boolean on) {
-    textLbl.setText(text);
-    if (on) {
-      textRect.setOpacity(1);
-      textLbl.setOpacity(1);
-
-      // Decision labels need to be refactored to deal with
-      // different room interactions, e.g. proceed.
-      yesLbl.setOpacity(1);
-      noLbl.setOpacity(1);
-      dashLbl.setOpacity(1);
-    } else {
-      textRect.setOpacity(0);
-      textLbl.setOpacity(0);
-      yesLbl.setOpacity(0);
-      noLbl.setOpacity(0);
-      dashLbl.setOpacity(0);
-    }
   }
 
   /** Chaning scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
-    // BookController.bookBackgroundImg.setImage(new Image("/images/library-room.jpeg"));
+    // BookController.bookBackgroundImg.setImage(new
+    // Image("/images/library-room.jpeg"));
     SceneManager.currScene = AppUi.LIBRARY_ROOM;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 
-  /** Dealing with the event where the bag icon is clicked */
-  @FXML
-  public void clickBag() {
-    if (MainMenuController.inventory.size() == 0) return;
-    if (!bagOpened) {
-      libItemScroll.setVvalue(0);
-      libItemScroll.setContent(null);
-      libItemScroll.setContent(MainMenuController.inventory.box);
-      libItemScroll.setOpacity(1);
-      bagOpened = true;
-      mouseTrackRegion.setDisable(false);
-      System.out.println("Bag opened");
-    }
-  }
-
   /**
-   * Dealing with closing the inventory or text box by clicking 
+   * Dealing with closing the inventory or text box by clicking
    * a region outside of the inventory or text box.
    */
   @FXML
@@ -342,7 +353,7 @@ public class LibraryRoomController {
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
-      libItemScroll.setOpacity(0);
+      itemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("Bag closed");
     }

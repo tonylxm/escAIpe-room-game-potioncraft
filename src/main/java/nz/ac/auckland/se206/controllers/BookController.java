@@ -29,28 +29,50 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 /** Controller class for the book view. */
 public class BookController {
-  @FXML private TextArea chatTextArea;
-  @FXML private TextField inputText;
-  @FXML private Button sendButton;
-  @FXML private Button xBtn;
-  @FXML private ImageView backBtn;
-  @FXML private ListView<String> ingredientList;
-  @FXML private ImageView ttsBtn1;
-  @FXML private ImageView ttsBtn2;
-  @FXML private Label timerLabel;
-  @FXML public static ImageView bookBackgroundImg;
+  @FXML
+  public static ImageView bookBackgroundImg;
 
-  @FXML private ImageView placeholderImg;
-  @FXML private ImageView itemOneImg;
-  @FXML private ImageView itemTwoImg;
-  @FXML private ImageView itemThreeImg;
-  @FXML private ImageView itemFourImg;
-  @FXML private ImageView itemFiveImg;
-  @FXML private ImageView itemSixImg;
-  @FXML private ImageView itemSevenImg;
-  @FXML private ImageView itemEightImg;
-  @FXML private ImageView itemNineImg;
-  @FXML private ImageView itemTenImg;
+  @FXML
+  private TextArea chatTextArea;
+  @FXML
+  private TextField inputText;
+  @FXML
+  private Button sendButton;
+  @FXML
+  private Button xBtn;
+  @FXML
+  private ImageView backBtn;
+  @FXML
+  private ListView<String> ingredientList;
+  @FXML
+  private ImageView ttsBtn1;
+  @FXML
+  private ImageView ttsBtn2;
+  @FXML
+  private Label timerLabel;
+
+  @FXML
+  private ImageView placeholderImg;
+  @FXML
+  private ImageView itemOneImg;
+  @FXML
+  private ImageView itemTwoImg;
+  @FXML
+  private ImageView itemThreeImg;
+  @FXML
+  private ImageView itemFourImg;
+  @FXML
+  private ImageView itemFiveImg;
+  @FXML
+  private ImageView itemSixImg;
+  @FXML
+  private ImageView itemSevenImg;
+  @FXML
+  private ImageView itemEightImg;
+  @FXML
+  private ImageView itemNineImg;
+  @FXML
+  private ImageView itemTenImg;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
@@ -59,9 +81,11 @@ public class BookController {
 
   /**
    * Initializes the chat view, loading the riddle.
+   * Also initialises ways to view the appropriate images for the required items.
    *
    * @param <T>
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   @FXML
   public void initialize() {
@@ -70,9 +94,11 @@ public class BookController {
 
     // bookBackgroundImg.setImage(new Image("/images/cauldron-room.jpg"));
 
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    // runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+    chatCompletionRequest = new ChatCompletionRequest()
+        .setN(1).setTemperature(0.2)
+        .setTopP(0.5).setMaxTokens(100);
+    // runGpt(new ChatMessage("user",
+    // GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
 
     interactionHandler = new ShapeInteractionHandler();
@@ -88,11 +114,13 @@ public class BookController {
         .addListener(
             new ChangeListener<String>() {
 
+              // Overrideing appropriate method in ChangeListener to swap between images
               @Override
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 String item = ingredientList.getSelectionModel().getSelectedItem();
 
+                // Setting all the images to be transparent initially
                 placeholderImg.setOpacity(0);
                 itemOneImg.setOpacity(0);
                 itemTwoImg.setOpacity(0);
@@ -105,6 +133,7 @@ public class BookController {
                 itemNineImg.setOpacity(0);
                 itemTenImg.setOpacity(0);
 
+                // Setting the appropriate image to be visible based on the selected item
                 switch (item) {
                   case "TAIL":
                     itemOneImg.setOpacity(1);
@@ -147,11 +176,15 @@ public class BookController {
     }
   }
 
+  /**
+   * Handles when a key is pressed on the book scene.
+   */
   @FXML
   public void onKeyPressed(KeyEvent event) throws ApiProxyException {
     System.out.println("key " + event.getCode() + " pressed");
     if (event.getCode().toString().equals("ENTER")) {
       String message = inputText.getText();
+      // Using same GPT message sending logic as previous
       if (message.trim().isEmpty()) {
         return;
       }
@@ -179,7 +212,8 @@ public class BookController {
    *
    * @param msg the chat message to process
    * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
@@ -199,12 +233,14 @@ public class BookController {
    * Sends a message to the GPT model.
    *
    * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
+   * @throws IOException       if there is an I/O error
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     String message = inputText.getText();
+    // Not doing anything if there is no message
     if (message.trim().isEmpty()) {
       return;
     }
@@ -212,6 +248,7 @@ public class BookController {
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
     ChatMessage lastMsg = runGpt(msg);
+    // If the riddle is answered correctly, setting the GameState accordingly
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
       GameState.isBookRiddleResolved = true;
     }
@@ -221,8 +258,9 @@ public class BookController {
    * Navigates back to the previous view.
    *
    * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
+   * @throws IOException       if there is an I/O error
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
@@ -230,31 +268,38 @@ public class BookController {
     backBtn.getScene().setRoot(SceneManager.getUiRoot(SceneManager.currScene));
   }
 
+  /**
+   * Uses text to speech to read the required items in the book.
+   */
   public void readIngredientList() {
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            App.textToSpeech.speak("Ingredient List");
-            for (int i = 0; i < Items.necessary.size(); i++) {
-              App.textToSpeech.speak(ingredientList.getItems().get(i));
-            }
-            return null;
-          }
-        };
+    // Using concurency to prevent the system freezing
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        App.textToSpeech.speak("Ingredient List");
+        for (int i = 0; i < Items.necessary.size(); i++) {
+          App.textToSpeech.speak(ingredientList.getItems().get(i));
+        }
+        return null;
+      }
+    };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
   }
 
+  /**
+   * Uses text to speech to read the game master's response to the user's
+   * message.
+   */
   public void readGameMasterResponse() {
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            App.textToSpeech.speak(result.getChatMessage().getContent());
-            return null;
-          }
-        };
+    // Using concurency to prevent the system freezing
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        App.textToSpeech.speak(result.getChatMessage().getContent());
+        return null;
+      }
+    };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
   }

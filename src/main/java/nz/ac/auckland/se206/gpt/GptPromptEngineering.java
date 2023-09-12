@@ -19,6 +19,14 @@ public class GptPromptEngineering {
         + " the answer";
   }
 
+  /**
+   * GPT prompt for a riddle with an answer that that is one of water, earth,
+   * fire, or air to
+   * direct the user to the correct book later in the room.
+   * 
+   * @param book
+   * @return
+   */
   public static String getBookRiddle(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
         + " with a fire theme, water theme, and air theme. The correct book is"
