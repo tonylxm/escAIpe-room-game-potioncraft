@@ -79,6 +79,6 @@
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
+      <ScrollPane id="itemScroll" fx:id="itemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
   </children>
 </Pane>
