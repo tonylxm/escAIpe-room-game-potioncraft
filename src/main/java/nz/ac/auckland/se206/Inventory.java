@@ -1,4 +1,5 @@
 package nz.ac.auckland.se206;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ import javafx.scene.layout.VBox;
 public class Inventory {
     public Set<Items.Item> inventory;
     public VBox box;
-    
+
     public Inventory() {
         inventory = new HashSet<Items.Item>();
         box = new VBox();
@@ -18,7 +19,7 @@ public class Inventory {
         inventory.add(item);
     }
 
-    /** Removes an item from the inventory given the item*/
+    /** Removes an item from the inventory given the item */
     public void remove(Items.Item item) {
         inventory.remove(item);
     }

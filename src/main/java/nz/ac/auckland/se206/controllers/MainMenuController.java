@@ -35,17 +35,28 @@ public class MainMenuController {
   public static Items items;
   public static Inventory inventory;
 
-  @FXML private Pane pane;
-  @FXML private Button playBtn;
-  @FXML private Button startBtn;
-  @FXML private Text difficultyTxt;
-  @FXML private Text timeLimitTxt;
-  @FXML private ToggleButton easyBtn;
-  @FXML private ToggleButton mediumBtn;
-  @FXML private ToggleButton hardBtn;
-  @FXML private ToggleButton twoMinBtn;
-  @FXML private ToggleButton fourMinBtn;
-  @FXML private ToggleButton sixMinBtn;
+  @FXML
+  private Pane pane;
+  @FXML
+  private Button playBtn;
+  @FXML
+  private Button startBtn;
+  @FXML
+  private Text difficultyTxt;
+  @FXML
+  private Text timeLimitTxt;
+  @FXML
+  private ToggleButton easyBtn;
+  @FXML
+  private ToggleButton mediumBtn;
+  @FXML
+  private ToggleButton hardBtn;
+  @FXML
+  private ToggleButton twoMinBtn;
+  @FXML
+  private ToggleButton fourMinBtn;
+  @FXML
+  private ToggleButton sixMinBtn;
 
   public void initialize() {
     // pane.setOpacity(1);
@@ -56,43 +67,50 @@ public class MainMenuController {
     inventory = new Inventory();
   }
 
+  /**
+   * Handles starting a new game by creating new instances of the required scenes
+   */
   @FXML
   public void playGame() throws InterruptedException, IOException {
-    Task<Void> instantiateScenes =
-        new Task<Void>() {
+    // Using a task to make sure game does not freeze
+    Task<Void> instantiateScenes = new Task<Void>() {
 
-          @Override
-          protected Void call() throws Exception {
-            SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-            SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
-            SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
-            SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
-            return null;
-          }
-        };
-    Thread instantiateScenesThread =
-        new Thread(instantiateScenes, "instantiate scenes upon starting game");
+      @Override
+      protected Void call() throws Exception {
+        SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
+        SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
+        SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
+        SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
+        return null;
+      }
+    };
+    Thread instantiateScenesThread = new Thread(instantiateScenes, "instantiate scenes upon starting game");
     instantiateScenesThread.start();
 
     TransitionAnimation.fade(playBtn, 0.0);
     playBtn.setDisable(true);
+    // Using a task to make sure game does not freeze
+    Task<Void> fadeInSettingsBtnsTask = new Task<Void>() {
 
-    Task<Void> fadeInSettingsBtnsTask =
-        new Task<Void>() {
-
-          @Override
-          protected Void call() throws Exception {
-            Thread.sleep(500);
-            disableAndOrFadeSettingsBtns(false, 1.0, true);
-            return null;
-          }
-        };
-    Thread fadeInSettingsBtnsThread =
-        new Thread(fadeInSettingsBtnsTask, "fadeIn settings btns thread");
+      @Override
+      protected Void call() throws Exception {
+        Thread.sleep(500);
+        disableAndOrFadeSettingsBtns(false, 1.0, true);
+        return null;
+      }
+    };
+    Thread fadeInSettingsBtnsThread = new Thread(fadeInSettingsBtnsTask, "fadeIn settings btns thread");
     fadeInSettingsBtnsThread.start();
   }
 
-  // tf stands for true/false
+  /**
+   * Approprately disables or enables the settings buttons
+   * 
+   * @param tf       stands for true of false, if true then disable buttons, if
+   *                 false then enable buttons
+   * @param ocpacity
+   * @param fade
+   */
   public void disableAndOrFadeSettingsBtns(boolean tf, double ocpacity, boolean fade) {
     easyBtn.setDisable(tf);
     mediumBtn.setDisable(tf);
@@ -103,6 +121,7 @@ public class MainMenuController {
 
     startBtn.setDisable(true);
 
+    // Handing animations for fading
     if (fade) {
       TransitionAnimation.fade(difficultyTxt, ocpacity);
       TransitionAnimation.fade(timeLimitTxt, ocpacity);
@@ -176,16 +195,15 @@ public class MainMenuController {
     TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
-    Task<Void> timerStartTask =
-        new Task<Void>() {
+    Task<Void> timerStartTask = new Task<Void>() {
 
-          @Override
-          protected Void call() throws Exception {
-            Thread.sleep(2000);
-            countdownTimer.start();
-            return null;
-          }
-        };
+      @Override
+      protected Void call() throws Exception {
+        Thread.sleep(2000);
+        countdownTimer.start();
+        return null;
+      }
+    };
     Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
     timerStartThread.start();
   }

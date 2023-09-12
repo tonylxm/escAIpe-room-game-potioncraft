@@ -7,8 +7,10 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 
 public class GameOverController {
-  @FXML private Pane pane;
-  @FXML private Button playAgainBtn;
+  @FXML
+  private Pane pane;
+  @FXML
+  private Button playAgainBtn;
 
   public void playAgain() throws IOException {
     System.out.println("GAME_OVER -> MAIN_MENU");

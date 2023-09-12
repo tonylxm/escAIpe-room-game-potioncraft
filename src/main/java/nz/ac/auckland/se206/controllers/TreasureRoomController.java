@@ -16,41 +16,74 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
 public class TreasureRoomController {
-  public boolean readyToAdd;
-  public boolean bagOpened;
-  public Items.Item item;
+  private boolean readyToAdd;
+  private boolean bagOpened;
+  private Items.Item item;
 
   // Booleans to keep track of whether an item has been added to the inventory
-  public boolean itemSixAdded, itemSevenAdded, itemEightAdded, itemNineAdded, itemTenAdded;
+  private boolean itemSixAdded;
+  private boolean itemSevenAdded;
+  private boolean itemEightAdded;
+  private boolean itemNineAdded;
+  private boolean itemTenAdded;
   // Booleans to keep track of if an item is clicked or selected
-  public boolean sixClicked, sevenClicked, eightClicked, nineClicked, tenClicked;
+  private boolean sixClicked;
+  private boolean sevenClicked;
+  private boolean eightClicked;
+  private boolean nineClicked;
+  private boolean tenClicked;
 
-  @FXML private Rectangle textRect;
-  @FXML private Rectangle mouseTrackRegion;
-  @FXML private Polygon leftShpe;
-  @FXML private Label textLbl;
-  @FXML private Label noLbl;
-  @FXML private Label yesLbl;
-  @FXML private Label dashLbl;
-  @FXML private ImageView bookBtn;
-  @FXML private ImageView bagBtn;
-  @FXML private Label timerLabel;
-  @FXML private ScrollPane treItemScroll;
+  @FXML
+  private Rectangle textRect;
+  @FXML
+  private Rectangle mouseTrackRegion;
+  @FXML
+  private Polygon leftShpe;
+  @FXML
+  private Label textLbl;
+  @FXML
+  private Label noLbl;
+  @FXML
+  private Label yesLbl;
+  @FXML
+  private Label dashLbl;
+  @FXML
+  private ImageView bookBtn;
+  @FXML
+  private ImageView bagBtn;
+  @FXML
+  private Label timerLabel;
+  @FXML
+  private ScrollPane treItemScroll;
 
-  @FXML private ImageView itemSixImg;
-  @FXML private ImageView itemSevenImg;
-  @FXML private ImageView itemEightImg;
-  @FXML private ImageView itemNineImg;
-  @FXML private ImageView itemTenImg;
+  @FXML
+  private ImageView itemSixImg;
+  @FXML
+  private ImageView itemSevenImg;
+  @FXML
+  private ImageView itemEightImg;
+  @FXML
+  private ImageView itemNineImg;
+  @FXML
+  private ImageView itemTenImg;
 
-  @FXML private ShapeInteractionHandler interactionHandler;
+  @FXML
+  private ShapeInteractionHandler interactionHandler;
 
   private CountdownTimer countdownTimer;
 
+  /**
+   * Setting the appropriate fields and listeners when scene is initialised.
+   * This includes initialising whether an item is clicked or already added
+   * to the inventory, whether an item is ready to be added, whether the bag
+   * is already opened, initialising the countdown timer and diabling the
+   * mouseTrackRegion appropriately.
+   */
   public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setRightTimerLabel(timerLabel);
 
+    // Setting appropriate boolean fields
     itemSixAdded = false;
     itemSevenAdded = false;
     itemEightAdded = false;
@@ -69,6 +102,7 @@ public class TreasureRoomController {
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 
+    // Setting up listeners for the various items
     interactionHandler = new ShapeInteractionHandler();
     if (itemSixImg != null) {
       itemSixImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemSixImg));
@@ -107,14 +141,16 @@ public class TreasureRoomController {
       bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
       bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
-
     }
   }
 
-  /** Changing scenes to the cauldron room */
+  /**
+   * Changing scenes to the cauldron room
+   */
   @FXML
   public void goLeft(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
+    // Resetting appropriate fields before changing scenes
     setText("", false);
     readyToAdd = false;
     treItemScroll.setOpacity(0);
@@ -124,43 +160,59 @@ public class TreasureRoomController {
   }
 
   /**
-   * Selecting the item and prompting user and prompting user to either add or not add the item to
-   * their inventory. Does nothing if the item has already been added to the inventory.
+   * Selecting the item and prompting user and prompting user to either add or not
+   * add the item to
+   * their inventory. Does nothing if the item has already been added to the
+   * inventory.
    *
    * @param item the item clicked by user
    */
   @FXML
   public void itemSelect(Items.Item item) {
-    // Items are are clicked, so their glow remains on until item is added or not added
+    // Items are are clicked, so their glow remains on until item is added or not
+    // added
     switch (item) {
       case TALON:
-        if (itemSixAdded) return;
+        if (itemSixAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemSixImg);
         sixClicked = true;
         break;
       case CRYSTAL:
-        if (itemSevenAdded) return;
+        if (itemSevenAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemSevenImg);
         sevenClicked = true;
         break;
       case BAT_WINGS:
-        if (itemEightAdded) return;
+        if (itemEightAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemEightImg);
         eightClicked = true;
         break;
       case WREATH:
-        if (itemNineAdded) return;
+        if (itemNineAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemNineImg);
         nineClicked = true;
         break;
       case FEATHER:
-        if (itemTenAdded) return;
+        if (itemTenAdded) {
+          return;
+        }
         interactionHandler.glowThis(itemTenImg);
         tenClicked = true;
         break;
       default:
         break;
     }
+    // Setting the appropriate text for the text box
+    // and setting the item to be added and letting the
+    // system know that an item is ready to be added
     this.item = item;
     setText("Add to inventory?", true);
     mouseTrackRegion.setDisable(false);
@@ -171,7 +223,9 @@ public class TreasureRoomController {
   /** Adding a selected item to the inventory */
   @FXML
   public void addItem() {
-    if (!readyToAdd) return;
+    if (!readyToAdd) {
+      return;
+    }
     MainMenuController.inventory.add(item);
     setText("", false);
     readyToAdd = false;
@@ -244,13 +298,18 @@ public class TreasureRoomController {
     }
   }
 
-  /** Not adding a selected item to the inventory */
+  /**
+   * Not adding a selected item to the inventory
+   */
   @FXML
   public void noAdd() {
-    if (!readyToAdd) return;
+    if (!readyToAdd) {
+      return;
+    }
     setText("", false);
     readyToAdd = false;
 
+    // Turning off the glow effect for all items
     sixClicked = false;
     interactionHandler.unglowThis(itemSixImg);
     sevenClicked = false;
@@ -262,6 +321,7 @@ public class TreasureRoomController {
     tenClicked = false;
     interactionHandler.unglowThis(itemTenImg);
 
+    // Making sure the mouseTrackRegion is disabled
     mouseTrackRegion.setDisable(true);
     System.out.println("Item not added to inventory");
   }
@@ -270,7 +330,7 @@ public class TreasureRoomController {
    * Making text box appear or dissapear with given text.
    *
    * @param text the text to be displayed
-   * @param on whether the text box should be visible or not
+   * @param on   whether the text box should be visible or not
    */
   @FXML
   private void setText(String text, boolean on) {
@@ -300,10 +360,16 @@ public class TreasureRoomController {
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 
-  /** Dealing with the event where the bag icon is clicked */
+  /**
+   * Dealing with the event where the bag icon is clicked
+   */
   @FXML
   public void clickBag() {
-    if (MainMenuController.inventory.size() == 0) return;
+    // If there are no items in the inventory, can't open the bag
+    if (MainMenuController.inventory.size() == 0) {
+      return;
+    }
+    // If the bag isn't opened already, open it
     if (!bagOpened) {
       treItemScroll.setVvalue(0);
       treItemScroll.setContent(null);
@@ -315,10 +381,10 @@ public class TreasureRoomController {
     }
   }
 
-  /** 
-   * Dealing with closing the inventory or text box by clicking 
+  /**
+   * Dealing with closing the inventory or text box by clicking
    * a region outside of the inventory or text box.
-   * */
+   */
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
