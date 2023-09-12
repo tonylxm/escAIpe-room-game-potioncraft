@@ -33,6 +33,11 @@ public class MainMenuController {
   public static Items items;
   public static Inventory inventory;
 
+  public static CountdownTimer getCountdownTimer() {
+    System.out.println("getting timer");
+    return countdownTimer;
+  }
+
   private Difficulty difficulty;
   private TimeLimit timeLimit;
 
@@ -85,7 +90,8 @@ public class MainMenuController {
         return null;
       }
     };
-    Thread instantiateScenesThread = new Thread(instantiateScenes, "instantiate scenes upon starting game");
+    Thread instantiateScenesThread = new Thread(
+        instantiateScenes, "instantiate scenes upon starting game");
     instantiateScenesThread.start();
 
     TransitionAnimation.fade(playBtn, 0.0);
@@ -100,7 +106,8 @@ public class MainMenuController {
         return null;
       }
     };
-    Thread fadeInSettingsBtnsThread = new Thread(fadeInSettingsBtnsTask, "fadeIn settings btns thread");
+    Thread fadeInSettingsBtnsThread = new Thread(
+        fadeInSettingsBtnsTask, "fadeIn settings btns thread");
     fadeInSettingsBtnsThread.start();
   }
 
@@ -181,11 +188,6 @@ public class MainMenuController {
       startBtn.setDisable(false);
       startBtn.setOpacity(1.0);
     }
-  }
-
-  public static CountdownTimer getCountdownTimer() {
-    System.out.println("getting timer");
-    return countdownTimer;
   }
 
   @FXML

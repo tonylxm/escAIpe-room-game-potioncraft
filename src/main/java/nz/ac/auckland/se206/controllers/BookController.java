@@ -94,7 +94,9 @@ public class BookController {
 
     // bookBackgroundImg.setImage(new Image("/images/cauldron-room.jpg"));
 
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest()
+        .setN(1).setTemperature(0.2)
+        .setTopP(0.5).setMaxTokens(100);
     // runGpt(new ChatMessage("user",
     // GptPromptEngineering.getRiddleWithGivenWord("vase")));
     writeRecipeIngredients(Items.necessary);
@@ -112,6 +114,7 @@ public class BookController {
         .addListener(
             new ChangeListener<String>() {
 
+              // Overrideing appropriate method in ChangeListener to swap between images
               @Override
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
