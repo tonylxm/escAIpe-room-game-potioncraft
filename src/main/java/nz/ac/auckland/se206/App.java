@@ -10,7 +10,8 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
- * This is the entry point of the JavaFX application, while you can change this class, it should
+ * This is the entry point of the JavaFX application, while you can change this
+ * class, it should
  * remain as the class that runs the JavaFX application.
  */
 public class App extends Application {
@@ -27,7 +28,8 @@ public class App extends Application {
   }
 
   /**
-   * Returns the node associated to the input file. The method expects that the file is located in
+   * Returns the node associated to the input file. The method expects that the
+   * file is located in
    * "src/main/resources/fxml".
    *
    * @param fxml The name of the FXML file (without extension).
@@ -39,7 +41,8 @@ public class App extends Application {
   }
 
   /**
-   * This method is invoked when the application starts. It loads and shows the "Canvas" scene.
+   * This method is invoked when the application starts. It loads and shows the
+   * "Canvas" scene.
    *
    * @param stage The primary stage of the application.
    * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
@@ -47,12 +50,12 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     SceneManager.addAppUi(AppUi.MAIN_MENU, loadFxml("main_menu"));
-    SceneManager.addAppUi(AppUi.GAME_OVER, loadFxml("game_over"));
 
     Parent root = SceneManager.getUiRoot(AppUi.MAIN_MENU);
 
     scene = new Scene(root);
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
     root.requestFocus();
   }

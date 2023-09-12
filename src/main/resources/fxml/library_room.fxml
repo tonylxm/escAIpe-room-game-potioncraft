@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -17,32 +17,72 @@
             <Image url="@../images/library-room.jpeg" />
          </image>
       </ImageView>
-      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="150.0" fitWidth="150.0" layoutX="69.0" layoutY="368.0">
+      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="85.0" layoutY="423.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/tail.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="150.0" fitWidth="150.0" layoutX="596.0" layoutY="125.0">
+      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="553.0" layoutY="173.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/iwings.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="150.0" fitWidth="150.0" layoutX="787.0" layoutY="83.0">
+      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="754.0" layoutY="191.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/flower.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="150.0" fitWidth="150.0" layoutX="382.0" layoutY="98.0">
+      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="122.0" fitWidth="122.0" layoutX="348.0" layoutY="107.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/scales.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="150.0" fitWidth="150.0" layoutX="227.0" layoutY="273.0">
+      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="92.0" fitWidth="168.0" layoutX="217.0" layoutY="275.0">
          <image>
-            <Image url="@../images/Poké_Ball_icon.svg.png" />
+            <Image url="@../images/powder.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Polygon id="rightShpe" fx:id="rightShpe" fill="#0084ff" layoutX="799.0" layoutY="401.0" onMouseClicked="#goRight" points="222.0, -60.0, 189.0, -42.0, 189.0, -78.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="rightShpe" fill="WHITE" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" opacity="0.5" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Polygon>
+      <ImageView fx:id="bagBtn" fitHeight="45.0" fitWidth="45.0" layoutX="911.0" layoutY="625.0" onMouseClicked="#clickBag" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bag_icon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/book_icon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
          <font>
@@ -64,18 +104,6 @@
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="624.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Picture1.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="timerLabel" layoutX="774.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Circle fill="#3f4a54" layoutX="928.0" layoutY="648.0" onMouseClicked="#clickBag" radius="22.0" stroke="BLACK" strokeType="OUTSIDE" />
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-68.0" layoutY="20.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
-      <ScrollPane id="libItemScroll" fx:id="libItemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
-   </children>
+      <ScrollPane id="itemScroll" fx:id="itemScroll" layoutX="854.0" layoutY="416.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
+  </children>
 </Pane>
