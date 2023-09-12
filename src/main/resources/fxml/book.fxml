@@ -105,7 +105,7 @@
             <Image url="@../images/feather.png" />
          </image>
       </ImageView>
-      <Text layoutX="547.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient Viewer">
+      <Text layoutX="544.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredient Viewer">
          <font>
             <Font name="Algerian" size="20.0" />
          </font>

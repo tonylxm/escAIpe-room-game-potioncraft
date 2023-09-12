@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -20,37 +21,61 @@
          <image>
             <Image url="@../images/talon.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="200.0" fitWidth="200.0" layoutX="517.0" layoutY="174.0">
          <image>
             <Image url="@../images/stone.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="200.0" fitWidth="160.0" layoutX="98.0" layoutY="74.0">
          <image>
             <Image url="@../images/bwings.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="133.0" fitWidth="150.0" layoutX="132.0" layoutY="350.0">
          <image>
             <Image url="@../images/wreath.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="171.0" fitWidth="171.0" layoutX="768.0" layoutY="218.0">
          <image>
             <Image url="@../images/feather.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Polygon>
       <ImageView fx:id="bagBtn" fitHeight="45.0" fitWidth="45.0" layoutX="911.0" layoutY="625.0" onMouseClicked="#clickBag" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/bag_icon.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="bookBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#openBook" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/book_icon.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>
