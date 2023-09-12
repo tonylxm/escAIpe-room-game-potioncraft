@@ -1,5 +1,5 @@
 {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "[java]": {
         "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code",
     },

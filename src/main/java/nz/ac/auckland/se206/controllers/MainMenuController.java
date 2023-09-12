@@ -32,8 +32,6 @@ public class MainMenuController {
 
   public static Items items;
   public static Inventory inventory;
-  
-  private boolean difficultySelected;
 
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
@@ -42,6 +40,8 @@ public class MainMenuController {
 
   private Difficulty difficulty;
   private TimeLimit timeLimit;
+
+  private boolean difficultySelected;
 
   @FXML
   private Pane pane;
@@ -65,6 +65,12 @@ public class MainMenuController {
   private ToggleButton fourMinBtn;
   @FXML
   private ToggleButton sixMinBtn;
+  @FXML
+  private Text hintInfinity;
+  @FXML
+  private Text hintFive;
+  @FXML
+  private Text hintZero;
 
   public void initialize() {
     // Item & inventory generation
