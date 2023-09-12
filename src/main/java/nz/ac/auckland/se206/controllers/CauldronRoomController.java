@@ -306,7 +306,7 @@ public class CauldronRoomController {
 
   @FXML
   public void riddleSelect() {
-    riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 12));
+    riddleSelectLabel.setFont(javafx.scene.text.Font.font("Algerian", 12));
     riddleSelectLabel.setText(riddle);
     chooseLabel.setOpacity(100);
     enableBooks();

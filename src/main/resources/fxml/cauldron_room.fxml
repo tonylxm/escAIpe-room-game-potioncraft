@@ -37,7 +37,7 @@
       <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="858.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
       <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
          <font>
-            <Font size="38.0" />
+            <Font name="Algerian" size="38.0" />
          </font>
       </Label>
       <Label fx:id="riddleSelectLabel" layoutX="143.0" layoutY="541.0" onMouseClicked="#riddleSelect" opacity="0.0" prefHeight="107.0" prefWidth="710.0" text="&gt;Riddle" wrapText="true">
