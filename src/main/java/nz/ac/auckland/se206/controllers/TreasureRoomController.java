@@ -12,7 +12,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
-public class TreasureRoomController extends itemRoomController {
+public class TreasureRoomController extends ItemRoomController {
   // Booleans to keep track of whether an item has been added to the inventory
   private boolean itemSixAdded;
   private boolean itemSevenAdded;
@@ -230,8 +230,7 @@ public class TreasureRoomController extends itemRoomController {
     setText("", false, false);
     readyToAdd = false;
 
-    // Place holder image for now
-    // Real item images will be initialised in switch case statment
+    // If no item is selected but still added, place holder image
     ImageView image = new ImageView(new Image("images/place_holder.png"));
     double ratio = 1;
 

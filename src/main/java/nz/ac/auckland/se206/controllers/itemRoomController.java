@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 
-public abstract class itemRoomController {
+public abstract class ItemRoomController {
   protected boolean bagOpened;
   protected boolean readyToAdd;
   protected Items.Item item;

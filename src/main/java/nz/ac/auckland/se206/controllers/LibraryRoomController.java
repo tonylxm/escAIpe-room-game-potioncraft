@@ -7,13 +7,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.CountdownTimer;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
-public class LibraryRoomController extends itemRoomController {
+public class LibraryRoomController extends ItemRoomController {
   // Booleans to keep track of whether an item has been added to the inventory
   private boolean itemOneAdded;
   private boolean itemTwoAdded;
@@ -137,14 +136,17 @@ public class LibraryRoomController extends itemRoomController {
       // ELSE NO ITEMS IN BAG MESSAGE
     }
 
-    
     if (wizardRectangle != null) {
-      wizardRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      wizardRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
     }
   }
 
-  /** Changing scenes to the cauldron room */
+  /** 
+   * Changing scenes to the cauldron room 
+   */
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
@@ -367,30 +369,5 @@ public class LibraryRoomController extends itemRoomController {
       bagOpened = false;
       System.out.println("Bag closed");
     }
-  }
-
-  @FXML
-  public void clickWizard(MouseEvent event) {
-    System.out.println("wizard clicked");
-    if (!GameState.isBookRiddleResolved) {
-      showWizardChat();
-      GameState.isBookRiddleGiven = true;
-      // unhighlightThis(wizardRectangle);
-    } else {
-      // showWizardChat();
-    }
-  }
-
-  /**
-   * Displaying wizard chat to user when prompted
-   */
-  private void showWizardChat() {
-    // Setting approrpiate fields to be visible and interactable
-    wizardChatImage.setDisable(false);
-    wizardChatImage.setOpacity(1);
-    textRect.setDisable(false);
-    mouseTrackRegion.setDisable(false);
-    setText("I'm keeping an eye on you", true, false);
-    mouseTrackRegion.setOpacity(0.5);
   }
 }
