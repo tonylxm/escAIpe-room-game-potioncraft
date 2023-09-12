@@ -17,34 +17,54 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
-  @FXML private Rectangle cauldronRectangle;
-  @FXML private Rectangle wizardRectangle;
-  @FXML private Polygon rightArrow;
-  @FXML private Polygon leftArrow;
-  @FXML private Rectangle bookFireRectangle;
-  @FXML private Rectangle bookWaterRectangle;
-  @FXML private Rectangle bookAirRectangle;
-  @FXML private Rectangle bookFireImage;
-  @FXML private Rectangle bookWaterImage;
-  @FXML private Rectangle bookAirImage;
-  @FXML private Rectangle textRect;
-  @FXML private Rectangle wizardChatImage;
-  @FXML private Rectangle mouseTrackRegion;
-  @FXML private ImageView bookBtn;
-  @FXML private ImageView bagBtn;
-  @FXML private Label timerLabel;
-  @FXML private ScrollPane calItemScroll;
-  @FXML private Label riddleSelectLabel;
-  @FXML private Label chooseLabel;
+  @FXML
+  private Rectangle cauldronRectangle;
+  @FXML
+  private Rectangle wizardRectangle;
+  @FXML
+  private Polygon rightArrow;
+  @FXML
+  private Polygon leftArrow;
+  @FXML
+  private Rectangle bookFireRectangle;
+  @FXML
+  private Rectangle bookWaterRectangle;
+  @FXML
+  private Rectangle bookAirRectangle;
+  @FXML
+  private Rectangle bookFireImage;
+  @FXML
+  private Rectangle bookWaterImage;
+  @FXML
+  private Rectangle bookAirImage;
+  @FXML
+  private Rectangle textRect;
+  @FXML
+  private Rectangle wizardChatImage;
+  @FXML
+  private Rectangle mouseTrackRegion;
+  @FXML
+  private ImageView bookBtn;
+  @FXML
+  private ImageView bagBtn;
+  @FXML
+  private Label timerLabel;
+  @FXML
+  private ScrollPane calItemScroll;
+  @FXML
+  private Label riddleSelectLabel;
+  @FXML
+  private Label chooseLabel;
 
-  @FXML private ShapeInteractionHandler interactionHandler;
+  @FXML
+  private ShapeInteractionHandler interactionHandler;
   private ChatHandler chatHandler = new ChatHandler();
-  boolean wizardFirstTime = true;
+  private boolean wizardFirstTime = true;
   private String book;
-  private String[] options = {"fire", "water", "air"};
+  private String[] options = { "fire", "water", "air" };
   private String riddle;
 
-  public boolean bagOpened;
+  private boolean bagOpened;
 
   private CountdownTimer countdownTimer;
 
@@ -105,16 +125,15 @@ public class CauldronRoomController {
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
-    Task<Void> bookRiddleTask =
-        new Task<Void>() {
+    Task<Void> bookRiddleTask = new Task<Void>() {
 
-          @Override
-          protected Void call() throws Exception {
-            // riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
-            // System.out.println(riddle);
-            return null;
-          }
-        };
+      @Override
+      protected Void call() throws Exception {
+        // riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
+        // System.out.println(riddle);
+        return null;
+      }
+    };
     new Thread(bookRiddleTask).start();
     System.out.println(riddle);
     // Some type of animation
@@ -229,11 +248,18 @@ public class CauldronRoomController {
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
+  /**
+   * Handling events where menus or views need to be exited by clicking anywhere
+   * else on the screen
+   * 
+   * @param event
+   */
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
     wizardChatImage.setOpacity(0);
     textRect.setDisable(true);
+    // Disabling mouseTrackRegion so it doesn't interfere with other interactions
     mouseTrackRegion.setDisable(true);
     textRect.setOpacity(0);
     mouseTrackRegion.setOpacity(0);
@@ -259,14 +285,14 @@ public class CauldronRoomController {
 
   // @FXML
   // public void highlightThis(Shape shape) {
-  //   shape.setStroke(Color.GOLD);
-  //   shape.setStrokeWidth(5);
+  // shape.setStroke(Color.GOLD);
+  // shape.setStrokeWidth(5);
   // }
 
   // @FXML
   // public void unhighlightThis(Shape shape) {
-  //   shape.setStrokeWidth(0);
-  //   shape.setStroke(Color.BLACK);
+  // shape.setStrokeWidth(0);
+  // shape.setStroke(Color.BLACK);
   // }
 
   private String getRandomBook() {
@@ -275,7 +301,11 @@ public class CauldronRoomController {
     return options[randomIndex];
   }
 
+  /**
+   * Displaying wizard chat to user when prompted
+   */
   private void showWizardChat() {
+    // Setting approrpiate fields to be visible and interactable
     wizardChatImage.setOpacity(100);
     textRect.setDisable(false);
     mouseTrackRegion.setDisable(false);
@@ -292,10 +322,16 @@ public class CauldronRoomController {
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
 
-  /** Dealing with the event where the bag icon is clicked */
+  /**
+   * Dealing with the event where the bag icon is clicked
+   */
   @FXML
   public void clickBag() {
-    if (MainMenuController.inventory.size() == 0) return;
+    // If there are no items in the inventory, can't open the bag
+    if (MainMenuController.inventory.size() == 0) {
+      return;
+    }
+    // If the bag isn't opened already, open it
     if (!bagOpened) {
       calItemScroll.setVvalue(0);
       calItemScroll.setContent(null);

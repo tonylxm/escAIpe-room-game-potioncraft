@@ -33,23 +33,31 @@ public class CountdownTimer {
     currentSeconds = Integer.parseInt(time[1]);
   }
 
-  // Set up the timer to count down every second
+  /**
+   * Set up the timer to count down every second and
+   * update the appropriate timer label
+   */
   public void setupTimeline() {
-    timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  try {
-                    oneSecondPassed();
-                  } catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                  updateTimerLabel();
-                }));
+    timeline = new Timeline(
+        new KeyFrame(
+            Duration.seconds(1),
+            event -> {
+              try {
+                oneSecondPassed();
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+              updateTimerLabel();
+            }));
     timeline.setCycleCount(Timeline.INDEFINITE);
   }
 
+  /**
+   * Logic that occurs every second. If the timer reaches 0, the game over scene
+   * is
+   * 
+   * @throws IOException
+   */
   public void oneSecondPassed() throws IOException {
     if (currentSeconds == 0 && minutes == 0) {
       handleTimeOut();
@@ -75,24 +83,24 @@ public class CountdownTimer {
     updateTimerLabel();
   }
 
-  // Logic that occurs every second that updates the timer label. Make sure to name the timer labels
+  // Logic that occurs every second that updates the timer label. Make sure to
+  // name the timer labels
   // timerLabel!!!
   private void updateTimerLabel() {
     Parent currentSceneRoot = SceneManager.getUiRoot(SceneManager.getTimerScene());
     // System.out.println(
-    //     "currentSceneRoot = "
-    //         + currentSceneRoot
-    //         + "  ||  current scene = "
-    //         + SceneManager.getTimerScene()
-    //         + "  ||  sec = "
-    //         + currentSeconds
-    //         + "  || cauldron timer = "
-    //         + cauldronTimerLabel);
+    // "currentSceneRoot = "
+    // + currentSceneRoot
+    // + " || current scene = "
+    // + SceneManager.getTimerScene()
+    // + " || sec = "
+    // + currentSeconds
+    // + " || cauldron timer = "
+    // + cauldronTimerLabel);
 
     if (currentSceneRoot != null) {
 
-      Label timerLabel =
-          (Label) currentSceneRoot.lookup("#timerLabel"); // Assuming the ID is "timerLabel"
+      Label timerLabel = (Label) currentSceneRoot.lookup("#timerLabel"); // Assuming the ID is "timerLabel"
 
       if (timerLabel != null) {
         timerLabel.setText(formatTimerText());
@@ -141,7 +149,8 @@ public class CountdownTimer {
     this.bookTimerLabel = bookTimerLabel;
   }
 
-  // Logic that occurs when the timer reaches 0 - sets the scene to the game over scene
+  // Logic that occurs when the timer reaches 0 - sets the scene to the game over
+  // scene
   private void handleTimeOut() throws IOException {
     System.out.println("GAME_OVER");
     App.setRoot("you-lose"); // use App.setRoot() so that game over occurs in all scenes

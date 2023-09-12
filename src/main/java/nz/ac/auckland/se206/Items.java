@@ -19,22 +19,26 @@ public class Items {
     FEATHER
   }
 
-    public static Set<Item> available;
-    public static Set<Item> necessary;
-    private Item[] list = new Item[]{
-        Item.TAIL, Item.INSECT_WINGS, Item.FLOWER, Item.SCALES, 
-        Item.POWDER, Item.TALON, Item.CRYSTAL, Item.BAT_WINGS, 
-        Item.WREATH, Item.FEATHER
-      };
+  public static Set<Item> available;
+  public static Set<Item> necessary;
+  private Item[] list = new Item[] {
+      Item.TAIL, Item.INSECT_WINGS, Item.FLOWER, Item.SCALES,
+      Item.POWDER, Item.TALON, Item.CRYSTAL, Item.BAT_WINGS,
+      Item.WREATH, Item.FEATHER
+  };
 
   /**
-   * Constructor that adds an appropriate number of random unique items to the available and
-   * necessary sets. The available set contains all the items you can interact with within the room.
+   * Constructor that adds an appropriate number of random unique items to the
+   * available and
+   * necessary sets. The available set contains all the items you can interact
+   * with within the room.
    * The necessary set contains the items that are needed to complete the room.
    *
-   * @param n is the number of items needed to complete the room. Note that the number of items
-   *     available is double those required to complete it. Currently, the maximum value for n is 5,
-   *     given the number of items.
+   * @param n is the number of items needed to complete the room. Note that the
+   *          number of items
+   *          available is double those required to complete it. Currently, the
+   *          maximum value for n is 5,
+   *          given the number of items.
    */
   public Items(int n) {
     Random random = new Random();
