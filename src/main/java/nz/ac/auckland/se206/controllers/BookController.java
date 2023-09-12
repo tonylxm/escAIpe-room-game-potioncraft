@@ -30,6 +30,9 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 /** Controller class for the book view. */
 public class BookController {
   @FXML
+  public static ImageView bookBackgroundImg;
+
+  @FXML
   private TextArea chatTextArea;
   @FXML
   private TextField inputText;
@@ -47,8 +50,6 @@ public class BookController {
   private ImageView ttsBtn2;
   @FXML
   private Label timerLabel;
-  @FXML
-  public static ImageView bookBackgroundImg;
 
   @FXML
   private ImageView placeholderImg;

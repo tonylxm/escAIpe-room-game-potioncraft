@@ -28,12 +28,13 @@ public class MainMenuController {
     SIX_MIN
   }
 
-  private Difficulty difficulty;
-  private TimeLimit timeLimit;
   public static CountdownTimer countdownTimer = new CountdownTimer("2:00");
 
   public static Items items;
   public static Inventory inventory;
+
+  private Difficulty difficulty;
+  private TimeLimit timeLimit;
 
   @FXML
   private Pane pane;
