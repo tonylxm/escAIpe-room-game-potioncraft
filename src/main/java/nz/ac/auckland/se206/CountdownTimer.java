@@ -11,6 +11,14 @@ public class CountdownTimer {
   private static int minutes;
   private static int initialSeconds;
   private static int currentSeconds;
+
+  public static void setTimerLimit(String timeLimit) {
+    String[] time = timeLimit.split(":");
+    minutes = Integer.parseInt(time[0]);
+    initialSeconds = Integer.parseInt(time[1]);
+    currentSeconds = Integer.parseInt(time[1]);
+  }
+
   private Timeline timeline;
   private Label cauldronTimerLabel;
   private Label leftTimerLabel;
@@ -24,13 +32,6 @@ public class CountdownTimer {
     currentSeconds = Integer.parseInt(time[1]);
 
     setupTimeline();
-  }
-
-  public static void setTimerLimit(String timeLimit) {
-    String[] time = timeLimit.split(":");
-    minutes = Integer.parseInt(time[0]);
-    initialSeconds = Integer.parseInt(time[1]);
-    currentSeconds = Integer.parseInt(time[1]);
   }
 
   /**
@@ -49,6 +50,7 @@ public class CountdownTimer {
               }
               updateTimerLabel();
             }));
+    // Updating timer label every second
     timeline.setCycleCount(Timeline.INDEFINITE);
   }
 
@@ -63,6 +65,7 @@ public class CountdownTimer {
       handleTimeOut();
       timeline.stop();
     } else if (currentSeconds == 0) {
+      // Converting minutes to seconds and decrementing minutes appropriately
       minutes--;
       currentSeconds = 60;
     }
@@ -149,10 +152,13 @@ public class CountdownTimer {
     this.bookTimerLabel = bookTimerLabel;
   }
 
-  // Logic that occurs when the timer reaches 0 - sets the scene to the game over
-  // scene
+  /**
+   * Logic that occurs when the timer reaches 0 - sets the scene to the game over
+   * scene
+   */
   private void handleTimeOut() throws IOException {
     System.out.println("GAME_OVER");
-    App.setRoot("you-lose"); // use App.setRoot() so that game over occurs in all scenes
+    App.setRoot("you-lose");
+    // Using App.setRoot() so that game over occurs in all scenes
   }
 }

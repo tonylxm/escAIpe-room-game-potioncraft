@@ -105,41 +105,62 @@ public class LibraryRoomController {
     // Setting up listeners for the various items
     interactionHandler = new ShapeInteractionHandler();
     if (itemOneImg != null) {
-      itemOneImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemOneImg));
-      itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
-      itemOneImg.setOnMouseClicked(event -> itemSelect(Items.Item.TAIL));
+      itemOneImg.setOnMouseEntered(
+        event -> interactionHandler.glowThis(itemOneImg));
+      itemOneImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
+      itemOneImg.setOnMouseClicked(
+        event -> itemSelect(Items.Item.TAIL));
     }
     if (itemTwoImg != null) {
-      itemTwoImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemTwoImg));
-      itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
-      itemTwoImg.setOnMouseClicked(event -> itemSelect(Items.Item.INSECT_WINGS));
+      itemTwoImg.setOnMouseEntered(
+        event -> interactionHandler.glowThis(itemTwoImg));
+      itemTwoImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
+      itemTwoImg.setOnMouseClicked(
+        event -> itemSelect(Items.Item.INSECT_WINGS));
     }
     if (itemThreeImg != null) {
-      itemThreeImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemThreeImg));
-      itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
-      itemThreeImg.setOnMouseClicked(event -> itemSelect(Items.Item.FLOWER));
+      itemThreeImg.setOnMouseEntered(
+        event -> interactionHandler.glowThis(itemThreeImg));
+      itemThreeImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
+      itemThreeImg.setOnMouseClicked(
+        event -> itemSelect(Items.Item.FLOWER));
     }
     if (itemFourImg != null) {
-      itemFourImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFourImg));
-      itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
-      itemFourImg.setOnMouseClicked(event -> itemSelect(Items.Item.SCALES));
+      itemFourImg.setOnMouseEntered(
+        event -> interactionHandler.glowThis(itemFourImg));
+      itemFourImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
+      itemFourImg.setOnMouseClicked(
+        event -> itemSelect(Items.Item.SCALES));
     }
     if (itemFiveImg != null) {
-      itemFiveImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemFiveImg));
-      itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
-      itemFiveImg.setOnMouseClicked(event -> itemSelect(Items.Item.POWDER));
+      itemFiveImg.setOnMouseEntered(
+        event -> interactionHandler.glowThis(itemFiveImg));
+      itemFiveImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
+      itemFiveImg.setOnMouseClicked(
+        event -> itemSelect(Items.Item.POWDER));
     }
     if (rightShpe != null) {
-      rightShpe.setOnMouseEntered(event -> rightShpe.setOpacity(0.9));
-      rightShpe.setOnMouseExited(event -> rightShpe.setOpacity(0.5));
+      rightShpe.setOnMouseEntered(
+        event -> rightShpe.setOpacity(0.9));
+      rightShpe.setOnMouseExited(
+        event -> rightShpe.setOpacity(0.5));
     }
     if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+      bookBtn.setOnMouseEntered(
+        event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(
+        event -> interactionHandler.unglowThis(bookBtn));
     }
     if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      bagBtn.setOnMouseEntered(
+        event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(
+        event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
   }
