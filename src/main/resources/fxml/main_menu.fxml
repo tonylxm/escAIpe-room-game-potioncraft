@@ -77,7 +77,17 @@
             <Image url="@../images/title.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="447.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 2">
+      <Text fx:id="hintFive" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="hintInfinity" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="hintZero" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
          <font>
             <Font name="Bookshelf Symbol 7" size="18.0" />
          </font>
