@@ -137,6 +137,7 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
+        SceneManager.addAppUi(AppUi.CAULDRON, App.loadFxml("cauldron"));
         return null;
       }
     };

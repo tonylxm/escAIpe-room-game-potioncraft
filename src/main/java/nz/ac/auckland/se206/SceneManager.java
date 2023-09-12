@@ -13,7 +13,8 @@ public class SceneManager {
     LIBRARY_ROOM,
     TREASURE_ROOM,
     YOU_WIN,
-    YOU_LOSE
+    YOU_LOSE,
+    CAULDRON,
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

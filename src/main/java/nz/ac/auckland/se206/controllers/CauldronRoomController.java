@@ -162,6 +162,11 @@ public class CauldronRoomController {
   @FXML
   public void clickCauldron(MouseEvent event) {
     System.out.println("cauldron clicked");
+    calItemScroll.setOpacity(0);
+    bagOpened = false;
+    System.out.println("CAULDRON_ROOM -> CAULDRON");
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
+    SceneManager.setTimerScene(AppUi.CAULDRON);
   }
 
   @FXML
