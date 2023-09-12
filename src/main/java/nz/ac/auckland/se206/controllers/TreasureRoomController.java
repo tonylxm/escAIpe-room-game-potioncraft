@@ -144,7 +144,7 @@ public class TreasureRoomController extends itemRoomController {
   public void goLeft(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
     // Resetting appropriate fields before changing scenes
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
     itemScroll.setOpacity(0);
     bagOpened = false;
@@ -207,7 +207,7 @@ public class TreasureRoomController extends itemRoomController {
     // and setting the item to be added and letting the
     // system know that an item is ready to be added
     this.item = item;
-    setText("Add to inventory?", true);
+    setText("Add to inventory?", true, true);
     mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
@@ -220,7 +220,7 @@ public class TreasureRoomController extends itemRoomController {
       return;
     }
     MainMenuController.inventory.add(item);
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
 
     // Place holder image for now
@@ -299,7 +299,7 @@ public class TreasureRoomController extends itemRoomController {
     if (!readyToAdd) {
       return;
     }
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
 
     // Turning off the glow effect for all items
@@ -334,7 +334,7 @@ public class TreasureRoomController extends itemRoomController {
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
-    setText("", false);
+    setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 

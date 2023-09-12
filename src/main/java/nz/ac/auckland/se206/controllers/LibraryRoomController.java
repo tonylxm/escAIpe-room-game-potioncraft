@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.CountdownTimer;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -135,6 +136,12 @@ public class LibraryRoomController extends itemRoomController {
           event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
+
+    
+    if (wizardRectangle != null) {
+      wizardRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+    }
   }
 
   /** Changing scenes to the cauldron room */
@@ -142,7 +149,7 @@ public class LibraryRoomController extends itemRoomController {
   public void goRight(MouseEvent event) {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
     // Resetting appropriate fields before changing scenes
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
     itemScroll.setOpacity(0);
     bagOpened = false;
@@ -205,7 +212,7 @@ public class LibraryRoomController extends itemRoomController {
     // and setting the item to be added and letting the
     // system know that an item is ready to be added
     this.item = item;
-    setText("Add to inventory?", true);
+    setText("Add to inventory?", true, true);
     mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
@@ -218,7 +225,7 @@ public class LibraryRoomController extends itemRoomController {
       return;
     }
     MainMenuController.inventory.add(item);
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
 
     // If no item is selected but still added, place holder image
@@ -296,7 +303,7 @@ public class LibraryRoomController extends itemRoomController {
     if (!readyToAdd) {
       return;
     }
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
 
     // Turning off the glow effect for all items
@@ -333,9 +340,12 @@ public class LibraryRoomController extends itemRoomController {
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
-    setText("", false);
+    setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
+
+    wizardChatImage.setOpacity(0);
+    wizardChatImage.setDisable(true);
 
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
@@ -357,5 +367,30 @@ public class LibraryRoomController extends itemRoomController {
       bagOpened = false;
       System.out.println("Bag closed");
     }
+  }
+
+  @FXML
+  public void clickWizard(MouseEvent event) {
+    System.out.println("wizard clicked");
+    if (!GameState.isBookRiddleResolved) {
+      showWizardChat();
+      GameState.isBookRiddleGiven = true;
+      // unhighlightThis(wizardRectangle);
+    } else {
+      // showWizardChat();
+    }
+  }
+
+  /**
+   * Displaying wizard chat to user when prompted
+   */
+  private void showWizardChat() {
+    // Setting approrpiate fields to be visible and interactable
+    wizardChatImage.setDisable(false);
+    wizardChatImage.setOpacity(1);
+    textRect.setDisable(false);
+    mouseTrackRegion.setDisable(false);
+    setText("I'm keeping an eye on you", true, false);
+    mouseTrackRegion.setOpacity(0.5);
   }
 }

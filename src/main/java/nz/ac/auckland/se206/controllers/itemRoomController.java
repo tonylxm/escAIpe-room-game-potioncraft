@@ -13,6 +13,10 @@ public abstract class itemRoomController {
   protected Items.Item item;
 
   @FXML
+  protected Rectangle wizardChatImage;
+  @FXML
+  protected Rectangle wizardRectangle;
+  @FXML
   protected Rectangle mouseTrackRegion;
   @FXML
   protected Label textLbl;
@@ -40,7 +44,7 @@ public abstract class itemRoomController {
    * @param on   whether the text box should be visible or not
    */
   @FXML
-  protected void setText(String text, boolean on) {
+  protected void setText(String text, boolean on, boolean yesNo) {
     textLbl.setText(text);
     if (on) {
       textRect.setOpacity(1);
@@ -48,14 +52,24 @@ public abstract class itemRoomController {
 
       // Decision labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
-      yesLbl.setOpacity(1);
-      noLbl.setOpacity(1);
-      dashLbl.setOpacity(1);
+      yesLbl.setDisable(!yesNo);
+      noLbl.setDisable(!yesNo);
+      if (yesNo) {
+        yesLbl.setOpacity(1);
+        noLbl.setOpacity(1);
+        dashLbl.setOpacity(1);
+      } else {
+        yesLbl.setOpacity(0);
+        noLbl.setOpacity(0);
+        dashLbl.setOpacity(0);
+      }
     } else {
       textRect.setOpacity(0);
       textLbl.setOpacity(0);
       yesLbl.setOpacity(0);
+      yesLbl.setDisable(true);
       noLbl.setOpacity(0);
+      noLbl.setDisable(true);
       dashLbl.setOpacity(0);
     }
   }

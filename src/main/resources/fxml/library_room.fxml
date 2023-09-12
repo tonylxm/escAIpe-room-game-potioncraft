@@ -57,6 +57,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Rectangle fx:id="wizardRectangle" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="168.0" layoutX="711.0" layoutY="368.0" onMouseClicked="#clickWizard" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="62.0" />
       <Polygon fx:id="rightShpe" fill="WHITE" layoutX="999.0" layoutY="327.0" onMouseClicked="#goRight" opacity="0.5" points="12.0, 10.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -83,6 +84,7 @@
          </font>
       </Label>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="225.0" layoutY="407.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
          <font>
