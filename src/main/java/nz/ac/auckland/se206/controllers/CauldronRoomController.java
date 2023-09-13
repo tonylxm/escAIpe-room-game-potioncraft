@@ -161,6 +161,10 @@ public class CauldronRoomController {
 
   @FXML
   public void clickCauldron(MouseEvent event) {
+    CauldronController cauldronController = SceneManager.getCauldronControllerInstance();
+if (cauldronController != null) {
+    cauldronController.updateImageStates();
+}
     System.out.println("cauldron clicked");
     calItemScroll.setOpacity(0);
     bagOpened = false;

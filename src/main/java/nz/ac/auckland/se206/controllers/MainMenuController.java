@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
@@ -137,7 +139,15 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
-        SceneManager.addAppUi(AppUi.CAULDRON, App.loadFxml("cauldron"));
+    
+    // Create an instance of CauldronController
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/cauldron.fxml"));
+    Parent cauldronRoot = loader.load();
+    CauldronController cauldronController = loader.getController();
+    
+    // Store the controller instance in SceneManager
+    SceneManager.addAppUi(AppUi.CAULDRON, cauldronRoot);
+    SceneManager.setCauldronControllerInstance(cauldronController);
         return null;
       }
     };

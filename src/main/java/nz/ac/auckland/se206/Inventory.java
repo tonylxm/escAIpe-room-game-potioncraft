@@ -32,4 +32,9 @@ public class Inventory {
   public int size() {
     return inventory.size();
   }
+
+  /** Returns the inventory */
+  public Set<Items.Item> getInventory() {
+    return inventory;
+  }
 }
