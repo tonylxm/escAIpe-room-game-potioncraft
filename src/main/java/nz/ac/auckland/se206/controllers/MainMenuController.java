@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
@@ -245,7 +246,7 @@ public class MainMenuController {
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON ROOM");
-    TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
+    TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM, 2);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     Task<Void> timerStartTask = new Task<Void>() {
