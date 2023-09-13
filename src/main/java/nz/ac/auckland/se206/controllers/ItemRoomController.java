@@ -4,14 +4,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 
-public abstract class itemRoomController {
+public abstract class ItemRoomController {
   protected boolean bagOpened;
   protected boolean readyToAdd;
   protected Items.Item item;
 
+  @FXML
+  protected Rectangle wizardChatImage;
+  @FXML
+  protected Rectangle wizardRectangle;
   @FXML
   protected Rectangle mouseTrackRegion;
   @FXML
@@ -40,22 +46,40 @@ public abstract class itemRoomController {
    * @param on   whether the text box should be visible or not
    */
   @FXML
-  protected void setText(String text, boolean on) {
+  protected void setText(String text, boolean on, boolean yesNo) {
     textLbl.setText(text);
     if (on) {
       textRect.setOpacity(1);
+      textRect.setDisable(false);
       textLbl.setOpacity(1);
+      textLbl.setDisable(false);
 
       // Decision labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
-      yesLbl.setOpacity(1);
-      noLbl.setOpacity(1);
-      dashLbl.setOpacity(1);
+      yesLbl.setDisable(!yesNo);
+      noLbl.setDisable(!yesNo);
+      if (yesNo) {
+        yesLbl.setOpacity(1);
+        yesLbl.setDisable(false);
+        noLbl.setOpacity(1);
+        noLbl.setDisable(false);
+        dashLbl.setOpacity(1);
+      } else {
+        yesLbl.setOpacity(0);
+        yesLbl.setDisable(true);
+        noLbl.setOpacity(0);
+        noLbl.setDisable(true);
+        dashLbl.setOpacity(0);
+      }
     } else {
       textRect.setOpacity(0);
+      textRect.setDisable(true);
       textLbl.setOpacity(0);
+      textLbl.setDisable(true);
       yesLbl.setOpacity(0);
+      yesLbl.setDisable(true);
       noLbl.setOpacity(0);
+      noLbl.setDisable(true);
       dashLbl.setOpacity(0);
     }
   }
@@ -79,5 +103,30 @@ public abstract class itemRoomController {
       mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
     }
+  }
+
+  @FXML
+  public void clickWizard(MouseEvent event) {
+    System.out.println("wizard clicked");
+    if (!GameState.isBookRiddleResolved) {
+      showWizardChat();
+      GameState.isBookRiddleGiven = true;
+      // unhighlightThis(wizardRectangle);
+    } else {
+      // showWizardChat();
+    }
+  }
+
+  /**
+   * Displaying wizard chat to user when prompted
+   */
+  private void showWizardChat() {
+    // Setting approrpiate fields to be visible and interactable
+    wizardChatImage.setDisable(false);
+    wizardChatImage.setOpacity(1);
+    textRect.setDisable(false);
+    mouseTrackRegion.setDisable(false);
+    setText("I'm keeping an eye on you", true, false);
+    mouseTrackRegion.setOpacity(0.5);
   }
 }

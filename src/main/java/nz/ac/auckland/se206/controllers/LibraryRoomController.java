@@ -12,7 +12,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 
-public class LibraryRoomController extends itemRoomController {
+public class LibraryRoomController extends ItemRoomController {
   // Booleans to keep track of whether an item has been added to the inventory
   private boolean itemOneAdded;
   private boolean itemTwoAdded;
@@ -71,6 +71,7 @@ public class LibraryRoomController extends itemRoomController {
     fourClicked = false;
     fiveClicked = false;
 
+    setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 
@@ -135,14 +136,23 @@ public class LibraryRoomController extends itemRoomController {
           event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
+
+    if (wizardRectangle != null) {
+      wizardRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
+    }
   }
 
-  /** Changing scenes to the cauldron room */
+  /** 
+   * Changing scenes to the cauldron room 
+   */
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
     // Resetting appropriate fields before changing scenes
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
     itemScroll.setOpacity(0);
     bagOpened = false;
@@ -205,7 +215,7 @@ public class LibraryRoomController extends itemRoomController {
     // and setting the item to be added and letting the
     // system know that an item is ready to be added
     this.item = item;
-    setText("Add to inventory?", true);
+    setText("Add to inventory?", true, true);
     mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
@@ -218,7 +228,7 @@ public class LibraryRoomController extends itemRoomController {
       return;
     }
     MainMenuController.inventory.add(item);
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
 
     // If no item is selected but still added, place holder image
@@ -296,7 +306,7 @@ public class LibraryRoomController extends itemRoomController {
     if (!readyToAdd) {
       return;
     }
-    setText("", false);
+    setText("", false, false);
     readyToAdd = false;
 
     // Turning off the glow effect for all items
@@ -333,9 +343,12 @@ public class LibraryRoomController extends itemRoomController {
   @FXML
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
-    setText("", false);
+    setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
+
+    wizardChatImage.setOpacity(0);
+    wizardChatImage.setDisable(true);
 
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
