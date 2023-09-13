@@ -19,7 +19,7 @@
             <Image url="@../images/mystic.jpeg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
+      <ImageView fx:id="cauldronImageView" fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
          <image>
             <Image url="@../images/cauldron.png" />
          </image>

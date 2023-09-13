@@ -1,11 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
+import javafx.animation.AnimationTimer;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -22,6 +29,7 @@ public class CauldronController {
     @FXML private ImageView scalesImage;
     @FXML private ImageView flowerImage;
     @FXML private ImageView wreathImage;
+    @FXML private ImageView cauldronImageView;
 
     private Set<Items.Item> inventory;
     private static CauldronController instance;
@@ -33,6 +41,18 @@ public class CauldronController {
     @FXML
     private void initialize() {
         inventory = MainMenuController.inventory.getInventory();
+        //set up drag and drop for all images
+        setupDragAndDrop(batWingImage, "batWingImage");
+        setupDragAndDrop(crystalImage, "crystalImage");
+        setupDragAndDrop(insectWingImage, "insectWingImage");
+        setupDragAndDrop(talonImage, "talonImage");
+        setupDragAndDrop(powderImage, "powderImage");
+        setupDragAndDrop(tailImage, "tailImage");
+        setupDragAndDrop(featherImage, "featherImage");
+        setupDragAndDrop(scalesImage, "scalesImage");
+        setupDragAndDrop(flowerImage, "flowerImage");
+        setupDragAndDrop(wreathImage, "wreathImage");
+        
         //disable all image
         batWingImage.setDisable(true);
         crystalImage.setDisable(true);
@@ -44,6 +64,33 @@ public class CauldronController {
         scalesImage.setDisable(true);
         flowerImage.setDisable(true);
         wreathImage.setDisable(true);
+
+        cauldronImageView.setOnDragOver(event -> {
+            if (event.getGestureSource() != cauldronImageView && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
+            event.consume();
+        });
+        
+        cauldronImageView.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+        
+            if (db.hasString()) {
+                // Get the identifier of the dropped item
+                String itemId = db.getString();
+        
+                // // Check if the dropped item is valid (e.g., based on the identifier)
+                // if (isValidItem(itemId)) {
+                //     // Perform actions to add the item to the cauldron (e.g., update the inventory)
+                //     // You can also update the UI to reflect the item being added to the cauldron
+                //     success = true;
+                // }
+            }
+        
+            event.setDropCompleted(success);
+            event.consume();
+        });
     
     }
 
@@ -92,7 +139,65 @@ public class CauldronController {
         if (inventory.contains(Items.Item.WREATH)) {
             wreathImage.setOpacity(1);
         }
+        
     }
+
+    @FXML
+    private void setupDragAndDrop(ImageView itemImageView, String itemId) {
+    AtomicReference<Double> originalX = new AtomicReference<>(0.0);
+    AtomicReference<Double> originalY = new AtomicReference<>(0.0);
+
+    itemImageView.setOnDragDetected(event -> {
+        Dragboard db = itemImageView.startDragAndDrop(TransferMode.MOVE);
+
+        ClipboardContent content = new ClipboardContent();
+        content.putString(itemId); // Use the item's unique identifier
+        db.setContent(content);
+
+        // Store the original position of the item
+        originalX.set(event.getSceneX());
+        originalY.set(event.getSceneY());
+
+        event.consume();
+    });
+
+    itemImageView.setOnDragDone(event -> {
+        if (event.getTransferMode() == TransferMode.MOVE) {
+            // Handle the end of the drag operation
+            // The item was successfully dropped
+            // You can perform any additional actions here
+        }
+        event.consume();
+    });
+
+    // Add an event handler to update the item's position while dragging
+    itemImageView.setOnDragOver(dragOverEvent -> {
+        // Calculate the new position based on the mouse cursor's position
+        double offsetX = dragOverEvent.getSceneX() - originalX.get();
+        double offsetY = dragOverEvent.getSceneY() - originalY.get();
+
+        // Update the item's position
+        itemImageView.setLayoutX(itemImageView.getLayoutX() + offsetX);
+        itemImageView.setLayoutY(itemImageView.getLayoutY() + offsetY);
+
+        // Store the new position as the original position for the next drag event
+        originalX.set(dragOverEvent.getSceneX());
+        originalY.set(dragOverEvent.getSceneY());
+
+        dragOverEvent.acceptTransferModes(TransferMode.MOVE);
+        dragOverEvent.consume();
+    });
+}
+
+    
+
+
+    
+
+    
+    
+
+
 
     @FXML 
     private void goBack() {
