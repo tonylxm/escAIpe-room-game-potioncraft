@@ -85,23 +85,23 @@
       </Label>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="225.0" layoutY="407.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
-      <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="91.0" layoutX="227.0" layoutY="579.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="512.0" />
-      <Label id="textLbl" fx:id="textLbl" layoutX="249.0" layoutY="606.0" opacity="0.0" prefHeight="37.0" prefWidth="390.0" text="Add to inventory?">
+      <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="135.0" layoutX="116.0" layoutY="531.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" width="784.0" />
+      <Label id="textLbl" fx:id="textLbl" layoutX="143.0" layoutY="541.0" opacity="0.59" prefHeight="107.0" prefWidth="619.0" text="Add to inventory?" wrapText="true">
          <font>
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <Label id="yesLbl" fx:id="yesLbl" layoutX="665.0" layoutY="606.0" onMouseClicked="#addItem" opacity="0.0" text="Y">
+      <Label id="yesLbl" fx:id="yesLbl" layoutX="773.0" layoutY="574.0" onMouseClicked="#addItem" opacity="0.43" text="Y">
          <font>
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <Label id="noLbl" fx:id="noLbl" layoutX="697.0" layoutY="606.0" onMouseClicked="#noAdd" opacity="0.0" text="N">
+      <Label id="noLbl" fx:id="noLbl" layoutX="812.0" layoutY="574.0" onMouseClicked="#noAdd" opacity="0.53" text="N">
          <font>
             <Font name="Comic Sans MS" size="30.0" />
          </font>
       </Label>
-      <Label id="dashLbl" fx:id="dashLbl" layoutX="686.0" layoutY="606.0" opacity="0.0" text="/">
+      <Label id="dashLbl" fx:id="dashLbl" layoutX="792.0" layoutY="574.0" opacity="0.49" text="/">
          <font>
             <Font name="Comic Sans MS" size="30.0" />
          </font>
