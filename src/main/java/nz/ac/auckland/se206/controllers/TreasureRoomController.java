@@ -71,6 +71,7 @@ public class TreasureRoomController extends ItemRoomController {
     nineClicked = false;
     tenClicked = false;
 
+    setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 

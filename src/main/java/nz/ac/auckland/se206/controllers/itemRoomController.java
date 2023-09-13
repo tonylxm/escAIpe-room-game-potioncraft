@@ -50,7 +50,9 @@ public abstract class ItemRoomController {
     textLbl.setText(text);
     if (on) {
       textRect.setOpacity(1);
+      textRect.setDisable(false);
       textLbl.setOpacity(1);
+      textLbl.setDisable(false);
 
       // Decision labels need to be refactored to deal with
       // different room interactions, e.g. proceed.
@@ -58,16 +60,22 @@ public abstract class ItemRoomController {
       noLbl.setDisable(!yesNo);
       if (yesNo) {
         yesLbl.setOpacity(1);
+        yesLbl.setDisable(false);
         noLbl.setOpacity(1);
+        noLbl.setDisable(false);
         dashLbl.setOpacity(1);
       } else {
         yesLbl.setOpacity(0);
+        yesLbl.setDisable(true);
         noLbl.setOpacity(0);
+        noLbl.setDisable(true);
         dashLbl.setOpacity(0);
       }
     } else {
       textRect.setOpacity(0);
+      textRect.setDisable(true);
       textLbl.setOpacity(0);
+      textLbl.setDisable(true);
       yesLbl.setOpacity(0);
       yesLbl.setDisable(true);
       noLbl.setOpacity(0);

@@ -71,6 +71,7 @@ public class LibraryRoomController extends ItemRoomController {
     fourClicked = false;
     fiveClicked = false;
 
+    setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 
