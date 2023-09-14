@@ -13,13 +13,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class CauldronController {
+  private static CauldronController instance;
+
   @FXML private Label returnLbl;
   @FXML private ImageView batWingImage;
   @FXML private ImageView crystalImage;
@@ -35,9 +36,9 @@ public class CauldronController {
   @FXML private Rectangle cauldronOverlay;
   @FXML private Button brewBtn;
 
-  Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
+  private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
-  private static CauldronController instance;
+  
   //array to store the items dropped into the cauldron
   private ArrayList<Items.Item> cauldronItems = new ArrayList<Items.Item>();
 
@@ -64,15 +65,15 @@ public class CauldronController {
 
     //defining mapping
     imageViewToItemMap.put("batWingImage", Items.Item.BAT_WINGS);
-imageViewToItemMap.put("crystalImage", Items.Item.CRYSTAL);
-imageViewToItemMap.put("insectWingImage", Items.Item.INSECT_WINGS);
-imageViewToItemMap.put("talonImage", Items.Item.TALON);
-imageViewToItemMap.put("powderImage", Items.Item.POWDER);
-imageViewToItemMap.put("tailImage", Items.Item.TAIL);
-imageViewToItemMap.put("featherImage", Items.Item.FEATHER);
-imageViewToItemMap.put("scalesImage", Items.Item.SCALES);
-imageViewToItemMap.put("flowerImage", Items.Item.FLOWER);
-imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
+    imageViewToItemMap.put("crystalImage", Items.Item.CRYSTAL);
+    imageViewToItemMap.put("insectWingImage", Items.Item.INSECT_WINGS);
+    imageViewToItemMap.put("talonImage", Items.Item.TALON);
+    imageViewToItemMap.put("powderImage", Items.Item.POWDER);
+    imageViewToItemMap.put("tailImage", Items.Item.TAIL);
+    imageViewToItemMap.put("featherImage", Items.Item.FEATHER);
+    imageViewToItemMap.put("scalesImage", Items.Item.SCALES);
+    imageViewToItemMap.put("flowerImage", Items.Item.FLOWER);
+    imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
 
     // disable all image
     batWingImage.setDisable(true);
@@ -117,7 +118,7 @@ imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
                 draggedItem.setVisible(false);
                 success = true;
                 if (db.hasString()) {
-                    String imageViewName = db.getString();
+                    String imageViewName = itemId;
                     Items.Item item = imageViewToItemMap.get(imageViewName);
             
                     if (item != null) {
@@ -255,7 +256,7 @@ imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
       return;
     }
 
-    if(cauldronItems.size() == 5) {
+    if (cauldronItems.size() == 5) {
         //check if the order of the items is correct by comparing cauldronItems with Items.necessary
         if (cauldronItems.equals(Items.necessary)) {
             System.out.println("Potion brewed");

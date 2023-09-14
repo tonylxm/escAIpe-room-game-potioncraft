@@ -84,41 +84,59 @@ public class CauldronRoomController {
     book = getRandomBook();
 
     if (cauldronRectangle != null) {
-      cauldronRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      cauldronRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      cauldronRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      cauldronRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
     }
     if (wizardRectangle != null) {
-      wizardRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      wizardRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
     }
     if (rightArrow != null) {
-      rightArrow.setOnMouseEntered(event -> rightArrow.setOpacity(0.9));
-      rightArrow.setOnMouseExited(event -> rightArrow.setOpacity(0.5));
+      rightArrow.setOnMouseEntered(
+        event -> rightArrow.setOpacity(0.9));
+      rightArrow.setOnMouseExited(
+        event -> rightArrow.setOpacity(0.5));
     }
     if (leftArrow != null) {
-      leftArrow.setOnMouseEntered(event -> leftArrow.setOpacity(0.9));
-      leftArrow.setOnMouseExited(event -> leftArrow.setOpacity(0.5));
+      leftArrow.setOnMouseEntered(
+        event -> leftArrow.setOpacity(0.9));
+      leftArrow.setOnMouseExited(
+        event -> leftArrow.setOpacity(0.5));
     }
     if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+      bookBtn.setOnMouseEntered(
+        event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(
+        event -> interactionHandler.unglowThis(bookBtn));
     }
     if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      bagBtn.setOnMouseEntered(
+        event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(
+        event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
     if (bookFireRectangle != null) {
-      bookFireRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      bookFireRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      bookFireRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      bookFireRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
     }
     if (bookWaterRectangle != null) {
-      bookWaterRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      bookWaterRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      bookWaterRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      bookWaterRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
     }
     if (bookAirRectangle != null) {
-      bookAirRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      bookAirRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      bookAirRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      bookAirRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
     }
 
     try {
@@ -160,12 +178,20 @@ public class CauldronRoomController {
     bookAirRectangle.setOpacity(100);
   }
 
+  /**
+   * Taking user to the cauldron scene from the room scene to be able to 
+   * brew their potions.
+   * 
+   * @param event
+   */
   @FXML
   public void clickCauldron(MouseEvent event) {
     CauldronController cauldronController = SceneManager.getCauldronControllerInstance();
-if (cauldronController != null) {
-    cauldronController.updateImageStates();
-}
+    if (cauldronController != null) {
+      cauldronController.updateImageStates();
+    }
+
+    // If the cauldronController exists, then switching scenes
     System.out.println("cauldron clicked");
     calItemScroll.setOpacity(0);
     bagOpened = false;

@@ -1,13 +1,17 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Iterator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 
 public abstract class ItemRoomController {
   protected boolean bagOpened;
@@ -39,6 +43,45 @@ public abstract class ItemRoomController {
   @FXML
   protected Label timerLabel;
 
+  @FXML
+  protected ShapeInteractionHandler interactionHandler;
+
+  protected CountdownTimer countdownTimer;
+
+
+  @FXML
+  protected void genericInitialise() {
+    countdownTimer = MainMenuController.getCountdownTimer();
+    countdownTimer.setLeftTimerLabel(timerLabel);
+
+    readyToAdd = false;
+    bagOpened = false;
+
+    setText("", false, false);
+    mouseTrackRegion.setDisable(true);
+    mouseTrackRegion.setOpacity(0);
+
+    if (bookBtn != null) {
+      bookBtn.setOnMouseEntered(
+          event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(
+          event -> interactionHandler.unglowThis(bookBtn));
+    }
+    if (bagBtn != null) {
+      bagBtn.setOnMouseEntered(
+          event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(
+          event -> interactionHandler.unglowThis(bagBtn));
+      // ELSE NO ITEMS IN BAG MESSAGE
+    }
+    if (wizardRectangle != null) {
+      wizardRectangle.setOnMouseEntered(
+        event -> interactionHandler.handle(event));
+      wizardRectangle.setOnMouseExited(
+        event -> interactionHandler.handle(event));
+    }
+  }
+  
   /**
    * Making text box appear or dissapear with given text.
    *
@@ -120,7 +163,7 @@ public abstract class ItemRoomController {
   /**
    * Displaying wizard chat to user when prompted
    */
-  private void showWizardChat() {
+  protected void showWizardChat() {
     // Setting approrpiate fields to be visible and interactable
     wizardChatImage.setDisable(false);
     wizardChatImage.setOpacity(1);
@@ -128,5 +171,30 @@ public abstract class ItemRoomController {
     mouseTrackRegion.setDisable(false);
     setText("I'm keeping an eye on you", true, false);
     mouseTrackRegion.setOpacity(0.5);
+  }
+
+  /**
+   * Handling the identical parts of addItem in the treasure room and
+   * library room in a single method.
+   * 
+   * @param ratio the ratio between the image's width and height
+   * @param image an image of the item to be added to the inventory
+   */
+  public void itemCollect(double ratio, ImageView image) {
+    image.setFitHeight(133 * ratio);
+    image.setFitWidth(133);
+    // Using the inventory instance from the MainMenuController so that images
+    // added from other scenes are not lost
+    MainMenuController.inventory.box.getChildren().add(image);
+
+    mouseTrackRegion.setDisable(true);
+    // To see what is in the inventory in the terminal
+    // Can be removed later
+    System.out.println("Item added to inventory");
+    System.out.println("Current Inventory:");
+    Iterator itr = new MainMenuController().inventory.inventory.iterator();
+    while (itr.hasNext()) {
+      System.out.println("  " + itr.next());
+    }
   }
 }

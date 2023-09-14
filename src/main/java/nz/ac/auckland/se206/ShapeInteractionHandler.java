@@ -28,13 +28,6 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
     image.setEffect(new Glow(1.2));
   }
 
-  /** Turning off the glow of an image unless it's been clicked. */
-  public void unglowThis(ImageView image, boolean clicked) {
-    if (!clicked) {
-      image.setEffect(new Glow(0));
-    }
-  }
-
   private void glowThis(Shape shape) {
     shape.setStroke(GLOW_COLOR);
     shape.setStrokeWidth(GLOW_STROKE_WIDTH);
@@ -48,5 +41,12 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
   private void unglowThis(Shape shape) {
     shape.setStrokeWidth(0);
     shape.setStroke(HIGH_LIGHT_COLOR);
+  }
+
+  /** Turning off the glow of an image unless it's been clicked. */
+  public void unglowThis(ImageView image, boolean clicked) {
+    if (!clicked) {
+      image.setEffect(new Glow(0));
+    }
   }
 }

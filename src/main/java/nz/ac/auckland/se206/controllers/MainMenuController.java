@@ -104,19 +104,26 @@ public class MainMenuController {
     }
   }
 
+  /**
+   * Displays the appropriate number of hints when hovering over a difficulty.
+   * @param difficulty
+   */
   public void difficultySelect(String difficulty) {
     difficultySelected = true;
     switch (difficulty) {
+      // Easiest level granting unlimited hints
       case "EASY":
         hintInfinity.setOpacity(1);
         hintFive.setOpacity(0);
         hintZero.setOpacity(0);
         break;
+      // Medium level capping hints at 5
       case "MEDIUM":
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(1);
         hintZero.setOpacity(0);
         break;
+      // No hints are allowed to be given on hard level
       case "HARD":
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(0);
@@ -141,14 +148,14 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
         SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
-    // Create an instance of CauldronController
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/cauldron.fxml"));
-    Parent cauldronRoot = loader.load();
-    CauldronController cauldronController = loader.getController();
-    
-    // Store the controller instance in SceneManager
-    SceneManager.addAppUi(AppUi.CAULDRON, cauldronRoot);
-    SceneManager.setCauldronControllerInstance(cauldronController);
+        // Create an instance of CauldronController
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/cauldron.fxml"));
+        Parent cauldronRoot = loader.load();
+        CauldronController cauldronController = loader.getController();
+        
+        // Store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.CAULDRON, cauldronRoot);
+        SceneManager.setCauldronControllerInstance(cauldronController);
         return null;
       }
     };
