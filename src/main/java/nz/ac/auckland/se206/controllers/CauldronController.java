@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -32,6 +33,7 @@ public class CauldronController {
   @FXML private ImageView wreathImage;
   @FXML private ImageView cauldronImageView;
   @FXML private Rectangle cauldronOverlay;
+  @FXML private Button brewBtn;
 
   Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -125,15 +127,7 @@ imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
                         // You can also update the UI or perform other actions here
                     }
                 }
-              } else {
-                // If dropped elsewhere, move it to the drop location
-                Pane parentPane = (Pane) draggedItem.getParent();
-                parentPane.getChildren().remove(draggedItem); // Remove from the previous location
-                draggedItem.setLayoutX(event.getSceneX());
-                draggedItem.setLayoutY(event.getSceneY());
-                draggedItem.setDisable(true);
-                success = true;
-              }
+              } 
             }
           }
 
@@ -240,5 +234,64 @@ imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
     returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     System.out.println(cauldronItems);
+  }
+
+  @FXML
+  private void brewPotion() {
+    System.out.println(Items.necessary);
+    System.out.println(cauldronItems);
+    //if less than 6 items have been dropped into the cauldron then the potion is not brewed
+    if (cauldronItems.size() < 5) {
+      System.out.println("Potion not brewed");
+      resetItems();
+      return;
+    }
+
+    //if more than 6 items have been dropped into the cauldron then the potion is not brewed
+    if (cauldronItems.size() > 5) {
+      System.out.println("Potion not brewed");
+        resetItems();
+      
+      return;
+    }
+
+    if(cauldronItems.size() == 5) {
+        //check if the order of the items is correct by comparing cauldronItems with Items.necessary
+        if (cauldronItems.equals(Items.necessary)) {
+            System.out.println("Potion brewed");
+            //set scene to you win
+            System.out.println("CAULDRON -> YOU_WIN");
+            returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
+            SceneManager.setTimerScene(AppUi.YOU_WIN);
+            
+            
+        } else {
+            System.out.println("Potion not brewed");
+            resetItems();
+        }
+    }
+
+
+  }
+
+  @FXML 
+  private void resetItems() {
+    //returning the items to the original position. I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
+    // batWingImage.setX(84);  it might not even be necessary nvm but keeping just in case
+    // batWingImage.setY(54);
+
+    //resetting the items in the cauldron
+    cauldronItems.clear();
+    //resetting the images
+    batWingImage.setVisible(true);
+    crystalImage.setVisible(true);
+    insectWingImage.setVisible(true);
+    talonImage.setVisible(true);
+    powderImage.setVisible(true);
+    tailImage.setVisible(true);
+    featherImage.setVisible(true);
+    scalesImage.setVisible(true);
+    flowerImage.setVisible(true);
+    wreathImage.setVisible(true);
   }
 }

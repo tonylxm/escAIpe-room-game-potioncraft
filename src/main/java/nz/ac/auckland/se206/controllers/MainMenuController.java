@@ -139,6 +139,7 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
+        SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
     // Create an instance of CauldronController
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/cauldron.fxml"));

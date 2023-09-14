@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -80,5 +81,6 @@
          </image>
       </ImageView>
       <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Button fx:id="brewBtn" layoutX="445.0" layoutY="609.0" mnemonicParsing="false" onAction="#brewPotion" prefHeight="65.0" prefWidth="161.0" text="Brew!" />
    </children>
 </Pane>
