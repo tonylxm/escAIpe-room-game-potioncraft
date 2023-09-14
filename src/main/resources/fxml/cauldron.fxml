@@ -4,8 +4,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CauldronController">
    <children>
@@ -19,16 +19,16 @@
             <Image url="@../images/mystic.jpeg" />
          </image>
       </ImageView>
-      <ImageView fx:id="cauldronImageView" fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
-         <image>
-            <Image url="@../images/cauldron.png" />
-         </image>
-      </ImageView>
       <Label fx:id="returnLbl" layoutX="14.0" layoutY="614.0" onMouseClicked="#goBack" text="Return">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
+      <ImageView fx:id="cauldronImageView" fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
+         <image>
+            <Image url="@../images/cauldron.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="featherImage" fitHeight="111.0" fitWidth="112.0" layoutX="191.0" layoutY="285.0" opacity="0.0">
          <image>
             <Image url="@../images/feather.png" />
@@ -79,5 +79,6 @@
             <Image url="@../images/bwings.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
    </children>
 </Pane>
