@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -42,13 +41,16 @@ public abstract class ItemRoomController {
   protected ImageView bagBtn;
   @FXML
   protected Label timerLabel;
-
   @FXML
   protected ShapeInteractionHandler interactionHandler;
 
   protected CountdownTimer countdownTimer;
 
 
+  /**
+   * Initialising the fields that are common in both of the item
+   * rooms to avoid code duplication.
+   */
   @FXML
   protected void genericInitialise() {
     countdownTimer = MainMenuController.getCountdownTimer();
@@ -57,10 +59,12 @@ public abstract class ItemRoomController {
     readyToAdd = false;
     bagOpened = false;
 
+    // Disabling the text box and mouse track region
     setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 
+    // Setting appropriate interactable features
     if (bookBtn != null) {
       bookBtn.setOnMouseEntered(
           event -> interactionHandler.glowThis(bookBtn));
@@ -76,9 +80,9 @@ public abstract class ItemRoomController {
     }
     if (wizardRectangle != null) {
       wizardRectangle.setOnMouseEntered(
-        event -> interactionHandler.handle(event));
+          event -> interactionHandler.handle(event));
       wizardRectangle.setOnMouseExited(
-        event -> interactionHandler.handle(event));
+          event -> interactionHandler.handle(event));
     }
   }
   

@@ -118,15 +118,15 @@ public class CauldronController {
                 draggedItem.setVisible(false);
                 success = true;
                 if (db.hasString()) {
-                    String imageViewName = itemId;
-                    Items.Item item = imageViewToItemMap.get(imageViewName);
+                  String imageViewName = itemId;
+                  Items.Item item = imageViewToItemMap.get(imageViewName);
             
-                    if (item != null) {
-                        // Add the item to the cauldronItems ArrayList
-                        cauldronItems.add(item);
-                        
-                        // You can also update the UI or perform other actions here
-                    }
+                  if (item != null) {
+                    // Add the item to the cauldronItems ArrayList
+                    cauldronItems.add(item);
+                    
+                    // You can also update the UI or perform other actions here
+                  }
                 }
               } 
             }
@@ -251,25 +251,23 @@ public class CauldronController {
     //if more than 6 items have been dropped into the cauldron then the potion is not brewed
     if (cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
-        resetItems();
-      
+      resetItems();
       return;
     }
 
     if (cauldronItems.size() == 5) {
-        //check if the order of the items is correct by comparing cauldronItems with Items.necessary
-        if (cauldronItems.equals(Items.necessary)) {
-            System.out.println("Potion brewed");
-            //set scene to you win
-            System.out.println("CAULDRON -> YOU_WIN");
-            returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
-            SceneManager.setTimerScene(AppUi.YOU_WIN);
-            
-            
-        } else {
-            System.out.println("Potion not brewed");
-            resetItems();
-        }
+      //check if the order of the items is correct by comparing cauldronItems with Items.necessary
+      if (cauldronItems.equals(Items.necessary)) {
+        System.out.println("Potion brewed");
+        //set scene to you win
+        System.out.println("CAULDRON -> YOU_WIN");
+        returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
+        SceneManager.setTimerScene(AppUi.YOU_WIN);
+                
+      } else {
+        System.out.println("Potion not brewed");
+        resetItems();
+      }
     }
 
 
