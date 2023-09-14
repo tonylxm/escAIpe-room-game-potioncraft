@@ -10,6 +10,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
@@ -171,6 +172,7 @@ if (cauldronController != null) {
     System.out.println("CAULDRON_ROOM -> CAULDRON");
     cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
     SceneManager.setTimerScene(AppUi.CAULDRON);
+    System.out.println(Items.necessary);
   }
 
   @FXML

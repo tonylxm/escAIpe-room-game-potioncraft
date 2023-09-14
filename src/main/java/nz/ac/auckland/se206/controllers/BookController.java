@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -170,7 +171,7 @@ public class BookController {
             });
   }
 
-  private void writeRecipeIngredients(Set<Item> necessary) {
+  private void writeRecipeIngredients(List<Items.Item> necessary) {
     for (Item item : necessary) {
       ingredientList.getItems().add(item.toString());
     }
