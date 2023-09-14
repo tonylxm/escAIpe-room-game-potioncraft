@@ -10,6 +10,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
@@ -161,7 +162,17 @@ public class CauldronRoomController {
 
   @FXML
   public void clickCauldron(MouseEvent event) {
+    CauldronController cauldronController = SceneManager.getCauldronControllerInstance();
+if (cauldronController != null) {
+    cauldronController.updateImageStates();
+}
     System.out.println("cauldron clicked");
+    calItemScroll.setOpacity(0);
+    bagOpened = false;
+    System.out.println("CAULDRON_ROOM -> CAULDRON");
+    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
+    SceneManager.setTimerScene(AppUi.CAULDRON);
+    System.out.println(Items.necessary);
   }
 
   @FXML
@@ -345,7 +356,7 @@ public class CauldronRoomController {
 
   @FXML
   public void riddleSelect() {
-    riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 12));
+    riddleSelectLabel.setFont(javafx.scene.text.Font.font("Algerian", 12));
     riddleSelectLabel.setText(riddle);
     chooseLabel.setOpacity(100);
     enableBooks();
