@@ -17,10 +17,14 @@
             <Image url="@../images/cauldron-room.jpg" />
          </image>
       </ImageView>
-      <Rectangle fx:id="cauldronRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ffad21" height="135.0" layoutX="440.0" layoutY="432.0" onMouseClicked="#clickCauldron" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="135.0" />
       <ImageView id="wizardImg" fx:id="wizardImg" fitHeight="240.0" fitWidth="174.0" layoutX="203.0" layoutY="252.0" onMouseClicked="#clickWizard" scaleX="-1.0">
          <image>
             <Image url="@../images/wizard.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cauldronImg" fitHeight="200.0" fitWidth="200.0" layoutX="407.0" layoutY="384.0" onMouseClicked="#clickCauldron">
+         <image>
+            <Image url="@../images/cauldron.png" />
          </image>
       </ImageView>
       <Polygon fx:id="leftArrow" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
