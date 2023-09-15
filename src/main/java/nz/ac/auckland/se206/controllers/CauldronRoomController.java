@@ -19,7 +19,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
   @FXML
-  private Rectangle cauldronRectangle;
+  private ImageView cauldronImg;
   @FXML
   private ImageView wizardImg;
   @FXML
@@ -83,11 +83,12 @@ public class CauldronRoomController {
     mouseTrackRegion.setOpacity(0);
     book = getRandomBook();
 
-    if (cauldronRectangle != null) {
-      cauldronRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
-      cauldronRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+    if (cauldronImg != null) {
+      cauldronImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(cauldronImg));
+      cauldronImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(cauldronImg));
+      
     }
     if (wizardImg != null) {
       wizardImg.setOnMouseEntered(
@@ -196,7 +197,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> CAULDRON");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
+    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
     SceneManager.setTimerScene(AppUi.CAULDRON);
     System.out.println(Items.necessary);
   }
@@ -272,7 +273,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
+    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
     SceneManager.setTimerScene(AppUi.LIBRARY_ROOM);
   }
 
@@ -281,7 +282,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
