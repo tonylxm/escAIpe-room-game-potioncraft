@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,6 +20,7 @@ import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -30,7 +32,11 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 /** Controller class for the book view. */
 public class BookController {
   @FXML
-  public static ImageView bookBackgroundImg;
+  private ImageView cauldronRoomBackground;
+  @FXML
+  private ImageView treasureBackground;
+  @FXML
+  private ImageView libraryBackground;
 
   @FXML
   private TextArea chatTextArea;
@@ -302,5 +308,27 @@ public class BookController {
     };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
+  }
+
+  public void updateBackground() {
+    AppUi scene = SceneManager.getTimerScene();
+    if (scene == AppUi.CAULDRON_ROOM) {
+      cauldronRoomBackground.setOpacity(0.65);
+      treasureBackground.setOpacity(0);
+      libraryBackground.setOpacity(0);
+    }
+
+    if (scene == AppUi.LIBRARY_ROOM) {
+      cauldronRoomBackground.setOpacity(0);
+      treasureBackground.setOpacity(0);
+      libraryBackground.setOpacity(0.65);
+    }
+
+    if (scene == AppUi.TREASURE_ROOM) {
+      cauldronRoomBackground.setOpacity(0);
+      treasureBackground.setOpacity(0.65);
+      libraryBackground.setOpacity(0);
+    }
+
   }
 }

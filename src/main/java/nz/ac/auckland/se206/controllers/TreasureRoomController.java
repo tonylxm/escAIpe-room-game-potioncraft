@@ -280,6 +280,10 @@ public class TreasureRoomController extends ItemRoomController {
   /** Chaning scenes to book view */
   @FXML
   public void openBook() {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
     System.out.println("TREASURE_ROOM -> BOOK");
     SceneManager.currScene = AppUi.TREASURE_ROOM;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
