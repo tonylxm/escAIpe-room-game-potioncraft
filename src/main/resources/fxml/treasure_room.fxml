@@ -17,7 +17,7 @@
             <Image url="@../images/treasure-room.jpeg" />
          </image>
       </ImageView>
-      <ImageView id="itemSixImg" fx:id="itemSixImg" fitHeight="141.0" fitWidth="141.0" layoutX="336.0" layoutY="133.0">
+      <ImageView id="itemSixImg" fx:id="itemSixImg" fitHeight="71.0" fitWidth="70.0" layoutX="119.0" layoutY="359.0" rotate="116.6" scaleY="-1.0">
          <image>
             <Image url="@../images/talon.png" />
          </image>
@@ -25,7 +25,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="200.0" fitWidth="200.0" layoutX="517.0" layoutY="174.0">
+      <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="84.0" fitWidth="84.0" layoutX="579.0" layoutY="486.0" rotate="-116.6" scaleY="-1.0">
          <image>
             <Image url="@../images/stone.png" />
          </image>
@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="200.0" fitWidth="160.0" layoutX="98.0" layoutY="74.0">
+      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="80.0" fitWidth="62.0" layoutX="295.0" layoutY="234.0" rotate="83.1">
          <image>
             <Image url="@../images/bwings.png" />
          </image>
@@ -41,7 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="133.0" fitWidth="150.0" layoutX="132.0" layoutY="350.0">
+      <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="67.0" fitWidth="70.0" layoutX="565.0" layoutY="150.0">
          <image>
             <Image url="@../images/wreath.png" />
          </image>
@@ -49,7 +49,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="171.0" fitWidth="171.0" layoutX="768.0" layoutY="218.0">
+      <ImageView id="itemTenImg" fx:id="itemTenImg" fitHeight="86.0" fitWidth="91.0" layoutX="808.0" layoutY="321.0" rotate="113.8" scaleY="-1.0">
          <image>
             <Image url="@../images/feather.png" />
          </image>
