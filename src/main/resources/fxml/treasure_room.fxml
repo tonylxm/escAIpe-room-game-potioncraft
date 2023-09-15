@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TreasureRoomController">
    <children>
-      <ImageView fitHeight="683.0" fitWidth="1024.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="688.0" fitWidth="1030.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/treasure-room.jpeg" />
          </image>
@@ -83,7 +83,7 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1030.0" />
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="235.0" layoutY="417.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="135.0" layoutX="116.0" layoutY="531.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="143.0" layoutY="541.0" opacity="0.0" prefHeight="107.0" prefWidth="619.0" text="Add to inventory?" wrapText="true">
