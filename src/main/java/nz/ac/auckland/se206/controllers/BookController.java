@@ -15,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -37,6 +38,8 @@ public class BookController {
   private ImageView treasureBackground;
   @FXML
   private ImageView libraryBackground;
+  @FXML
+  private Rectangle backgroundShade;
 
   @FXML
   private TextArea chatTextArea;
@@ -313,7 +316,7 @@ public class BookController {
   public void updateBackground() {
     AppUi scene = SceneManager.getTimerScene();
     if (scene == AppUi.CAULDRON_ROOM) {
-      cauldronRoomBackground.setOpacity(0.65);
+      cauldronRoomBackground.setOpacity(1);
       treasureBackground.setOpacity(0);
       libraryBackground.setOpacity(0);
     }
@@ -321,12 +324,12 @@ public class BookController {
     if (scene == AppUi.LIBRARY_ROOM) {
       cauldronRoomBackground.setOpacity(0);
       treasureBackground.setOpacity(0);
-      libraryBackground.setOpacity(0.65);
+      libraryBackground.setOpacity(1);
     }
 
     if (scene == AppUi.TREASURE_ROOM) {
       cauldronRoomBackground.setOpacity(0);
-      treasureBackground.setOpacity(0.65);
+      treasureBackground.setOpacity(1);
       libraryBackground.setOpacity(0);
     }
 
