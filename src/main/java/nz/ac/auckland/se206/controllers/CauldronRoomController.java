@@ -354,6 +354,10 @@ public class CauldronRoomController {
 
   @FXML
   public void openBook() {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
     System.out.println("CAULDRON_ROOM -> BOOK");
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));

@@ -145,7 +145,7 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
-        SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
+        //SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
         SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
         // Create an instance of CauldronController
@@ -156,6 +156,17 @@ public class MainMenuController {
         // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.CAULDRON, cauldronRoot);
         SceneManager.setCauldronControllerInstance(cauldronController);
+
+        //create an instance of BookController
+       FXMLLoader bookLoader = new FXMLLoader(App.class.getResource("/fxml/book.fxml"));
+        Parent bookRoot = bookLoader.load();
+        BookController bookController = bookLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.BOOK, bookRoot);
+        SceneManager.setBookControllerInstance(bookController);
+        
+
         return null;
       }
     };

@@ -283,6 +283,10 @@ public class LibraryRoomController extends ItemRoomController {
     System.out.println("LIBRARY_ROOM -> BOOK");
     // BookController.bookBackgroundImg.setImage(new
     // Image("/images/library-room.jpeg"));
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
     SceneManager.currScene = AppUi.LIBRARY_ROOM;
     rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
   }
