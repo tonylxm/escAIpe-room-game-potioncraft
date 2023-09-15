@@ -21,7 +21,7 @@ public class CauldronRoomController {
   @FXML
   private Rectangle cauldronRectangle;
   @FXML
-  private Rectangle wizardRectangle;
+  private ImageView wizardImg;
   @FXML
   private Polygon rightArrow;
   @FXML
@@ -41,7 +41,7 @@ public class CauldronRoomController {
   @FXML
   private Rectangle textRect;
   @FXML
-  private Rectangle wizardChatImage;
+  private ImageView wizardChatImage;
   @FXML
   private Rectangle mouseTrackRegion;
   @FXML
@@ -89,11 +89,11 @@ public class CauldronRoomController {
       cauldronRectangle.setOnMouseExited(
           event -> interactionHandler.handle(event));
     }
-    if (wizardRectangle != null) {
-      wizardRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
-      wizardRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+    if (wizardImg != null) {
+      wizardImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(wizardImg));
+      wizardImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(wizardImg));
     }
     if (rightArrow != null) {
       rightArrow.setOnMouseEntered(
@@ -308,8 +308,8 @@ public class CauldronRoomController {
     chooseLabel.setOpacity(0);
 
     if (GameState.isBookRiddleResolved) {
-      wizardRectangle.setDisable(true);
-      wizardRectangle.setOpacity(0);
+      wizardImg.setDisable(true);
+      wizardImg.setOpacity(0);
     }
 
     // Handling closing the "bag" when clicking off inventory

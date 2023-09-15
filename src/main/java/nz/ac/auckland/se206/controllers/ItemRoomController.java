@@ -18,9 +18,9 @@ public abstract class ItemRoomController {
   protected Items.Item item;
 
   @FXML
-  protected Rectangle wizardChatImage;
+  protected ImageView wizardChatImage;
   @FXML
-  protected Rectangle wizardRectangle;
+  protected ImageView wizardImg;
   @FXML
   protected Rectangle mouseTrackRegion;
   @FXML
@@ -78,11 +78,11 @@ public abstract class ItemRoomController {
           event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
-    if (wizardRectangle != null) {
-      wizardRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
-      wizardRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+    if (wizardImg != null) {
+      wizardImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(wizardImg));
+      wizardImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(wizardImg));
     }
   }
   
