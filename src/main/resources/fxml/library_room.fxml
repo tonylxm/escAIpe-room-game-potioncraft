@@ -12,12 +12,13 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LibraryRoomController">
    <children>
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <ImageView fitHeight="683.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/library-room.jpeg" />
          </image>
       </ImageView>
-      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="85.0" layoutY="423.0">
+      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="52.0" fitWidth="51.0" layoutX="717.0" layoutY="259.0" rotate="85.9">
          <image>
             <Image url="@../images/tail.png" />
          </image>
@@ -25,7 +26,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="553.0" layoutY="173.0">
+      <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="41.0" fitWidth="99.0" layoutX="221.0" layoutY="289.0" rotate="95.1">
          <image>
             <Image url="@../images/iwings.png" />
          </image>
@@ -33,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="754.0" layoutY="191.0">
+      <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="90.0" fitWidth="95.0" layoutX="776.0" layoutY="422.0" rotate="56.7">
          <image>
             <Image url="@../images/flower.png" />
          </image>
@@ -41,7 +42,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="122.0" fitWidth="122.0" layoutX="348.0" layoutY="107.0">
+      <ImageView id="itemFourImg" fx:id="itemFourImg" fitHeight="65.0" fitWidth="71.0" layoutX="130.0" layoutY="553.0" rotate="-46.3">
          <image>
             <Image url="@../images/scales.png" />
          </image>
@@ -49,7 +50,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="92.0" fitWidth="168.0" layoutX="217.0" layoutY="275.0">
+      <ImageView id="itemFiveImg" fx:id="itemFiveImg" fitHeight="32.0" fitWidth="60.0" layoutX="329.0" layoutY="453.0">
          <image>
             <Image url="@../images/powder.png" />
          </image>
@@ -83,7 +84,6 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Rectangle fx:id="wizardChatImage" arcHeight="5.0" arcWidth="5.0" fill="#21a0ff" height="247.0" layoutX="225.0" layoutY="407.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="91.0" />
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="135.0" layoutX="116.0" layoutY="531.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <Label id="textLbl" fx:id="textLbl" layoutX="143.0" layoutY="541.0" opacity="0.0" prefHeight="107.0" prefWidth="619.0" text="Add to inventory?" wrapText="true">
