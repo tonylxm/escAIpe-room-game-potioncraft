@@ -90,8 +90,6 @@ public class CauldronRoomController {
   private boolean bagOpened;
 
   private CountdownTimer countdownTimer;
-  private ChatCompletionRequest chatCompletionRequest;
-  private Choice result;
 
   @FXML
   public void initialize() throws ApiProxyException {
@@ -161,11 +159,7 @@ public class CauldronRoomController {
     };
     new Thread(bookRiddleTask).start();
     System.out.println(riddle);
-
-    chatCompletionRequest = new ChatCompletionRequest()
-        .setN(1).setTemperature(0.2)
-        .setTopP(0.5).setMaxTokens(50);
-
+    
     // Run GPT to generate hints for the game
     // Task<Void> runGptTask = new Task<Void>() {
     //   @Override
@@ -398,81 +392,6 @@ if (cauldronController != null) {
     enableBooks();
   }
 
-  /**
-   * Handles when a key is pressed on the book scene.
-   */
-  @FXML
-  public void onKeyPressed(KeyEvent event) throws ApiProxyException {
-    System.out.println("key " + event.getCode() + " pressed");
-    if (event.getCode().toString().equals("ENTER")) {
-      String message = inputText.getText();
-      // Using same GPT message sending logic as previous
-      if (message.trim().isEmpty()) {
-        return;
-      }
-      inputText.clear();
-      ChatMessage msg = new ChatMessage("user", message);
-      appendChatMessage(msg);
-      
-
-      Task<Void> runGptTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        ChatMessage lastMsg = runGpt(msg);
-
-        if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-        GameState.isBookRiddleResolved = true;
-      }
-        return null;
-      }
-    };
-    new Thread(runGptTask, "runGpt Thread").start();
-    }
-  }
-
-  /**
-   * Appends a chat message to the chat text area.
-   *
-   * @param msg the chat message to append
-   */
-  private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": ");
-
-    Task<Void> appendTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        for (char c : msg.getContent().toCharArray()) {
-          chatTextArea.appendText(String.valueOf(c));
-          Thread.sleep(10);
-        }
-        chatTextArea.appendText("\n\n");
-        return null;
-      }
-    };
-    new Thread(appendTask, "Append Thread").start();
-  }
-
-  /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
-   */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
 
   /**
    * Sends a message to the GPT model.
@@ -491,11 +410,33 @@ if (cauldronController != null) {
     }
     inputText.clear();
     ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-    ChatMessage lastMsg = runGpt(msg);
+    chatHandler.appendChatMessage(msg, chatTextArea);
+    ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea);
     // If the riddle is answered correctly, setting the GameState accordingly
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
       GameState.isBookRiddleResolved = true;
+    }
+  }
+
+  /**
+   * Handles when a key is pressed on the book scene.
+   */
+  @FXML
+  public void onKeyPressed(KeyEvent event) throws ApiProxyException {
+    System.out.println("key " + event.getCode() + " pressed");
+    if (event.getCode().toString().equals("ENTER")) {
+      String message = inputText.getText();
+      // Using same GPT message sending logic as previous
+      if (message.trim().isEmpty()) {
+        return;
+      }
+      inputText.clear();
+      ChatMessage msg = new ChatMessage("user", message);
+      chatHandler.appendChatMessage(msg, chatTextArea);
+      ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea);
+      if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
+        GameState.isBookRiddleResolved = true;
+      }
     }
   }
 
@@ -508,7 +449,7 @@ if (cauldronController != null) {
     Task<Void> speakTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
-        App.textToSpeech.speak(result.getChatMessage().getContent());
+        App.textToSpeech.speak(chatHandler.result.getChatMessage().getContent());
         return null;
       }
     };
