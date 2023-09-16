@@ -268,7 +268,6 @@ public class CauldronRoomController {
   public void clickWizard(MouseEvent event) throws InterruptedException {
     System.out.println("wizard clicked");
     showWizardChat();
-    inputText.setDisable(true);
     if (!GameState.isBookRiddleGiven) {
       chatHandler.appendChatMessage(riddle, chatTextArea);
 
@@ -300,8 +299,6 @@ public class CauldronRoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
-      // Only enable inputText when appending has finished
-      inputText.setDisable(false);
     }
   }
 
@@ -317,8 +314,6 @@ public class CauldronRoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
-      // Only enable inputText when appending has finished
-      inputText.setDisable(false);
     }
   }
 
@@ -334,8 +329,6 @@ public class CauldronRoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
-      // Only enable inputText when appending has finished
-      inputText.setDisable(false);
     }
   }
 
@@ -376,9 +369,7 @@ public class CauldronRoomController {
     disableBooks();
     chooseLabel.setOpacity(0);
 
-    if (inputText != null) {
-      disableChat();
-    }
+    disableChat();
 
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
