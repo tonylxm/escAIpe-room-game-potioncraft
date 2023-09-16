@@ -103,7 +103,8 @@ public class CountdownTimer {
 
     if (currentSceneRoot != null) {
 
-      Label timerLabel = (Label) currentSceneRoot.lookup("#timerLabel"); // Assuming the ID is "timerLabel"
+      Label timerLabel = (Label) currentSceneRoot.lookup("#timerLabel"); 
+      // Assuming the ID is "timerLabel"
 
       if (timerLabel != null) {
         timerLabel.setText(formatTimerText());

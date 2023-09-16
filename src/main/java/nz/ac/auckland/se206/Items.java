@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class Items {
   /** Possible items the user can interact with in the room */
@@ -19,12 +19,12 @@ public class Items {
     FEATHER
   }
 
-  public static Set<Item> available;
-  public static Set<Item> necessary;
+  public static List<Item> available;
+  public static List<Item> necessary;
   private Item[] list = new Item[] {
-      Item.TAIL, Item.INSECT_WINGS, Item.FLOWER, Item.SCALES,
-      Item.POWDER, Item.TALON, Item.CRYSTAL, Item.BAT_WINGS,
-      Item.WREATH, Item.FEATHER
+    Item.TAIL, Item.INSECT_WINGS, Item.FLOWER, Item.SCALES,
+    Item.POWDER, Item.TALON, Item.CRYSTAL, Item.BAT_WINGS,
+    Item.WREATH, Item.FEATHER
   };
 
   /**
@@ -33,7 +33,7 @@ public class Items {
    * necessary sets. The available set contains all the items you can interact
    * with within the room.
    * The necessary set contains the items that are needed to complete the room.
-   *
+   * ***********UPDATE CHANGED TO A LIST INSTEAD OF A SET - ANDY 14/09/2023 
    * @param n is the number of items needed to complete the room. Note that the
    *          number of items
    *          available is double those required to complete it. Currently, the
@@ -42,11 +42,10 @@ public class Items {
    */
   public Items(int n) {
     Random random = new Random();
-    available = new HashSet<Item>();
-    necessary = new HashSet<Item>();
+    available = new ArrayList<>();
+    necessary = new ArrayList<>();
     int i = 0;
     while (i < 2 * n) {
-      // Method for getting a random item could be improved
       Item item = list[random.nextInt(10)];
       if (!available.contains(item)) {
         available.add(item);
