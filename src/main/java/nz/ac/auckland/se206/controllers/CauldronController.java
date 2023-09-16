@@ -259,15 +259,8 @@ public class CauldronController {
   private void brewPotion() {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
-    //if less than 6 items have been dropped into the cauldron then the potion is not brewed
-    if (cauldronItems.size() < 5) {
-      System.out.println("Potion not brewed");
-      resetItems();
-      return;
-    }
-
-    //if more than 6 items have been dropped into the cauldron then the potion is not brewed
-    if (cauldronItems.size() > 5) {
+    // if more or less than 6 items have been dropped into the cauldron then the potion is not brewed
+    if (cauldronItems.size() < 5 || cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
       resetItems();
       return;
@@ -279,7 +272,7 @@ public class CauldronController {
         System.out.println("Potion brewed");
         //set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
-        returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
+        TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
         SceneManager.setTimerScene(AppUi.YOU_WIN);
                 
       } else {
