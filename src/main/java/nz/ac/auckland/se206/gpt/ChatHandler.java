@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.gpt;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
@@ -16,11 +15,11 @@ public class ChatHandler {
   @FXML
   public void initialize() throws ApiProxyException {
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
   }
 
   public String runGpt(String msgContent) throws ApiProxyException {
-    ChatMessage msg = new ChatMessage("user", msgContent);
+    ChatMessage msg = new ChatMessage("You", msgContent);
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
@@ -33,6 +32,9 @@ public class ChatHandler {
       return null;
     }
   }
+
+
+  // TODO: Duplicate code, refactor later
 
   /**
    * Runs the GPT model with a given chat message.
