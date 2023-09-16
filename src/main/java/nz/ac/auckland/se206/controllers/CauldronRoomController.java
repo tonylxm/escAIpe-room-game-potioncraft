@@ -202,10 +202,12 @@ public class CauldronRoomController {
     inputText.setDisable(true);
     sendButton.setDisable(true);
     ttsBtn2.setDisable(true);
+    wizardChatImage.setDisable(true);
     chatTextArea.setOpacity(0);
     inputText.setOpacity(0);
     sendButton.setOpacity(0);
     ttsBtn2.setOpacity(0);
+    wizardChatImage.setOpacity(0);
   }
 
   private void enableChat() {
@@ -213,10 +215,12 @@ public class CauldronRoomController {
     inputText.setDisable(false);
     sendButton.setDisable(false);
     ttsBtn2.setDisable(false);
-    chatTextArea.setOpacity(100);
-    inputText.setOpacity(100);
-    sendButton.setOpacity(100);
-    ttsBtn2.setOpacity(100);
+    wizardChatImage.setDisable(false);
+    chatTextArea.setOpacity(1);
+    inputText.setOpacity(1);
+    sendButton.setOpacity(1);
+    ttsBtn2.setOpacity(1);
+    wizardChatImage.setOpacity(1);
   }
 
   private void disableBooks() {
@@ -374,11 +378,6 @@ public class CauldronRoomController {
 
     if (inputText != null) {
       disableChat();
-    }
-    
-    if (GameState.isBookRiddleResolved) {
-      wizardImg.setDisable(true);
-      wizardImg.setOpacity(0);
     }
 
     // Handling closing the "bag" when clicking off inventory
