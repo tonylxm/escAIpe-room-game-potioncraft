@@ -74,6 +74,7 @@ public class CauldronRoomController {
     textRect.setDisable(true);
     riddleSelectLabel.setDisable(true);
     disableBooks();
+    disableChat();
     mouseTrackRegion.setOpacity(0);
     book = getRandomBook();
 
@@ -146,6 +147,10 @@ public class CauldronRoomController {
   }
 
   private void disableChat() {
+    chatTextArea.setDisable(true);
+    inputText.setDisable(true);
+    sendButton.setDisable(true);
+    ttsBtn2.setDisable(true);
     chatTextArea.setOpacity(0);
     inputText.setOpacity(0);
     sendButton.setOpacity(0);
@@ -153,12 +158,15 @@ public class CauldronRoomController {
   }
 
   private void enableChat() {
-    chatTextArea.setOpacity(1);
+    chatTextArea.setDisable(false);
+    inputText.setDisable(false);
+    sendButton.setDisable(false);
+    ttsBtn2.setDisable(false);
+    chatTextArea.setOpacity(100);
     inputText.setOpacity(100);
     sendButton.setOpacity(100);
     ttsBtn2.setOpacity(100);
   }
-
 
   private void disableBooks() {
     bookFireRectangle.setDisable(true);
@@ -198,10 +206,13 @@ public class CauldronRoomController {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleResolved) {
       showWizardChat();
+      riddleSelectLabel.setText(riddle);
+      chooseLabel.setOpacity(100);
+      enableBooks();
       wizardFirstTime = false;
       GameState.isBookRiddleGiven = true;
-      // unhighlightThis(wizardRectangle);
     } else {
+      showWizardChat();
       enableChat();
     }
   }
@@ -218,8 +229,8 @@ public class CauldronRoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       riddleSelectLabel.setText(
-          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
-              + " wish to ask anything of me or require any hints please come talk to me again.");
+          "You've done well to solve the riddle. The rest is now up to you. If you"
+              + " require any assistance, please come talk to me again.");
     }
   }
 
@@ -235,8 +246,8 @@ public class CauldronRoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       riddleSelectLabel.setText(
-          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
-              + " wish to ask anything of me or require any hints please come talk to me again.");
+          "You've done well to solve the riddle. The rest is now up to you. If you"
+              + " require any assistance, please come talk to me again.");
     }
   }
 
@@ -252,8 +263,8 @@ public class CauldronRoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       riddleSelectLabel.setText(
-          "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
-              + " wish to ask anything of me or require any hints please come talk to me again.");
+          "You've done well to solve the riddle. The rest is now up to you. If you"
+              + " require any assistance, please come talk to me again.");
     }
   }
 
@@ -294,12 +305,10 @@ public class CauldronRoomController {
     riddleSelectLabel.setText(">Riddle");
     riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
     disableBooks();
-    disableChat();
     chooseLabel.setOpacity(0);
 
-    if (GameState.isBookRiddleResolved) {
-      wizardRectangle.setDisable(true);
-      wizardRectangle.setOpacity(0);
+    if (chatTextArea != null) {
+      disableChat();
     }
 
     // Handling closing the "bag" when clicking off inventory
@@ -364,14 +373,6 @@ public class CauldronRoomController {
       mouseTrackRegion.setDisable(false);
       System.out.println("Bag opened");
     }
-  }
-
-  @FXML
-  public void riddleSelect() {
-    riddleSelectLabel.setFont(javafx.scene.text.Font.font("Algerian", 12));
-    riddleSelectLabel.setText(riddle);
-    chooseLabel.setOpacity(100);
-    enableBooks();
   }
 
   /**
