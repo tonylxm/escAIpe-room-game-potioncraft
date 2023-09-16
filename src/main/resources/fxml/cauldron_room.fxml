@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -69,5 +72,13 @@
             <Font size="32.0" />
          </font>
       </Label>
+      <TextArea fx:id="chatTextArea" editable="false" layoutX="17.0" layoutY="14.0" prefHeight="78.0" prefWidth="446.0" wrapText="true" />
+      <TextField fx:id="inputText" layoutX="17.0" layoutY="92.0" prefHeight="26.0" prefWidth="401.0" promptText="Ask me anything..." />
+      <Button fx:id="sendButton" layoutX="418.0" layoutY="92.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="26.0" prefWidth="45.0" text="Send" />
+      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="429.0" layoutY="25.0" onMouseClicked="#readGameMasterResponse" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tts-icon.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
