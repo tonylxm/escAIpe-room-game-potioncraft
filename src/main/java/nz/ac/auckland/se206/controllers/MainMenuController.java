@@ -276,7 +276,7 @@ public class MainMenuController {
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON ROOM");
-    TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM, 2);
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, 2);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     Task<Void> timerStartTask = new Task<Void>() {

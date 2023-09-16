@@ -37,29 +37,20 @@ public class TransitionAnimation {
     fadeTransition.play();
   }
 
-  public static void fadeScene(Node obj, double opacity, AppUi appUi, double s) {
-    FadeTransition fadeSceneTransition = new FadeTransition(Duration.seconds(s), obj);
-    // Fade in
-    if (opacity == 1.0) {
-      fromValue = 0.0;
-      toValue = 1.0;
-      // Fade out
-    } else {
-      fromValue = 1.0;
-      toValue = 0.0;
-    }
-    fadeSceneTransition.setFromValue(fromValue);
-    fadeSceneTransition.setToValue(toValue);
-    fadeSceneTransition.setOnFinished(
+  public static void changeScene(Node obj, AppUi appUi, double s) {
+    FadeTransition fadeOut = new FadeTransition(Duration.seconds(s), obj);
+    fadeOut.setFromValue(1.0);
+    fadeOut.setToValue(0.0);
+    fadeOut.setOnFinished(
         (ActionEvent event) -> {
-          if (!isFadeIn) {
             Parent root = SceneManager.getUiRoot(appUi);
             root.setOpacity(0);
-            fadeScene(root, 1.0, appUi, 0.3);
-            isFadeIn = true;
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), root);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
             obj.getScene().setRoot(root);
-          }
+            fadeIn.play();
         });
-    fadeSceneTransition.play();
+    fadeOut.play();
   }
 }

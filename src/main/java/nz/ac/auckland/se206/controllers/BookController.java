@@ -142,7 +142,7 @@ public class BookController {
 
   private void writeRecipeIngredients(List<Items.Item> necessary) {
     for (int i = 0; i < necessary.size(); i++) {
-      ingredientList.getItems().add(Integer.toString(i + 1) + ": " + necessary.get(i).toString());
+      ingredientList.getItems().add(Integer.toString(i + 1) + ". " + necessary.get(i).toString());
     }
   }
 
