@@ -4,13 +4,18 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TransitionAnimation {
   private static double fromValue;
   private static double toValue;
-  private static boolean isFadeIn = false;
+  private static Pane masterPane;
+
+  public static void setMasterPane(Pane pane) {
+    masterPane = pane;
+  }
 
   // For fadeIn, set ocpacity = 1.0
   // For fadeOut, set ocpacity = 0.0
@@ -37,7 +42,14 @@ public class TransitionAnimation {
     fadeTransition.play();
   }
 
-  public static void changeScene(Node obj, AppUi appUi, double s) {
+  public static void changeScene(Node obj, AppUi appUi, boolean mainMenu) {
+    double s;
+    if (mainMenu) {
+      s = 2;
+    } else {
+      s = 0.2;
+    }
+
     FadeTransition fadeOut = new FadeTransition(Duration.seconds(s), obj);
     fadeOut.setFromValue(1.0);
     fadeOut.setToValue(0.0);
@@ -45,10 +57,12 @@ public class TransitionAnimation {
         (ActionEvent event) -> {
             Parent root = SceneManager.getUiRoot(appUi);
             root.setOpacity(0);
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), root);
+            masterPane.getChildren().remove(obj);
+            masterPane.getChildren().add(1, root);
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(s), root);
             fadeIn.setFromValue(0.0);
             fadeIn.setToValue(1.0);
-            obj.getScene().setRoot(root);
+            fadeIn.setNode(root);
             fadeIn.play();
         });
     fadeOut.play();

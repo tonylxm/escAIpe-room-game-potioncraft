@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
@@ -47,6 +46,8 @@ public class MainMenuController {
   private boolean difficultySelected;
 
   @FXML
+  private Pane masterPane;
+  @FXML
   private Pane pane;
   @FXML
   private Button playBtn;
@@ -79,6 +80,7 @@ public class MainMenuController {
     // Item & inventory generation
     items = new Items(5);
     inventory = new Inventory();
+    TransitionAnimation.setMasterPane(masterPane);
 
     difficultySelected = false;
     // Hover hints on difficulty selection
@@ -276,7 +278,7 @@ public class MainMenuController {
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, 2);
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, true);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     Task<Void> timerStartTask = new Task<Void>() {

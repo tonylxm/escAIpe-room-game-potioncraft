@@ -13,28 +13,46 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
   private static CauldronController instance;
 
-  @FXML private Label returnLbl;
-  @FXML private ImageView batWingImage;
-  @FXML private ImageView crystalImage;
-  @FXML private ImageView insectWingImage;
-  @FXML private ImageView talonImage;
-  @FXML private ImageView powderImage;
-  @FXML private ImageView tailImage;
-  @FXML private ImageView featherImage;
-  @FXML private ImageView scalesImage;
-  @FXML private ImageView flowerImage;
-  @FXML private ImageView wreathImage;
-  @FXML private ImageView cauldronImageView;
-  @FXML private Rectangle cauldronOverlay;
-  @FXML private Button brewBtn;
+  @FXML
+  private Pane pane;
+  @FXML 
+  private Label returnLbl;
+  @FXML 
+  private ImageView batWingImage;
+  @FXML 
+  private ImageView crystalImage;
+  @FXML 
+  private ImageView insectWingImage;
+  @FXML 
+  private ImageView talonImage;
+  @FXML 
+  private ImageView powderImage;
+  @FXML 
+  private ImageView tailImage;
+  @FXML 
+  private ImageView featherImage;
+  @FXML 
+  private ImageView scalesImage;
+  @FXML 
+  private ImageView flowerImage;
+  @FXML 
+  private ImageView wreathImage;
+  @FXML 
+  private ImageView cauldronImageView;
+  @FXML 
+  private Rectangle cauldronOverlay;
+  @FXML 
+  private Button brewBtn;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -232,7 +250,7 @@ public class CauldronController {
   @FXML
   private void goBack() {
     System.out.println("CAULDRON -> CAULDRON_ROOM");
-    returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     System.out.println(cauldronItems);
   }
