@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.util.HashMap;
 import javafx.scene.Parent;
+import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
 
 public class SceneManager {
@@ -22,6 +23,7 @@ public class SceneManager {
   public static AppUi currScene;
   public static AppUi timerScene;
   private static CauldronController cauldronControllerInstance;
+  private static BookController bookControllerInstance;
 
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);
@@ -51,5 +53,15 @@ public class SceneManager {
   // Get the CauldronController instance
   public static CauldronController getCauldronControllerInstance() {
     return cauldronControllerInstance;
+  }
+
+  // Set the BookController instance
+  public static void setBookControllerInstance(BookController controller) {
+    bookControllerInstance = controller;
+  }
+
+  // Get the BookController instance
+  public static BookController getBookControllerInstance() {
+    return bookControllerInstance;
   }
 }

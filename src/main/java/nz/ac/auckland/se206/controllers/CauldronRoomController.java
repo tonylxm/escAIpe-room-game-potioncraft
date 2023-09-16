@@ -27,31 +27,56 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
-  @FXML private Rectangle cauldronRectangle;
-  @FXML private Rectangle wizardRectangle;
-  @FXML private Polygon rightArrow;
-  @FXML private Polygon leftArrow;
-  @FXML private Rectangle bookFireRectangle;
-  @FXML private Rectangle bookWaterRectangle;
-  @FXML private Rectangle bookAirRectangle;
-  @FXML private Rectangle bookFireImage;
-  @FXML private Rectangle bookWaterImage;
-  @FXML private Rectangle bookAirImage;
-  @FXML private Rectangle textRect;
-  @FXML private Rectangle wizardChatImage;
-  @FXML private Rectangle mouseTrackRegion;
-  @FXML private ImageView bookBtn;
-  @FXML private ImageView bagBtn;
-  @FXML private Label timerLabel;
-  @FXML private ScrollPane calItemScroll;
-  @FXML private Label chooseLabel;
+  
+  @FXML
+  private ImageView cauldronImg;
+  @FXML
+  private ImageView wizardImg;
+  @FXML
+  private Polygon rightArrow;
+  @FXML
+  private Polygon leftArrow;
+  @FXML
+  private Rectangle bookFireRectangle;
+  @FXML
+  private Rectangle bookWaterRectangle;
+  @FXML
+  private Rectangle bookAirRectangle;
+  @FXML
+  private Rectangle bookFireImage;
+  @FXML
+  private Rectangle bookWaterImage;
+  @FXML
+  private Rectangle bookAirImage;
+  @FXML
+  private Rectangle textRect;
+  @FXML
+  private ImageView wizardChatImage;
+  @FXML
+  private Rectangle mouseTrackRegion;
+  @FXML
+  private ImageView bookBtn;
+  @FXML
+  private ImageView bagBtn;
+  @FXML
+  private Label timerLabel;
+  @FXML
+  private ScrollPane calItemScroll;
+  @FXML
+  private Label riddleSelectLabel;
+  @FXML
+  private Label chooseLabel;
 
-  @FXML private TextArea chatTextArea;
-  @FXML private TextField inputText;
-  @FXML private Button sendButton;
-  @FXML private ImageView ttsBtn2;
+  @FXML 
+  private TextArea chatTextArea;
+  @FXML 
+  private TextField inputText;
+  @FXML 
+  private Button sendButton;
+  @FXML 
+  private ImageView ttsBtn2;
 
-  @FXML private ShapeInteractionHandler interactionHandler;
+  private ShapeInteractionHandler interactionHandler;
   private ChatHandler chatHandler = new ChatHandler();
   private boolean wizardFirstTime = true;
   private String book;
@@ -77,42 +102,61 @@ public class CauldronRoomController {
     mouseTrackRegion.setOpacity(0);
     book = getRandomBook();
 
-    if (cauldronRectangle != null) {
-      cauldronRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      cauldronRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+    if (cauldronImg != null) {
+      cauldronImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(cauldronImg));
+      cauldronImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(cauldronImg));
+      
     }
-    if (wizardRectangle != null) {
-      wizardRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      wizardRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+    if (wizardImg != null) {
+      wizardImg.setOnMouseEntered(
+          event -> interactionHandler.glowThis(wizardImg));
+      wizardImg.setOnMouseExited(
+          event -> interactionHandler.unglowThis(wizardImg));
     }
     if (rightArrow != null) {
-      rightArrow.setOnMouseEntered(event -> rightArrow.setOpacity(0.9));
-      rightArrow.setOnMouseExited(event -> rightArrow.setOpacity(0.5));
+      rightArrow.setOnMouseEntered(
+          event -> rightArrow.setOpacity(0.9));
+      rightArrow.setOnMouseExited(
+          event -> rightArrow.setOpacity(0.5));
     }
     if (leftArrow != null) {
-      leftArrow.setOnMouseEntered(event -> leftArrow.setOpacity(0.9));
-      leftArrow.setOnMouseExited(event -> leftArrow.setOpacity(0.5));
+      leftArrow.setOnMouseEntered(
+          event -> leftArrow.setOpacity(0.9));
+      leftArrow.setOnMouseExited(
+          event -> leftArrow.setOpacity(0.5));
     }
     if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bookBtn));
+      bookBtn.setOnMouseEntered(
+          event -> interactionHandler.glowThis(bookBtn));
+      bookBtn.setOnMouseExited(
+          event -> interactionHandler.unglowThis(bookBtn));
     }
     if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(event -> interactionHandler.unglowThis(bagBtn));
+      bagBtn.setOnMouseEntered(
+          event -> interactionHandler.glowThis(bagBtn));
+      bagBtn.setOnMouseExited(
+          event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
     if (bookFireRectangle != null) {
-      bookFireRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      bookFireRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      bookFireRectangle.setOnMouseEntered(
+          event -> interactionHandler.handle(event));
+      bookFireRectangle.setOnMouseExited(
+          event -> interactionHandler.handle(event));
     }
     if (bookWaterRectangle != null) {
-      bookWaterRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      bookWaterRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      bookWaterRectangle.setOnMouseEntered(
+          event -> interactionHandler.handle(event));
+      bookWaterRectangle.setOnMouseExited(
+          event -> interactionHandler.handle(event));
     }
     if (bookAirRectangle != null) {
-      bookAirRectangle.setOnMouseEntered(event -> interactionHandler.handle(event));
-      bookAirRectangle.setOnMouseExited(event -> interactionHandler.handle(event));
+      bookAirRectangle.setOnMouseEntered(
+          event -> interactionHandler.handle(event));
+      bookAirRectangle.setOnMouseExited(
+          event -> interactionHandler.handle(event));
     }
 
     try {
@@ -193,17 +237,25 @@ public class CauldronRoomController {
     bookAirRectangle.setOpacity(100);
   }
 
+  /**
+   * Taking user to the cauldron scene from the room scene to be able to 
+   * brew their potions.
+   * 
+   * @param event
+   */
   @FXML
   public void clickCauldron(MouseEvent event) {
     CauldronController cauldronController = SceneManager.getCauldronControllerInstance();
     if (cauldronController != null) {
       cauldronController.updateImageStates();
     }
+
+    // If the cauldronController exists, then switching scenes
     System.out.println("cauldron clicked");
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> CAULDRON");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
+    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
     SceneManager.setTimerScene(AppUi.CAULDRON);
     System.out.println(Items.necessary);
   }
@@ -288,7 +340,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
+    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
     SceneManager.setTimerScene(AppUi.LIBRARY_ROOM);
   }
 
@@ -297,7 +349,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    cauldronRectangle.getScene().setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
@@ -322,6 +374,11 @@ public class CauldronRoomController {
 
     if (inputText != null) {
       disableChat();
+    }
+    
+    if (GameState.isBookRiddleResolved) {
+      wizardImg.setDisable(true);
+      wizardImg.setOpacity(0);
     }
 
     // Handling closing the "bag" when clicking off inventory
@@ -363,6 +420,10 @@ public class CauldronRoomController {
 
   @FXML
   public void openBook() {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
     System.out.println("CAULDRON_ROOM -> BOOK");
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
     bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));

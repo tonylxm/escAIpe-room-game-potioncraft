@@ -1,12 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
-import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -39,11 +37,6 @@ public class TreasureRoomController extends ItemRoomController {
   @FXML
   private ImageView itemTenImg;
 
-  @FXML
-  private ShapeInteractionHandler interactionHandler;
-
-  private CountdownTimer countdownTimer;
-
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
    * This includes initialising whether an item is clicked or already added
@@ -52,8 +45,8 @@ public class TreasureRoomController extends ItemRoomController {
    * mouseTrackRegion appropriately.
    */
   public void initialize() {
-    countdownTimer = MainMenuController.getCountdownTimer();
-    countdownTimer.setRightTimerLabel(timerLabel);
+    // Initialising everything from the superclass
+    genericInitialise();
 
     // Setting appropriate boolean fields
     itemSixAdded = false;
@@ -62,18 +55,11 @@ public class TreasureRoomController extends ItemRoomController {
     itemNineAdded = false;
     itemTenAdded = false;
 
-    readyToAdd = false;
-    bagOpened = false;
-
     sixClicked = false;
     sevenClicked = false;
     eightClicked = false;
     nineClicked = false;
     tenClicked = false;
-
-    setText("", false, false);
-    mouseTrackRegion.setDisable(true);
-    mouseTrackRegion.setOpacity(0);
 
     // Setting up listeners for the various items
     interactionHandler = new ShapeInteractionHandler();
@@ -122,26 +108,6 @@ public class TreasureRoomController extends ItemRoomController {
           event -> leftShpe.setOpacity(0.9));
       leftShpe.setOnMouseExited(
           event -> leftShpe.setOpacity(0.5));
-    }
-    if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookBtn));
-    }
-    if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bagBtn));
-      // ELSE NO ITEMS IN BAG MESSAGE
-    }
-
-    if (wizardRectangle != null) {
-      wizardRectangle.setOnMouseEntered(
-        event -> interactionHandler.handle(event));
-      wizardRectangle.setOnMouseExited(
-        event -> interactionHandler.handle(event));
     }
   }
 
@@ -280,22 +246,7 @@ public class TreasureRoomController extends ItemRoomController {
       default:
         break;
     }
-
-    image.setFitHeight(133 * ratio);
-    image.setFitWidth(133);
-    // Using the inventory instance from the MainMenuController so that images
-    // added from other scenes are not lost
-    MainMenuController.inventory.box.getChildren().add(image);
-
-    mouseTrackRegion.setDisable(true);
-    // To see what is in the inventory in the terminal
-    // Can be removed later
-    System.out.println("Item added to inventory");
-    System.out.println("Current Inventory:");
-    Iterator itr = new MainMenuController().inventory.inventory.iterator();
-    while (itr.hasNext()) {
-      System.out.println("  " + itr.next());
-    }
+    itemCollect(ratio, image);
   }
 
   /**
@@ -329,6 +280,10 @@ public class TreasureRoomController extends ItemRoomController {
   /** Chaning scenes to book view */
   @FXML
   public void openBook() {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
     System.out.println("TREASURE_ROOM -> BOOK");
     SceneManager.currScene = AppUi.TREASURE_ROOM;
     leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
