@@ -44,7 +44,6 @@ public class CauldronRoomController {
   @FXML private ImageView bagBtn;
   @FXML private Label timerLabel;
   @FXML private ScrollPane calItemScroll;
-  @FXML private Label riddleSelectLabel;
   @FXML private Label chooseLabel;
 
   @FXML private TextArea chatTextArea;
@@ -57,7 +56,8 @@ public class CauldronRoomController {
   private boolean wizardFirstTime = true;
   private String book;
   private String[] options = {"fire", "water", "air"};
-  private String riddle;
+  private ChatMessage riddle;
+  private ChatMessage riddleSolveMsg;
 
   private boolean bagOpened;
 
@@ -72,7 +72,6 @@ public class CauldronRoomController {
     // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);
     textRect.setDisable(true);
-    riddleSelectLabel.setDisable(true);
     disableBooks();
     disableChat();
     mouseTrackRegion.setOpacity(0);
@@ -126,13 +125,21 @@ public class CauldronRoomController {
 
           @Override
           protected Void call() throws Exception {
-            riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
+            riddle =
+                new ChatMessage(
+                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book)));
             // System.out.println(riddle);
             return null;
           }
         };
     new Thread(bookRiddleTask).start();
     System.out.println(riddle);
+
+    riddleSolveMsg =
+        new ChatMessage(
+            "Wizard",
+            "You've done well to solve the riddle. The rest is now up to you. If you"
+                + " require any assistance, please come talk to me again.");
 
     // Run GPT to generate hints for the game
     // Task<Void> runGptTask = new Task<Void>() {
@@ -202,17 +209,25 @@ public class CauldronRoomController {
   }
 
   @FXML
-  public void clickWizard(MouseEvent event) {
+  public void clickWizard(MouseEvent event) throws InterruptedException {
     System.out.println("wizard clicked");
-    if (!GameState.isBookRiddleResolved) {
-      showWizardChat();
-      riddleSelectLabel.setText(riddle);
-      chooseLabel.setOpacity(100);
+    showWizardChat();
+    inputText.setDisable(true);
+    if (!GameState.isBookRiddleGiven) {
+      chatHandler.appendChatMessage(riddle, chatTextArea);
+
+      // TODO: only show books when riddle has finished appending
+      chooseLabel.setOpacity(1);
+      enableBooks();
+      wizardFirstTime = false;
+      GameState.isBookRiddleGiven = true;
+    } else if (!GameState.isBookRiddleResolved) {
+      // TODO: only show books when riddle has finished appending
+      chooseLabel.setOpacity(1);
       enableBooks();
       wizardFirstTime = false;
       GameState.isBookRiddleGiven = true;
     } else {
-      showWizardChat();
       enableChat();
     }
   }
@@ -228,9 +243,9 @@ public class CauldronRoomController {
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      riddleSelectLabel.setText(
-          "You've done well to solve the riddle. The rest is now up to you. If you"
-              + " require any assistance, please come talk to me again.");
+      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
+      // Only enable inputText when appending has finished
+      inputText.setDisable(false);
     }
   }
 
@@ -245,9 +260,9 @@ public class CauldronRoomController {
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      riddleSelectLabel.setText(
-          "You've done well to solve the riddle. The rest is now up to you. If you"
-              + " require any assistance, please come talk to me again.");
+      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
+      // Only enable inputText when appending has finished
+      inputText.setDisable(false);
     }
   }
 
@@ -262,9 +277,9 @@ public class CauldronRoomController {
       bookAirRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      riddleSelectLabel.setText(
-          "You've done well to solve the riddle. The rest is now up to you. If you"
-              + " require any assistance, please come talk to me again.");
+      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
+      // Only enable inputText when appending has finished
+      inputText.setDisable(false);
     }
   }
 
@@ -300,14 +315,12 @@ public class CauldronRoomController {
     mouseTrackRegion.setDisable(true);
     textRect.setOpacity(0);
     mouseTrackRegion.setOpacity(0);
-    riddleSelectLabel.setDisable(true);
-    riddleSelectLabel.setOpacity(0);
-    riddleSelectLabel.setText(">Riddle");
-    riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
+    chatTextArea.setDisable(true);
+    chatTextArea.setOpacity(0);
     disableBooks();
     chooseLabel.setOpacity(0);
 
-    if (chatTextArea != null) {
+    if (inputText != null) {
       disableChat();
     }
 
@@ -340,12 +353,11 @@ public class CauldronRoomController {
   /** Displaying wizard chat to user when prompted */
   private void showWizardChat() {
     // Setting approrpiate fields to be visible and interactable
-    wizardChatImage.setOpacity(100);
+    wizardChatImage.setOpacity(1);
     textRect.setDisable(false);
     mouseTrackRegion.setDisable(false);
-    textRect.setOpacity(100);
-    riddleSelectLabel.setDisable(false);
-    riddleSelectLabel.setOpacity(100);
+    textRect.setOpacity(1);
+    enableChat();
     mouseTrackRegion.setOpacity(0.5);
   }
 
@@ -390,23 +402,26 @@ public class CauldronRoomController {
       return;
     }
     inputText.clear();
-    ChatMessage msg = new ChatMessage("user", message);   // TODO: Cannot change to You without generating error
+    // TODO: Disable input text area while text is appending
+    // inputText.setDisable(true);
+    ChatMessage msg =
+        new ChatMessage("user", message); // TODO: Cannot change to You without generating error
     chatHandler.appendChatMessage(msg, chatTextArea);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // Could refactor for hint checking
             ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea);
-            // If the riddle is answered correctly, setting the GameState accordingly
-            if (lastMsg.getRole().equals("assistant")
-                && lastMsg.getContent().startsWith("Correct")) {
-              GameState.isBookRiddleResolved = true;
-            }
+            // if (lastMsg.getRole().equals("assistant")
+            //     && lastMsg.getContent().startsWith("Correct")) {
+            //   GameState.isBookRiddleResolved = true;
+            // }
             return null;
           }
         };
-    new Thread(runGptTask, "runGpt Thread").start();
+    new Thread(runGptTask).start();
   }
 
   /**
