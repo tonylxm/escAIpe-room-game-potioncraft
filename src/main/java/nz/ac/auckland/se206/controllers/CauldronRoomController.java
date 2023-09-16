@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
@@ -124,7 +125,7 @@ public class CauldronRoomController {
 
           @Override
           protected Void call() throws Exception {
-            // riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
+            riddle = chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book));
             // System.out.println(riddle);
             return null;
           }
@@ -143,6 +144,21 @@ public class CauldronRoomController {
     // };
     // new Thread(runGptTask, "runGpt Thread").start();
   }
+
+  private void disableChat() {
+    chatTextArea.setOpacity(0);
+    inputText.setOpacity(0);
+    sendButton.setOpacity(0);
+    ttsBtn2.setOpacity(0);
+  }
+
+  private void enableChat() {
+    chatTextArea.setOpacity(1);
+    inputText.setOpacity(100);
+    sendButton.setOpacity(100);
+    ttsBtn2.setOpacity(100);
+  }
+
 
   private void disableBooks() {
     bookFireRectangle.setDisable(true);
@@ -181,14 +197,12 @@ public class CauldronRoomController {
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleResolved) {
-
       showWizardChat();
-
       wizardFirstTime = false;
       GameState.isBookRiddleGiven = true;
       // unhighlightThis(wizardRectangle);
     } else {
-      // showWizardChat();
+      enableChat();
     }
   }
 
@@ -205,7 +219,7 @@ public class CauldronRoomController {
       chooseLabel.setOpacity(0);
       riddleSelectLabel.setText(
           "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
-              + " wish to ask anything of me write in the book and I will respond.");
+              + " wish to ask anything of me or require any hints please come talk to me again.");
     }
   }
 
@@ -222,7 +236,7 @@ public class CauldronRoomController {
       chooseLabel.setOpacity(0);
       riddleSelectLabel.setText(
           "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
-              + " wish to ask anything of me write in the book and I will respond.");
+              + " wish to ask anything of me or require any hints please come talk to me again.");
     }
   }
 
@@ -239,7 +253,7 @@ public class CauldronRoomController {
       chooseLabel.setOpacity(0);
       riddleSelectLabel.setText(
           "You've done well to solve the riddle. The rest is now up to you my apprentice, if you"
-              + " wish to ask anything of me write in the book and I will respond.");
+              + " wish to ask anything of me or require any hints please come talk to me again.");
     }
   }
 
@@ -280,6 +294,7 @@ public class CauldronRoomController {
     riddleSelectLabel.setText(">Riddle");
     riddleSelectLabel.setFont(javafx.scene.text.Font.font("System", 24));
     disableBooks();
+    disableChat();
     chooseLabel.setOpacity(0);
 
     if (GameState.isBookRiddleResolved) {

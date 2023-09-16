@@ -19,7 +19,7 @@ public class ChatHandler {
   }
 
   public String runGpt(String msgContent) throws ApiProxyException {
-    ChatMessage msg = new ChatMessage("You", msgContent);
+    ChatMessage msg = new ChatMessage("user", msgContent);
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
