@@ -130,9 +130,9 @@ public class CountdownTimer {
 
   public String formatTimerText() {
     if (currentSeconds < 10) {
-      return String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds);
+      return String.format("%d" + ":" + "0" + "%d", minutes, currentSeconds);
     } else {
-      return String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds);
+      return String.format("%d" + ":" + "%d", minutes, currentSeconds);
     }
   }
 
