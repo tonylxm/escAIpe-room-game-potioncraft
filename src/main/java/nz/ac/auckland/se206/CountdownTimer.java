@@ -117,7 +117,7 @@ public class CountdownTimer {
 
       if (libraryTimerLabel != null) {
         libraryTimerLabel.setText(formatTimerText());
-        System.out.println("left timer label updated");
+        //System.out.println("left timer label updated");
       }
 
       if (rightTimerLabel != null) {
@@ -130,7 +130,7 @@ public class CountdownTimer {
 
       if (brewingLabel != null) {
         brewingLabel.setText(formatTimerText());
-        System.out.println("brewing label updated");
+        //System.out.println("brewing label updated");
       }
     }
   }
@@ -149,7 +149,7 @@ public class CountdownTimer {
   }
 
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
-    System.out.println("setting left timer label");
+    //System.out.println("setting left timer label");
     this.libraryTimerLabel = libraryTimerLabel;
   }
 
