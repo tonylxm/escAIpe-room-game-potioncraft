@@ -53,8 +53,8 @@ public abstract class ItemRoomController {
    */
   @FXML
   protected void genericInitialise() {
-    countdownTimer = MainMenuController.getCountdownTimer();
-    countdownTimer.setLeftTimerLabel(timerLabel);
+    //countdownTimer = MainMenuController.getCountdownTimer();
+    //countdownTimer.setLeftTimerLabel(timerLabel);
 
     readyToAdd = false;
     bagOpened = false;
