@@ -45,10 +45,10 @@ public class TransitionAnimation {
   public static void changeScene(Node obj, AppUi appUi, boolean mainMenu) {
     double s1;
     double s2;
-    
+
     if (mainMenu) {
       s1 = 2;
-      s2 = 0.1;
+      s2 = 0.2;
     } else {
       s1 = 0.1;
       s2 = 0.1;
