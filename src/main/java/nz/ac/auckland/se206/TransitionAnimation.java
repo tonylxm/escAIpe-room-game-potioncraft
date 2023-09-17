@@ -43,14 +43,18 @@ public class TransitionAnimation {
   }
 
   public static void changeScene(Node obj, AppUi appUi, boolean mainMenu) {
-    double s;
+    double s1;
+    double s2;
+    
     if (mainMenu) {
-      s = 2;
+      s1 = 2;
+      s2 = 0.1;
     } else {
-      s = 0.2;
+      s1 = 0.1;
+      s2 = 0.1;
     }
 
-    FadeTransition fadeOut = new FadeTransition(Duration.seconds(s), obj);
+    FadeTransition fadeOut = new FadeTransition(Duration.seconds(s1), obj);
     fadeOut.setFromValue(1.0);
     fadeOut.setToValue(0.0);
     fadeOut.setOnFinished(
@@ -59,7 +63,7 @@ public class TransitionAnimation {
             root.setOpacity(0);
             masterPane.getChildren().remove(obj);
             masterPane.getChildren().add(1, root);
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(s), root);
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(s2), root);
             fadeIn.setFromValue(0.0);
             fadeIn.setToValue(1.0);
             fadeIn.setNode(root);
