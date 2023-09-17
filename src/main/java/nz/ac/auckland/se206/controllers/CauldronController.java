@@ -15,6 +15,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -53,6 +54,10 @@ public class CauldronController {
   private Rectangle cauldronOverlay;
   @FXML 
   private Button brewBtn;
+  @FXML
+  private Button  emptyBtn;
+  @FXML
+  private Label timerLabel;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -62,12 +67,17 @@ public class CauldronController {
 
   private ImageView draggedItem;
 
+  private CountdownTimer countdownTimer;
+
   public CauldronController() {
     instance = this;
   }
 
   @FXML
   private void initialize() {
+    // Set up the timer
+    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer.setBrewingLabel(timerLabel);
     inventory = MainMenuController.inventory.getInventory();
     // set up drag and drop for all images
     setupDragAndDrop(batWingImage, "batWingImage");
@@ -303,5 +313,9 @@ public class CauldronController {
     scalesImage.setVisible(true);
     flowerImage.setVisible(true);
     wreathImage.setVisible(true);
+  }
+
+  @FXML private void emptyCauldron() {
+    resetItems();
   }
 }

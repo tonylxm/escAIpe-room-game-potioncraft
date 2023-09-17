@@ -24,6 +24,7 @@ public class CountdownTimer {
   private Label leftTimerLabel;
   private Label rightTimerLabel;
   private Label bookTimerLabel;
+  private Label brewingLabel;
 
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
@@ -125,14 +126,18 @@ public class CountdownTimer {
       if (bookTimerLabel != null) {
         bookTimerLabel.setText(formatTimerText());
       }
+
+      if (brewingLabel != null) {
+        brewingLabel.setText(formatTimerText());
+      }
     }
   }
 
   public String formatTimerText() {
     if (currentSeconds < 10) {
-      return String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds);
+      return String.format("%d" + ":" + "0" + "%d", minutes, currentSeconds);
     } else {
-      return String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds);
+      return String.format("%d" + ":" + "%d", minutes, currentSeconds);
     }
   }
 
@@ -161,5 +166,9 @@ public class CountdownTimer {
     System.out.println("GAME_OVER");
     App.setRoot("you-lose");
     // Using App.setRoot() so that game over occurs in all scenes
+  }
+
+  public void setBrewingLabel(Label timerLabel) {
+    this.brewingLabel = timerLabel;
   }
 }

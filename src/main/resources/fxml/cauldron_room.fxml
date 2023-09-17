@@ -13,7 +13,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CauldronRoomController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="-9.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
@@ -70,11 +69,21 @@
       </ImageView>
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#ffe1b2" height="168.0" layoutX="116.0" layoutY="498.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <ScrollPane id="calItemScroll" fx:id="calItemScroll" layoutX="858.0" layoutY="410.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
-      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
+      <ImageView fitHeight="88.0" fitWidth="216.0" layoutX="799.0" layoutY="14.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="844.0" layoutY="25.0" prefHeight="67.0" prefWidth="257.0" text="4:00">
          <font>
-            <Font name="Algerian" size="38.0" />
+            <Font name="Algerian" size="42.0" />
          </font>
       </Label>
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="926.0" layoutY="25.0">
+         <image>
+            <Image url="@../images/hourglass-1024x1024.gif" />
+         </image>
+      </ImageView>
       <Rectangle fx:id="bookFireRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff2121" height="67.0" layoutX="720.0" layoutY="167.0" onMouseClicked="#clickBookFire" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookWaterRectangle" arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="67.0" layoutX="756.0" layoutY="167.0" onMouseClicked="#clickBookWater" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Rectangle fx:id="bookAirRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="792.0" layoutY="167.0" onMouseClicked="#clickBookAir" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
