@@ -1,11 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -40,6 +42,10 @@ public class LibraryRoomController extends ItemRoomController {
   private ImageView itemFourImg;
   @FXML
   private ImageView itemFiveImg;
+  @FXML
+  private Label timerLabel;
+
+  private CountdownTimer countdownTimer;
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
@@ -51,6 +57,9 @@ public class LibraryRoomController extends ItemRoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise();
+    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer.setLibraryTimerLabel(timerLabel);
+
 
     // Setting appropriate boolean fields
     itemOneAdded = false;

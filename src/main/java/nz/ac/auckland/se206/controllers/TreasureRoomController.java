@@ -1,11 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -41,6 +43,11 @@ public class TreasureRoomController extends ItemRoomController {
   @FXML
   private ImageView itemTenImg;
 
+  @FXML
+  private Label timerLabel;
+
+  private CountdownTimer countdownTimer;
+
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
    * This includes initialising whether an item is clicked or already added
@@ -51,6 +58,8 @@ public class TreasureRoomController extends ItemRoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise();
+    countdownTimer = MainMenuController.getCountdownTimer();
+    countdownTimer.setRightTimerLabel(timerLabel);
 
     // Setting appropriate boolean fields
     itemSixAdded = false;
