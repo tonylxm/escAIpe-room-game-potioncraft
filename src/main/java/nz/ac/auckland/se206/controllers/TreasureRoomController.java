@@ -1,14 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
 
 public class TreasureRoomController extends ItemRoomController {
   // Booleans to keep track of whether an item has been added to the inventory
@@ -25,6 +29,8 @@ public class TreasureRoomController extends ItemRoomController {
   private boolean tenClicked;
 
   @FXML
+  private Pane pane;
+  @FXML
   private Polygon leftShpe;
   @FXML
   private ImageView itemSixImg;
@@ -37,6 +43,11 @@ public class TreasureRoomController extends ItemRoomController {
   @FXML
   private ImageView itemTenImg;
 
+  @FXML
+  private Label timerLabel;
+
+  private CountdownTimer countdownTimer;
+
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
    * This includes initialising whether an item is clicked or already added
@@ -47,6 +58,8 @@ public class TreasureRoomController extends ItemRoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise();
+    countdownTimer = MainMenuController.getCountdownTimer();
+    countdownTimer.setRightTimerLabel(timerLabel);
 
     // Setting appropriate boolean fields
     itemSixAdded = false;
@@ -123,7 +136,7 @@ public class TreasureRoomController extends ItemRoomController {
     itemScroll.setOpacity(0);
     bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
   }
 
   /**
@@ -286,7 +299,7 @@ public class TreasureRoomController extends ItemRoomController {
     }
     System.out.println("TREASURE_ROOM -> BOOK");
     SceneManager.currScene = AppUi.TREASURE_ROOM;
-    leftShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
   /**

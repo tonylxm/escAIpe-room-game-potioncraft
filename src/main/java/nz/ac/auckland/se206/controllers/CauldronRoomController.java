@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -21,6 +22,7 @@ import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -28,6 +30,8 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
   
+  @FXML
+  private Pane pane;
   @FXML
   private ImageView cauldronImg;
   @FXML
@@ -259,7 +263,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> CAULDRON");
-    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON, false);
     SceneManager.setTimerScene(AppUi.CAULDRON);
     System.out.println(Items.necessary);
   }
@@ -341,7 +345,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
+    TransitionAnimation.changeScene(pane, AppUi.LIBRARY_ROOM, false);
     SceneManager.setTimerScene(AppUi.LIBRARY_ROOM);
   }
 
@@ -350,7 +354,7 @@ public class CauldronRoomController {
     calItemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    cauldronImg.getScene().setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+    TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
@@ -420,7 +424,7 @@ public class CauldronRoomController {
     }
     System.out.println("CAULDRON_ROOM -> BOOK");
     SceneManager.currScene = AppUi.CAULDRON_ROOM;
-    bookBtn.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
   /** Dealing with the event where the bag icon is clicked */

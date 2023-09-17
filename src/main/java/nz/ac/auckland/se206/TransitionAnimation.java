@@ -3,26 +3,33 @@ package nz.ac.auckland.se206;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TransitionAnimation {
   private static double fromValue;
   private static double toValue;
+  private static Pane masterPane;
+
+  public static void setMasterPane(Pane pane) {
+    masterPane = pane;
+  }
 
   // For fadeIn, set ocpacity = 1.0
   // For fadeOut, set ocpacity = 0.0
-  public static void fade(Node obj, double ocpacity) {
+  public static void fade(Node obj, double opacity) {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), obj);
 
     // Fade in
-    if (ocpacity == 1.0) {
+    if (opacity == 1.0) {
       fromValue = 0.0;
       toValue = 1.0;
 
       // Fade in startBtn intitally as disabled and greyed out until settings have
       // been selected
-    } else if (ocpacity == 0.4) {
+    } else if (opacity == 0.4) {
       fromValue = 0.0;
       toValue = 0.4;
       // Fade out
@@ -35,23 +42,33 @@ public class TransitionAnimation {
     fadeTransition.play();
   }
 
-  public static void fadeScene(Node obj, double ocpacity, AppUi appUi) {
-    FadeTransition fadeSceneTransition = new FadeTransition(Duration.seconds(2), obj);
-    // Fade in
-    if (ocpacity == 1.0) {
-      fromValue = 0.0;
-      toValue = 1.0;
-      // Fade out
+  public static void changeScene(Node obj, AppUi appUi, boolean mainMenu) {
+    double s1;
+    double s2;
+
+    if (mainMenu) {
+      s1 = 2;
+      s2 = 0.2;
     } else {
-      fromValue = 1.0;
-      toValue = 0.0;
+      s1 = 0.1;
+      s2 = 0.1;
     }
-    fadeSceneTransition.setFromValue(fromValue);
-    fadeSceneTransition.setToValue(toValue);
-    fadeSceneTransition.setOnFinished(
+
+    FadeTransition fadeOut = new FadeTransition(Duration.seconds(s1), obj);
+    fadeOut.setFromValue(1.0);
+    fadeOut.setToValue(0.0);
+    fadeOut.setOnFinished(
         (ActionEvent event) -> {
-          obj.getScene().setRoot(SceneManager.getUiRoot(appUi));
+            Parent root = SceneManager.getUiRoot(appUi);
+            root.setOpacity(0);
+            masterPane.getChildren().remove(obj);
+            masterPane.getChildren().add(1, root);
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(s2), root);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.setNode(root);
+            fadeIn.play();
         });
-    fadeSceneTransition.play();
+    fadeOut.play();
   }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CauldronController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CauldronController">
    <children>
       <ImageView fitHeight="680.0" fitWidth="1024.0">
          <image>
@@ -82,5 +82,21 @@
       </ImageView>
       <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Button fx:id="brewBtn" layoutX="445.0" layoutY="609.0" mnemonicParsing="false" onAction="#brewPotion" prefHeight="65.0" prefWidth="161.0" text="Brew!" />
+      <Button fx:id="emptyBtn" layoutX="639.0" layoutY="629.0" mnemonicParsing="false" onAction="#emptyCauldron" text="Empty" />
+      <ImageView fitHeight="88.0" fitWidth="216.0" layoutX="799.0" layoutY="10.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="846.0" layoutY="21.0" prefHeight="67.0" prefWidth="257.0" text="4:00">
+         <font>
+            <Font name="Algerian" size="42.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="926.0" layoutY="21.0">
+         <image>
+            <Image url="@../images/hourglass-1024x1024.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

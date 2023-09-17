@@ -13,28 +13,51 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
   private static CauldronController instance;
 
-  @FXML private Label returnLbl;
-  @FXML private ImageView batWingImage;
-  @FXML private ImageView crystalImage;
-  @FXML private ImageView insectWingImage;
-  @FXML private ImageView talonImage;
-  @FXML private ImageView powderImage;
-  @FXML private ImageView tailImage;
-  @FXML private ImageView featherImage;
-  @FXML private ImageView scalesImage;
-  @FXML private ImageView flowerImage;
-  @FXML private ImageView wreathImage;
-  @FXML private ImageView cauldronImageView;
-  @FXML private Rectangle cauldronOverlay;
-  @FXML private Button brewBtn;
+  @FXML
+  private Pane pane;
+  @FXML 
+  private Label returnLbl;
+  @FXML 
+  private ImageView batWingImage;
+  @FXML 
+  private ImageView crystalImage;
+  @FXML 
+  private ImageView insectWingImage;
+  @FXML 
+  private ImageView talonImage;
+  @FXML 
+  private ImageView powderImage;
+  @FXML 
+  private ImageView tailImage;
+  @FXML 
+  private ImageView featherImage;
+  @FXML 
+  private ImageView scalesImage;
+  @FXML 
+  private ImageView flowerImage;
+  @FXML 
+  private ImageView wreathImage;
+  @FXML 
+  private ImageView cauldronImageView;
+  @FXML 
+  private Rectangle cauldronOverlay;
+  @FXML 
+  private Button brewBtn;
+  @FXML
+  private Button  emptyBtn;
+  @FXML
+  private Label timerLabel;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -44,12 +67,17 @@ public class CauldronController {
 
   private ImageView draggedItem;
 
+  private CountdownTimer countdownTimer;
+
   public CauldronController() {
     instance = this;
   }
 
   @FXML
   private void initialize() {
+    // Set up the timer
+    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer.setBrewingLabel(timerLabel);
     inventory = MainMenuController.inventory.getInventory();
     // set up drag and drop for all images
     setupDragAndDrop(batWingImage, "batWingImage");
@@ -232,7 +260,7 @@ public class CauldronController {
   @FXML
   private void goBack() {
     System.out.println("CAULDRON -> CAULDRON_ROOM");
-    returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     System.out.println(cauldronItems);
   }
@@ -241,15 +269,8 @@ public class CauldronController {
   private void brewPotion() {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
-    //if less than 6 items have been dropped into the cauldron then the potion is not brewed
-    if (cauldronItems.size() < 5) {
-      System.out.println("Potion not brewed");
-      resetItems();
-      return;
-    }
-
-    //if more than 6 items have been dropped into the cauldron then the potion is not brewed
-    if (cauldronItems.size() > 5) {
+    // if more or less than 6 items have been dropped into the cauldron then the potion is not brewed
+    if (cauldronItems.size() < 5 || cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
       resetItems();
       return;
@@ -261,7 +282,7 @@ public class CauldronController {
         System.out.println("Potion brewed");
         //set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
-        returnLbl.getScene().setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
+        TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
         SceneManager.setTimerScene(AppUi.YOU_WIN);
                 
       } else {
@@ -292,5 +313,9 @@ public class CauldronController {
     scalesImage.setVisible(true);
     flowerImage.setVisible(true);
     wreathImage.setVisible(true);
+  }
+
+  @FXML private void emptyCauldron() {
+    resetItems();
   }
 }

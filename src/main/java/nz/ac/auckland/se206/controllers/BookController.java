@@ -7,24 +7,25 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
-import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the book view. */
 public class BookController {
+  @FXML
+  private Pane pane;
   @FXML
   private ImageView cauldronRoomBackground;
   @FXML
@@ -88,7 +89,7 @@ public class BookController {
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 String item = ingredientList.getSelectionModel().getSelectedItem();
                 // Removing the number and colon from the string
-                item = item.substring(item.indexOf(":") + 2);
+                item = item.substring(item.indexOf(".") + 2);
 
                 // Setting all the images to be transparent initially
                 placeholderImg.setOpacity(0);
@@ -142,7 +143,7 @@ public class BookController {
 
   private void writeRecipeIngredients(List<Items.Item> necessary) {
     for (int i = 0; i < necessary.size(); i++) {
-      ingredientList.getItems().add(Integer.toString(i + 1) + ": " + necessary.get(i).toString());
+      ingredientList.getItems().add(Integer.toString(i + 1) + ". " + necessary.get(i).toString());
     }
   }
 
@@ -156,7 +157,7 @@ public class BookController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println("BOOK -> " + SceneManager.currScene);
-    backBtn.getScene().setRoot(SceneManager.getUiRoot(SceneManager.currScene));
+    TransitionAnimation.changeScene(pane, SceneManager.currScene, false);
   }
 
   /** Uses text to speech to read the required items in the book. */

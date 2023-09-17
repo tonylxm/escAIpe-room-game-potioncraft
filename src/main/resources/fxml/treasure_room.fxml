@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TreasureRoomController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TreasureRoomController">
    <children>
       <ImageView fitHeight="688.0" fitWidth="1030.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -65,7 +65,8 @@
       <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Polygon>
+         </cursor>
+      </Polygon>
       <ImageView fx:id="bagBtn" fitHeight="45.0" fitWidth="45.0" layoutX="911.0" layoutY="625.0" onMouseClicked="#clickBag" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/bag_icon.png" />
@@ -82,11 +83,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
       <ImageView id="wizardChatImage" fx:id="wizardChatImage" fitHeight="188.0" fitWidth="200.0" layoutX="154.0" layoutY="340.0" opacity="0.0" scaleX="-1.0">
          <image>
@@ -115,5 +111,20 @@
          </font>
       </Label>
       <ScrollPane id="itemScroll" fx:id="itemScroll" layoutX="853.0" layoutY="404.0" opacity="0.0" prefHeight="200.0" prefWidth="150.0" vbarPolicy="ALWAYS" />
+      <ImageView fitHeight="88.0" fitWidth="216.0" layoutX="800.0" layoutY="14.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="845.0" layoutY="25.0" prefHeight="67.0" prefWidth="257.0" text="4:00">
+         <font>
+            <Font name="Algerian" size="42.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
+         <image>
+            <Image url="@../images/hourglass-1024x1024.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

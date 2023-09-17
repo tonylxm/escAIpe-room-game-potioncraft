@@ -21,9 +21,10 @@ public class CountdownTimer {
 
   private Timeline timeline;
   private Label cauldronTimerLabel;
-  private Label leftTimerLabel;
+  private Label libraryTimerLabel;
   private Label rightTimerLabel;
   private Label bookTimerLabel;
+  private Label brewingLabel;
 
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
@@ -114,8 +115,9 @@ public class CountdownTimer {
         cauldronTimerLabel.setText(formatTimerText());
       }
 
-      if (leftTimerLabel != null) {
-        leftTimerLabel.setText(formatTimerText());
+      if (libraryTimerLabel != null) {
+        libraryTimerLabel.setText(formatTimerText());
+        //System.out.println("left timer label updated");
       }
 
       if (rightTimerLabel != null) {
@@ -125,14 +127,19 @@ public class CountdownTimer {
       if (bookTimerLabel != null) {
         bookTimerLabel.setText(formatTimerText());
       }
+
+      if (brewingLabel != null) {
+        brewingLabel.setText(formatTimerText());
+        //System.out.println("brewing label updated");
+      }
     }
   }
 
   public String formatTimerText() {
     if (currentSeconds < 10) {
-      return String.format("Time left: %d" + ":" + "0" + "%d", minutes, currentSeconds);
+      return String.format("%d" + ":" + "0" + "%d", minutes, currentSeconds);
     } else {
-      return String.format("Time left: %d" + ":" + "%d", minutes, currentSeconds);
+      return String.format("%d" + ":" + "%d", minutes, currentSeconds);
     }
   }
 
@@ -141,8 +148,9 @@ public class CountdownTimer {
     this.cauldronTimerLabel = cauldronTimerLabel;
   }
 
-  public void setLeftTimerLabel(Label leftTimerLabel) {
-    this.leftTimerLabel = leftTimerLabel;
+  public void setLibraryTimerLabel(Label libraryTimerLabel) {
+    //System.out.println("setting left timer label");
+    this.libraryTimerLabel = libraryTimerLabel;
   }
 
   public void setRightTimerLabel(Label rightTimerLabel) {
@@ -161,5 +169,9 @@ public class CountdownTimer {
     System.out.println("GAME_OVER");
     App.setRoot("you-lose");
     // Using App.setRoot() so that game over occurs in all scenes
+  }
+
+  public void setBrewingLabel(Label timerLabel) {
+    this.brewingLabel = timerLabel;
   }
 }
