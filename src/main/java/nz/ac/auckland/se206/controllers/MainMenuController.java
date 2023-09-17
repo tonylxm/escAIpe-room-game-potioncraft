@@ -46,6 +46,8 @@ public class MainMenuController {
   private boolean difficultySelected;
 
   @FXML
+  private Pane masterPane;
+  @FXML
   private Pane pane;
   @FXML
   private Button playBtn;
@@ -78,6 +80,7 @@ public class MainMenuController {
     // Item & inventory generation
     items = new Items(5);
     inventory = new Inventory();
+    TransitionAnimation.setMasterPane(masterPane);
 
     difficultySelected = false;
     // Hover hints on difficulty selection
@@ -275,7 +278,7 @@ public class MainMenuController {
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON ROOM");
-    TransitionAnimation.fadeScene(pane, 0, AppUi.CAULDRON_ROOM);
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, true);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     Task<Void> timerStartTask = new Task<Void>() {

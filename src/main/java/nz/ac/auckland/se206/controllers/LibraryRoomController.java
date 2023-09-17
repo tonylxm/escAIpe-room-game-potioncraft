@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
 
 public class LibraryRoomController extends ItemRoomController {
   // Booleans to keep track of whether an item has been added to the inventory
@@ -24,6 +26,8 @@ public class LibraryRoomController extends ItemRoomController {
   private boolean fourClicked;
   private boolean fiveClicked;
 
+  @FXML
+  private Pane pane;
   @FXML
   private Polygon rightShpe;
   @FXML
@@ -123,7 +127,7 @@ public class LibraryRoomController extends ItemRoomController {
     itemScroll.setOpacity(0);
     bagOpened = false;
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
   }
 
   /**
@@ -288,7 +292,7 @@ public class LibraryRoomController extends ItemRoomController {
       bookController.updateBackground();
     }
     SceneManager.currScene = AppUi.LIBRARY_ROOM;
-    rightShpe.getScene().setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
   /**

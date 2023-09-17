@@ -6,91 +6,97 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1025.0" stylesheets="@../css/mainmenu.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
+<Pane fx:id="masterPane" prefHeight="680.0" prefWidth="1024.0" stylesheets="@../css/mainmenu.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
    <children>
-      <ImageView fitHeight="689.0" fitWidth="1055.0" layoutX="-6.0" layoutY="-5.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/cauldron-room.jpg" />
-         </image>
-      </ImageView>
-      <Button fx:id="startBtn" disable="true" layoutX="447.0" layoutY="612.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </Button>
-      <Text fx:id="difficultyTxt" fill="WHITE" layoutX="445.0" layoutY="248.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="35.0" />
-         </font>
-      </Text>
-      <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="385.0" layoutY="405.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="35.0" />
-         </font>
-      </Text>
-      <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="243.0" layoutY="423.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="2">
-         <toggleGroup>
-            <ToggleGroup fx:id="TimeLimit" />
-         </toggleGroup>
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="423.0" layoutY="423.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="4" toggleGroup="$TimeLimit">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="603.0" layoutY="423.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="6" toggleGroup="$TimeLimit">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="easyBtn" disable="true" layoutX="242.0" layoutY="266.0" mnemonicParsing="false" onAction="#setEasy" opacity="0.0" prefWidth="180.0" styleClass="button" text="Dobby">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="Difficulty" />
-         </toggleGroup>
-      </ToggleButton>
-      <ToggleButton fx:id="mediumBtn" disable="true" layoutX="421.0" layoutY="266.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="180.0" styleClass="button" text="Harry" toggleGroup="$Difficulty">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </ToggleButton>
-      <ToggleButton fx:id="hardBtn" disable="true" layoutX="601.0" layoutY="266.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefHeight="52.0" prefWidth="180.0" styleClass="button" text="Voldemort" toggleGroup="$Difficulty">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </ToggleButton>
-      <Button fx:id="playBtn" layoutX="458.0" layoutY="612.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="30.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="127.0" fitWidth="822.0" layoutX="101.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/title.png" />
-         </image>
-      </ImageView>
-      <Text fx:id="hintFive" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="hintInfinity" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="hintZero" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
-         <font>
-            <Font name="Bookshelf Symbol 7" size="18.0" />
-         </font>
-      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="680.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="1024.0" stylesheets="@../css/mainmenu.css">
+         <children>
+            <ImageView fitHeight="689.0" fitWidth="1055.0" layoutX="-6.0" layoutY="-5.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cauldron-room.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="startBtn" disable="true" layoutX="447.0" layoutY="612.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </Button>
+            <Text fx:id="difficultyTxt" fill="WHITE" layoutX="445.0" layoutY="248.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="35.0" />
+               </font>
+            </Text>
+            <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="385.0" layoutY="405.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="35.0" />
+               </font>
+            </Text>
+            <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="243.0" layoutY="423.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="2">
+               <toggleGroup>
+                  <ToggleGroup fx:id="TimeLimit" />
+               </toggleGroup>
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="423.0" layoutY="423.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="4" toggleGroup="$TimeLimit">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="603.0" layoutY="423.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="6" toggleGroup="$TimeLimit">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="easyBtn" disable="true" layoutX="242.0" layoutY="266.0" mnemonicParsing="false" onAction="#setEasy" opacity="0.0" prefWidth="180.0" styleClass="button" text="Dobby">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Difficulty" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="mediumBtn" disable="true" layoutX="421.0" layoutY="266.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="180.0" styleClass="button" text="Harry" toggleGroup="$Difficulty">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="hardBtn" disable="true" layoutX="601.0" layoutY="266.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefHeight="52.0" prefWidth="180.0" styleClass="button" text="Voldemort" toggleGroup="$Difficulty">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </ToggleButton>
+            <Button fx:id="playBtn" layoutX="458.0" layoutY="612.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="30.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="127.0" fitWidth="822.0" layoutX="101.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/title.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="hintFive" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="hintInfinity" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="hintZero" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>
