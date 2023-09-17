@@ -53,6 +53,8 @@ public class CauldronController {
   private Rectangle cauldronOverlay;
   @FXML 
   private Button brewBtn;
+  @FXML
+  private Button  emptyBtn;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -303,5 +305,9 @@ public class CauldronController {
     scalesImage.setVisible(true);
     flowerImage.setVisible(true);
     wreathImage.setVisible(true);
+  }
+
+  @FXML private void emptyCauldron() {
+    resetItems();
   }
 }
