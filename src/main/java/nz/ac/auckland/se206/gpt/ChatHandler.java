@@ -2,7 +2,9 @@ package nz.ac.auckland.se206.gpt;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
@@ -43,13 +45,13 @@ public class ChatHandler {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public ChatMessage runGptGameMaster(ChatMessage msg, TextArea chatTextArea) throws ApiProxyException {
+  public ChatMessage runGptGameMaster(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage(), chatTextArea);
+      appendChatMessage(result.getChatMessage(), chatTextArea, inputText, sendButton);
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       e.printStackTrace();
@@ -62,7 +64,7 @@ public class ChatHandler {
    *
    * @param msg the chat message to append
    */
-  public void appendChatMessage(ChatMessage msg, TextArea chatTextArea) {
+  public void appendChatMessage(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
     chatTextArea.appendText(msg.getRole() + ": ");
 
     Task<Void> appendTask =
@@ -78,5 +80,15 @@ public class ChatHandler {
           }
         };
     new Thread(appendTask, "Append Thread").start();
+    
+    if (msg.getRole().equals("Wizard") || msg.getRole().equals("assistant")) {
+    appendTask.setOnSucceeded(
+        (event) -> {
+          inputText.setDisable(false);
+          inputText.setOpacity(1);
+          sendButton.setDisable(false);
+          sendButton.setOpacity(1);
+        });
+      }
   }
 }

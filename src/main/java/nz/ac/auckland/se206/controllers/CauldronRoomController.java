@@ -269,7 +269,11 @@ public class CauldronRoomController {
     System.out.println("wizard clicked");
     showWizardChat();
     if (!GameState.isBookRiddleGiven) {
-      chatHandler.appendChatMessage(riddle, chatTextArea);
+      inputText.setDisable(true);
+      inputText.setOpacity(0.5);
+      sendButton.setDisable(true);
+      sendButton.setOpacity(0.5);
+      chatHandler.appendChatMessage(riddle, chatTextArea, inputText, sendButton);
 
       // TODO: only show books when riddle has finished appending
       chooseLabel.setOpacity(1);
@@ -298,7 +302,7 @@ public class CauldronRoomController {
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
+      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -313,7 +317,7 @@ public class CauldronRoomController {
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
+      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -328,7 +332,7 @@ public class CauldronRoomController {
       bookAirRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea);
+      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -453,18 +457,20 @@ public class CauldronRoomController {
       return;
     }
     inputText.clear();
-    // TODO: Disable input text area while text is appending
-    // inputText.setDisable(true);
+    inputText.setDisable(true);
+    inputText.setOpacity(0.5);
+    sendButton.setDisable(true);
+    sendButton.setOpacity(0.5);
     ChatMessage msg =
         new ChatMessage("user", message); // TODO: Cannot change to You without generating error
-    chatHandler.appendChatMessage(msg, chatTextArea);
+    chatHandler.appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
             // Could refactor for hint checking
-            ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea);
+            ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea, inputText, sendButton);
             // if (lastMsg.getRole().equals("assistant")
             //     && lastMsg.getContent().startsWith("Correct")) {
             //   GameState.isBookRiddleResolved = true;
