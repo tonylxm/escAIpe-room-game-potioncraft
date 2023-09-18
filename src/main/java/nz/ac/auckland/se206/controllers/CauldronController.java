@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
@@ -60,6 +62,10 @@ public class CauldronController {
   private Label timerLabel;
   @FXML
   private ImageView backImg;
+  @FXML
+  private ImageView notificationBack;
+  @FXML
+  private Label notificationText;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -118,6 +124,27 @@ public class CauldronController {
     scalesImage.setDisable(true);
     flowerImage.setDisable(true);
     wreathImage.setDisable(true);
+
+    //set up glow for all images by adding images to an array then going in a loop
+    ArrayList<ImageView> images = new ArrayList<ImageView>();
+    images.add(batWingImage);
+    images.add(crystalImage);
+    images.add(insectWingImage);
+    images.add(talonImage);
+    images.add(powderImage);
+    images.add(tailImage);
+    images.add(featherImage);
+    images.add(scalesImage);
+    images.add(flowerImage);
+    images.add(wreathImage);
+    //setup glow for all images
+    for (ImageView image : images) {
+      image.setOnMouseEntered(
+          event -> interactionHandler.glowThis(image));
+      image.setOnMouseExited(
+          event -> interactionHandler.unglowThis(image));
+    }
+    
 
     // Set up drag and drop for cauldronImageView
     cauldronImageView.setOnDragOver(
@@ -288,7 +315,15 @@ public class CauldronController {
     // if more or less than 6 items have been dropped into the cauldron then the potion is not brewed
     if (cauldronItems.size() < 5 || cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
-      resetItems();
+      if (inventory.isEmpty()) {
+        notificationText.setText("Find some ingredients!");
+      }
+      if (cauldronItems.size() < 5) {
+        notificationText.setText("Add more ingredients!");
+      } else if (cauldronItems.size() > 5) {
+        notificationText.setText("Too many ingredients!");
+      }
+      notifyPopup();
       return;
     }
 
@@ -308,6 +343,41 @@ public class CauldronController {
     }
 
 
+  }
+
+  private void notifyPopup() {
+    // Create a FadeTransition to gradually change opacity over 3 seconds
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), notificationBack);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(1.0);
+            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(3), notificationText);
+            fadeTransition2.setFromValue(1.0);
+            fadeTransition2.setToValue(1.0);
+
+            // Play the fade-in animation
+            fadeTransition.play();
+            fadeTransition2.play();
+
+            // Schedule a task to fade out the image after 3 seconds
+            fadeTransition.setOnFinished(fadeEvent -> {
+              if (notificationBack.getOpacity() == 1.0) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationBack);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+              }
+            });
+
+            fadeTransition2.setOnFinished(fadeEvent -> {
+              if (notificationText.getOpacity() == 1.0) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationText);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+              }
+            });
+
+            
   }
 
   @FXML 
