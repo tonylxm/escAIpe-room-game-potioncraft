@@ -12,8 +12,8 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class ChatHandler {
   private ChatCompletionRequest chatCompletionRequest;
-  public Choice result;
-  public Task<Void> appendTask;
+  private Choice result;
+  private Task<Void> appendTask;
 
   @FXML
   public void initialize() throws ApiProxyException {
@@ -99,5 +99,21 @@ public class ChatHandler {
             sendButton.setOpacity(1);
           });
     }
+  }
+
+  public void setResult(Choice result) {
+    this.result = result;
+  }
+
+  public Choice getResult() {
+    return result;
+  }
+
+  public Task<Void> getAppendTask() {
+    return appendTask;
+  }
+
+  public void setAppendTask(Task<Void> appendTask) {
+    this.appendTask = appendTask;
   }
 }

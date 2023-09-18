@@ -137,14 +137,14 @@ public abstract class ItemRoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.inventory.size() == 0) {
+    if (MainMenuController.getInventory().size() == 0) {
       return;
     }
     // If the bag isn't opened already, open it
     if (!bagOpened) {
       itemScroll.setVvalue(0);
       itemScroll.setContent(null);
-      itemScroll.setContent(MainMenuController.inventory.box);
+      itemScroll.setContent(MainMenuController.getInventory().getBox());
       itemScroll.setOpacity(1);
       bagOpened = true;
       mouseTrackRegion.setDisable(false);
@@ -189,14 +189,14 @@ public abstract class ItemRoomController {
     image.setFitWidth(133);
     // Using the inventory instance from the MainMenuController so that images
     // added from other scenes are not lost
-    MainMenuController.inventory.box.getChildren().add(image);
+    MainMenuController.getInventory().getBox().getChildren().add(image);
 
     mouseTrackRegion.setDisable(true);
     // To see what is in the inventory in the terminal
     // Can be removed later
     System.out.println("Item added to inventory");
     System.out.println("Current Inventory:");
-    Iterator itr = new MainMenuController().inventory.inventory.iterator();
+    Iterator itr = new MainMenuController().getInventory().getInventory().iterator();
     while (itr.hasNext()) {
       System.out.println("  " + itr.next());
     }

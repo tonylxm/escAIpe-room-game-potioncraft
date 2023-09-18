@@ -57,7 +57,7 @@ public class LibraryRoomController extends ItemRoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise();
-    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLibraryTimerLabel(timerLabel);
 
 
@@ -206,7 +206,7 @@ public class LibraryRoomController extends ItemRoomController {
     if (!readyToAdd) {
       return;
     }
-    MainMenuController.inventory.add(item);
+    MainMenuController.getInventory().add(item);
     setText("", false, false);
     readyToAdd = false;
 

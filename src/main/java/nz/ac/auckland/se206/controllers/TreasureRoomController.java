@@ -206,7 +206,7 @@ public class TreasureRoomController extends ItemRoomController {
     if (!readyToAdd) {
       return;
     }
-    MainMenuController.inventory.add(item);
+    MainMenuController.getInventory().add(item);
     setText("", false, false);
     readyToAdd = false;
 

@@ -34,10 +34,40 @@ public class MainMenuController {
     SIX_MIN
   }
 
-  public static CountdownTimer countdownTimer = new CountdownTimer("2:00");
+  private static CountdownTimer countdownTimer = new CountdownTimer("2:00");
 
-  public static Items items;
-  public static Inventory inventory;
+  private static Items items;
+  private static Inventory inventory;
+  
+  private static String book;
+  private static ChatHandler chatHandler;
+  private String[] options = {"fire", "water", "air"};
+  private static ChatMessage riddle;
+  private static int hints;
+
+  public static Items getItems() {
+    return items;
+  }
+
+  public static Inventory getInventory() {
+    return inventory;
+  }
+
+  public static String getBook() {
+    return book;
+  }
+
+  public static ChatHandler getChatHandler() {
+    return chatHandler;
+  }
+
+  public static ChatMessage getRiddle() {
+    return riddle;
+  }
+
+  public static int getHints() {
+    return hints;
+  }
 
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
@@ -48,12 +78,6 @@ public class MainMenuController {
   private TimeLimit timeLimit;
 
   private boolean difficultySelected;
-
-  public static String book;
-  public static ChatHandler chatHandler;
-  private String[] options = {"fire", "water", "air"};
-  public static ChatMessage riddle;
-  public static int hints;
 
   @FXML
   private Pane masterPane;

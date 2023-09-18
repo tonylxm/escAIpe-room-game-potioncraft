@@ -271,11 +271,11 @@ public class CauldronRoomController {
       inputText.setOpacity(0.5);
       sendButton.setDisable(true);
       sendButton.setOpacity(0.5);
-      MainMenuController.chatHandler.appendChatMessage(MainMenuController.riddle, chatTextArea, inputText, sendButton);
+      MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
       // the user to select the book and respond to the wizard
-      MainMenuController.chatHandler.appendTask.setOnSucceeded(e -> {
+      MainMenuController.getChatHandler().getAppendTask().setOnSucceeded(e -> {
         chooseLabel.setOpacity(1);
         inputText.setDisable(false);
         inputText.setOpacity(1);
@@ -294,7 +294,7 @@ public class CauldronRoomController {
   @FXML
   public void clickBookFire(MouseEvent event) {
     System.out.println("book fire clicked");
-    if (MainMenuController.book == "fire") {
+    if (MainMenuController.getBook() == "fire") {
       // remove the book from the scene
       bookFireRectangle.setOpacity(0);
       bookFireImage.setOpacity(0);
@@ -309,7 +309,7 @@ public class CauldronRoomController {
   @FXML
   public void clickBookWater(MouseEvent event) {
     System.out.println("book water clicked");
-    if (MainMenuController.book == "water") {
+    if (MainMenuController.getBook() == "water") {
       // remove the book from the scene
       bookWaterRectangle.setOpacity(0);
       bookWaterImage.setOpacity(0);
@@ -324,7 +324,7 @@ public class CauldronRoomController {
   @FXML
   public void clickBookAir(MouseEvent event) {
     System.out.println("book air clicked");
-    if (MainMenuController.book == "air") {
+    if (MainMenuController.getBook() == "air") {
       // remove the book from the scene
       bookAirRectangle.setOpacity(0);
       bookAirImage.setOpacity(0);
@@ -415,14 +415,14 @@ public class CauldronRoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.inventory.size() == 0) {
+    if (MainMenuController.getInventory().size() == 0) {
       return;
     }
     // If the bag isn't opened already, open it
     if (!bagOpened) {
       calItemScroll.setVvalue(0);
       calItemScroll.setContent(null);
-      calItemScroll.setContent(MainMenuController.inventory.box);
+      calItemScroll.setContent(MainMenuController.getInventory().getBox());
       calItemScroll.setOpacity(1);
       bagOpened = true;
       mouseTrackRegion.setDisable(false);
@@ -451,14 +451,14 @@ public class CauldronRoomController {
     sendButton.setOpacity(0.5);
     ChatMessage msg =
         new ChatMessage("user", message); // TODO: Cannot change to You without generating error
-    MainMenuController.chatHandler.appendChatMessage(msg, chatTextArea, inputText, sendButton);
+    MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
             // Hints are already checked in the prompt
-            MainMenuController.chatHandler.runGptGameMaster(msg, chatTextArea, inputText, sendButton);
+            MainMenuController.getChatHandler().runGptGameMaster(msg, chatTextArea, inputText, sendButton);
             return null;
           }
         };
@@ -485,7 +485,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            App.textToSpeech.speak(MainMenuController.chatHandler.result.getChatMessage().getContent());
+            App.textToSpeech.speak(MainMenuController.getChatHandler().getResult().getChatMessage().getContent());
             return null;
           }
         };

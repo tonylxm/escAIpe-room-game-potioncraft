@@ -76,9 +76,9 @@ public class CauldronController {
   @FXML
   private void initialize() {
     // Set up the timer
-    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBrewingLabel(timerLabel);
-    inventory = MainMenuController.inventory.getInventory();
+    inventory = MainMenuController.getInventory().getInventory();
     // set up drag and drop for all images
     setupDragAndDrop(batWingImage, "batWingImage");
     setupDragAndDrop(crystalImage, "crystalImage");
