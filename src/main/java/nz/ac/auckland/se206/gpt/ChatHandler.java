@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class ChatHandler {
   private ChatCompletionRequest chatCompletionRequest;
   public Choice result;
+  public Task<Void> appendTask;
 
   @FXML
   public void initialize() throws ApiProxyException {
@@ -67,7 +68,7 @@ public class ChatHandler {
   public void appendChatMessage(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
     chatTextArea.appendText(msg.getRole() + ": ");
 
-    Task<Void> appendTask =
+    appendTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
@@ -83,7 +84,7 @@ public class ChatHandler {
     
     if (msg.getRole().equals("Wizard") || msg.getRole().equals("assistant")) {
     appendTask.setOnSucceeded(
-        (event) -> {
+        e -> {
           inputText.setDisable(false);
           inputText.setOpacity(1);
           sendButton.setDisable(false);
