@@ -89,7 +89,7 @@
       <Rectangle fx:id="bookAirRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="792.0" layoutY="167.0" onMouseClicked="#clickBookAir" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Label fx:id="chooseLabel" layoutX="610.0" layoutY="99.0" opacity="0.0" prefHeight="47.0" prefWidth="365.0" text="Choose the right book" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="32.0" />
+            <Font name="Algerian" size="24.0" />
          </font>
       </Label>
       <TextArea fx:id="chatTextArea" editable="false" layoutX="127.0" layoutY="509.0" opacity="0.0" prefHeight="101.0" prefWidth="763.0" wrapText="true">
