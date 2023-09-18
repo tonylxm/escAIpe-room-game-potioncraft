@@ -15,16 +15,11 @@
             <Image url="@../images/cauldron-room.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="680.0" fitWidth="1024.0" opacity="0.74">
+      <ImageView fx:id="backImg" fitHeight="680.0" fitWidth="1024.0" opacity="0.74">
          <image>
             <Image url="@../images/mystic.jpeg" />
          </image>
       </ImageView>
-      <Label fx:id="returnLbl" layoutX="14.0" layoutY="614.0" onMouseClicked="#goBack" text="Return">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
       <ImageView fx:id="cauldronImageView" fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
          <image>
             <Image url="@../images/cauldron.png" />
@@ -96,6 +91,11 @@
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="926.0" layoutY="21.0">
          <image>
             <Image url="@../images/hourglass-1024x1024.gif" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="backImg" fitHeight="55.0" fitWidth="57.0" layoutX="953.0" layoutY="614.0" onMouseClicked="#goBack">
+         <image>
+            <Image url="@../images/back.png" />
          </image>
       </ImageView>
    </children>

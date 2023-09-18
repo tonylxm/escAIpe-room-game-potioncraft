@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -19,6 +20,7 @@ import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
@@ -26,8 +28,6 @@ public class CauldronController {
 
   @FXML
   private Pane pane;
-  @FXML 
-  private Label returnLbl;
   @FXML 
   private ImageView batWingImage;
   @FXML 
@@ -58,6 +58,8 @@ public class CauldronController {
   private Button  emptyBtn;
   @FXML
   private Label timerLabel;
+  @FXML
+  private ImageView backImg;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -68,6 +70,8 @@ public class CauldronController {
   private ImageView draggedItem;
 
   private CountdownTimer countdownTimer;
+
+  private ShapeInteractionHandler interactionHandler;
 
   public CauldronController() {
     instance = this;
@@ -163,6 +167,18 @@ public class CauldronController {
           event.setDropCompleted(success);
           event.consume();
         });
+
+        interactionHandler = new ShapeInteractionHandler();
+        //set glow for back image
+        if (backImg != null) {
+          backImg.setOnMouseEntered(
+              event -> interactionHandler.glowThis(backImg));
+          backImg.setOnMouseExited(
+              event -> interactionHandler.unglowThis(backImg));
+          
+        }
+
+      
   }
 
   // Method to update the image states based on the player's inventory
