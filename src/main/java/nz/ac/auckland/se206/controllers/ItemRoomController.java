@@ -53,9 +53,6 @@ public abstract class ItemRoomController {
    */
   @FXML
   protected void genericInitialise() {
-    //countdownTimer = MainMenuController.getCountdownTimer();
-    //countdownTimer.setLeftTimerLabel(timerLabel);
-
     readyToAdd = false;
     bagOpened = false;
 
@@ -158,7 +155,6 @@ public abstract class ItemRoomController {
     if (!GameState.isBookRiddleResolved) {
       showWizardChat();
       GameState.isBookRiddleGiven = true;
-      // unhighlightThis(wizardRectangle);
     } else {
       // showWizardChat();
     }
