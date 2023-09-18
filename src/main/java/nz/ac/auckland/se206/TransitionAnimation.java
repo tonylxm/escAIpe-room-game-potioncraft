@@ -42,6 +42,13 @@ public class TransitionAnimation {
     fadeTransition.play();
   }
 
+  /**
+   * Fading to black inbetween scenes to have a smooth transition.
+   * 
+   * @param obj
+   * @param appUi
+   * @param mainMenu
+   */
   public static void changeScene(Node obj, AppUi appUi, boolean mainMenu) {
     double s1;
     double s2;
@@ -54,6 +61,7 @@ public class TransitionAnimation {
       s2 = 0.1;
     }
 
+    // Setting the appropriate roots and scenes for the fade transitions
     FadeTransition fadeOut = new FadeTransition(Duration.seconds(s1), obj);
     fadeOut.setFromValue(1.0);
     fadeOut.setToValue(0.0);

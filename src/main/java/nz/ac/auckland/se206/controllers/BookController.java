@@ -178,25 +178,30 @@ public class BookController {
     speakThread.start();
   }
 
+  /**
+   * Setting the appropriate scene when transitioning to the book view.
+   */
   public void updateBackground() {
     AppUi scene = SceneManager.getTimerScene();
+    // Going from the cauldron room to the book
     if (scene == AppUi.CAULDRON_ROOM) {
       cauldronRoomBackground.setOpacity(1);
       treasureBackground.setOpacity(0);
       libraryBackground.setOpacity(0);
     }
 
+    // Going from the library to the book
     if (scene == AppUi.LIBRARY_ROOM) {
       cauldronRoomBackground.setOpacity(0);
       treasureBackground.setOpacity(0);
       libraryBackground.setOpacity(1);
     }
 
+    // Going from the treasure room to the book
     if (scene == AppUi.TREASURE_ROOM) {
       cauldronRoomBackground.setOpacity(0);
       treasureBackground.setOpacity(1);
       libraryBackground.setOpacity(0);
     }
-
   }
 }

@@ -215,7 +215,7 @@ public class MainMenuController {
         SceneManager.setCauldronControllerInstance(cauldronController);
 
         //create an instance of BookController
-       FXMLLoader bookLoader = new FXMLLoader(App.class.getResource("/fxml/book.fxml"));
+        FXMLLoader bookLoader = new FXMLLoader(App.class.getResource("/fxml/book.fxml"));
         Parent bookRoot = bookLoader.load();
         BookController bookController = bookLoader.getController();
 
