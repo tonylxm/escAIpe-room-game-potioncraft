@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -83,6 +84,11 @@ public class CauldronRoomController {
   @FXML 
   private ImageView ttsBtn2;
 
+  @FXML
+  private ImageView notificationBack;
+  @FXML
+  private Label notificationText;
+
   private ShapeInteractionHandler interactionHandler;
   private ChatHandler chatHandler = new ChatHandler();
   private String book;
@@ -93,6 +99,8 @@ public class CauldronRoomController {
   private boolean bagOpened;
 
   private CountdownTimer countdownTimer;
+
+  private Boolean showRecipe = true;
 
   @FXML
   public void initialize() {
@@ -384,7 +392,7 @@ public class CauldronRoomController {
       chatTextArea.setOpacity(0);
       disableBooks();
       chooseLabel.setOpacity(0);
-
+      enableRecipe();
       disableChat();
 
       // Handling closing the "bag" when clicking off inventory
@@ -394,6 +402,19 @@ public class CauldronRoomController {
         System.out.println("Bag closed");
       }
     }
+  }
+
+  @FXML
+  private void enableRecipe() {
+    bookBtn.setDisable(false);
+    bookBtn.setOpacity(1);
+
+    if(showRecipe) {
+      notificationText.setText("Check bottom right for the recipe book!");
+      notifyPopup();
+    }
+
+    showRecipe = false;
   }
 
   // @FXML
@@ -519,5 +540,41 @@ public class CauldronRoomController {
           }
         };
     new Thread(speakTask, "Speak Thread").start();
+  }
+
+  @FXML
+  private void notifyPopup() {
+    // Create a FadeTransition to gradually change opacity over 3 seconds
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(5), notificationBack);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(1.0);
+            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(5), notificationText);
+            fadeTransition2.setFromValue(1.0);
+            fadeTransition2.setToValue(1.0);
+
+            // Play the fade-in animation
+            fadeTransition.play();
+            fadeTransition2.play();
+
+            // Schedule a task to fade out the image after 3 seconds
+            fadeTransition.setOnFinished(fadeEvent -> {
+              if (notificationBack.getOpacity() == 1.0) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationBack);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+              }
+            });
+
+            fadeTransition2.setOnFinished(fadeEvent -> {
+              if (notificationText.getOpacity() == 1.0) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationText);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+              }
+            });
+
+            
   }
 }
