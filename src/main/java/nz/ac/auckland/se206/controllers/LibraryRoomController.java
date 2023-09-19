@@ -15,19 +15,6 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class LibraryRoomController extends ItemRoomController {
-  // Booleans to keep track of whether an item has been added to the inventory
-  private boolean itemOneAdded;
-  private boolean itemTwoAdded;
-  private boolean itemThreeAdded;
-  private boolean itemFourAdded;
-  private boolean itemFiveAdded;
-  // Booleans to keep track of if an item is clicked or selected
-  private boolean oneClicked;
-  private boolean twoClicked;
-  private boolean threeClicked;
-  private boolean fourClicked;
-  private boolean fiveClicked;
-
   @FXML
   private Pane pane;
   @FXML
@@ -56,65 +43,10 @@ public class LibraryRoomController extends ItemRoomController {
    */
   public void initialize() {
     // Initialising everything from the superclass
-    genericInitialise();
+    genericInitialise(itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg, rightShpe);
+    
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLibraryTimerLabel(timerLabel);
-
-    // Setting appropriate boolean fields
-    itemOneAdded = false;
-    itemTwoAdded = false;
-    itemThreeAdded = false;
-    itemFourAdded = false;
-    itemFiveAdded = false;
-
-    oneClicked = false;
-    twoClicked = false;
-    threeClicked = false;
-    fourClicked = false;
-    fiveClicked = false;
-
-    // Setting up listeners for the various items
-    interactionHandler = new ShapeInteractionHandler();
-      itemOneImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(itemOneImg));
-      itemOneImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
-      itemOneImg.setOnMouseClicked(
-          event -> itemSelect(Items.Item.TAIL));
-
-      itemTwoImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(itemTwoImg));
-      itemTwoImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
-      itemTwoImg.setOnMouseClicked(
-          event -> itemSelect(Items.Item.INSECT_WINGS));
-
-
-      itemThreeImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(itemThreeImg));
-      itemThreeImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
-      itemThreeImg.setOnMouseClicked(
-          event -> itemSelect(Items.Item.FLOWER));
-  
-      itemFourImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(itemFourImg));
-      itemFourImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
-      itemFourImg.setOnMouseClicked(
-          event -> itemSelect(Items.Item.SCALES));
- 
-      itemFiveImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(itemFiveImg));
-      itemFiveImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
-      itemFiveImg.setOnMouseClicked(
-          event -> itemSelect(Items.Item.POWDER));
- 
-      rightShpe.setOnMouseEntered(
-          event -> rightShpe.setOpacity(0.9));
-      rightShpe.setOnMouseExited(
-          event -> rightShpe.setOpacity(0.5));
   }
 
   /** 
