@@ -61,8 +61,11 @@
          <image>
             <Image url="@../images/wizard.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.5" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Polygon fx:id="leftShpe" fill="WHITE" layoutX="72.0" layoutY="327.0" onMouseClicked="#goLeft" opacity="0.6" points="-57.0, 8.0, -22.0, 35.0, -22.0, -17.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

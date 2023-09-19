@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -14,66 +15,105 @@
          <image>
             <Image url="@../images/cauldron-room.jpg" />
          </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="backImg" fitHeight="680.0" fitWidth="1024.0" opacity="0.74">
          <image>
             <Image url="@../images/mystic.jpeg" />
          </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="cauldronImageView" fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
          <image>
             <Image url="@../images/cauldron.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="featherImage" fitHeight="111.0" fitWidth="112.0" layoutX="191.0" layoutY="285.0" opacity="0.0">
          <image>
             <Image url="@../images/feather.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="flowerImage" fitHeight="123.0" fitWidth="123.0" layoutX="213.0" layoutY="501.0" opacity="0.0">
          <image>
             <Image url="@../images/flower.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="insectWingImage" fitHeight="55.0" fitWidth="123.0" layoutX="790.0" layoutY="545.0" opacity="0.0">
          <image>
             <Image url="@../images/iwings.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="powderImage" fitHeight="65.0" fitWidth="112.0" layoutX="790.0" layoutY="329.0" opacity="0.0">
          <image>
             <Image url="@../images/powder.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="scalesImage" fitHeight="136.0" fitWidth="131.0" layoutX="780.0" layoutY="117.0" opacity="0.0">
          <image>
             <Image url="@../images/scales.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="crystalImage" fitHeight="136.0" fitWidth="131.0" layoutX="36.0" layoutY="349.0" opacity="0.0">
          <image>
             <Image url="@../images/stone.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="tailImage" fitHeight="82.0" fitWidth="82.0" layoutX="378.0" layoutY="164.0" opacity="0.0">
          <image>
             <Image url="@../images/tail.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="talonImage" fitHeight="111.0" fitWidth="112.0" layoutX="274.0" layoutY="139.0" opacity="0.0">
          <image>
             <Image url="@../images/talon.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="wreathImage" fitHeight="136.0" fitWidth="150.0" layoutX="541.0" layoutY="137.0" opacity="0.0">
          <image>
             <Image url="@../images/wreath.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="batWingImage" fitHeight="171.0" fitWidth="137.0" layoutX="84.0" layoutY="54.0" opacity="0.0">
          <image>
             <Image url="@../images/bwings.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
       <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Button fx:id="brewBtn" layoutX="445.0" layoutY="609.0" mnemonicParsing="false" onAction="#brewPotion" prefHeight="65.0" prefWidth="161.0" text="Brew!" />
@@ -97,6 +137,9 @@
          <image>
             <Image url="@../images/back.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="notificationBack" fitHeight="200.0" fitWidth="290.0" layoutX="374.0" layoutY="-22.0" opacity="0.0">
          <image>

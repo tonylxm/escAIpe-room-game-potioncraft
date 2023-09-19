@@ -102,7 +102,7 @@ public class ChatHandler {
     new Thread(appendTask, "Append Thread").start();
 
     // Not allowing the user to send messages while the wizard or assistant is typing
-    if (msg.getRole().equals("Wizard") || msg.getRole().equals("assistant")) {
+    if (displayRole.equals("Wizard")) {
       appendTask.setOnSucceeded(
           e -> {
             inputText.setDisable(false);
