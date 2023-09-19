@@ -148,7 +148,7 @@
             <Image url="@../images/oie_yaYCuLx1PDOG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="notificationBack" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0">
+      <ImageView fx:id="notificationBack" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0" opacity="0.0">
          <image>
             <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
          </image>
