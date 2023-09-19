@@ -148,14 +148,14 @@
             <Image url="@../images/oie_yaYCuLx1PDOG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="notificationBack" fitHeight="200.0" fitWidth="257.0" layoutX="375.0" layoutY="-26.0" opacity="0.0">
+      <ImageView fx:id="notificationBack" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0">
          <image>
             <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
          </image>
       </ImageView>
-      <Label fx:id="notificationText" layoutX="409.0" layoutY="40.0" prefHeight="67.0" prefWidth="189.0" wrapText="true">
+      <Label fx:id="notificationText" layoutX="389.0" layoutY="52.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
          <font>
-            <Font name="Algerian" size="14.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
       </Label>
    </children>

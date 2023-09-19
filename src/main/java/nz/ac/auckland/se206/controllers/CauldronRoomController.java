@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -200,8 +199,6 @@ public class CauldronRoomController {
             "Wizard",
             "You've done well to solve the riddle. The rest is now up to you. If you"
                 + " require any assistance, please come talk to me again.");
-
-    // Force the user to talk to the wizard first and solve book riddle
   }
 
   private void disableChat() {
@@ -460,6 +457,8 @@ public class CauldronRoomController {
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
     if (MainMenuController.inventory.size() == 0) {
+      notificationText.setText("You have no ingredients in your bag!");
+      notifyPopup();
       return;
     }
     // If the bag isn't opened already, open it
@@ -501,7 +500,6 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            // Could refactor for hint checking
             ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea, inputText, sendButton);
             // if (lastMsg.getRole().equals("assistant")
             //     && lastMsg.getContent().startsWith("Correct")) {
@@ -533,7 +531,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            App.textToSpeech.speak(chatHandler.result.getChatMessage().getContent());
+            App.textToSpeech.speak(chatTextArea.getText());
             return null;
           }
         };
