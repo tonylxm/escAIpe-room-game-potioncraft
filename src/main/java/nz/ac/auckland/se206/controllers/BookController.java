@@ -5,9 +5,7 @@ import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
@@ -18,7 +16,6 @@ import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -35,26 +32,39 @@ public class BookController {
   @FXML
   private Rectangle backgroundShade;
 
-  private Button xBtn;
-  @FXML private ImageView backBtn;
-  @FXML private ListView<String> ingredientList;
-  @FXML private ImageView ttsBtn1;
-  @FXML private Label timerLabel;
+  @FXML
+  private ImageView backBtn;
+  @FXML
+  private ListView<String> ingredientList;
+  @FXML
+  private ImageView ttsBtn1;
+  @FXML
+  private Label timerLabel;
 
-  @FXML private ImageView placeholderImg;
-  @FXML private ImageView itemOneImg;
-  @FXML private ImageView itemTwoImg;
-  @FXML private ImageView itemThreeImg;
-  @FXML private ImageView itemFourImg;
-  @FXML private ImageView itemFiveImg;
-  @FXML private ImageView itemSixImg;
-  @FXML private ImageView itemSevenImg;
-  @FXML private ImageView itemEightImg;
-  @FXML private ImageView itemNineImg;
-  @FXML private ImageView itemTenImg;
+  @FXML
+  private ImageView placeholderImg;
+  @FXML
+  private ImageView itemOneImg;
+  @FXML
+  private ImageView itemTwoImg;
+  @FXML
+  private ImageView itemThreeImg;
+  @FXML
+  private ImageView itemFourImg;
+  @FXML
+  private ImageView itemFiveImg;
+  @FXML
+  private ImageView itemSixImg;
+  @FXML
+  private ImageView itemSevenImg;
+  @FXML
+  private ImageView itemEightImg;
+  @FXML
+  private ImageView itemNineImg;
+  @FXML
+  private ImageView itemTenImg;
 
   private CountdownTimer countdownTimer;
-  private ShapeInteractionHandler interactionHandler;
 
   /**
    * Initializes the chat view, loading the riddle. Also initialises ways to view the appropriate
@@ -70,11 +80,7 @@ public class BookController {
 
     writeRecipeIngredients(Items.necessary);
 
-    interactionHandler = new ShapeInteractionHandler();
-    if (xBtn != null) {
-      xBtn.setOnMouseEntered(event -> interactionHandler.glowThis(backBtn));
-      xBtn.setOnMouseExited(event -> interactionHandler.unglowThis(backBtn));
-    }
+    ItemRoomController.btnMouseActions(backBtn);
 
     ingredientList.setStyle("-fx-font-size: 1.5em ;");
     ingredientList
@@ -155,7 +161,7 @@ public class BookController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+  private void onGoBack() {
     System.out.println("BOOK -> " + SceneManager.currScene);
     TransitionAnimation.changeScene(pane, SceneManager.currScene, false);
   }
