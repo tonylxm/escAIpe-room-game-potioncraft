@@ -81,7 +81,6 @@ public class MainMenuController {
     items = new Items(5);
     inventory = new Inventory();
     TransitionAnimation.setMasterPane(masterPane);
-
     difficultySelected = false;
     // Hover hints on difficulty selection
     easyBtn.setOnMouseEntered(event -> difficultyHoverOn(hintInfinity));

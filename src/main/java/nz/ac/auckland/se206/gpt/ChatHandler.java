@@ -86,9 +86,11 @@ public class ChatHandler {
     appendTask.setOnSucceeded(
         e -> {
           inputText.setDisable(false);
-          inputText.setOpacity(1);
           sendButton.setDisable(false);
-          sendButton.setOpacity(1);
+          if (inputText.getOpacity() == 0.5) {
+            inputText.setOpacity(1);
+            sendButton.setOpacity(1);
+          }
         });
       }
   }

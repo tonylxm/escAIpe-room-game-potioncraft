@@ -281,8 +281,6 @@ public class CauldronRoomController {
       GameState.isBookRiddleGiven = true;
     } else {
       showWizardChat();
-      enableChat();
-
     }
   }
 
