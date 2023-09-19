@@ -206,7 +206,7 @@ public class TreasureRoomController extends ItemRoomController {
     if (!readyToAdd) {
       return;
     }
-    MainMenuController.inventory.add(item);
+    MainMenuController.getInventory().add(item);
     setText("", false, false);
     readyToAdd = false;
 
@@ -217,6 +217,8 @@ public class TreasureRoomController extends ItemRoomController {
     // Different controls are executed depending on the item
     switch (item) {
       case TALON:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image six = new Image("images/talon.png");
         ratio = six.getHeight() / six.getWidth();
         image = new ImageView(six);
@@ -225,6 +227,8 @@ public class TreasureRoomController extends ItemRoomController {
         sixClicked = false;
         break;
       case CRYSTAL:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image seven = new Image("images/stone.png");
         ratio = seven.getHeight() / seven.getWidth();
         image = new ImageView(seven);
@@ -233,6 +237,8 @@ public class TreasureRoomController extends ItemRoomController {
         sevenClicked = false;
         break;
       case BAT_WINGS:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image eight = new Image("images/bwings.png");
         ratio = eight.getHeight() / eight.getWidth();
         image = new ImageView(eight);
@@ -241,6 +247,8 @@ public class TreasureRoomController extends ItemRoomController {
         eightClicked = false;
         break;
       case WREATH:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image nine = new Image("images/wreath.png");
         ratio = nine.getHeight() / nine.getWidth();
         image = new ImageView(nine);
@@ -249,6 +257,8 @@ public class TreasureRoomController extends ItemRoomController {
         nineClicked = false;
         break;
       case FEATHER:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image ten = new Image("images/feather.png");
         ratio = ten.getHeight() / ten.getWidth();
         image = new ImageView(ten);
@@ -297,6 +307,7 @@ public class TreasureRoomController extends ItemRoomController {
     if (bookController != null) {
       bookController.updateBackground();
     }
+    // Transitioning to the book scene with the appropriate fade animation
     System.out.println("TREASURE_ROOM -> BOOK");
     SceneManager.currScene = AppUi.TREASURE_ROOM;
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);

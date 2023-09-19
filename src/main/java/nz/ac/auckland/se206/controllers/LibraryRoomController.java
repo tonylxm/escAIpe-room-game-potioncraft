@@ -57,7 +57,7 @@ public class LibraryRoomController extends ItemRoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise();
-    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLibraryTimerLabel(timerLabel);
 
 
@@ -206,7 +206,7 @@ public class LibraryRoomController extends ItemRoomController {
     if (!readyToAdd) {
       return;
     }
-    MainMenuController.inventory.add(item);
+    MainMenuController.getInventory().add(item);
     setText("", false, false);
     readyToAdd = false;
 
@@ -217,6 +217,8 @@ public class LibraryRoomController extends ItemRoomController {
     // Different controls are executed depending on the item
     switch (item) {
       case TAIL:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image one = new Image("images/tail.png");
         ratio = one.getHeight() / one.getWidth();
         image = new ImageView(one);
@@ -225,6 +227,8 @@ public class LibraryRoomController extends ItemRoomController {
         oneClicked = false;
         break;
       case INSECT_WINGS:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image two = new Image("images/iwings.png");
         ratio = two.getHeight() / two.getWidth();
         image = new ImageView(two);
@@ -233,6 +237,8 @@ public class LibraryRoomController extends ItemRoomController {
         twoClicked = false;
         break;
       case FLOWER:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image three = new Image("images/flower.png");
         ratio = three.getHeight() / three.getWidth();
         image = new ImageView(three);
@@ -241,6 +247,8 @@ public class LibraryRoomController extends ItemRoomController {
         threeClicked = false;
         break;
       case SCALES:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image four = new Image("images/scales.png");
         ratio = four.getHeight() / four.getWidth();
         image = new ImageView(four);
@@ -249,6 +257,8 @@ public class LibraryRoomController extends ItemRoomController {
         fourClicked = false;
         break;
       case POWDER:
+        // Setting up appropriate image and ratio and appropriate
+        // click fields to be added
         Image five = new Image("images/powder.png");
         ratio = five.getHeight() / five.getWidth();
         image = new ImageView(five);

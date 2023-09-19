@@ -27,9 +27,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
-import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
@@ -90,10 +88,6 @@ public class CauldronRoomController {
   private Label notificationText;
 
   private ShapeInteractionHandler interactionHandler;
-  private ChatHandler chatHandler = new ChatHandler();
-  private String book;
-  private String[] options = {"fire", "water", "air"};
-  private ChatMessage riddle;
   private ChatMessage riddleSolveMsg;
 
   private boolean bagOpened;
@@ -104,6 +98,8 @@ public class CauldronRoomController {
 
   @FXML
   public void initialize() {
+    // Setting up the countdown and appropriate booleans before
+    // anything happens to change them within the game
     bagOpened = false;
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
@@ -115,39 +111,43 @@ public class CauldronRoomController {
     textRect.setDisable(true);
     disableBooks();
     mouseTrackRegion.setOpacity(0);
-    book = getRandomBook();
 
+    // Setting up the appropriate interactions for the cauldron
     if (cauldronImg != null) {
       cauldronImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(cauldronImg));
       cauldronImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(cauldronImg));
-      
     }
+    // Setting up the appropriate interactions for the wizard
     if (wizardImg != null) {
       wizardImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(wizardImg));
       wizardImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(wizardImg));
     }
+    // Setting up the appropriate interactions for the right arrow
     if (rightArrow != null) {
       rightArrow.setOnMouseEntered(
           event -> rightArrow.setOpacity(0.9));
       rightArrow.setOnMouseExited(
           event -> rightArrow.setOpacity(0.5));
     }
+    // Setting up the appropriate interactions for the left arrow
     if (leftArrow != null) {
       leftArrow.setOnMouseEntered(
           event -> leftArrow.setOpacity(0.9));
       leftArrow.setOnMouseExited(
           event -> leftArrow.setOpacity(0.5));
     }
+    // Setting up the appropriate interactions for the book button
     if (bookBtn != null) {
       bookBtn.setOnMouseEntered(
           event -> interactionHandler.glowThis(bookBtn));
       bookBtn.setOnMouseExited(
           event -> interactionHandler.unglowThis(bookBtn));
     }
+    // Setting up the appropriate interactions for the bag button
     if (bagBtn != null) {
       bagBtn.setOnMouseEntered(
           event -> interactionHandler.glowThis(bagBtn));
@@ -155,20 +155,21 @@ public class CauldronRoomController {
           event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
-    
-    //glow the books on hover
+    // Setting up the appropriate interactions for the book fire
     if (bookFireRectangle != null) {
       bookFireRectangle.setOnMouseEntered(
           event -> interactionHandler.glowThis(bookFireRectangle));
       bookFireRectangle.setOnMouseExited(
           event -> interactionHandler.unglowThis(bookFireRectangle));
     }
+    // Setting up the appropriate interactions for the book water
     if (bookWaterRectangle != null) {
       bookWaterRectangle.setOnMouseEntered(
           event -> interactionHandler.glowThis(bookWaterRectangle));
       bookWaterRectangle.setOnMouseExited(
           event -> interactionHandler.unglowThis(bookWaterRectangle));
     }
+    // Setting up the appropriate interactions for the book air
     if (bookAirRectangle != null) {
       bookAirRectangle.setOnMouseEntered(
           event -> interactionHandler.glowThis(bookAirRectangle));
@@ -176,25 +177,7 @@ public class CauldronRoomController {
           event -> interactionHandler.unglowThis(bookAirRectangle));
     }
 
-    try {
-      chatHandler.initialize();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-    }
-    Task<Void> bookRiddleTask =
-        new Task<Void>() {
-
-          @Override
-          protected Void call() throws Exception {
-            riddle =
-                new ChatMessage(
-                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddle(book)));
-            return null;
-          }
-        };
-    new Thread(bookRiddleTask).start();
-    System.out.println(riddle);
-
+    // Message to be displayed when the user selected the correct book
     riddleSolveMsg =
         new ChatMessage(
             "Wizard",
@@ -204,7 +187,11 @@ public class CauldronRoomController {
     // Force the user to talk to the wizard first and solve book riddle
   }
 
+  /**
+   * Disabling the chat functionality for the user to be able to talk to the wizard.
+   */
   private void disableChat() {
+    // Disabling the approrpiate fields and making everything invisible
     chatTextArea.setDisable(true);
     inputText.setDisable(true);
     sendButton.setDisable(true);
@@ -217,7 +204,11 @@ public class CauldronRoomController {
     wizardChatImage.setOpacity(0);
   }
 
+  /**
+   * Enabling the chat functionality for the user to be able to talk to the wizard.
+   */
   private void enableChat() {
+    // Enabling the approrpiate fields and making everything visible
     chatTextArea.setDisable(false);
     inputText.setDisable(false);
     sendButton.setDisable(false);
@@ -271,26 +262,36 @@ public class CauldronRoomController {
     System.out.println(Items.necessary);
   }
   
+  /**
+   * Taking the user to the wizard's chat functionality.
+   * Also, if the user hasn't been prompted with the riddle yet,
+   * showing it to them too.
+   * 
+   * @param event
+   * @throws InterruptedException
+   */
   @FXML
   public void clickWizard(MouseEvent event) throws InterruptedException {
     System.out.println("wizard clicked");
-    if (!GameState.isBookRiddleGiven ) {
+    if (!GameState.isBookRiddleGiven) {
       showWizardChat();
       // mouseTrackRegion.setDisable(true);
       inputText.setDisable(true);
       inputText.setOpacity(0.5);
       sendButton.setDisable(true);
       sendButton.setOpacity(0.5);
-      chatHandler.appendChatMessage(riddle, chatTextArea, inputText, sendButton);
+      MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
-      chatHandler.appendTask.setOnSucceeded(e -> {
-          chooseLabel.setOpacity(1);
-          inputText.setDisable(false);
-          inputText.setOpacity(1);
-          sendButton.setDisable(false);
-          sendButton.setOpacity(1);
-          enableBooks();
-        });
+      // After the riddle scrolling text animation has finished, then allowing
+      // the user to select the book and respond to the wizard
+      MainMenuController.getChatHandler().getAppendTask().setOnSucceeded(e -> {
+        chooseLabel.setOpacity(1);
+        inputText.setDisable(false);
+        inputText.setOpacity(1);
+        sendButton.setDisable(false);
+        sendButton.setOpacity(1);
+        enableBooks();
+      });
       GameState.isBookRiddleGiven = true;
     } else {
       showWizardChat();
@@ -302,7 +303,7 @@ public class CauldronRoomController {
   @FXML
   public void clickBookFire(MouseEvent event) {
     System.out.println("book fire clicked");
-    if (book == "fire") {
+    if (MainMenuController.getBook() == "fire") {
       // remove the book from the scene
       //bookFireRectangle.setOpacity(0);
       //fade the book out
@@ -315,14 +316,14 @@ public class CauldronRoomController {
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+      // chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
   @FXML
   public void clickBookWater(MouseEvent event) {
     System.out.println("book water clicked");
-    if (book == "water") {
+    if (MainMenuController.getBook() == "water") {
       // remove the book from the scene
       FadeTransition ft = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
       ft.setFromValue(1);
@@ -333,14 +334,14 @@ public class CauldronRoomController {
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+      // chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
   @FXML
   public void clickBookAir(MouseEvent event) {
     System.out.println("book air clicked");
-    if (book == "air") {
+    if (MainMenuController.getBook() == "air") {
       // remove the book from the scene
       FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAirRectangle);
       ft.setFromValue(1);
@@ -351,7 +352,7 @@ public class CauldronRoomController {
       bookAirRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+      // chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -416,25 +417,7 @@ public class CauldronRoomController {
 
     showRecipe = false;
   }
-
-  // @FXML
-  // public void highlightThis(Shape shape) {
-  // shape.setStroke(Color.GOLD);
-  // shape.setStrokeWidth(5);
-  // }
-
-  // @FXML
-  // public void unhighlightThis(Shape shape) {
-  // shape.setStrokeWidth(0);
-  // shape.setStroke(Color.BLACK);
-  // }
-
-  private String getRandomBook() {
-    int randomIndex = (int) (Math.random() * options.length);
-    System.out.println(options[randomIndex]);
-    return options[randomIndex];
-  }
-
+  
   /** Displaying wizard chat to user when prompted */
   private void showWizardChat() {
     // Setting approrpiate fields to be visible and interactable
@@ -446,10 +429,14 @@ public class CauldronRoomController {
     mouseTrackRegion.setOpacity(0.5);
   }
 
+  /**
+   * Taking the user to the book scene from the room scene to be able to
+   */
   @FXML
   public void openBook() {
     BookController bookController = SceneManager.getBookControllerInstance();
     if (bookController != null) {
+      // Updating the book scene to reflect the current state of the book
       bookController.updateBackground();
     }
     System.out.println("CAULDRON_ROOM -> BOOK");
@@ -461,14 +448,14 @@ public class CauldronRoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.inventory.size() == 0) {
+    if (MainMenuController.getInventory().size() == 0) {
       return;
     }
     // If the bag isn't opened already, open it
     if (!bagOpened) {
       calItemScroll.setVvalue(0);
       calItemScroll.setContent(null);
-      calItemScroll.setContent(MainMenuController.inventory.box);
+      calItemScroll.setContent(MainMenuController.getInventory().getBox());
       calItemScroll.setOpacity(1);
       bagOpened = true;
       mouseTrackRegion.setDisable(false);
@@ -497,18 +484,14 @@ public class CauldronRoomController {
     sendButton.setOpacity(0.5);
     ChatMessage msg =
         new ChatMessage("user", message); // TODO: Cannot change to You without generating error
-    chatHandler.appendChatMessage(msg, chatTextArea, inputText, sendButton);
+    MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            // Could refactor for hint checking
-            ChatMessage lastMsg = chatHandler.runGptGameMaster(msg, chatTextArea, inputText, sendButton);
-            // if (lastMsg.getRole().equals("assistant")
-            //     && lastMsg.getContent().startsWith("Correct")) {
-            //   GameState.isBookRiddleResolved = true;
-            // }
+            // Hints are already checked in the prompt
+            MainMenuController.getChatHandler().runGptGameMaster(msg, chatTextArea, inputText, sendButton);
             return null;
           }
         };
@@ -535,7 +518,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            App.textToSpeech.speak(chatHandler.result.getChatMessage().getContent());
+            App.textToSpeech.speak(MainMenuController.getChatHandler().getResult().getChatMessage().getContent());
             return null;
           }
         };

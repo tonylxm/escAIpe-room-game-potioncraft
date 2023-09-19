@@ -16,8 +16,8 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -178,25 +178,30 @@ public class BookController {
     speakThread.start();
   }
 
+  /**
+   * Setting the appropriate scene when transitioning to the book view.
+   */
   public void updateBackground() {
     AppUi scene = SceneManager.getTimerScene();
+    // Going from the cauldron room to the book
     if (scene == AppUi.CAULDRON_ROOM) {
       cauldronRoomBackground.setOpacity(1);
       treasureBackground.setOpacity(0);
       libraryBackground.setOpacity(0);
     }
 
+    // Going from the library to the book
     if (scene == AppUi.LIBRARY_ROOM) {
       cauldronRoomBackground.setOpacity(0);
       treasureBackground.setOpacity(0);
       libraryBackground.setOpacity(1);
     }
 
+    // Going from the treasure room to the book
     if (scene == AppUi.TREASURE_ROOM) {
       cauldronRoomBackground.setOpacity(0);
       treasureBackground.setOpacity(1);
       libraryBackground.setOpacity(0);
     }
-
   }
 }

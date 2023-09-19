@@ -92,15 +92,6 @@ public class CountdownTimer {
   // timerLabel!!!
   private void updateTimerLabel() {
     Parent currentSceneRoot = SceneManager.getUiRoot(SceneManager.getTimerScene());
-    // System.out.println(
-    // "currentSceneRoot = "
-    // + currentSceneRoot
-    // + " || current scene = "
-    // + SceneManager.getTimerScene()
-    // + " || sec = "
-    // + currentSeconds
-    // + " || cauldron timer = "
-    // + cauldronTimerLabel);
 
     if (currentSceneRoot != null) {
 
@@ -117,7 +108,6 @@ public class CountdownTimer {
 
       if (libraryTimerLabel != null) {
         libraryTimerLabel.setText(formatTimerText());
-        //System.out.println("left timer label updated");
       }
 
       if (rightTimerLabel != null) {
@@ -130,7 +120,6 @@ public class CountdownTimer {
 
       if (brewingLabel != null) {
         brewingLabel.setText(formatTimerText());
-        //System.out.println("brewing label updated");
       }
     }
   }
@@ -149,7 +138,6 @@ public class CountdownTimer {
   }
 
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
-    //System.out.println("setting left timer label");
     this.libraryTimerLabel = libraryTimerLabel;
   }
 

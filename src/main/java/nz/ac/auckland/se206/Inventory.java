@@ -5,8 +5,8 @@ import java.util.Set;
 import javafx.scene.layout.VBox;
 
 public class Inventory {
-  public Set<Items.Item> inventory;
-  public VBox box;
+  private Set<Items.Item> inventory;
+  private VBox box;
 
   public Inventory() {
     inventory = new HashSet<Items.Item>();
@@ -36,5 +36,17 @@ public class Inventory {
   /** Returns the inventory */
   public Set<Items.Item> getInventory() {
     return inventory;
+  }
+
+  public void setInventory(Set<Items.Item> inventory) {
+    this.inventory = inventory;
+  }
+
+  public VBox getBox() {
+    return box;
+  }
+
+  public void setBox(VBox box) {
+    this.box = box;
   }
 }

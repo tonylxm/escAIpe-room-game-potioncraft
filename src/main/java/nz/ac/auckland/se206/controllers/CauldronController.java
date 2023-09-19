@@ -86,9 +86,9 @@ public class CauldronController {
   @FXML
   private void initialize() {
     // Set up the timer
-    countdownTimer = MainMenuController.countdownTimer;
+    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBrewingLabel(timerLabel);
-    inventory = MainMenuController.inventory.getInventory();
+    inventory = MainMenuController.getInventory().getInventory();
     // set up drag and drop for all images
     setupDragAndDrop(batWingImage, "batWingImage");
     setupDragAndDrop(crystalImage, "crystalImage");
@@ -312,7 +312,8 @@ public class CauldronController {
   private void brewPotion() {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
-    // if more or less than 6 items have been dropped into the cauldron then the potion is not brewed
+    // if more or less than 6 items have been dropped into the cauldron then the 
+    // potion is not brewed
     if (cauldronItems.size() < 5 || cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
       if (inventory.isEmpty()) {
@@ -328,7 +329,8 @@ public class CauldronController {
     }
 
     if (cauldronItems.size() == 5) {
-      //check if the order of the items is correct by comparing cauldronItems with Items.necessary
+      //check if the order of the items is correct by comparing cauldronItems with 
+      // Items.necessary
       if (cauldronItems.equals(Items.necessary)) {
         System.out.println("Potion brewed");
         //set scene to you win
@@ -383,7 +385,8 @@ public class CauldronController {
 
   @FXML 
   private void resetItems() {
-    //returning the items to the original position. I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
+    //returning the items to the original position. 
+    // I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
     // batWingImage.setX(84);  it might not even be necessary nvm but keeping just in case
     // batWingImage.setY(54);
 
