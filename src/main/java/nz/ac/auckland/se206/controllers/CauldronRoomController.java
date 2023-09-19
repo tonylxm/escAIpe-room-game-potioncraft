@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -293,7 +296,12 @@ public class CauldronRoomController {
     System.out.println("book fire clicked");
     if (book == "fire") {
       // remove the book from the scene
-      bookFireRectangle.setOpacity(0);
+      //bookFireRectangle.setOpacity(0);
+      //fade the book out
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookFireRectangle);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.play();
       bookFireImage.setOpacity(0);
       bookFireImage.setDisable(true);
       bookFireRectangle.setDisable(true);
@@ -308,7 +316,10 @@ public class CauldronRoomController {
     System.out.println("book water clicked");
     if (book == "water") {
       // remove the book from the scene
-      bookWaterRectangle.setOpacity(0);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.play();
       bookWaterImage.setOpacity(0);
       bookWaterImage.setDisable(true);
       bookWaterRectangle.setDisable(true);
@@ -323,7 +334,10 @@ public class CauldronRoomController {
     System.out.println("book air clicked");
     if (book == "air") {
       // remove the book from the scene
-      bookAirRectangle.setOpacity(0);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAirRectangle);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.play();
       bookAirImage.setOpacity(0);
       bookAirImage.setDisable(true);
       bookAirRectangle.setDisable(true);
