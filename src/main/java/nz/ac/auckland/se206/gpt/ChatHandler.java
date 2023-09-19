@@ -30,7 +30,6 @@ public class ChatHandler {
       chatCompletionRequest.addMessage(result.getChatMessage());
       return result.getChatMessage().getContent();
     } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
       e.printStackTrace();
       return null;
     }
@@ -71,7 +70,20 @@ public class ChatHandler {
   public void appendChatMessage(
       ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
     // Adding the role of the chatter to the start of each message
-    chatTextArea.appendText(msg.getRole() + ": ");
+    String displayRole;
+    switch(msg.getRole()) {
+      case "assistant":
+        displayRole = "Wizard";
+        break;
+      case "user":
+        displayRole = "You";
+        break;
+      default:
+        displayRole = msg.getRole();
+        break;
+    }
+
+    chatTextArea.appendText(displayRole + ": ");
 
     // Appending the message character by character to the chat text area
     appendTask =
@@ -89,7 +101,7 @@ public class ChatHandler {
     new Thread(appendTask, "Append Thread").start();
 
     // Not allowing the user to send messages while the wizard or assistant is typing
-    if (msg.getRole().equals("Wizard") || msg.getRole().equals("assistant")) {
+    if (displayRole.equals("Wizard")) {
       appendTask.setOnSucceeded(
           e -> {
             inputText.setDisable(false);

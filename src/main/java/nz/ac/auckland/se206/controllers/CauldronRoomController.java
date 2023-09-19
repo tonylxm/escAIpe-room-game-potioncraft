@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,13 +25,11 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController {
-  
   @FXML
   private Pane pane;
   @FXML
@@ -86,14 +85,10 @@ public class CauldronRoomController {
   @FXML
   private Label notificationText;
 
-  private ShapeInteractionHandler interactionHandler;
   private ChatMessage riddleSolveMsg;
-
   private boolean bagOpened;
-
   private CountdownTimer countdownTimer;
-
-  private Boolean showRecipe = true;
+  private boolean showRecipe = true;
 
   @FXML
   public void initialize() {
@@ -102,80 +97,25 @@ public class CauldronRoomController {
     bagOpened = false;
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
-    interactionHandler = new ShapeInteractionHandler();
+
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
-    // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);
     textRect.setDisable(true);
-    disableChat();
-    disableBooks();
+    toggleChat(true, 0);
+    toggleBooks(true, 0);
     mouseTrackRegion.setOpacity(0);
 
-    // Setting up the appropriate interactions for the cauldron
-    if (cauldronImg != null) {
-      cauldronImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(cauldronImg));
-      cauldronImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(cauldronImg));
-    }
-    // Setting up the appropriate interactions for the wizard
-    if (wizardImg != null) {
-      wizardImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(wizardImg));
-      wizardImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(wizardImg));
-    }
-    // Setting up the appropriate interactions for the right arrow
-    if (rightArrow != null) {
-      rightArrow.setOnMouseEntered(
-          event -> rightArrow.setOpacity(0.9));
-      rightArrow.setOnMouseExited(
-          event -> rightArrow.setOpacity(0.5));
-    }
-    // Setting up the appropriate interactions for the left arrow
-    if (leftArrow != null) {
-      leftArrow.setOnMouseEntered(
-          event -> leftArrow.setOpacity(0.9));
-      leftArrow.setOnMouseExited(
-          event -> leftArrow.setOpacity(0.5));
-    }
-    // Setting up the appropriate interactions for the book button
-    if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookBtn));
-    }
-    // Setting up the appropriate interactions for the bag button
-    if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bagBtn));
-      // ELSE NO ITEMS IN BAG MESSAGE
-    }
-    // Setting up the appropriate interactions for the book fire
-    if (bookFireRectangle != null) {
-      bookFireRectangle.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookFireRectangle));
-      bookFireRectangle.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookFireRectangle));
-    }
-    // Setting up the appropriate interactions for the book water
-    if (bookWaterRectangle != null) {
-      bookWaterRectangle.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookWaterRectangle));
-      bookWaterRectangle.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookWaterRectangle));
-    }
-    // Setting up the appropriate interactions for the book air
-    if (bookAirRectangle != null) {
-      bookAirRectangle.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookAirRectangle));
-      bookAirRectangle.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookAirRectangle));
-    }
+    // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
+    ItemRoomController.btnMouseActions(cauldronImg);
+    ItemRoomController.btnMouseActions(wizardImg);
+    ItemRoomController.arrowMouseActions(leftArrow);
+    ItemRoomController.arrowMouseActions(rightArrow);
+    ItemRoomController.btnMouseActions(bookBtn);
+    ItemRoomController.btnMouseActions(bagBtn);
+    ItemRoomController.btnMouseActions(bookFireRectangle);
+    ItemRoomController.btnMouseActions(bookWaterRectangle);
+    ItemRoomController.btnMouseActions(bookAirRectangle);
 
     // Message to be displayed when the user selected the correct book
     riddleSolveMsg =
@@ -186,55 +126,44 @@ public class CauldronRoomController {
   }
 
   /**
-   * Disabling the chat functionality for the user to be able to talk to the wizard.
+   * Enabling/disabling the chat functionality for the user to be able to talk to the wizard.
    */
-  private void disableChat() {
-    // Disabling the approrpiate fields and making everything invisible
-    chatTextArea.setDisable(true);
-    inputText.setDisable(true);
-    sendButton.setDisable(true);
-    ttsBtn2.setDisable(true);
-    wizardChatImage.setDisable(true);
-    chatTextArea.setOpacity(0);
-    inputText.setOpacity(0);
-    sendButton.setOpacity(0);
-    ttsBtn2.setOpacity(0);
-    wizardChatImage.setOpacity(0);
+  private void toggleChat(boolean disable, int opacity) {
+    // Enabling/disabling the approrpiate fields and making everything invisible/visible
+    chatTextArea.setDisable(disable);
+    inputText.setDisable(disable);
+    sendButton.setDisable(disable);
+    ttsBtn2.setDisable(disable);
+    textRect.setDisable(disable);
+    mouseTrackRegion.setDisable(disable);
+    wizardChatImage.setDisable(disable);
+    chatTextArea.setOpacity(opacity);
+    inputText.setOpacity(opacity);
+    sendButton.setOpacity(opacity);
+    ttsBtn2.setOpacity(opacity);
+    textRect.setOpacity(opacity);
+    wizardChatImage.setOpacity(opacity);
+    if (opacity == 0) {
+      mouseTrackRegion.setOpacity(0);
+    } else {
+      mouseTrackRegion.setOpacity(0.5);
+    }
   }
 
-  /**
-   * Enabling the chat functionality for the user to be able to talk to the wizard.
-   */
-  private void enableChat() {
-    // Enabling the approrpiate fields and making everything visible
-    chatTextArea.setDisable(false);
-    inputText.setDisable(false);
-    sendButton.setDisable(false);
-    ttsBtn2.setDisable(false);
-    wizardChatImage.setDisable(false);
-    chatTextArea.setOpacity(1);
-    inputText.setOpacity(1);
-    sendButton.setOpacity(1);
-    ttsBtn2.setOpacity(1);
-    wizardChatImage.setOpacity(1);
+  private void toggleBooks(boolean disable, int opacity) {
+    bookFireRectangle.setDisable(disable);
+    bookWaterRectangle.setDisable(disable);
+    bookAirRectangle.setDisable(disable);
+    bookFireRectangle.setOpacity(opacity);
+    bookWaterRectangle.setOpacity(opacity);
+    bookAirRectangle.setOpacity(opacity);
   }
 
-  private void disableBooks() {
-    bookFireRectangle.setDisable(true);
-    bookWaterRectangle.setDisable(true);
-    bookAirRectangle.setDisable(true);
-    bookFireRectangle.setOpacity(0);
-    bookWaterRectangle.setOpacity(0);
-    bookAirRectangle.setOpacity(0);
-  }
-
-  private void enableBooks() {
-    bookFireRectangle.setDisable(false);
-    bookWaterRectangle.setDisable(false);
-    bookAirRectangle.setDisable(false);
-    bookFireRectangle.setOpacity(100);
-    bookWaterRectangle.setOpacity(100);
-    bookAirRectangle.setOpacity(100);
+  private void disableChat(boolean disable, double opacity) {
+    inputText.setDisable(disable);
+    inputText.setOpacity(opacity);
+    sendButton.setDisable(disable);
+    sendButton.setOpacity(opacity);
   }
 
   /**
@@ -272,113 +201,51 @@ public class CauldronRoomController {
   public void clickWizard(MouseEvent event) throws InterruptedException {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleGiven) {
-      showWizardChat();
-      // mouseTrackRegion.setDisable(true);
-      inputText.setDisable(true);
-      inputText.setOpacity(0.5);
-      sendButton.setDisable(true);
-      sendButton.setOpacity(0.5);
-      MainMenuController.getChatHandler().appendChatMessage(
-          MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
+      toggleChat(false, 1);
+      disableChat(true, 0.5);
+      MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
       // the user to select the book and respond to the wizard
       MainMenuController.getChatHandler().getAppendTask().setOnSucceeded(e -> {
         chooseLabel.setOpacity(1);
-        inputText.setDisable(false);
-        inputText.setOpacity(1);
-        sendButton.setDisable(false);
-        sendButton.setOpacity(1);
-        enableBooks();
+        disableChat(false, 1);
+        toggleBooks(false, 1);
       });
       GameState.isBookRiddleGiven = true;
     } else {
-      showWizardChat();
+      toggleChat(false, 1);
     }
   }
 
   @FXML
   public void clickBookFire(MouseEvent event) {
-    System.out.println("book fire clicked");
-    if (MainMenuController.getBook() == "fire") {
-      // remove the book from the scene
-      //bookFireRectangle.setOpacity(0);
-      //fade the book out
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookFireRectangle);
-      ft.setFromValue(1);
-      ft.setToValue(0);
-      ft.play();
-      bookFireImage.setOpacity(0);
-      bookFireImage.setDisable(true);
-      bookFireRectangle.setDisable(true);
-      GameState.isBookRiddleResolved = true;
-      chooseLabel.setOpacity(0);
-
-      // Code to send appropriate riddle resolved message to GPT
-      // try {
-      //   Task<Void> resolvedTask = new Task<Void>() {
-      //     @Override
-      //     protected Void call() throws Exception {
-      //       ChatMessage msg = new ChatMessage(
-      //         "Wizard", MainMenuController.getChatHandler().runGpt(
-      //           MainMenuController.getResolvedMessage()));
-      //       MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
-      //       return null;
-      //     }
-      //   };
-      //   new Thread(resolvedTask).start();
-      // } catch (ApiProxyException e) {
-      //   e.printStackTrace();
-      // }
-    }
+    handleClickBooks("fire", bookFireImage, bookFireRectangle);
   }
 
   @FXML
   public void clickBookWater(MouseEvent event) {
-    System.out.println("book water clicked");
-    if (MainMenuController.getBook() == "water") {
-      // remove the book from the scene
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
-      ft.setFromValue(1);
-      ft.setToValue(0);
-      ft.play();
-      bookWaterImage.setOpacity(0);
-      bookWaterImage.setDisable(true);
-      bookWaterRectangle.setDisable(true);
-      GameState.isBookRiddleResolved = true;
-      chooseLabel.setOpacity(0);
-
-      // Code to send appropriate riddle resolved message to GPT
-      // try {
-      //   Task<Void> resolvedTask = new Task<Void>() {
-      //     @Override
-      //     protected Void call() throws Exception {
-      //       ChatMessage msg = new ChatMessage(
-      //         "Wizard", MainMenuController.getChatHandler().runGpt(
-      //           MainMenuController.getResolvedMessage()));
-      //       MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
-      //       return null;
-      //     }
-      //   };
-      //   new Thread(resolvedTask).start();
-      // } catch (ApiProxyException e) {
-      //   e.printStackTrace();
-      // }
-    }
+    handleClickBooks("water", bookWaterImage, bookWaterRectangle);
   }
 
   @FXML
   public void clickBookAir(MouseEvent event) {
-    System.out.println("book air clicked");
-    if (MainMenuController.getBook() == "air") {
+    handleClickBooks("air", bookAirImage, bookAirRectangle);
+  }
+
+  private void handleClickBooks(String element, ImageView bookImage, ImageView bookRectangle) {
+    System.out.println("book " + element +  " clicked");
+    if (MainMenuController.getBook() == element) {
       // remove the book from the scene
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAirRectangle);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookRectangle);
       ft.setFromValue(1);
       ft.setToValue(0);
       ft.play();
-      bookAirImage.setOpacity(0);
-      bookAirImage.setDisable(true);
-      bookAirRectangle.setDisable(true); 
+
+      bookImage.setOpacity(0);
+      bookImage.setDisable(true);
+      bookRectangle.setDisable(true);
+
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
 
@@ -429,18 +296,23 @@ public class CauldronRoomController {
   public void clickOff(MouseEvent event) {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
-      wizardChatImage.setOpacity(0);
-      textRect.setDisable(true);
+
       // Disabling mouseTrackRegion so it doesn't interfere with other interactions
       mouseTrackRegion.setDisable(true);
+
+      wizardChatImage.setDisable(true);
+      wizardChatImage.setOpacity(0);
+
+      textRect.setDisable(true);
+      
       textRect.setOpacity(0);
       mouseTrackRegion.setOpacity(0);
       chatTextArea.setDisable(true);
       chatTextArea.setOpacity(0);
-      disableBooks();
       chooseLabel.setOpacity(0);
       enableRecipe();
-      disableChat();
+      toggleChat(true, 0);
+      toggleBooks(true, 0);
 
       // Handling closing the "bag" when clicking off inventory
       if (bagOpened) {
@@ -462,17 +334,6 @@ public class CauldronRoomController {
     }
 
     showRecipe = false;
-  }
-  
-  /** Displaying wizard chat to user when prompted */
-  private void showWizardChat() {
-    // Setting approrpiate fields to be visible and interactable
-    wizardChatImage.setOpacity(1);
-    textRect.setDisable(false);
-    mouseTrackRegion.setDisable(false);
-    textRect.setOpacity(1);
-    enableChat();
-    mouseTrackRegion.setOpacity(0.5);
   }
 
   /**
@@ -526,15 +387,10 @@ public class CauldronRoomController {
       return;
     }
     inputText.clear();
-    inputText.setDisable(true);
-    inputText.setOpacity(0.5);
-    sendButton.setDisable(true);
-    sendButton.setOpacity(0.5);
+    disableChat(true, 0.5);
     ChatMessage msg =
-        new ChatMessage("user", message); 
-        // TODO: Cannot change to You without generating error
-    MainMenuController.getChatHandler().appendChatMessage(
-        msg, chatTextArea, inputText, sendButton);
+        new ChatMessage("user", message);
+    MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
@@ -570,6 +426,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // need to update the chat text area with the game master's response & riddle
             App.textToSpeech.speak(chatTextArea.getText());
             return null;
           }
