@@ -26,6 +26,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -88,12 +89,9 @@ public class CauldronRoomController {
 
   private ShapeInteractionHandler interactionHandler;
   private ChatMessage riddleSolveMsg;
-
   private boolean bagOpened;
-
   private CountdownTimer countdownTimer;
-
-  private Boolean showRecipe = true;
+  private boolean showRecipe = true;
 
   @FXML
   public void initialize() {
@@ -105,77 +103,22 @@ public class CauldronRoomController {
     interactionHandler = new ShapeInteractionHandler();
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
-    // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);
     textRect.setDisable(true);
     disableChat();
     disableBooks();
     mouseTrackRegion.setOpacity(0);
 
-    // Setting up the appropriate interactions for the cauldron
-    if (cauldronImg != null) {
-      cauldronImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(cauldronImg));
-      cauldronImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(cauldronImg));
-    }
-    // Setting up the appropriate interactions for the wizard
-    if (wizardImg != null) {
-      wizardImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(wizardImg));
-      wizardImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(wizardImg));
-    }
-    // Setting up the appropriate interactions for the right arrow
-    if (rightArrow != null) {
-      rightArrow.setOnMouseEntered(
-          event -> rightArrow.setOpacity(0.9));
-      rightArrow.setOnMouseExited(
-          event -> rightArrow.setOpacity(0.5));
-    }
-    // Setting up the appropriate interactions for the left arrow
-    if (leftArrow != null) {
-      leftArrow.setOnMouseEntered(
-          event -> leftArrow.setOpacity(0.9));
-      leftArrow.setOnMouseExited(
-          event -> leftArrow.setOpacity(0.5));
-    }
-    // Setting up the appropriate interactions for the book button
-    if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookBtn));
-    }
-    // Setting up the appropriate interactions for the bag button
-    if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bagBtn));
-      // ELSE NO ITEMS IN BAG MESSAGE
-    }
-    // Setting up the appropriate interactions for the book fire
-    if (bookFireRectangle != null) {
-      bookFireRectangle.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookFireRectangle));
-      bookFireRectangle.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookFireRectangle));
-    }
-    // Setting up the appropriate interactions for the book water
-    if (bookWaterRectangle != null) {
-      bookWaterRectangle.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookWaterRectangle));
-      bookWaterRectangle.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookWaterRectangle));
-    }
-    // Setting up the appropriate interactions for the book air
-    if (bookAirRectangle != null) {
-      bookAirRectangle.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookAirRectangle));
-      bookAirRectangle.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookAirRectangle));
-    }
+    // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
+    ItemRoomController.btnMouseActions(cauldronImg);
+    ItemRoomController.btnMouseActions(wizardImg);
+    ItemRoomController.arrowMouseActions(leftArrow);
+    ItemRoomController.arrowMouseActions(rightArrow);
+    ItemRoomController.btnMouseActions(bookBtn);
+    ItemRoomController.btnMouseActions(bagBtn);
+    ItemRoomController.btnMouseActions(bookFireRectangle);
+    ItemRoomController.btnMouseActions(bookWaterRectangle);
+    ItemRoomController.btnMouseActions(bookAirRectangle);
 
     // Message to be displayed when the user selected the correct book
     riddleSolveMsg =

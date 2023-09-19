@@ -45,7 +45,7 @@ public abstract class ItemRoomController {
   @FXML
   protected Label timerLabel;
   @FXML
-  protected ShapeInteractionHandler interactionHandler;
+  protected static ShapeInteractionHandler interactionHandler;
 
   protected CountdownTimer countdownTimer;
 
@@ -146,14 +146,13 @@ public abstract class ItemRoomController {
     itemMouseActions(itemEImg, fiveClicked, itemFive);
 
     // Setting appropriate interactable features for the arrow
-    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
-    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
+    arrowMouseActions(arrowShpe);
   }
 
   /**
    * Handling the event where a button is hovered over
    */
-  protected void btnMouseActions(ImageView btn) {
+  protected static void btnMouseActions(ImageView btn) {
     btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
     btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
   }
@@ -165,6 +164,11 @@ public abstract class ItemRoomController {
     itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
     itemImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemImg, itemClicked));
     itemImg.setOnMouseClicked(event -> itemSelect(item));
+  }
+
+  protected static void arrowMouseActions(Polygon arrowShpe) {
+    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
+    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
   }
 
   /**
