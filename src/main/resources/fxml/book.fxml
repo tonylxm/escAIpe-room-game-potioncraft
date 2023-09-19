@@ -49,19 +49,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="placeholderImg" fitHeight="150.0" fitWidth="200.0" layoutX="629.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="placeholderImg" fitHeight="150.0" fitWidth="200.0" layoutX="629.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/place_holder.png" />
          </image>
       </ImageView>
-      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="626.0" layoutY="300.0" opacity="0.0">
+      <ImageView id="itemOneImg" fx:id="itemOneImg" fitHeight="156.0" fitWidth="156.0" layoutX="626.0" layoutY="292.0" opacity="0.0">
          <image>
             <Image url="@../images/tail.png" />
          </image>
       </ImageView>
       <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="92.0" fitWidth="200.0" layoutX="604.0" layoutY="325.0" opacity="0.0">
          <image>
-            <Image url="@../images/iwings.png" />
+            <Image url="@../images/insect_wings.png" />
          </image>
       </ImageView>
       <ImageView id="itemThreeImg" fx:id="itemThreeImg" fitHeight="200.0" fitWidth="200.0" layoutX="604.0" layoutY="270.0" opacity="0.0">
@@ -86,12 +86,12 @@
       </ImageView>
       <ImageView fx:id="itemSevenImg" fitHeight="150.0" fitWidth="200.0" layoutX="629.0" layoutY="296.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/stone.png" />
+            <Image url="@../images/crystal.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="itemEightImg" fitHeight="150.0" fitWidth="200.0" layoutX="650.0" layoutY="294.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="itemEightImg" fitHeight="150.0" fitWidth="200.0" layoutX="644.0" layoutY="296.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/bwings.png" />
+            <Image url="@../images/bat_wings.png" />
          </image>
       </ImageView>
       <ImageView fx:id="itemNineImg" fitHeight="150.0" fitWidth="200.0" layoutX="621.0" layoutY="296.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">

@@ -257,8 +257,6 @@ public abstract class ItemRoomController {
         break;
     }
 
-    // talon, crystal, bat wings, wreath, feather
-
     // Setting the appropriate text for the text box
     // and setting the item to be added and letting the
     // system know that an item is ready to be added
@@ -307,15 +305,16 @@ public abstract class ItemRoomController {
         one = new Image("images/talon.png");
         handleAddImg(one, itemOneImg, oneAdded, oneClicked);
         break;
-      case BAT_WINGS:
-        two = new Image("images/bat_wings.png");
+      case CRYSTAL:
+        two = new Image("images/crystal.png");
         handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
-      case WREATH:
-        three = new Image("images/wreath.png");
+        break;
+      case BAT_WINGS:
+        three = new Image("images/bat_wings.png");
         handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
         break;
-      case CRYSTAL:
-        four = new Image("images/crystal.png");
+      case WREATH:
+        four = new Image("images/wreath.png");
         handleAddImg(four, itemFourImg, fourAdded, fourClicked);
         break;
       case FEATHER:
@@ -335,6 +334,7 @@ public abstract class ItemRoomController {
     ratio = img.getHeight() / img.getWidth();
     image = new ImageView(img);
     itemImg.setOpacity(0);
+    itemImg.setDisable(true);
     itemAdded = true;
     itemClicked = false;
   }

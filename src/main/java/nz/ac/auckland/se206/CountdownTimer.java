@@ -126,10 +126,31 @@ public class CountdownTimer {
 
   public String formatTimerText() {
     if (currentSeconds < 10) {
+      if (minutes == 0 && currentSeconds % 2 == 1) {
+        setTimerRed(cauldronTimerLabel, libraryTimerLabel, rightTimerLabel, bookTimerLabel, brewingLabel);
+      } else if (minutes == 0 && currentSeconds % 2 == 0) {
+        setTimerBlack(cauldronTimerLabel, libraryTimerLabel, rightTimerLabel, bookTimerLabel, brewingLabel);
+      }
       return String.format("%d" + ":" + "0" + "%d", minutes, currentSeconds);
     } else {
       return String.format("%d" + ":" + "%d", minutes, currentSeconds);
     }
+  }
+
+  public void setTimerRed(Label timer1, Label timer2, Label timer3, Label timer4, Label timer5) {
+    timer1.setStyle("-fx-text-fill: red");
+    timer2.setStyle("-fx-text-fill: red");
+    timer3.setStyle("-fx-text-fill: red");
+    timer4.setStyle("-fx-text-fill: red");
+    timer5.setStyle("-fx-text-fill: red");
+  }
+
+  public void setTimerBlack(Label timer1, Label timer2, Label timer3, Label timer4, Label timer5) {
+    timer1.setStyle("-fx-text-fill: black");
+    timer2.setStyle("-fx-text-fill: black");
+    timer3.setStyle("-fx-text-fill: black");
+    timer4.setStyle("-fx-text-fill: black");
+    timer5.setStyle("-fx-text-fill: black");
   }
 
   // Getters and setters
