@@ -41,10 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Polygon>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b56e30" height="176.0" layoutX="705.0" layoutY="146.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="125.0" />
-      <Rectangle fx:id="bookFireImage" arcHeight="5.0" arcWidth="5.0" fill="#ff6a6a" height="67.0" layoutX="720.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Rectangle fx:id="bookWaterImage" arcHeight="5.0" arcWidth="5.0" fill="#94fdff" height="67.0" layoutX="756.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Rectangle fx:id="bookAirImage" arcHeight="5.0" arcWidth="5.0" fill="#e6e6e6" height="67.0" layoutX="792.0" layoutY="167.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b56e30" height="176.0" layoutX="705.0" layoutY="146.0" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="125.0" />
       <ImageView fx:id="bagBtn" fitHeight="45.0" fitWidth="45.0" layoutX="911.0" layoutY="625.0" onMouseClicked="#clickBag" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/bag_icon.png" />
@@ -60,6 +57,21 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </ImageView>
+      <ImageView fx:id="bookWaterImage" fitHeight="78.0" fitWidth="35.0" layoutX="751.0" layoutY="174.0" opacity="0.36">
+         <image>
+            <Image url="@../images/oie_LKpGbTvkE1Nv.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bookAirImage" fitHeight="78.0" fitWidth="35.0" layoutX="787.0" layoutY="174.0" opacity="0.22">
+         <image>
+            <Image url="@../images/oie_NEPoOa9RNfHE.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bookFireImage" fitHeight="78.0" fitWidth="35.0" layoutX="715.0" layoutY="174.0" opacity="0.28">
+         <image>
+            <Image url="@../images/oie_yaYCuLx1PDOG.png" />
+         </image>
       </ImageView>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <ImageView id="wizardChatImage" fx:id="wizardChatImage" fitHeight="188.0" fitWidth="200.0" layoutX="164.0" layoutY="350.0" opacity="0.0" scaleX="-1.0">
@@ -84,9 +96,6 @@
             <Image url="@../images/hourglass-1024x1024.gif" />
          </image>
       </ImageView>
-      <Rectangle fx:id="bookFireRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ff2121" height="67.0" layoutX="720.0" layoutY="167.0" onMouseClicked="#clickBookFire" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Rectangle fx:id="bookWaterRectangle" arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="67.0" layoutX="756.0" layoutY="167.0" onMouseClicked="#clickBookWater" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
-      <Rectangle fx:id="bookAirRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="67.0" layoutX="792.0" layoutY="167.0" onMouseClicked="#clickBookAir" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="24.0" />
       <Label fx:id="chooseLabel" layoutX="610.0" layoutY="99.0" opacity="0.0" prefHeight="47.0" prefWidth="365.0" text="Choose the right book" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Algerian" size="24.0" />
@@ -123,6 +132,21 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </ImageView>
+      <ImageView fx:id="bookWaterRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="475.0" layoutY="227.0" onMouseClicked="#clickBookWater">
+         <image>
+            <Image url="@../images/oie_LKpGbTvkE1Nv.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bookAirRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="540.0" layoutY="227.0" onMouseClicked="#clickBookAir">
+         <image>
+            <Image url="@../images/oie_NEPoOa9RNfHE.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bookFireRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="409.0" layoutY="227.0" onMouseClicked="#clickBookFire">
+         <image>
+            <Image url="@../images/oie_yaYCuLx1PDOG.png" />
+         </image>
       </ImageView>
    </children>
 </Pane>

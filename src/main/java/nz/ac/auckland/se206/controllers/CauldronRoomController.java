@@ -41,17 +41,17 @@ public class CauldronRoomController {
   @FXML
   private Polygon leftArrow;
   @FXML
-  private Rectangle bookFireRectangle;
+  private ImageView bookFireRectangle;
   @FXML
-  private Rectangle bookWaterRectangle;
+  private ImageView bookWaterRectangle;
   @FXML
-  private Rectangle bookAirRectangle;
+  private ImageView bookAirRectangle;
   @FXML
-  private Rectangle bookFireImage;
+  private ImageView bookFireImage;
   @FXML
-  private Rectangle bookWaterImage;
+  private ImageView bookWaterImage;
   @FXML
-  private Rectangle bookAirImage;
+  private ImageView bookAirImage;
   @FXML
   private Rectangle textRect;
   @FXML
@@ -144,23 +144,25 @@ public class CauldronRoomController {
           event -> interactionHandler.unglowThis(bagBtn));
       // ELSE NO ITEMS IN BAG MESSAGE
     }
+    
+    //glow the books on hover
     if (bookFireRectangle != null) {
       bookFireRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.glowThis(bookFireRectangle));
       bookFireRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.unglowThis(bookFireRectangle));
     }
     if (bookWaterRectangle != null) {
       bookWaterRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.glowThis(bookWaterRectangle));
       bookWaterRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.unglowThis(bookWaterRectangle));
     }
     if (bookAirRectangle != null) {
       bookAirRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.glowThis(bookAirRectangle));
       bookAirRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.unglowThis(bookAirRectangle));
     }
 
     try {

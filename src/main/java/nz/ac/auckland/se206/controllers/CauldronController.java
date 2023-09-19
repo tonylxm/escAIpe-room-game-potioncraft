@@ -338,7 +338,8 @@ public class CauldronController {
                 
       } else {
         System.out.println("Potion not brewed");
-        resetItems();
+        notificationText.setText("Wrong recipe!");
+        notifyPopup();
       }
     }
 
@@ -347,10 +348,10 @@ public class CauldronController {
 
   private void notifyPopup() {
     // Create a FadeTransition to gradually change opacity over 3 seconds
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), notificationBack);
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), notificationBack);
             fadeTransition.setFromValue(1.0);
             fadeTransition.setToValue(1.0);
-            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(3), notificationText);
+            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(1), notificationText);
             fadeTransition2.setFromValue(1.0);
             fadeTransition2.setToValue(1.0);
 
