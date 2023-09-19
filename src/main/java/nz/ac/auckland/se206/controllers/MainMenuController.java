@@ -37,7 +37,7 @@ public class MainMenuController {
   private static CountdownTimer countdownTimer = new CountdownTimer("2:00");
 
   private static Items items;
-  private static Inventory inventory;
+  static Inventory inventory;
   
   private static String book;
   private static ChatHandler chatHandler;
@@ -115,7 +115,6 @@ public class MainMenuController {
     items = new Items(5);
     inventory = new Inventory();
     TransitionAnimation.setMasterPane(masterPane);
-
     difficultySelected = false;
     // Hover hints on difficulty selection
     easyBtn.setOnMouseEntered(event -> difficultyHoverOn(hintInfinity));

@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -109,6 +108,7 @@ public class CauldronRoomController {
     // highlightThis(wizardRectangle);
     mouseTrackRegion.setDisable(true);
     textRect.setDisable(true);
+    disableChat();
     disableBooks();
     mouseTrackRegion.setOpacity(0);
 
@@ -183,8 +183,6 @@ public class CauldronRoomController {
             "Wizard",
             "You've done well to solve the riddle. The rest is now up to you. If you"
                 + " require any assistance, please come talk to me again.");
-
-    // Force the user to talk to the wizard first and solve book riddle
   }
 
   /**
@@ -295,8 +293,6 @@ public class CauldronRoomController {
       GameState.isBookRiddleGiven = true;
     } else {
       showWizardChat();
-      enableChat();
-
     }
   }
 
@@ -316,7 +312,7 @@ public class CauldronRoomController {
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      // chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+      MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -334,7 +330,7 @@ public class CauldronRoomController {
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      // chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+      MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -352,7 +348,7 @@ public class CauldronRoomController {
       bookAirRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      // chatHandler.appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+      MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
   }
 
@@ -448,7 +444,9 @@ public class CauldronRoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.getInventory().size() == 0) {
+    if (MainMenuController.inventory.size() == 0) {
+      notificationText.setText("You have no ingredients in your bag!");
+      notifyPopup();
       return;
     }
     // If the bag isn't opened already, open it
@@ -490,7 +488,6 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            // Hints are already checked in the prompt
             MainMenuController.getChatHandler().runGptGameMaster(msg, chatTextArea, inputText, sendButton);
             return null;
           }
@@ -518,7 +515,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            App.textToSpeech.speak(MainMenuController.getChatHandler().getResult().getChatMessage().getContent());
+            App.textToSpeech.speak(chatTextArea.getText());
             return null;
           }
         };
