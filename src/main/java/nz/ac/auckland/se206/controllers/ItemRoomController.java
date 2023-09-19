@@ -13,10 +13,7 @@ import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
-import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.Items.Item;
-import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public abstract class ItemRoomController {
   protected boolean bagOpened;
@@ -59,11 +56,11 @@ public abstract class ItemRoomController {
   protected ImageView itemFiveImg;
 
   // Booleans to keep track of whether an item has been added to the inventory
-  private boolean itemOneAdded;
-  private boolean itemTwoAdded;
-  private boolean itemThreeAdded;
-  private boolean itemFourAdded;
-  private boolean itemFiveAdded;
+  private boolean oneAdded;
+  private boolean twoAdded;
+  private boolean threeAdded;
+  private boolean fourAdded;
+  private boolean fiveAdded;
   // Booleans to keep track of if an item is clicked or selected
   private boolean oneClicked;
   private boolean twoClicked;
@@ -76,6 +73,15 @@ public abstract class ItemRoomController {
   private Item itemThree;
   private Item itemFour;
   private Item itemFive;
+
+  private Image one;
+  private Image two;
+  private Image three;
+  private Image four;
+  private Image five;
+
+  private ImageView image;
+  private double ratio;
 
   /**
    * Initialising the fields that are common in both of the item
@@ -91,11 +97,11 @@ public abstract class ItemRoomController {
     this.itemFiveImg = itemEImg;
 
     // Setting appropriate boolean fields
-    itemOneAdded = false;
-    itemTwoAdded = false;
-    itemThreeAdded = false;
-    itemFourAdded = false;
-    itemFiveAdded = false;
+    oneAdded = false;
+    twoAdded = false;
+    threeAdded = false;
+    fourAdded = false;
+    fiveAdded = false;
 
     oneClicked = false;
     twoClicked = false;
@@ -163,9 +169,8 @@ public abstract class ItemRoomController {
 
   /**
    * Selecting the item and prompting user and prompting user to either add or not
-   * add the item to
-   * their inventory. Does nothing if the item has already been added to the
-   * inventory.
+   * add the item to their inventory. Does nothing if the item has already been 
+   * added to the inventory.
    *
    * @param item the item clicked by user
    */
@@ -175,70 +180,70 @@ public abstract class ItemRoomController {
     // added
     switch (item) {
       case TAIL:
-        if (itemOneAdded) {
+        if (oneAdded) {
           return;
         }
         interactionHandler.glowThis(itemOneImg);
         oneClicked = true;
         break;
       case INSECT_WINGS:
-        if (itemTwoAdded) {
+        if (twoAdded) {
           return;
         }
         interactionHandler.glowThis(itemTwoImg);
         twoClicked = true;
         break;
       case FLOWER:
-        if (itemThreeAdded) {
+        if (threeAdded) {
           return;
         }
         interactionHandler.glowThis(itemThreeImg);
         threeClicked = true;
         break;
       case SCALES:
-        if (itemFourAdded) {
+        if (fourAdded) {
           return;
         }
         interactionHandler.glowThis(itemFourImg);
         fourClicked = true;
         break;
       case POWDER:
-        if (itemFiveAdded) {
+        if (fiveAdded) {
           return;
         }
         interactionHandler.glowThis(itemFiveImg);
         fiveClicked = true;
         break;
       case TALON:
-        if (itemOneAdded) {
+        if (oneAdded) {
           return;
         }
         interactionHandler.glowThis(itemOneImg);
         oneClicked = true;
         break;
       case CRYSTAL:
-        if (itemTwoAdded) {
+        if (twoAdded) {
           return;
         }
         interactionHandler.glowThis(itemTwoImg);
         twoClicked = true;
         break;
       case BAT_WINGS:
-        if (itemThreeAdded) {
+        if (threeAdded) {
           return;
         }
         interactionHandler.glowThis(itemThreeImg);
         threeClicked = true;
         break;
       case WREATH:
-        if (itemFourAdded) {
+        if (fourAdded) {
           return;
         }
         interactionHandler.glowThis(itemFourImg);
         fourClicked = true;
         break;
       case FEATHER:
-        if (itemFiveAdded) {
+        if (fiveAdded) {
           return;
         }
         interactionHandler.glowThis(itemFiveImg);
@@ -247,6 +252,8 @@ public abstract class ItemRoomController {
       default:
         break;
     }
+
+    // talon, crystal, bat wings, wreath, feather
 
     // Setting the appropriate text for the text box
     // and setting the item to be added and letting the
@@ -269,65 +276,63 @@ public abstract class ItemRoomController {
     readyToAdd = false;
 
     // If no item is selected but still added, place holder image
-    ImageView image = new ImageView(new Image("images/place_holder.png"));
-    double ratio = 1;
+    image = new ImageView(new Image("images/place_holder.png"));
+    ratio = 1;
 
     // Different controls are executed depending on the item
     switch (item) {
       case TAIL:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image one = new Image("images/tail.png");
-        ratio = one.getHeight() / one.getWidth();
-        image = new ImageView(one);
-        itemOneImg.setOpacity(0);
-        itemOneAdded = true;
-        oneClicked = false;
+        one = new Image("images/tail.png");
+        handleAddImg(one, itemOneImg, oneAdded, oneClicked);
         break;
       case INSECT_WINGS:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image two = new Image("images/iwings.png");
-        ratio = two.getHeight() / two.getWidth();
-        image = new ImageView(two);
-        itemTwoImg.setOpacity(0);
-        itemTwoAdded = true;
-        twoClicked = false;
-        break;
+        two = new Image("images/insect_wings.png");
+        handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
       case FLOWER:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image three = new Image("images/flower.png");
-        ratio = three.getHeight() / three.getWidth();
-        image = new ImageView(three);
-        itemThreeImg.setOpacity(0);
-        itemThreeAdded = true;
-        threeClicked = false;
+        three = new Image("images/flower.png");
+        handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
         break;
       case SCALES:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image four = new Image("images/scales.png");
-        ratio = four.getHeight() / four.getWidth();
-        image = new ImageView(four);
-        itemFourImg.setOpacity(0);
-        itemFourAdded = true;
-        fourClicked = false;
+        four = new Image("images/scales.png");
+        handleAddImg(four, itemFourImg, fourAdded, fourClicked);
         break;
       case POWDER:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image five = new Image("images/powder.png");
-        ratio = five.getHeight() / five.getWidth();
-        image = new ImageView(five);
-        itemFiveImg.setOpacity(0);
-        itemFiveAdded = true;
-        fiveClicked = false;
+        five = new Image("images/powder.png");
+        handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+      case TALON:
+        one = new Image("images/talon.png");
+        handleAddImg(one, itemOneImg, oneAdded, oneClicked);
         break;
+      case BAT_WINGS:
+        two = new Image("images/bat_wings.png");
+        handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+      case WREATH:
+        three = new Image("images/wreath.png");
+        handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
+        break;
+      case CRYSTAL:
+        four = new Image("images/crystal.png");
+        handleAddImg(four, itemFourImg, fourAdded, fourClicked);
+        break;
+      case FEATHER:
+        five = new Image("images/feather.png");
+        handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
       default:
         break;
     }
     itemCollect(ratio, image);
+  }
+
+  /**
+   * Handling the event where an item is added to bag and formatting image size ratio
+   */
+  protected void handleAddImg(Image img, ImageView itemImg, boolean itemAdded, boolean itemClicked) {
+    // Setting up appropriate image and ratio and appropriate click fields to be added
+    ratio = img.getHeight() / img.getWidth();
+    image = new ImageView(img);
+    itemImg.setOpacity(0);
+    itemAdded = true;
+    itemClicked = false;
   }
 
   /**
@@ -356,20 +361,6 @@ public abstract class ItemRoomController {
     // Making sure the mouseTrackRegion is disabled
     mouseTrackRegion.setDisable(true);
     System.out.println("Item not added to inventory");
-  }
-
-  /** Chaning scenes to book view */
-  @FXML
-  public void openBook() {
-    System.out.println("LIBRARY_ROOM -> BOOK");
-    // BookController.bookBackgroundImg.setImage(new
-    // Image("/images/library-room.jpeg"));
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      bookController.updateBackground();
-    }
-    SceneManager.currScene = AppUi.LIBRARY_ROOM;
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
   /**
@@ -407,7 +398,6 @@ public abstract class ItemRoomController {
       System.out.println("Bag closed");
     }
   }
-  
   
   /**
    * Making text box appear or dissapear with given text.
@@ -484,7 +474,7 @@ public abstract class ItemRoomController {
       showWizardChat();
       GameState.isBookRiddleGiven = true;
     } else {
-      // showWizardChat();
+      showWizardChat();
     }
   }
 

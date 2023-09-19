@@ -2,16 +2,13 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.CountdownTimer;
-import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class LibraryRoomController extends ItemRoomController {
@@ -43,7 +40,7 @@ public class LibraryRoomController extends ItemRoomController {
    */
   public void initialize() {
     // Initialising everything from the superclass
-    genericInitialise(itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg, rightShpe);
+    genericInitialise("Library", itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg, rightShpe);
     
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLibraryTimerLabel(timerLabel);
@@ -64,214 +61,16 @@ public class LibraryRoomController extends ItemRoomController {
     TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
   }
 
-  /**
-   * Selecting the item and prompting user and prompting user to either add or not
-   * add the item to
-   * their inventory. Does nothing if the item has already been added to the
-   * inventory.
-   *
-   * @param item the item clicked by user
-   */
-  @FXML
-  public void itemSelect(Items.Item item) {
-    // Items are are clicked, so their glow remains on until item is added or not
-    // added
-    switch (item) {
-      case TAIL:
-        if (itemOneAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemOneImg);
-        oneClicked = true;
-        break;
-      case INSECT_WINGS:
-        if (itemTwoAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemTwoImg);
-        twoClicked = true;
-        break;
-      case FLOWER:
-        if (itemThreeAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemThreeImg);
-        threeClicked = true;
-        break;
-      case SCALES:
-        if (itemFourAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemFourImg);
-        fourClicked = true;
-        break;
-      case POWDER:
-        if (itemFiveAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemFiveImg);
-        fiveClicked = true;
-        break;
-      default:
-        break;
-    }
-    // Setting the appropriate text for the text box
-    // and setting the item to be added and letting the
-    // system know that an item is ready to be added
-    this.item = item;
-    setText("Add to inventory?", true, true);
-    mouseTrackRegion.setDisable(false);
-    readyToAdd = true;
-    System.out.println(item + " clicked");
-  }
-
-  /** Adding item to inventory if an item is selected */
-  @FXML
-  public void addItem() {
-    if (!readyToAdd) {
-      return;
-    }
-    MainMenuController.getInventory().add(item);
-    setText("", false, false);
-    readyToAdd = false;
-
-    // If no item is selected but still added, place holder image
-    ImageView image = new ImageView(new Image("images/place_holder.png"));
-    double ratio = 1;
-
-    // Different controls are executed depending on the item
-    switch (item) {
-      case TAIL:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image one = new Image("images/tail.png");
-        ratio = one.getHeight() / one.getWidth();
-        image = new ImageView(one);
-        itemOneImg.setOpacity(0);
-        itemOneAdded = true;
-        oneClicked = false;
-        break;
-      case INSECT_WINGS:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image two = new Image("images/iwings.png");
-        ratio = two.getHeight() / two.getWidth();
-        image = new ImageView(two);
-        itemTwoImg.setOpacity(0);
-        itemTwoAdded = true;
-        twoClicked = false;
-        break;
-      case FLOWER:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image three = new Image("images/flower.png");
-        ratio = three.getHeight() / three.getWidth();
-        image = new ImageView(three);
-        itemThreeImg.setOpacity(0);
-        itemThreeAdded = true;
-        threeClicked = false;
-        break;
-      case SCALES:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image four = new Image("images/scales.png");
-        ratio = four.getHeight() / four.getWidth();
-        image = new ImageView(four);
-        itemFourImg.setOpacity(0);
-        itemFourAdded = true;
-        fourClicked = false;
-        break;
-      case POWDER:
-        // Setting up appropriate image and ratio and appropriate
-        // click fields to be added
-        Image five = new Image("images/powder.png");
-        ratio = five.getHeight() / five.getWidth();
-        image = new ImageView(five);
-        itemFiveImg.setOpacity(0);
-        itemFiveAdded = true;
-        fiveClicked = false;
-        break;
-      default:
-        break;
-    }
-    itemCollect(ratio, image);
-  }
-
-  /**
-   * Not adding a selected item to the inventory
-   */
-  @FXML
-  public void noAdd() {
-    if (!readyToAdd) {
-      return;
-    }
-    setText("", false, false);
-    readyToAdd = false;
-
-    // Turning off the glow effect for all items
-    oneClicked = false;
-    interactionHandler.unglowThis(itemOneImg);
-    twoClicked = false;
-    interactionHandler.unglowThis(itemTwoImg);
-    threeClicked = false;
-    interactionHandler.unglowThis(itemThreeImg);
-    fourClicked = false;
-    interactionHandler.unglowThis(itemFourImg);
-    fiveClicked = false;
-    interactionHandler.unglowThis(itemFiveImg);
-
-    // Making sure the mouseTrackRegion is disabled
-    mouseTrackRegion.setDisable(true);
-    System.out.println("Item not added to inventory");
-  }
-
-  /** Chaning scenes to book view */
+  /** Changing scenes to book view */
   @FXML
   public void openBook() {
-    System.out.println("LIBRARY_ROOM -> BOOK");
-    // BookController.bookBackgroundImg.setImage(new
-    // Image("/images/library-room.jpeg"));
     BookController bookController = SceneManager.getBookControllerInstance();
     if (bookController != null) {
       bookController.updateBackground();
     }
+    
+    System.out.println("LIBRARY_ROOM -> BOOK");
     SceneManager.currScene = AppUi.LIBRARY_ROOM;
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
-  }
-
-  /**
-   * Dealing with closing the inventory or text box by clicking
-   * a region outside of the inventory or text box.
-   */
-  @FXML
-  public void clickOff(MouseEvent event) {
-    System.out.println("click off");
-    setText("", false, false);
-    mouseTrackRegion.setDisable(true);
-    mouseTrackRegion.setOpacity(0);
-
-    wizardChatImage.setOpacity(0);
-    wizardChatImage.setDisable(true);
-
-    // Turning off the glow effect for all items
-    interactionHandler.unglowThis(itemOneImg);
-    interactionHandler.unglowThis(itemTwoImg);
-    interactionHandler.unglowThis(itemThreeImg);
-    interactionHandler.unglowThis(itemFourImg);
-    interactionHandler.unglowThis(itemFiveImg);
-
-    // None of the items are clicked anymore
-    oneClicked = false;
-    twoClicked = false;
-    threeClicked = false;
-    fourClicked = false;
-    fiveClicked = false;
-
-    // Handling closing the "bag" when clicking off inventory
-    if (bagOpened) {
-      itemScroll.setOpacity(0);
-      bagOpened = false;
-      System.out.println("Bag closed");
-    }
   }
 }
