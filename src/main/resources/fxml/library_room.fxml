@@ -27,7 +27,7 @@
       </ImageView>
       <ImageView id="itemTwoImg" fx:id="itemTwoImg" fitHeight="41.0" fitWidth="99.0" layoutX="221.0" layoutY="289.0" rotate="95.1">
          <image>
-            <Image url="@../images/iwings.png" />
+            <Image url="@../images/insect_wings.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

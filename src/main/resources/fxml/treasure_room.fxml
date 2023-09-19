@@ -27,7 +27,7 @@
       </ImageView>
       <ImageView id="itemSevenImg" fx:id="itemSevenImg" fitHeight="84.0" fitWidth="84.0" layoutX="579.0" layoutY="486.0" rotate="-116.6" scaleY="-1.0">
          <image>
-            <Image url="@../images/stone.png" />
+            <Image url="@../images/crystal.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -35,7 +35,7 @@
       </ImageView>
       <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="80.0" fitWidth="62.0" layoutX="295.0" layoutY="234.0" rotate="83.1">
          <image>
-            <Image url="@../images/bwings.png" />
+            <Image url="@../images/bat_wings.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
