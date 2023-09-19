@@ -134,7 +134,9 @@ public abstract class ItemRoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.getInventory().size() == 0) {
+    if (MainMenuController.inventory.size() == 0) {
+      // notificationText.setText("You have no ingredients in your bag!");
+      // notifyPopup();
       return;
     }
     // If the bag isn't opened already, open it

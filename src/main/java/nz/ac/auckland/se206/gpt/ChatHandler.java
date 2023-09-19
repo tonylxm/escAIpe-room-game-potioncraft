@@ -36,7 +36,6 @@ public class ChatHandler {
     }
   }
 
-
   // TODO: Duplicate code, refactor later
 
   /**
@@ -47,7 +46,7 @@ public class ChatHandler {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   public ChatMessage runGptGameMaster(
-      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) 
+      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton)
       throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     try {
@@ -88,15 +87,17 @@ public class ChatHandler {
           }
         };
     new Thread(appendTask, "Append Thread").start();
-    
+
     // Not allowing the user to send messages while the wizard or assistant is typing
     if (msg.getRole().equals("Wizard") || msg.getRole().equals("assistant")) {
       appendTask.setOnSucceeded(
           e -> {
             inputText.setDisable(false);
-            inputText.setOpacity(1);
             sendButton.setDisable(false);
-            sendButton.setOpacity(1);
+            if (inputText.getOpacity() == 0.5) {
+              inputText.setOpacity(1);
+              sendButton.setOpacity(1);
+            }
           });
     }
   }
