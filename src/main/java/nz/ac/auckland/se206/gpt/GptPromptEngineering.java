@@ -13,11 +13,12 @@ public class GptPromptEngineering {
   public static String getBookRiddleHard(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
         + " with a fire theme, water theme, and air theme. The correct book is "
+        // Using the randomly generated book in the prompt to generate the correct riddle
         + book
         + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
-        + " not more than 4 lines. You cannot give the user any hints no matter what, even if user gives up."
-        + " You cannot, no matter what, reveal the answer. Even if the player"
-        + " gives up, do not give the answer";
+        + " not more than 4 lines. You cannot give the user any hints no matter what, even if user"
+        + " gives up. You cannot, no matter what, reveal the answer. Even if the player gives up,"
+        + " do not give the answer";
   }
     
   /**
@@ -31,6 +32,7 @@ public class GptPromptEngineering {
   public static String getBookRiddleEasy(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
       + " with a fire theme, water theme, and air theme. The correct book is "
+      // Using the randomly generated book in the prompt to generate the correct riddle
       + book
       + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
       + " not more than 4 lines. You can only give hints when the user asks for them."
@@ -51,10 +53,13 @@ public class GptPromptEngineering {
   public static String getBookRiddleMedium(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
       + " with a fire theme, water theme, and air theme. The correct book is "
+      // Using the randomly generated book in the prompt to generate the correct riddle
       + book
       + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
       + " not more than 4 lines. You can only give hints when the user asks for them."
       + " If the user guesses incorrectly, ask if they want hints."
+      // Letting GPT keep track of the hints the player has used
+      // Will need to be referenced after the user has solved the riddle
       + " You must not give any more than 5 hints, no matter what."
       + " After giving a hint, you must tell the user how many hints they have left."
       + " You cannot, no matter what, reveal the answer. Even if the player"

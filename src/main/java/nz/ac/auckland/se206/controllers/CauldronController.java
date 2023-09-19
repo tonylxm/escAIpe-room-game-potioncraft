@@ -124,7 +124,8 @@ public class CauldronController {
     flowerImage.setDisable(true);
     wreathImage.setDisable(true);
 
-    //set up glow for all images by adding images to an array then going in a loop
+    // Set up glow for all images by adding images to an array then going 
+    // in a loop
     ArrayList<ImageView> images = new ArrayList<ImageView>();
     images.add(batWingImage);
     images.add(crystalImage);
@@ -148,7 +149,8 @@ public class CauldronController {
     // Set up drag and drop for cauldronImageView
     cauldronImageView.setOnDragOver(
         event -> {
-          if (event.getGestureSource() != cauldronImageView && event.getDragboard().hasString()) {
+          if (event.getGestureSource() != cauldronImageView 
+              && event.getDragboard().hasString()) {
             event.acceptTransferModes(TransferMode.MOVE);
           }
           event.consume();
@@ -349,44 +351,47 @@ public class CauldronController {
 
   private void notifyPopup() {
     // Create a FadeTransition to gradually change opacity over 3 seconds
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), notificationBack);
-            fadeTransition.setFromValue(1.0);
-            fadeTransition.setToValue(1.0);
-            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(1), notificationText);
-            fadeTransition2.setFromValue(1.0);
-            fadeTransition2.setToValue(1.0);
+    FadeTransition fadeTransition = new FadeTransition(
+        Duration.seconds(1), notificationBack);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(1.0);
+    FadeTransition fadeTransition2 = new FadeTransition(
+        Duration.seconds(1), notificationText);
+    fadeTransition2.setFromValue(1.0);
+    fadeTransition2.setToValue(1.0);
 
-            // Play the fade-in animation
-            fadeTransition.play();
-            fadeTransition2.play();
+    // Play the fade-in animation
+    fadeTransition.play();
+    fadeTransition2.play();
 
-            // Schedule a task to fade out the image after 3 seconds
-            fadeTransition.setOnFinished(fadeEvent -> {
-              if (notificationBack.getOpacity() == 1.0) {
-                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationBack);
-                fadeOutTransition.setFromValue(1.0);
-                fadeOutTransition.setToValue(0.0);
-                fadeOutTransition.play();
-              }
-            });
+    // Schedule a task to fade out the image after 3 seconds
+    fadeTransition.setOnFinished(fadeEvent -> {
+        if (notificationBack.getOpacity() == 1.0) {
+          FadeTransition fadeOutTransition = new FadeTransition(
+              Duration.seconds(1.5), notificationBack);
+          fadeOutTransition.setFromValue(1.0);
+          fadeOutTransition.setToValue(0.0);
+          fadeOutTransition.play();
+        }
+    });
 
-            fadeTransition2.setOnFinished(fadeEvent -> {
-              if (notificationText.getOpacity() == 1.0) {
-                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationText);
-                fadeOutTransition.setFromValue(1.0);
-                fadeOutTransition.setToValue(0.0);
-                fadeOutTransition.play();
-              }
-            });
-
-            
+    fadeTransition2.setOnFinished(fadeEvent -> {
+        if (notificationText.getOpacity() == 1.0) {
+          FadeTransition fadeOutTransition = new FadeTransition(
+              Duration.seconds(1.5), notificationText);
+          fadeOutTransition.setFromValue(1.0);
+          fadeOutTransition.setToValue(0.0);
+          fadeOutTransition.play();
+        }
+    });        
   }
 
   @FXML 
   private void resetItems() {
     //returning the items to the original position. 
     // I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
-    // batWingImage.setX(84);  it might not even be necessary nvm but keeping just in case
+    // batWingImage.setX(84);  it might not even be necessary nvm but keeping 
+    // just in case
     // batWingImage.setY(54);
 
     //resetting the items in the cauldron

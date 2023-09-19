@@ -41,7 +41,6 @@ public class MainMenuController {
   
   private static String book;
   private static ChatHandler chatHandler;
-  private String[] options = {"fire", "water", "air"};
   private static ChatMessage riddle;
   private static int hints;
 
@@ -76,6 +75,7 @@ public class MainMenuController {
 
   private Difficulty difficulty;
   private TimeLimit timeLimit;
+  private String[] options = {"fire", "water", "air"};
 
   private boolean difficultySelected;
 
@@ -146,7 +146,6 @@ public class MainMenuController {
    */
   public void difficultySelect(String difficulty) {
     difficultySelected = true;
-    String message = "";
     switch (difficulty) {
       // Easiest level granting unlimited hints
       case "EASY":
@@ -172,31 +171,31 @@ public class MainMenuController {
     }
 
     Task<Void> bookRiddleTask =
-      new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-          switch(hints) {
-            case -1:
-              // When on Dobby mode, selecting the prompt to give the user unlimited hints
-              riddle =
-                new ChatMessage(
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            switch (hints) {
+              case -1:
+                // When on Dobby mode, selecting the prompt to give the user unlimited hints
+                riddle =
+                  new ChatMessage(
                     "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
-              break;
-            case 5:
-              // When on Harry mode, selecting the prompt to give the user only 5 hints
-              riddle =
-                new ChatMessage(
+                break;
+              case 5:
+                // When on Harry mode, selecting the prompt to give the user only 5 hints
+                riddle =
+                  new ChatMessage(
                     "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
-              break;
-            case 0:
-              // When on Voldemort mode, selecting the prompt to give the user no hints at all
-              riddle =
-                new ChatMessage(
-                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
-              break;
+                break;
+              case 0:
+                // When on Voldemort mode, selecting the prompt to give the user no hints at all
+                riddle =
+                  new ChatMessage(
+                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+                break;
+            }
+            return null;
           }
-          return null;
-        }
       };
     new Thread(bookRiddleTask).start();
     System.out.println(riddle);
@@ -244,8 +243,7 @@ public class MainMenuController {
 
         //store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.BOOK, bookRoot);
-        SceneManager.setBookControllerInstance(bookController);
-        
+        SceneManager.setBookControllerInstance(bookController);  
 
         return null;
       }
