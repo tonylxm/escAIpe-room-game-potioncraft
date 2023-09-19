@@ -30,7 +30,6 @@ public class ChatHandler {
       chatCompletionRequest.addMessage(result.getChatMessage());
       return result.getChatMessage().getContent();
     } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
       e.printStackTrace();
       return null;
     }

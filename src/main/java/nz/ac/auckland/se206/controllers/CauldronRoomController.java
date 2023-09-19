@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -218,54 +219,30 @@ public class CauldronRoomController {
 
   @FXML
   public void clickBookFire(MouseEvent event) {
-    System.out.println("book fire clicked");
-    if (MainMenuController.getBook() == "fire") {
-      // remove the book from the scene
-      //bookFireRectangle.setOpacity(0);
-      //fade the book out
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookFireRectangle);
-      ft.setFromValue(1);
-      ft.setToValue(0);
-      ft.play();
-      bookFireImage.setOpacity(0);
-      bookFireImage.setDisable(true);
-      bookFireRectangle.setDisable(true);
-      GameState.isBookRiddleResolved = true;
-      chooseLabel.setOpacity(0);
-      MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
-    }
+    handleClickBooks("fire", bookFireImage, bookFireRectangle);
   }
 
   @FXML
   public void clickBookWater(MouseEvent event) {
-    System.out.println("book water clicked");
-    if (MainMenuController.getBook() == "water") {
-      // remove the book from the scene
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
-      ft.setFromValue(1);
-      ft.setToValue(0);
-      ft.play();
-      bookWaterImage.setOpacity(0);
-      bookWaterImage.setDisable(true);
-      bookWaterRectangle.setDisable(true);
-      GameState.isBookRiddleResolved = true;
-      chooseLabel.setOpacity(0);
-      MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
-    }
+    handleClickBooks("water", bookWaterImage, bookWaterRectangle);
   }
 
   @FXML
   public void clickBookAir(MouseEvent event) {
-    System.out.println("book air clicked");
-    if (MainMenuController.getBook() == "air") {
+    handleClickBooks("air", bookAirImage, bookAirRectangle);
+  }
+
+  private void handleClickBooks(String element, ImageView bookImage, ImageView bookRectangle) {
+    System.out.println("book " + element +  " clicked");
+    if (MainMenuController.getBook() == element) {
       // remove the book from the scene
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAirRectangle);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookImage);
       ft.setFromValue(1);
       ft.setToValue(0);
       ft.play();
-      bookAirImage.setOpacity(0);
-      bookAirImage.setDisable(true);
-      bookAirRectangle.setDisable(true);
+      bookImage.setOpacity(0);
+      bookImage.setDisable(true);
+      bookRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
       MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
@@ -395,14 +372,14 @@ public class CauldronRoomController {
     sendButton.setDisable(true);
     sendButton.setOpacity(0.5);
     ChatMessage msg =
-        new ChatMessage("user", message); // TODO: Cannot change to You without generating error
+        new ChatMessage("user", message);
     MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            MainMenuController.getChatHandler().runGptGameMaster(msg, chatTextArea, inputText, sendButton);
+            MainMenuController.getChatHandler().runGpt(message);
             return null;
           }
         };
@@ -429,6 +406,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // need to update the chat text area with the game master's response & riddle
             App.textToSpeech.speak(chatTextArea.getText());
             return null;
           }
