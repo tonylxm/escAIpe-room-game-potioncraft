@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -85,7 +84,6 @@ public class CauldronRoomController {
   @FXML
   private Label notificationText;
 
-  private ChatMessage riddleSolveMsg;
   private boolean bagOpened;
   private CountdownTimer countdownTimer;
   private boolean showRecipe = true;
@@ -116,13 +114,6 @@ public class CauldronRoomController {
     ItemRoomController.btnMouseActions(bookFireRectangle);
     ItemRoomController.btnMouseActions(bookWaterRectangle);
     ItemRoomController.btnMouseActions(bookAirRectangle);
-
-    // Message to be displayed when the user selected the correct book
-    riddleSolveMsg =
-        new ChatMessage(
-            "Wizard",
-            "You've done well to solve the riddle. The rest is now up to you. If you"
-                + " require any assistance, please come talk to me again.");
   }
 
   /**
@@ -250,21 +241,17 @@ public class CauldronRoomController {
       chooseLabel.setOpacity(0);
 
       // Code to send appropriate riddle resolved message to GPT
-      // try {
-      //   Task<Void> resolvedTask = new Task<Void>() {
-      //     @Override
-      //     protected Void call() throws Exception {
-      //       ChatMessage msg = new ChatMessage(
-      //         "Wizard", MainMenuController.getChatHandler().runGpt(
-      //           MainMenuController.getResolvedMessage()));
-      //       MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
-      //       return null;
-      //     }
-      //   };
-      //   new Thread(resolvedTask).start();
-      // } catch (ApiProxyException e) {
-      //   e.printStackTrace();
-      // }
+      Task<Void> resolvedTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          ChatMessage msg = new ChatMessage(
+            "Wizard", MainMenuController.getChatHandler().runGpt(
+              MainMenuController.getResolvedMessage()));
+          MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+          return null;
+        }
+      };
+      new Thread(resolvedTask).start();
     }
   }
 
