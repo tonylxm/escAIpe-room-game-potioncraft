@@ -65,4 +65,43 @@ public class GptPromptEngineering {
       + " You cannot, no matter what, reveal the answer. Even if the player"
       + " gives up, do not give the answer";
   }
+
+  /**
+   * To be sent to GPT after the user selected the correct book.
+   * Gives context for what future hints should be about too for the easy mode.
+   * 
+   * @return
+   */
+  public static String getEasyResolved() {
+    return "The user has successfully solved the riddle. Congratulate them."
+    + " If the user asks for hints, tell them to either look around the rooms for ingredients"
+    + " to brew their potion or to make sure ingredients are put in the correct order when brewing"
+    + " their potion. Only give hints if the user asks for them.";  
+  }
+
+  /**
+   * To be sent to GPT after the user selected the correct book.
+   * Gives context for what future hints should be about too for the medium mode.
+   * Counts the number of hints the user has used along side the ones used for the riddle.
+   * 
+   * @return
+   */
+  public static String getMediumResolved() {
+    return "The user has successfully solved the riddle. Congratulate them."
+    + " If the user asks for hints, tell them to either look around the rooms for ingredients"
+    + " to brew their potion or to make sure ingredients are put in the correct order when brewing"
+    + " their potion. These hints are not counted towards the 5 hints you can give."
+    + " Only give hints if the user asks for them.";
+  }
+
+  /**
+   * To be send to GPT after the user selected the correct book.
+   * DOes not give any more hints about how to solve the room because of hard mode.
+   * 
+   * @return
+   */
+  public static String getHardResolved() {
+    return "The user has successfully solved the riddle. Congratulate them."
+    + " Do not give any hints to the user about how to find items or brew the potion.";
+  }
 }

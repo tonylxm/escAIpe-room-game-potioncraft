@@ -313,6 +313,14 @@ public class CauldronRoomController {
       bookFireRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
+      try {
+        ChatMessage msg = new ChatMessage(
+          "Wizard", MainMenuController.getChatHandler().runGpt(
+            MainMenuController.getResolvedMessage()));
+        MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
       // MainMenuController.getChatHandler().appendChatMessage(
       //    riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
@@ -332,6 +340,14 @@ public class CauldronRoomController {
       bookWaterRectangle.setDisable(true);
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
+      try {
+        ChatMessage msg = new ChatMessage(
+          "Wizard", MainMenuController.getChatHandler().runGpt(
+            MainMenuController.getResolvedMessage()));
+        MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
       // MainMenuController.getChatHandler().appendChatMessage(
       //    riddleSolveMsg, chatTextArea, inputText, sendButton);
     }
@@ -351,6 +367,14 @@ public class CauldronRoomController {
       bookAirRectangle.setDisable(true); 
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
+      try {
+        ChatMessage msg = new ChatMessage(
+          "Wizard", MainMenuController.getChatHandler().runGpt(
+            MainMenuController.getResolvedMessage()));
+        MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
       // MainMenuController.getChatHandler().appendChatMessage(
       //    riddleSolveMsg, chatTextArea, inputText, sendButton);
     }

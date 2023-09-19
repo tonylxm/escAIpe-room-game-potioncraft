@@ -42,6 +42,7 @@ public class MainMenuController {
   private static String book;
   private static ChatHandler chatHandler;
   private static ChatMessage riddle;
+  private static String resolvedRiddle;
   private static int hints;
 
   public static Items getItems() {
@@ -62,6 +63,10 @@ public class MainMenuController {
 
   public static ChatMessage getRiddle() {
     return riddle;
+  }
+
+  public static String getResolvedMessage() {
+    return resolvedRiddle;
   }
 
   public static int getHints() {
@@ -180,18 +185,27 @@ public class MainMenuController {
                 riddle =
                   new ChatMessage(
                     "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
+
+                // Message to send to GPT after user has resolved the riddle
+                resolvedRiddle = GptPromptEngineering.getEasyResolved();
                 break;
               case 5:
                 // When on Harry mode, selecting the prompt to give the user only 5 hints
                 riddle =
                   new ChatMessage(
                     "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
+                
+                // Message to send to GPT after user has resolved the riddle
+                resolvedRiddle = GptPromptEngineering.getMediumResolved();
                 break;
               case 0:
                 // When on Voldemort mode, selecting the prompt to give the user no hints at all
                 riddle =
                   new ChatMessage(
                       "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+                
+                // Message to send to GPT after user has resolved the riddle
+                resolvedRiddle =GptPromptEngineering.getHardResolved();
                 break;
             }
             return null;
