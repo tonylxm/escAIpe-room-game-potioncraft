@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,12 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -39,17 +43,17 @@ public class CauldronRoomController {
   @FXML
   private Polygon leftArrow;
   @FXML
-  private Rectangle bookFireRectangle;
+  private ImageView bookFireRectangle;
   @FXML
-  private Rectangle bookWaterRectangle;
+  private ImageView bookWaterRectangle;
   @FXML
-  private Rectangle bookAirRectangle;
+  private ImageView bookAirRectangle;
   @FXML
-  private Rectangle bookFireImage;
+  private ImageView bookFireImage;
   @FXML
-  private Rectangle bookWaterImage;
+  private ImageView bookWaterImage;
   @FXML
-  private Rectangle bookAirImage;
+  private ImageView bookAirImage;
   @FXML
   private Rectangle textRect;
   @FXML
@@ -78,12 +82,19 @@ public class CauldronRoomController {
   @FXML 
   private ImageView ttsBtn2;
 
+  @FXML
+  private ImageView notificationBack;
+  @FXML
+  private Label notificationText;
+
   private ShapeInteractionHandler interactionHandler;
   private ChatMessage riddleSolveMsg;
 
   private boolean bagOpened;
 
   private CountdownTimer countdownTimer;
+
+  private Boolean showRecipe = true;
 
   @FXML
   public void initialize() {
@@ -147,23 +158,23 @@ public class CauldronRoomController {
     // Setting up the appropriate interactions for the book fire
     if (bookFireRectangle != null) {
       bookFireRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.glowThis(bookFireRectangle));
       bookFireRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.unglowThis(bookFireRectangle));
     }
     // Setting up the appropriate interactions for the book water
     if (bookWaterRectangle != null) {
       bookWaterRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.glowThis(bookWaterRectangle));
       bookWaterRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.unglowThis(bookWaterRectangle));
     }
     // Setting up the appropriate interactions for the book air
     if (bookAirRectangle != null) {
       bookAirRectangle.setOnMouseEntered(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.glowThis(bookAirRectangle));
       bookAirRectangle.setOnMouseExited(
-          event -> interactionHandler.handle(event));
+          event -> interactionHandler.unglowThis(bookAirRectangle));
     }
 
     // Message to be displayed when the user selected the correct book
@@ -294,7 +305,12 @@ public class CauldronRoomController {
     System.out.println("book fire clicked");
     if (MainMenuController.getBook() == "fire") {
       // remove the book from the scene
-      bookFireRectangle.setOpacity(0);
+      //bookFireRectangle.setOpacity(0);
+      //fade the book out
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookFireRectangle);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.play();
       bookFireImage.setOpacity(0);
       bookFireImage.setDisable(true);
       bookFireRectangle.setDisable(true);
@@ -309,7 +325,10 @@ public class CauldronRoomController {
     System.out.println("book water clicked");
     if (MainMenuController.getBook() == "water") {
       // remove the book from the scene
-      bookWaterRectangle.setOpacity(0);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.play();
       bookWaterImage.setOpacity(0);
       bookWaterImage.setDisable(true);
       bookWaterRectangle.setDisable(true);
@@ -324,7 +343,10 @@ public class CauldronRoomController {
     System.out.println("book air clicked");
     if (MainMenuController.getBook() == "air") {
       // remove the book from the scene
-      bookAirRectangle.setOpacity(0);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookAirRectangle);
+      ft.setFromValue(1);
+      ft.setToValue(0);
+      ft.play();
       bookAirImage.setOpacity(0);
       bookAirImage.setDisable(true);
       bookAirRectangle.setDisable(true);
@@ -371,7 +393,7 @@ public class CauldronRoomController {
       chatTextArea.setOpacity(0);
       disableBooks();
       chooseLabel.setOpacity(0);
-
+      enableRecipe();
       disableChat();
 
       // Handling closing the "bag" when clicking off inventory
@@ -383,6 +405,19 @@ public class CauldronRoomController {
     }
   }
 
+  @FXML
+  private void enableRecipe() {
+    bookBtn.setDisable(false);
+    bookBtn.setOpacity(1);
+
+    if(showRecipe) {
+      notificationText.setText("Check bottom right for the recipe book!");
+      notifyPopup();
+    }
+
+    showRecipe = false;
+  }
+  
   /** Displaying wizard chat to user when prompted */
   private void showWizardChat() {
     // Setting approrpiate fields to be visible and interactable
@@ -488,5 +523,41 @@ public class CauldronRoomController {
           }
         };
     new Thread(speakTask, "Speak Thread").start();
+  }
+
+  @FXML
+  private void notifyPopup() {
+    // Create a FadeTransition to gradually change opacity over 3 seconds
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(5), notificationBack);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(1.0);
+            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(5), notificationText);
+            fadeTransition2.setFromValue(1.0);
+            fadeTransition2.setToValue(1.0);
+
+            // Play the fade-in animation
+            fadeTransition.play();
+            fadeTransition2.play();
+
+            // Schedule a task to fade out the image after 3 seconds
+            fadeTransition.setOnFinished(fadeEvent -> {
+              if (notificationBack.getOpacity() == 1.0) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationBack);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+              }
+            });
+
+            fadeTransition2.setOnFinished(fadeEvent -> {
+              if (notificationText.getOpacity() == 1.0) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationText);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+              }
+            });
+
+            
   }
 }

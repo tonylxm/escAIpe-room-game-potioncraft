@@ -15,16 +15,11 @@
             <Image url="@../images/cauldron-room.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="680.0" fitWidth="1024.0" opacity="0.74">
+      <ImageView fx:id="backImg" fitHeight="680.0" fitWidth="1024.0" opacity="0.74">
          <image>
             <Image url="@../images/mystic.jpeg" />
          </image>
       </ImageView>
-      <Label fx:id="returnLbl" layoutX="14.0" layoutY="614.0" onMouseClicked="#goBack" text="Return">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
       <ImageView fx:id="cauldronImageView" fitHeight="334.0" fitWidth="334.0" layoutX="352.0" layoutY="307.0">
          <image>
             <Image url="@../images/cauldron.png" />
@@ -60,7 +55,7 @@
             <Image url="@../images/stone.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tailImage" layoutX="386.0" layoutY="17.0" opacity="0.0">
+      <ImageView fx:id="tailImage" fitHeight="82.0" fitWidth="82.0" layoutX="378.0" layoutY="164.0" opacity="0.0">
          <image>
             <Image url="@../images/tail.png" />
          </image>
@@ -98,5 +93,20 @@
             <Image url="@../images/hourglass-1024x1024.gif" />
          </image>
       </ImageView>
+      <ImageView fx:id="backImg" fitHeight="55.0" fitWidth="57.0" layoutX="953.0" layoutY="614.0" onMouseClicked="#goBack">
+         <image>
+            <Image url="@../images/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="notificationBack" fitHeight="200.0" fitWidth="290.0" layoutX="374.0" layoutY="-22.0" opacity="0.0">
+         <image>
+            <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="notificationText" layoutX="419.0" layoutY="46.0" prefHeight="65.0" prefWidth="200.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Algerian" size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
