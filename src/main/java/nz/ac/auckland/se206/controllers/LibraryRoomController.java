@@ -60,7 +60,6 @@ public class LibraryRoomController extends ItemRoomController {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLibraryTimerLabel(timerLabel);
 
-
     // Setting appropriate boolean fields
     itemOneAdded = false;
     itemTwoAdded = false;
@@ -76,52 +75,46 @@ public class LibraryRoomController extends ItemRoomController {
 
     // Setting up listeners for the various items
     interactionHandler = new ShapeInteractionHandler();
-    if (itemOneImg != null) {
       itemOneImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(itemOneImg));
       itemOneImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
       itemOneImg.setOnMouseClicked(
           event -> itemSelect(Items.Item.TAIL));
-    }
-    if (itemTwoImg != null) {
+
       itemTwoImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(itemTwoImg));
       itemTwoImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
       itemTwoImg.setOnMouseClicked(
           event -> itemSelect(Items.Item.INSECT_WINGS));
-    }
-    if (itemThreeImg != null) {
+
+
       itemThreeImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(itemThreeImg));
       itemThreeImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
       itemThreeImg.setOnMouseClicked(
           event -> itemSelect(Items.Item.FLOWER));
-    }
-    if (itemFourImg != null) {
+  
       itemFourImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(itemFourImg));
       itemFourImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
       itemFourImg.setOnMouseClicked(
           event -> itemSelect(Items.Item.SCALES));
-    }
-    if (itemFiveImg != null) {
+ 
       itemFiveImg.setOnMouseEntered(
           event -> interactionHandler.glowThis(itemFiveImg));
       itemFiveImg.setOnMouseExited(
           event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
       itemFiveImg.setOnMouseClicked(
           event -> itemSelect(Items.Item.POWDER));
-    }
-    if (rightShpe != null) {
+ 
       rightShpe.setOnMouseEntered(
           event -> rightShpe.setOpacity(0.9));
       rightShpe.setOnMouseExited(
           event -> rightShpe.setOpacity(0.5));
-    }
   }
 
   /** 

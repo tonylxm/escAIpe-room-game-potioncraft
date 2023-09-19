@@ -6,11 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.Items.Item;
 
 public abstract class ItemRoomController {
   protected boolean bagOpened;
@@ -46,42 +48,94 @@ public abstract class ItemRoomController {
 
   protected CountdownTimer countdownTimer;
 
+  protected ImageView itemA;
+  protected ImageView itemB;
+  protected ImageView itemC;
+  protected ImageView itemD;
+  protected ImageView itemE;
+
+    // Booleans to keep track of whether an item has been added to the inventory
+    private boolean itemAAdded;
+    private boolean itemBAdded;
+    private boolean itemCAdded;
+    private boolean itemDAdded;
+    private boolean itemEAdded;
+    // Booleans to keep track of if an item is clicked or selected
+    private boolean aClicked;
+    private boolean bClicked;
+    private boolean cClicked;
+    private boolean dClicked;
+    private boolean eClicked;
 
   /**
    * Initialising the fields that are common in both of the item
    * rooms to avoid code duplication.
    */
   @FXML
-  protected void genericInitialise() {
+  protected void genericInitialise(ImageView itemA, ImageView itemB, ImageView itemC,
+      ImageView itemD, ImageView itemE, Polygon arrowShpe) {
+    this.itemA = itemA;
+    this.itemB = itemB;
+    this.itemC = itemC;
+    this.itemD = itemD;
+    this.itemE = itemE;
+
+    // Setting appropriate boolean fields
+    itemAAdded = false;
+    itemBAdded = false;
+    itemCAdded = false;
+    itemDAdded = false;
+    itemEAdded = false;
+
+    aClicked = false;
+    bClicked = false;
+    cClicked = false;
+    dClicked = false;
+    eClicked = false;
+
     readyToAdd = false;
     bagOpened = false;
+
+    interactionHandler = new ShapeInteractionHandler();
 
     // Disabling the text box and mouse track region
     setText("", false, false);
     mouseTrackRegion.setDisable(true);
     mouseTrackRegion.setOpacity(0);
 
-    // Setting appropriate interactable features
-    if (bookBtn != null) {
-      bookBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bookBtn));
-      bookBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bookBtn));
-    }
-    if (bagBtn != null) {
-      bagBtn.setOnMouseEntered(
-          event -> interactionHandler.glowThis(bagBtn));
-      bagBtn.setOnMouseExited(
-          event -> interactionHandler.unglowThis(bagBtn));
-      // ELSE NO ITEMS IN BAG MESSAGE
-    }
-    if (wizardImg != null) {
-      wizardImg.setOnMouseEntered(
-          event -> interactionHandler.glowThis(wizardImg));
-      wizardImg.setOnMouseExited(
-          event -> interactionHandler.unglowThis(wizardImg));
-    }
+    // Setting appropriate interactable features for the buttons
+    btnMouseActions(bookBtn);
+    btnMouseActions(bagBtn);
+    btnMouseActions(wizardImg);
+
+    // Setting appropriate interactable features for the items
+    itemMouseActions(itemA, aClicked);
+    itemMouseActions(itemB, bClicked);
+    itemMouseActions(itemC, cClicked);
+    itemMouseActions(itemD, dClicked);
+    itemMouseActions(itemE, eClicked);
+
+    // Setting appropriate interactable features for the arrow
+    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
+    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
   }
+
+  /**
+   * Handling the event where a btn is hovered over
+   */
+  protected void btnMouseActions(ImageView btn) {
+    btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
+    btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
+  }
+
+  /**
+   * Handling the event where an item is hovered over and clicked
+   */
+  protected void itemMouseActions(ImageView itemImg, boolean itemClicked) {
+    itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
+    itemImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemImg, itemClicked));
+  }
+  
   
   /**
    * Making text box appear or dissapear with given text.
@@ -194,7 +248,8 @@ public abstract class ItemRoomController {
     // Can be removed later
     System.out.println("Item added to inventory");
     System.out.println("Current Inventory:");
-    Iterator itr = new MainMenuController().getInventory().getInventory().iterator();
+    new MainMenuController();
+    Iterator<Item> itr = MainMenuController.getInventory().getInventory().iterator();
     while (itr.hasNext()) {
       System.out.println("  " + itr.next());
     }
