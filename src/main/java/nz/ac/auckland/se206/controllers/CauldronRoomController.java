@@ -159,6 +159,13 @@ public class CauldronRoomController {
     bookAirRectangle.setOpacity(opacity);
   }
 
+  private void disableChat(boolean disable, double opacity) {
+    inputText.setDisable(disable);
+    inputText.setOpacity(opacity);
+    sendButton.setDisable(disable);
+    sendButton.setOpacity(opacity);
+  }
+
   /**
    * Taking user to the cauldron scene from the room scene to be able to 
    * brew their potions.
@@ -195,20 +202,14 @@ public class CauldronRoomController {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleGiven) {
       toggleChat(false, 1);
-      inputText.setDisable(true);
-      inputText.setOpacity(0.5);
-      sendButton.setDisable(true);
-      sendButton.setOpacity(0.5);
+      disableChat(true, 0.5);
       MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
       // the user to select the book and respond to the wizard
       MainMenuController.getChatHandler().getAppendTask().setOnSucceeded(e -> {
         chooseLabel.setOpacity(1);
-        inputText.setDisable(false);
-        inputText.setOpacity(1);
-        sendButton.setDisable(false);
-        sendButton.setOpacity(1);
+        disableChat(false, 1);
         toggleBooks(false, 1);
       });
       GameState.isBookRiddleGiven = true;
@@ -236,7 +237,7 @@ public class CauldronRoomController {
     System.out.println("book " + element +  " clicked");
     if (MainMenuController.getBook() == element) {
       // remove the book from the scene
-      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookImage);
+      FadeTransition ft = new FadeTransition(Duration.seconds(1), bookRectangle);
       ft.setFromValue(1);
       ft.setToValue(0);
       ft.play();
@@ -367,10 +368,7 @@ public class CauldronRoomController {
       return;
     }
     inputText.clear();
-    inputText.setDisable(true);
-    inputText.setOpacity(0.5);
-    sendButton.setDisable(true);
-    sendButton.setOpacity(0.5);
+    disableChat(true, 0.5);
     ChatMessage msg =
         new ChatMessage("user", message);
     MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
@@ -379,7 +377,7 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            MainMenuController.getChatHandler().runGpt(message);
+            MainMenuController.getChatHandler().runGptGameMaster(msg, chatTextArea, inputText, sendButton);
             return null;
           }
         };
