@@ -11,7 +11,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1024.0" stylesheets="@../css/book.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookController">
   <children>
       <ImageView fx:id="cauldronRoomBackground" fitHeight="692.0" fitWidth="1034.0" layoutX="-10.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
@@ -47,11 +46,6 @@
             <Image url="@../images/tts-icon.png" />
          </image>
       </ImageView>
-      <Label fx:id="timerLabel" layoutX="773.0" prefHeight="67.0" prefWidth="257.0" text="timerLabel" textFill="WHITE">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
       <ImageView fx:id="placeholderImg" fitHeight="150.0" fitWidth="200.0" layoutX="628.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/place_holder.png" />
@@ -118,6 +112,21 @@
          </image>
       </ImageView>
       <Button layoutX="970.0" layoutY="631.0" mnemonicParsing="false" onAction="#onGoBack" opacity="0.001" prefHeight="34.0" prefWidth="34.0" text="X" fx:id="xBtn" />
+      <ImageView fitHeight="88.0" fitWidth="216.0" layoutX="797.0" layoutY="14.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timerLabel" layoutX="842.0" layoutY="25.0" prefHeight="67.0" prefWidth="257.0" text="4:00">
+         <font>
+            <Font name="Algerian" size="42.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="924.0" layoutY="25.0">
+         <image>
+            <Image url="@../images/hourglass-1024x1024.gif" />
+         </image>
+      </ImageView>
   </children>
    <effect>
       <Blend />
