@@ -143,6 +143,13 @@ public abstract class RoomController {
       itemThree = Items.Item.BAT_WINGS;
       itemFour = Items.Item.WREATH;
       itemFive = Items.Item.FEATHER;
+    } else if (roomName.equals("Cauldron")) {
+      // Fix
+      itemOne = Items.Item.TAIL;
+      itemTwo = Items.Item.INSECT_WINGS;
+      itemThree = Items.Item.FLOWER;
+      itemFour = Items.Item.SCALES;
+      itemFive = Items.Item.POWDER;
     }
 
     readyToAdd = false;

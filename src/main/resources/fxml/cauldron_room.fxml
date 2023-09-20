@@ -79,7 +79,7 @@
             <Image url="@../images/oie_yaYCuLx1PDOG.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutX="77.0" layoutY="52.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="159.0" layoutY="310.0" opacity="0.0" scaleX="-1.0">
          <image>
             <Image url="@../images/headshot.png" />
@@ -173,5 +173,45 @@
             <Font name="Algerian" size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="itemElevenImg" fitHeight="67.0" fitWidth="150.0" layoutX="273.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bone.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="itemTwelveImg" fitHeight="78.0" fitWidth="71.0" layoutX="107.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true" rotate="-5.0">
+         <image>
+            <Image url="@../images/fire.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="itemThirteenImg" fitHeight="88.0" fitWidth="65.0" layoutX="409.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/root.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="itemFourteenImg" fitHeight="88.0" fitWidth="65.0" layoutX="496.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bettle.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="itemFifteenImg" fitHeight="88.0" fitWidth="65.0" layoutX="586.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/unicorn_horn.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </Pane>
