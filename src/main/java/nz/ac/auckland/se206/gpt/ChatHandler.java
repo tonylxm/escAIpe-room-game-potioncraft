@@ -12,8 +12,8 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class ChatHandler {
   private ChatCompletionRequest chatCompletionRequest;
-  public Choice result;
-  public Task<Void> appendTask;
+  private Choice result;
+  private Task<Void> appendTask;
 
   @FXML
   public void initialize() throws ApiProxyException {
@@ -30,12 +30,10 @@ public class ChatHandler {
       chatCompletionRequest.addMessage(result.getChatMessage());
       return result.getChatMessage().getContent();
     } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
       e.printStackTrace();
       return null;
     }
   }
-
 
   // TODO: Duplicate code, refactor later
 
@@ -46,15 +44,19 @@ public class ChatHandler {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public ChatMessage runGptGameMaster(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) throws ApiProxyException {
+  public ChatMessage runGptGameMaster(
+      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton)
+      throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     try {
+      // Sending a request to the GPT API proxy to get a response for the user
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
       appendChatMessage(result.getChatMessage(), chatTextArea, inputText, sendButton);
       return result.getChatMessage();
     } catch (ApiProxyException e) {
+      // Displaying stck trace and not crashing the game if there is a request error
       e.printStackTrace();
       return null;
     }
@@ -65,9 +67,25 @@ public class ChatHandler {
    *
    * @param msg the chat message to append
    */
-  public void appendChatMessage(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
-    chatTextArea.appendText(msg.getRole() + ": ");
+  public void appendChatMessage(
+      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
+    // Adding the role of the chatter to the start of each message
+    String displayRole;
+    switch(msg.getRole()) {
+      case "assistant":
+        displayRole = "Wizard";
+        break;
+      case "user":
+        displayRole = "You";
+        break;
+      default:
+        displayRole = msg.getRole();
+        break;
+    }
 
+    chatTextArea.appendText(displayRole + ": ");
+
+    // Appending the message character by character to the chat text area
     appendTask =
         new Task<Void>() {
           @Override
@@ -81,15 +99,34 @@ public class ChatHandler {
           }
         };
     new Thread(appendTask, "Append Thread").start();
-    
-    if (msg.getRole().equals("Wizard") || msg.getRole().equals("assistant")) {
-    appendTask.setOnSucceeded(
-        e -> {
-          inputText.setDisable(false);
-          inputText.setOpacity(1);
-          sendButton.setDisable(false);
-          sendButton.setOpacity(1);
-        });
-      }
+
+    // Not allowing the user to send messages while the wizard or assistant is typing
+    if (displayRole.equals("Wizard")) {
+      appendTask.setOnSucceeded(
+          e -> {
+            inputText.setDisable(false);
+            sendButton.setDisable(false);
+            if (inputText.getOpacity() == 0.5) {
+              inputText.setOpacity(1);
+              sendButton.setOpacity(1);
+            }
+          });
+    }
+  }
+
+  public void setResult(Choice result) {
+    this.result = result;
+  }
+
+  public Choice getResult() {
+    return result;
+  }
+
+  public Task<Void> getAppendTask() {
+    return appendTask;
+  }
+
+  public void setAppendTask(Task<Void> appendTask) {
+    this.appendTask = appendTask;
   }
 }

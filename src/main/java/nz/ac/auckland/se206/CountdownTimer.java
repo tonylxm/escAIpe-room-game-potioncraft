@@ -92,15 +92,6 @@ public class CountdownTimer {
   // timerLabel!!!
   private void updateTimerLabel() {
     Parent currentSceneRoot = SceneManager.getUiRoot(SceneManager.getTimerScene());
-    // System.out.println(
-    // "currentSceneRoot = "
-    // + currentSceneRoot
-    // + " || current scene = "
-    // + SceneManager.getTimerScene()
-    // + " || sec = "
-    // + currentSeconds
-    // + " || cauldron timer = "
-    // + cauldronTimerLabel);
 
     if (currentSceneRoot != null) {
 
@@ -117,7 +108,6 @@ public class CountdownTimer {
 
       if (libraryTimerLabel != null) {
         libraryTimerLabel.setText(formatTimerText());
-        //System.out.println("left timer label updated");
       }
 
       if (rightTimerLabel != null) {
@@ -130,17 +120,37 @@ public class CountdownTimer {
 
       if (brewingLabel != null) {
         brewingLabel.setText(formatTimerText());
-        //System.out.println("brewing label updated");
       }
     }
   }
 
   public String formatTimerText() {
     if (currentSeconds < 10) {
+      if (minutes == 0 && currentSeconds % 2 == 1) {
+        setTimerRed(cauldronTimerLabel, libraryTimerLabel, rightTimerLabel, bookTimerLabel, brewingLabel);
+      } else if (minutes == 0 && currentSeconds % 2 == 0) {
+        setTimerBlack(cauldronTimerLabel, libraryTimerLabel, rightTimerLabel, bookTimerLabel, brewingLabel);
+      }
       return String.format("%d" + ":" + "0" + "%d", minutes, currentSeconds);
     } else {
       return String.format("%d" + ":" + "%d", minutes, currentSeconds);
     }
+  }
+
+  public void setTimerRed(Label timer1, Label timer2, Label timer3, Label timer4, Label timer5) {
+    timer1.setStyle("-fx-text-fill: red");
+    timer2.setStyle("-fx-text-fill: red");
+    timer3.setStyle("-fx-text-fill: red");
+    timer4.setStyle("-fx-text-fill: red");
+    timer5.setStyle("-fx-text-fill: red");
+  }
+
+  public void setTimerBlack(Label timer1, Label timer2, Label timer3, Label timer4, Label timer5) {
+    timer1.setStyle("-fx-text-fill: black");
+    timer2.setStyle("-fx-text-fill: black");
+    timer3.setStyle("-fx-text-fill: black");
+    timer4.setStyle("-fx-text-fill: black");
+    timer5.setStyle("-fx-text-fill: black");
   }
 
   // Getters and setters
@@ -149,7 +159,6 @@ public class CountdownTimer {
   }
 
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
-    //System.out.println("setting left timer label");
     this.libraryTimerLabel = libraryTimerLabel;
   }
 

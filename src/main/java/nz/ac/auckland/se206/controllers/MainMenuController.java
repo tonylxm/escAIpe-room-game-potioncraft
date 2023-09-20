@@ -16,6 +16,10 @@ import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.gpt.ChatHandler;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainMenuController {
   public enum Difficulty {
@@ -30,10 +34,40 @@ public class MainMenuController {
     SIX_MIN
   }
 
-  public static CountdownTimer countdownTimer = new CountdownTimer("2:00");
+  private static CountdownTimer countdownTimer = new CountdownTimer("2:00");
 
-  public static Items items;
-  public static Inventory inventory;
+  private static Items items;
+  static Inventory inventory;
+  
+  private static String book;
+  private static ChatHandler chatHandler;
+  private String[] options = {"fire", "water", "air"};
+  private static ChatMessage riddle;
+  private static int hints;
+
+  public static Items getItems() {
+    return items;
+  }
+
+  public static Inventory getInventory() {
+    return inventory;
+  }
+
+  public static String getBook() {
+    return book;
+  }
+
+  public static ChatHandler getChatHandler() {
+    return chatHandler;
+  }
+
+  public static ChatMessage getRiddle() {
+    return riddle;
+  }
+
+  public static int getHints() {
+    return hints;
+  }
 
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
@@ -81,7 +115,6 @@ public class MainMenuController {
     items = new Items(5);
     inventory = new Inventory();
     TransitionAnimation.setMasterPane(masterPane);
-
     difficultySelected = false;
     // Hover hints on difficulty selection
     easyBtn.setOnMouseEntered(event -> difficultyHoverOn(hintInfinity));
@@ -113,26 +146,60 @@ public class MainMenuController {
    */
   public void difficultySelect(String difficulty) {
     difficultySelected = true;
+    String message = "";
     switch (difficulty) {
       // Easiest level granting unlimited hints
       case "EASY":
+        hints = -1;
         hintInfinity.setOpacity(1);
         hintFive.setOpacity(0);
         hintZero.setOpacity(0);
         break;
       // Medium level capping hints at 5
       case "MEDIUM":
+        hints = 5;
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(1);
         hintZero.setOpacity(0);
         break;
       // No hints are allowed to be given on hard level
       case "HARD":
+        hints = 0;
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(0);
         hintZero.setOpacity(1);
         break;
     }
+
+    Task<Void> bookRiddleTask =
+      new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          switch(hints) {
+            case -1:
+              // When on Dobby mode, selecting the prompt to give the user unlimited hints
+              riddle =
+                new ChatMessage(
+                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
+              break;
+            case 5:
+              // When on Harry mode, selecting the prompt to give the user only 5 hints
+              riddle =
+                new ChatMessage(
+                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
+              break;
+            case 0:
+              // When on Voldemort mode, selecting the prompt to give the user no hints at all
+              riddle =
+                new ChatMessage(
+                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+              break;
+          }
+          return null;
+        }
+      };
+    new Thread(bookRiddleTask).start();
+    System.out.println(riddle);
   }
 
   /**
@@ -140,6 +207,16 @@ public class MainMenuController {
    */
   @FXML
   public void playGame() throws InterruptedException, IOException {
+    // Initialising the book and the chat handler whenever a new game is started from the
+    // play button to have enough time to intialise the chat messages
+    chatHandler = new ChatHandler();
+    try {
+      chatHandler.initialize();
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+    }
+    book = getRandomBook();
+
     // Using a task to make sure game does not freeze
     Task<Void> instantiateScenes = new Task<Void>() {
 
@@ -161,7 +238,7 @@ public class MainMenuController {
         SceneManager.setCauldronControllerInstance(cauldronController);
 
         //create an instance of BookController
-       FXMLLoader bookLoader = new FXMLLoader(App.class.getResource("/fxml/book.fxml"));
+        FXMLLoader bookLoader = new FXMLLoader(App.class.getResource("/fxml/book.fxml"));
         Parent bookRoot = bookLoader.load();
         BookController bookController = bookLoader.getController();
 
@@ -192,6 +269,17 @@ public class MainMenuController {
     Thread fadeInSettingsBtnsThread = new Thread(
         fadeInSettingsBtnsTask, "fadeIn settings btns thread");
     fadeInSettingsBtnsThread.start();
+  }
+
+  /**
+   * Generating a random book for the user to guess through the riddle
+   * 
+   * @return
+   */
+  private String getRandomBook() {
+    int randomIndex = (int) (Math.random() * options.length);
+    System.out.println(options[randomIndex]);
+    return options[randomIndex];
   }
 
   /**
@@ -265,7 +353,9 @@ public class MainMenuController {
     startBtnEnable();
   }
 
-  // Only set startBtn enabled when difficutly and time limit have been chosen
+  /**
+   * Only set startBtn enabled when difficutly and time limit have been chosen
+   */
   public void startBtnEnable() {
     if (difficulty != null && timeLimit != null) {
       startBtn.setDisable(false);
