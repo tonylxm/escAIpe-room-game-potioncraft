@@ -9,7 +9,7 @@ import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
-public class LibraryRoomController extends ItemRoomController {
+public class LibraryRoomController extends RoomController {
   @FXML
   private Pane pane;
   @FXML
@@ -52,13 +52,13 @@ public class LibraryRoomController extends ItemRoomController {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
     setText("", false, false);
     itemScroll.setOpacity(0);
-    ItemRoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
+    RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
   /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
-    ItemRoomController.openBook(AppUi.LIBRARY_ROOM, pane);
+    RoomController.openBook(AppUi.LIBRARY_ROOM, pane);
   }
 }

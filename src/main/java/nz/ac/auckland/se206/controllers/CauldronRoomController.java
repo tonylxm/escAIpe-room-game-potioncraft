@@ -105,15 +105,15 @@ public class CauldronRoomController {
     mouseTrackRegion.setOpacity(0);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
-    ItemRoomController.btnMouseActions(cauldronImg);
-    ItemRoomController.btnMouseActions(wizardImg);
-    ItemRoomController.arrowMouseActions(leftArrow);
-    ItemRoomController.arrowMouseActions(rightArrow);
-    ItemRoomController.btnMouseActions(bookBtn);
-    ItemRoomController.btnMouseActions(bagBtn);
-    ItemRoomController.btnMouseActions(bookFireRectangle);
-    ItemRoomController.btnMouseActions(bookWaterRectangle);
-    ItemRoomController.btnMouseActions(bookAirRectangle);
+    RoomController.btnMouseActions(cauldronImg);
+    RoomController.btnMouseActions(wizardImg);
+    RoomController.arrowMouseActions(leftArrow);
+    RoomController.arrowMouseActions(rightArrow);
+    RoomController.btnMouseActions(bookBtn);
+    RoomController.btnMouseActions(bagBtn);
+    RoomController.btnMouseActions(bookFireRectangle);
+    RoomController.btnMouseActions(bookWaterRectangle);
+    RoomController.btnMouseActions(bookAirRectangle);
   }
 
   /**
@@ -324,18 +324,12 @@ public class CauldronRoomController {
   }
 
   /**
-   * Taking the user to the book scene from the room scene to be able to
+   * Taking the user to the book scene from the room scene.
    */
   @FXML
   public void openBook() {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      // Updating the book scene to reflect the current state of the book
-      bookController.updateBackground();
-    }
     System.out.println("CAULDRON_ROOM -> BOOK");
-    SceneManager.currScene = AppUi.CAULDRON_ROOM;
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+    RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
   }
 
   /** Dealing with the event where the bag icon is clicked */

@@ -19,7 +19,7 @@ import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
-public abstract class ItemRoomController {
+public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
   protected Items.Item item;
