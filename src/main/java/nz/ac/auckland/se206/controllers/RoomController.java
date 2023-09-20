@@ -47,10 +47,6 @@ public abstract class RoomController {
   protected Label textLbl;
   @FXML
   protected Rectangle textRect;
-  // @FXML
-  // protected Polygon leftShpe;
-  // @FXML
-  // protected Polygon rightShpe;
   @FXML
   protected Label yesLbl;
   @FXML

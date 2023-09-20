@@ -48,22 +48,26 @@ public class CauldronRoomController extends RoomController {
     // genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
     // Setting up the countdown and appropriate booleans before
     // anything happens to change them within the game
-    bagOpened = false;
+    
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
 
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
-    toggleChat(true, 0);
+    
     toggleBooks(true, 0);
+
+    // DELETE WHEN GENERIC INIT IMPLEMENTED
+    // bagOpened = false;
+    // toggleChat(true, 0);
+    // btnMouseActions(wizardImg);
+    // btnMouseActions(bookBtn);
+    // btnMouseActions(bagBtn);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
     btnMouseActions(cauldronImg);
-    btnMouseActions(wizardImg);
     arrowMouseActions(leftArrow);
     arrowMouseActions(rightArrow);
-    btnMouseActions(bookBtn);
-    btnMouseActions(bagBtn);
     btnMouseActions(bookFireRectangle);
     btnMouseActions(bookWaterRectangle);
     btnMouseActions(bookAirRectangle);
@@ -110,7 +114,7 @@ public class CauldronRoomController extends RoomController {
    * @throws InterruptedException
    */
   @FXML
-  public void clickWizard(MouseEvent event) {
+  public void clickCauldronRoomWizard(MouseEvent event) {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleGiven) {
       toggleChat(false, 1);
@@ -178,14 +182,14 @@ public class CauldronRoomController extends RoomController {
   }
 
   @FXML
-  public void goLeft(MouseEvent event) {
+  public void goLeftRoom(MouseEvent event) {
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
     calItemScroll.setOpacity(0);
     RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
   }
 
   @FXML
-  public void goRight(MouseEvent event) {
+  public void goRightRoom(MouseEvent event) {
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
     calItemScroll.setOpacity(0);
     RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
@@ -198,7 +202,7 @@ public class CauldronRoomController extends RoomController {
    * @param event
    */
   @FXML
-  public void clickOff(MouseEvent event) {
+  public void clickOffCauldronRoom(MouseEvent event) {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
       chooseLabel.setOpacity(0);
