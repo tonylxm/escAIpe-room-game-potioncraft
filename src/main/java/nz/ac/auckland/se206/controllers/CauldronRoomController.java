@@ -71,6 +71,17 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private Label chooseLabel;
 
+  @FXML
+  private ImageView itemElevenImg;
+  @FXML
+  private ImageView itemTwelveImg;
+  @FXML
+  private ImageView itemThirteenImg;
+  @FXML
+  private ImageView itemFourteenImg;
+  @FXML
+  private ImageView itemFifteenImg;
+
   @FXML 
   private TextArea chatTextArea;
   @FXML 
@@ -92,6 +103,8 @@ public class CauldronRoomController extends RoomController {
 
   @FXML
   public void initialize() {
+
+    genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
     // Setting up the countdown and appropriate booleans before
     // anything happens to change them within the game
     bagOpened = false;
