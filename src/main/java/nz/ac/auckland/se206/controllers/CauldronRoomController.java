@@ -259,20 +259,16 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
-    calItemScroll.setOpacity(0);
-    bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.LIBRARY_ROOM, false);
-    SceneManager.setTimerScene(AppUi.LIBRARY_ROOM);
+    calItemScroll.setOpacity(0);
+    RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
   }
 
   @FXML
   public void goRight(MouseEvent event) {
-    calItemScroll.setOpacity(0);
-    bagOpened = false;
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
-    SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
+    calItemScroll.setOpacity(0);
+    RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
   }
 
   /**
