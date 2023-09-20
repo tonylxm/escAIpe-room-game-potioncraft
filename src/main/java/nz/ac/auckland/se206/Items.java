@@ -61,7 +61,7 @@ public class Items {
     necessary = new ArrayList<>();
     int i = 0;
     while (i < 2 * n) {
-      Item item = list[random.nextInt(10)];
+      Item item = list[random.nextInt(15)];
       if (!available.contains(item)) {
         available.add(item);
         if (necessary.size() < n) {

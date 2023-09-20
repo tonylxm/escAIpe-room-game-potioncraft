@@ -141,7 +141,7 @@
       </ImageView>
       <ImageView id="itemFourteenImg" fx:id="beetleImage" fitHeight="45.0" fitWidth="65.0" layoutX="811.0" layoutY="383.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/bettle.png" />
+            <Image url="@../images/beetle.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

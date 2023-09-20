@@ -121,7 +121,7 @@
       </ImageView>
       <ImageView fx:id="itemFourteenImg" fitHeight="88.0" fitWidth="100.0" layoutX="651.0" layoutY="348.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/bettle.png" />
+            <Image url="@../images/beetle.png" />
          </image>
       </ImageView>
       <ImageView fx:id="itemFifteenImg" fitHeight="101.0" fitWidth="100.0" layoutX="654.0" layoutY="336.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">

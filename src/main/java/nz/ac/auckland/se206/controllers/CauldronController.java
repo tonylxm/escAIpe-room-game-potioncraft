@@ -405,6 +405,8 @@ public class CauldronController {
 
   @FXML
   private void emptyCauldron() {
+    notificationText.setText("Cauldron Emptied!");
+    Notification.notifyPopup(notificationBack, notificationText);
     resetItems();
   }
 }
