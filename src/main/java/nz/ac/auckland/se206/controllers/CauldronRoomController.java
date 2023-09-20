@@ -22,13 +22,14 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
+import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-public class CauldronRoomController {
+public class CauldronRoomController extends RoomController {
   @FXML
   private Pane pane;
   @FXML
@@ -85,8 +86,9 @@ public class CauldronRoomController {
   private Label notificationText;
 
   private boolean bagOpened;
-  private CountdownTimer countdownTimer;
   private boolean showRecipe = true;
+
+  private CountdownTimer countdownTimer;
 
   @FXML
   public void initialize() {
@@ -105,15 +107,15 @@ public class CauldronRoomController {
     mouseTrackRegion.setOpacity(0);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
-    ItemRoomController.btnMouseActions(cauldronImg);
-    ItemRoomController.btnMouseActions(wizardImg);
-    ItemRoomController.arrowMouseActions(leftArrow);
-    ItemRoomController.arrowMouseActions(rightArrow);
-    ItemRoomController.btnMouseActions(bookBtn);
-    ItemRoomController.btnMouseActions(bagBtn);
-    ItemRoomController.btnMouseActions(bookFireRectangle);
-    ItemRoomController.btnMouseActions(bookWaterRectangle);
-    ItemRoomController.btnMouseActions(bookAirRectangle);
+    RoomController.btnMouseActions(cauldronImg);
+    RoomController.btnMouseActions(wizardImg);
+    RoomController.arrowMouseActions(leftArrow);
+    RoomController.arrowMouseActions(rightArrow);
+    RoomController.btnMouseActions(bookBtn);
+    RoomController.btnMouseActions(bagBtn);
+    RoomController.btnMouseActions(bookFireRectangle);
+    RoomController.btnMouseActions(bookWaterRectangle);
+    RoomController.btnMouseActions(bookAirRectangle);
   }
 
   /**
@@ -189,7 +191,7 @@ public class CauldronRoomController {
    * @throws InterruptedException
    */
   @FXML
-  public void clickWizard(MouseEvent event) throws InterruptedException {
+  public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleGiven) {
       toggleChat(false, 1);
@@ -257,20 +259,16 @@ public class CauldronRoomController {
 
   @FXML
   public void goLeft(MouseEvent event) {
-    calItemScroll.setOpacity(0);
-    bagOpened = false;
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.LIBRARY_ROOM, false);
-    SceneManager.setTimerScene(AppUi.LIBRARY_ROOM);
+    calItemScroll.setOpacity(0);
+    RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
   }
 
   @FXML
   public void goRight(MouseEvent event) {
-    calItemScroll.setOpacity(0);
-    bagOpened = false;
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
-    SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
+    calItemScroll.setOpacity(0);
+    RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
   }
 
   /**
@@ -284,18 +282,15 @@ public class CauldronRoomController {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
 
-      // Disabling mouseTrackRegion so it doesn't interfere with other interactions
-      mouseTrackRegion.setDisable(true);
-
-      wizardChatImage.setDisable(true);
-      wizardChatImage.setOpacity(0);
-
-      textRect.setDisable(true);
-      
-      textRect.setOpacity(0);
       mouseTrackRegion.setOpacity(0);
+      mouseTrackRegion.setDisable(true);
+      wizardChatImage.setOpacity(0);
+      wizardChatImage.setDisable(true);
+      textRect.setOpacity(0);
+      textRect.setDisable(true);
       chatTextArea.setDisable(true);
       chatTextArea.setOpacity(0);
+
       chooseLabel.setOpacity(0);
       enableRecipe();
       toggleChat(true, 0);
@@ -317,25 +312,19 @@ public class CauldronRoomController {
 
     if (showRecipe) {
       notificationText.setText("Check bottom right for the recipe book!");
-      notifyPopup();
+      Notification.notifyPopup(notificationBack, notificationText);
     }
 
     showRecipe = false;
   }
 
   /**
-   * Taking the user to the book scene from the room scene to be able to
+   * Taking the user to the book scene from the room scene.
    */
   @FXML
   public void openBook() {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      // Updating the book scene to reflect the current state of the book
-      bookController.updateBackground();
-    }
     System.out.println("CAULDRON_ROOM -> BOOK");
-    SceneManager.currScene = AppUi.CAULDRON_ROOM;
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+    RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
   }
 
   /** Dealing with the event where the bag icon is clicked */
@@ -344,7 +333,7 @@ public class CauldronRoomController {
     // If there are no items in the inventory, can't open the bag
     if (MainMenuController.inventory.size() == 0) {
       notificationText.setText("You have no ingredients in your bag!");
-      notifyPopup();
+      Notification.notifyPopup(notificationBack, notificationText);
       return;
     }
     // If the bag isn't opened already, open it
@@ -375,16 +364,15 @@ public class CauldronRoomController {
     }
     inputText.clear();
     disableChat(true, 0.5);
-    ChatMessage msg =
-        new ChatMessage("user", message);
+    ChatMessage msg = new ChatMessage("user", message);
     MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            MainMenuController.getChatHandler().runGptGameMaster(
-                msg, chatTextArea, inputText, sendButton);
+            ChatMessage response = new ChatMessage("assistant", MainMenuController.getChatHandler().runGpt(message));
+            MainMenuController.getChatHandler().appendChatMessage(response, chatTextArea, inputText, sendButton);
             return null;
           }
         };
@@ -421,41 +409,4 @@ public class CauldronRoomController {
     new Thread(speakTask, "Speak Thread").start();
   }
 
-  @FXML
-  private void notifyPopup() {
-    // Create a FadeTransition to gradually change opacity over 3 seconds
-    FadeTransition fadeTransition = new FadeTransition(
-        Duration.seconds(5), notificationBack);
-    fadeTransition.setFromValue(1.0);
-    fadeTransition.setToValue(1.0);
-    FadeTransition fadeTransition2 = new FadeTransition(
-        Duration.seconds(5), notificationText);
-    fadeTransition2.setFromValue(1.0);
-    fadeTransition2.setToValue(1.0);
-
-    // Play the fade-in animation
-    fadeTransition.play();
-    fadeTransition2.play();
-
-    // Schedule a task to fade out the image after 3 seconds
-    fadeTransition.setOnFinished(fadeEvent -> {
-        if (notificationBack.getOpacity() == 1.0) {
-          FadeTransition fadeOutTransition = new FadeTransition(
-              Duration.seconds(1.5), notificationBack);
-          fadeOutTransition.setFromValue(1.0);
-          fadeOutTransition.setToValue(0.0);
-          fadeOutTransition.play();
-        }
-    });
-
-    fadeTransition2.setOnFinished(fadeEvent -> {
-        if (notificationText.getOpacity() == 1.0) {
-          FadeTransition fadeOutTransition = new FadeTransition(
-              Duration.seconds(1.5), notificationText);
-          fadeOutTransition.setFromValue(1.0);
-          fadeOutTransition.setToValue(0.0);
-          fadeOutTransition.play();
-        }
-    });        
-  }
 }

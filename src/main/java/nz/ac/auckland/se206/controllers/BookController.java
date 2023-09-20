@@ -80,7 +80,7 @@ public class BookController {
 
     writeRecipeIngredients(Items.necessary);
 
-    ItemRoomController.btnMouseActions(backBtn);
+    RoomController.btnMouseActions(backBtn);
 
     ingredientList.setStyle("-fx-font-size: 1.5em ;");
     ingredientList

@@ -7,11 +7,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.CountdownTimer;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.TransitionAnimation;
 
-public class TreasureRoomController extends ItemRoomController {
+public class TreasureRoomController extends RoomController {
   @FXML
   private Pane pane;
   @FXML
@@ -52,25 +50,15 @@ public class TreasureRoomController extends ItemRoomController {
   @FXML
   public void goLeft(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
-    // Resetting appropriate fields before changing scenes
     setText("", false, false);
-    readyToAdd = false;
     itemScroll.setOpacity(0);
-    bagOpened = false;
-    SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
+    RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
   /** Chaning scenes to book view */
   @FXML
   public void openBook() {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      bookController.updateBackground();
-    }
-    // Transitioning to the book scene with the appropriate fade animation
     System.out.println("TREASURE_ROOM -> BOOK");
-    SceneManager.currScene = AppUi.TREASURE_ROOM;
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+    RoomController.openBook(AppUi.TREASURE_ROOM, pane);
   }
 }

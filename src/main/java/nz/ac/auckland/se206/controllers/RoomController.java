@@ -2,22 +2,30 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.Items.Item;
+import nz.ac.auckland.se206.Notification;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
-public abstract class ItemRoomController {
-  protected boolean bagOpened;
-  protected boolean readyToAdd;
+public abstract class RoomController {
+  protected static boolean bagOpened;
+  protected static boolean readyToAdd;
   protected Items.Item item;
 
   @FXML
@@ -46,6 +54,20 @@ public abstract class ItemRoomController {
   protected Label timerLabel;
   @FXML
   protected static ShapeInteractionHandler interactionHandler;
+
+  @FXML 
+  protected TextArea chatTextArea;
+  @FXML 
+  protected TextField inputText;
+  @FXML 
+  protected Button sendButton;
+  @FXML 
+  protected ImageView ttsBtn2;
+
+  @FXML
+  protected ImageView notificationBack;
+  @FXML
+  protected Label notificationText;
 
   protected CountdownTimer countdownTimer;
 
@@ -88,13 +110,13 @@ public abstract class ItemRoomController {
    * rooms to avoid code duplication.
    */
   @FXML
-  protected void genericInitialise(String roomName, ImageView itemAImg, ImageView itemBImg, ImageView itemCImg,
-      ImageView itemDImg, ImageView itemEImg, Polygon arrowShpe) {
-    this.itemOneImg = itemAImg;
-    this.itemTwoImg = itemBImg;
-    this.itemThreeImg = itemCImg;
-    this.itemFourImg = itemDImg;
-    this.itemFiveImg = itemEImg;
+  protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
+      ImageView itemFourImg, ImageView itemFiveImg, Polygon arrowShpe) {
+    this.itemOneImg = itemOneImg;
+    this.itemTwoImg = itemTwoImg;
+    this.itemThreeImg = itemThreeImg;
+    this.itemFourImg = itemFourImg;
+    this.itemFiveImg = itemFiveImg;
 
     // Setting appropriate boolean fields
     oneAdded = false;
@@ -139,11 +161,11 @@ public abstract class ItemRoomController {
     btnMouseActions(wizardImg);
 
     // Setting appropriate interactable features for the items
-    itemMouseActions(itemAImg, oneClicked, itemOne);
-    itemMouseActions(itemBImg, twoClicked, itemTwo);
-    itemMouseActions(itemCImg, threeClicked, itemThree);
-    itemMouseActions(itemDImg, fourClicked, itemFour);
-    itemMouseActions(itemEImg, fiveClicked, itemFive);
+    itemMouseActions(itemOneImg, oneClicked, itemOne);
+    itemMouseActions(itemTwoImg, twoClicked, itemTwo);
+    itemMouseActions(itemThreeImg, threeClicked, itemThree);
+    itemMouseActions(itemFourImg, fourClicked, itemFour);
+    itemMouseActions(itemFiveImg, fiveClicked, itemFive);
 
     // Setting appropriate interactable features for the arrow
     arrowMouseActions(arrowShpe);
@@ -290,6 +312,7 @@ public abstract class ItemRoomController {
       case INSECT_WINGS:
         two = new Image("images/insect_wings.png");
         handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+        break;
       case FLOWER:
         three = new Image("images/flower.png");
         handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
@@ -301,6 +324,7 @@ public abstract class ItemRoomController {
       case POWDER:
         five = new Image("images/powder.png");
         handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        break;
       case TALON:
         one = new Image("images/talon.png");
         handleAddImg(one, itemOneImg, oneAdded, oneClicked);
@@ -320,6 +344,7 @@ public abstract class ItemRoomController {
       case FEATHER:
         five = new Image("images/feather.png");
         handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        break;
       default:
         break;
     }
@@ -375,11 +400,15 @@ public abstract class ItemRoomController {
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
     setText("", false, false);
-    mouseTrackRegion.setDisable(true);
-    mouseTrackRegion.setOpacity(0);
 
+    mouseTrackRegion.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
     wizardChatImage.setOpacity(0);
     wizardChatImage.setDisable(true);
+    textRect.setOpacity(0);
+    textRect.setDisable(true);
+    // chatTextArea.setDisable(true);
+    // chatTextArea.setOpacity(0);
 
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
@@ -448,17 +477,36 @@ public abstract class ItemRoomController {
     }
   }
 
+  public static void goDirection(Pane pane, AppUi room) {
+    // Resetting appropriate fields before changing scenes
+    readyToAdd = false;
+    bagOpened = false;
+    SceneManager.setTimerScene(room);
+    TransitionAnimation.changeScene(pane, room, false);
+  }
+
+  public static void openBook(AppUi currScene, Pane pane) {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
+    SceneManager.currScene = currScene;
+    // Transitioning to the book scene with the appropriate fade animation
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+  }
+
   /**
    * Dealing with the event where the bag icon is clicked
    */
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.inventory.size() == 0) {
-      // Setting notificationText.setText("You have no ingredients in your bag!");
-      // notifyPopup(); if the user hasn't collected anything yet
-      return;
-    }
+    //  if (MainMenuController.inventory.size() == 0) {
+    //   notificationText.setText("You have no ingredients in your bag!");
+    //   Notification.notifyPopup(notificationBack, notificationText);
+    //   return;
+    // }
+
     // If the bag isn't opened already, open it
     if (!bagOpened) {
       itemScroll.setVvalue(0);
@@ -471,6 +519,9 @@ public abstract class ItemRoomController {
     }
   }
 
+  /**
+   * Dealing with the event where the wizard icon is clicked
+   */
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");

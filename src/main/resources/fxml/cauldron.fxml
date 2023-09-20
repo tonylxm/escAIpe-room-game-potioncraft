@@ -141,14 +141,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="notificationBack" fitHeight="200.0" fitWidth="290.0" layoutX="374.0" layoutY="-22.0" opacity="0.0">
+      <ImageView fx:id="notificationBack" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0" opacity="0.0">
          <image>
             <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
          </image>
       </ImageView>
-      <Label fx:id="notificationText" layoutX="419.0" layoutY="46.0" prefHeight="65.0" prefWidth="200.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="notificationText" layoutX="389.0" layoutY="52.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
          <font>
-            <Font name="Algerian" size="14.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
       </Label>
    </children>
