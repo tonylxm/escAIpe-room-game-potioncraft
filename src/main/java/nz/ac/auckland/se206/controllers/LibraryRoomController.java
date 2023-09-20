@@ -38,13 +38,13 @@ public class LibraryRoomController extends RoomController {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
     setText("", false, false);
     itemScroll.setOpacity(0);
-    RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
+    goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
   /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
-    RoomController.openBook(AppUi.LIBRARY_ROOM, pane);
+    openBook(AppUi.LIBRARY_ROOM, pane);
   }
 }

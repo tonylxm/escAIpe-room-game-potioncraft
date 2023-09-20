@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -158,6 +157,7 @@ public class CauldronRoomController extends RoomController {
       chooseLabel.setOpacity(0);
 
       disableChat(true, 0.5);
+      enableItems();
       // Code to send appropriate riddle resolved message to GPT
       Task<Void> resolvedTask = new Task<Void>() {
         @Override
@@ -173,10 +173,23 @@ public class CauldronRoomController extends RoomController {
     }
   }
 
+  private void enableItems() {
+    itemElevenImg.setDisable(false);
+    itemTwelveImg.setDisable(false);
+    itemThirteenImg.setDisable(false);
+    itemFourteenImg.setDisable(false);
+    itemFifteenImg.setDisable(false);
+    itemElevenImg.setOpacity(1);
+    itemTwelveImg.setOpacity(1);
+    itemThirteenImg.setOpacity(1);
+    itemFourteenImg.setOpacity(1);
+    itemFifteenImg.setOpacity(1);
+  }
+
   @FXML
   public void goLeftRoom(MouseEvent event) {
     if (!GameState.isBookRiddleResolved) {
-      notificationText.setText("Talk to the wizard!");
+      notificationText.setText("The Wizard has some instructions for you! Talk to him first!");
       Notification.notifyPopup(notificationBack, notificationText);
     } else {
       System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
@@ -188,7 +201,7 @@ public class CauldronRoomController extends RoomController {
   @FXML
   public void goRightRoom(MouseEvent event) {
     if (!GameState.isBookRiddleResolved) {
-      notificationText.setText("Talk to the wizard!");
+      notificationText.setText("The Wizard has some instructions for you! Talk to him first!");
       Notification.notifyPopup(notificationBack, notificationText);
     } else {
       System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
@@ -230,7 +243,6 @@ public class CauldronRoomController extends RoomController {
       notificationText.setText("Check bottom right for the recipe book!");
       Notification.notifyPopup(notificationBack, notificationText);
     }
-
     showRecipe = false;
   }
 

@@ -41,13 +41,13 @@ public class TreasureRoomController extends RoomController {
     System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
     setText("", false, false);
     itemScroll.setOpacity(0);
-    RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
+    goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
   /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
-    RoomController.openBook(AppUi.TREASURE_ROOM, pane);
+    openBook(AppUi.TREASURE_ROOM, pane);
   }
 }
