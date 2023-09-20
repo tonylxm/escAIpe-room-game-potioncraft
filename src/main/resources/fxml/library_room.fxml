@@ -134,7 +134,7 @@
             <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
          </image>
       </ImageView>
-      <Label fx:id="notificationText" layoutX="399.0" layoutY="62.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
+      <Label fx:id="notificationText" layoutX="389.0" layoutY="52.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
          <font>
             <Font name="Algerian" size="18.0" />
          </font>

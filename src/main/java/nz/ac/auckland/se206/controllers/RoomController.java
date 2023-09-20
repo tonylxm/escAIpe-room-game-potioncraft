@@ -41,6 +41,10 @@ public abstract class RoomController {
   protected Label textLbl;
   @FXML
   protected Rectangle textRect;
+  // @FXML
+  // protected Polygon leftShpe;
+  // @FXML
+  // protected Polygon rightShpe;
   @FXML
   protected Label yesLbl;
   @FXML
@@ -114,7 +118,7 @@ public abstract class RoomController {
    */
   @FXML
   protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
-      ImageView itemFourImg, ImageView itemFiveImg, Polygon arrowShpe) {
+      ImageView itemFourImg, ImageView itemFiveImg, Polygon directionShpe) {
     this.itemOneImg = itemOneImg;
     this.itemTwoImg = itemTwoImg;
     this.itemThreeImg = itemThreeImg;
@@ -177,8 +181,9 @@ public abstract class RoomController {
     itemMouseActions(itemFourImg, fourClicked, itemFour);
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
 
-    // Setting appropriate interactable features for the arrow
-    arrowMouseActions(arrowShpe);
+    // Setting appropriate interactable features for the arrows
+    arrowMouseActions(directionShpe);
+    // arrowMouseActions(rightShpe);
   }
 
   /**
@@ -523,11 +528,11 @@ public abstract class RoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    //  if (MainMenuController.inventory.size() == 0) {
-    //   notificationText.setText("You have no ingredients in your bag!");
-    //   Notification.notifyPopup(notificationBack, notificationText);
-    //   return;
-    // }
+     if (MainMenuController.inventory.size() == 0) {
+      notificationText.setText("You have no ingredients in your bag!");
+      Notification.notifyPopup(notificationBack, notificationText);
+      return;
+    }
 
     // If the bag isn't opened already, open it
     if (!bagOpened) {

@@ -129,5 +129,15 @@
             <Image url="@../images/hourglass-1024x1024.gif" />
          </image>
       </ImageView>
+      <ImageView fx:id="notificationBack" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0" opacity="0.0">
+         <image>
+            <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="notificationText" layoutX="389.0" layoutY="52.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
+         <font>
+            <Font name="Algerian" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

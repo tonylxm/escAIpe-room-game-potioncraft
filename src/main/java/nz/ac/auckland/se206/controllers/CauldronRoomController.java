@@ -101,7 +101,6 @@ public class CauldronRoomController extends RoomController {
 
   private CountdownTimer countdownTimer;
 
-  @FXML
   public void initialize() {
     // genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
     // Setting up the countdown and appropriate booleans before
@@ -336,28 +335,7 @@ public class CauldronRoomController extends RoomController {
   @FXML
   public void openBook() {
     System.out.println("CAULDRON_ROOM -> BOOK");
-    // RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
-  }
-
-  /** Dealing with the event where the bag icon is clicked */
-  @FXML
-  public void clickBag() {
-    // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.inventory.size() == 0) {
-      notificationText.setText("You have no ingredients in your bag!");
-      Notification.notifyPopup(notificationBack, notificationText);
-      return;
-    }
-    // If the bag isn't opened already, open it
-    if (!bagOpened) {
-      calItemScroll.setVvalue(0);
-      calItemScroll.setContent(null);
-      calItemScroll.setContent(MainMenuController.getInventory().getBox());
-      calItemScroll.setOpacity(1);
-      bagOpened = true;
-      mouseTrackRegion.setDisable(false);
-      System.out.println("Bag opened");
-    }
+    RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
   }
 
   /**

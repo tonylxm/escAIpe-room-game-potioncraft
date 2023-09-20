@@ -55,7 +55,7 @@ public class TreasureRoomController extends RoomController {
     RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
-  /** Chaning scenes to book view */
+  /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
