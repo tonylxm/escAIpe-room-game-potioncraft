@@ -27,8 +27,6 @@ public class LibraryRoomController extends RoomController {
   @FXML
   private Label timerLabel;
 
-  private CountdownTimer countdownTimer;
-
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
    * This includes initialising whether an item is clicked or already added

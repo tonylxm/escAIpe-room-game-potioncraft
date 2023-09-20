@@ -6,7 +6,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
-import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TreasureRoomController extends RoomController {
@@ -28,8 +27,6 @@ public class TreasureRoomController extends RoomController {
   @FXML
   private Label timerLabel;
 
-  private CountdownTimer countdownTimer;
-
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
    * This includes initialising whether an item is clicked or already added
@@ -41,7 +38,7 @@ public class TreasureRoomController extends RoomController {
     // Initialising everything from the superclass
     genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg, leftShpe);
     countdownTimer = MainMenuController.getCountdownTimer();
-    countdownTimer.setRightTimerLabel(timerLabel);
+    countdownTimer.setTreasureTimerLabel(timerLabel);
   }
 
   /**

@@ -35,8 +35,6 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private ImageView cauldronImg;
   @FXML
-  private ImageView wizardImg;
-  @FXML
   private Polygon rightArrow;
   @FXML
   private Polygon leftArrow;
@@ -55,16 +53,6 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private Rectangle textRect;
   @FXML
-  private ImageView wizardChatImage;
-  @FXML
-  private Rectangle mouseTrackRegion;
-  @FXML
-  private ImageView bookBtn;
-  @FXML
-  private ImageView bagBtn;
-  @FXML
-  private Label timerLabel;
-  @FXML
   private ScrollPane calItemScroll;
   @FXML
   private Label riddleSelectLabel;
@@ -82,21 +70,6 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private ImageView itemFifteenImg;
 
-  @FXML 
-  private TextArea chatTextArea;
-  @FXML 
-  private TextField inputText;
-  @FXML 
-  private Button sendButton;
-  @FXML 
-  private ImageView ttsBtn2;
-
-  @FXML
-  private ImageView notificationBack;
-  @FXML
-  private Label notificationText;
-
-  private boolean bagOpened;
   private boolean showRecipe = true;
 
   private CountdownTimer countdownTimer;
