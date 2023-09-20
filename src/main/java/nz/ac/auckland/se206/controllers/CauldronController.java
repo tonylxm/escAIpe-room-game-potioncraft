@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Notification;
@@ -23,26 +21,41 @@ import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
   private static CauldronController instance;
+  @FXML 
+  private Pane pane;
+  @FXML
+  private ImageView batWingImage,
+      crystalImage,
+      insectWingImage,
+      talonImage,
+      powderImage,
+      tailImage,
+      featherImage,
+      scalesImage,
+      flowerImage,
+      wreathImage,
+      boneImage,
+      fireImage,
+      rootImage,
+      beetleImage,
+      unicornHornImage;
 
-  @FXML private Pane pane;
-  @FXML private ImageView batWingImage;
-  @FXML private ImageView crystalImage;
-  @FXML private ImageView insectWingImage;
-  @FXML private ImageView talonImage;
-  @FXML private ImageView powderImage;
-  @FXML private ImageView tailImage;
-  @FXML private ImageView featherImage;
-  @FXML private ImageView scalesImage;
-  @FXML private ImageView flowerImage;
-  @FXML private ImageView wreathImage;
-  @FXML private ImageView cauldronImageView;
-  @FXML private Rectangle cauldronOverlay;
-  @FXML private Button brewBtn;
-  @FXML private Button emptyBtn;
-  @FXML private Label timerLabel;
-  @FXML private ImageView backImg;
-  @FXML private ImageView notificationBack;
-  @FXML private Label notificationText;
+  @FXML 
+  private ImageView cauldronImageView;
+  @FXML 
+  private Rectangle cauldronOverlay;
+  @FXML 
+  private Button brewBtn;
+  @FXML 
+  private Button emptyBtn;
+  @FXML 
+  private Label timerLabel;
+  @FXML 
+  private ImageView backImg;
+  @FXML 
+  private ImageView notificationBack;
+  @FXML 
+  private Label notificationText;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -76,6 +89,11 @@ public class CauldronController {
     setupDragAndDrop(scalesImage, "scalesImage");
     setupDragAndDrop(flowerImage, "flowerImage");
     setupDragAndDrop(wreathImage, "wreathImage");
+    setupDragAndDrop(boneImage, "boneImage");
+    setupDragAndDrop(fireImage, "fireImage");
+    setupDragAndDrop(rootImage, "rootImage");
+    setupDragAndDrop(beetleImage, "beetleImage");
+    setupDragAndDrop(unicornHornImage, "unicornHornImage");
 
     // defining mapping
     imageViewToItemMap.put("batWingImage", Items.Item.BAT_WINGS);
@@ -88,6 +106,11 @@ public class CauldronController {
     imageViewToItemMap.put("scalesImage", Items.Item.SCALES);
     imageViewToItemMap.put("flowerImage", Items.Item.FLOWER);
     imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
+    imageViewToItemMap.put("boneImage", Items.Item.BONE);
+    imageViewToItemMap.put("fireImage", Items.Item.FIRE);
+    imageViewToItemMap.put("rootImage", Items.Item.ROOT);
+    imageViewToItemMap.put("beetleImage", Items.Item.BEETLE);
+    imageViewToItemMap.put("unicornHornImage", Items.Item.UNICORN_HORN);
 
     // disable all image
     batWingImage.setDisable(true);
@@ -100,9 +123,13 @@ public class CauldronController {
     scalesImage.setDisable(true);
     flowerImage.setDisable(true);
     wreathImage.setDisable(true);
+    boneImage.setDisable(true);
+    fireImage.setDisable(true);
+    rootImage.setDisable(true);
+    beetleImage.setDisable(true);
+    unicornHornImage.setDisable(true);
 
-
-    // Set up glow for all images by adding images to an array then going 
+    // Set up glow for all images by adding images to an array then going
     // in a loop
     ArrayList<ImageView> images = new ArrayList<ImageView>();
     images.add(batWingImage);
@@ -115,6 +142,12 @@ public class CauldronController {
     images.add(scalesImage);
     images.add(flowerImage);
     images.add(wreathImage);
+    images.add(boneImage);
+    images.add(fireImage);
+    images.add(rootImage);
+    images.add(beetleImage);
+    images.add(unicornHornImage);
+    
     // setup glow for all images
     for (ImageView image : images) {
       image.setOnMouseEntered(event -> interactionHandler.glowThis(image));
@@ -197,6 +230,11 @@ public class CauldronController {
     scalesImage.setDisable(!inventory.contains(Items.Item.SCALES));
     flowerImage.setDisable(!inventory.contains(Items.Item.FLOWER));
     wreathImage.setDisable(!inventory.contains(Items.Item.WREATH));
+    boneImage.setDisable(!inventory.contains(Items.Item.BONE));
+    fireImage.setDisable(!inventory.contains(Items.Item.FIRE));
+    rootImage.setDisable(!inventory.contains(Items.Item.ROOT));
+    beetleImage.setDisable(!inventory.contains(Items.Item.BEETLE));
+    unicornHornImage.setDisable(!inventory.contains(Items.Item.UNICORN_HORN));
     // enabling and setting opacity to 1 if item is in inventory
     if (inventory.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setOpacity(1);
@@ -227,6 +265,21 @@ public class CauldronController {
     }
     if (inventory.contains(Items.Item.WREATH)) {
       wreathImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.BONE)) {
+      boneImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.FIRE)) {
+      fireImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.ROOT)) {
+      rootImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.BEETLE)) {
+      beetleImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.UNICORN_HORN)) {
+      unicornHornImage.setOpacity(1);
     }
   }
 
@@ -291,7 +344,7 @@ public class CauldronController {
   private void brewPotion() {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
-    // if more or less than 6 items have been dropped into the cauldron then the 
+    // if more or less than 6 items have been dropped into the cauldron then the
     // potion is not brewed
     if (cauldronItems.size() < 5 || cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
@@ -308,7 +361,7 @@ public class CauldronController {
     }
 
     if (cauldronItems.size() == 5) {
-      //check if the order of the items is correct by comparing cauldronItems with 
+      // check if the order of the items is correct by comparing cauldronItems with
       // Items.necessary
       if (cauldronItems.equals(Items.necessary)) {
         System.out.println("Potion brewed");
@@ -328,9 +381,9 @@ public class CauldronController {
 
   @FXML
   private void resetItems() {
-    //returning the items to the original position. 
+    // returning the items to the original position.
     // I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
-    // batWingImage.setX(84);  it might not even be necessary nvm but keeping 
+    // batWingImage.setX(84);  it might not even be necessary nvm but keeping
     // just in case
     // batWingImage.setY(54);
 
@@ -347,10 +400,17 @@ public class CauldronController {
     scalesImage.setVisible(true);
     flowerImage.setVisible(true);
     wreathImage.setVisible(true);
+    boneImage.setVisible(true);
+    fireImage.setVisible(true);
+    rootImage.setVisible(true);
+    beetleImage.setVisible(true);
+    unicornHornImage.setVisible(true);
   }
 
   @FXML
   private void emptyCauldron() {
+    notificationText.setText("Cauldron Emptied!");
+    Notification.notifyPopup(notificationBack, notificationText);
     resetItems();
   }
 }

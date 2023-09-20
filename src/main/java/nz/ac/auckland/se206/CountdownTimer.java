@@ -162,7 +162,7 @@ public class CountdownTimer {
     this.libraryTimerLabel = libraryTimerLabel;
   }
 
-  public void setRightTimerLabel(Label rightTimerLabel) {
+  public void setTreasureTimerLabel(Label rightTimerLabel) {
     this.rightTimerLabel = rightTimerLabel;
   }
 

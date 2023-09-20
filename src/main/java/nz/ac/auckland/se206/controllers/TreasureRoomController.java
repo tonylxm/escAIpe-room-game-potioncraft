@@ -6,7 +6,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
-import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TreasureRoomController extends RoomController {
@@ -15,20 +14,9 @@ public class TreasureRoomController extends RoomController {
   @FXML
   private Polygon leftShpe;
   @FXML
-  private ImageView itemSixImg;
-  @FXML
-  private ImageView itemSevenImg;
-  @FXML
-  private ImageView itemEightImg;
-  @FXML
-  private ImageView itemNineImg;
-  @FXML
-  private ImageView itemTenImg;
-
+  private ImageView itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg;
   @FXML
   private Label timerLabel;
-
-  private CountdownTimer countdownTimer;
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
@@ -39,9 +27,10 @@ public class TreasureRoomController extends RoomController {
    */
   public void initialize() {
     // Initialising everything from the superclass
-    genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg, leftShpe);
+    genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg);
     countdownTimer = MainMenuController.getCountdownTimer();
-    countdownTimer.setRightTimerLabel(timerLabel);
+    countdownTimer.setTreasureTimerLabel(timerLabel);
+    arrowMouseActions(leftShpe);
   }
 
   /**
@@ -52,13 +41,13 @@ public class TreasureRoomController extends RoomController {
     System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
     setText("", false, false);
     itemScroll.setOpacity(0);
-    RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
+    goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
-  /** Chaning scenes to book view */
+  /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
-    RoomController.openBook(AppUi.TREASURE_ROOM, pane);
+    openBook(AppUi.TREASURE_ROOM, pane);
   }
 }

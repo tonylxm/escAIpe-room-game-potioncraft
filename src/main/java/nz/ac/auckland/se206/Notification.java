@@ -8,6 +8,9 @@ import javafx.util.Duration;
 public class Notification {
 
   public static void notifyPopup(ImageView notificationBack, Label notificationText) {
+    notificationBack.setDisable(false);
+    notificationText.setDisable(false);
+
     // Create a FadeTransition to gradually change opacity over 3 seconds
     FadeTransition fadeTransition = new FadeTransition(
         Duration.seconds(5), notificationBack);
@@ -41,6 +44,9 @@ public class Notification {
           fadeOutTransition.setToValue(0.0);
           fadeOutTransition.play();
         }
-    });        
+    });   
+    
+    notificationBack.setDisable(true);
+    notificationText.setDisable(true);
   }
 }
