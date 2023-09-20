@@ -139,7 +139,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="bookWaterRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="475.0" layoutY="227.0" onMouseClicked="#clickBookWater">
+      <ImageView fx:id="bookWaterRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="475.0" layoutY="227.0" onMouseClicked="#clickBookWater" opacity="0.0">
          <image>
             <Image url="@../images/oie_LKpGbTvkE1Nv.png" />
          </image>
@@ -147,7 +147,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="bookAirRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="540.0" layoutY="227.0" onMouseClicked="#clickBookAir">
+      <ImageView fx:id="bookAirRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="540.0" layoutY="227.0" onMouseClicked="#clickBookAir" opacity="0.0">
          <image>
             <Image url="@../images/oie_NEPoOa9RNfHE.png" />
          </image>
@@ -155,7 +155,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="bookFireRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="409.0" layoutY="227.0" onMouseClicked="#clickBookFire">
+      <ImageView fx:id="bookFireRectangle" fitHeight="145.0" fitWidth="65.0" layoutX="409.0" layoutY="227.0" onMouseClicked="#clickBookFire" opacity="0.0">
          <image>
             <Image url="@../images/oie_yaYCuLx1PDOG.png" />
          </image>

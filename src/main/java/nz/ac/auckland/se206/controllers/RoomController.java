@@ -2,8 +2,11 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Iterator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,6 +19,7 @@ import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.Items.Item;
+import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
@@ -50,6 +54,20 @@ public abstract class RoomController {
   protected Label timerLabel;
   @FXML
   protected static ShapeInteractionHandler interactionHandler;
+
+  @FXML 
+  protected TextArea chatTextArea;
+  @FXML 
+  protected TextField inputText;
+  @FXML 
+  protected Button sendButton;
+  @FXML 
+  protected ImageView ttsBtn2;
+
+  @FXML
+  protected ImageView notificationBack;
+  @FXML
+  protected Label notificationText;
 
   protected CountdownTimer countdownTimer;
 
@@ -92,13 +110,13 @@ public abstract class RoomController {
    * rooms to avoid code duplication.
    */
   @FXML
-  protected void genericInitialise(String roomName, ImageView itemAImg, ImageView itemBImg, ImageView itemCImg,
-      ImageView itemDImg, ImageView itemEImg, Polygon arrowShpe) {
-    this.itemOneImg = itemAImg;
-    this.itemTwoImg = itemBImg;
-    this.itemThreeImg = itemCImg;
-    this.itemFourImg = itemDImg;
-    this.itemFiveImg = itemEImg;
+  protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
+      ImageView itemFourImg, ImageView itemFiveImg, Polygon arrowShpe) {
+    this.itemOneImg = itemOneImg;
+    this.itemTwoImg = itemTwoImg;
+    this.itemThreeImg = itemThreeImg;
+    this.itemFourImg = itemFourImg;
+    this.itemFiveImg = itemFiveImg;
 
     // Setting appropriate boolean fields
     oneAdded = false;
@@ -143,11 +161,11 @@ public abstract class RoomController {
     btnMouseActions(wizardImg);
 
     // Setting appropriate interactable features for the items
-    itemMouseActions(itemAImg, oneClicked, itemOne);
-    itemMouseActions(itemBImg, twoClicked, itemTwo);
-    itemMouseActions(itemCImg, threeClicked, itemThree);
-    itemMouseActions(itemDImg, fourClicked, itemFour);
-    itemMouseActions(itemEImg, fiveClicked, itemFive);
+    itemMouseActions(itemOneImg, oneClicked, itemOne);
+    itemMouseActions(itemTwoImg, twoClicked, itemTwo);
+    itemMouseActions(itemThreeImg, threeClicked, itemThree);
+    itemMouseActions(itemFourImg, fourClicked, itemFour);
+    itemMouseActions(itemFiveImg, fiveClicked, itemFive);
 
     // Setting appropriate interactable features for the arrow
     arrowMouseActions(arrowShpe);
@@ -382,11 +400,15 @@ public abstract class RoomController {
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
     setText("", false, false);
-    mouseTrackRegion.setDisable(true);
-    mouseTrackRegion.setOpacity(0);
 
+    mouseTrackRegion.setOpacity(0);
+    mouseTrackRegion.setDisable(true);
     wizardChatImage.setOpacity(0);
     wizardChatImage.setDisable(true);
+    textRect.setOpacity(0);
+    textRect.setDisable(true);
+    // chatTextArea.setDisable(true);
+    // chatTextArea.setOpacity(0);
 
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
@@ -479,11 +501,12 @@ public abstract class RoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-    if (MainMenuController.inventory.size() == 0) {
-      // Setting notificationText.setText("You have no ingredients in your bag!");
-      // notifyPopup(); if the user hasn't collected anything yet
-      return;
-    }
+    //  if (MainMenuController.inventory.size() == 0) {
+    //   notificationText.setText("You have no ingredients in your bag!");
+    //   Notification.notifyPopup(notificationBack, notificationText);
+    //   return;
+    // }
+
     // If the bag isn't opened already, open it
     if (!bagOpened) {
       itemScroll.setVvalue(0);

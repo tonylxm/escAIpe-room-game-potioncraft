@@ -29,7 +29,7 @@ import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-public class CauldronRoomController {
+public class CauldronRoomController extends RoomController {
   @FXML
   private Pane pane;
   @FXML
@@ -191,7 +191,7 @@ public class CauldronRoomController {
    * @throws InterruptedException
    */
   @FXML
-  public void clickWizard(MouseEvent event) throws InterruptedException {
+  public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleGiven) {
       toggleChat(false, 1);
@@ -282,18 +282,15 @@ public class CauldronRoomController {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
 
-      // Disabling mouseTrackRegion so it doesn't interfere with other interactions
-      mouseTrackRegion.setDisable(true);
-
-      wizardChatImage.setDisable(true);
-      wizardChatImage.setOpacity(0);
-
-      textRect.setDisable(true);
-      
-      textRect.setOpacity(0);
       mouseTrackRegion.setOpacity(0);
+      mouseTrackRegion.setDisable(true);
+      wizardChatImage.setOpacity(0);
+      wizardChatImage.setDisable(true);
+      textRect.setOpacity(0);
+      textRect.setDisable(true);
       chatTextArea.setDisable(true);
       chatTextArea.setOpacity(0);
+
       chooseLabel.setOpacity(0);
       enableRecipe();
       toggleChat(true, 0);
