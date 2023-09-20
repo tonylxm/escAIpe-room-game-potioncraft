@@ -55,10 +55,10 @@ public class LibraryRoomController extends RoomController {
     RoomController.goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
-  /** Changing scenes to book view */
-  @FXML
-  public void openBook() {
-    System.out.println("LIBRARY_ROOM -> BOOK");
-    RoomController.openBook(AppUi.LIBRARY_ROOM, pane);
-  }
+    /** Changing scenes to book view */
+    @FXML
+    public void openBook() {
+      System.out.println("LIBRARY_ROOM -> BOOK");
+      RoomController.openBook(AppUi.LIBRARY_ROOM, pane);
+    }
 }

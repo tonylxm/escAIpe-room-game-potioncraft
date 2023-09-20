@@ -103,7 +103,7 @@ public class CauldronRoomController extends RoomController {
 
   @FXML
   public void initialize() {
-    genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
+    // genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
     // Setting up the countdown and appropriate booleans before
     // anything happens to change them within the game
     bagOpened = false;
@@ -336,7 +336,7 @@ public class CauldronRoomController extends RoomController {
   @FXML
   public void openBook() {
     System.out.println("CAULDRON_ROOM -> BOOK");
-    RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
+    // RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
   }
 
   /** Dealing with the event where the bag icon is clicked */
