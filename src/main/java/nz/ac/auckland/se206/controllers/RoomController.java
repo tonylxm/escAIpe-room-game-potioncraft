@@ -265,10 +265,10 @@ public abstract class RoomController {
    */
   private void handleSelect(boolean itemAdded, ImageView itemImg, boolean itemClicked) {
     if (itemAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemImg);
-        itemClicked = true;
+      return;
+    }
+    interactionHandler.glowThis(itemImg);
+    itemClicked = true;
   }
 
   /** Adding item to inventory if an item is selected */

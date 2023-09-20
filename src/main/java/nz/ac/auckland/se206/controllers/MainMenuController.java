@@ -234,7 +234,6 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        // do not need
         SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
@@ -378,7 +377,7 @@ public class MainMenuController {
   public void startGame() throws IOException {
     // Fade buttons and scene
     disableAndOrFadeSettingsBtns(true, 0, false);
-    System.out.println("MAIN MENU -> CAULDRON ROOM");
+    System.out.println("MAIN MENU -> CAULDRON_ROOM");
     TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, true);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 

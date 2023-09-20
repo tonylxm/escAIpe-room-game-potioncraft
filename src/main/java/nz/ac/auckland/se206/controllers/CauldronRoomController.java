@@ -34,8 +34,6 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private Rectangle textRect;
   @FXML
-  private ScrollPane calItemScroll;
-  @FXML
   private Label riddleSelectLabel, chooseLabel;
 
   @FXML
@@ -54,6 +52,7 @@ public class CauldronRoomController extends RoomController {
     countdownTimer.setCauldronTimerLabel(timerLabel);
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
+    
     toggleBooks(true, 0);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
@@ -90,7 +89,7 @@ public class CauldronRoomController extends RoomController {
 
     // If the cauldronController exists, then switching scenes
     System.out.println("cauldron clicked");
-    calItemScroll.setOpacity(0);
+    itemScroll.setOpacity(0);
     bagOpened = false;
     System.out.println("CAULDRON_ROOM -> CAULDRON");
     TransitionAnimation.changeScene(pane, AppUi.CAULDRON, false);
@@ -177,14 +176,14 @@ public class CauldronRoomController extends RoomController {
   @FXML
   public void goLeftRoom(MouseEvent event) {
     System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    calItemScroll.setOpacity(0);
+    itemScroll.setOpacity(0);
     RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
   }
 
   @FXML
   public void goRightRoom(MouseEvent event) {
     System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    calItemScroll.setOpacity(0);
+    itemScroll.setOpacity(0);
     RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
   }
 
@@ -205,7 +204,7 @@ public class CauldronRoomController extends RoomController {
 
       // Handling closing the "bag" when clicking off inventory
       if (bagOpened) {
-        calItemScroll.setOpacity(0);
+        itemScroll.setOpacity(0);
         bagOpened = false;
         System.out.println("Bag closed");
       }
