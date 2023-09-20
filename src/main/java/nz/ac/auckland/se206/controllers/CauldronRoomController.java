@@ -22,6 +22,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
+import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
@@ -85,8 +86,9 @@ public class CauldronRoomController {
   private Label notificationText;
 
   private boolean bagOpened;
-  private CountdownTimer countdownTimer;
   private boolean showRecipe = true;
+
+  private CountdownTimer countdownTimer;
 
   @FXML
   public void initialize() {
@@ -317,7 +319,7 @@ public class CauldronRoomController {
 
     if (showRecipe) {
       notificationText.setText("Check bottom right for the recipe book!");
-      notifyPopup();
+      Notification.notifyPopup(notificationBack, notificationText);
     }
 
     showRecipe = false;
@@ -338,7 +340,7 @@ public class CauldronRoomController {
     // If there are no items in the inventory, can't open the bag
     if (MainMenuController.inventory.size() == 0) {
       notificationText.setText("You have no ingredients in your bag!");
-      notifyPopup();
+      Notification.notifyPopup(notificationBack, notificationText);
       return;
     }
     // If the bag isn't opened already, open it
@@ -414,41 +416,4 @@ public class CauldronRoomController {
     new Thread(speakTask, "Speak Thread").start();
   }
 
-  @FXML
-  private void notifyPopup() {
-    // Create a FadeTransition to gradually change opacity over 3 seconds
-    FadeTransition fadeTransition = new FadeTransition(
-        Duration.seconds(5), notificationBack);
-    fadeTransition.setFromValue(1.0);
-    fadeTransition.setToValue(1.0);
-    FadeTransition fadeTransition2 = new FadeTransition(
-        Duration.seconds(5), notificationText);
-    fadeTransition2.setFromValue(1.0);
-    fadeTransition2.setToValue(1.0);
-
-    // Play the fade-in animation
-    fadeTransition.play();
-    fadeTransition2.play();
-
-    // Schedule a task to fade out the image after 3 seconds
-    fadeTransition.setOnFinished(fadeEvent -> {
-        if (notificationBack.getOpacity() == 1.0) {
-          FadeTransition fadeOutTransition = new FadeTransition(
-              Duration.seconds(1.5), notificationBack);
-          fadeOutTransition.setFromValue(1.0);
-          fadeOutTransition.setToValue(0.0);
-          fadeOutTransition.play();
-        }
-    });
-
-    fadeTransition2.setOnFinished(fadeEvent -> {
-        if (notificationText.getOpacity() == 1.0) {
-          FadeTransition fadeOutTransition = new FadeTransition(
-              Duration.seconds(1.5), notificationText);
-          fadeOutTransition.setFromValue(1.0);
-          fadeOutTransition.setToValue(0.0);
-          fadeOutTransition.play();
-        }
-    });        
-  }
 }
