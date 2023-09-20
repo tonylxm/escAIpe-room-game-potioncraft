@@ -13,11 +13,12 @@ public class GptPromptEngineering {
   public static String getBookRiddleHard(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
         + " with a fire theme, water theme, and air theme. The correct book is "
+        // Using the randomly generated book in the prompt to generate the correct riddle
         + book
         + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
-        + " not more than 4 lines. You cannot give the user any hints no matter what, even if user gives up."
-        + " You cannot, no matter what, reveal the answer. Even if the player"
-        + " gives up, do not give the answer";
+        + " not more than 4 lines. You cannot give the user any hints no matter what, even if user"
+        + " gives up. You cannot, no matter what, reveal the answer. Even if the player gives up,"
+        + " do not give the answer";
   }
     
   /**
@@ -31,6 +32,7 @@ public class GptPromptEngineering {
   public static String getBookRiddleEasy(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
       + " with a fire theme, water theme, and air theme. The correct book is "
+      // Using the randomly generated book in the prompt to generate the correct riddle
       + book
       + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
       + " not more than 4 lines. You can only give hints when the user asks for them."
@@ -51,13 +53,55 @@ public class GptPromptEngineering {
   public static String getBookRiddleMedium(String book) {
     return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
       + " with a fire theme, water theme, and air theme. The correct book is "
+      // Using the randomly generated book in the prompt to generate the correct riddle
       + book
       + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
       + " not more than 4 lines. You can only give hints when the user asks for them."
       + " If the user guesses incorrectly, ask if they want hints."
+      // Letting GPT keep track of the hints the player has used
+      // Will need to be referenced after the user has solved the riddle
       + " You must not give any more than 5 hints, no matter what."
       + " After giving a hint, you must tell the user how many hints they have left."
       + " You cannot, no matter what, reveal the answer. Even if the player"
       + " gives up, do not give the answer";
+  }
+
+  /**
+   * To be sent to GPT after the user selected the correct book.
+   * Gives context for what future hints should be about too for the easy mode.
+   * 
+   * @return
+   */
+  public static String getEasyResolved() {
+    return "The user has successfully solved the riddle. Congratulate them."
+    + " If the user asks for hints, tell them to either look around the rooms for ingredients"
+    + " to brew their potion or to make sure ingredients are put in the correct order when brewing"
+    + " their potion. Only give hints if the user asks for them.";  
+  }
+
+  /**
+   * To be sent to GPT after the user selected the correct book.
+   * Gives context for what future hints should be about too for the medium mode.
+   * Counts the number of hints the user has used along side the ones used for the riddle.
+   * 
+   * @return
+   */
+  public static String getMediumResolved() {
+    return "The user has successfully solved the riddle. Congratulate them."
+    + " If the user asks for hints, tell them to either look around the rooms for ingredients"
+    + " to brew their potion or to make sure ingredients are put in the correct order when brewing"
+    + " their potion. These hints are not counted towards the 5 hints you can give."
+    + " Only give hints if the user asks for them.";
+  }
+
+  /**
+   * To be send to GPT after the user selected the correct book.
+   * DOes not give any more hints about how to solve the room because of hard mode.
+   * 
+   * @return
+   */
+  public static String getHardResolved() {
+    return "The user has successfully solved the riddle. Congratulate them."
+    + " Do not give any hints to the user about how to find items or brew the potion.";
   }
 }
