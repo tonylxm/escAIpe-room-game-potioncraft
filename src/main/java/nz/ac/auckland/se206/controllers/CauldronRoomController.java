@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
@@ -24,7 +23,6 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CauldronRoomController extends RoomController {
   @FXML
@@ -90,31 +88,6 @@ public class CauldronRoomController extends RoomController {
     btnMouseActions(bookAirRectangle);
   }
 
-  /**
-   * Enabling/disabling the chat functionality for the user to be able to talk to the wizard.
-   */
-  private void toggleChat(boolean disable, int opacity) {
-    // Enabling/disabling the approrpiate fields and making everything invisible/visible
-    chatTextArea.setDisable(disable);
-    inputText.setDisable(disable);
-    sendButton.setDisable(disable);
-    ttsBtn2.setDisable(disable);
-    textRect.setDisable(disable);
-    mouseTrackRegion.setDisable(disable);
-    wizardChatImage.setDisable(disable);
-    chatTextArea.setOpacity(opacity);
-    inputText.setOpacity(opacity);
-    sendButton.setOpacity(opacity);
-    ttsBtn2.setOpacity(opacity);
-    textRect.setOpacity(opacity);
-    wizardChatImage.setOpacity(opacity);
-    if (opacity == 0) {
-      mouseTrackRegion.setOpacity(0);
-    } else {
-      mouseTrackRegion.setOpacity(0.5);
-    }
-  }
-
   private void toggleBooks(boolean disable, int opacity) {
     bookFireRectangle.setDisable(disable);
     bookWaterRectangle.setDisable(disable);
@@ -122,13 +95,6 @@ public class CauldronRoomController extends RoomController {
     bookFireRectangle.setOpacity(opacity);
     bookWaterRectangle.setOpacity(opacity);
     bookAirRectangle.setOpacity(opacity);
-  }
-
-  private void disableChat(boolean disable, double opacity) {
-    inputText.setDisable(disable);
-    inputText.setOpacity(opacity);
-    sendButton.setDisable(disable);
-    sendButton.setOpacity(opacity);
   }
 
   /**
@@ -155,7 +121,7 @@ public class CauldronRoomController extends RoomController {
   }
   
   /**
-   * Taking the user to the wizard's chat functionality.
+   * Talking the user to the wizard's chat functionality.
    * Also, if the user hasn't been prompted with the riddle yet,
    * showing it to them too.
    * 
@@ -214,6 +180,7 @@ public class CauldronRoomController extends RoomController {
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
 
+      disableChat(true, 0.5);
       // Code to send appropriate riddle resolved message to GPT
       Task<Void> resolvedTask = new Task<Void>() {
         @Override
@@ -253,16 +220,6 @@ public class CauldronRoomController extends RoomController {
   public void clickOff(MouseEvent event) {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
-
-      mouseTrackRegion.setOpacity(0);
-      mouseTrackRegion.setDisable(true);
-      wizardChatImage.setOpacity(0);
-      wizardChatImage.setDisable(true);
-      textRect.setOpacity(0);
-      textRect.setDisable(true);
-      chatTextArea.setDisable(true);
-      chatTextArea.setOpacity(0);
-
       chooseLabel.setOpacity(0);
       enableRecipe();
       toggleChat(true, 0);

@@ -414,15 +414,7 @@ public abstract class RoomController {
   public void clickOff(MouseEvent event) {
     System.out.println("click off");
     setText("", false, false);
-
-    mouseTrackRegion.setOpacity(0);
-    mouseTrackRegion.setDisable(true);
-    wizardChatImage.setOpacity(0);
-    wizardChatImage.setDisable(true);
-    textRect.setOpacity(0);
-    textRect.setDisable(true);
-    // chatTextArea.setDisable(true);
-    // chatTextArea.setOpacity(0);
+    toggleChat(true, 0);
 
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
@@ -539,25 +531,7 @@ public abstract class RoomController {
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
-    if (!GameState.isBookRiddleResolved) {
-      showWizardChat();
-      GameState.isBookRiddleGiven = true;
-    } else {
-      showWizardChat();
-    }
-  }
-
-  /**
-   * Displaying wizard chat to user when prompted
-   */
-  protected void showWizardChat() {
-    // Setting approrpiate fields to be visible and interactable
-    wizardChatImage.setDisable(false);
-    wizardChatImage.setOpacity(1);
-    textRect.setDisable(false);
-    mouseTrackRegion.setDisable(false);
-    setText("I'm keeping an eye on you", true, false);
-    mouseTrackRegion.setOpacity(0.5);
+    toggleChat(false, 1);
   }
 
   /**
@@ -586,7 +560,34 @@ public abstract class RoomController {
     }
   }
 
-  private void disableChat(boolean disable, double opacity) {
+  
+  /**
+   * Enabling/disabling the chat functionality for the user to be able to talk to the wizard.
+   */
+  protected void toggleChat(boolean disable, int opacity) {
+    // Enabling/disabling the approrpiate fields and making everything invisible/visible
+    chatTextArea.setDisable(disable);
+    chatTextArea.setOpacity(opacity);
+    
+    inputText.setDisable(disable);
+    inputText.setOpacity(opacity);
+    sendButton.setDisable(disable);
+    sendButton.setOpacity(opacity);
+    ttsBtn2.setDisable(disable);
+    ttsBtn2.setOpacity(opacity);
+    textRect.setDisable(disable);
+    textRect.setOpacity(opacity);
+    wizardChatImage.setDisable(disable);
+    wizardChatImage.setOpacity(opacity);
+    mouseTrackRegion.setDisable(disable);
+    if (opacity == 0) {
+      mouseTrackRegion.setOpacity(0);
+    } else {
+      mouseTrackRegion.setOpacity(0.5);
+    }
+  }
+
+  protected void disableChat(boolean disable, double opacity) {
     inputText.setDisable(disable);
     inputText.setOpacity(opacity);
     sendButton.setDisable(disable);
