@@ -1,6 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import java.util.Iterator;
+
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,15 +13,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
@@ -77,36 +85,16 @@ public abstract class RoomController {
 
   protected CountdownTimer countdownTimer;
 
-  protected ImageView itemOneImg;
-  protected ImageView itemTwoImg;
-  protected ImageView itemThreeImg;
-  protected ImageView itemFourImg;
-  protected ImageView itemFiveImg;
+  protected ImageView itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg;
 
   // Booleans to keep track of whether an item has been added to the inventory
-  private boolean oneAdded;
-  private boolean twoAdded;
-  private boolean threeAdded;
-  private boolean fourAdded;
-  private boolean fiveAdded;
+  private boolean oneAdded, twoAdded, threeAdded, fourAdded, fiveAdded;
   // Booleans to keep track of if an item is clicked or selected
-  private boolean oneClicked;
-  private boolean twoClicked;
-  private boolean threeClicked;
-  private boolean fourClicked;
-  private boolean fiveClicked;
+  private boolean oneClicked, twoClicked, threeClicked, fourClicked, fiveClicked;
 
-  private Item itemOne;
-  private Item itemTwo;
-  private Item itemThree;
-  private Item itemFour;
-  private Item itemFive;
+  private Item itemOne, itemTwo, itemThree, itemFour, itemFive;
 
-  private Image one;
-  private Image two;
-  private Image three;
-  private Image four;
-  private Image five;
+  private Image one, two, three, four, five;
 
   private ImageView image;
   private double ratio;
@@ -596,5 +584,73 @@ public abstract class RoomController {
     while (itr.hasNext()) {
       System.out.println("  " + itr.next());
     }
+  }
+
+  private void disableChat(boolean disable, double opacity) {
+    inputText.setDisable(disable);
+    inputText.setOpacity(opacity);
+    sendButton.setDisable(disable);
+    sendButton.setOpacity(opacity);
+  }
+
+    /**
+   * Sends a message to the GPT model.
+   *
+   * @param event the action event triggered by the send button
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    String message = inputText.getText();
+    // Not doing anything if there is no message
+    if (message.trim().isEmpty()) {
+      return;
+    }
+    inputText.clear();
+    disableChat(true, 0.5);
+    ChatMessage msg = new ChatMessage("user", message);
+    MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+
+    Task<Void> runGptTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            ChatMessage response = new ChatMessage("assistant", MainMenuController.getChatHandler().runGpt(message));
+            MainMenuController.getChatHandler().appendChatMessage(response, chatTextArea, inputText, sendButton);
+            return null;
+          }
+        };
+    new Thread(runGptTask).start();
+  }
+
+  /**
+   * Handles when ENTER is pressed on the input text area.
+   *
+   * @throws IOException
+   */
+  @FXML
+  public void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode().toString().equals("ENTER")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      onSendMessage(new ActionEvent());
+    }
+  }
+
+  /** 
+   * Uses text to speech to read the game master's response to the user's message. 
+   */
+  public void readGameMasterResponse() {
+    // Using concurency to prevent the system freezing
+    Task<Void> speakTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            // need to update the chat text area with the game master's response & riddle
+            App.textToSpeech.speak(chatTextArea.getText());
+            return null;
+          }
+        };
+    new Thread(speakTask, "Speak Thread").start();
   }
 }
