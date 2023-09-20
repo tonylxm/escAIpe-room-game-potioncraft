@@ -42,22 +42,38 @@ public class BookController {
   private Label timerLabel;
 
   @FXML
-  private ImageView placeholderImg,
-      itemOneImg,
-      itemTwoImg,
-      itemThreeImg,
-      itemFourImg,
-      itemFiveImg,
-      itemSixImg,
-      itemSevenImg,
-      itemEightImg,
-      itemNineImg,
-      itemTenImg,
-      itemElevenImg,
-      itemTwelveImg,
-      itemThirteenImg,
-      itemFourteenImg,
-      itemFifteenImg;
+  private ImageView placeholderImg;
+  @FXML
+  private ImageView itemOneImg;
+  @FXML
+  private ImageView itemTwoImg;
+  @FXML
+  private ImageView itemThreeImg;
+  @FXML
+  private ImageView itemFourImg;
+  @FXML
+  private ImageView itemFiveImg;
+  @FXML
+  private ImageView itemSixImg;
+  @FXML
+  private ImageView itemSevenImg;
+  @FXML
+  private ImageView itemEightImg;
+  @FXML
+  private ImageView itemNineImg;
+  @FXML
+  private ImageView itemTenImg;
+  @FXML
+  private ImageView itemElevenImg;
+  @FXML
+  private ImageView itemTwelveImg;
+  @FXML
+  private ImageView itemThirteenImg;
+  @FXML
+  private ImageView itemFourteenImg;
+  @FXML
+  private ImageView itemFifteenImg;
+
   @FXML 
   private CountdownTimer countdownTimer;
 
@@ -184,17 +200,16 @@ public class BookController {
   /** Uses text to speech to read the required items in the book. */
   public void readIngredientList() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            App.textToSpeech.speak("Potion Recipe");
-            for (int i = 0; i < Items.necessary.size(); i++) {
-              App.textToSpeech.speak(ingredientList.getItems().get(i));
-            }
-            return null;
-          }
-        };
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        App.textToSpeech.speak("Potion Recipe");
+        for (int i = 0; i < Items.necessary.size(); i++) {
+          App.textToSpeech.speak(ingredientList.getItems().get(i));
+        }
+        return null;
+      }
+    };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
   }

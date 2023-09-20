@@ -18,7 +18,8 @@ public class ChatHandler {
   @FXML
   public void initialize() throws ApiProxyException {
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+        new ChatCompletionRequest().setN(1).setTemperature(0.2)
+          .setTopP(0.5).setMaxTokens(100);
   }
 
   /**
@@ -49,10 +50,11 @@ public class ChatHandler {
    *
    * @param msg the chat message to append
    */
-  public void appendChatMessage(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
+  public void appendChatMessage(
+    ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
     // Adding the role of the chatter to the start of each message
     String displayRole;
-    switch(msg.getRole()) {
+    switch (msg.getRole()) {
       case "assistant":
         displayRole = "Wizard";
         break;

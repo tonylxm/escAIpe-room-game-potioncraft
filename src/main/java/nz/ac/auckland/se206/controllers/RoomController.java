@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Iterator;
-
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -80,16 +79,36 @@ public abstract class RoomController {
 
   protected CountdownTimer countdownTimer;
 
-  protected ImageView itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg;
+  protected ImageView itemOneImg;
+  protected ImageView itemTwoImg;
+  protected ImageView itemThreeImg;
+  protected ImageView itemFourImg;
+  protected ImageView itemFiveImg;
 
   // Booleans to keep track of whether an item has been added to the inventory
-  private boolean oneAdded, twoAdded, threeAdded, fourAdded, fiveAdded;
+  private boolean oneAdded;
+  private boolean twoAdded;
+  private boolean threeAdded;
+  private boolean fourAdded;
+  private boolean fiveAdded;
   // Booleans to keep track of if an item is clicked or selected
-  private boolean oneClicked, twoClicked, threeClicked, fourClicked, fiveClicked;
+  private boolean oneClicked;
+  private boolean twoClicked; 
+  private boolean threeClicked;
+  private boolean fourClicked;
+  private boolean fiveClicked;
 
-  private Item itemOne, itemTwo, itemThree, itemFour, itemFive;
+  private Item itemOne;
+  private Item itemTwo;
+  private Item itemThree;
+  private Item itemFour;
+  private Item itemFive;
 
-  private Image one, two, three, four, five;
+  private Image one;
+  private Image two;
+  private Image three;
+  private Image four;
+  private Image five;
 
   private ImageView image;
   private double ratio;
@@ -98,8 +117,9 @@ public abstract class RoomController {
    * Initialising the fields that are common in all of the item
    * rooms to avoid code duplication.
    */
-  protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
-      ImageView itemFourImg, ImageView itemFiveImg) {
+  protected void genericInitialise(
+      String roomName, ImageView itemOneImg, ImageView itemTwoImg, 
+      ImageView itemThreeImg, ImageView itemFourImg, ImageView itemFiveImg) {
     this.itemOneImg = itemOneImg;
     this.itemTwoImg = itemTwoImg;
     this.itemThreeImg = itemThreeImg;
@@ -270,9 +290,9 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where an item is selected and prompting user and prompting user to either add or not
-   * add the item to their inventory. Does nothing if the item has already been 
-   * added to the inventory.
+   * Handling the event where an item is selected and prompting user and 
+   * prompting user to either add or not add the item to their inventory. 
+   * Does nothing if the item has already been added to the inventory.
    *
    * @param itemAdded whether the item has already been added to the inventory
    * @param itemImg the image of the item clicked by user
@@ -528,7 +548,7 @@ public abstract class RoomController {
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-     if (MainMenuController.inventory.size() == 0) {
+    if (MainMenuController.inventory.size() == 0) {
       notificationText.setText("You have no ingredients in your bag!");
       Notification.notifyPopup(notificationBack, notificationText);
       return;
@@ -615,7 +635,7 @@ public abstract class RoomController {
     sendButton.setOpacity(opacity);
   }
 
-    /**
+  /**
    * Sends a message to the GPT model.
    *
    * @param event the action event triggered by the send button
@@ -632,14 +652,17 @@ public abstract class RoomController {
     inputText.clear();
     disableChat(true, 0.5);
     ChatMessage msg = new ChatMessage("user", message);
-    MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+    MainMenuController.getChatHandler().appendChatMessage(
+        msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            ChatMessage response = new ChatMessage("assistant", MainMenuController.getChatHandler().runGpt(message));
-            MainMenuController.getChatHandler().appendChatMessage(response, chatTextArea, inputText, sendButton);
+            ChatMessage response = new ChatMessage(
+                "assistant", MainMenuController.getChatHandler().runGpt(message));
+            MainMenuController.getChatHandler().appendChatMessage(
+                response, chatTextArea, inputText, sendButton);
             return null;
           }
         };
@@ -664,15 +687,14 @@ public abstract class RoomController {
    */
   public void readGameMasterResponse() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            // need to update the chat text area with the game master's response & riddle
-            App.textToSpeech.speak(chatTextArea.getText());
-            return null;
-          }
-        };
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        // need to update the chat text area with the game master's response & riddle
+        App.textToSpeech.speak(chatTextArea.getText());
+        return null;
+      }
+    };
     new Thread(speakTask, "Speak Thread").start();
   }
 }
