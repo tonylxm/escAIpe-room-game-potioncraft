@@ -175,16 +175,26 @@ public class CauldronRoomController extends RoomController {
 
   @FXML
   public void goLeftRoom(MouseEvent event) {
-    System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
-    itemScroll.setOpacity(0);
-    RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
+    if (!GameState.isBookRiddleResolved) {
+      notificationText.setText("Talk to the wizard!");
+      Notification.notifyPopup(notificationBack, notificationText);
+    } else {
+      System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
+      itemScroll.setOpacity(0);
+      RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
+    }
   }
 
   @FXML
   public void goRightRoom(MouseEvent event) {
-    System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
-    itemScroll.setOpacity(0);
-    RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
+    if (!GameState.isBookRiddleResolved) {
+      notificationText.setText("Talk to the wizard!");
+      Notification.notifyPopup(notificationBack, notificationText);
+    } else {
+      System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
+      itemScroll.setOpacity(0);
+      RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
+    }
   }
 
   /**
