@@ -6,11 +6,8 @@ import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -71,7 +68,6 @@ public class CauldronRoomController extends RoomController {
   private ImageView itemFifteenImg;
 
   private boolean showRecipe = true;
-
   private CountdownTimer countdownTimer;
 
   public void initialize() {
@@ -91,15 +87,15 @@ public class CauldronRoomController extends RoomController {
     mouseTrackRegion.setOpacity(0);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
-    RoomController.btnMouseActions(cauldronImg);
-    RoomController.btnMouseActions(wizardImg);
-    RoomController.arrowMouseActions(leftArrow);
-    RoomController.arrowMouseActions(rightArrow);
-    RoomController.btnMouseActions(bookBtn);
-    RoomController.btnMouseActions(bagBtn);
-    RoomController.btnMouseActions(bookFireRectangle);
-    RoomController.btnMouseActions(bookWaterRectangle);
-    RoomController.btnMouseActions(bookAirRectangle);
+    btnMouseActions(cauldronImg);
+    btnMouseActions(wizardImg);
+    arrowMouseActions(leftArrow);
+    arrowMouseActions(rightArrow);
+    btnMouseActions(bookBtn);
+    btnMouseActions(bagBtn);
+    btnMouseActions(bookFireRectangle);
+    btnMouseActions(bookWaterRectangle);
+    btnMouseActions(bookAirRectangle);
   }
 
   /**
