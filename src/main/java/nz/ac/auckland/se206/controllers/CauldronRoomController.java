@@ -45,29 +45,22 @@ public class CauldronRoomController extends RoomController {
   private CountdownTimer countdownTimer;
 
   public void initialize() {
-    // genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
+    // Initialising everything from the superclass
+    genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg);
+
     // Setting up the countdown and appropriate booleans before
     // anything happens to change them within the game
-    
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
-
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
-    
     toggleBooks(true, 0);
-
-    // DELETE WHEN GENERIC INIT IMPLEMENTED
-    // bagOpened = false;
-    // toggleChat(true, 0);
-    // btnMouseActions(wizardImg);
-    // btnMouseActions(bookBtn);
-    // btnMouseActions(bagBtn);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
     btnMouseActions(cauldronImg);
     arrowMouseActions(leftArrow);
     arrowMouseActions(rightArrow);
+
     btnMouseActions(bookFireRectangle);
     btnMouseActions(bookWaterRectangle);
     btnMouseActions(bookAirRectangle);

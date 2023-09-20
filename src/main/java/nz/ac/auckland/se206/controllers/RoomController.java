@@ -99,7 +99,7 @@ public abstract class RoomController {
    * rooms to avoid code duplication.
    */
   protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
-      ImageView itemFourImg, ImageView itemFiveImg, Polygon directionShpe) {
+      ImageView itemFourImg, ImageView itemFiveImg) {
     this.itemOneImg = itemOneImg;
     this.itemTwoImg = itemTwoImg;
     this.itemThreeImg = itemThreeImg;
@@ -146,8 +146,7 @@ public abstract class RoomController {
 
     // Disabling the text box and mouse track region
     setText("", false, false);
-    mouseTrackRegion.setDisable(true);
-    mouseTrackRegion.setOpacity(0);
+    toggleChat(true, 0);
 
     // Setting appropriate interactable features for the buttons
     btnMouseActions(bookBtn);
@@ -160,12 +159,6 @@ public abstract class RoomController {
     itemMouseActions(itemThreeImg, threeClicked, itemThree);
     itemMouseActions(itemFourImg, fourClicked, itemFour);
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
-
-    // Setting appropriate interactable features for the arrows
-    arrowMouseActions(directionShpe);
-    // arrowMouseActions(rightShpe);
-
-    toggleChat(true, 0);
   }
 
   /**

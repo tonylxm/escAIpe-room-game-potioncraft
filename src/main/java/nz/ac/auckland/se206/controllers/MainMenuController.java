@@ -234,10 +234,10 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+        // do not need
         SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
-        //SceneManager.addAppUi(AppUi.BOOK, App.loadFxml("book"));
         SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
         // Create an instance of CauldronController
