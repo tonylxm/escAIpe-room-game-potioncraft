@@ -19,7 +19,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="backImg" fitHeight="680.0" fitWidth="1024.0" opacity="0.74">
+      <ImageView fx:id="backImg" fitHeight="680.0" fitWidth="1024.0" opacity="0.75">
          <image>
             <Image url="@../images/mystic.jpeg" />
          </image>
@@ -35,7 +35,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="featherImage" fitHeight="111.0" fitWidth="112.0" layoutX="191.0" layoutY="285.0" opacity="0.0">
+      <ImageView fx:id="featherImage" fitHeight="111.0" fitWidth="112.0" layoutX="197.0" layoutY="350.0" opacity="0.0">
          <image>
             <Image url="@../images/feather.png" />
          </image>
@@ -59,7 +59,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="powderImage" fitHeight="65.0" fitWidth="112.0" layoutX="790.0" layoutY="329.0" opacity="0.0">
+      <ImageView fx:id="powderImage" fitHeight="65.0" fitWidth="112.0" layoutX="755.0" layoutY="285.0" opacity="0.0">
          <image>
             <Image url="@../images/powder.png" />
          </image>
@@ -83,7 +83,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="tailImage" fitHeight="82.0" fitWidth="82.0" layoutX="378.0" layoutY="164.0" opacity="0.0">
+      <ImageView fx:id="tailImage" fitHeight="82.0" fitWidth="82.0" layoutX="419.0" layoutY="209.0" opacity="0.0">
          <image>
             <Image url="@../images/tail.png" />
          </image>
@@ -113,6 +113,46 @@
          </image>
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemElevenImg" fx:id="itemElevenImg" fitHeight="111.0" fitWidth="57.0" layoutX="746.0" layoutY="413.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bone.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemTwelveImg" fx:id="itemTwelveImg" fitHeight="88.0" fitWidth="100.0" layoutX="109.0" layoutY="512.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fire.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemThirteenImg" fx:id="itemThirteenImg" fitHeight="82.0" fitWidth="82.0" layoutX="164.0" layoutY="241.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/root.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemFourteenImg" fx:id="itemFourteenImg" fitHeight="45.0" fitWidth="65.0" layoutX="811.0" layoutY="383.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bettle.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemFifteenImg" fx:id="itemFifteenImg" fitHeight="101.0" fitWidth="100.0" layoutX="888.0" layoutY="373.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/unicorn_horn.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
       <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
