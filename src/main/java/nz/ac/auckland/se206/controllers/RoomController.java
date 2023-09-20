@@ -196,49 +196,64 @@ public abstract class RoomController {
     // added
     switch (item) {
       case TAIL:
-        handleSelect(oneAdded, itemOneImg, oneClicked);
+        handleSelect(oneAdded, itemOneImg);
+        oneClicked = true;
         break;
       case INSECT_WINGS:
-        handleSelect(twoAdded, itemTwoImg, twoClicked);
+        handleSelect(twoAdded, itemTwoImg);
+        twoClicked = true;
         break;
       case FLOWER:
-        handleSelect(threeAdded, itemThreeImg, threeClicked);
+        handleSelect(threeAdded, itemThreeImg);
+        threeClicked = true;
         break;
       case SCALES:
-        handleSelect(fourAdded, itemFourImg, fourClicked);
+        handleSelect(fourAdded, itemFourImg);
+        fourClicked = true;
         break;
       case POWDER:
-        handleSelect(fiveAdded, itemFiveImg, fiveClicked);
+        handleSelect(fiveAdded, itemFiveImg);
+        fiveClicked = true;
         break;
       case TALON:
-        handleSelect(oneAdded, itemOneImg, oneClicked);
+        handleSelect(oneAdded, itemOneImg);
+        oneClicked = true;
         break;
       case CRYSTAL:
-        handleSelect(twoAdded, itemTwoImg, twoClicked);
+        handleSelect(twoAdded, itemTwoImg);
+        twoClicked = true;
         break;
       case BAT_WINGS:
-        handleSelect(threeAdded, itemThreeImg, threeClicked);
+        handleSelect(threeAdded, itemThreeImg);
+        threeClicked = true;
         break;
       case WREATH:
-        handleSelect(fourAdded, itemFourImg, fourClicked);
+        handleSelect(fourAdded, itemFourImg);
+        fourClicked = true;
         break;
       case FEATHER:
-        handleSelect(fiveAdded, itemFiveImg, fiveClicked);
+        handleSelect(fiveAdded, itemFiveImg);
+        fiveClicked = true;
         break;
       case BONE:
-        handleSelect(oneAdded, itemOneImg, oneClicked);
+        handleSelect(oneAdded, itemOneImg);
+        oneClicked = true;
         break;
       case FIRE:
-        handleSelect(twoAdded, itemTwoImg, twoClicked);
+        handleSelect(twoAdded, itemTwoImg);
+        twoClicked = true;
         break;
       case ROOT:
-        handleSelect(threeAdded, itemThreeImg, threeClicked);
+        handleSelect(threeAdded, itemThreeImg);
+        threeClicked = true;
         break;
       case BEETLE:
-        handleSelect(fourAdded, itemFourImg, fourClicked);
+        handleSelect(fourAdded, itemFourImg);
+        fourClicked = true;
         break;
       case UNICORN_HORN:
-        handleSelect(fiveAdded, itemFiveImg, fiveClicked);
+        handleSelect(fiveAdded, itemFiveImg);
+        fiveClicked = true;
         break;
       default:
         break;
@@ -263,12 +278,11 @@ public abstract class RoomController {
    * @param itemImg the image of the item clicked by user
    * @param itemClicked whether the item has already been clicked by user
    */
-  private void handleSelect(boolean itemAdded, ImageView itemImg, boolean itemClicked) {
+  private void handleSelect(boolean itemAdded, ImageView itemImg) {
     if (itemAdded) {
       return;
     }
     interactionHandler.glowThis(itemImg);
-    itemClicked = true;
   }
 
   /** Adding item to inventory if an item is selected */
@@ -289,63 +303,93 @@ public abstract class RoomController {
     switch (item) {
       case TAIL:
         one = new Image("images/tail.png");
-        handleAddImg(one, itemOneImg, oneAdded, oneClicked);
+        handleAddImg(one, itemOneImg);
+        oneAdded = true;
+        oneClicked = false;
         break;
       case INSECT_WINGS:
         two = new Image("images/insect_wings.png");
-        handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+        handleAddImg(two, itemTwoImg);
+        twoAdded = true;
+        twoClicked = false;
         break;
       case FLOWER:
         three = new Image("images/flower.png");
-        handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
+        handleAddImg(three, itemThreeImg);
+        threeAdded = true;
+        threeClicked = false;
         break;
       case SCALES:
         four = new Image("images/scales.png");
-        handleAddImg(four, itemFourImg, fourAdded, fourClicked);
+        handleAddImg(four, itemFourImg);
+        fourAdded = true;
+        fourClicked = false;
         break;
       case POWDER:
         five = new Image("images/powder.png");
-        handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        handleAddImg(five, itemFiveImg);
+        fiveAdded = true;
+        fiveClicked = false;
         break;
       case TALON:
         one = new Image("images/talon.png");
-        handleAddImg(one, itemOneImg, oneAdded, oneClicked);
+        handleAddImg(one, itemOneImg);
+        oneAdded = true;
+        oneClicked = false;
         break;
       case CRYSTAL:
         two = new Image("images/crystal.png");
-        handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+        handleAddImg(two, itemTwoImg);
+        twoAdded = true;
+        twoClicked = false;
         break;
       case BAT_WINGS:
         three = new Image("images/bat_wings.png");
-        handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
+        handleAddImg(three, itemThreeImg);
+        threeAdded = true;
+        threeClicked = false;
         break;
       case WREATH:
         four = new Image("images/wreath.png");
-        handleAddImg(four, itemFourImg, fourAdded, fourClicked);
+        handleAddImg(four, itemFourImg);
+        fourAdded = true;
+        fourClicked = false;
         break;
       case FEATHER:
         five = new Image("images/feather.png");
-        handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        handleAddImg(five, itemFiveImg);
+        fiveAdded = true;
+        fiveClicked = false;
         break;
       case BONE:
         one = new Image("images/bone.png");
-        handleAddImg(one, itemOneImg, oneAdded, oneClicked);
+        handleAddImg(one, itemOneImg);
+        oneAdded = true;
+        oneClicked = false;
         break;
       case FIRE:
         two = new Image("images/fire.png");
-        handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+        handleAddImg(two, itemTwoImg);
+        twoAdded = true;
+        twoClicked = false;
         break;
       case ROOT:
         three = new Image("images/root.png");
-        handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
+        handleAddImg(three, itemThreeImg);
+        threeAdded = true;
+        threeClicked = false;
         break;
       case BEETLE:
         four = new Image("images/beetle.png");
-        handleAddImg(four, itemFourImg, fourAdded, fourClicked);
+        handleAddImg(four, itemFourImg);
+        fourAdded = true;
+        fourClicked = false;
         break;
       case UNICORN_HORN:
         five = new Image("images/unicorn_horn.png");
-        handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        handleAddImg(five, itemFiveImg);
+        fiveAdded = true;
+        fiveClicked = false;
         break;
       default:
         break;
@@ -356,14 +400,12 @@ public abstract class RoomController {
   /**
    * Handling the event where an item is added to bag and formatting image size ratio
    */
-  protected void handleAddImg(Image img, ImageView itemImg, boolean itemAdded, boolean itemClicked) {
+  protected void handleAddImg(Image img, ImageView itemImg) {
     // Setting up appropriate image and ratio and appropriate click fields to be added
     ratio = img.getHeight() / img.getWidth();
     image = new ImageView(img);
     itemImg.setOpacity(0);
     itemImg.setDisable(true);
-    itemAdded = true;
-    itemClicked = false;
   }
 
   /**
@@ -376,18 +418,7 @@ public abstract class RoomController {
     }
     setText("", false, false);
     readyToAdd = false;
-
-    // Turning off the glow effect for all items
-    oneClicked = false;
-    interactionHandler.unglowThis(itemOneImg);
-    twoClicked = false;
-    interactionHandler.unglowThis(itemTwoImg);
-    threeClicked = false;
-    interactionHandler.unglowThis(itemThreeImg);
-    fourClicked = false;
-    interactionHandler.unglowThis(itemFourImg);
-    fiveClicked = false;
-    interactionHandler.unglowThis(itemFiveImg);
+    itemDefault();
 
     // Making sure the mouseTrackRegion is disabled
     mouseTrackRegion.setDisable(true);
@@ -403,7 +434,16 @@ public abstract class RoomController {
     System.out.println("click off");
     setText("", false, false);
     toggleChat(true, 0);
+    itemDefault();
+    // Handling closing the "bag" when clicking off inventory
+    if (bagOpened) {
+      itemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("Bag closed");
+    }
+  }
 
+  public void itemDefault() {
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
     interactionHandler.unglowThis(itemTwoImg);
@@ -417,13 +457,6 @@ public abstract class RoomController {
     threeClicked = false;
     fourClicked = false;
     fiveClicked = false;
-
-    // Handling closing the "bag" when clicking off inventory
-    if (bagOpened) {
-      itemScroll.setOpacity(0);
-      bagOpened = false;
-      System.out.println("Bag closed");
-    }
   }
   
   /**

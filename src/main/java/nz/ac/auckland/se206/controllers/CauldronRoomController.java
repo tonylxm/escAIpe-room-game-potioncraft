@@ -220,6 +220,7 @@ public class CauldronRoomController extends RoomController {
   public void clickOffCauldronRoom(MouseEvent event) {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
+      setText("", false, false);
       chooseLabel.setOpacity(0);
       enableRecipe();
       toggleChat(true, 0);
