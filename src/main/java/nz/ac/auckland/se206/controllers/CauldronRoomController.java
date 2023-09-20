@@ -36,17 +36,9 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private Polygon leftArrow;
   @FXML
-  private ImageView bookFireRectangle;
+  private ImageView bookFireRectangle, bookWaterRectangle, bookAirRectangle;
   @FXML
-  private ImageView bookWaterRectangle;
-  @FXML
-  private ImageView bookAirRectangle;
-  @FXML
-  private ImageView bookFireImage;
-  @FXML
-  private ImageView bookWaterImage;
-  @FXML
-  private ImageView bookAirImage;
+  private ImageView bookFireImage, bookWaterImage, bookAirImage;
   @FXML
   private Rectangle textRect;
   @FXML
