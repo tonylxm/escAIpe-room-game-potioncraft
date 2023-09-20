@@ -145,11 +145,11 @@ public abstract class RoomController {
       itemFive = Items.Item.FEATHER;
     } else if (roomName.equals("Cauldron")) {
       // Fix
-      itemOne = Items.Item.TAIL;
-      itemTwo = Items.Item.INSECT_WINGS;
-      itemThree = Items.Item.FLOWER;
-      itemFour = Items.Item.SCALES;
-      itemFive = Items.Item.POWDER;
+      itemOne = Items.Item.BONE;
+      itemTwo = Items.Item.FIRE;
+      itemThree = Items.Item.ROOT;
+      itemFour = Items.Item.BEETLE;
+      itemFive = Items.Item.UNICORN_HORN;
     }
 
     readyToAdd = false;
@@ -213,74 +213,49 @@ public abstract class RoomController {
     // added
     switch (item) {
       case TAIL:
-        if (oneAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemOneImg);
-        oneClicked = true;
+        handleSelect(oneAdded, itemOneImg, oneClicked);
         break;
       case INSECT_WINGS:
-        if (twoAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemTwoImg);
-        twoClicked = true;
+        handleSelect(twoAdded, itemTwoImg, twoClicked);
         break;
       case FLOWER:
-        if (threeAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemThreeImg);
-        threeClicked = true;
+        handleSelect(threeAdded, itemThreeImg, threeClicked);
         break;
       case SCALES:
-        if (fourAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemFourImg);
-        fourClicked = true;
+        handleSelect(fourAdded, itemFourImg, fourClicked);
         break;
       case POWDER:
-        if (fiveAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemFiveImg);
-        fiveClicked = true;
+        handleSelect(fiveAdded, itemFiveImg, fiveClicked);
         break;
       case TALON:
-        if (oneAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemOneImg);
-        oneClicked = true;
+        handleSelect(oneAdded, itemOneImg, oneClicked);
         break;
       case CRYSTAL:
-        if (twoAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemTwoImg);
-        twoClicked = true;
+        handleSelect(twoAdded, itemTwoImg, twoClicked);
         break;
       case BAT_WINGS:
-        if (threeAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemThreeImg);
-        threeClicked = true;
+        handleSelect(threeAdded, itemThreeImg, threeClicked);
         break;
       case WREATH:
-        if (fourAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemFourImg);
-        fourClicked = true;
+        handleSelect(fourAdded, itemFourImg, fourClicked);
         break;
       case FEATHER:
-        if (fiveAdded) {
-          return;
-        }
-        interactionHandler.glowThis(itemFiveImg);
-        fiveClicked = true;
+        handleSelect(fiveAdded, itemFiveImg, fiveClicked);
+        break;
+      case BONE:
+        handleSelect(oneAdded, itemOneImg, oneClicked);
+        break;
+      case FIRE:
+        handleSelect(twoAdded, itemTwoImg, twoClicked);
+        break;
+      case ROOT:
+        handleSelect(threeAdded, itemThreeImg, threeClicked);
+        break;
+      case BEETLE:
+        handleSelect(fourAdded, itemFourImg, fourClicked);
+        break;
+      case UNICORN_HORN:
+        handleSelect(fiveAdded, itemFiveImg, fiveClicked);
         break;
       default:
         break;
@@ -294,6 +269,23 @@ public abstract class RoomController {
     mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
+  }
+
+  /**
+   * Handling the event where an item is selected and prompting user and prompting user to either add or not
+   * add the item to their inventory. Does nothing if the item has already been 
+   * added to the inventory.
+   *
+   * @param itemAdded whether the item has already been added to the inventory
+   * @param itemImg the image of the item clicked by user
+   * @param itemClicked whether the item has already been clicked by user
+   */
+  private void handleSelect(boolean itemAdded, ImageView itemImg, boolean itemClicked) {
+    if (itemAdded) {
+          return;
+        }
+        interactionHandler.glowThis(itemImg);
+        itemClicked = true;
   }
 
   /** Adding item to inventory if an item is selected */
@@ -350,6 +342,26 @@ public abstract class RoomController {
         break;
       case FEATHER:
         five = new Image("images/feather.png");
+        handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        break;
+      case BONE:
+        one = new Image("images/bone.png");
+        handleAddImg(one, itemOneImg, oneAdded, oneClicked);
+        break;
+      case FIRE:
+        two = new Image("images/fire.png");
+        handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+        break;
+      case ROOT:
+        three = new Image("images/root.png");
+        handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
+        break;
+      case BEETLE:
+        four = new Image("images/beetle.png");
+        handleAddImg(four, itemFourImg, fourAdded, fourClicked);
+        break;
+      case UNICORN_HORN:
+        five = new Image("images/unicorn_horn.png");
         handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
         break;
       default:
