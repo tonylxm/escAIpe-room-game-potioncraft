@@ -20,7 +20,6 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
@@ -100,10 +99,9 @@ public abstract class RoomController {
   private double ratio;
 
   /**
-   * Initialising the fields that are common in both of the item
+   * Initialising the fields that are common in all of the item
    * rooms to avoid code duplication.
    */
-  @FXML
   protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
       ImageView itemFourImg, ImageView itemFiveImg, Polygon directionShpe) {
     this.itemOneImg = itemOneImg;
@@ -138,7 +136,6 @@ public abstract class RoomController {
       itemFour = Items.Item.WREATH;
       itemFive = Items.Item.FEATHER;
     } else if (roomName.equals("Cauldron")) {
-      // Fix
       itemOne = Items.Item.BONE;
       itemTwo = Items.Item.FIRE;
       itemThree = Items.Item.ROOT;
@@ -171,6 +168,8 @@ public abstract class RoomController {
     // Setting appropriate interactable features for the arrows
     arrowMouseActions(directionShpe);
     // arrowMouseActions(rightShpe);
+
+    toggleChat(true, 0);
   }
 
   /**

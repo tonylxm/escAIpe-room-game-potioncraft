@@ -1,15 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
-
 import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
@@ -30,9 +26,7 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private ImageView cauldronImg;
   @FXML
-  private Polygon rightArrow;
-  @FXML
-  private Polygon leftArrow;
+  private Polygon rightArrow, leftArrow;
   @FXML
   private ImageView bookFireRectangle, bookWaterRectangle, bookAirRectangle;
   @FXML
@@ -42,20 +36,10 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private ScrollPane calItemScroll;
   @FXML
-  private Label riddleSelectLabel;
-  @FXML
-  private Label chooseLabel;
+  private Label riddleSelectLabel, chooseLabel;
 
   @FXML
-  private ImageView itemElevenImg;
-  @FXML
-  private ImageView itemTwelveImg;
-  @FXML
-  private ImageView itemThirteenImg;
-  @FXML
-  private ImageView itemFourteenImg;
-  @FXML
-  private ImageView itemFifteenImg;
+  private ImageView itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg;
 
   private boolean showRecipe = true;
   private CountdownTimer countdownTimer;
@@ -70,11 +54,8 @@ public class CauldronRoomController extends RoomController {
 
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
-    mouseTrackRegion.setDisable(true);
-    textRect.setDisable(true);
     toggleChat(true, 0);
     toggleBooks(true, 0);
-    mouseTrackRegion.setOpacity(0);
 
     // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
     btnMouseActions(cauldronImg);
