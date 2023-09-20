@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -85,7 +84,6 @@ public class CauldronRoomController {
   @FXML
   private Label notificationText;
 
-  private ChatMessage riddleSolveMsg;
   private boolean bagOpened;
   private CountdownTimer countdownTimer;
   private boolean showRecipe = true;
@@ -116,13 +114,6 @@ public class CauldronRoomController {
     ItemRoomController.btnMouseActions(bookFireRectangle);
     ItemRoomController.btnMouseActions(bookWaterRectangle);
     ItemRoomController.btnMouseActions(bookAirRectangle);
-
-    // Message to be displayed when the user selected the correct book
-    riddleSolveMsg =
-        new ChatMessage(
-            "Wizard",
-            "You've done well to solve the riddle. The rest is now up to you. If you"
-                + " require any assistance, please come talk to me again.");
   }
 
   /**
@@ -241,12 +232,26 @@ public class CauldronRoomController {
       ft.setFromValue(1);
       ft.setToValue(0);
       ft.play();
+
       bookImage.setOpacity(0);
       bookImage.setDisable(true);
       bookRectangle.setDisable(true);
+
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
-      MainMenuController.getChatHandler().appendChatMessage(riddleSolveMsg, chatTextArea, inputText, sendButton);
+
+      // Code to send appropriate riddle resolved message to GPT
+      Task<Void> resolvedTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          ChatMessage msg = new ChatMessage(
+            "Wizard", MainMenuController.getChatHandler().runGpt(
+              MainMenuController.getResolvedMessage()));
+          MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+          return null;
+        }
+      };
+      new Thread(resolvedTask).start();
     }
   }
 
@@ -269,7 +274,8 @@ public class CauldronRoomController {
   }
 
   /**
-   * Handling events where menus or views need to be exited by clicking anywhere else on the screen
+   * Handling events where menus or views need to be exited by clicking 
+   * anywhere else on the screen
    *
    * @param event
    */
@@ -309,7 +315,7 @@ public class CauldronRoomController {
     bookBtn.setDisable(false);
     bookBtn.setOpacity(1);
 
-    if(showRecipe) {
+    if (showRecipe) {
       notificationText.setText("Check bottom right for the recipe book!");
       notifyPopup();
     }
@@ -377,7 +383,8 @@ public class CauldronRoomController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            MainMenuController.getChatHandler().runGptGameMaster(msg, chatTextArea, inputText, sendButton);
+            MainMenuController.getChatHandler().runGptGameMaster(
+                msg, chatTextArea, inputText, sendButton);
             return null;
           }
         };
@@ -397,7 +404,9 @@ public class CauldronRoomController {
     }
   }
 
-  /** Uses text to speech to read the game master's response to the user's message. */
+  /** 
+   * Uses text to speech to read the game master's response to the user's message. 
+   */
   public void readGameMasterResponse() {
     // Using concurency to prevent the system freezing
     Task<Void> speakTask =
@@ -415,36 +424,38 @@ public class CauldronRoomController {
   @FXML
   private void notifyPopup() {
     // Create a FadeTransition to gradually change opacity over 3 seconds
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(5), notificationBack);
-            fadeTransition.setFromValue(1.0);
-            fadeTransition.setToValue(1.0);
-            FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(5), notificationText);
-            fadeTransition2.setFromValue(1.0);
-            fadeTransition2.setToValue(1.0);
+    FadeTransition fadeTransition = new FadeTransition(
+        Duration.seconds(5), notificationBack);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(1.0);
+    FadeTransition fadeTransition2 = new FadeTransition(
+        Duration.seconds(5), notificationText);
+    fadeTransition2.setFromValue(1.0);
+    fadeTransition2.setToValue(1.0);
 
-            // Play the fade-in animation
-            fadeTransition.play();
-            fadeTransition2.play();
+    // Play the fade-in animation
+    fadeTransition.play();
+    fadeTransition2.play();
 
-            // Schedule a task to fade out the image after 3 seconds
-            fadeTransition.setOnFinished(fadeEvent -> {
-              if (notificationBack.getOpacity() == 1.0) {
-                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationBack);
-                fadeOutTransition.setFromValue(1.0);
-                fadeOutTransition.setToValue(0.0);
-                fadeOutTransition.play();
-              }
-            });
+    // Schedule a task to fade out the image after 3 seconds
+    fadeTransition.setOnFinished(fadeEvent -> {
+        if (notificationBack.getOpacity() == 1.0) {
+          FadeTransition fadeOutTransition = new FadeTransition(
+              Duration.seconds(1.5), notificationBack);
+          fadeOutTransition.setFromValue(1.0);
+          fadeOutTransition.setToValue(0.0);
+          fadeOutTransition.play();
+        }
+    });
 
-            fadeTransition2.setOnFinished(fadeEvent -> {
-              if (notificationText.getOpacity() == 1.0) {
-                FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), notificationText);
-                fadeOutTransition.setFromValue(1.0);
-                fadeOutTransition.setToValue(0.0);
-                fadeOutTransition.play();
-              }
-            });
-
-            
+    fadeTransition2.setOnFinished(fadeEvent -> {
+        if (notificationText.getOpacity() == 1.0) {
+          FadeTransition fadeOutTransition = new FadeTransition(
+              Duration.seconds(1.5), notificationText);
+          fadeOutTransition.setFromValue(1.0);
+          fadeOutTransition.setToValue(0.0);
+          fadeOutTransition.play();
+        }
+    });        
   }
 }

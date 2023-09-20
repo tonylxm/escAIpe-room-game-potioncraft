@@ -455,8 +455,8 @@ public abstract class ItemRoomController {
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
     if (MainMenuController.inventory.size() == 0) {
-      // notificationText.setText("You have no ingredients in your bag!");
-      // notifyPopup();
+      // Setting notificationText.setText("You have no ingredients in your bag!");
+      // notifyPopup(); if the user hasn't collected anything yet
       return;
     }
     // If the bag isn't opened already, open it
