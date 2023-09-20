@@ -21,49 +21,36 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the book view. */
 public class BookController {
-  @FXML
-  private Pane pane;
-  @FXML
-  private ImageView cauldronRoomBackground;
-  @FXML
-  private ImageView treasureBackground;
-  @FXML
-  private ImageView libraryBackground;
-  @FXML
-  private Rectangle backgroundShade;
+  @FXML private Pane pane;
+  @FXML private ImageView cauldronRoomBackground;
+  @FXML private ImageView treasureBackground;
+  @FXML private ImageView libraryBackground;
+  @FXML private Rectangle backgroundShade;
+
+  @FXML private ImageView backBtn;
+  @FXML private ListView<String> ingredientList;
+  @FXML private ImageView ttsBtn1;
+  @FXML private Label timerLabel;
 
   @FXML
-  private ImageView backBtn;
-  @FXML
-  private ListView<String> ingredientList;
-  @FXML
-  private ImageView ttsBtn1;
-  @FXML
-  private Label timerLabel;
-
-  @FXML
-  private ImageView placeholderImg;
-  @FXML
-  private ImageView itemOneImg;
-  @FXML
-  private ImageView itemTwoImg;
-  @FXML
-  private ImageView itemThreeImg;
-  @FXML
-  private ImageView itemFourImg;
-  @FXML
-  private ImageView itemFiveImg;
-  @FXML
-  private ImageView itemSixImg;
-  @FXML
-  private ImageView itemSevenImg;
-  @FXML
-  private ImageView itemEightImg;
-  @FXML
-  private ImageView itemNineImg;
-  @FXML
-  private ImageView itemTenImg;
-
+  private ImageView 
+      placeholderImg,
+      itemOneImg,
+      itemTwoImg,
+      itemThreeImg,
+      itemFourImg,
+      itemFiveImg,
+      itemSixImg,
+      itemSevenImg,
+      itemEightImg,
+      itemNineImg,
+      itemTenImg,
+      itemElevenImg,
+      itemTwelveImg,
+      itemThirteenImg,
+      itemFourteenImg,
+      itemFifteenImg;
+  @FXML 
   private CountdownTimer countdownTimer;
 
   /**
@@ -109,6 +96,11 @@ public class BookController {
                 itemEightImg.setOpacity(0);
                 itemNineImg.setOpacity(0);
                 itemTenImg.setOpacity(0);
+                itemElevenImg.setOpacity(0);
+                itemTwelveImg.setOpacity(0);
+                itemThirteenImg.setOpacity(0);
+                itemFourteenImg.setOpacity(0);
+                itemFifteenImg.setOpacity(0);
 
                 // Setting the appropriate image to be visible based on the selected item
                 switch (item) {
@@ -141,6 +133,20 @@ public class BookController {
                     break;
                   case "FEATHER":
                     itemTenImg.setOpacity(1);
+                    break;
+                  case "BONE":
+                    itemElevenImg.setOpacity(1);
+                    break;
+                  case "FIRE":
+                    itemTwelveImg.setOpacity(1);
+                  case "ROOT":
+                    itemThirteenImg.setOpacity(1);
+                    break;
+                  case "BEETLE":
+                    itemFourteenImg.setOpacity(1);
+                    break;
+                  case "UNICORN_HORN":
+                    itemFifteenImg.setOpacity(1);
                     break;
                 }
               }
@@ -184,9 +190,7 @@ public class BookController {
     speakThread.start();
   }
 
-  /**
-   * Setting the appropriate scene when transitioning to the book view.
-   */
+  /** Setting the appropriate scene when transitioning to the book view. */
   public void updateBackground() {
     AppUi scene = SceneManager.getTimerScene();
     // Going from the cauldron room to the book

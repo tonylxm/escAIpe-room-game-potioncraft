@@ -115,7 +115,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemElevenImg" fx:id="itemElevenImg" fitHeight="111.0" fitWidth="57.0" layoutX="746.0" layoutY="413.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemElevenImg" fx:id="boneImage" fitHeight="111.0" fitWidth="57.0" layoutX="746.0" layoutY="413.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/bone.png" />
          </image>
@@ -123,7 +123,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemTwelveImg" fx:id="itemTwelveImg" fitHeight="88.0" fitWidth="100.0" layoutX="109.0" layoutY="512.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemTwelveImg" fx:id="fireImage" fitHeight="88.0" fitWidth="100.0" layoutX="109.0" layoutY="512.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fire.png" />
          </image>
@@ -131,7 +131,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemThirteenImg" fx:id="itemThirteenImg" fitHeight="82.0" fitWidth="82.0" layoutX="164.0" layoutY="241.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemThirteenImg" fx:id="rootImage" fitHeight="82.0" fitWidth="82.0" layoutX="164.0" layoutY="241.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/root.png" />
          </image>
@@ -139,7 +139,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemFourteenImg" fx:id="itemFourteenImg" fitHeight="45.0" fitWidth="65.0" layoutX="811.0" layoutY="383.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemFourteenImg" fx:id="beetleImage" fitHeight="45.0" fitWidth="65.0" layoutX="811.0" layoutY="383.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/bettle.png" />
          </image>
@@ -147,7 +147,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemFifteenImg" fx:id="itemFifteenImg" fitHeight="101.0" fitWidth="100.0" layoutX="888.0" layoutY="373.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemFifteenImg" fx:id="unicornHornImage" fitHeight="101.0" fitWidth="100.0" layoutX="888.0" layoutY="373.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/unicorn_horn.png" />
          </image>

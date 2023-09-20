@@ -26,49 +26,46 @@ import nz.ac.auckland.se206.TransitionAnimation;
 public class CauldronController {
   private static CauldronController instance;
 
-  @FXML
+  @FXML 
   private Pane pane;
-  @FXML 
-  private ImageView batWingImage;
-  @FXML 
-  private ImageView crystalImage;
-  @FXML 
-  private ImageView insectWingImage;
-  @FXML 
-  private ImageView talonImage;
-  @FXML 
-  private ImageView powderImage;
-  @FXML 
-  private ImageView tailImage;
-  @FXML 
-  private ImageView featherImage;
-  @FXML 
-  private ImageView scalesImage;
-  @FXML 
-  private ImageView flowerImage;
-  @FXML 
-  private ImageView wreathImage;
+  @FXML
+  private ImageView batWingImage,
+      crystalImage,
+      insectWingImage,
+      talonImage,
+      powderImage,
+      tailImage,
+      featherImage,
+      scalesImage,
+      flowerImage,
+      wreathImage,
+      boneImage,
+      fireImage,
+      rootImage,
+      beetleImage,
+      unicorHornImage;
+
   @FXML 
   private ImageView cauldronImageView;
   @FXML 
   private Rectangle cauldronOverlay;
   @FXML 
   private Button brewBtn;
-  @FXML
-  private Button  emptyBtn;
-  @FXML
+  @FXML 
+  private Button emptyBtn;
+  @FXML 
   private Label timerLabel;
-  @FXML
+  @FXML 
   private ImageView backImg;
-  @FXML
+  @FXML 
   private ImageView notificationBack;
-  @FXML
+  @FXML 
   private Label notificationText;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
-  
-  //array to store the items dropped into the cauldron
+
+  // array to store the items dropped into the cauldron
   private ArrayList<Items.Item> cauldronItems = new ArrayList<Items.Item>();
 
   private ImageView draggedItem;
@@ -98,8 +95,13 @@ public class CauldronController {
     setupDragAndDrop(scalesImage, "scalesImage");
     setupDragAndDrop(flowerImage, "flowerImage");
     setupDragAndDrop(wreathImage, "wreathImage");
+    setupDragAndDrop(boneImage, "boneImage");
+    setupDragAndDrop(fireImage, "fireImage");
+    setupDragAndDrop(rootImage, "rootImage");
+    setupDragAndDrop(beetleImage, "beetleImage");
+    setupDragAndDrop(unicorHornImage, "unicorHornImage");
 
-    //defining mapping
+    // defining mapping
     imageViewToItemMap.put("batWingImage", Items.Item.BAT_WINGS);
     imageViewToItemMap.put("crystalImage", Items.Item.CRYSTAL);
     imageViewToItemMap.put("insectWingImage", Items.Item.INSECT_WINGS);
@@ -110,6 +112,11 @@ public class CauldronController {
     imageViewToItemMap.put("scalesImage", Items.Item.SCALES);
     imageViewToItemMap.put("flowerImage", Items.Item.FLOWER);
     imageViewToItemMap.put("wreathImage", Items.Item.WREATH);
+    imageViewToItemMap.put("boneImage", Items.Item.BONE);
+    imageViewToItemMap.put("fireImage", Items.Item.FIRE);
+    imageViewToItemMap.put("rootImage", Items.Item.ROOT);
+    imageViewToItemMap.put("beetleImage", Items.Item.BEETLE);
+    imageViewToItemMap.put("unicorHornImage", Items.Item.UNICORN_HORN);
 
     // disable all image
     batWingImage.setDisable(true);
@@ -122,8 +129,13 @@ public class CauldronController {
     scalesImage.setDisable(true);
     flowerImage.setDisable(true);
     wreathImage.setDisable(true);
+    boneImage.setDisable(true);
+    fireImage.setDisable(true);
+    rootImage.setDisable(true);
+    beetleImage.setDisable(true);
+    unicorHornImage.setDisable(true);
 
-    // Set up glow for all images by adding images to an array then going 
+    // Set up glow for all images by adding images to an array then going
     // in a loop
     ArrayList<ImageView> images = new ArrayList<ImageView>();
     images.add(batWingImage);
@@ -136,20 +148,22 @@ public class CauldronController {
     images.add(scalesImage);
     images.add(flowerImage);
     images.add(wreathImage);
-    //setup glow for all images
+    images.add(boneImage);
+    images.add(fireImage);
+    images.add(rootImage);
+    images.add(beetleImage);
+    images.add(unicorHornImage);
+
+    // setup glow for all images
     for (ImageView image : images) {
-      image.setOnMouseEntered(
-          event -> interactionHandler.glowThis(image));
-      image.setOnMouseExited(
-          event -> interactionHandler.unglowThis(image));
+      image.setOnMouseEntered(event -> interactionHandler.glowThis(image));
+      image.setOnMouseExited(event -> interactionHandler.unglowThis(image));
     }
-    
 
     // Set up drag and drop for cauldronImageView
     cauldronImageView.setOnDragOver(
         event -> {
-          if (event.getGestureSource() != cauldronImageView 
-              && event.getDragboard().hasString()) {
+          if (event.getGestureSource() != cauldronImageView && event.getDragboard().hasString()) {
             event.acceptTransferModes(TransferMode.MOVE);
           }
           event.consume();
@@ -179,15 +193,15 @@ public class CauldronController {
                 if (db.hasString()) {
                   String imageViewName = itemId;
                   Items.Item item = imageViewToItemMap.get(imageViewName);
-            
+
                   if (item != null) {
                     // Add the item to the cauldronItems ArrayList
                     cauldronItems.add(item);
-                    
+
                     // You can also update the UI or perform other actions here
                   }
                 }
-              } 
+              }
             }
           }
 
@@ -195,17 +209,12 @@ public class CauldronController {
           event.consume();
         });
 
-        interactionHandler = new ShapeInteractionHandler();
-        //set glow for back image
-        if (backImg != null) {
-          backImg.setOnMouseEntered(
-              event -> interactionHandler.glowThis(backImg));
-          backImg.setOnMouseExited(
-              event -> interactionHandler.unglowThis(backImg));
-          
-        }
-
-      
+    interactionHandler = new ShapeInteractionHandler();
+    // set glow for back image
+    if (backImg != null) {
+      backImg.setOnMouseEntered(event -> interactionHandler.glowThis(backImg));
+      backImg.setOnMouseExited(event -> interactionHandler.unglowThis(backImg));
+    }
   }
 
   // Method to update the image states based on the player's inventory
@@ -226,6 +235,11 @@ public class CauldronController {
     scalesImage.setDisable(!inventory.contains(Items.Item.SCALES));
     flowerImage.setDisable(!inventory.contains(Items.Item.FLOWER));
     wreathImage.setDisable(!inventory.contains(Items.Item.WREATH));
+    boneImage.setDisable(!inventory.contains(Items.Item.BONE));
+    fireImage.setDisable(!inventory.contains(Items.Item.FIRE));
+    rootImage.setDisable(!inventory.contains(Items.Item.ROOT));
+    beetleImage.setDisable(!inventory.contains(Items.Item.BEETLE));
+    unicorHornImage.setDisable(!inventory.contains(Items.Item.UNICORN_HORN));
     // enabling and setting opacity to 1 if item is in inventory
     if (inventory.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setOpacity(1);
@@ -256,6 +270,21 @@ public class CauldronController {
     }
     if (inventory.contains(Items.Item.WREATH)) {
       wreathImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.BONE)) {
+      boneImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.FIRE)) {
+      fireImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.ROOT)) {
+      rootImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.BEETLE)) {
+      beetleImage.setOpacity(1);
+    }
+    if (inventory.contains(Items.Item.UNICORN_HORN)) {
+      unicorHornImage.setOpacity(1);
     }
   }
 
@@ -312,7 +341,7 @@ public class CauldronController {
   private void brewPotion() {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
-    // if more or less than 6 items have been dropped into the cauldron then the 
+    // if more or less than 6 items have been dropped into the cauldron then the
     // potion is not brewed
     if (cauldronItems.size() < 5 || cauldronItems.size() > 5) {
       System.out.println("Potion not brewed");
@@ -329,15 +358,15 @@ public class CauldronController {
     }
 
     if (cauldronItems.size() == 5) {
-      //check if the order of the items is correct by comparing cauldronItems with 
+      // check if the order of the items is correct by comparing cauldronItems with
       // Items.necessary
       if (cauldronItems.equals(Items.necessary)) {
         System.out.println("Potion brewed");
-        //set scene to you win
+        // set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
         TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
         SceneManager.setTimerScene(AppUi.YOU_WIN);
-                
+
       } else {
         System.out.println("Potion not brewed");
         notificationText.setText("Wrong recipe!");
@@ -346,17 +375,17 @@ public class CauldronController {
     }
   }
 
-  @FXML 
+  @FXML
   private void resetItems() {
-    //returning the items to the original position. 
+    // returning the items to the original position.
     // I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
-    // batWingImage.setX(84);  it might not even be necessary nvm but keeping 
+    // batWingImage.setX(84);  it might not even be necessary nvm but keeping
     // just in case
     // batWingImage.setY(54);
 
-    //resetting the items in the cauldron
+    // resetting the items in the cauldron
     cauldronItems.clear();
-    //resetting the images
+    // resetting the images
     batWingImage.setVisible(true);
     crystalImage.setVisible(true);
     insectWingImage.setVisible(true);
@@ -367,9 +396,15 @@ public class CauldronController {
     scalesImage.setVisible(true);
     flowerImage.setVisible(true);
     wreathImage.setVisible(true);
+    boneImage.setVisible(true);
+    fireImage.setVisible(true);
+    rootImage.setVisible(true);
+    beetleImage.setVisible(true);
+    unicorHornImage.setVisible(true);
   }
 
-  @FXML private void emptyCauldron() {
+  @FXML
+  private void emptyCauldron() {
     resetItems();
   }
 }
