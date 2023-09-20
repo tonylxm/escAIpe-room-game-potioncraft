@@ -21,20 +21,28 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the book view. */
 public class BookController {
-  @FXML private Pane pane;
-  @FXML private ImageView cauldronRoomBackground;
-  @FXML private ImageView treasureBackground;
-  @FXML private ImageView libraryBackground;
-  @FXML private Rectangle backgroundShade;
+  @FXML 
+  private Pane pane;
+  @FXML 
+  private ImageView cauldronRoomBackground;
+  @FXML 
+  private ImageView treasureBackground;
+  @FXML 
+  private ImageView libraryBackground;
+  @FXML 
+  private Rectangle backgroundShade;
 
-  @FXML private ImageView backBtn;
-  @FXML private ListView<String> ingredientList;
-  @FXML private ImageView ttsBtn1;
-  @FXML private Label timerLabel;
+  @FXML 
+  private ImageView backBtn;
+  @FXML 
+  private ListView<String> ingredientList;
+  @FXML 
+  private ImageView ttsBtn1;
+  @FXML 
+  private Label timerLabel;
 
   @FXML
-  private ImageView 
-      placeholderImg,
+  private ImageView placeholderImg,
       itemOneImg,
       itemTwoImg,
       itemThreeImg,
@@ -139,6 +147,7 @@ public class BookController {
                     break;
                   case "FIRE":
                     itemTwelveImg.setOpacity(1);
+                    break;
                   case "ROOT":
                     itemThirteenImg.setOpacity(1);
                     break;

@@ -43,7 +43,7 @@ public class CauldronController {
       fireImage,
       rootImage,
       beetleImage,
-      unicorHornImage;
+      unicornHornImage;
 
   @FXML 
   private ImageView cauldronImageView;
@@ -99,7 +99,7 @@ public class CauldronController {
     setupDragAndDrop(fireImage, "fireImage");
     setupDragAndDrop(rootImage, "rootImage");
     setupDragAndDrop(beetleImage, "beetleImage");
-    setupDragAndDrop(unicorHornImage, "unicorHornImage");
+    setupDragAndDrop(unicornHornImage, "unicornHornImage");
 
     // defining mapping
     imageViewToItemMap.put("batWingImage", Items.Item.BAT_WINGS);
@@ -116,7 +116,7 @@ public class CauldronController {
     imageViewToItemMap.put("fireImage", Items.Item.FIRE);
     imageViewToItemMap.put("rootImage", Items.Item.ROOT);
     imageViewToItemMap.put("beetleImage", Items.Item.BEETLE);
-    imageViewToItemMap.put("unicorHornImage", Items.Item.UNICORN_HORN);
+    imageViewToItemMap.put("unicornHornImage", Items.Item.UNICORN_HORN);
 
     // disable all image
     batWingImage.setDisable(true);
@@ -133,7 +133,7 @@ public class CauldronController {
     fireImage.setDisable(true);
     rootImage.setDisable(true);
     beetleImage.setDisable(true);
-    unicorHornImage.setDisable(true);
+    unicornHornImage.setDisable(true);
 
     // Set up glow for all images by adding images to an array then going
     // in a loop
@@ -152,7 +152,7 @@ public class CauldronController {
     images.add(fireImage);
     images.add(rootImage);
     images.add(beetleImage);
-    images.add(unicorHornImage);
+    images.add(unicornHornImage);
 
     // setup glow for all images
     for (ImageView image : images) {
@@ -239,7 +239,7 @@ public class CauldronController {
     fireImage.setDisable(!inventory.contains(Items.Item.FIRE));
     rootImage.setDisable(!inventory.contains(Items.Item.ROOT));
     beetleImage.setDisable(!inventory.contains(Items.Item.BEETLE));
-    unicorHornImage.setDisable(!inventory.contains(Items.Item.UNICORN_HORN));
+    unicornHornImage.setDisable(!inventory.contains(Items.Item.UNICORN_HORN));
     // enabling and setting opacity to 1 if item is in inventory
     if (inventory.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setOpacity(1);
@@ -284,7 +284,7 @@ public class CauldronController {
       beetleImage.setOpacity(1);
     }
     if (inventory.contains(Items.Item.UNICORN_HORN)) {
-      unicorHornImage.setOpacity(1);
+      unicornHornImage.setOpacity(1);
     }
   }
 
@@ -400,7 +400,7 @@ public class CauldronController {
     fireImage.setVisible(true);
     rootImage.setVisible(true);
     beetleImage.setVisible(true);
-    unicorHornImage.setVisible(true);
+    unicornHornImage.setVisible(true);
   }
 
   @FXML

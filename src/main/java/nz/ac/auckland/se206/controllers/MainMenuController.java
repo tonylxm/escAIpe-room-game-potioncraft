@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainMenuController {
@@ -174,44 +175,44 @@ public class MainMenuController {
         break;
     }
 
-    // Task<Void> bookRiddleTask =
-    //     new Task<Void>() {
-    //       @Override
-    //       protected Void call() throws Exception {
-    //         switch (hints) {
-    //           case -1:
-    //             // When on Dobby mode, selecting the prompt to give the user unlimited hints
-    //             riddle =
-    //               new ChatMessage(
-    //                 "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
+    Task<Void> bookRiddleTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            switch (hints) {
+              case -1:
+                // When on Dobby mode, selecting the prompt to give the user unlimited hints
+                riddle =
+                  new ChatMessage(
+                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
 
-    //             // Message to send to GPT after user has resolved the riddle
-    //             resolvedRiddle = GptPromptEngineering.getEasyResolved();
-    //             break;
-    //           case 5:
-    //             // When on Harry mode, selecting the prompt to give the user only 5 hints
-    //             riddle =
-    //               new ChatMessage(
-    //                 "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
+                // Message to send to GPT after user has resolved the riddle
+                resolvedRiddle = GptPromptEngineering.getEasyResolved();
+                break;
+              case 5:
+                // When on Harry mode, selecting the prompt to give the user only 5 hints
+                riddle =
+                  new ChatMessage(
+                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
                 
-    //             // Message to send to GPT after user has resolved the riddle
-    //             resolvedRiddle = GptPromptEngineering.getMediumResolved();
-    //             break;
-    //           case 0:
-    //             // When on Voldemort mode, selecting the prompt to give the user no hints at all
-    //             riddle =
-    //               new ChatMessage(
-    //                   "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+                // Message to send to GPT after user has resolved the riddle
+                resolvedRiddle = GptPromptEngineering.getMediumResolved();
+                break;
+              case 0:
+                // When on Voldemort mode, selecting the prompt to give the user no hints at all
+                riddle =
+                  new ChatMessage(
+                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
                 
-    //             // Message to send to GPT after user has resolved the riddle
-    //             resolvedRiddle =GptPromptEngineering.getHardResolved();
-    //             break;
-    //         }
-    //         return null;
-    //       }
-    //   };
-    // new Thread(bookRiddleTask).start();
-    // System.out.println(riddle);
+                // Message to send to GPT after user has resolved the riddle
+                resolvedRiddle =GptPromptEngineering.getHardResolved();
+                break;
+            }
+            return null;
+          }
+      };
+    new Thread(bookRiddleTask).start();
+    System.out.println(riddle);
   }
 
   /**
