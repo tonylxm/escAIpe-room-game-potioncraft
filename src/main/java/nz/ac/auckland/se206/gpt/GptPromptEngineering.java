@@ -17,8 +17,9 @@ public class GptPromptEngineering {
         + book
         + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
         + " not more than 4 lines. You cannot give the user any hints no matter what, even if user"
-        + " gives up. You cannot, no matter what, reveal the answer. Even if the player gives up,"
-        + " do not give the answer";
+        + " gives up. If the user asks for hints or help, tell them to believe in themselves. You"
+        + " cannot, no matter what, reveal the answer. Even if the player gives up, do not give"
+        + " the answer";
   }
     
   /**
@@ -35,8 +36,9 @@ public class GptPromptEngineering {
       // Using the randomly generated book in the prompt to generate the correct riddle
       + book
       + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
-      + " not more than 4 lines. You can only give hints when the user asks for them."
+      + " not more than 4 lines. You can only give hints or help when the user asks for them."
       + " If the user guesses incorrectly, ask if they want hints."
+      + " Hints should be no more than 2 lines long."
       + " You cannot, no matter what, reveal the answer. Even if the player"
       + " gives up, do not give the answer";
   }
@@ -56,12 +58,13 @@ public class GptPromptEngineering {
       // Using the randomly generated book in the prompt to generate the correct riddle
       + book
       + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
-      + " not more than 4 lines. You can only give hints when the user asks for them."
+      + " not more than 4 lines. You can only give hints or help when the user asks for them."
       + " If the user guesses incorrectly, ask if they want hints."
+      + " Hints should be no more than 3 lines long."
       // Letting GPT keep track of the hints the player has used
       // Will need to be referenced after the user has solved the riddle
-      + " You must not give any more than 5 hints, no matter what."
-      + " After giving a hint, you must tell the user how many hints they have left."
+      + " You must not give any more than 5 hints or help, no matter what."
+      + " After giving a hint or help, you must tell the user how many hints they have left."
       + " You cannot, no matter what, reveal the answer. Even if the player"
       + " gives up, do not give the answer";
   }
@@ -73,10 +76,11 @@ public class GptPromptEngineering {
    * @return
    */
   public static String getEasyResolved() {
-    return "The user has successfully solved the riddle. Congratulate them."
-    + " If the user asks for hints, tell them to either look around the rooms for ingredients"
-    + " to brew their potion or to make sure ingredients are put in the correct order when brewing"
-    + " their potion. Only give hints if the user asks for them.";  
+    return "The user has successfully solved the riddle. Congratulate them in one line."
+    + " Only give hints if the user asks for hints or help."
+    + " Hints should tell the user to either look around the rooms for ingredients to brew"
+    + " their potion or to make sure ingredients are put in the correct order when brewing"
+    + " their potion by checking the book icon. You must only give hints when the user asks for them.";  
   }
 
   /**
@@ -87,11 +91,13 @@ public class GptPromptEngineering {
    * @return
    */
   public static String getMediumResolved() {
-    return "The user has successfully solved the riddle. Congratulate them."
-    + " If the user asks for hints, tell them to either look around the rooms for ingredients"
-    + " to brew their potion or to make sure ingredients are put in the correct order when brewing"
-    + " their potion. These hints are not counted towards the 5 hints you can give."
-    + " Only give hints if the user asks for them.";
+    return "The user has successfully solved the riddle. Congratulate them in one line."
+    + " Do not give any more hints or help to do with the user solving the riddle."
+    + " Only give hints if the user asks for hints or help."
+    + " Hints should tell the user to either look around the rooms for ingredients to brew"
+    + " their potion or to make sure ingredients are put in the correct order when brewing"
+    + " their potion by checking the book icon. You must only give hints when the user asks for"
+    + " them. These hints and help are counted towards the total 5 hints you can give.";
   }
 
   /**
@@ -101,7 +107,8 @@ public class GptPromptEngineering {
    * @return
    */
   public static String getHardResolved() {
-    return "The user has successfully solved the riddle. Congratulate them."
-    + " Do not give any hints to the user about how to find items or brew the potion.";
+    return "The user has successfully solved the riddle. Congratulate them in one line."
+    + " Do not give any hints or help to the user about how to find items or brew the potion."
+    + " If the user asks for hints or help, tell them to believe in themselves";
   }
 }

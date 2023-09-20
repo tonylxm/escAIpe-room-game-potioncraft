@@ -6,13 +6,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
@@ -25,7 +21,6 @@ import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
   private static CauldronController instance;
-
   @FXML 
   private Pane pane;
   @FXML
@@ -68,7 +63,6 @@ public class CauldronController {
   // array to store the items dropped into the cauldron
   private ArrayList<Items.Item> cauldronItems = new ArrayList<Items.Item>();
 
-  private ImageView draggedItem;
 
   private CountdownTimer countdownTimer;
 
@@ -153,7 +147,7 @@ public class CauldronController {
     images.add(rootImage);
     images.add(beetleImage);
     images.add(unicornHornImage);
-
+    
     // setup glow for all images
     for (ImageView image : images) {
       image.setOnMouseEntered(event -> interactionHandler.glowThis(image));
@@ -161,53 +155,54 @@ public class CauldronController {
     }
 
     // Set up drag and drop for cauldronImageView
-    cauldronImageView.setOnDragOver(
-        event -> {
-          if (event.getGestureSource() != cauldronImageView && event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.MOVE);
-          }
-          event.consume();
-        });
+    // cauldronImageView.setOnDragOver(
+    //     event -> {
+    //       if (event.getGestureSource() != cauldronImageView && event.getDragboard().hasString())
+    // {
+    //         event.acceptTransferModes(TransferMode.MOVE);
+    //       }
+    //       event.consume();
+    //     });
 
-    cauldronImageView.setOnDragDropped(
-        event -> {
-          Dragboard db = event.getDragboard();
-          boolean success = false;
-          System.out.println("Dropped");
-          if (db.hasString()) {
-            // Get the identifier of the dropped item
-            String itemId = db.getString();
+    // cauldronImageView.setOnDragDropped(
+    //     event -> {
+    //       Dragboard db = event.getDragboard();
+    //       boolean success = false;
+    //       System.out.println("Dropped");
+    //       // if (db.hasString()) {
+    //       //   // Get the identifier of the dropped item
+    //       //   String itemId = db.getString();
 
-            if (draggedItem != null) {
-              // Check if the item was dropped within the cauldron's bounds
-              Bounds cauldronBounds =
-                  cauldronImageView.localToScene(cauldronImageView.getBoundsInLocal());
-              double itemX = event.getSceneX();
-              double itemY = event.getSceneY();
+    //       //   if (draggedItem != null) {
+    //       //     // Check if the item was dropped within the cauldron's bounds
+    //       //     Bounds cauldronBounds =
+    //       //         cauldronImageView.localToScene(cauldronImageView.getBoundsInLocal());
+    //       //     double itemX = event.getSceneX();
+    //       //     double itemY = event.getSceneY();
 
-              if (cauldronBounds.contains(itemX, itemY)) {
-                // If dropped within cauldron bounds, make it disappear
-                System.out.println("Dropped within cauldron bounds");
-                draggedItem.setVisible(false);
-                success = true;
-                if (db.hasString()) {
-                  String imageViewName = itemId;
-                  Items.Item item = imageViewToItemMap.get(imageViewName);
+    //       //     if (cauldronBounds.contains(itemX, itemY)) {
+    //       //       // If dropped within cauldron bounds, make it disappear
+    //       //       System.out.println("Dropped within cauldron bounds");
+    //       //       draggedItem.setVisible(false);
+    //       //       success = true;
+    //       //       if (db.hasString()) {
+    //       //         String imageViewName = itemId;
+    //       //         Items.Item item = imageViewToItemMap.get(imageViewName);
 
-                  if (item != null) {
-                    // Add the item to the cauldronItems ArrayList
-                    cauldronItems.add(item);
+    //       //         if (item != null) {
+    //       //           // Add the item to the cauldronItems ArrayList
+    //       //           cauldronItems.add(item);
 
-                    // You can also update the UI or perform other actions here
-                  }
-                }
-              }
-            }
-          }
+    //       //           // You can also update the UI or perform other actions here
+    //       //         }
+    //       //       }
+    //       //     }
+    //       //   }
+    //       // }
 
-          event.setDropCompleted(success);
-          event.consume();
-        });
+    //       event.setDropCompleted(success);
+    //       event.consume();
+    //     });
 
     interactionHandler = new ShapeInteractionHandler();
     // set glow for back image
@@ -290,44 +285,52 @@ public class CauldronController {
 
   @FXML
   private void setupDragAndDrop(ImageView itemImageView, String itemId) {
-    AtomicReference<Double> originalX = new AtomicReference<>(0.0);
-    AtomicReference<Double> originalY = new AtomicReference<>(0.0);
+    final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
+    final AtomicReference<Double> originalY = new AtomicReference<>(0.0);
 
-    itemImageView.setOnDragDetected(
-        event -> {
-          System.out.println("Drag detected");
-          // Store the itemImageView as the draggedItem
-          draggedItem = itemImageView;
-          // Start the drag and drop operation
-          Dragboard db = itemImageView.startDragAndDrop(TransferMode.MOVE);
+    itemImageView.setOnMousePressed(event -> {
+        originalX.set(event.getSceneX() - itemImageView.getLayoutX());
+        originalY.set(event.getSceneY() - itemImageView.getLayoutY());
+    });
 
-          ClipboardContent content = new ClipboardContent();
-          content.putString(itemId);
-          db.setContent(content);
+    itemImageView.setOnMouseDragged(event -> {
+        double offsetX = event.getSceneX() - originalX.get();
+        double offsetY = event.getSceneY() - originalY.get();
 
-          originalX.set(event.getSceneX());
-          originalY.set(event.getSceneY());
+        itemImageView.setLayoutX(offsetX);
+        itemImageView.setLayoutY(offsetY);
+    });
 
-          event.consume();
-        });
+    itemImageView.setOnMouseReleased(event -> {
+        // Define the target position relative to the scene
+        System.out.println("Dropped");
+        double targetX = 520;
+        double targetY = 450;
 
-    itemImageView.setOnDragDone(
-        event -> {
-          System.out.println("Drag done");
-          if (event.getTransferMode() == TransferMode.MOVE) {
-            // Handle the end of the drag operation
-            // The item was successfully dropped
-            // You can perform any additional actions here
-          }
-          event.consume();
-        });
+        // Calculate the distance between the drop position and the target position
+        double distance = Math.sqrt(Math.pow(event.getSceneX() - targetX, 2) + Math.pow(event.getSceneY() - targetY, 2));
 
-    itemImageView.setOnDragOver(
-        dragOverEvent -> {
-          dragOverEvent.acceptTransferModes(TransferMode.MOVE);
-          dragOverEvent.consume();
-        });
-  }
+        //print out the coordinates of where it was dropped
+        System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
+
+        // Set a threshold for the maximum allowed distance
+        double maxDistanceThreshold = 150;
+
+        if (distance <= maxDistanceThreshold) {
+            System.out.println("Dropped within cauldron bounds");
+            itemImageView.setVisible(false);
+            String imageViewName = itemId;
+            Items.Item item = imageViewToItemMap.get(imageViewName);
+
+            if (item != null) {
+                // Add the item to the cauldronItems ArrayList
+                cauldronItems.add(item);
+
+                // You can also update the UI or perform other actions here
+            }
+        }
+    });
+}
 
   @FXML
   private void goBack() {
@@ -364,6 +367,7 @@ public class CauldronController {
         System.out.println("Potion brewed");
         // set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
+        countdownTimer.stop();
         TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
         SceneManager.setTimerScene(AppUi.YOU_WIN);
 
