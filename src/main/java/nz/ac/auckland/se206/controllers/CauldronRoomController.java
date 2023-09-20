@@ -103,7 +103,6 @@ public class CauldronRoomController extends RoomController {
 
   @FXML
   public void initialize() {
-
     genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg, leftArrow);
     // Setting up the countdown and appropriate booleans before
     // anything happens to change them within the game
