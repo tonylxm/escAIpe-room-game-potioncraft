@@ -375,16 +375,15 @@ public class CauldronRoomController {
     }
     inputText.clear();
     disableChat(true, 0.5);
-    ChatMessage msg =
-        new ChatMessage("user", message);
+    ChatMessage msg = new ChatMessage("user", message);
     MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            MainMenuController.getChatHandler().runGptGameMaster(
-                msg, chatTextArea, inputText, sendButton);
+            ChatMessage response = new ChatMessage("assistant", MainMenuController.getChatHandler().runGpt(message));
+            MainMenuController.getChatHandler().appendChatMessage(response, chatTextArea, inputText, sendButton);
             return null;
           }
         };

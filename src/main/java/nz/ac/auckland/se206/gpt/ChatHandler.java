@@ -21,22 +21,6 @@ public class ChatHandler {
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
   }
 
-  public String runGpt(String msgContent) throws ApiProxyException {
-    ChatMessage msg = new ChatMessage("user", msgContent);
-    chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      return result.getChatMessage().getContent();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  // TODO: Duplicate code, refactor later
-
   /**
    * Runs the GPT model with a given chat message.
    *
@@ -44,19 +28,17 @@ public class ChatHandler {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public ChatMessage runGptGameMaster(
-      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton)
-      throws ApiProxyException {
+  public String runGpt(String msgContent) throws ApiProxyException {
+    ChatMessage msg = new ChatMessage("user", msgContent);
     chatCompletionRequest.addMessage(msg);
     try {
       // Sending a request to the GPT API proxy to get a response for the user
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      result = chatCompletionResult.getChoices().iterator().next();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage(), chatTextArea, inputText, sendButton);
-      return result.getChatMessage();
+      return result.getChatMessage().getContent();
     } catch (ApiProxyException e) {
-      // Displaying stck trace and not crashing the game if there is a request error
+      // Displaying stack trace and not crashing the game if there is a request error
       e.printStackTrace();
       return null;
     }
@@ -67,8 +49,7 @@ public class ChatHandler {
    *
    * @param msg the chat message to append
    */
-  public void appendChatMessage(
-      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
+  public void appendChatMessage(ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
     // Adding the role of the chatter to the start of each message
     String displayRole;
     switch(msg.getRole()) {

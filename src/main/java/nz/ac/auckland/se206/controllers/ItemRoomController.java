@@ -7,17 +7,21 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.Items.Item;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public abstract class ItemRoomController {
-  protected boolean bagOpened;
-  protected boolean readyToAdd;
+  protected static boolean bagOpened;
+  protected static boolean readyToAdd;
   protected Items.Item item;
 
   @FXML
@@ -290,6 +294,7 @@ public abstract class ItemRoomController {
       case INSECT_WINGS:
         two = new Image("images/insect_wings.png");
         handleAddImg(two, itemTwoImg, twoAdded, twoClicked);
+        break;
       case FLOWER:
         three = new Image("images/flower.png");
         handleAddImg(three, itemThreeImg, threeAdded, threeClicked);
@@ -301,6 +306,7 @@ public abstract class ItemRoomController {
       case POWDER:
         five = new Image("images/powder.png");
         handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        break;
       case TALON:
         one = new Image("images/talon.png");
         handleAddImg(one, itemOneImg, oneAdded, oneClicked);
@@ -320,6 +326,7 @@ public abstract class ItemRoomController {
       case FEATHER:
         five = new Image("images/feather.png");
         handleAddImg(five, itemFiveImg, fiveAdded, fiveClicked);
+        break;
       default:
         break;
     }
@@ -448,6 +455,24 @@ public abstract class ItemRoomController {
     }
   }
 
+  public static void goDirection(Pane pane, AppUi room) {
+    // Resetting appropriate fields before changing scenes
+    readyToAdd = false;
+    bagOpened = false;
+    SceneManager.setTimerScene(room);
+    TransitionAnimation.changeScene(pane, room, false);
+  }
+
+  public static void openBook(AppUi currScene, Pane pane) {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
+    SceneManager.currScene = currScene;
+    // Transitioning to the book scene with the appropriate fade animation
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+  }
+
   /**
    * Dealing with the event where the bag icon is clicked
    */
@@ -471,6 +496,9 @@ public abstract class ItemRoomController {
     }
   }
 
+  /**
+   * Dealing with the event where the wizard icon is clicked
+   */
   @FXML
   public void clickWizard(MouseEvent event) {
     System.out.println("wizard clicked");
