@@ -94,7 +94,9 @@ public class GptPromptEngineering {
   public static String getMediumResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
       + " Do not give any more hints or help to do with the user solving the riddle."
+      // The user could ask for either hints or help to get assistance
       + " Only give hints if the user asks for hints or help."
+      // Adjusting what should be given in the hints
       + " Hints should tell the user to either look around the rooms for ingredients to brew"
       + " their potion or to make sure ingredients are put in the correct order when brewing"
       + " their potion by checking the book icon. You must only give hints when the user asks"

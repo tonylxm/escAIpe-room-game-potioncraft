@@ -124,8 +124,14 @@ public class CountdownTimer {
     }
   }
 
+  /**
+   * Formats the timer text to be displayed in the format mm:ss
+   * @return
+   */
   public String formatTimerText() {
+    // In order to properly format the time no matter how long is left
     if (currentSeconds < 10) {
+      // Accounting for the minutes when the seconds are less than 10
       if (minutes == 0 && currentSeconds % 2 == 1) {
         setTimerRed(cauldronTimerLabel, libraryTimerLabel, 
             rightTimerLabel, bookTimerLabel, brewingLabel);

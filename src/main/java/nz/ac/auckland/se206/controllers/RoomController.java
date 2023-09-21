@@ -321,90 +321,105 @@ public abstract class RoomController {
 
     // Different controls are executed depending on the item
     switch (item) {
+      // Selecting the tail to be added to the inventory
       case TAIL:
         one = new Image("images/tail.png");
         handleAddImg(one, itemOneImg);
         oneAdded = true;
         oneClicked = false;
         break;
+      // Selecting the insect wings to be added to the inventory
       case INSECT_WINGS:
         two = new Image("images/insect_wings.png");
         handleAddImg(two, itemTwoImg);
         twoAdded = true;
         twoClicked = false;
         break;
+      // Selecting the flower to be added to the inventory
       case FLOWER:
         three = new Image("images/flower.png");
         handleAddImg(three, itemThreeImg);
         threeAdded = true;
         threeClicked = false;
         break;
+      // Selecting the scales to be added to the inventory
       case SCALES:
         four = new Image("images/scales.png");
         handleAddImg(four, itemFourImg);
         fourAdded = true;
         fourClicked = false;
         break;
+      // Selecting the powder to be added to the inventory
       case POWDER:
         five = new Image("images/powder.png");
         handleAddImg(five, itemFiveImg);
         fiveAdded = true;
         fiveClicked = false;
         break;
+      // Selecting the talon to be added to the inventory
       case TALON:
         one = new Image("images/talon.png");
         handleAddImg(one, itemOneImg);
         oneAdded = true;
         oneClicked = false;
         break;
+      // Selecting the crystal to be added to the inventory
       case CRYSTAL:
         two = new Image("images/crystal.png");
         handleAddImg(two, itemTwoImg);
         twoAdded = true;
         twoClicked = false;
         break;
+      // Selecting the bat wings to be added to the inventory
       case BAT_WINGS:
         three = new Image("images/bat_wings.png");
         handleAddImg(three, itemThreeImg);
         threeAdded = true;
         threeClicked = false;
         break;
+      // Selecting the wreath to be added to the inventory
       case WREATH:
         four = new Image("images/wreath.png");
         handleAddImg(four, itemFourImg);
         fourAdded = true;
         fourClicked = false;
         break;
+      // Selecting the feather to be added to the inventory  
       case FEATHER:
         five = new Image("images/feather.png");
         handleAddImg(five, itemFiveImg);
         fiveAdded = true;
         fiveClicked = false;
         break;
+      // Selecting the bone to be added to the inventory
       case BONE:
         one = new Image("images/bone.png");
         handleAddImg(one, itemOneImg);
         oneAdded = true;
         oneClicked = false;
         break;
+      // Selecting the fire to be added to the inventory
       case FIRE:
         two = new Image("images/fire.png");
         handleAddImg(two, itemTwoImg);
         twoAdded = true;
         twoClicked = false;
         break;
+      // Selecting the root to be added to the inventory
       case ROOT:
         three = new Image("images/root.png");
         handleAddImg(three, itemThreeImg);
         threeAdded = true;
         threeClicked = false;
         break;
+      // Selecting the beetle to be added to the inventory
       case BEETLE:
         four = new Image("images/beetle.png");
         handleAddImg(four, itemFourImg);
         fourAdded = true;
         fourClicked = false;
         break;
+      // Selecting the unicorn horn to be added to the inventory
       case UNICORN_HORN:
         five = new Image("images/unicorn_horn.png");
         handleAddImg(five, itemFiveImg);

@@ -86,6 +86,7 @@ public class BookController {
    */
   @FXML
   public void initialize() {
+    // Setting up appropriate timer`
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
 
@@ -128,48 +129,63 @@ public class BookController {
 
                 // Setting the appropriate image to be visible based on the selected item
                 switch (item) {
+                  // Making the tail visible
                   case "TAIL":
                     itemOneImg.setOpacity(1);
                     break;
+                  // Making the insect wings visible
                   case "INSECT_WINGS":
                     itemTwoImg.setOpacity(1);
                     break;
+                  // Making the flower visible
                   case "FLOWER":
                     itemThreeImg.setOpacity(1);
                     break;
+                  // Making the scales visible
                   case "SCALES":
                     itemFourImg.setOpacity(1);
                     break;
+                  // Making the powder visible
                   case "POWDER":
                     itemFiveImg.setOpacity(1);
                     break;
+                  // Making the talon visible
                   case "TALON":
                     itemSixImg.setOpacity(1);
                     break;
+                  // Making the crystal visible
                   case "CRYSTAL":
                     itemSevenImg.setOpacity(1);
                     break;
+                  // Making the bat wings visible
                   case "BAT_WINGS":
                     itemEightImg.setOpacity(1);
                     break;
+                  // Making the wreath visible
                   case "WREATH":
                     itemNineImg.setOpacity(1);
                     break;
+                  // Making the feather visible
                   case "FEATHER":
                     itemTenImg.setOpacity(1);
                     break;
+                  // Making the bone visible
                   case "BONE":
                     itemElevenImg.setOpacity(1);
                     break;
+                  // Making the fire visible
                   case "FIRE":
                     itemTwelveImg.setOpacity(1);
                     break;
+                  // Making the root visible
                   case "ROOT":
                     itemThirteenImg.setOpacity(1);
                     break;
+                  // Making the beetle visible
                   case "BEETLE":
                     itemFourteenImg.setOpacity(1);
                     break;
+                  // Making the unicorn horn visible
                   case "UNICORN_HORN":
                     itemFifteenImg.setOpacity(1);
                     break;

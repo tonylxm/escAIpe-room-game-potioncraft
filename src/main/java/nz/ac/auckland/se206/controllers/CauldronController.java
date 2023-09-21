@@ -226,7 +226,9 @@ public class CauldronController {
     }
   }
 
-  // Method to update the image states based on the player's inventory
+  /**
+   * Method to update the image states based on the player's inventory
+   */
   public void updateImageStates() {
     // Enable or disable images based on the presence of items in the inventory
     System.out.println("Updating image states");
@@ -234,6 +236,8 @@ public class CauldronController {
       batWingImage.setDisable(false);
       System.out.println("Bat wings found");
     }
+    // If an item is in the inventory, allowing it to be interactable
+    // withing the cauldron scene
     batWingImage.setDisable(!inventory.contains(Items.Item.BAT_WINGS));
     crystalImage.setDisable(!inventory.contains(Items.Item.CRYSTAL));
     insectWingImage.setDisable(!inventory.contains(Items.Item.INSECT_WINGS));
@@ -249,49 +253,63 @@ public class CauldronController {
     rootImage.setDisable(!inventory.contains(Items.Item.ROOT));
     beetleImage.setDisable(!inventory.contains(Items.Item.BEETLE));
     unicornHornImage.setDisable(!inventory.contains(Items.Item.UNICORN_HORN));
-    // enabling and setting opacity to 1 if item is in inventory
+    // Making bat wings visible
     if (inventory.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setOpacity(1);
     }
+    // Making crystal visibla
     if (inventory.contains(Items.Item.CRYSTAL)) {
       crystalImage.setOpacity(1);
     }
+    // Making insect wings visible
     if (inventory.contains(Items.Item.INSECT_WINGS)) {
       insectWingImage.setOpacity(1);
     }
+    // Making talon visible
     if (inventory.contains(Items.Item.TALON)) {
       talonImage.setOpacity(1);
     }
+    // Making powder visible
     if (inventory.contains(Items.Item.POWDER)) {
       powderImage.setOpacity(1);
     }
+    // Making tail visible
     if (inventory.contains(Items.Item.TAIL)) {
       tailImage.setOpacity(1);
     }
+    // Making feather visible
     if (inventory.contains(Items.Item.FEATHER)) {
       featherImage.setOpacity(1);
     }
+    // Making scales visible
     if (inventory.contains(Items.Item.SCALES)) {
       scalesImage.setOpacity(1);
     }
+    // Making flower visible
     if (inventory.contains(Items.Item.FLOWER)) {
       flowerImage.setOpacity(1);
     }
+    // Making wreath visible
     if (inventory.contains(Items.Item.WREATH)) {
       wreathImage.setOpacity(1);
     }
+    // Making bone visible
     if (inventory.contains(Items.Item.BONE)) {
       boneImage.setOpacity(1);
     }
+    // Making fire visible
     if (inventory.contains(Items.Item.FIRE)) {
       fireImage.setOpacity(1);
     }
+    // Making root visible
     if (inventory.contains(Items.Item.ROOT)) {
       rootImage.setOpacity(1);
     }
+    // Making beetle visible
     if (inventory.contains(Items.Item.BEETLE)) {
       beetleImage.setOpacity(1);
     }
+    // Making unicorn horn visible
     if (inventory.contains(Items.Item.UNICORN_HORN)) {
       unicornHornImage.setOpacity(1);
     }
