@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
@@ -15,6 +17,7 @@ import nz.ac.auckland.se206.Inventory;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -44,6 +47,7 @@ public class MainMenuController {
   private static ChatMessage riddle;
   private static String resolvedRiddle;
   private static int hints;
+  private static ShapeInteractionHandler interactionHandler;
 
   public static Items getItems() {
     return items;
@@ -91,29 +95,44 @@ public class MainMenuController {
   @FXML
   private Button playBtn;
   @FXML
+  private Button continueBtn;
+  @FXML
   private Button startBtn;
   @FXML
   private Text difficultyTxt;
   @FXML
   private Text timeLimitTxt;
   @FXML
-  private ToggleButton easyBtn;
+  private ImageView easyBtn;
   @FXML
-  private ToggleButton mediumBtn;
+  private ImageView mediumBtn;
   @FXML
-  private ToggleButton hardBtn;
+  private ImageView hardBtn;
   @FXML
-  private ToggleButton twoMinBtn;
+  private ImageView twoMinBtn;
   @FXML
-  private ToggleButton fourMinBtn;
+  private ImageView fourMinBtn;
   @FXML
-  private ToggleButton sixMinBtn;
+  private ImageView sixMinBtn;
   @FXML
   private Text hintInfinity;
   @FXML
   private Text hintFive;
   @FXML
   private Text hintZero;
+  @FXML
+  private Text twoMin;
+  @FXML
+  private Text fourMin;
+  @FXML
+  private Text sixMin;
+
+  private boolean easyBtnClicked;
+  private boolean mediumBtnClicked;
+  private boolean hardBtnClicked;
+  private boolean twoMinBtnClicked;
+  private boolean fourMinBtnClicked;
+  private boolean sixMinBtnClicked;
 
   public void initialize() {
     // Item & inventory generation
@@ -121,26 +140,48 @@ public class MainMenuController {
     inventory = new Inventory();
     TransitionAnimation.setMasterPane(masterPane);
     difficultySelected = false;
-    // Hover hints on difficulty selection
-    easyBtn.setOnMouseEntered(event -> difficultyHoverOn(hintInfinity));
-    easyBtn.setOnMouseExited(event -> difficultyHoverOff(hintInfinity));
-    easyBtn.setOnMouseClicked(event -> difficultySelect("EASY"));
-    mediumBtn.setOnMouseEntered(event -> difficultyHoverOn(hintFive));
-    mediumBtn.setOnMouseExited(event -> difficultyHoverOff(hintFive));
-    mediumBtn.setOnMouseClicked(event -> difficultySelect("MEDIUM"));
-    hardBtn.setOnMouseEntered(event -> difficultyHoverOn(hintZero));
-    hardBtn.setOnMouseExited(event -> difficultyHoverOff(hintZero));
-    hardBtn.setOnMouseClicked(event -> difficultySelect("HARD"));
+    interactionHandler = new ShapeInteractionHandler();
+
+    // Initialise booleans for settings selection
+    easyBtnClicked = false;
+    mediumBtnClicked = false;
+    hardBtnClicked = false;
+    twoMinBtnClicked = false;
+    fourMinBtnClicked = false;
+    sixMinBtnClicked = false;
+
+    // Setting appropriate interactable features for the settings buttons including hover hints
+    difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, "EASY");
+    difficultyMouseActions(mediumBtn, mediumBtnClicked, hintFive, "MEDIUM");
+    difficultyMouseActions(hardBtn, hardBtnClicked, hintZero, "HARD");
+
+    timeMouseActions(twoMinBtn, twoMinBtnClicked, twoMin, "TWO_MIN");
+    timeMouseActions(fourMinBtn, fourMinBtnClicked, fourMin, "FOUR_MIN");
+    timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, "SIX_MIN");
   }
 
-  public void difficultyHoverOn(Text hint) {
+  public void difficultyMouseActions(ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
+    difficultyBtn.setOnMouseEntered(event -> settingsHoverOn(difficultyBtn, hint));
+    difficultyBtn.setOnMouseExited(event -> settingsHoverOff(difficultyBtn, difficultyBtnClicked, hint));
+    difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
+  }
+
+  public void timeMouseActions(ImageView timeBtn, boolean timeBtnClicked, Text hint, String time) {
+    timeBtn.setOnMouseEntered(event -> settingsHoverOn(timeBtn, hint));
+    timeBtn.setOnMouseExited(event -> settingsHoverOff(timeBtn, timeBtnClicked, hint));
+    timeBtn.setOnMouseClicked(event -> timeSelect(time));
+  }
+
+  public void settingsHoverOn(ImageView settingsBtn, Text hint) {
     if (!difficultySelected) {
+      settingsBtn.setOnMouseEntered(event -> interactionHandler.glowThis(settingsBtn));
       hint.setOpacity(1);
     }
   }
 
-  public void difficultyHoverOff(Text hint) {
+  public void settingsHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
     if (!difficultySelected) {
+      settingsBtn.setOnMouseExited(event -> interactionHandler.unglowThis(settingsBtn, settingsBtnClicked));
       hint.setOpacity(0);
     }
   }
@@ -212,6 +253,35 @@ public class MainMenuController {
     System.out.println(riddle);
   }
 
+  public void timeSelect(String time) {
+      switch (time) {
+        case "TWO_MIN":
+          twoMinBtnClicked = true;
+          twoMin.setOpacity(1);
+          fourMinBtnClicked = false;
+          fourMin.setOpacity(0);
+          sixMinBtnClicked = false;
+          sixMin.setOpacity(0);
+          break;
+        case "FOUR_MIN":
+          twoMinBtnClicked = false;
+          twoMin.setOpacity(0);
+          fourMinBtnClicked = true;
+          fourMin.setOpacity(1);
+          sixMinBtnClicked = false;
+          sixMin.setOpacity(0);
+          break;
+        case "SIX_MIN":
+          twoMinBtnClicked = false;
+          twoMin.setOpacity(0);
+          fourMinBtnClicked = false;
+          fourMin.setOpacity(0);
+          sixMinBtnClicked = true;
+          sixMin.setOpacity(1);
+          break;
+      }
+    }
+
   /**
    * Handles starting a new game by creating new instances of the required scenes
    */
@@ -274,9 +344,16 @@ public class MainMenuController {
         return null;
       }
     };
-    Thread fadeInSettingsBtnsThread = new Thread(
-        fadeInSettingsBtnsTask, "fadeIn settings btns thread");
+    Thread fadeInSettingsBtnsThread = new Thread(fadeInSettingsBtnsTask);
     fadeInSettingsBtnsThread.start();
+  }
+
+  /**
+   * Handles continuing a game by loading the appropriate scenes
+   */
+  @FXML
+  public void continueGame() {
+
   }
 
   /**

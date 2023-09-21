@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -20,60 +18,29 @@
                   <Image url="@../images/cauldron-room.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="startBtn" disable="true" layoutX="447.0" layoutY="612.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+            <Button fx:id="startBtn" disable="true" layoutX="446.0" layoutY="609.0" mnemonicParsing="false" onAction="#startGame" text="START">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
+                  <Font name="Algerian" size="30.0" />
                </font>
             </Button>
-            <Text fx:id="difficultyTxt" fill="WHITE" layoutX="445.0" layoutY="248.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+            <Text fx:id="difficultyTxt" fill="WHITE" layoutX="417.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="35.0" />
+                  <Font name="Algerian" size="35.0" />
                </font>
             </Text>
-            <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="385.0" layoutY="405.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit (min)">
+            <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="423.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="35.0" />
+                  <Font name="Algerian" size="35.0" />
                </font>
             </Text>
-            <ToggleButton fx:id="twoMinBtn" disable="true" layoutX="243.0" layoutY="423.0" mnemonicParsing="false" onAction="#setTwoMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="2">
-               <toggleGroup>
-                  <ToggleGroup fx:id="TimeLimit" />
-               </toggleGroup>
+            <Button fx:id="continueBtn" disable="true" layoutX="425.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGame" text="CONTINUE">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
+                  <Font name="Algerian" size="30.0" />
                </font>
-            </ToggleButton>
-            <ToggleButton fx:id="fourMinBtn" disable="true" layoutX="423.0" layoutY="423.0" mnemonicParsing="false" onAction="#setFourMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="4" toggleGroup="$TimeLimit">
+            </Button>
+            <Button fx:id="playBtn" layoutX="450.0" layoutY="609.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
-               </font>
-            </ToggleButton>
-            <ToggleButton fx:id="sixMinBtn" disable="true" layoutX="603.0" layoutY="423.0" mnemonicParsing="false" onAction="#setSixMin" opacity="0.0" prefWidth="180.0" styleClass="button" text="6" toggleGroup="$TimeLimit">
-               <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
-               </font>
-            </ToggleButton>
-            <ToggleButton fx:id="easyBtn" disable="true" layoutX="242.0" layoutY="266.0" mnemonicParsing="false" onAction="#setEasy" opacity="0.0" prefWidth="180.0" styleClass="button" text="Dobby">
-               <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="Difficulty" />
-               </toggleGroup>
-            </ToggleButton>
-            <ToggleButton fx:id="mediumBtn" disable="true" layoutX="421.0" layoutY="266.0" mnemonicParsing="false" onAction="#setMedium" opacity="0.0" prefWidth="180.0" styleClass="button" text="Harry" toggleGroup="$Difficulty">
-               <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
-               </font>
-            </ToggleButton>
-            <ToggleButton fx:id="hardBtn" disable="true" layoutX="601.0" layoutY="266.0" mnemonicParsing="false" onAction="#setHard" opacity="0.0" prefHeight="52.0" prefWidth="180.0" styleClass="button" text="Voldemort" toggleGroup="$Difficulty">
-               <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
-               </font>
-            </ToggleButton>
-            <Button fx:id="playBtn" layoutX="458.0" layoutY="612.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
-               <font>
-                  <Font name="Bookshelf Symbol 7" size="30.0" />
+                  <Font name="Algerian" size="30.0" />
                </font>
             </Button>
             <ImageView fitHeight="127.0" fitWidth="822.0" layoutX="101.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
@@ -81,19 +48,64 @@
                   <Image url="@../images/title.png" />
                </image>
             </ImageView>
-            <Text fx:id="hintFive" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
+            <Text fx:id="hintZero" fill="WHITE" layoutX="425.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="18.0" />
+                  <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="hintInfinity" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
+            <Text fx:id="hintFive" fill="WHITE" layoutX="425.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="18.0" />
+                  <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="hintZero" fill="WHITE" layoutX="447.0" layoutY="345.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
+            <Text fx:id="hintInfinity" fill="WHITE" layoutX="425.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
                <font>
-                  <Font name="Bookshelf Symbol 7" size="18.0" />
+                  <Font name="Algerian" size="20.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="easyBtn" fitHeight="150.0" fitWidth="200.0" layoutX="214.0" layoutY="374.0" onMouseClicked="#setEasy" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/dobby.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="mediumBtn" fitHeight="232.0" fitWidth="144.0" layoutX="448.0" layoutY="292.0" onMouseClicked="#setMedium" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/harry.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hardBtn" fitHeight="279.0" fitWidth="185.0" layoutX="696.0" layoutY="245.0" onMouseClicked="#setHard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/voldemort.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="twoMinBtn" fitHeight="112.0" fitWidth="118.0" layoutX="217.0" layoutY="352.0" onMouseClicked="#setTwoMin" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/hourglass-1024x1024.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="fourMinBtn" fitHeight="112.0" fitWidth="118.0" layoutX="457.0" layoutY="352.0" onMouseClicked="#setFourMin" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3" scaleZ="1.3">
+               <image>
+                  <Image url="@../images/hourglass-1024x1024.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sixMinBtn" fitHeight="112.0" fitWidth="118.0" layoutX="727.0" layoutY="352.0" onMouseClicked="#setSixMin" pickOnBounds="true" preserveRatio="true" scaleX="1.7" scaleY="1.7" scaleZ="1.7">
+               <image>
+                  <Image url="@../images/hourglass-1024x1024.gif" />
+               </image>
+            </ImageView>
+            <Text fx:id="twoMin" fill="WHITE" layoutX="488.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 MIN">
+               <font>
+                  <Font name="Algerian" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="fourMin" fill="WHITE" layoutX="488.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4 MIN">
+               <font>
+                  <Font name="Algerian" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="sixMin" fill="WHITE" layoutX="488.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 MIN">
+               <font>
+                  <Font name="Algerian" size="20.0" />
                </font>
             </Text>
          </children>
