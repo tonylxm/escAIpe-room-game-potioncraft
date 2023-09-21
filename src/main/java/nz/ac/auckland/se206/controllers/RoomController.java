@@ -32,6 +32,8 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
+  @FXML
+  protected static ShapeInteractionHandler interactionHandler;
 
   /**
    * Handling the event where a button is hovered over
@@ -92,8 +94,6 @@ public abstract class RoomController {
   protected ImageView bagBtn;
   @FXML
   protected Label timerLabel;
-  @FXML
-  protected static ShapeInteractionHandler interactionHandler;
 
   @FXML 
   protected TextArea chatTextArea;
