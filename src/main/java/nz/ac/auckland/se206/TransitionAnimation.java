@@ -63,19 +63,21 @@ public class TransitionAnimation {
 
     // Setting the appropriate roots and scenes for the fade transitions
     FadeTransition fadeOut = new FadeTransition(Duration.seconds(s1), obj);
+    // Setting values to fade from and to
     fadeOut.setFromValue(1.0);
     fadeOut.setToValue(0.0);
     fadeOut.setOnFinished(
         (ActionEvent event) -> {
-            Parent root = SceneManager.getUiRoot(appUi);
-            root.setOpacity(0);
-            masterPane.getChildren().remove(obj);
-            masterPane.getChildren().add(1, root);
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(s2), root);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.setNode(root);
-            fadeIn.play();
+          Parent root = SceneManager.getUiRoot(appUi);
+          root.setOpacity(0);
+          masterPane.getChildren().remove(obj);
+          masterPane.getChildren().add(1, root);
+          // Fading in to the next scene after the fade out has finished
+          FadeTransition fadeIn = new FadeTransition(Duration.seconds(s2), root);
+          fadeIn.setFromValue(0.0);
+          fadeIn.setToValue(1.0);
+          fadeIn.setNode(root);
+          fadeIn.play();
         });
     fadeOut.play();
   }

@@ -27,23 +27,23 @@ public class Notification {
 
     // Schedule a task to fade out the image after 3 seconds
     fadeTransition.setOnFinished(fadeEvent -> {
-        if (notificationBack.getOpacity() == 1.0) {
-          FadeTransition fadeOutTransition = new FadeTransition(
-              Duration.seconds(1.5), notificationBack);
-          fadeOutTransition.setFromValue(1.0);
-          fadeOutTransition.setToValue(0.0);
-          fadeOutTransition.play();
-        }
+      if (notificationBack.getOpacity() == 1.0) {
+        FadeTransition fadeOutTransition = new FadeTransition(
+            Duration.seconds(1.5), notificationBack);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.play();
+      }
     });
 
     fadeTransition2.setOnFinished(fadeEvent -> {
-        if (notificationText.getOpacity() == 1.0) {
-          FadeTransition fadeOutTransition = new FadeTransition(
-              Duration.seconds(1.5), notificationText);
-          fadeOutTransition.setFromValue(1.0);
-          fadeOutTransition.setToValue(0.0);
-          fadeOutTransition.play();
-        }
+      if (notificationText.getOpacity() == 1.0) {
+        FadeTransition fadeOutTransition = new FadeTransition(
+            Duration.seconds(1.5), notificationText);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.play();
+      }
     });   
     
     notificationBack.setDisable(true);

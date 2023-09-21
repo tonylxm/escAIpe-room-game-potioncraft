@@ -24,21 +24,35 @@ public class CauldronController {
   @FXML 
   private Pane pane;
   @FXML
-  private ImageView batWingImage,
-      crystalImage,
-      insectWingImage,
-      talonImage,
-      powderImage,
-      tailImage,
-      featherImage,
-      scalesImage,
-      flowerImage,
-      wreathImage,
-      boneImage,
-      fireImage,
-      rootImage,
-      beetleImage,
-      unicornHornImage;
+  private ImageView batWingImage;
+  @FXML
+  private ImageView crystalImage;
+  @FXML
+  private ImageView insectWingImage;
+  @FXML
+  private ImageView talonImage;
+  @FXML    
+  private ImageView powderImage;
+  @FXML    
+  private ImageView tailImage;
+  @FXML
+  private ImageView featherImage;
+  @FXML    
+  private ImageView scalesImage;
+  @FXML    
+  private ImageView flowerImage;
+  @FXML    
+  private ImageView wreathImage;
+  @FXML    
+  private ImageView boneImage;
+  @FXML    
+  private ImageView fireImage;
+  @FXML
+  private ImageView rootImage;
+  @FXML
+  private ImageView beetleImage;
+  @FXML
+  private ImageView unicornHornImage;
 
   @FXML 
   private ImageView cauldronImageView;
@@ -212,7 +226,9 @@ public class CauldronController {
     }
   }
 
-  // Method to update the image states based on the player's inventory
+  /**
+   * Method to update the image states based on the player's inventory
+   */
   public void updateImageStates() {
     // Enable or disable images based on the presence of items in the inventory
     System.out.println("Updating image states");
@@ -220,6 +236,8 @@ public class CauldronController {
       batWingImage.setDisable(false);
       System.out.println("Bat wings found");
     }
+    // If an item is in the inventory, allowing it to be interactable
+    // withing the cauldron scene
     batWingImage.setDisable(!inventory.contains(Items.Item.BAT_WINGS));
     crystalImage.setDisable(!inventory.contains(Items.Item.CRYSTAL));
     insectWingImage.setDisable(!inventory.contains(Items.Item.INSECT_WINGS));
@@ -235,49 +253,63 @@ public class CauldronController {
     rootImage.setDisable(!inventory.contains(Items.Item.ROOT));
     beetleImage.setDisable(!inventory.contains(Items.Item.BEETLE));
     unicornHornImage.setDisable(!inventory.contains(Items.Item.UNICORN_HORN));
-    // enabling and setting opacity to 1 if item is in inventory
+    // Making bat wings visible
     if (inventory.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setOpacity(1);
     }
+    // Making crystal visibla
     if (inventory.contains(Items.Item.CRYSTAL)) {
       crystalImage.setOpacity(1);
     }
+    // Making insect wings visible
     if (inventory.contains(Items.Item.INSECT_WINGS)) {
       insectWingImage.setOpacity(1);
     }
+    // Making talon visible
     if (inventory.contains(Items.Item.TALON)) {
       talonImage.setOpacity(1);
     }
+    // Making powder visible
     if (inventory.contains(Items.Item.POWDER)) {
       powderImage.setOpacity(1);
     }
+    // Making tail visible
     if (inventory.contains(Items.Item.TAIL)) {
       tailImage.setOpacity(1);
     }
+    // Making feather visible
     if (inventory.contains(Items.Item.FEATHER)) {
       featherImage.setOpacity(1);
     }
+    // Making scales visible
     if (inventory.contains(Items.Item.SCALES)) {
       scalesImage.setOpacity(1);
     }
+    // Making flower visible
     if (inventory.contains(Items.Item.FLOWER)) {
       flowerImage.setOpacity(1);
     }
+    // Making wreath visible
     if (inventory.contains(Items.Item.WREATH)) {
       wreathImage.setOpacity(1);
     }
+    // Making bone visible
     if (inventory.contains(Items.Item.BONE)) {
       boneImage.setOpacity(1);
     }
+    // Making fire visible
     if (inventory.contains(Items.Item.FIRE)) {
       fireImage.setOpacity(1);
     }
+    // Making root visible
     if (inventory.contains(Items.Item.ROOT)) {
       rootImage.setOpacity(1);
     }
+    // Making beetle visible
     if (inventory.contains(Items.Item.BEETLE)) {
       beetleImage.setOpacity(1);
     }
+    // Making unicorn horn visible
     if (inventory.contains(Items.Item.UNICORN_HORN)) {
       unicornHornImage.setOpacity(1);
     }
@@ -289,48 +321,49 @@ public class CauldronController {
     final AtomicReference<Double> originalY = new AtomicReference<>(0.0);
 
     itemImageView.setOnMousePressed(event -> {
-        originalX.set(event.getSceneX() - itemImageView.getLayoutX());
-        originalY.set(event.getSceneY() - itemImageView.getLayoutY());
+      originalX.set(event.getSceneX() - itemImageView.getLayoutX());
+      originalY.set(event.getSceneY() - itemImageView.getLayoutY());
     });
 
     itemImageView.setOnMouseDragged(event -> {
-        double offsetX = event.getSceneX() - originalX.get();
-        double offsetY = event.getSceneY() - originalY.get();
+      double offsetX = event.getSceneX() - originalX.get();
+      double offsetY = event.getSceneY() - originalY.get();
 
-        itemImageView.setLayoutX(offsetX);
-        itemImageView.setLayoutY(offsetY);
+      itemImageView.setLayoutX(offsetX);
+      itemImageView.setLayoutY(offsetY);
     });
 
     itemImageView.setOnMouseReleased(event -> {
-        // Define the target position relative to the scene
-        System.out.println("Dropped");
-        double targetX = 520;
-        double targetY = 450;
+      // Define the target position relative to the scene
+      System.out.println("Dropped");
+      double targetX = 520;
+      double targetY = 450;
 
-        // Calculate the distance between the drop position and the target position
-        double distance = Math.sqrt(Math.pow(event.getSceneX() - targetX, 2) + Math.pow(event.getSceneY() - targetY, 2));
+      // Calculate the distance between the drop position and the target position
+      double distance = Math.sqrt(Math.pow(event.getSceneX() - targetX, 2) 
+        + Math.pow(event.getSceneY() - targetY, 2));
 
-        //print out the coordinates of where it was dropped
-        System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
+      //print out the coordinates of where it was dropped
+      System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
 
-        // Set a threshold for the maximum allowed distance
-        double maxDistanceThreshold = 150;
+      // Set a threshold for the maximum allowed distance
+      double maxDistanceThreshold = 150;
 
-        if (distance <= maxDistanceThreshold) {
-            System.out.println("Dropped within cauldron bounds");
-            itemImageView.setVisible(false);
-            String imageViewName = itemId;
-            Items.Item item = imageViewToItemMap.get(imageViewName);
+      if (distance <= maxDistanceThreshold) {
+        System.out.println("Dropped within cauldron bounds");
+        itemImageView.setVisible(false);
+        String imageViewName = itemId;
+        Items.Item item = imageViewToItemMap.get(imageViewName);
 
-            if (item != null) {
-                // Add the item to the cauldronItems ArrayList
-                cauldronItems.add(item);
+        if (item != null) {
+          // Add the item to the cauldronItems ArrayList
+          cauldronItems.add(item);
 
-                // You can also update the UI or perform other actions here
-            }
+          // You can also update the UI or perform other actions here
         }
+      }
     });
-}
+  }
 
   @FXML
   private void goBack() {

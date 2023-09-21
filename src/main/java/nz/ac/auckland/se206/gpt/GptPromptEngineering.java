@@ -77,10 +77,11 @@ public class GptPromptEngineering {
    */
   public static String getEasyResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
-    + " Only give hints if the user asks for hints or help."
-    + " Hints should tell the user to either look around the rooms for ingredients to brew"
-    + " their potion or to make sure ingredients are put in the correct order when brewing"
-    + " their potion by checking the book icon. You must only give hints when the user asks for them.";  
+      + " Only give hints if the user asks for hints or help."
+      + " Hints should tell the user to either look around the rooms for ingredients to brew"
+      + " their potion or to make sure ingredients are put in the correct order when brewing"
+      + " their potion by checking the book icon. You must only give hints when the user asks"
+      + " for them.";  
   }
 
   /**
@@ -92,12 +93,14 @@ public class GptPromptEngineering {
    */
   public static String getMediumResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
-    + " Do not give any more hints or help to do with the user solving the riddle."
-    + " Only give hints if the user asks for hints or help."
-    + " Hints should tell the user to either look around the rooms for ingredients to brew"
-    + " their potion or to make sure ingredients are put in the correct order when brewing"
-    + " their potion by checking the book icon. You must only give hints when the user asks for"
-    + " them. These hints and help are counted towards the total 5 hints you can give.";
+      + " Do not give any more hints or help to do with the user solving the riddle."
+      // The user could ask for either hints or help to get assistance
+      + " Only give hints if the user asks for hints or help."
+      // Adjusting what should be given in the hints
+      + " Hints should tell the user to either look around the rooms for ingredients to brew"
+      + " their potion or to make sure ingredients are put in the correct order when brewing"
+      + " their potion by checking the book icon. You must only give hints when the user asks"
+      + " for them. These hints and help are counted towards the total 5 hints you can give.";
   }
 
   /**
@@ -108,7 +111,7 @@ public class GptPromptEngineering {
    */
   public static String getHardResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
-    + " Do not give any hints or help to the user about how to find items or brew the potion."
-    + " If the user asks for hints or help, tell them to believe in themselves";
+      + " Do not give any hints or help to the user about how to find items or brew the potion."
+      + " If the user asks for hints or help, tell them to believe in themselves";
   }
 }

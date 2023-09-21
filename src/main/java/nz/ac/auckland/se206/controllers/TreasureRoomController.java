@@ -14,7 +14,15 @@ public class TreasureRoomController extends RoomController {
   @FXML
   private Polygon leftShpe;
   @FXML
-  private ImageView itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg;
+  private ImageView itemSixImg;
+  @FXML
+  private ImageView itemSevenImg;
+  @FXML
+  private ImageView itemEightImg;
+  @FXML
+  private ImageView itemNineImg;
+  @FXML
+  private ImageView itemTenImg;
   @FXML
   private Label timerLabel;
 

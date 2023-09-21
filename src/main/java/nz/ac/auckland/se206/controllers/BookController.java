@@ -42,22 +42,38 @@ public class BookController {
   private Label timerLabel;
 
   @FXML
-  private ImageView placeholderImg,
-      itemOneImg,
-      itemTwoImg,
-      itemThreeImg,
-      itemFourImg,
-      itemFiveImg,
-      itemSixImg,
-      itemSevenImg,
-      itemEightImg,
-      itemNineImg,
-      itemTenImg,
-      itemElevenImg,
-      itemTwelveImg,
-      itemThirteenImg,
-      itemFourteenImg,
-      itemFifteenImg;
+  private ImageView placeholderImg;
+  @FXML
+  private ImageView itemOneImg;
+  @FXML
+  private ImageView itemTwoImg;
+  @FXML
+  private ImageView itemThreeImg;
+  @FXML
+  private ImageView itemFourImg;
+  @FXML
+  private ImageView itemFiveImg;
+  @FXML
+  private ImageView itemSixImg;
+  @FXML
+  private ImageView itemSevenImg;
+  @FXML
+  private ImageView itemEightImg;
+  @FXML
+  private ImageView itemNineImg;
+  @FXML
+  private ImageView itemTenImg;
+  @FXML
+  private ImageView itemElevenImg;
+  @FXML
+  private ImageView itemTwelveImg;
+  @FXML
+  private ImageView itemThirteenImg;
+  @FXML
+  private ImageView itemFourteenImg;
+  @FXML
+  private ImageView itemFifteenImg;
+
   @FXML 
   private CountdownTimer countdownTimer;
 
@@ -70,6 +86,7 @@ public class BookController {
    */
   @FXML
   public void initialize() {
+    // Setting up appropriate timer`
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
 
@@ -112,48 +129,63 @@ public class BookController {
 
                 // Setting the appropriate image to be visible based on the selected item
                 switch (item) {
+                  // Making the tail visible
                   case "TAIL":
                     itemOneImg.setOpacity(1);
                     break;
+                  // Making the insect wings visible
                   case "INSECT_WINGS":
                     itemTwoImg.setOpacity(1);
                     break;
+                  // Making the flower visible
                   case "FLOWER":
                     itemThreeImg.setOpacity(1);
                     break;
+                  // Making the scales visible
                   case "SCALES":
                     itemFourImg.setOpacity(1);
                     break;
+                  // Making the powder visible
                   case "POWDER":
                     itemFiveImg.setOpacity(1);
                     break;
+                  // Making the talon visible
                   case "TALON":
                     itemSixImg.setOpacity(1);
                     break;
+                  // Making the crystal visible
                   case "CRYSTAL":
                     itemSevenImg.setOpacity(1);
                     break;
+                  // Making the bat wings visible
                   case "BAT_WINGS":
                     itemEightImg.setOpacity(1);
                     break;
+                  // Making the wreath visible
                   case "WREATH":
                     itemNineImg.setOpacity(1);
                     break;
+                  // Making the feather visible
                   case "FEATHER":
                     itemTenImg.setOpacity(1);
                     break;
+                  // Making the bone visible
                   case "BONE":
                     itemElevenImg.setOpacity(1);
                     break;
+                  // Making the fire visible
                   case "FIRE":
                     itemTwelveImg.setOpacity(1);
                     break;
+                  // Making the root visible
                   case "ROOT":
                     itemThirteenImg.setOpacity(1);
                     break;
+                  // Making the beetle visible
                   case "BEETLE":
                     itemFourteenImg.setOpacity(1);
                     break;
+                  // Making the unicorn horn visible
                   case "UNICORN_HORN":
                     itemFifteenImg.setOpacity(1);
                     break;
@@ -184,17 +216,16 @@ public class BookController {
   /** Uses text to speech to read the required items in the book. */
   public void readIngredientList() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            App.textToSpeech.speak("Potion Recipe");
-            for (int i = 0; i < Items.necessary.size(); i++) {
-              App.textToSpeech.speak(ingredientList.getItems().get(i));
-            }
-            return null;
-          }
-        };
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        App.textToSpeech.speak("Potion Recipe");
+        for (int i = 0; i < Items.necessary.size(); i++) {
+          App.textToSpeech.speak(ingredientList.getItems().get(i));
+        }
+        return null;
+      }
+    };
     Thread speakThread = new Thread(speakTask, "Speak Thread");
     speakThread.start();
   }

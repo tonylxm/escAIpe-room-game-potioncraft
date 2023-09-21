@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Iterator;
-
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +32,40 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
+  @FXML
+  protected static ShapeInteractionHandler interactionHandler;
+
+  /**
+   * Handling the event where a button is hovered over
+   */
+  protected static void btnMouseActions(ImageView btn) {
+    btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
+    btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
+  }
+
+  protected static void arrowMouseActions(Polygon arrowShpe) {
+    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
+    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
+  }
+
+  public static void goDirection(Pane pane, AppUi room) {
+    // Resetting appropriate fields before changing scenes
+    readyToAdd = false;
+    bagOpened = false;
+    SceneManager.setTimerScene(room);
+    TransitionAnimation.changeScene(pane, room, false);
+  }
+  
+  public static void openBook(AppUi currScene, Pane pane) {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
+    SceneManager.currScene = currScene;
+    // Transitioning to the book scene with the appropriate fade animation
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+  }
+
   protected Items.Item item;
 
   @FXML
@@ -61,8 +94,6 @@ public abstract class RoomController {
   protected ImageView bagBtn;
   @FXML
   protected Label timerLabel;
-  @FXML
-  protected static ShapeInteractionHandler interactionHandler;
 
   @FXML 
   protected TextArea chatTextArea;
@@ -80,16 +111,36 @@ public abstract class RoomController {
 
   protected CountdownTimer countdownTimer;
 
-  protected ImageView itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg;
+  protected ImageView itemOneImg;
+  protected ImageView itemTwoImg;
+  protected ImageView itemThreeImg;
+  protected ImageView itemFourImg;
+  protected ImageView itemFiveImg;
 
   // Booleans to keep track of whether an item has been added to the inventory
-  private boolean oneAdded, twoAdded, threeAdded, fourAdded, fiveAdded;
+  private boolean oneAdded;
+  private boolean twoAdded;
+  private boolean threeAdded;
+  private boolean fourAdded;
+  private boolean fiveAdded;
   // Booleans to keep track of if an item is clicked or selected
-  private boolean oneClicked, twoClicked, threeClicked, fourClicked, fiveClicked;
+  private boolean oneClicked;
+  private boolean twoClicked; 
+  private boolean threeClicked;
+  private boolean fourClicked;
+  private boolean fiveClicked;
 
-  private Item itemOne, itemTwo, itemThree, itemFour, itemFive;
+  private Item itemOne;
+  private Item itemTwo;
+  private Item itemThree;
+  private Item itemFour;
+  private Item itemFive;
 
-  private Image one, two, three, four, five;
+  private Image one;
+  private Image two;
+  private Image three;
+  private Image four;
+  private Image five;
 
   private ImageView image;
   private double ratio;
@@ -98,8 +149,9 @@ public abstract class RoomController {
    * Initialising the fields that are common in all of the item
    * rooms to avoid code duplication.
    */
-  protected void genericInitialise(String roomName, ImageView itemOneImg, ImageView itemTwoImg, ImageView itemThreeImg,
-      ImageView itemFourImg, ImageView itemFiveImg) {
+  protected void genericInitialise(
+      String roomName, ImageView itemOneImg, ImageView itemTwoImg, 
+      ImageView itemThreeImg, ImageView itemFourImg, ImageView itemFiveImg) {
     this.itemOneImg = itemOneImg;
     this.itemTwoImg = itemTwoImg;
     this.itemThreeImg = itemThreeImg;
@@ -162,25 +214,12 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where a button is hovered over
-   */
-  protected static void btnMouseActions(ImageView btn) {
-    btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
-    btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
-  }
-
-  /**
    * Handling the event where an item is hovered over and clicked
    */
   protected void itemMouseActions(ImageView itemImg, boolean itemClicked, Items.Item item) {
     itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
     itemImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemImg, itemClicked));
     itemImg.setOnMouseClicked(event -> itemSelect(item));
-  }
-
-  protected static void arrowMouseActions(Polygon arrowShpe) {
-    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
-    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
   }
 
   /**
@@ -270,9 +309,9 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where an item is selected and prompting user and prompting user to either add or not
-   * add the item to their inventory. Does nothing if the item has already been 
-   * added to the inventory.
+   * Handling the event where an item is selected and prompting user and 
+   * prompting user to either add or not add the item to their inventory. 
+   * Does nothing if the item has already been added to the inventory.
    *
    * @param itemAdded whether the item has already been added to the inventory
    * @param itemImg the image of the item clicked by user
@@ -301,90 +340,105 @@ public abstract class RoomController {
 
     // Different controls are executed depending on the item
     switch (item) {
+      // Selecting the tail to be added to the inventory
       case TAIL:
         one = new Image("images/tail.png");
         handleAddImg(one, itemOneImg);
         oneAdded = true;
         oneClicked = false;
         break;
+      // Selecting the insect wings to be added to the inventory
       case INSECT_WINGS:
         two = new Image("images/insect_wings.png");
         handleAddImg(two, itemTwoImg);
         twoAdded = true;
         twoClicked = false;
         break;
+      // Selecting the flower to be added to the inventory
       case FLOWER:
         three = new Image("images/flower.png");
         handleAddImg(three, itemThreeImg);
         threeAdded = true;
         threeClicked = false;
         break;
+      // Selecting the scales to be added to the inventory
       case SCALES:
         four = new Image("images/scales.png");
         handleAddImg(four, itemFourImg);
         fourAdded = true;
         fourClicked = false;
         break;
+      // Selecting the powder to be added to the inventory
       case POWDER:
         five = new Image("images/powder.png");
         handleAddImg(five, itemFiveImg);
         fiveAdded = true;
         fiveClicked = false;
         break;
+      // Selecting the talon to be added to the inventory
       case TALON:
         one = new Image("images/talon.png");
         handleAddImg(one, itemOneImg);
         oneAdded = true;
         oneClicked = false;
         break;
+      // Selecting the crystal to be added to the inventory
       case CRYSTAL:
         two = new Image("images/crystal.png");
         handleAddImg(two, itemTwoImg);
         twoAdded = true;
         twoClicked = false;
         break;
+      // Selecting the bat wings to be added to the inventory
       case BAT_WINGS:
         three = new Image("images/bat_wings.png");
         handleAddImg(three, itemThreeImg);
         threeAdded = true;
         threeClicked = false;
         break;
+      // Selecting the wreath to be added to the inventory
       case WREATH:
         four = new Image("images/wreath.png");
         handleAddImg(four, itemFourImg);
         fourAdded = true;
         fourClicked = false;
         break;
+      // Selecting the feather to be added to the inventory  
       case FEATHER:
         five = new Image("images/feather.png");
         handleAddImg(five, itemFiveImg);
         fiveAdded = true;
         fiveClicked = false;
         break;
+      // Selecting the bone to be added to the inventory
       case BONE:
         one = new Image("images/bone.png");
         handleAddImg(one, itemOneImg);
         oneAdded = true;
         oneClicked = false;
         break;
+      // Selecting the fire to be added to the inventory
       case FIRE:
         two = new Image("images/fire.png");
         handleAddImg(two, itemTwoImg);
         twoAdded = true;
         twoClicked = false;
         break;
+      // Selecting the root to be added to the inventory
       case ROOT:
         three = new Image("images/root.png");
         handleAddImg(three, itemThreeImg);
         threeAdded = true;
         threeClicked = false;
         break;
+      // Selecting the beetle to be added to the inventory
       case BEETLE:
         four = new Image("images/beetle.png");
         handleAddImg(four, itemFourImg);
         fourAdded = true;
         fourClicked = false;
         break;
+      // Selecting the unicorn horn to be added to the inventory
       case UNICORN_HORN:
         five = new Image("images/unicorn_horn.png");
         handleAddImg(five, itemFiveImg);
@@ -504,31 +558,13 @@ public abstract class RoomController {
     }
   }
 
-  public static void goDirection(Pane pane, AppUi room) {
-    // Resetting appropriate fields before changing scenes
-    readyToAdd = false;
-    bagOpened = false;
-    SceneManager.setTimerScene(room);
-    TransitionAnimation.changeScene(pane, room, false);
-  }
-  
-  public static void openBook(AppUi currScene, Pane pane) {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      bookController.updateBackground();
-    }
-    SceneManager.currScene = currScene;
-    // Transitioning to the book scene with the appropriate fade animation
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
-  }
-
   /**
    * Dealing with the event where the bag icon is clicked
    */
   @FXML
   public void clickBag() {
     // If there are no items in the inventory, can't open the bag
-     if (MainMenuController.inventory.size() == 0) {
+    if (MainMenuController.inventory.size() == 0) {
       notificationText.setText("You have no ingredients in your bag!");
       Notification.notifyPopup(notificationBack, notificationText);
       return;
@@ -615,7 +651,7 @@ public abstract class RoomController {
     sendButton.setOpacity(opacity);
   }
 
-    /**
+  /**
    * Sends a message to the GPT model.
    *
    * @param event the action event triggered by the send button
@@ -632,14 +668,17 @@ public abstract class RoomController {
     inputText.clear();
     disableChat(true, 0.5);
     ChatMessage msg = new ChatMessage("user", message);
-    MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+    MainMenuController.getChatHandler().appendChatMessage(
+        msg, chatTextArea, inputText, sendButton);
 
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            ChatMessage response = new ChatMessage("assistant", MainMenuController.getChatHandler().runGpt(message));
-            MainMenuController.getChatHandler().appendChatMessage(response, chatTextArea, inputText, sendButton);
+            ChatMessage response = new ChatMessage(
+                "assistant", MainMenuController.getChatHandler().runGpt(message));
+            MainMenuController.getChatHandler().appendChatMessage(
+                response, chatTextArea, inputText, sendButton);
             return null;
           }
         };
@@ -664,15 +703,14 @@ public abstract class RoomController {
    */
   public void readGameMasterResponse() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            // need to update the chat text area with the game master's response & riddle
-            App.textToSpeech.speak(chatTextArea.getText());
-            return null;
-          }
-        };
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        // need to update the chat text area with the game master's response & riddle
+        App.textToSpeech.speak(chatTextArea.getText());
+        return null;
+      }
+    };
     new Thread(speakTask, "Speak Thread").start();
   }
 }

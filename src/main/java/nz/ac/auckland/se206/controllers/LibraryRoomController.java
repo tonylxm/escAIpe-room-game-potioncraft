@@ -14,7 +14,15 @@ public class LibraryRoomController extends RoomController {
   @FXML 
   private Polygon rightShpe;
   @FXML 
-  private ImageView itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg;
+  private ImageView itemOneImg;
+  @FXML
+  private ImageView itemTwoImg;
+  @FXML
+  private ImageView itemThreeImg;
+  @FXML
+  private ImageView itemFourImg;
+  @FXML
+  private ImageView itemFiveImg;
   @FXML 
   private Label timerLabel;
 

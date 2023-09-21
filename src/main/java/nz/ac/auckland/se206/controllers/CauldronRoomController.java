@@ -25,25 +25,46 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private ImageView cauldronImg;
   @FXML
-  private Polygon rightArrow, leftArrow;
+  private Polygon rightArrow;
   @FXML
-  private ImageView bookFireRectangle, bookWaterRectangle, bookAirRectangle;
+  private Polygon leftArrow;
   @FXML
-  private ImageView bookFireImage, bookWaterImage, bookAirImage;
+  private ImageView bookFireRectangle;
+  @FXML
+  private ImageView bookWaterRectangle;
+  @FXML
+  private ImageView bookAirRectangle;
+  @FXML
+  private ImageView bookFireImage;
+  @FXML
+  private ImageView bookWaterImage;
+  @FXML
+  private ImageView bookAirImage;
   @FXML
   private Rectangle textRect;
   @FXML
-  private Label riddleSelectLabel, chooseLabel;
+  private Label riddleSelectLabel;
+  @FXML
+  private Label chooseLabel;
 
   @FXML
-  private ImageView itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg;
+  private ImageView itemElevenImg;
+  @FXML
+  private ImageView itemTwelveImg;
+  @FXML
+  private ImageView itemThirteenImg;
+  @FXML
+  private ImageView itemFourteenImg;
+  @FXML
+  private ImageView itemFifteenImg;
 
   private boolean showRecipe = true;
   private CountdownTimer countdownTimer;
 
   public void initialize() {
     // Initialising everything from the superclass
-    genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, itemThirteenImg, itemFourteenImg, itemFifteenImg);
+    genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, 
+        itemThirteenImg, itemFourteenImg, itemFifteenImg);
 
     // Setting up the countdown and appropriate booleans before
     // anything happens to change them within the game
@@ -54,7 +75,8 @@ public class CauldronRoomController extends RoomController {
     
     toggleBooks(true, 0);
 
-    // Setting up the appropriate interactions for the cauldron, wizard, arrows, book button, bag button, book fire, book water, book air
+    // Setting up the appropriate interactions for the cauldron, wizard, 
+    // arrows, book button, bag button, book fire, book water, book air
     btnMouseActions(cauldronImg);
     arrowMouseActions(leftArrow);
     arrowMouseActions(rightArrow);
@@ -110,7 +132,8 @@ public class CauldronRoomController extends RoomController {
     if (!GameState.isBookRiddleGiven) {
       toggleChat(false, 1);
       disableChat(true, 0.5);
-      MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
+      MainMenuController.getChatHandler().appendChatMessage(
+          MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
       // the user to select the book and respond to the wizard
@@ -140,7 +163,8 @@ public class CauldronRoomController extends RoomController {
     handleClickBooks("air", bookAirImage, bookAirRectangle);
   }
 
-  private void handleClickBooks(String element, ImageView bookImage, ImageView bookRectangle) {
+  private void handleClickBooks(
+      String element, ImageView bookImage, ImageView bookRectangle) {
     System.out.println("book " + element +  " clicked");
     if (MainMenuController.getBook() == element) {
       // remove the book from the scene
@@ -163,9 +187,10 @@ public class CauldronRoomController extends RoomController {
         @Override
         protected Void call() throws Exception {
           ChatMessage msg = new ChatMessage(
-            "Wizard", MainMenuController.getChatHandler().runGpt(
+              "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getResolvedMessage()));
-          MainMenuController.getChatHandler().appendChatMessage(msg, chatTextArea, inputText, sendButton);
+          MainMenuController.getChatHandler().appendChatMessage(
+              msg, chatTextArea, inputText, sendButton);
           return null;
         }
       };
@@ -173,12 +198,17 @@ public class CauldronRoomController extends RoomController {
     }
   }
 
+  /**
+   * Enabling the items to be able to be clicked on.
+   */
   private void enableItems() {
+    // Allowing all items to be interactable
     itemElevenImg.setDisable(false);
     itemTwelveImg.setDisable(false);
     itemThirteenImg.setDisable(false);
     itemFourteenImg.setDisable(false);
     itemFifteenImg.setDisable(false);
+    // Making all items visible
     itemElevenImg.setOpacity(1);
     itemTwelveImg.setOpacity(1);
     itemThirteenImg.setOpacity(1);
@@ -186,24 +216,36 @@ public class CauldronRoomController extends RoomController {
     itemFifteenImg.setOpacity(1);
   }
 
+  /**
+   * Taking the user to the library room from the room scene.
+   * @param event
+   */
   @FXML
   public void goLeftRoom(MouseEvent event) {
     if (!GameState.isBookRiddleResolved) {
-      notificationText.setText("The Wizard has some instructions for you! Talk to him first!");
+      notificationText.setText(
+          "The Wizard has some instructions for you! Talk to him first!");
       Notification.notifyPopup(notificationBack, notificationText);
     } else {
+      // If you've solved the riddle, you can freely travel between rooms
       System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
       itemScroll.setOpacity(0);
       RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
     }
   }
 
+  /**
+   * Taking the user to the treasure room from the room scene.
+   * @param event
+   */
   @FXML
   public void goRightRoom(MouseEvent event) {
     if (!GameState.isBookRiddleResolved) {
-      notificationText.setText("The Wizard has some instructions for you! Talk to him first!");
+      notificationText.setText(
+          "The Wizard has some instructions for you! Talk to him first!");
       Notification.notifyPopup(notificationBack, notificationText);
     } else {
+      // If you've solved the riddle, you can freely travel between rooms
       System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
       itemScroll.setOpacity(0);
       RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
@@ -235,11 +277,14 @@ public class CauldronRoomController extends RoomController {
     }
   }
 
+  /**
+   * Enabling the recipe book button to be able to be clicked on.
+   */
   @FXML
   private void enableRecipe() {
     bookBtn.setDisable(false);
     bookBtn.setOpacity(1);
-
+    // Showing the notification to the user that the recipe book is available
     if (showRecipe) {
       notificationText.setText("Check bottom right for the recipe book!");
       Notification.notifyPopup(notificationBack, notificationText);
