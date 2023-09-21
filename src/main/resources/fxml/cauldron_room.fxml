@@ -233,5 +233,20 @@
             <Font name="Algerian" size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="fireImg" fitHeight="78.0" fitWidth="77.0" layoutX="403.0" layoutY="252.0" mouseTransparent="true" opacity="0.0">
+         <image>
+            <Image url="@../images/fire-icon-free-png.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="waterImg" fitHeight="65.0" fitWidth="35.0" layoutX="490.0" layoutY="259.0" mouseTransparent="true" opacity="0.0">
+         <image>
+            <Image url="@../images/water-drop-icon-symbol-20.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="airImg" fitHeight="34.0" fitWidth="35.0" layoutX="555.0" layoutY="283.0" mouseTransparent="true" opacity="0.0">
+         <image>
+            <Image url="@../images/air-3.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

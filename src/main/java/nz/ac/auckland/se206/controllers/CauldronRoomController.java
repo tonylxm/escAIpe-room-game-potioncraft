@@ -41,6 +41,12 @@ public class CauldronRoomController extends RoomController {
   @FXML
   private ImageView bookAirImage;
   @FXML
+  private ImageView fireImg;
+  @FXML
+  private ImageView waterImg;
+  @FXML
+  private ImageView airImg;
+  @FXML
   private Rectangle textRect;
   @FXML
   private Label riddleSelectLabel;
@@ -93,6 +99,9 @@ public class CauldronRoomController extends RoomController {
     bookFireRectangle.setOpacity(opacity);
     bookWaterRectangle.setOpacity(opacity);
     bookAirRectangle.setOpacity(opacity);
+    fireImg.setOpacity(opacity);
+    waterImg.setOpacity(opacity);
+    airImg.setOpacity(opacity);
   }
 
   /**
@@ -176,6 +185,21 @@ public class CauldronRoomController extends RoomController {
       bookImage.setOpacity(0);
       bookImage.setDisable(true);
       bookRectangle.setDisable(true);
+
+      //switch statement to set the correct image opacity to 0
+      switch (element) {
+        case "fire":
+          fireImg.setOpacity(0);
+          break;
+        case "water":
+          waterImg.setOpacity(0);
+          break;
+        case "air":
+          airImg.setOpacity(0);
+          break;
+        default:
+          break;
+      }
 
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
