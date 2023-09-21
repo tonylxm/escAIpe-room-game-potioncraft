@@ -32,6 +32,38 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
+
+  /**
+   * Handling the event where a button is hovered over
+   */
+  protected static void btnMouseActions(ImageView btn) {
+    btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
+    btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
+  }
+
+  protected static void arrowMouseActions(Polygon arrowShpe) {
+    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
+    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
+  }
+
+  public static void goDirection(Pane pane, AppUi room) {
+    // Resetting appropriate fields before changing scenes
+    readyToAdd = false;
+    bagOpened = false;
+    SceneManager.setTimerScene(room);
+    TransitionAnimation.changeScene(pane, room, false);
+  }
+  
+  public static void openBook(AppUi currScene, Pane pane) {
+    BookController bookController = SceneManager.getBookControllerInstance();
+    if (bookController != null) {
+      bookController.updateBackground();
+    }
+    SceneManager.currScene = currScene;
+    // Transitioning to the book scene with the appropriate fade animation
+    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
+  }
+
   protected Items.Item item;
 
   @FXML
@@ -182,25 +214,12 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where a button is hovered over
-   */
-  protected static void btnMouseActions(ImageView btn) {
-    btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
-    btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
-  }
-
-  /**
    * Handling the event where an item is hovered over and clicked
    */
   protected void itemMouseActions(ImageView itemImg, boolean itemClicked, Items.Item item) {
     itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
     itemImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemImg, itemClicked));
     itemImg.setOnMouseClicked(event -> itemSelect(item));
-  }
-
-  protected static void arrowMouseActions(Polygon arrowShpe) {
-    arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
-    arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
   }
 
   /**
@@ -537,24 +556,6 @@ public abstract class RoomController {
       noLbl.setDisable(true);
       dashLbl.setOpacity(0);
     }
-  }
-
-  public static void goDirection(Pane pane, AppUi room) {
-    // Resetting appropriate fields before changing scenes
-    readyToAdd = false;
-    bagOpened = false;
-    SceneManager.setTimerScene(room);
-    TransitionAnimation.changeScene(pane, room, false);
-  }
-  
-  public static void openBook(AppUi currScene, Pane pane) {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      bookController.updateBackground();
-    }
-    SceneManager.currScene = currScene;
-    // Transitioning to the book scene with the appropriate fade animation
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
   /**
