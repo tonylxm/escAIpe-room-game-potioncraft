@@ -15,6 +15,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -150,6 +151,11 @@ public class CauldronRoomController extends RoomController {
         chooseLabel.setOpacity(1);
         disableChat(false, 1);
         toggleBooks(false, 1);
+        //set the fire, water and air images to glow
+        ShapeInteractionHandler glow = new ShapeInteractionHandler();
+        glow.glowThis(fireImg);
+        glow.glowThis(waterImg);
+        glow.glowThis(airImg);
       });
       GameState.isBookRiddleGiven = true;
     } else {
