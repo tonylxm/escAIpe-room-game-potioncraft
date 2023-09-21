@@ -134,6 +134,8 @@ public class MainMenuController {
   private boolean fourMinBtnClicked;
   private boolean sixMinBtnClicked;
 
+  private boolean secondContinueClick;
+
   public void initialize() {
     // Item & inventory generation
     items = new Items(5);
@@ -149,6 +151,8 @@ public class MainMenuController {
     twoMinBtnClicked = false;
     fourMinBtnClicked = false;
     sixMinBtnClicked = false;
+
+    secondContinueClick = false;
 
     // Setting appropriate interactable features for the settings buttons including hover hints
     difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, "EASY");
@@ -173,15 +177,15 @@ public class MainMenuController {
   }
 
   public void settingsHoverOn(ImageView settingsBtn, Text hint) {
+    interactionHandler.glowThis(settingsBtn);
     if (!difficultySelected) {
-      settingsBtn.setOnMouseEntered(event -> interactionHandler.glowThis(settingsBtn));
       hint.setOpacity(1);
     }
   }
 
   public void settingsHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
+    interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
     if (!difficultySelected) {
-      settingsBtn.setOnMouseExited(event -> interactionHandler.unglowThis(settingsBtn, settingsBtnClicked));
       hint.setOpacity(0);
     }
   }
@@ -195,6 +199,7 @@ public class MainMenuController {
     switch (difficulty) {
       // Easiest level granting unlimited hints
       case "EASY":
+        interactionHandler.glowThis(easyBtn);
         hints = -1;
         hintInfinity.setOpacity(1);
         hintFive.setOpacity(0);
@@ -202,6 +207,7 @@ public class MainMenuController {
         break;
       // Medium level capping hints at 5
       case "MEDIUM":
+        interactionHandler.glowThis(mediumBtn);
         hints = 5;
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(1);
@@ -209,53 +215,21 @@ public class MainMenuController {
         break;
       // No hints are allowed to be given on hard level
       case "HARD":
+        interactionHandler.glowThis(hardBtn);
         hints = 0;
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(0);
         hintZero.setOpacity(1);
         break;
     }
-
-    Task<Void> bookRiddleTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            switch (hints) {
-              case -1:
-                // When on Dobby mode, selecting the prompt to give the user unlimited hints
-                riddle = new ChatMessage(
-                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
-
-                // Message to send to GPT after user has resolved the riddle
-                resolvedRiddle = GptPromptEngineering.getEasyResolved();
-                break;
-              case 5:
-                // When on Harry mode, selecting the prompt to give the user only 5 hints
-                riddle = new ChatMessage(
-                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
-                
-                // Message to send to GPT after user has resolved the riddle
-                resolvedRiddle = GptPromptEngineering.getMediumResolved();
-                break;
-              case 0:
-                // When on Voldemort mode, selecting the prompt to give the user no hints at all
-                riddle = new ChatMessage(
-                    "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
-                
-                // Message to send to GPT after user has resolved the riddle
-                resolvedRiddle =GptPromptEngineering.getHardResolved();
-                break;
-            }
-            return null;
-          }
-      };
-    new Thread(bookRiddleTask).start();
-    System.out.println(riddle);
+    continueBtn.setDisable(false);
+    continueBtn.setOpacity(1.0);
   }
 
   public void timeSelect(String time) {
       switch (time) {
         case "TWO_MIN":
+          interactionHandler.glowThis(twoMinBtn);
           twoMinBtnClicked = true;
           twoMin.setOpacity(1);
           fourMinBtnClicked = false;
@@ -264,6 +238,7 @@ public class MainMenuController {
           sixMin.setOpacity(0);
           break;
         case "FOUR_MIN":
+          interactionHandler.glowThis(fourMinBtn);
           twoMinBtnClicked = false;
           twoMin.setOpacity(0);
           fourMinBtnClicked = true;
@@ -272,6 +247,7 @@ public class MainMenuController {
           sixMin.setOpacity(0);
           break;
         case "SIX_MIN":
+          interactionHandler.glowThis(sixMinBtn);
           twoMinBtnClicked = false;
           twoMin.setOpacity(0);
           fourMinBtnClicked = false;
@@ -280,6 +256,8 @@ public class MainMenuController {
           sixMin.setOpacity(1);
           break;
       }
+      continueBtn.setDisable(false);
+      continueBtn.setOpacity(1.0);
     }
 
   /**
@@ -328,24 +306,23 @@ public class MainMenuController {
         return null;
       }
     };
-    Thread instantiateScenesThread = new Thread(
-        instantiateScenes, "instantiate scenes upon starting game");
+    Thread instantiateScenesThread = new Thread(instantiateScenes);
     instantiateScenesThread.start();
 
     TransitionAnimation.fade(playBtn, 0.0);
     playBtn.setDisable(true);
     // Using a task to make sure game does not freeze
-    Task<Void> fadeInSettingsBtnsTask = new Task<Void>() {
+    Task<Void> fadeInDifficultyBtnsTask = new Task<Void>() {
 
       @Override
       protected Void call() throws Exception {
         Thread.sleep(500);
-        disableAndOrFadeSettingsBtns(false, 1.0, true);
+        disableAndOrFadeDifficultyBtns(false, 1.0, true);
+        TransitionAnimation.fade(continueBtn, 0.4);
         return null;
       }
     };
-    Thread fadeInSettingsBtnsThread = new Thread(fadeInSettingsBtnsTask);
-    fadeInSettingsBtnsThread.start();
+    new Thread(fadeInDifficultyBtnsTask).start();
   }
 
   /**
@@ -353,7 +330,24 @@ public class MainMenuController {
    */
   @FXML
   public void continueGame() {
+    continueBtn.setDisable(true);
+    continueBtn.setOpacity(0.4);
+    // Using a task to make sure game does not freeze
+    Task<Void> fadeInSettingsBtnsTask = new Task<Void>() {
 
+      @Override
+      protected Void call() throws Exception {
+        if (!secondContinueClick) {
+          disableAndOrFadeDifficultyBtns(true, 0, true);
+          disableAndOrFadeTimeBtns(false, 1.0, true);
+        } else {
+          disableAndOrFadeTimeBtns(true, 0, true);
+          
+        }
+        return null;
+      }
+    };
+    new Thread(fadeInSettingsBtnsTask).start();
   }
 
   /**
@@ -368,53 +362,124 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the settings buttons
+   * Approprately disables or enables the difficulty buttons
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
    *                 false then enable buttons
    * @param ocpacity
    * @param fade
    */
-  public void disableAndOrFadeSettingsBtns(boolean tf, double ocpacity, boolean fade) {
+  public void disableAndOrFadeDifficultyBtns(boolean tf, double opacity, boolean fade) {
     easyBtn.setDisable(tf);
     mediumBtn.setDisable(tf);
     hardBtn.setDisable(tf);
+    // Handing animations for fading
+    if (fade) {
+      TransitionAnimation.fade(difficultyTxt, opacity);
+      TransitionAnimation.fade(easyBtn, opacity);
+      TransitionAnimation.fade(mediumBtn, opacity);
+      TransitionAnimation.fade(hardBtn, opacity);
+
+      if (opacity == 0.0) {
+        hintZero.setOpacity(0);
+        hintFive.setOpacity(0);
+        hintInfinity.setOpacity(0);
+
+        hintZero.setDisable(true);
+        hintFive.setDisable(true);
+        hintInfinity.setDisable(true);
+      }
+    }
+  }
+
+  /**
+   * Approprately disables or enables the time buttons
+   * 
+   * @param tf       stands for true of false, if true then disable buttons, if
+   *                 false then enable buttons
+   * @param ocpacity
+   * @param fade
+   */
+  public void disableAndOrFadeTimeBtns(boolean tf, double opacity, boolean fade) {
     twoMinBtn.setDisable(tf);
     fourMinBtn.setDisable(tf);
     sixMinBtn.setDisable(tf);
-
-    startBtn.setDisable(true);
-
     // Handing animations for fading
     if (fade) {
-      TransitionAnimation.fade(difficultyTxt, ocpacity);
-      TransitionAnimation.fade(timeLimitTxt, ocpacity);
-      TransitionAnimation.fade(easyBtn, ocpacity);
-      TransitionAnimation.fade(mediumBtn, ocpacity);
-      TransitionAnimation.fade(hardBtn, ocpacity);
-      TransitionAnimation.fade(twoMinBtn, ocpacity);
-      TransitionAnimation.fade(fourMinBtn, ocpacity);
-      TransitionAnimation.fade(sixMinBtn, ocpacity);
-      TransitionAnimation.fade(startBtn, 0.4);
-    }
+        TransitionAnimation.fade(timeLimitTxt, opacity);
+        TransitionAnimation.fade(twoMinBtn, opacity);
+        TransitionAnimation.fade(fourMinBtn, opacity);
+        TransitionAnimation.fade(sixMinBtn, opacity);
+
+        if (opacity == 0.0) {
+          twoMin.setOpacity(0);
+          fourMin.setOpacity(0);
+          sixMin.setOpacity(0);
+
+          twoMin.setDisable(true);
+          fourMin.setDisable(true);
+          sixMin.setDisable(true);
+        }
+
+        if (secondContinueClick) {
+          TransitionAnimation.fade(continueBtn, 0.4);
+
+          Task<Void> bookRiddleTask =
+            new Task<Void>() {
+              @Override
+              protected Void call() throws Exception {
+                switch (hints) {
+                  case -1:
+                    // When on Dobby mode, selecting the prompt to give the user unlimited hints
+                    riddle = new ChatMessage(
+                        "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
+
+                    // Message to send to GPT after user has resolved the riddle
+                    resolvedRiddle = GptPromptEngineering.getEasyResolved();
+                    break;
+                  case 5:
+                    // When on Harry mode, selecting the prompt to give the user only 5 hints
+                    riddle = new ChatMessage(
+                        "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
+                    
+                    // Message to send to GPT after user has resolved the riddle
+                    resolvedRiddle = GptPromptEngineering.getMediumResolved();
+                    break;
+                  case 0:
+                    // When on Voldemort mode, selecting the prompt to give the user no hints at all
+                    riddle = new ChatMessage(
+                        "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+                    
+                    // Message to send to GPT after user has resolved the riddle
+                    resolvedRiddle = GptPromptEngineering.getHardResolved();
+                    break;
+                }
+                return null;
+              }
+          };
+        new Thread(bookRiddleTask).start();
+        System.out.println(riddle);
+        }
+        secondContinueClick = true;
+      }
   }
 
   @FXML
   public void setEasy() {
     difficulty = Difficulty.EASY;
-    startBtnEnable();
+    continueBtnEnable();
   }
 
   @FXML
   public void setMedium() {
     difficulty = Difficulty.MEDIUM;
-    startBtnEnable();
+    continueBtnEnable();
   }
 
   @FXML
   public void setHard() {
     difficulty = Difficulty.HARD;
-    startBtnEnable();
+    continueBtnEnable();
   }
 
   @FXML
@@ -439,6 +504,16 @@ public class MainMenuController {
   }
 
   /**
+   * Only set continueBtn enabled when difficutly and time limit have been chosen
+   */
+  public void continueBtnEnable() {
+    if (difficulty != null && timeLimit != null) {
+      continueBtn.setDisable(false);
+      continueBtn.setOpacity(1.0);
+    }
+  }
+
+  /**
    * Only set startBtn enabled when difficutly and time limit have been chosen
    */
   public void startBtnEnable() {
@@ -451,7 +526,7 @@ public class MainMenuController {
   @FXML
   public void startGame() throws IOException {
     // Fade buttons and scene
-    disableAndOrFadeSettingsBtns(true, 0, false);
+    disableAndOrFadeTimeBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
     TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, true);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);

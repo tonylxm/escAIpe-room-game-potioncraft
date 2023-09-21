@@ -18,27 +18,27 @@
                   <Image url="@../images/cauldron-room.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="startBtn" disable="true" layoutX="446.0" layoutY="609.0" mnemonicParsing="false" onAction="#startGame" text="START">
-               <font>
-                  <Font name="Algerian" size="30.0" />
-               </font>
-            </Button>
-            <Text fx:id="difficultyTxt" fill="WHITE" layoutX="417.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
-               <font>
-                  <Font name="Algerian" size="35.0" />
-               </font>
-            </Text>
-            <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="423.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
-               <font>
-                  <Font name="Algerian" size="35.0" />
-               </font>
-            </Text>
-            <Button fx:id="continueBtn" disable="true" layoutX="425.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGame" text="CONTINUE">
-               <font>
-                  <Font name="Algerian" size="30.0" />
-               </font>
-            </Button>
             <Button fx:id="playBtn" layoutX="450.0" layoutY="609.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
+               <font>
+                  <Font name="Algerian" size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="startBtn" disable="true" layoutX="446.0" layoutY="609.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+               <font>
+                  <Font name="Algerian" size="30.0" />
+               </font>
+            </Button>
+            <Text fx:id="difficultyTxt" fill="WHITE" layoutX="417.0" layoutY="231.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty">
+               <font>
+                  <Font name="Algerian" size="35.0" />
+               </font>
+            </Text>
+            <Text fx:id="timeLimitTxt" fill="WHITE" layoutX="423.0" layoutY="232.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Limit">
+               <font>
+                  <Font name="Algerian" size="35.0" />
+               </font>
+            </Text>
+            <Button fx:id="continueBtn" disable="true" layoutX="425.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGame" opacity="0.0" text="CONTINUE">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>
@@ -48,62 +48,62 @@
                   <Image url="@../images/title.png" />
                </image>
             </ImageView>
-            <Text fx:id="hintZero" fill="WHITE" layoutX="425.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
+            <Text fx:id="hintZero" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="hintFive" fill="WHITE" layoutX="425.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
+            <Text fx:id="hintFive" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="hintInfinity" fill="WHITE" layoutX="425.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
+            <Text fx:id="hintInfinity" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <ImageView fx:id="easyBtn" fitHeight="150.0" fitWidth="200.0" layoutX="214.0" layoutY="374.0" onMouseClicked="#setEasy" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="easyBtn" disable="true" fitHeight="150.0" fitWidth="200.0" layoutX="214.0" layoutY="374.0" onMouseClicked="#setEasy" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/dobby.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="mediumBtn" fitHeight="232.0" fitWidth="144.0" layoutX="448.0" layoutY="292.0" onMouseClicked="#setMedium" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mediumBtn" disable="true" fitHeight="232.0" fitWidth="144.0" layoutX="448.0" layoutY="292.0" onMouseClicked="#setMedium" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/harry.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="hardBtn" fitHeight="279.0" fitWidth="185.0" layoutX="696.0" layoutY="245.0" onMouseClicked="#setHard" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="hardBtn" disable="true" fitHeight="279.0" fitWidth="185.0" layoutX="696.0" layoutY="245.0" onMouseClicked="#setHard" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/voldemort.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="twoMinBtn" fitHeight="112.0" fitWidth="118.0" layoutX="217.0" layoutY="352.0" onMouseClicked="#setTwoMin" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="twoMinBtn" disable="true" fitHeight="112.0" fitWidth="118.0" layoutX="217.0" layoutY="364.0" onMouseClicked="#setTwoMin" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/hourglass-1024x1024.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="fourMinBtn" fitHeight="112.0" fitWidth="118.0" layoutX="457.0" layoutY="352.0" onMouseClicked="#setFourMin" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3" scaleZ="1.3">
+            <ImageView fx:id="fourMinBtn" disable="true" fitHeight="112.0" fitWidth="118.0" layoutX="457.0" layoutY="352.0" onMouseClicked="#setFourMin" opacity="0.0" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3" scaleZ="1.3">
                <image>
                   <Image url="@../images/hourglass-1024x1024.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="sixMinBtn" fitHeight="112.0" fitWidth="118.0" layoutX="727.0" layoutY="352.0" onMouseClicked="#setSixMin" pickOnBounds="true" preserveRatio="true" scaleX="1.7" scaleY="1.7" scaleZ="1.7">
+            <ImageView fx:id="sixMinBtn" disable="true" fitHeight="112.0" fitWidth="118.0" layoutX="727.0" layoutY="340.0" onMouseClicked="#setSixMin" opacity="0.0" pickOnBounds="true" preserveRatio="true" scaleX="1.7" scaleY="1.7" scaleZ="1.7">
                <image>
                   <Image url="@../images/hourglass-1024x1024.gif" />
                </image>
             </ImageView>
-            <Text fx:id="twoMin" fill="WHITE" layoutX="488.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 MIN">
+            <Text fx:id="twoMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 MIN">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="fourMin" fill="WHITE" layoutX="488.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4 MIN">
+            <Text fx:id="fourMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4 MIN">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="sixMin" fill="WHITE" layoutX="488.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 MIN">
+            <Text fx:id="sixMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 MIN">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
