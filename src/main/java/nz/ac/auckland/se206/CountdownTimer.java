@@ -217,11 +217,11 @@ public class CountdownTimer {
     // Setting the appropriate text for the hint label based on the
     // number of hjints remaining
     if (hints < 0) {
-      text = "∞ hints left";
+      text = "∞ hints";
     } else if (hints == 0) {
-      text = "No hints left";
+      text = "No hints";
     } else {
-      text = Integer.toString(hints) + " hints left";
+      text = Integer.toString(hints) + " hints";
     }
 
     // Setting the label text for all hint labels
