@@ -444,9 +444,9 @@ public class MainMenuController {
 
         // Intro message to let the user know hwat to do
         String introMsg = 
-          "Welcome apprentice! Are you ready for your test?"
-          + " Come talk to me for your instructions once you start the test."
-          + " Good Luck!";
+            "Welcome apprentice! Are you ready for your test?"
+            + " Come talk to me for your instructions once you start the test."
+            + " Good Luck!";
 
         Thread.sleep(500);
         // Showing the intro message, given by the wizard, to the user
@@ -459,7 +459,7 @@ public class MainMenuController {
     new Thread(fadeInStartBtnTask).start();
   }
 
-    /**
+  /**
    * Appends intro message to the chat text area.
    *
    * @param msg the chat message to append
@@ -499,7 +499,7 @@ public class MainMenuController {
           }
         };
     new Thread(appendIntroTask).start();
-    }
+  }
 
   /**
    * Handles click off for after the intro message is displayed
@@ -535,7 +535,7 @@ public class MainMenuController {
           return null;
         }
       };
-    new Thread(wizardLeaveTask).start();
+      new Thread(wizardLeaveTask).start();
     }
   }
   
@@ -705,8 +705,8 @@ public class MainMenuController {
               return null;
             }
         };
-      new Thread(bookRiddleTask).start();
-      System.out.println(riddle.getContent());
+    new Thread(bookRiddleTask).start();
+    System.out.println(riddle.getContent());
   }
 
   /**

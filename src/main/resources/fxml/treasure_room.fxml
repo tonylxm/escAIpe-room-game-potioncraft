@@ -166,7 +166,7 @@
       </ImageView>
       <Label fx:id="hintLabel" layoutX="62.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
          <font>
-            <Font size="38.0" />
+            <Font size="30.0" />
          </font>
       </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
@@ -184,5 +184,10 @@
             <Font name="Algerian" size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="thoughtImage" fitHeight="200.0" fitWidth="200.0" layoutX="361.0" layoutY="149.0" opacity="0.0">
+         <image>
+            <Image url="@../images/thought.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
