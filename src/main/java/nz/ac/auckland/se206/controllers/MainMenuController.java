@@ -281,9 +281,14 @@ public class MainMenuController {
     continueBtnEnable();
   }
 
+  /**
+   * Displays the appropriate time limit when hovering over a time limit.
+   * @param time
+   */
   public void timeSelect(String time) {
     timeSelected = true;
     switch (time) {
+      // Using the appropriate glow animation over the 2 minuts image
       case "TWO_MIN":
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
@@ -293,6 +298,7 @@ public class MainMenuController {
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         break;
+      // Using the appropriate glow animation over the 4 minutes image
       case "FOUR_MIN":
         interactionHandler.glowThis(fourMinBtn);
         twoMinBtnClicked = false;
@@ -302,6 +308,7 @@ public class MainMenuController {
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         break;
+      // Using the appropriate glow animation over the 6 minutes image
       case "SIX_MIN":
         interactionHandler.glowThis(sixMinBtn);
         twoMinBtnClicked = false;
@@ -312,6 +319,7 @@ public class MainMenuController {
         sixMin.setOpacity(1);
         break;
     }
+    // After selected a time limit, enabling the continue button
     continueBtnOneEnable();
   }
 
@@ -371,6 +379,7 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+        // Setting the disable and enabling the appropriate animation
         Thread.sleep(500);
         disableAndOrFadeDifficultyBtns(false, 1.0, true);
         TransitionAnimation.fade(continueBtn, 0.4);
@@ -392,9 +401,11 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+        // Setting the disable and fade to true and 0.0 respectively
         disableAndOrFadeDifficultyBtns(true, 0, true);
         disableAndOrFadeTimeBtns(false, 1.0, true);
         continueBtnDisable();
+        // Setting the continue button to fade out
         continueBtnOne.setDisable(false);
         continueBtnOne.setOpacity(0.4);
         return null;
@@ -415,26 +426,30 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+        // Setting the disable and fade to true and 0.0 respectively
         disableAndOrFadeTimeBtns(true, 0, true);
         TransitionAnimation.fade(continueBtnOne, 0.0);
         Thread.sleep(1000);
         TransitionAnimation.fade(wizardImg, 1.0);
         Thread.sleep(1000);
-        
+        // Setting the appropriate animation transition
         TransitionAnimation.fade(wizardChatImage, 1.0);
         TransitionAnimation.fade(textRect, 1.0);
         TransitionAnimation.fade(chatTextArea, 1.0);
         TransitionAnimation.fade(ttsBtn2, 1.0);
+        // Enabling the chat text area and tts button
         chatTextArea.setDisable(false);
         ttsBtn2.setDisable(false);
         mouseTrackRegion.setOpacity(0.5);
 
+        // Intro message to let the user know hwat to do
         String introMsg = 
           "Welcome apprentice! Are you ready for your test?"
           + " Come talk to me for your instructions once you start the test."
           + " Good Luck!";
 
         Thread.sleep(500);
+        // Showing the intro message, given by the wizard, to the user
         appendIntroMessage(new ChatMessage("Wizard", introMsg), chatTextArea);
 
         TransitionAnimation.fade(startBtn, 0.4);
@@ -471,10 +486,12 @@ public class MainMenuController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // Adding each character of the message to the chat text area
             for (char c : msg.getContent().toCharArray()) {
               chatTextArea.appendText(String.valueOf(c));
               Thread.sleep(20);
             }
+            // After completion, letting user click off
             System.out.println("finished");
             mouseTrackRegion.setDisable(false);
             appendIntroMsgFinished = true;
@@ -493,19 +510,24 @@ public class MainMenuController {
   @FXML
   public void clickOff(MouseEvent event) throws InterruptedException {
     System.out.println("click off");
+    // Only using the click off property if the wizard has been shown already
     if (appendIntroMsgFinished) {
+      // Using concurency to prevent lag or delay in the program
       Task<Void> wizardLeaveTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Setting an animation for the wizard to fade out of the scene
           TransitionAnimation.fade(wizardChatImage, 0.0);
           TransitionAnimation.fade(textRect, 0.0);
           TransitionAnimation.fade(chatTextArea, 0.0);
           TransitionAnimation.fade(ttsBtn2, 0.0);
+          // Disabling the chat text area and tts button
           chatTextArea.setDisable(true);
           ttsBtn2.setDisable(true);
           mouseTrackRegion.setDisable(true);
           mouseTrackRegion.setOpacity(0);
 
+          // Waiting for the wizard to leave the scene
           Thread.sleep(1000);
           TransitionAnimation.fade(wizardImg, 0.0);
           Thread.sleep(500);
