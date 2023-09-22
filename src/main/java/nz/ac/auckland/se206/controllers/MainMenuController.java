@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.sql.Time;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -157,7 +156,7 @@ public class MainMenuController {
   private boolean fourMinBtnClicked;
   private boolean sixMinBtnClicked;
 
-  private ChatMessage introMsg;
+  private String introMsg;
   private boolean appendIntroMsgFinished;
 
   public void initialize() {
@@ -284,10 +283,6 @@ public class MainMenuController {
     }
     continueBtnEnable();
   }
-
-  // public static Difficulty getDifficulty() {
-  //   return difficulty;
-  // }
 
   /**
    * Displays the appropriate time limit when hovering over a time limit.
@@ -453,7 +448,7 @@ public class MainMenuController {
         ttsBtn2.setDisable(false);
 
         // Intro message to let the user know hwat to do
-        String introMsg = 
+        introMsg = 
             "Welcome apprentice! Are you ready for your test?"
             + " Come talk to me for your instructions once you start the test."
             + " Good Luck!";
@@ -521,7 +516,7 @@ public class MainMenuController {
     System.out.println("click off");
     // Only using the click off property if the wizard has been shown already
     if (appendIntroMsgFinished) {
-       // Using concurency to prevent lag or delay in the program
+      // Using concurency to prevent lag or delay in the program
       Task<Void> wizardLeaveTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
