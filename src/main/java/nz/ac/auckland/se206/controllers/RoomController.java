@@ -643,8 +643,10 @@ public abstract class RoomController {
 
     mouseTrackRegion.setDisable(disable);
     if (opacity == 0) {
+      mouseTrackRegion.setDisable(true);
       TransitionAnimation.fade(mouseTrackRegion, 0);
     } else {
+      mouseTrackRegion.setDisable(false);
       TransitionAnimation.fade(mouseTrackRegion, 0.4);
     }
   }

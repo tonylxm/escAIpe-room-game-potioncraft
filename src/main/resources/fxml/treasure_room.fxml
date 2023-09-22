@@ -89,7 +89,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0" />
+      <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" disable="true" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
       <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="159.0" layoutY="268.0" opacity="0.0" scaleX="-1.0">
          <image>
             <Image url="@../images/headshot.png" />
