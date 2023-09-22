@@ -133,7 +133,7 @@
             <Font name="Algerian" size="30.0" />
          </font>
       </Label>
-      <Label id="yesLbl" fx:id="yesLbl" layoutX="792.0" layoutY="545.0" onMouseClicked="#addItem" opacity="0.0" text="Y">
+      <Label id="yesLbl" fx:id="yesLbl" layoutX="792.0" layoutY="545.0" onKeyPressed="#onYPressed" onMouseClicked="#addItem" opacity="0.0" text="Y">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
