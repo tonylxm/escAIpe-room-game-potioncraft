@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.sql.Time;
+
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -177,13 +179,13 @@ public class MainMenuController {
     sixMinBtnClicked = false;
 
     // Setting appropriate interactable features for the settings buttons including hover hints
-    difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, "EASY");
-    difficultyMouseActions(mediumBtn, mediumBtnClicked, hintFive, "MEDIUM");
-    difficultyMouseActions(hardBtn, hardBtnClicked, hintZero, "HARD");
+    difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, Difficulty.EASY);
+    difficultyMouseActions(mediumBtn, mediumBtnClicked, hintFive, Difficulty.MEDIUM);
+    difficultyMouseActions(hardBtn, hardBtnClicked, hintZero, Difficulty.HARD);
 
-    timeMouseActions(twoMinBtn, twoMinBtnClicked, twoMin, "TWO_MIN");
-    timeMouseActions(fourMinBtn, fourMinBtnClicked, fourMin, "FOUR_MIN");
-    timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, "SIX_MIN");
+    timeMouseActions(twoMinBtn, twoMinBtnClicked, twoMin, TimeLimit.TWO_MIN);
+    timeMouseActions(fourMinBtn, fourMinBtnClicked, fourMin, TimeLimit.FOUR_MIN);
+    timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, TimeLimit.SIX_MIN);
 
     // Pregenerate wizard intro message
     // Task<Void> introTask =
@@ -201,7 +203,7 @@ public class MainMenuController {
   }
 
   public void difficultyMouseActions(
-      ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
+      ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, Difficulty difficulty) {
     difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
     difficultyBtn.setOnMouseExited(event -> difficultyHoverOff(
         difficultyBtn, difficultyBtnClicked, hint));
@@ -209,7 +211,7 @@ public class MainMenuController {
   }
 
   public void timeMouseActions(
-      ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, String time) {
+      ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, TimeLimit time) {
     timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
     timeBtn.setOnMouseExited(event -> timeLimitHoverOff(timeBtn, timeBtnClicked, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
@@ -248,13 +250,13 @@ public class MainMenuController {
 
   /**
    * Displays the appropriate number of hints when hovering over a difficulty.
-   * @param difficulty
+   * @param gameDifficulty
    */
-  public void difficultySelect(String difficulty) {
+  public void difficultySelect(Difficulty gameDifficulty) {
     difficultySelected = true;
-    switch (difficulty) {
+    switch (gameDifficulty) {
       // Easiest level granting unlimited hints
-      case "EASY":
+      case EASY:
         interactionHandler.glowThis(easyBtn);
         hints = -1;
         hintInfinity.setOpacity(1);
@@ -262,7 +264,8 @@ public class MainMenuController {
         hintZero.setOpacity(0);
         break;
       // Medium level capping hints at 5
-      case "MEDIUM":
+      case MEDIUM:
+        difficulty = Difficulty.MEDIUM;
         interactionHandler.glowThis(mediumBtn);
         hints = 5;
         hintInfinity.setOpacity(0);
@@ -270,7 +273,8 @@ public class MainMenuController {
         hintZero.setOpacity(0);
         break;
       // No hints are allowed to be given on hard level
-      case "HARD":
+      case HARD:
+        difficulty = Difficulty.HARD;
         interactionHandler.glowThis(hardBtn);
         hints = 0;
         hintInfinity.setOpacity(0);
@@ -281,15 +285,19 @@ public class MainMenuController {
     continueBtnEnable();
   }
 
+  // public static Difficulty getDifficulty() {
+  //   return difficulty;
+  // }
+
   /**
    * Displays the appropriate time limit when hovering over a time limit.
    * @param time
    */
-  public void timeSelect(String time) {
+  public void timeSelect(TimeLimit time) {
     timeSelected = true;
     switch (time) {
       // Using the appropriate glow animation over the 2 minuts image
-      case "TWO_MIN":
+      case TWO_MIN:
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
         twoMin.setOpacity(1);
@@ -299,7 +307,7 @@ public class MainMenuController {
         sixMin.setOpacity(0);
         break;
       // Using the appropriate glow animation over the 4 minutes image
-      case "FOUR_MIN":
+      case FOUR_MIN:
         interactionHandler.glowThis(fourMinBtn);
         twoMinBtnClicked = false;
         twoMin.setOpacity(0);
@@ -309,7 +317,7 @@ public class MainMenuController {
         sixMin.setOpacity(0);
         break;
       // Using the appropriate glow animation over the 6 minutes image
-      case "SIX_MIN":
+      case SIX_MIN:
         interactionHandler.glowThis(sixMinBtn);
         twoMinBtnClicked = false;
         twoMin.setOpacity(0);
@@ -725,13 +733,13 @@ public class MainMenuController {
 
   @FXML
   public void startGame() throws IOException {
-    // Fade buttons and scene
-    disableAndOrFadeTimeBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
+    disableAndOrFadeTimeBtns(true, 0, false);
     TransitionAnimation.changeScene(
         pane, AppUi.CAULDRON_ROOM, true);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
+    
     Task<Void> timerStartTask = new Task<Void>() {
 
       @Override
