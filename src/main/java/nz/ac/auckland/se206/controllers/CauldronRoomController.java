@@ -15,6 +15,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -40,6 +41,12 @@ public class CauldronRoomController extends RoomController {
   private ImageView bookWaterImage;
   @FXML
   private ImageView bookAirImage;
+  @FXML
+  private ImageView fireImg;
+  @FXML
+  private ImageView waterImg;
+  @FXML
+  private ImageView airImg;
   @FXML
   private Rectangle textRect;
   @FXML
@@ -93,6 +100,9 @@ public class CauldronRoomController extends RoomController {
     bookFireRectangle.setOpacity(opacity);
     bookWaterRectangle.setOpacity(opacity);
     bookAirRectangle.setOpacity(opacity);
+    fireImg.setOpacity(opacity);
+    waterImg.setOpacity(opacity);
+    airImg.setOpacity(opacity);
   }
 
   /**
@@ -141,6 +151,11 @@ public class CauldronRoomController extends RoomController {
         chooseLabel.setOpacity(1);
         disableChat(false, 1);
         toggleBooks(false, 1);
+        //set the fire, water and air images to glow
+        ShapeInteractionHandler glow = new ShapeInteractionHandler();
+        glow.glowThis(fireImg);
+        glow.glowThis(waterImg);
+        glow.glowThis(airImg);
       });
       GameState.isBookRiddleGiven = true;
     } else {
@@ -176,6 +191,21 @@ public class CauldronRoomController extends RoomController {
       bookImage.setOpacity(0);
       bookImage.setDisable(true);
       bookRectangle.setDisable(true);
+
+      //switch statement to set the correct image opacity to 0
+      switch (element) {
+        case "fire":
+          fireImg.setOpacity(0);
+          break;
+        case "water":
+          waterImg.setOpacity(0);
+          break;
+        case "air":
+          airImg.setOpacity(0);
+          break;
+        default:
+          break;
+      }
 
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
