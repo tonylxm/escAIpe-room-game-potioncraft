@@ -61,6 +61,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <ImageView id="itemFourteenImg" fx:id="itemFourteenImg" disable="true" fitHeight="44.0" fitWidth="45.0" layoutX="224.0" layoutY="69.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/beetle.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
       <ImageView id="itemFifteenImg" fx:id="itemFifteenImg" disable="true" fitHeight="88.0" fitWidth="65.0" layoutX="838.0" layoutY="269.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0">
          <image>
             <Image url="@../images/unicorn_horn.png" />
@@ -110,14 +118,6 @@
          <image>
             <Image url="@../images/oie_yaYCuLx1PDOG.png" />
          </image>
-      </ImageView>
-      <ImageView id="itemFourteenImg" fx:id="itemFourteenImg" disable="true" fitHeight="34.0" fitWidth="53.0" layoutX="724.0" layoutY="393.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/beetle.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </ImageView>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" height="680.0" layoutY="-4.0" onMouseClicked="#clickOffCauldronRoom" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="159.0" layoutY="258.0" opacity="0.0" scaleX="-1.0">
@@ -184,6 +184,11 @@
             <Image url="@../images/scroll-png-transparent-image--6.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="19.0" layoutY="15.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
       <Label fx:id="timerLabel" layoutX="844.0" layoutY="25.0" prefHeight="67.0" prefWidth="257.0" text="4:00">
          <font>
             <Font name="Algerian" size="42.0" />
@@ -223,14 +228,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="notificationBack" disable="true" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0" mouseTransparent="true" opacity="0.0">
+      <ImageView fx:id="notificationBack" disable="true" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0" opacity="0.0">
          <image>
             <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
          </image>
       </ImageView>
-      <Label fx:id="notificationText" disable="true" layoutX="389.0" layoutY="52.0" mouseTransparent="true" prefHeight="101.0" prefWidth="229.0" wrapText="true">
+      <Label fx:id="notificationText" disable="true" layoutX="389.0" layoutY="52.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
          <font>
             <Font name="Algerian" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="hintLabel" layoutX="52.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
+         <font>
+            <Font name="Algerian" size="24.0" />
          </font>
       </Label>
       <ImageView fx:id="fireImg" fitHeight="78.0" fitWidth="77.0" layoutX="403.0" layoutY="252.0" mouseTransparent="true" opacity="0.0">

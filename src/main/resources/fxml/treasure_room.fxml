@@ -36,14 +36,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="80.0" fitWidth="62.0" layoutX="295.0" layoutY="234.0" rotate="83.1">
-         <image>
-            <Image url="@../images/bat_wings.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="67.0" fitWidth="70.0" layoutX="565.0" layoutY="150.0">
          <image>
             <Image url="@../images/wreath.png" />
@@ -63,6 +55,14 @@
       <ImageView fx:id="wizardImg" fitHeight="200.0" fitWidth="142.0" layoutX="326.0" layoutY="255.0" onMouseClicked="#clickWizard">
          <image>
             <Image url="@../images/wizard.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="80.0" fitWidth="62.0" layoutX="45.0" layoutY="158.0" rotate="83.1">
+         <image>
+            <Image url="@../images/bat_wings.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
