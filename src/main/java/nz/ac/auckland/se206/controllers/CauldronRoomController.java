@@ -165,7 +165,8 @@ public class CauldronRoomController extends RoomController {
         }
       };
       new Thread(waitForAnimationTask).start();
-      Thread.sleep(500);
+      // TODO: add half sec delay
+      // Thred.sleep(500)
       MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing

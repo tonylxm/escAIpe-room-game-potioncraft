@@ -387,8 +387,8 @@ public class MainMenuController {
       protected Void call() throws Exception {
         disableAndOrFadeDifficultyBtns(true, 0, true);
         disableAndOrFadeTimeBtns(false, 1.0, true);
+        continueBtnOne.setOpacity(0.4);
         continueBtnDisable();
-        TransitionAnimation.fade(continueBtnOne, 0.4);
         return null;
       }
     };
