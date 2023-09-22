@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -191,6 +190,7 @@ public class MainMenuController {
     //     new Task<Void>() {
     //       @Override
     //       protected Void call() throws Exception {
+    //         // FIX no click off
     //         introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
     //         return null;
     //       }
@@ -410,6 +410,7 @@ public class MainMenuController {
       protected Void call() throws Exception {
         disableAndOrFadeTimeBtns(true, 0, true);
         TransitionAnimation.fade(continueBtnOne, 0.0);
+        Thread.sleep(1000);
         TransitionAnimation.fade(wizardImg, 1.0);
         Thread.sleep(1000);
         
@@ -422,7 +423,7 @@ public class MainMenuController {
         mouseTrackRegion.setOpacity(0.5);
 
         Thread.sleep(500);
-        appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions when you start the test. Good Luck!"), chatTextArea);
+        appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions once you start the test. Good Luck!"), chatTextArea);
 
         TransitionAnimation.fade(startBtn, 0.4);
         return null;
@@ -462,16 +463,13 @@ public class MainMenuController {
               chatTextArea.appendText(String.valueOf(c));
               Thread.sleep(20);
             }
-            chatTextArea.appendText("\n\n");
+            System.out.println("finished");
+            mouseTrackRegion.setDisable(false);
+            appendIntroMsgFinished = true;
             return null;
           }
         };
     new Thread(appendIntroTask).start();
-    appendIntroTask.setOnSucceeded(
-      e -> {
-        mouseTrackRegion.setDisable(false);
-        appendIntroMsgFinished = true;
-      });
     }
 
   /**
@@ -482,19 +480,29 @@ public class MainMenuController {
    */
   @FXML
   public void clickOff(MouseEvent event) throws InterruptedException {
+    System.out.println("click off");
     if (appendIntroMsgFinished) {
-      System.out.println("click off");
-      TransitionAnimation.fade(wizardImg, 0.0);
-      TransitionAnimation.fade(wizardChatImage, 0.0);
-      TransitionAnimation.fade(textRect, 0.0);
-      TransitionAnimation.fade(chatTextArea, 0.0);
-      TransitionAnimation.fade(ttsBtn2, 0.0);
-      chatTextArea.setDisable(true);
-      ttsBtn2.setDisable(true);
-      mouseTrackRegion.setDisable(true);
-      mouseTrackRegion.setOpacity(0);
+       Task<Void> wizardLeaveTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            TransitionAnimation.fade(wizardChatImage, 0.0);
+            TransitionAnimation.fade(textRect, 0.0);
+            TransitionAnimation.fade(chatTextArea, 0.0);
+            TransitionAnimation.fade(ttsBtn2, 0.0);
+            chatTextArea.setDisable(true);
+            ttsBtn2.setDisable(true);
+            mouseTrackRegion.setDisable(true);
+            mouseTrackRegion.setOpacity(0);
 
-      startBtnEnable();
+            Thread.sleep(1000);
+            TransitionAnimation.fade(wizardImg, 0.0);
+            Thread.sleep(500);
+            startBtnEnable();
+            return null;
+          }
+        };
+    new Thread(wizardLeaveTask).start();
     }
   }
   
@@ -593,21 +601,18 @@ public class MainMenuController {
   public void setTwoMin() {
     timeLimit = TimeLimit.TWO_MIN;
     CountdownTimer.setTimerLimit("2:00");
-    startBtnEnable();
   }
 
   @FXML
   public void setFourMin() {
     timeLimit = TimeLimit.FOUR_MIN;
     CountdownTimer.setTimerLimit("4:00");
-    startBtnEnable();
   }
 
   @FXML
   public void setSixMin() {
     timeLimit = TimeLimit.SIX_MIN;
     CountdownTimer.setTimerLimit("6:00");
-    startBtnEnable();
   }
 
   /**
@@ -660,7 +665,7 @@ public class MainMenuController {
             }
         };
       new Thread(bookRiddleTask).start();
-      System.out.println(riddle);
+      System.out.println(riddle.getContent());
   }
 
   /**
