@@ -305,6 +305,7 @@ public class MainMenuController {
         fourMin.setOpacity(0);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
+        CountdownTimer.setTimerLimit("2:00");
         break;
       // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
@@ -315,6 +316,7 @@ public class MainMenuController {
         fourMin.setOpacity(1);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
+        CountdownTimer.setTimerLimit("4:00");
         break;
       // Using the appropriate glow animation over the 6 minutes image
       case SIX_MIN:
@@ -325,6 +327,7 @@ public class MainMenuController {
         fourMin.setOpacity(0);
         sixMinBtnClicked = true;
         sixMin.setOpacity(1);
+        CountdownTimer.setTimerLimit("6:00");
         break;
     }
     // After selected a time limit, enabling the continue button
