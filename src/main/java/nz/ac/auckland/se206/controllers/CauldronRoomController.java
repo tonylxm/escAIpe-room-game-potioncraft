@@ -77,6 +77,7 @@ public class CauldronRoomController extends RoomController {
     // anything happens to change them within the game
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
+    countdownTimer.setCauldronHintLabel(hintLabel);
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     

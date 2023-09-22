@@ -36,8 +36,8 @@ public class TreasureRoomController extends RoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg);
-    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setTreasureTimerLabel(timerLabel);
+    countdownTimer.setTreasureHintLabel(hintLabel);
     arrowMouseActions(leftShpe);
   }
 
