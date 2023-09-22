@@ -109,6 +109,8 @@ public abstract class RoomController {
   protected ImageView notificationBack;
   @FXML
   protected Label notificationText;
+  @FXML
+  protected ImageView thoughtImage;
 
   protected CountdownTimer countdownTimer;
 
@@ -202,6 +204,7 @@ public abstract class RoomController {
     // Disabling the text box and mouse track region
     setText("", false, false);
     toggleChat(true, 0);
+    thoughtImage.setDisable(true);
 
     // Setting appropriate interactable features for the buttons
     btnMouseActions(bookBtn);
@@ -678,6 +681,9 @@ public abstract class RoomController {
     MainMenuController.getChatHandler().appendChatMessage(
         msg, chatTextArea, inputText, sendButton);
 
+    thoughtImage.setDisable(false);
+    thoughtImage.setOpacity(1);
+
     Task<Void> runGptTask =
         new Task<Void>() {
           @Override
@@ -703,6 +709,8 @@ public abstract class RoomController {
     // Updating the number of hints in each room's labels after the GPT model has run
     runGptTask.setOnSucceeded(
         e -> {
+          thoughtImage.setOpacity(0);
+          thoughtImage.setDisable(true);
           if (MainMenuController.getHints() >= 0) {
             countdownTimer.updateHintLabel(MainMenuController.getHints());
           }

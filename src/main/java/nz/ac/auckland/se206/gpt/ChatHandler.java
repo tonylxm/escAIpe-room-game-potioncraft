@@ -51,7 +51,7 @@ public class ChatHandler {
    * @param msg the chat message to append
    */
   public void appendChatMessage(
-    ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
+      ChatMessage msg, TextArea chatTextArea, TextField inputText, Button sendButton) {
     // Adding the role of the chatter to the start of each message
     String displayRole;
     switch (msg.getRole()) {

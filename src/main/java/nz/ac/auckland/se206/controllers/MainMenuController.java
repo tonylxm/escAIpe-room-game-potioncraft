@@ -191,7 +191,8 @@ public class MainMenuController {
     //       @Override
     //       protected Void call() throws Exception {
     //         // FIX no click off
-    //         introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
+    //         introMsg = new ChatMessage("Wizard", 
+    //             chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
     //         return null;
     //       }
     //     };
@@ -199,26 +200,31 @@ public class MainMenuController {
     // System.out.println(introMsg);
   }
 
-  public void difficultyMouseActions(ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
+  public void difficultyMouseActions(
+      ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
     difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
-    difficultyBtn.setOnMouseExited(event -> difficultyHoverOff(difficultyBtn, difficultyBtnClicked, hint));
+    difficultyBtn.setOnMouseExited(event -> difficultyHoverOff(
+        difficultyBtn, difficultyBtnClicked, hint));
     difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
   }
 
-  public void timeMouseActions(ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, String time) {
+  public void timeMouseActions(
+      ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, String time) {
     timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
     timeBtn.setOnMouseExited(event -> timeLimitHoverOff(timeBtn, timeBtnClicked, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
   }
 
-  public void difficultyHoverOn(ImageView settingsBtn, Text hint) {
+  public void difficultyHoverOn(
+      ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
     if (!difficultySelected) {
       hint.setOpacity(1);
     } 
   }
 
-  public void difficultyHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
+  public void difficultyHoverOff(
+      ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
     if (!difficultySelected) {
       hint.setOpacity(0);
@@ -232,7 +238,8 @@ public class MainMenuController {
     } 
   }
 
-  public void timeLimitHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text timeLimit) {
+  public void timeLimitHoverOff(
+      ImageView settingsBtn, boolean settingsBtnClicked, Text timeLimit) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
     if (!timeSelected) {
       timeLimit.setOpacity(0);
@@ -274,9 +281,14 @@ public class MainMenuController {
     continueBtnEnable();
   }
 
+  /**
+   * Displays the appropriate time limit when hovering over a time limit.
+   * @param time
+   */
   public void timeSelect(String time) {
     timeSelected = true;
     switch (time) {
+      // Using the appropriate glow animation over the 2 minuts image
       case "TWO_MIN":
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
@@ -286,6 +298,7 @@ public class MainMenuController {
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         break;
+      // Using the appropriate glow animation over the 4 minutes image
       case "FOUR_MIN":
         interactionHandler.glowThis(fourMinBtn);
         twoMinBtnClicked = false;
@@ -295,6 +308,7 @@ public class MainMenuController {
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         break;
+      // Using the appropriate glow animation over the 6 minutes image
       case "SIX_MIN":
         interactionHandler.glowThis(sixMinBtn);
         twoMinBtnClicked = false;
@@ -305,6 +319,7 @@ public class MainMenuController {
         sixMin.setOpacity(1);
         break;
     }
+    // After selected a time limit, enabling the continue button
     continueBtnOneEnable();
   }
 
@@ -364,6 +379,7 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+        // Setting the disable and enabling the appropriate animation
         Thread.sleep(500);
         disableAndOrFadeDifficultyBtns(false, 1.0, true);
         TransitionAnimation.fade(continueBtn, 0.4);
@@ -385,8 +401,10 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+        // Setting the disable and fade to true and 0.0 respectively
         disableAndOrFadeDifficultyBtns(true, 0, true);
         disableAndOrFadeTimeBtns(false, 1.0, true);
+        
         continueBtnOne.setOpacity(0.4);
         continueBtnDisable();
         return null;
@@ -406,22 +424,32 @@ public class MainMenuController {
     Task<Void> fadeInStartBtnTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
+        // Setting the disable and fade to true and 0.0 respectively
         disableAndOrFadeTimeBtns(true, 0, true);
         TransitionAnimation.fade(continueBtnOne, 0.0);
         Thread.sleep(1000);
         TransitionAnimation.fade(wizardImg, 1.0);
         Thread.sleep(1000);
-        
+        // Setting the appropriate animation transition
         TransitionAnimation.fade(wizardChatImage, 1.0);
         TransitionAnimation.fade(textRect, 1.0);
         TransitionAnimation.fade(chatTextArea, 1.0);
         TransitionAnimation.fade(ttsBtn2, 1.0);
         TransitionAnimation.fade(mouseTrackRegion, 0.4);
+        
+        // Enabling the chat text area and tts button
         chatTextArea.setDisable(false);
         ttsBtn2.setDisable(false);
 
+        // Intro message to let the user know hwat to do
+        String introMsg = 
+            "Welcome apprentice! Are you ready for your test?"
+            + " Come talk to me for your instructions once you start the test."
+            + " Good Luck!";
+
         Thread.sleep(500);
-        appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions once you start the test. Good Luck!"), chatTextArea);
+        // Showing the intro message, given by the wizard, to the user
+        appendIntroMessage(new ChatMessage("Wizard", introMsg), chatTextArea);
 
         TransitionAnimation.fade(startBtn, 0.4);
         return null;
@@ -430,7 +458,7 @@ public class MainMenuController {
     new Thread(fadeInStartBtnTask).start();
   }
 
-    /**
+  /**
    * Appends intro message to the chat text area.
    *
    * @param msg the chat message to append
@@ -457,10 +485,12 @@ public class MainMenuController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // Adding each character of the message to the chat text area
             for (char c : msg.getContent().toCharArray()) {
               chatTextArea.appendText(String.valueOf(c));
               Thread.sleep(20);
             }
+            // After completion, letting user click off
             System.out.println("finished");
             mouseTrackRegion.setDisable(false);
             appendIntroMsgFinished = true;
@@ -468,7 +498,7 @@ public class MainMenuController {
           }
         };
     new Thread(appendIntroTask).start();
-    }
+  }
 
   /**
    * Handles click off for after the intro message is displayed
@@ -479,7 +509,9 @@ public class MainMenuController {
   @FXML
   public void clickOff(MouseEvent event) throws InterruptedException {
     System.out.println("click off");
+    // Only using the click off property if the wizard has been shown already
     if (appendIntroMsgFinished) {
+       // Using concurency to prevent lag or delay in the program
        Task<Void> wizardLeaveTask =
         new Task<Void>() {
           @Override
@@ -488,10 +520,11 @@ public class MainMenuController {
             TransitionAnimation.fade(textRect, 0.0);
             TransitionAnimation.fade(chatTextArea, 0.0);
             TransitionAnimation.fade(ttsBtn2, 0.0);
+            TransitionAnimation.fade(mouseTrackRegion, 0);
+            // Disabling the chat text area and tts button
             chatTextArea.setDisable(true);
             ttsBtn2.setDisable(true);
             mouseTrackRegion.setDisable(true);
-            TransitionAnimation.fade(mouseTrackRegion, 0);
 
             Thread.sleep(1000);
             TransitionAnimation.fade(wizardImg, 0.0);
@@ -523,7 +556,8 @@ public class MainMenuController {
    * @param ocpacity
    * @param fade
    */
-  public void disableAndOrFadeDifficultyBtns(boolean tf, double opacity, boolean fade) {
+  public void disableAndOrFadeDifficultyBtns(
+      boolean tf, double opacity, boolean fade) {
     easyBtn.setDisable(tf);
     mediumBtn.setDisable(tf);
     hardBtn.setDisable(tf);
@@ -554,27 +588,28 @@ public class MainMenuController {
    * @param ocpacity
    * @param fade
    */
-  public void disableAndOrFadeTimeBtns(boolean tf, double opacity, boolean fade) {
+  public void disableAndOrFadeTimeBtns(
+      boolean tf, double opacity, boolean fade) {
     twoMinBtn.setDisable(tf);
     fourMinBtn.setDisable(tf);
     sixMinBtn.setDisable(tf);
     // Handing animations for fading
     if (fade) {
-        TransitionAnimation.fade(timeLimitTxt, opacity);
-        TransitionAnimation.fade(twoMinBtn, opacity);
-        TransitionAnimation.fade(fourMinBtn, opacity);
-        TransitionAnimation.fade(sixMinBtn, opacity);
+      TransitionAnimation.fade(timeLimitTxt, opacity);
+      TransitionAnimation.fade(twoMinBtn, opacity);
+      TransitionAnimation.fade(fourMinBtn, opacity);
+      TransitionAnimation.fade(sixMinBtn, opacity);
 
-        if (opacity == 0.0) {
-          twoMin.setOpacity(0);
-          fourMin.setOpacity(0);
-          sixMin.setOpacity(0);
+      if (opacity == 0.0) {
+        twoMin.setOpacity(0);
+        fourMin.setOpacity(0);
+        sixMin.setOpacity(0);
 
-          twoMin.setDisable(true);
-          fourMin.setDisable(true);
-          sixMin.setDisable(true);
-        }
+        twoMin.setDisable(true);
+        fourMin.setDisable(true);
+        sixMin.setDisable(true);
       }
+    }
   }
 
   @FXML
@@ -635,25 +670,31 @@ public class MainMenuController {
             protected Void call() throws Exception {
               switch (hints) {
                 case -1:
-                  // When on Dobby mode, selecting the prompt to give the user unlimited hints
+                  // When on Dobby mode, selecting the prompt to give the user 
+                  // unlimited hints
                   riddle = new ChatMessage(
-                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
+                      "Wizard", chatHandler.runGpt(
+                        GptPromptEngineering.getBookRiddleEasy(book)));
 
                   // Message to send to GPT after user has resolved the riddle
                   resolvedRiddle = GptPromptEngineering.getEasyResolved();
                   break;
                 case 5:
-                  // When on Harry mode, selecting the prompt to give the user only 5 hints
+                  // When on Harry mode, selecting the prompt to give the user 
+                  // only 5 hints
                   riddle = new ChatMessage(
-                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
+                      "Wizard", chatHandler.runGpt(
+                        GptPromptEngineering.getBookRiddleMedium(book)));
                   
                   // Message to send to GPT after user has resolved the riddle
                   resolvedRiddle = GptPromptEngineering.getMediumResolved();
                   break;
                 case 0:
-                  // When on Voldemort mode, selecting the prompt to give the user no hints at all
+                  // When on Voldemort mode, selecting the prompt to give the 
+                  // user no hints at all
                   riddle = new ChatMessage(
-                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+                      "Wizard", chatHandler.runGpt(
+                        GptPromptEngineering.getBookRiddleHard(book)));
                   
                   // Message to send to GPT after user has resolved the riddle
                   resolvedRiddle = GptPromptEngineering.getHardResolved();
@@ -662,8 +703,8 @@ public class MainMenuController {
               return null;
             }
         };
-      new Thread(bookRiddleTask).start();
-      System.out.println(riddle.getContent());
+    new Thread(bookRiddleTask).start();
+    System.out.println(riddle.getContent());
   }
 
   /**
@@ -687,7 +728,8 @@ public class MainMenuController {
     // Fade buttons and scene
     disableAndOrFadeTimeBtns(true, 0, false);
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, true);
+    TransitionAnimation.changeScene(
+        pane, AppUi.CAULDRON_ROOM, true);
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     Task<Void> timerStartTask = new Task<Void>() {
@@ -700,7 +742,8 @@ public class MainMenuController {
       }
     };
     countdownTimer.updateHintLabel(hints);
-    Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
+    Thread timerStartThread = new Thread(
+        timerStartTask, "timer start thread");
     timerStartThread.start();
   }
 
@@ -709,7 +752,8 @@ public class MainMenuController {
     Task<Void> speakTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
-        // need to update the chat text area with the game master's response & riddle
+        // need to update the chat text area with the game master's response 
+        // & riddle
         App.textToSpeech.speak(chatTextArea.getText());
         return null;
       }
