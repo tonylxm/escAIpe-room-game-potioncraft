@@ -492,22 +492,21 @@ public class MainMenuController {
     chatTextArea.appendText(displayRole + ": ");
 
     // Appending the message character by character to the chat text area
-    Task<Void> appendIntroTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            // Adding each character of the message to the chat text area
-            for (char c : msg.getContent().toCharArray()) {
-              chatTextArea.appendText(String.valueOf(c));
-              Thread.sleep(20);
-            }
-            // After completion, letting user click off
-            System.out.println("finished");
-            mouseTrackRegion.setDisable(false);
-            appendIntroMsgFinished = true;
-            return null;
-          }
-        };
+    Task<Void> appendIntroTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        // Adding each character of the message to the chat text area
+        for (char c : msg.getContent().toCharArray()) {
+          chatTextArea.appendText(String.valueOf(c));
+          Thread.sleep(20);
+        }
+        // After completion, letting user click off
+        System.out.println("finished");
+        mouseTrackRegion.setDisable(false);
+        appendIntroMsgFinished = true;
+        return null;
+      }
+    };
     new Thread(appendIntroTask).start();
   }
 
@@ -523,28 +522,27 @@ public class MainMenuController {
     // Only using the click off property if the wizard has been shown already
     if (appendIntroMsgFinished) {
        // Using concurency to prevent lag or delay in the program
-       Task<Void> wizardLeaveTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            TransitionAnimation.fade(wizardChatImage, 0.0);
-            TransitionAnimation.fade(textRect, 0.0);
-            TransitionAnimation.fade(chatTextArea, 0.0);
-            TransitionAnimation.fade(ttsBtn2, 0.0);
-            TransitionAnimation.fade(mouseTrackRegion, 0);
-            // Disabling the chat text area and tts button
-            chatTextArea.setDisable(true);
-            ttsBtn2.setDisable(true);
-            mouseTrackRegion.setDisable(true);
+      Task<Void> wizardLeaveTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          TransitionAnimation.fade(wizardChatImage, 0.0);
+          TransitionAnimation.fade(textRect, 0.0);
+          TransitionAnimation.fade(chatTextArea, 0.0);
+          TransitionAnimation.fade(ttsBtn2, 0.0);
+          TransitionAnimation.fade(mouseTrackRegion, 0);
+          // Disabling the chat text area and tts button
+          chatTextArea.setDisable(true);
+          ttsBtn2.setDisable(true);
+          mouseTrackRegion.setDisable(true);
 
-            Thread.sleep(1000);
-            TransitionAnimation.fade(wizardImg, 0.0);
-            Thread.sleep(1000);
-            startBtnEnable();
-            return null;
-          }
-        };
-    new Thread(wizardLeaveTask).start();
+          Thread.sleep(1000);
+          TransitionAnimation.fade(wizardImg, 0.0);
+          Thread.sleep(1000);
+          startBtnEnable();
+          return null;
+        }
+      };
+      new Thread(wizardLeaveTask).start();
     }
   }
   
