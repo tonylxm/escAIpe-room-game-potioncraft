@@ -156,8 +156,8 @@
          </cursor>
       </ImageView>
       <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Button fx:id="brewBtn" layoutX="445.0" layoutY="609.0" mnemonicParsing="false" onAction="#brewPotion" prefHeight="65.0" prefWidth="161.0" text="Brew!" />
-      <Button fx:id="emptyBtn" layoutX="639.0" layoutY="629.0" mnemonicParsing="false" onAction="#emptyCauldron" text="Empty" />
+      <Button fx:id="brewBtn" layoutX="445.0" layoutY="609.0" mnemonicParsing="false" onAction="#onBrewPotion" prefHeight="65.0" prefWidth="161.0" text="Brew!" />
+      <Button fx:id="emptyBtn" layoutX="639.0" layoutY="629.0" mnemonicParsing="false" onAction="#onEmptyCauldron" text="Empty" />
       <ImageView fitHeight="88.0" fitWidth="216.0" layoutX="799.0" layoutY="10.0">
          <image>
             <Image url="@../images/scroll-png-transparent-image--6.png" />

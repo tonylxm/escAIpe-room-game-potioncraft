@@ -21,7 +21,7 @@
             <Font name="Algerian" size="100.0" />
          </font>
       </Text>
-      <Button fx:id="playAgainBtn" layoutX="404.0" layoutY="600.0" mnemonicParsing="false" onAction="#playAgain" text="PLAY AGAIN">
+      <Button fx:id="playAgainBtn" layoutX="404.0" layoutY="600.0" mnemonicParsing="false" onAction="#onPlayAgain" text="PLAY AGAIN">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>

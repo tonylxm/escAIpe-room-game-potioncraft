@@ -25,7 +25,7 @@
                   <Font name="Algerian" size="30.0" />
                </font>
             </Button>
-            <Button fx:id="startBtn" disable="true" layoutX="441.0" layoutY="609.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+            <Button fx:id="startBtn" disable="true" layoutX="441.0" layoutY="609.0" mnemonicParsing="false" onAction="#onStartGame" opacity="0.0" text="START">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>
@@ -40,12 +40,12 @@
                   <Font name="Algerian" size="35.0" />
                </font>
             </Text>
-            <Button fx:id="continueBtn" disable="true" layoutX="420.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGame" opacity="0.0" text="CONTINUE">
+            <Button fx:id="continueBtn" disable="true" layoutX="420.0" layoutY="609.0" mnemonicParsing="false" onAction="#onContinueGame" opacity="0.0" text="CONTINUE">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>
             </Button>
-            <Button fx:id="continueBtnOne" disable="true" layoutX="420.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGameOne" opacity="0.0" text="CONTINUE">
+            <Button fx:id="continueBtnOne" disable="true" layoutX="420.0" layoutY="609.0" mnemonicParsing="false" onAction="#onContinueGameOne" opacity="0.0" text="CONTINUE">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>

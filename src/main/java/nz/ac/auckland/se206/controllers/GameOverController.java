@@ -12,7 +12,7 @@ public class GameOverController {
   @FXML
   private Button playAgainBtn;
 
-  public void playAgain() throws IOException {
+  public void onPlayAgain() throws IOException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     App.setRoot("main_menu");
   }
