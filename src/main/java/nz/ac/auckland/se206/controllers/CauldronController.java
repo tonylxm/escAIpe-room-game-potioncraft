@@ -20,7 +20,6 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
-  private static CauldronController instance;
   @FXML 
   private Pane pane;
   @FXML
@@ -81,10 +80,6 @@ public class CauldronController {
   private CountdownTimer countdownTimer;
 
   private ShapeInteractionHandler interactionHandler;
-
-  public CauldronController() {
-    instance = this;
-  }
 
   @FXML
   private void initialize() {
