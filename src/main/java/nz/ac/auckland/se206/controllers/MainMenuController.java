@@ -186,17 +186,17 @@ public class MainMenuController {
     timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, "SIX_MIN");
 
     // Pregenerate wizard intro message
-    Task<Void> introTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            // FIX no click off
-            introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
-            return null;
-          }
-        };
-    new Thread(introTask).start();
-    System.out.println(introMsg);
+    // Task<Void> introTask =
+    //     new Task<Void>() {
+    //       @Override
+    //       protected Void call() throws Exception {
+    //         // FIX no click off
+    //         introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
+    //         return null;
+    //       }
+    //     };
+    // new Thread(introTask).start();
+    // System.out.println(introMsg);
   }
 
   public void difficultyMouseActions(ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
@@ -462,13 +462,13 @@ public class MainMenuController {
               chatTextArea.appendText(String.valueOf(c));
               Thread.sleep(20);
             }
-            chatTextArea.appendText("\n\n");
             return null;
           }
         };
     new Thread(appendIntroTask).start();
     appendIntroTask.setOnSucceeded(
       e -> {
+        System.out.println("enabled");
         mouseTrackRegion.setDisable(false);
         appendIntroMsgFinished = true;
         startBtnEnable();
@@ -483,13 +483,14 @@ public class MainMenuController {
    */
   @FXML
   public void clickOff(MouseEvent event) throws InterruptedException {
+    System.out.println("click off");
     if (appendIntroMsgFinished) {
-      System.out.println("click off");
-      TransitionAnimation.fade(wizardImg, 0.0);
       TransitionAnimation.fade(wizardChatImage, 0.0);
       TransitionAnimation.fade(textRect, 0.0);
       TransitionAnimation.fade(chatTextArea, 0.0);
       TransitionAnimation.fade(ttsBtn2, 0.0);
+      Thread.sleep(1000);
+      TransitionAnimation.fade(wizardImg, 0.0);
       chatTextArea.setDisable(true);
       ttsBtn2.setDisable(true);
       mouseTrackRegion.setDisable(true);
