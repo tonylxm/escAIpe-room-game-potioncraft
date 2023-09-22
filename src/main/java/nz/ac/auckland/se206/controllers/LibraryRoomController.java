@@ -35,8 +35,8 @@ public class LibraryRoomController extends RoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise("Library", itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg);
-    countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setLibraryTimerLabel(timerLabel);
+    countdownTimer.setLibraryHintLabel(hintLabel);
     arrowMouseActions(rightShpe);
   }
 

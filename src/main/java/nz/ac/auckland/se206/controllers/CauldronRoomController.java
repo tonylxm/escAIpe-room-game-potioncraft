@@ -15,6 +15,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -40,6 +41,12 @@ public class CauldronRoomController extends RoomController {
   private ImageView bookWaterImage;
   @FXML
   private ImageView bookAirImage;
+  @FXML
+  private ImageView fireImg;
+  @FXML
+  private ImageView waterImg;
+  @FXML
+  private ImageView airImg;
   @FXML
   private Rectangle textRect;
   @FXML
@@ -70,6 +77,7 @@ public class CauldronRoomController extends RoomController {
     // anything happens to change them within the game
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setCauldronTimerLabel(timerLabel);
+    countdownTimer.setCauldronHintLabel(hintLabel);
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     
@@ -86,13 +94,23 @@ public class CauldronRoomController extends RoomController {
     btnMouseActions(bookAirRectangle);
   }
 
+  /**
+   * Setting the text for the riddle select label.
+   * @param disable
+   * @param opacity
+   */
   private void toggleBooks(boolean disable, int opacity) {
+    // Making books interactable or not based on the diasble
     bookFireRectangle.setDisable(disable);
     bookWaterRectangle.setDisable(disable);
     bookAirRectangle.setDisable(disable);
+    // Making appropriate images visiable or not based on the opacity
     bookFireRectangle.setOpacity(opacity);
     bookWaterRectangle.setOpacity(opacity);
     bookAirRectangle.setOpacity(opacity);
+    fireImg.setOpacity(opacity);
+    waterImg.setOpacity(opacity);
+    airImg.setOpacity(opacity);
   }
 
   /**
@@ -141,6 +159,11 @@ public class CauldronRoomController extends RoomController {
         chooseLabel.setOpacity(1);
         disableChat(false, 1);
         toggleBooks(false, 1);
+        //set the fire, water and air images to glow
+        ShapeInteractionHandler glow = new ShapeInteractionHandler();
+        glow.glowThis(fireImg);
+        glow.glowThis(waterImg);
+        glow.glowThis(airImg);
       });
       GameState.isBookRiddleGiven = true;
     } else {
@@ -177,6 +200,21 @@ public class CauldronRoomController extends RoomController {
       bookImage.setDisable(true);
       bookRectangle.setDisable(true);
 
+      //switch statement to set the correct image opacity to 0
+      switch (element) {
+        case "fire":
+          fireImg.setOpacity(0);
+          break;
+        case "water":
+          waterImg.setOpacity(0);
+          break;
+        case "air":
+          airImg.setOpacity(0);
+          break;
+        default:
+          break;
+      }
+
       GameState.isBookRiddleResolved = true;
       chooseLabel.setOpacity(0);
 
@@ -186,6 +224,8 @@ public class CauldronRoomController extends RoomController {
       Task<Void> resolvedTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Running gpt after the riddle has been resolved to congratulate
+          // the user and tell GPT what hints to give next
           ChatMessage msg = new ChatMessage(
               "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getResolvedMessage()));

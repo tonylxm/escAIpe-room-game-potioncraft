@@ -36,14 +36,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="80.0" fitWidth="62.0" layoutX="295.0" layoutY="234.0" rotate="83.1">
-         <image>
-            <Image url="@../images/bat_wings.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <ImageView id="itemNineImg" fx:id="itemNineImg" fitHeight="67.0" fitWidth="70.0" layoutX="565.0" layoutY="150.0">
          <image>
             <Image url="@../images/wreath.png" />
@@ -63,6 +55,14 @@
       <ImageView fx:id="wizardImg" fitHeight="200.0" fitWidth="142.0" layoutX="326.0" layoutY="255.0" onMouseClicked="#clickWizard">
          <image>
             <Image url="@../images/wizard.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView id="itemEightImg" fx:id="itemEightImg" fitHeight="80.0" fitWidth="62.0" layoutX="45.0" layoutY="158.0" rotate="83.1">
+         <image>
+            <Image url="@../images/bat_wings.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -133,7 +133,7 @@
             <Font name="Algerian" size="30.0" />
          </font>
       </Label>
-      <Label id="yesLbl" fx:id="yesLbl" layoutX="792.0" layoutY="545.0" onMouseClicked="#addItem" opacity="0.0" text="Y">
+      <Label id="yesLbl" fx:id="yesLbl" layoutX="792.0" layoutY="545.0" onKeyPressed="#onYesPressed" onMouseClicked="#addItem" opacity="0.0" text="Y">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
@@ -157,6 +157,16 @@
       <Label fx:id="timerLabel" layoutX="845.0" layoutY="25.0" prefHeight="67.0" prefWidth="257.0" text="4:00">
          <font>
             <Font name="Algerian" size="42.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="27.0" layoutY="15.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="hintLabel" layoutX="62.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
+         <font>
+            <Font size="38.0" />
          </font>
       </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">

@@ -50,6 +50,14 @@ public class MainMenuController {
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
 
+  public static int getHints() {
+    return hints;
+  }
+
+  public static void setHints(int changedHints) {
+    hints = changedHints;
+  }
+
   public static Items getItems() {
     return items;
   }
@@ -72,10 +80,6 @@ public class MainMenuController {
 
   public static String getResolvedMessage() {
     return resolvedRiddle;
-  }
-
-  public static int getHints() {
-    return hints;
   }
 
   public static CountdownTimer getCountdownTimer() {
@@ -688,6 +692,7 @@ public class MainMenuController {
         return null;
       }
     };
+    countdownTimer.updateHintLabel(hints);
     Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
     timerStartThread.start();
   }

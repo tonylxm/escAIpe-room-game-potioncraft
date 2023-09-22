@@ -20,14 +20,14 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
-import nz.ac.auckland.se206.ShapeInteractionHandler;
-import nz.ac.auckland.se206.TransitionAnimation;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public abstract class RoomController {
   protected static boolean bagOpened;
@@ -93,6 +93,8 @@ public abstract class RoomController {
   protected ImageView bagBtn;
   @FXML
   protected Label timerLabel;
+  @FXML
+  protected Label hintLabel;
 
   @FXML 
   protected TextArea chatTextArea;
@@ -195,6 +197,8 @@ public abstract class RoomController {
 
     interactionHandler = new ShapeInteractionHandler();
 
+    countdownTimer = MainMenuController.getCountdownTimer();
+
     // Disabling the text box and mouse track region
     setText("", false, false);
     toggleChat(true, 0);
@@ -210,6 +214,8 @@ public abstract class RoomController {
     itemMouseActions(itemThreeImg, threeClicked, itemThree);
     itemMouseActions(itemFourImg, fourClicked, itemFour);
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
+
+    
   }
 
   /**
@@ -305,6 +311,8 @@ public abstract class RoomController {
     mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
+    yesLbl.setFocusTraversable(true);
+    yesLbl.requestFocus();
   }
 
   /**
@@ -678,9 +686,27 @@ public abstract class RoomController {
                 "assistant", MainMenuController.getChatHandler().runGpt(message));
             MainMenuController.getChatHandler().appendChatMessage(
                 response, chatTextArea, inputText, sendButton);
+            // Updating the number of hints for medium mode after GPT has given a hint
+            // Checking if the correct role has given the hint, rather than the user
+            if (response.getRole().equals("Wizard")
+                || response.getRole().equals("assistant")) {
+              if (response.getContent().startsWith("Hint")) {
+                int hints = MainMenuController.getHints();
+                hints--;
+                MainMenuController.setHints(hints);
+                System.out.println(MainMenuController.getHints());
+              }
+            }
             return null;
           }
         };
+    // Updating the number of hints in each room's labels after the GPT model has run
+    runGptTask.setOnSucceeded(
+        e -> {
+          if (MainMenuController.getHints() >= 0) {
+            countdownTimer.updateHintLabel(MainMenuController.getHints());
+          }
+        });
     new Thread(runGptTask).start();
   }
 
@@ -691,11 +717,49 @@ public abstract class RoomController {
    */
   @FXML
   public void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
+    System.out.println("any key pressed");
     if (event.getCode().toString().equals("ENTER")) {
       System.out.println("key " + event.getCode() + " pressed");
       onSendMessage(new ActionEvent());
     }
   }
+
+
+  /**
+   * Handles when Y or N is pressed on the input text area.
+   * @param event
+   * @throws ApiProxyException
+   * @throws IOException
+   */
+  @FXML
+  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // If Y us pressed, adding the item
+    if (event.getCode().toString().equals("Y")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      addItem();
+    }
+    // If N is pressed, not adding the item
+    if (event.getCode().toString().equals("N")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      noAdd();
+    }
+  }
+
+  /**
+   * Handles when N is pressed on the input text area.
+   * @param event
+   * @throws ApiProxyException
+   * @throws IOException
+   */
+  @FXML
+  public void onNoPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // Not adding the item if N is pressed
+    if (event.getCode().toString().equals("N")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      noAdd();
+    }
+  }
+
 
   /** 
    * Uses text to speech to read the game master's response to the user's message. 
