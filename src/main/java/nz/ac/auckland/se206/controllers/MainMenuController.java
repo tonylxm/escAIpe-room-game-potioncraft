@@ -388,8 +388,7 @@ public class MainMenuController {
         disableAndOrFadeDifficultyBtns(true, 0, true);
         disableAndOrFadeTimeBtns(false, 1.0, true);
         continueBtnDisable();
-        continueBtnOne.setDisable(false);
-        continueBtnOne.setOpacity(0.4);
+        TransitionAnimation.fade(continueBtnOne, 0.4);
         return null;
       }
     };
@@ -405,7 +404,6 @@ public class MainMenuController {
     continueBtnOne.setOpacity(0.4);
     // Using a task to make sure game does not freeze
     Task<Void> fadeInStartBtnTask = new Task<Void>() {
-
       @Override
       protected Void call() throws Exception {
         disableAndOrFadeTimeBtns(true, 0, true);
@@ -497,7 +495,7 @@ public class MainMenuController {
 
             Thread.sleep(1000);
             TransitionAnimation.fade(wizardImg, 0.0);
-            Thread.sleep(500);
+            Thread.sleep(1000);
             startBtnEnable();
             return null;
           }

@@ -121,19 +121,25 @@ public class CauldronRoomController extends RoomController {
    */
   @FXML
   public void clickCauldron(MouseEvent event) {
-    CauldronController cauldronController = SceneManager.getCauldronControllerInstance();
-    if (cauldronController != null) {
-      cauldronController.updateImageStates();
-    }
+    if (!GameState.isBookRiddleResolved) {
+      notificationText.setText(
+          "The Wizard has some instructions for you! Talk to him first!");
+      Notification.notifyPopup(notificationBack, notificationText);
+    } else {
+      CauldronController cauldronController = SceneManager.getCauldronControllerInstance();
+      if (cauldronController != null) {
+        cauldronController.updateImageStates();
+      }
 
-    // If the cauldronController exists, then switching scenes
-    System.out.println("cauldron clicked");
-    itemScroll.setOpacity(0);
-    bagOpened = false;
-    System.out.println("CAULDRON_ROOM -> CAULDRON");
-    TransitionAnimation.changeScene(pane, AppUi.CAULDRON, false);
-    SceneManager.setTimerScene(AppUi.CAULDRON);
-    System.out.println(Items.necessary);
+      // If the cauldronController exists, then switching scenes
+      System.out.println("cauldron clicked");
+      itemScroll.setOpacity(0);
+      bagOpened = false;
+      System.out.println("CAULDRON_ROOM -> CAULDRON");
+      TransitionAnimation.changeScene(pane, AppUi.CAULDRON, false);
+      SceneManager.setTimerScene(AppUi.CAULDRON);
+      System.out.println(Items.necessary);
+    }
   }
   
   /**
@@ -145,13 +151,22 @@ public class CauldronRoomController extends RoomController {
    * @throws InterruptedException
    */
   @FXML
-  public void clickCauldronRoomWizard(MouseEvent event) {
+  public void clickCauldronRoomWizard(MouseEvent event) throws InterruptedException {
     System.out.println("wizard clicked");
     if (!GameState.isBookRiddleGiven) {
-      toggleChat(false, 1);
-      disableChat(true, 0.5);
-      MainMenuController.getChatHandler().appendChatMessage(
-          MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
+      Task<Void> waitForAnimationTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          // Running gpt to get the riddle from the wizard
+          toggleChat(false, 1);
+          mouseTrackRegion.setDisable(true);
+          disableChat(true, 0.5);
+          return null;
+        }
+      };
+      new Thread(waitForAnimationTask).start();
+      Thread.sleep(500);
+      MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
       // the user to select the book and respond to the wizard
@@ -235,6 +250,9 @@ public class CauldronRoomController extends RoomController {
         }
       };
       new Thread(resolvedTask).start();
+      resolvedTask.setOnSucceeded(e -> {
+        mouseTrackRegion.setDisable(false);
+      });
     }
   }
 
