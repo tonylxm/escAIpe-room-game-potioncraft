@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -183,16 +182,17 @@ public class MainMenuController {
     timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, "SIX_MIN");
 
     // Pregenerate wizard intro message
-    // Task<Void> introTask =
-    //     new Task<Void>() {
-    //       @Override
-    //       protected Void call() throws Exception {
-    //         introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
-    //         return null;
-    //       }
-    //     };
-    // new Thread(introTask).start();
-    // System.out.println(introMsg);
+    Task<Void> introTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            // FIX no click off
+            introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
+            return null;
+          }
+        };
+    new Thread(introTask).start();
+    System.out.println(introMsg);
   }
 
   public void difficultyMouseActions(ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
@@ -409,18 +409,19 @@ public class MainMenuController {
         TransitionAnimation.fade(wizardImg, 1.0);
         Thread.sleep(1000);
         
-        TransitionAnimation.fade(wizardChatImage, 1.0);
-        TransitionAnimation.fade(textRect, 1.0);
-        TransitionAnimation.fade(chatTextArea, 1.0);
-        TransitionAnimation.fade(ttsBtn2, 1.0);
-        chatTextArea.setDisable(false);
-        ttsBtn2.setDisable(false);
-        mouseTrackRegion.setOpacity(0.5);
+        // TransitionAnimation.fade(wizardChatImage, 1.0);
+        // TransitionAnimation.fade(textRect, 1.0);
+        // TransitionAnimation.fade(chatTextArea, 1.0);
+        // TransitionAnimation.fade(ttsBtn2, 1.0);
+        // chatTextArea.setDisable(false);
+        // ttsBtn2.setDisable(false);
+        // mouseTrackRegion.setOpacity(0.5);
 
         Thread.sleep(500);
-        appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions when you start the test. Good Luck!"), chatTextArea);
+        // appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions once you start the test. Good Luck!"), chatTextArea);
 
         TransitionAnimation.fade(startBtn, 0.4);
+        startBtnEnable();
         return null;
       }
     };

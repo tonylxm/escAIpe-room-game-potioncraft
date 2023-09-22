@@ -69,31 +69,49 @@
                <image>
                   <Image url="@../images/dobby.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="mediumBtn" disable="true" fitHeight="232.0" fitWidth="144.0" layoutX="448.0" layoutY="292.0" onMouseClicked="#setMedium" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/harry.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="hardBtn" disable="true" fitHeight="279.0" fitWidth="185.0" layoutX="696.0" layoutY="245.0" onMouseClicked="#setHard" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/voldemort.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="twoMinBtn" disable="true" fitHeight="112.0" fitWidth="118.0" layoutX="217.0" layoutY="364.0" onMouseClicked="#setTwoMin" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/hourglass-1024x1024.gif" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="fourMinBtn" disable="true" fitHeight="112.0" fitWidth="118.0" layoutX="457.0" layoutY="352.0" onMouseClicked="#setFourMin" opacity="0.0" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3" scaleZ="1.3">
                <image>
                   <Image url="@../images/hourglass-1024x1024.gif" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="sixMinBtn" disable="true" fitHeight="112.0" fitWidth="118.0" layoutX="727.0" layoutY="340.0" onMouseClicked="#setSixMin" opacity="0.0" pickOnBounds="true" preserveRatio="true" scaleX="1.7" scaleY="1.7" scaleZ="1.7">
                <image>
                   <Image url="@../images/hourglass-1024x1024.gif" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <Text fx:id="twoMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 MIN">
                <font>
@@ -118,7 +136,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" disable="true" height="680.0" layoutX="-4.0" layoutY="34.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+            <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" disable="true" height="680.0" layoutX="-4.0" layoutY="-1.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Rectangle>
             <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="169.0" layoutY="302.0" opacity="0.0">
                <image>
                   <Image url="@../images/headshot.png" />
