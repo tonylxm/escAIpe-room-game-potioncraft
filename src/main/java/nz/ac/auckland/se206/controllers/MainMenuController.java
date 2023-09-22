@@ -409,19 +409,18 @@ public class MainMenuController {
         TransitionAnimation.fade(wizardImg, 1.0);
         Thread.sleep(1000);
         
-        // TransitionAnimation.fade(wizardChatImage, 1.0);
-        // TransitionAnimation.fade(textRect, 1.0);
-        // TransitionAnimation.fade(chatTextArea, 1.0);
-        // TransitionAnimation.fade(ttsBtn2, 1.0);
-        // chatTextArea.setDisable(false);
-        // ttsBtn2.setDisable(false);
-        // mouseTrackRegion.setOpacity(0.5);
+        TransitionAnimation.fade(wizardChatImage, 1.0);
+        TransitionAnimation.fade(textRect, 1.0);
+        TransitionAnimation.fade(chatTextArea, 1.0);
+        TransitionAnimation.fade(ttsBtn2, 1.0);
+        chatTextArea.setDisable(false);
+        ttsBtn2.setDisable(false);
+        mouseTrackRegion.setOpacity(0.5);
 
         Thread.sleep(500);
-        // appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions once you start the test. Good Luck!"), chatTextArea);
+        appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions once you start the test. Good Luck!"), chatTextArea);
 
         TransitionAnimation.fade(startBtn, 0.4);
-        startBtnEnable();
         return null;
       }
     };
@@ -468,6 +467,7 @@ public class MainMenuController {
       e -> {
         mouseTrackRegion.setDisable(false);
         appendIntroMsgFinished = true;
+        startBtnEnable();
       });
     }
 
@@ -490,8 +490,6 @@ public class MainMenuController {
       ttsBtn2.setDisable(true);
       mouseTrackRegion.setDisable(true);
       mouseTrackRegion.setOpacity(0);
-
-      startBtnEnable();
     }
   }
   
@@ -590,21 +588,18 @@ public class MainMenuController {
   public void setTwoMin() {
     timeLimit = TimeLimit.TWO_MIN;
     CountdownTimer.setTimerLimit("2:00");
-    startBtnEnable();
   }
 
   @FXML
   public void setFourMin() {
     timeLimit = TimeLimit.FOUR_MIN;
     CountdownTimer.setTimerLimit("4:00");
-    startBtnEnable();
   }
 
   @FXML
   public void setSixMin() {
     timeLimit = TimeLimit.SIX_MIN;
     CountdownTimer.setTimerLimit("6:00");
-    startBtnEnable();
   }
 
   /**
