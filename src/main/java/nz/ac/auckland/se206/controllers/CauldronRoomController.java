@@ -249,11 +249,11 @@ public class CauldronRoomController extends RoomController {
     itemFourteenImg.setDisable(false);
     itemFifteenImg.setDisable(false);
     // Making all items visible
-    itemElevenImg.setOpacity(1);
-    itemTwelveImg.setOpacity(1);
-    itemThirteenImg.setOpacity(1);
-    itemFourteenImg.setOpacity(1);
-    itemFifteenImg.setOpacity(1);
+    TransitionAnimation.fade(itemElevenImg, 1.0);
+    TransitionAnimation.fade(itemTwelveImg, 1.0);
+    TransitionAnimation.fade(itemThirteenImg, 1.0);
+    TransitionAnimation.fade(itemFourteenImg, 1.0);
+    TransitionAnimation.fade(itemFifteenImg, 1.0);
   }
 
   /**

@@ -214,8 +214,6 @@ public abstract class RoomController {
     itemMouseActions(itemThreeImg, threeClicked, itemThree);
     itemMouseActions(itemFourImg, fourClicked, itemFour);
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
-
-    
   }
 
   /**
@@ -631,23 +629,23 @@ public abstract class RoomController {
   protected void toggleChat(boolean disable, int opacity) {
     // Enabling/disabling the approrpiate fields and making everything invisible/visible
     chatTextArea.setDisable(disable);
-    chatTextArea.setOpacity(opacity);
-    
+    TransitionAnimation.fade(chatTextArea, opacity);
     inputText.setDisable(disable);
-    inputText.setOpacity(opacity);
+    TransitionAnimation.fade(inputText, opacity);
     sendButton.setDisable(disable);
-    sendButton.setOpacity(opacity);
+    TransitionAnimation.fade(sendButton, opacity);
     ttsBtn2.setDisable(disable);
-    ttsBtn2.setOpacity(opacity);
+    TransitionAnimation.fade(ttsBtn2, opacity);
     textRect.setDisable(disable);
-    textRect.setOpacity(opacity);
+    TransitionAnimation.fade(textRect, opacity);
     wizardChatImage.setDisable(disable);
-    wizardChatImage.setOpacity(opacity);
+    TransitionAnimation.fade(wizardChatImage, opacity);
+
     mouseTrackRegion.setDisable(disable);
     if (opacity == 0) {
-      mouseTrackRegion.setOpacity(0);
+      TransitionAnimation.fade(mouseTrackRegion, 0);
     } else {
-      mouseTrackRegion.setOpacity(0.5);
+      TransitionAnimation.fade(mouseTrackRegion, 0.4);
     }
   }
 

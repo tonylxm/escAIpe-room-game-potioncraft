@@ -418,9 +418,9 @@ public class MainMenuController {
         TransitionAnimation.fade(textRect, 1.0);
         TransitionAnimation.fade(chatTextArea, 1.0);
         TransitionAnimation.fade(ttsBtn2, 1.0);
+        TransitionAnimation.fade(mouseTrackRegion, 0.4);
         chatTextArea.setDisable(false);
         ttsBtn2.setDisable(false);
-        mouseTrackRegion.setOpacity(0.5);
 
         Thread.sleep(500);
         appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions once you start the test. Good Luck!"), chatTextArea);
@@ -493,7 +493,7 @@ public class MainMenuController {
             chatTextArea.setDisable(true);
             ttsBtn2.setDisable(true);
             mouseTrackRegion.setDisable(true);
-            mouseTrackRegion.setOpacity(0);
+            TransitionAnimation.fade(mouseTrackRegion, 0);
 
             Thread.sleep(1000);
             TransitionAnimation.fade(wizardImg, 0.0);

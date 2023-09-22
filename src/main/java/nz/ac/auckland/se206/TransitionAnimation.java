@@ -27,14 +27,13 @@ public class TransitionAnimation {
       fromValue = 0.0;
       toValue = 1.0;
 
-      // Fade in startBtn intitally as disabled and greyed out until settings have
-      // been selected
+      // Fade in intitally as disabled and greyed out until settings have been selected
     } else if (opacity == 0.4) {
       fromValue = 0.0;
       toValue = 0.4;
       // Fade out
     } else {
-      fromValue = 1.0;
+      fromValue = obj.getOpacity();
       toValue = 0.0;
     }
     fadeTransition.setFromValue(fromValue);
