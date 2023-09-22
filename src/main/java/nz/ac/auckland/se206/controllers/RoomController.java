@@ -692,8 +692,10 @@ public abstract class RoomController {
             if (response.getRole().equals("Wizard")
                 || response.getRole().equals("assistant")) {
               if (response.getContent().startsWith("Hint")) {
-                MainMenuController.hints--;  
-                System.out.println(MainMenuController.hints);
+                int hints = MainMenuController.getHints();
+                hints--;
+                MainMenuController.setHints(hints);
+                System.out.println(MainMenuController.getHints());
               }
             }
             return null;
@@ -701,8 +703,8 @@ public abstract class RoomController {
         };
     runGptTask.setOnSucceeded(
         e -> {
-          if (MainMenuController.hints >= 0) {
-            countdownTimer.updateHintLabel(MainMenuController.hints);
+          if (MainMenuController.getHints() >= 0) {
+            countdownTimer.updateHintLabel(MainMenuController.getHints());
           }
         });
     new Thread(runGptTask).start();
