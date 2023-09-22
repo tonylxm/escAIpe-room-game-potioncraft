@@ -691,9 +691,10 @@ public abstract class RoomController {
             if (response.getRole().equals("Wizard")
                 || response.getRole().equals("assistant")) {
               if (response.getContent().startsWith("Hint")) {
-                // Decrementing the hints
-                MainMenuController.hints--;  
-                System.out.println(MainMenuController.hints);
+                int hints = MainMenuController.getHints();
+                hints--;
+                MainMenuController.setHints(hints);
+                System.out.println(MainMenuController.getHints());
               }
             }
             return null;
@@ -702,8 +703,8 @@ public abstract class RoomController {
     // Updating the number of hints in each room's labels after the GPT model has run
     runGptTask.setOnSucceeded(
         e -> {
-          if (MainMenuController.hints >= 0) {
-            countdownTimer.updateHintLabel(MainMenuController.hints);
+          if (MainMenuController.getHints() >= 0) {
+            countdownTimer.updateHintLabel(MainMenuController.getHints());
           }
         });
     new Thread(runGptTask).start();

@@ -51,6 +51,14 @@ public class MainMenuController {
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
 
+  public static int getHints() {
+    return hints;
+  }
+
+  public static void setHints(int changedHints) {
+    hints = changedHints;
+  }
+
   public static Items getItems() {
     return items;
   }
