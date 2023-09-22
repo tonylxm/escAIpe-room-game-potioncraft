@@ -732,7 +732,7 @@ public abstract class RoomController {
    * @throws IOException
    */
   @FXML
-  public void onYPressed(KeyEvent event) throws ApiProxyException, IOException {
+  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException {
     // If Y us pressed, adding the item
     if (event.getCode().toString().equals("Y")) {
       System.out.println("key " + event.getCode() + " pressed");
@@ -752,7 +752,7 @@ public abstract class RoomController {
    * @throws IOException
    */
   @FXML
-  public void onNPressed(KeyEvent event) throws ApiProxyException, IOException {
+  public void onNoPressed(KeyEvent event) throws ApiProxyException, IOException {
     // Not adding the item if N is pressed
     if (event.getCode().toString().equals("N")) {
       System.out.println("key " + event.getCode() + " pressed");
