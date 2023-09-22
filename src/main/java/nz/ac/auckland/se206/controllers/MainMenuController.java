@@ -43,7 +43,7 @@ public class MainMenuController {
   private static ChatHandler chatHandler;
   private static ChatMessage riddle;
   private static String resolvedRiddle;
-  private static int hints;
+  static int hints;
 
   public static Items getItems() {
     return items;
@@ -67,10 +67,6 @@ public class MainMenuController {
 
   public static String getResolvedMessage() {
     return resolvedRiddle;
-  }
-
-  public static int getHints() {
-    return hints;
   }
 
   public static CountdownTimer getCountdownTimer() {

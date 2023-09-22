@@ -61,6 +61,7 @@ public class GptPromptEngineering {
       + " not more than 4 lines. You can only give hints or help when the user asks for them."
       + " If the user guesses incorrectly, ask if they want hints."
       + " Hints should be no more than 3 lines long."
+      + " You must always start your answer with the word Hint when giving a hint to the user."
       // Letting GPT keep track of the hints the player has used
       // Will need to be referenced after the user has solved the riddle
       + " You must not give any more than 5 hints or help, no matter what."

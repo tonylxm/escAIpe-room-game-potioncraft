@@ -159,6 +159,16 @@
             <Font name="Algerian" size="42.0" />
          </font>
       </Label>
+      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="27.0" layoutY="15.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="hintLabel" layoutX="62.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
+         <font>
+            <Font name="Algerian" size="42.0" />
+         </font>
+      </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
          <image>
             <Image url="@../images/hourglass-1024x1024.gif" />
