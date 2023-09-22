@@ -250,6 +250,7 @@ public class CauldronRoomController extends RoomController {
           return null;
         }
       };
+      // TODO: change to after appendTask is completed
       new Thread(resolvedTask).start();
       resolvedTask.setOnSucceeded(e -> {
         mouseTrackRegion.setDisable(false);
