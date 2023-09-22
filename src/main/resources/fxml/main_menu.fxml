@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -23,7 +25,7 @@
                   <Font name="Algerian" size="30.0" />
                </font>
             </Button>
-            <Button fx:id="startBtn" disable="true" layoutX="446.0" layoutY="609.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
+            <Button fx:id="startBtn" disable="true" layoutX="441.0" layoutY="609.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" text="START">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>
@@ -38,16 +40,16 @@
                   <Font name="Algerian" size="35.0" />
                </font>
             </Text>
-            <Button fx:id="continueBtn" disable="true" layoutX="425.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGame" opacity="0.0" text="CONTINUE">
+            <Button fx:id="continueBtn" disable="true" layoutX="420.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGame" opacity="0.0" text="CONTINUE">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>
             </Button>
-            <ImageView fitHeight="127.0" fitWidth="822.0" layoutX="101.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/title.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="continueBtnOne" disable="true" layoutX="420.0" layoutY="609.0" mnemonicParsing="false" onAction="#continueGameOne" opacity="0.0" text="CONTINUE">
+               <font>
+                  <Font name="Algerian" size="30.0" />
+               </font>
+            </Button>
             <Text fx:id="hintZero" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
                <font>
                   <Font name="Algerian" size="20.0" />
@@ -108,6 +110,42 @@
                   <Font name="Algerian" size="20.0" />
                </font>
             </Text>
+            <ImageView id="wizardImg" fx:id="wizardImg" disable="true" fitHeight="240.0" fitWidth="174.0" layoutX="421.0" layoutY="276.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/wizard.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" disable="true" height="680.0" layoutX="-4.0" layoutY="34.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+            <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="169.0" layoutY="302.0" opacity="0.0">
+               <image>
+                  <Image url="@../images/headshot.png" />
+               </image>
+            </ImageView>
+            <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffe1b2" height="175.0" layoutX="126.0" layoutY="491.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
+            <TextArea fx:id="chatTextArea" disable="true" editable="false" layoutX="137.0" layoutY="501.0" opacity="0.0" prefHeight="157.0" prefWidth="763.0" wrapText="true">
+               <font>
+                  <Font name="Algerian" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </TextArea>
+            <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="855.0" layoutY="638.0" onMouseClicked="#readGameMasterResponse" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/tts-icon.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="127.0" fitWidth="822.0" layoutX="101.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/title.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

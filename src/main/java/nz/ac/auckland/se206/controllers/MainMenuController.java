@@ -6,10 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
@@ -87,6 +89,7 @@ public class MainMenuController {
   private String[] options = {"fire", "water", "air"};
 
   private boolean difficultySelected;
+  private boolean timeSelected;
 
   @FXML
   private Pane masterPane;
@@ -96,6 +99,8 @@ public class MainMenuController {
   private Button playBtn;
   @FXML
   private Button continueBtn;
+  @FXML
+  private Button continueBtnOne;
   @FXML
   private Button startBtn;
   @FXML
@@ -127,6 +132,19 @@ public class MainMenuController {
   @FXML
   private Text sixMin;
 
+  @FXML
+  private ImageView wizardChatImage;
+  @FXML
+  private ImageView wizardImg;
+  @FXML
+  private Rectangle textRect;
+  @FXML 
+  private TextArea chatTextArea;
+  @FXML
+  private ImageView ttsBtn2;
+  @FXML
+  private Rectangle mouseTrackRegion;
+
   private boolean easyBtnClicked;
   private boolean mediumBtnClicked;
   private boolean hardBtnClicked;
@@ -134,7 +152,8 @@ public class MainMenuController {
   private boolean fourMinBtnClicked;
   private boolean sixMinBtnClicked;
 
-  private boolean secondContinueClick;
+  private ChatMessage introMsg;
+  private boolean appendIntroMsgFinished;
 
   public void initialize() {
     // Item & inventory generation
@@ -142,6 +161,8 @@ public class MainMenuController {
     inventory = new Inventory();
     TransitionAnimation.setMasterPane(masterPane);
     difficultySelected = false;
+    timeSelected = false;
+    appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
 
     // Initialise booleans for settings selection
@@ -152,8 +173,6 @@ public class MainMenuController {
     fourMinBtnClicked = false;
     sixMinBtnClicked = false;
 
-    secondContinueClick = false;
-
     // Setting appropriate interactable features for the settings buttons including hover hints
     difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, "EASY");
     difficultyMouseActions(mediumBtn, mediumBtnClicked, hintFive, "MEDIUM");
@@ -162,32 +181,58 @@ public class MainMenuController {
     timeMouseActions(twoMinBtn, twoMinBtnClicked, twoMin, "TWO_MIN");
     timeMouseActions(fourMinBtn, fourMinBtnClicked, fourMin, "FOUR_MIN");
     timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, "SIX_MIN");
+
+    // Pregenerate wizard intro message
+    // Task<Void> introTask =
+    //     new Task<Void>() {
+    //       @Override
+    //       protected Void call() throws Exception {
+    //         introMsg = new ChatMessage("Wizard", chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
+    //         return null;
+    //       }
+    //     };
+    // new Thread(introTask).start();
+    // System.out.println(introMsg);
   }
 
   public void difficultyMouseActions(ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, String difficulty) {
-    difficultyBtn.setOnMouseEntered(event -> settingsHoverOn(difficultyBtn, hint));
-    difficultyBtn.setOnMouseExited(event -> settingsHoverOff(difficultyBtn, difficultyBtnClicked, hint));
+    difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
+    difficultyBtn.setOnMouseExited(event -> difficultyHoverOff(difficultyBtn, difficultyBtnClicked, hint));
     difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
   }
 
-  public void timeMouseActions(ImageView timeBtn, boolean timeBtnClicked, Text hint, String time) {
-    timeBtn.setOnMouseEntered(event -> settingsHoverOn(timeBtn, hint));
-    timeBtn.setOnMouseExited(event -> settingsHoverOff(timeBtn, timeBtnClicked, hint));
+  public void timeMouseActions(ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, String time) {
+    timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
+    timeBtn.setOnMouseExited(event -> timeLimitHoverOff(timeBtn, timeBtnClicked, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
   }
 
-  public void settingsHoverOn(ImageView settingsBtn, Text hint) {
+  public void difficultyHoverOn(ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
     if (!difficultySelected) {
       hint.setOpacity(1);
-    }
+    } 
   }
 
-  public void settingsHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
+  public void difficultyHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
     if (!difficultySelected) {
       hint.setOpacity(0);
-    }
+    } 
+  }
+
+  public void timeLimitHoverOn(ImageView settingsBtn, Text hint) {
+    interactionHandler.glowThis(settingsBtn);
+    if (!timeSelected) {
+      hint.setOpacity(1);
+    } 
+  }
+
+  public void timeLimitHoverOff(ImageView settingsBtn, boolean settingsBtnClicked, Text timeLimit) {
+    interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
+    if (!timeSelected) {
+      timeLimit.setOpacity(0);
+    } 
   }
 
   /**
@@ -222,43 +267,42 @@ public class MainMenuController {
         hintZero.setOpacity(1);
         break;
     }
-    continueBtn.setDisable(false);
-    continueBtn.setOpacity(1.0);
+    continueBtnEnable();
   }
 
   public void timeSelect(String time) {
-      switch (time) {
-        case "TWO_MIN":
-          interactionHandler.glowThis(twoMinBtn);
-          twoMinBtnClicked = true;
-          twoMin.setOpacity(1);
-          fourMinBtnClicked = false;
-          fourMin.setOpacity(0);
-          sixMinBtnClicked = false;
-          sixMin.setOpacity(0);
-          break;
-        case "FOUR_MIN":
-          interactionHandler.glowThis(fourMinBtn);
-          twoMinBtnClicked = false;
-          twoMin.setOpacity(0);
-          fourMinBtnClicked = true;
-          fourMin.setOpacity(1);
-          sixMinBtnClicked = false;
-          sixMin.setOpacity(0);
-          break;
-        case "SIX_MIN":
-          interactionHandler.glowThis(sixMinBtn);
-          twoMinBtnClicked = false;
-          twoMin.setOpacity(0);
-          fourMinBtnClicked = false;
-          fourMin.setOpacity(0);
-          sixMinBtnClicked = true;
-          sixMin.setOpacity(1);
-          break;
-      }
-      continueBtn.setDisable(false);
-      continueBtn.setOpacity(1.0);
+    timeSelected = true;
+    switch (time) {
+      case "TWO_MIN":
+        interactionHandler.glowThis(twoMinBtn);
+        twoMinBtnClicked = true;
+        twoMin.setOpacity(1);
+        fourMinBtnClicked = false;
+        fourMin.setOpacity(0);
+        sixMinBtnClicked = false;
+        sixMin.setOpacity(0);
+        break;
+      case "FOUR_MIN":
+        interactionHandler.glowThis(fourMinBtn);
+        twoMinBtnClicked = false;
+        twoMin.setOpacity(0);
+        fourMinBtnClicked = true;
+        fourMin.setOpacity(1);
+        sixMinBtnClicked = false;
+        sixMin.setOpacity(0);
+        break;
+      case "SIX_MIN":
+        interactionHandler.glowThis(sixMinBtn);
+        twoMinBtnClicked = false;
+        twoMin.setOpacity(0);
+        fourMinBtnClicked = false;
+        fourMin.setOpacity(0);
+        sixMinBtnClicked = true;
+        sixMin.setOpacity(1);
+        break;
     }
+    continueBtnOneEnable();
+  }
 
   /**
    * Handles starting a new game by creating new instances of the required scenes
@@ -326,7 +370,7 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate scenes
+   * Handles continuing a game by loading the appropriate settings
    */
   @FXML
   public void continueGame() {
@@ -337,19 +381,119 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        if (!secondContinueClick) {
-          disableAndOrFadeDifficultyBtns(true, 0, true);
-          disableAndOrFadeTimeBtns(false, 1.0, true);
-        } else {
-          disableAndOrFadeTimeBtns(true, 0, true);
-          
-        }
+        disableAndOrFadeDifficultyBtns(true, 0, true);
+        disableAndOrFadeTimeBtns(false, 1.0, true);
+        continueBtnDisable();
+        continueBtnOne.setDisable(false);
+        continueBtnOne.setOpacity(0.4);
         return null;
       }
     };
     new Thread(fadeInSettingsBtnsTask).start();
   }
 
+  /**
+   * Handles continuing a game by loading the appropriate settings
+   */
+  @FXML
+  public void continueGameOne() {
+    continueBtnOne.setDisable(true);
+    continueBtnOne.setOpacity(0.4);
+    // Using a task to make sure game does not freeze
+    Task<Void> fadeInStartBtnTask = new Task<Void>() {
+
+      @Override
+      protected Void call() throws Exception {
+        disableAndOrFadeTimeBtns(true, 0, true);
+        TransitionAnimation.fade(continueBtnOne, 0.0);
+        TransitionAnimation.fade(wizardImg, 1.0);
+        Thread.sleep(1000);
+        
+        TransitionAnimation.fade(wizardChatImage, 1.0);
+        TransitionAnimation.fade(textRect, 1.0);
+        TransitionAnimation.fade(chatTextArea, 1.0);
+        TransitionAnimation.fade(ttsBtn2, 1.0);
+        chatTextArea.setDisable(false);
+        ttsBtn2.setDisable(false);
+        mouseTrackRegion.setOpacity(0.5);
+
+        Thread.sleep(500);
+        appendIntroMessage(new ChatMessage("Wizard", "Welcome apprentice! Are you ready for your test? Come talk to me for your instructions when you start the test. Good Luck!"), chatTextArea);
+
+        TransitionAnimation.fade(startBtn, 0.4);
+        return null;
+      }
+    };
+    new Thread(fadeInStartBtnTask).start();
+  }
+
+    /**
+   * Appends intro message to the chat text area.
+   *
+   * @param msg the chat message to append
+   */
+  public void appendIntroMessage(ChatMessage msg, TextArea chatTextArea) {
+    // Adding the role of the chatter to the start of each message
+    String displayRole;
+    switch (msg.getRole()) {
+      case "assistant":
+        displayRole = "Wizard";
+        break;
+      case "user":
+        displayRole = "You";
+        break;
+      default:
+        displayRole = msg.getRole();
+        break;
+    }
+
+    chatTextArea.appendText(displayRole + ": ");
+
+    // Appending the message character by character to the chat text area
+    Task<Void> appendIntroTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            for (char c : msg.getContent().toCharArray()) {
+              chatTextArea.appendText(String.valueOf(c));
+              Thread.sleep(20);
+            }
+            chatTextArea.appendText("\n\n");
+            return null;
+          }
+        };
+    new Thread(appendIntroTask).start();
+    appendIntroTask.setOnSucceeded(
+      e -> {
+        mouseTrackRegion.setDisable(false);
+        appendIntroMsgFinished = true;
+      });
+    }
+
+  /**
+   * Handles click off for after the intro message is displayed
+   * 
+   * @param event
+   * @throws InterruptedException
+   */
+  @FXML
+  public void clickOff(MouseEvent event) throws InterruptedException {
+    if (appendIntroMsgFinished) {
+      System.out.println("click off");
+      TransitionAnimation.fade(wizardImg, 0.0);
+      TransitionAnimation.fade(wizardChatImage, 0.0);
+      TransitionAnimation.fade(textRect, 0.0);
+      TransitionAnimation.fade(chatTextArea, 0.0);
+      TransitionAnimation.fade(ttsBtn2, 0.0);
+      chatTextArea.setDisable(true);
+      ttsBtn2.setDisable(true);
+      mouseTrackRegion.setDisable(true);
+      mouseTrackRegion.setOpacity(0);
+
+      startBtnEnable();
+    }
+  }
+  
   /**
    * Generating a random book for the user to guess through the riddle
    * 
@@ -420,47 +564,6 @@ public class MainMenuController {
           fourMin.setDisable(true);
           sixMin.setDisable(true);
         }
-
-        if (secondContinueClick) {
-          TransitionAnimation.fade(continueBtn, 0.4);
-
-          Task<Void> bookRiddleTask =
-            new Task<Void>() {
-              @Override
-              protected Void call() throws Exception {
-                switch (hints) {
-                  case -1:
-                    // When on Dobby mode, selecting the prompt to give the user unlimited hints
-                    riddle = new ChatMessage(
-                        "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
-
-                    // Message to send to GPT after user has resolved the riddle
-                    resolvedRiddle = GptPromptEngineering.getEasyResolved();
-                    break;
-                  case 5:
-                    // When on Harry mode, selecting the prompt to give the user only 5 hints
-                    riddle = new ChatMessage(
-                        "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
-                    
-                    // Message to send to GPT after user has resolved the riddle
-                    resolvedRiddle = GptPromptEngineering.getMediumResolved();
-                    break;
-                  case 0:
-                    // When on Voldemort mode, selecting the prompt to give the user no hints at all
-                    riddle = new ChatMessage(
-                        "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
-                    
-                    // Message to send to GPT after user has resolved the riddle
-                    resolvedRiddle = GptPromptEngineering.getHardResolved();
-                    break;
-                }
-                return null;
-              }
-          };
-        new Thread(bookRiddleTask).start();
-        System.out.println(riddle);
-        }
-        secondContinueClick = true;
       }
   }
 
@@ -504,23 +607,72 @@ public class MainMenuController {
   }
 
   /**
-   * Only set continueBtn enabled when difficutly and time limit have been chosen
+   * Enable continueBtn and set visible
    */
   public void continueBtnEnable() {
-    if (difficulty != null && timeLimit != null) {
-      continueBtn.setDisable(false);
-      continueBtn.setOpacity(1.0);
-    }
+    continueBtn.setDisable(false);
+    continueBtn.setOpacity(1.0);
   }
 
   /**
-   * Only set startBtn enabled when difficutly and time limit have been chosen
+   * Enable continueBtn, set invisible and pregenerate book riddle
+   */
+
+  public void continueBtnDisable() {
+    continueBtn.setDisable(true);
+    continueBtn.setOpacity(0.0);
+
+    Task<Void> bookRiddleTask =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              switch (hints) {
+                case -1:
+                  // When on Dobby mode, selecting the prompt to give the user unlimited hints
+                  riddle = new ChatMessage(
+                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleEasy(book)));
+
+                  // Message to send to GPT after user has resolved the riddle
+                  resolvedRiddle = GptPromptEngineering.getEasyResolved();
+                  break;
+                case 5:
+                  // When on Harry mode, selecting the prompt to give the user only 5 hints
+                  riddle = new ChatMessage(
+                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleMedium(book)));
+                  
+                  // Message to send to GPT after user has resolved the riddle
+                  resolvedRiddle = GptPromptEngineering.getMediumResolved();
+                  break;
+                case 0:
+                  // When on Voldemort mode, selecting the prompt to give the user no hints at all
+                  riddle = new ChatMessage(
+                      "Wizard", chatHandler.runGpt(GptPromptEngineering.getBookRiddleHard(book)));
+                  
+                  // Message to send to GPT after user has resolved the riddle
+                  resolvedRiddle = GptPromptEngineering.getHardResolved();
+                  break;
+              }
+              return null;
+            }
+        };
+      new Thread(bookRiddleTask).start();
+      System.out.println(riddle);
+  }
+
+  /**
+   * Enable continueBtnOne and set visible
+   */
+  public void continueBtnOneEnable() {
+    continueBtnOne.setDisable(false);
+    continueBtnOne.setOpacity(1.0);
+  }
+
+  /**
+   * Enable startBtn and set visible
    */
   public void startBtnEnable() {
-    if (difficulty != null && timeLimit != null) {
-      startBtn.setDisable(false);
-      startBtn.setOpacity(1.0);
-    }
+    startBtn.setDisable(false);
+    startBtn.setOpacity(1.0);
   }
 
   @FXML
@@ -542,5 +694,18 @@ public class MainMenuController {
     };
     Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
     timerStartThread.start();
+  }
+
+  public void readGameMasterResponse() {
+    // Using concurency to prevent the system freezing
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        // need to update the chat text area with the game master's response & riddle
+        App.textToSpeech.speak(chatTextArea.getText());
+        return null;
+      }
+    };
+    new Thread(speakTask, "Speak Thread").start();
   }
 }
