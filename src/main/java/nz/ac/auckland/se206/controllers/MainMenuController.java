@@ -75,10 +75,6 @@ public class MainMenuController {
     return resolvedRiddle;
   }
 
-  public static int getHints() {
-    return hints;
-  }
-
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
     return countdownTimer;
@@ -692,6 +688,7 @@ public class MainMenuController {
         return null;
       }
     };
+    countdownTimer.updateHintLabel(hints);
     Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
     timerStartThread.start();
   }

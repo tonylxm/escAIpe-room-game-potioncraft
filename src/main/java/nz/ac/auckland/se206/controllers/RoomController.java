@@ -5,6 +5,7 @@ import java.util.Iterator;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -93,6 +95,8 @@ public abstract class RoomController {
   protected ImageView bagBtn;
   @FXML
   protected Label timerLabel;
+  @FXML
+  protected Label hintLabel;
 
   @FXML 
   protected TextArea chatTextArea;
@@ -195,6 +199,8 @@ public abstract class RoomController {
 
     interactionHandler = new ShapeInteractionHandler();
 
+    countdownTimer = MainMenuController.getCountdownTimer();
+
     // Disabling the text box and mouse track region
     setText("", false, false);
     toggleChat(true, 0);
@@ -210,6 +216,8 @@ public abstract class RoomController {
     itemMouseActions(itemThreeImg, threeClicked, itemThree);
     itemMouseActions(itemFourImg, fourClicked, itemFour);
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
+
+    
   }
 
   /**
@@ -305,6 +313,8 @@ public abstract class RoomController {
     mouseTrackRegion.setDisable(false);
     readyToAdd = true;
     System.out.println(item + " clicked");
+    yesLbl.setFocusTraversable(true);
+    yesLbl.requestFocus();
   }
 
   /**
@@ -678,9 +688,23 @@ public abstract class RoomController {
                 "assistant", MainMenuController.getChatHandler().runGpt(message));
             MainMenuController.getChatHandler().appendChatMessage(
                 response, chatTextArea, inputText, sendButton);
+
+            if (response.getRole().equals("Wizard")
+                || response.getRole().equals("assistant")) {
+              if (response.getContent().startsWith("Hint")) {
+                MainMenuController.hints--;  
+                System.out.println(MainMenuController.hints);
+              }
+            }
             return null;
           }
         };
+    runGptTask.setOnSucceeded(
+        e -> {
+          if (MainMenuController.hints >= 0) {
+            countdownTimer.updateHintLabel(MainMenuController.hints);
+          }
+        });
     new Thread(runGptTask).start();
   }
 
@@ -691,11 +715,34 @@ public abstract class RoomController {
    */
   @FXML
   public void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
+    System.out.println("any key pressed");
     if (event.getCode().toString().equals("ENTER")) {
       System.out.println("key " + event.getCode() + " pressed");
       onSendMessage(new ActionEvent());
     }
   }
+
+
+  @FXML
+  public void onYPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode().toString().equals("Y")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      addItem();
+    }
+    if (event.getCode().toString().equals("N")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      noAdd();
+    }
+  }
+
+  @FXML
+  public void onNPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode().toString().equals("N")) {
+      System.out.println("key " + event.getCode() + " pressed");
+      noAdd();
+    }
+  }
+
 
   /** 
    * Uses text to speech to read the game master's response to the user's message. 

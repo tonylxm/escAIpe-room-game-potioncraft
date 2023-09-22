@@ -70,6 +70,16 @@
             <Font name="Algerian" size="42.0" />
          </font>
       </Label>
+      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="29.0" layoutY="25.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="hintLabel" layoutX="62.0" layoutY="36.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
          <image>
             <Image url="@../images/hourglass-1024x1024.gif" />
@@ -148,7 +158,7 @@
             <Font name="Algerian" size="30.0" />
          </font>
       </Label>
-      <Label id="yesLbl" fx:id="yesLbl" layoutX="777.0" layoutY="540.0" onMouseClicked="#addItem" opacity="0.0" text="Y">
+      <Label id="yesLbl" fx:id="yesLbl" layoutX="777.0" layoutY="540.0" onKeyPressed="#onYPressed" onMouseClicked="#addItem" opacity="0.0" text="Y">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
