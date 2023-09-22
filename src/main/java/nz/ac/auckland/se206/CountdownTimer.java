@@ -21,8 +21,11 @@ public class CountdownTimer {
 
   private Timeline timeline;
   private Label cauldronTimerLabel;
+  private Label cauldronHintLabel;
   private Label libraryTimerLabel;
+  private Label libraryHintLabel;
   private Label rightTimerLabel;
+  private Label rightHintLabel;
   private Label bookTimerLabel;
   private Label brewingLabel;
 
@@ -31,7 +34,6 @@ public class CountdownTimer {
     minutes = Integer.parseInt(time[0]);
     initialSeconds = Integer.parseInt(time[1]);
     currentSeconds = Integer.parseInt(time[1]);
-
     setupTimeline();
   }
 
@@ -168,12 +170,24 @@ public class CountdownTimer {
     this.cauldronTimerLabel = cauldronTimerLabel;
   }
 
+  public void setCauldronHintLabel(Label cauldronHintLabel) {
+    this.cauldronHintLabel = cauldronHintLabel;
+  }
+
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
     this.libraryTimerLabel = libraryTimerLabel;
   }
 
+  public void setLibraryHintLabel(Label libraryHintLabel) {
+    this.libraryHintLabel = libraryHintLabel;
+  }
+
   public void setTreasureTimerLabel(Label rightTimerLabel) {
     this.rightTimerLabel = rightTimerLabel;
+  }
+
+  public void setTreasureHintLabel(Label rightHintLabel) {
+    this.rightHintLabel = rightHintLabel;
   }
 
   public void setBookTimerLabel(Label bookTimerLabel) {
@@ -192,5 +206,25 @@ public class CountdownTimer {
 
   public void setBrewingLabel(Label timerLabel) {
     this.brewingLabel = timerLabel;
+  }
+
+  public void updateHintLabel(int hints) {
+    String text;
+    if (hints < 0) {
+      text = "∞ hints left";
+    } else if (hints == 0) {
+      text = "No hints left";
+    } else {
+      text = Integer.toString(hints) + " hints left";
+    }
+    if (libraryHintLabel != null) {
+      libraryHintLabel.setText(text);
+    }
+    if (cauldronHintLabel != null) {
+      cauldronHintLabel.setText(text);
+    }
+    if (rightHintLabel != null) {
+      rightHintLabel.setText(text);
+    }
   }
 }

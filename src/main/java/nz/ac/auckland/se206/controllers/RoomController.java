@@ -96,6 +96,8 @@ public abstract class RoomController {
   protected ImageView bagBtn;
   @FXML
   protected Label timerLabel;
+  @FXML
+  protected Label hintLabel;
 
   @FXML 
   protected TextArea chatTextArea;
@@ -197,6 +199,8 @@ public abstract class RoomController {
     bagOpened = false;
 
     interactionHandler = new ShapeInteractionHandler();
+
+    countdownTimer = MainMenuController.getCountdownTimer();
 
     // Disabling the text box and mouse track region
     setText("", false, false);
@@ -685,9 +689,23 @@ public abstract class RoomController {
                 "assistant", MainMenuController.getChatHandler().runGpt(message));
             MainMenuController.getChatHandler().appendChatMessage(
                 response, chatTextArea, inputText, sendButton);
+
+            if (response.getRole().equals("Wizard")
+                || response.getRole().equals("assistant")) {
+              if (response.getContent().startsWith("Hint")) {
+                MainMenuController.hints--;  
+                System.out.println(MainMenuController.hints);
+              }
+            }
             return null;
           }
         };
+    runGptTask.setOnSucceeded(
+        e -> {
+          if (MainMenuController.hints >= 0) {
+            countdownTimer.updateHintLabel(MainMenuController.hints);
+          }
+        });
     new Thread(runGptTask).start();
   }
 
