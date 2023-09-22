@@ -404,10 +404,9 @@ public class MainMenuController {
         // Setting the disable and fade to true and 0.0 respectively
         disableAndOrFadeDifficultyBtns(true, 0, true);
         disableAndOrFadeTimeBtns(false, 1.0, true);
-        continueBtnDisable();
-        // Setting the continue button to fade out
-        continueBtnOne.setDisable(false);
+        
         continueBtnOne.setOpacity(0.4);
+        continueBtnDisable();
         return null;
       }
     };
@@ -423,7 +422,6 @@ public class MainMenuController {
     continueBtnOne.setOpacity(0.4);
     // Using a task to make sure game does not freeze
     Task<Void> fadeInStartBtnTask = new Task<Void>() {
-
       @Override
       protected Void call() throws Exception {
         // Setting the disable and fade to true and 0.0 respectively
@@ -437,10 +435,11 @@ public class MainMenuController {
         TransitionAnimation.fade(textRect, 1.0);
         TransitionAnimation.fade(chatTextArea, 1.0);
         TransitionAnimation.fade(ttsBtn2, 1.0);
+        TransitionAnimation.fade(mouseTrackRegion, 0.4);
+        
         // Enabling the chat text area and tts button
         chatTextArea.setDisable(false);
         ttsBtn2.setDisable(false);
-        mouseTrackRegion.setOpacity(0.5);
 
         // Intro message to let the user know hwat to do
         String introMsg = 
@@ -512,30 +511,29 @@ public class MainMenuController {
     System.out.println("click off");
     // Only using the click off property if the wizard has been shown already
     if (appendIntroMsgFinished) {
-      // Using concurency to prevent lag or delay in the program
-      Task<Void> wizardLeaveTask = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-          // Setting an animation for the wizard to fade out of the scene
-          TransitionAnimation.fade(wizardChatImage, 0.0);
-          TransitionAnimation.fade(textRect, 0.0);
-          TransitionAnimation.fade(chatTextArea, 0.0);
-          TransitionAnimation.fade(ttsBtn2, 0.0);
-          // Disabling the chat text area and tts button
-          chatTextArea.setDisable(true);
-          ttsBtn2.setDisable(true);
-          mouseTrackRegion.setDisable(true);
-          mouseTrackRegion.setOpacity(0);
+       // Using concurency to prevent lag or delay in the program
+       Task<Void> wizardLeaveTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            TransitionAnimation.fade(wizardChatImage, 0.0);
+            TransitionAnimation.fade(textRect, 0.0);
+            TransitionAnimation.fade(chatTextArea, 0.0);
+            TransitionAnimation.fade(ttsBtn2, 0.0);
+            TransitionAnimation.fade(mouseTrackRegion, 0);
+            // Disabling the chat text area and tts button
+            chatTextArea.setDisable(true);
+            ttsBtn2.setDisable(true);
+            mouseTrackRegion.setDisable(true);
 
-          // Waiting for the wizard to leave the scene
-          Thread.sleep(1000);
-          TransitionAnimation.fade(wizardImg, 0.0);
-          Thread.sleep(500);
-          startBtnEnable();
-          return null;
-        }
-      };
-      new Thread(wizardLeaveTask).start();
+            Thread.sleep(1000);
+            TransitionAnimation.fade(wizardImg, 0.0);
+            Thread.sleep(1000);
+            startBtnEnable();
+            return null;
+          }
+        };
+    new Thread(wizardLeaveTask).start();
     }
   }
   

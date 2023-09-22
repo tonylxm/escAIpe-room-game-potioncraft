@@ -50,19 +50,19 @@
                   <Font name="Algerian" size="30.0" />
                </font>
             </Button>
-            <Text fx:id="hintZero" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
+            <Text fx:id="hintZero" fill="WHITE" layoutX="401.0" layoutY="587.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 0">
                <font>
-                  <Font name="Algerian" size="20.0" />
+                  <Font name="Algerian" size="26.0" />
                </font>
             </Text>
-            <Text fx:id="hintFive" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
+            <Text fx:id="hintFive" fill="WHITE" layoutX="401.0" layoutY="587.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: 5">
                <font>
-                  <Font name="Algerian" size="20.0" />
+                  <Font name="Algerian" size="26.0" />
                </font>
             </Text>
-            <Text fx:id="hintInfinity" fill="WHITE" layoutX="425.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
+            <Text fx:id="hintInfinity" fill="WHITE" layoutX="401.0" layoutY="587.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hints allowed: ∞">
                <font>
-                  <Font name="Algerian" size="20.0" />
+                  <Font name="Algerian" size="26.0" />
                </font>
             </Text>
             <ImageView fx:id="easyBtn" disable="true" fitHeight="150.0" fitWidth="200.0" layoutX="214.0" layoutY="374.0" onMouseClicked="#setEasy" opacity="0.0" pickOnBounds="true" preserveRatio="true">
@@ -113,19 +113,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Text fx:id="twoMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 MIN">
+            <Text fx:id="twoMin" fill="WHITE" layoutX="482.0" layoutY="572.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 MIN">
                <font>
-                  <Font name="Algerian" size="20.0" />
+                  <Font name="Algerian" size="25.0" />
                </font>
             </Text>
-            <Text fx:id="fourMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4 MIN">
+            <Text fx:id="fourMin" fill="WHITE" layoutX="482.0" layoutY="572.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4 MIN">
                <font>
-                  <Font name="Algerian" size="20.0" />
+                  <Font name="Algerian" size="25.0" />
                </font>
             </Text>
-            <Text fx:id="sixMin" fill="WHITE" layoutX="488.0" layoutY="575.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 MIN">
+            <Text fx:id="sixMin" fill="WHITE" layoutX="482.0" layoutY="572.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 MIN">
                <font>
-                  <Font name="Algerian" size="20.0" />
+                  <Font name="Algerian" size="25.0" />
                </font>
             </Text>
             <ImageView id="wizardImg" fx:id="wizardImg" disable="true" fitHeight="240.0" fitWidth="174.0" layoutX="421.0" layoutY="276.0" opacity="0.0">
