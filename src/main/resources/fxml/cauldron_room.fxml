@@ -243,7 +243,7 @@
       </Label>
       <Label fx:id="hintLabel" layoutX="52.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
          <font>
-            <Font size="30.0" />
+            <Font name="Algerian" size="30.0" />
          </font>
       </Label>
       <ImageView fx:id="fireImg" fitHeight="78.0" fitWidth="77.0" layoutX="403.0" layoutY="252.0" mouseTransparent="true" opacity="0.0">
