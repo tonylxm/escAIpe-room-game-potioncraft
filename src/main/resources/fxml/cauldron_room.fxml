@@ -163,7 +163,7 @@
             <Font name="Algerian" size="30.0" />
          </font>
       </Label>
-      <Label id="yesLbl" fx:id="yesLbl" layoutX="782.0" layoutY="536.0" onKeyPressed="#onYPressed" onMouseClicked="#addItem" opacity="0.0" text="Y">
+      <Label id="yesLbl" fx:id="yesLbl" layoutX="782.0" layoutY="536.0" onKeyPressed="#onYesPressed" onMouseClicked="#addItem" opacity="0.0" text="Y">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
@@ -173,7 +173,7 @@
             <Font name="Algerian" size="30.0" />
          </font>
       </Label>
-      <Label id="noLbl" fx:id="noLbl" layoutX="821.0" layoutY="536.0" onKeyPressed="#onNPressed" onMouseClicked="#noAdd" opacity="0.0" text="N">
+      <Label id="noLbl" fx:id="noLbl" layoutX="821.0" layoutY="536.0" onKeyPressed="#onNoPressed" onMouseClicked="#noAdd" opacity="0.0" text="N">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>

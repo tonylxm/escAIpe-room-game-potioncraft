@@ -5,7 +5,6 @@ import java.util.Iterator;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -22,14 +20,14 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
-import nz.ac.auckland.se206.ShapeInteractionHandler;
-import nz.ac.auckland.se206.TransitionAnimation;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public abstract class RoomController {
   protected static boolean bagOpened;
@@ -688,10 +686,12 @@ public abstract class RoomController {
                 "assistant", MainMenuController.getChatHandler().runGpt(message));
             MainMenuController.getChatHandler().appendChatMessage(
                 response, chatTextArea, inputText, sendButton);
-
+            // Updating the number of hints for medium mode after GPT has given a hint
+            // Checking if the correct role has given the hint, rather than the user
             if (response.getRole().equals("Wizard")
                 || response.getRole().equals("assistant")) {
               if (response.getContent().startsWith("Hint")) {
+                // Decrementing the hints
                 MainMenuController.hints--;  
                 System.out.println(MainMenuController.hints);
               }
@@ -699,6 +699,7 @@ public abstract class RoomController {
             return null;
           }
         };
+    // Updating the number of hints in each room's labels after the GPT model has run
     runGptTask.setOnSucceeded(
         e -> {
           if (MainMenuController.hints >= 0) {
@@ -723,20 +724,35 @@ public abstract class RoomController {
   }
 
 
+  /**
+   * Handles when Y or N is pressed on the input text area.
+   * @param event
+   * @throws ApiProxyException
+   * @throws IOException
+   */
   @FXML
-  public void onYPressed(KeyEvent event) throws ApiProxyException, IOException {
+  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // If Y us pressed, adding the item
     if (event.getCode().toString().equals("Y")) {
       System.out.println("key " + event.getCode() + " pressed");
       addItem();
     }
+    // If N is pressed, not adding the item
     if (event.getCode().toString().equals("N")) {
       System.out.println("key " + event.getCode() + " pressed");
       noAdd();
     }
   }
 
+  /**
+   * Handles when N is pressed on the input text area.
+   * @param event
+   * @throws ApiProxyException
+   * @throws IOException
+   */
   @FXML
-  public void onNPressed(KeyEvent event) throws ApiProxyException, IOException {
+  public void onNoPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // Not adding the item if N is pressed
     if (event.getCode().toString().equals("N")) {
       System.out.println("key " + event.getCode() + " pressed");
       noAdd();

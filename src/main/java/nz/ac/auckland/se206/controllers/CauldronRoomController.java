@@ -94,10 +94,17 @@ public class CauldronRoomController extends RoomController {
     btnMouseActions(bookAirRectangle);
   }
 
+  /**
+   * Setting the text for the riddle select label.
+   * @param disable
+   * @param opacity
+   */
   private void toggleBooks(boolean disable, int opacity) {
+    // Making books interactable or not based on the diasble
     bookFireRectangle.setDisable(disable);
     bookWaterRectangle.setDisable(disable);
     bookAirRectangle.setDisable(disable);
+    // Making appropriate images visiable or not based on the opacity
     bookFireRectangle.setOpacity(opacity);
     bookWaterRectangle.setOpacity(opacity);
     bookAirRectangle.setOpacity(opacity);
@@ -217,6 +224,8 @@ public class CauldronRoomController extends RoomController {
       Task<Void> resolvedTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Running gpt after the riddle has been resolved to congratulate
+          // the user and tell GPT what hints to give next
           ChatMessage msg = new ChatMessage(
               "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getResolvedMessage()));
