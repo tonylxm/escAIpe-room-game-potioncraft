@@ -61,17 +61,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemFourteenImg" fx:id="itemFourteenImg" disable="true" fitHeight="44.0" fitWidth="45.0" layoutX="224.0" layoutY="69.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemFifteenImg" fx:id="itemFifteenImg" disable="true" fitHeight="88.0" fitWidth="65.0" layoutX="838.0" layoutY="269.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0">
          <image>
-            <Image url="@../images/beetle.png" />
+            <Image url="@../images/unicorn_horn.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemFifteenImg" fx:id="itemFifteenImg" disable="true" fitHeight="88.0" fitWidth="65.0" layoutX="838.0" layoutY="269.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="-30.0">
+      <ImageView id="itemFourteenImg" fx:id="itemFourteenImg" disable="true" fitHeight="44.0" fitWidth="45.0" layoutX="715.0" layoutY="405.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/unicorn_horn.png" />
+            <Image url="@../images/beetle.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
