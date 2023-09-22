@@ -70,21 +70,21 @@
             <Font name="Algerian" size="42.0" />
          </font>
       </Label>
-      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="29.0" layoutY="25.0">
-         <image>
-            <Image url="@../images/scroll-png-transparent-image--6.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="hintLabel" layoutX="62.0" layoutY="36.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
          <image>
             <Image url="@../images/hourglass-1024x1024.gif" />
          </image>
       </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="19.0" layoutY="14.0">
+         <image>
+            <Image url="@../images/scroll-png-transparent-image--6.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="hintLabel" layoutX="52.0" layoutY="25.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
+         <font>
+            <Font name="Algerian" size="30.0" />
+         </font>
+      </Label>
       <ImageView fx:id="wizardImg" fitHeight="261.0" fitWidth="185.0" layoutX="558.0" layoutY="341.0" onMouseClicked="#clickWizard">
          <image>
             <Image url="@../images/wizard.png" />

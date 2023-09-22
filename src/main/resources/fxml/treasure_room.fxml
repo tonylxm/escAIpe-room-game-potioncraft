@@ -169,7 +169,7 @@
       </ImageView>
       <Label fx:id="hintLabel" layoutX="62.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
          <font>
-            <Font size="30.0" />
+            <Font name="Algerian" size="30.0" />
          </font>
       </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
