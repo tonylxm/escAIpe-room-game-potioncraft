@@ -208,8 +208,14 @@ public class CountdownTimer {
     this.brewingLabel = timerLabel;
   }
 
+  /**
+   * Updates the hint label to display the number of hints left
+   * @param hints
+   */
   public void updateHintLabel(int hints) {
     String text;
+    // Setting the appropriate text for the hint label based on the
+    // number of hjints remaining
     if (hints < 0) {
       text = "∞ hints left";
     } else if (hints == 0) {
@@ -217,6 +223,8 @@ public class CountdownTimer {
     } else {
       text = Integer.toString(hints) + " hints left";
     }
+
+    // Setting the label text for all hint labels
     if (libraryHintLabel != null) {
       libraryHintLabel.setText(text);
     }

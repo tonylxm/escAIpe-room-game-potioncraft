@@ -689,10 +689,12 @@ public abstract class RoomController {
                 "assistant", MainMenuController.getChatHandler().runGpt(message));
             MainMenuController.getChatHandler().appendChatMessage(
                 response, chatTextArea, inputText, sendButton);
-
+            // Updating the number of hints for medium mode after GPT has given a hint
+            // Checking if the correct role has given the hint, rather than the user
             if (response.getRole().equals("Wizard")
                 || response.getRole().equals("assistant")) {
               if (response.getContent().startsWith("Hint")) {
+                // Decrementing the hints
                 MainMenuController.hints--;  
                 System.out.println(MainMenuController.hints);
               }
@@ -700,6 +702,7 @@ public abstract class RoomController {
             return null;
           }
         };
+    // Updating the number of hints in each room's labels after the GPT model has run
     runGptTask.setOnSucceeded(
         e -> {
           if (MainMenuController.hints >= 0) {
@@ -724,20 +727,35 @@ public abstract class RoomController {
   }
 
 
+  /**
+   * Handles when Y or N is pressed on the input text area.
+   * @param event
+   * @throws ApiProxyException
+   * @throws IOException
+   */
   @FXML
   public void onYPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // If Y us pressed, adding the item
     if (event.getCode().toString().equals("Y")) {
       System.out.println("key " + event.getCode() + " pressed");
       addItem();
     }
+    // If N is pressed, not adding the item
     if (event.getCode().toString().equals("N")) {
       System.out.println("key " + event.getCode() + " pressed");
       noAdd();
     }
   }
 
+  /**
+   * Handles when N is pressed on the input text area.
+   * @param event
+   * @throws ApiProxyException
+   * @throws IOException
+   */
   @FXML
   public void onNPressed(KeyEvent event) throws ApiProxyException, IOException {
+    // Not adding the item if N is pressed
     if (event.getCode().toString().equals("N")) {
       System.out.println("key " + event.getCode() + " pressed");
       noAdd();
