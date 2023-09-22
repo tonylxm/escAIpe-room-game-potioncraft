@@ -336,7 +336,7 @@ public class CauldronController {
 
       // Calculate the distance between the drop position and the target position
       double distance = Math.sqrt(Math.pow(event.getSceneX() - targetX, 2) 
-        + Math.pow(event.getSceneY() - targetY, 2));
+          + Math.pow(event.getSceneY() - targetY, 2));
 
       //print out the coordinates of where it was dropped
       System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
