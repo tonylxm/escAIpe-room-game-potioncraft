@@ -38,7 +38,6 @@ public class TreasureRoomController extends RoomController {
     genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg);
     countdownTimer.setTreasureTimerLabel(timerLabel);
     countdownTimer.setTreasureHintLabel(hintLabel);
-    countdownTimer.updateHintLabel(MainMenuController.hints);
     arrowMouseActions(leftShpe);
   }
 

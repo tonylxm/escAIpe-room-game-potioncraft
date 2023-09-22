@@ -384,6 +384,7 @@ public class MainMenuController {
         return null;
       }
     };
+    countdownTimer.updateHintLabel(hints);
     Thread timerStartThread = new Thread(timerStartTask, "timer start thread");
     timerStartThread.start();
   }

@@ -240,7 +240,7 @@
       </Label>
       <Label fx:id="hintLabel" layoutX="52.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
          <font>
-            <Font name="Algerian" size="42.0" />
+            <Font size="38.0" />
          </font>
       </Label>
    </children>

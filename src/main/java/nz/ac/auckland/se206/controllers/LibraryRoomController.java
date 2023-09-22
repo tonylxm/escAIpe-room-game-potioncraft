@@ -37,7 +37,6 @@ public class LibraryRoomController extends RoomController {
     genericInitialise("Library", itemOneImg, itemTwoImg, itemThreeImg, itemFourImg, itemFiveImg);
     countdownTimer.setLibraryTimerLabel(timerLabel);
     countdownTimer.setLibraryHintLabel(hintLabel);
-    countdownTimer.updateHintLabel(MainMenuController.hints);
     arrowMouseActions(rightShpe);
   }
 
