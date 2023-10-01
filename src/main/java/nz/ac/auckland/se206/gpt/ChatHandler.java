@@ -66,7 +66,7 @@ public class ChatHandler {
         break;
     }
 
-    chatTextArea.appendText(displayRole + ": ");
+    // chatTextArea.appendText(displayRole + ": ");
 
     chatTextArea.setText(msg.getContent() + "\n\n");
 
