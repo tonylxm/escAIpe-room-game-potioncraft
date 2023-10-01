@@ -369,7 +369,7 @@ public class CauldronController {
   }
 
   @FXML
-  private void brewPotion() {
+  private void onBrewPotion() {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
     // if more or less than 6 items have been dropped into the cauldron then the
@@ -436,7 +436,7 @@ public class CauldronController {
   }
 
   @FXML
-  private void emptyCauldron() {
+  private void onEmptyCauldron() {
     notificationText.setText("Cauldron Emptied!");
     Notification.notifyPopup(notificationBack, notificationText);
     resetItems();

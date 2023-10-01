@@ -399,7 +399,7 @@ public class MainMenuController {
    * Handles continuing a game by loading the appropriate settings
    */
   @FXML
-  public void continueGame() {
+  public void onContinueGame() {
     continueBtn.setDisable(true);
     continueBtn.setOpacity(0.4);
     // Using a task to make sure game does not freeze
@@ -423,7 +423,7 @@ public class MainMenuController {
    * Handles continuing a game by loading the appropriate settings
    */
   @FXML
-  public void continueGameOne() {
+  public void onContinueGameOne() {
     continueBtnOne.setDisable(true);
     continueBtnOne.setOpacity(0.4);
     // Using a task to make sure game does not freeze
@@ -728,7 +728,7 @@ public class MainMenuController {
   }
 
   @FXML
-  public void startGame() throws IOException {
+  public void onStartGame() throws IOException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
     disableAndOrFadeTimeBtns(true, 0, false);
     TransitionAnimation.changeScene(

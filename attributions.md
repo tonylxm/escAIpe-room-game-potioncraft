@@ -13,3 +13,14 @@ unicorn_horn.png - https://www.deviantart.com/klaus-x/art/Unicorn-Horn-Stock-293
 bone.png - https://www.getbodysmart.com/lower-limb-bones/femur-bone-anterior-markings/ 
 fire.png - https://pngbong.com/fire-png-file/
 bettle.png - https://www.needpix.com/photo/26702/beetle-insect-bug-blue-black-legs-body-animals-hard
+
+dobby.png - https://static.wikia.nocookie.net/harrypotter/images/f/f4/DobbyDH.jpg/revision/latest?cb=20161215060027 
+harry.png - <a href=https://www.pngmart.com/image/130932 target="_blank">Harry Potter PNG Transparent</a>
+voldemort.png - https://www.deviantart.com/speedcam/art/Lord-Voldemort-Nagini-HP7-Transparent-905339559
+
+sad_dobby.gif - https://tenor.com/view/dobby-head-smash-gif-12139267
+happy_dobby.gif - https://fuzzyw.com/
+sad_harry.gif - https://tenor.com/view/harry-potter-screaming-noo-why-but-why-gif-22430413
+happy_harry.gif - https://tenor.com/view/harry-potter-cute-happy-gif-21913000
+sad_vodemort.gif - https://gifer.com/en/A0Bh
+happy_voldemort.gif - https://giphy.com/stickers/imoji-laugh-3o7bu8wHMiBqpCdmo0
