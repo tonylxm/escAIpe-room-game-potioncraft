@@ -484,17 +484,18 @@ public class MainMenuController {
         break;
     }
 
-    chatTextArea.appendText(displayRole + ": ");
+    chatTextArea.setText(msg.getContent());
+    // chatTextArea.appendText(displayRole + ": ");
 
     // Appending the message character by character to the chat text area
     Task<Void> appendIntroTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
         // Adding each character of the message to the chat text area
-        for (char c : msg.getContent().toCharArray()) {
-          chatTextArea.appendText(String.valueOf(c));
-          Thread.sleep(20);
-        }
+        // for (char c : msg.getContent().toCharArray()) {
+        //   chatTextArea.appendText(String.valueOf(c));
+        //   Thread.sleep(20);
+        // }
         // After completion, letting user click off
         System.out.println("finished");
         mouseTrackRegion.setDisable(false);
