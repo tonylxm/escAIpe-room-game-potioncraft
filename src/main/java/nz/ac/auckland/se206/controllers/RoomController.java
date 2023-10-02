@@ -104,6 +104,8 @@ public abstract class RoomController {
   protected Button sendButton;
   @FXML 
   protected ImageView ttsBtn2;
+  @FXML
+  protected ImageView cancelTtsBtn;
 
   @FXML
   protected ImageView notificationBack;
@@ -147,6 +149,7 @@ public abstract class RoomController {
 
   private ImageView image;
   private double ratio;
+  private boolean ttsOn;
 
   /**
    * Initialising the fields that are common in all of the item
@@ -196,6 +199,7 @@ public abstract class RoomController {
 
     readyToAdd = false;
     bagOpened = false;
+    ttsOn = false;
 
     interactionHandler = new ShapeInteractionHandler();
 
@@ -496,6 +500,8 @@ public abstract class RoomController {
     System.out.println("click off");
     setText("", false, false);
     toggleChat(true, 0);
+    TransitionAnimation.fade(cancelTtsBtn, 0.0);
+    cancelTtsBtn.setDisable(true);
     itemDefault();
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
@@ -732,7 +738,6 @@ public abstract class RoomController {
     }
   }
 
-
   /**
    * Handles when Y or N is pressed on the input text area.
    * @param event
@@ -768,20 +773,37 @@ public abstract class RoomController {
     }
   }
 
-
   /** 
    * Uses text to speech to read the game master's response to the user's message. 
    */
-  public void readGameMasterResponse() {
+  @FXML
+  private void onReadGameMasterResponse() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        // need to update the chat text area with the game master's response & riddle
-        App.textToSpeech.speak(chatTextArea.getText());
-        return null;
-      }
-    };
-    new Thread(speakTask, "Speak Thread").start();
+    if (!ttsOn) {
+      ttsOn = true;
+      cancelTtsBtn.setDisable(false);
+      cancelTtsBtn.setOpacity(1);
+      Task<Void> speakTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          App.textToSpeech.speak(chatTextArea.getText());
+          return null;
+        }
+      };
+      new Thread(speakTask).start();
+      speakTask.setOnSucceeded(e -> {
+        ttsOn = false;
+        cancelTtsBtn.setDisable(true);
+        cancelTtsBtn.setOpacity(0);
+      });
+    }
+  }
+
+  @FXML
+  public void onCancelTts() {
+    ttsOn = false;
+    cancelTtsBtn.setDisable(true);
+    cancelTtsBtn.setOpacity(0);
+    App.textToSpeech.stop();
   }
 }

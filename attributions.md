@@ -24,3 +24,5 @@ sad_harry.gif - https://tenor.com/view/harry-potter-screaming-noo-why-but-why-gi
 happy_harry.gif - https://tenor.com/view/harry-potter-cute-happy-gif-21913000
 sad_vodemort.gif - https://gifer.com/en/A0Bh
 happy_voldemort.gif - https://giphy.com/stickers/imoji-laugh-3o7bu8wHMiBqpCdmo0
+
+cancel-tts - https://pngtree.com/so/no-sign
