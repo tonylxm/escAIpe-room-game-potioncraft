@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -159,14 +160,14 @@ public class CauldronRoomController extends RoomController {
         protected Void call() throws Exception {
           // Running gpt to get the riddle from the wizard
           toggleChat(false, 1);
-          mouseTrackRegion.setDisable(true);
+          // mouseTrackRegion.setDisable(true);
           disableChat(true, 0.5);
           return null;
         }
       };
       new Thread(waitForAnimationTask).start();
       // TODO: add half sec delay
-      // Thred.sleep(500)
+      // Thread.sleep(500)
       MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
@@ -254,6 +255,7 @@ public class CauldronRoomController extends RoomController {
       new Thread(resolvedTask).start();
       resolvedTask.setOnSucceeded(e -> {
         mouseTrackRegion.setDisable(false);
+        mouseTrackRegion.setCursor(Cursor.HAND);
       });
     }
   }
@@ -327,6 +329,9 @@ public class CauldronRoomController extends RoomController {
       enableRecipe();
       toggleChat(true, 0);
       toggleBooks(true, 0);
+
+      TransitionAnimation.fade(cancelTtsBtn, 0.0);
+      cancelTtsBtn.setDisable(true);
 
       // Handling closing the "bag" when clicking off inventory
       if (bagOpened) {

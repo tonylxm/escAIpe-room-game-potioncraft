@@ -62,7 +62,7 @@ public class GptPromptEngineering {
    * @return
    */
   public static String getBookRiddleMedium(String book) {
-    return "You are a wizard who is setting a test for his apprentice. You have 3 books, a book"
+    return "You are a wizard setting a test for his apprentice. You have 3 books, a book"
       + " with a fire theme, water theme, and air theme. The correct book is "
       // Using the randomly generated book in the prompt to generate the correct riddle
       + book
