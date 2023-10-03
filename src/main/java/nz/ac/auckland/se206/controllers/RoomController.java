@@ -704,14 +704,11 @@ public abstract class RoomController {
                 response, chatTextArea, inputText, sendButton);
             // Updating the number of hints for medium mode after GPT has given a hint
             // Checking if the correct role has given the hint, rather than the user
-            if (response.getRole().equals("Wizard")
-                || response.getRole().equals("assistant")) {
-              if (response.getContent().startsWith("Hint")) {
-                int hints = MainMenuController.getHints();
-                hints--;
-                MainMenuController.setHints(hints);
-                System.out.println(MainMenuController.getHints());
-              }
+            if (response.getContent().startsWith("HINT")) {
+              int hints = MainMenuController.getHints();
+              hints--;
+              MainMenuController.setHints(hints);
+              System.out.println(MainMenuController.getHints());
             }
             return null;
           }
