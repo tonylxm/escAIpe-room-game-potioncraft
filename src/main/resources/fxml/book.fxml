@@ -34,7 +34,7 @@
             <Image url="@../images/book_parchment.png" />
          </image>
       </ImageView>
-      <Text layoutX="174.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Potion Recipe">
+      <Text fx:id="potionName" layoutX="174.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Potion Recipe">
          <font>
             <Font name="Algerian" size="20.0" />
          </font>

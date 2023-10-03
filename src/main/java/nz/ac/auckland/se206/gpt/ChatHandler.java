@@ -22,6 +22,13 @@ public class ChatHandler {
           .setTopP(0.5).setMaxTokens(100);
   }
 
+  @FXML
+  public void potionNameInitialize() throws ApiProxyException {
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(1.2)
+          .setTopP(0.75).setMaxTokens(10);
+  }
+
   /**
    * Runs the GPT model with a given chat message.
    *

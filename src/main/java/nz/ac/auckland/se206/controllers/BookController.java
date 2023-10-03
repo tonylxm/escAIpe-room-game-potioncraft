@@ -8,16 +8,18 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.gpt.ChatHandler;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the book view. */
@@ -79,8 +81,11 @@ public class BookController {
 
   @FXML 
   private CountdownTimer countdownTimer;
+  @FXML
+  private Text potionName;
 
   private boolean ttsOn;
+  private ChatHandler potionNameHandler;
 
   /**
    * Initializes the chat view, loading the riddle. Also initialises ways to view the appropriate
@@ -90,10 +95,14 @@ public class BookController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
     // Setting up appropriate timer`
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
+
+    potionNameHandler = new ChatHandler();
+    potionNameHandler.potionNameInitialize();
+    potionName.setText(potionNameHandler.runGpt(GptPromptEngineering.getPotionName()));
 
     ttsOn = false;
 
@@ -231,7 +240,7 @@ public class BookController {
       Task<Void> speakTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
-          App.textToSpeech.speak("Potion Recipe");
+          App.textToSpeech.speak(potionName.getText());
           for (int i = 0; i < Items.necessary.size(); i++) {
             if (ttsOn) {
               App.textToSpeech.speak(ingredientList.getItems().get(i));

@@ -124,4 +124,8 @@ public class GptPromptEngineering {
         + " Do not give any hints or help to the user about how to find items or brew the potion."
         + " If the user asks for hints or help, tell them to believe in themselves";
   }
+
+  public static String getPotionName() {
+    return "Only give one short concise potion name + the word Recipe";
+  }
 }
