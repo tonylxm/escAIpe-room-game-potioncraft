@@ -11,12 +11,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.gpt.ChatHandler;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the book view. */
@@ -38,6 +41,8 @@ public class BookController {
   private ListView<String> ingredientList;
   @FXML 
   private ImageView ttsBtn1;
+  @FXML
+  private ImageView cancelTtsBtn;
   @FXML 
   private Label timerLabel;
 
@@ -76,6 +81,11 @@ public class BookController {
 
   @FXML 
   private CountdownTimer countdownTimer;
+  @FXML
+  private Text potionName;
+
+  private boolean ttsOn;
+  private ChatHandler potionNameHandler;
 
   /**
    * Initializes the chat view, loading the riddle. Also initialises ways to view the appropriate
@@ -85,10 +95,16 @@ public class BookController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
     // Setting up appropriate timer`
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setBookTimerLabel(timerLabel);
+
+    potionNameHandler = new ChatHandler();
+    potionNameHandler.potionNameInitialize();
+    potionName.setText(potionNameHandler.runGpt(GptPromptEngineering.getPotionName()));
+
+    ttsOn = false;
 
     writeRecipeIngredients(Items.necessary);
 
@@ -214,20 +230,41 @@ public class BookController {
   }
 
   /** Uses text to speech to read the required items in the book. */
-  public void readIngredientList() {
+  @FXML
+  public void onReadIngredientList() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        App.textToSpeech.speak("Potion Recipe");
-        for (int i = 0; i < Items.necessary.size(); i++) {
-          App.textToSpeech.speak(ingredientList.getItems().get(i));
+    if (!ttsOn) {
+      ttsOn = true;
+      cancelTtsBtn.setDisable(false);
+      cancelTtsBtn.setOpacity(1);
+      Task<Void> speakTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          App.textToSpeech.speak(potionName.getText());
+          for (int i = 0; i < Items.necessary.size(); i++) {
+            if (ttsOn) {
+              App.textToSpeech.speak(ingredientList.getItems().get(i));
+            }
+          }
+          return null;
         }
-        return null;
-      }
-    };
-    Thread speakThread = new Thread(speakTask, "Speak Thread");
-    speakThread.start();
+      };
+      new Thread(speakTask).start();
+      speakTask.setOnSucceeded(e -> {
+        ttsOn = false;
+        cancelTtsBtn.setDisable(true);
+        cancelTtsBtn.setOpacity(0);
+      });
+    }
+  }
+
+  @FXML
+  private void onCancelTts() {
+    ttsOn = false;
+    cancelTtsBtn.setDisable(true);
+    cancelTtsBtn.setOpacity(0);
+    App.textToSpeech.stop();
+    ttsOn = false;
   }
 
   /** Setting the appropriate scene when transitioning to the book view. */

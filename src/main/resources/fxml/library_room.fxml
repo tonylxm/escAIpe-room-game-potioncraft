@@ -126,7 +126,7 @@
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#ffe1b2" height="219.0" layoutX="111.0" layoutY="451.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <TextArea fx:id="chatTextArea" editable="false" layoutX="122.0" layoutY="459.0" opacity="0.0" prefHeight="155.0" prefWidth="763.0" wrapText="true">
          <font>
-            <Font name="Algerian" size="18.0" />
+            <Font name="Algerian" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -134,7 +134,7 @@
       </TextArea>
       <TextField fx:id="inputText" layoutX="122.0" layoutY="614.0" onKeyPressed="#onEnterPressed" opacity="0.0" prefHeight="44.0" prefWidth="672.0" promptText="Ask me anything...">
          <font>
-            <Font name="Algerian" size="18.0" />
+            <Font name="Algerian" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="TEXT" />
@@ -148,9 +148,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="840.0" layoutY="596.0" onMouseClicked="#readGameMasterResponse" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ttsBtn2" fitHeight="20.0" fitWidth="23.0" layoutX="835.0" layoutY="585.0" onMouseClicked="#onReadGameMasterResponse" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="cancelTtsBtn" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="820.0" layoutY="569.0" onMouseClicked="#onCancelTts" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/cancel-tts.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

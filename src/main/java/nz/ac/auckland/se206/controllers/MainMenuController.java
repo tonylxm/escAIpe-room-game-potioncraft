@@ -25,6 +25,7 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class MainMenuController {
   public enum Difficulty {
@@ -147,6 +148,8 @@ public class MainMenuController {
   @FXML
   private ImageView ttsBtn2;
   @FXML
+  private ImageView cancelTtsBtn;
+  @FXML
   private Rectangle mouseTrackRegion;
 
   private boolean easyBtnClicked;
@@ -157,6 +160,7 @@ public class MainMenuController {
   private boolean sixMinBtnClicked;
 
   private String introMsg;
+  private boolean ttsOn;
   private boolean appendIntroMsgFinished;
 
   public void initialize() {
@@ -166,6 +170,7 @@ public class MainMenuController {
     TransitionAnimation.setMasterPane(masterPane);
     difficultySelected = false;
     timeSelected = false;
+    ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
 
@@ -525,10 +530,12 @@ public class MainMenuController {
           TransitionAnimation.fade(textRect, 0.0);
           TransitionAnimation.fade(chatTextArea, 0.0);
           TransitionAnimation.fade(ttsBtn2, 0.0);
+          TransitionAnimation.fade(cancelTtsBtn, 0.0);
           TransitionAnimation.fade(mouseTrackRegion, 0);
           // Disabling the chat text area and tts button
           chatTextArea.setDisable(true);
           ttsBtn2.setDisable(true);
+          cancelTtsBtn.setDisable(true);
           mouseTrackRegion.setDisable(true);
 
           Thread.sleep(1000);
@@ -752,17 +759,34 @@ public class MainMenuController {
     timerStartThread.start();
   }
 
-  public void readGameMasterResponse() {
+  @FXML
+  private void onReadGameMasterResponse() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        // need to update the chat text area with the game master's response 
-        // & riddle
-        App.textToSpeech.speak(chatTextArea.getText());
-        return null;
-      }
-    };
-    new Thread(speakTask, "Speak Thread").start();
+    if (!ttsOn) {
+      ttsOn = true;
+      cancelTtsBtn.setDisable(false);
+      cancelTtsBtn.setOpacity(1);
+      Task<Void> speakTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          App.textToSpeech.speak(chatTextArea.getText());
+          return null;
+        }
+      };
+      new Thread(speakTask).start();
+      speakTask.setOnSucceeded(e -> {
+        ttsOn = false;
+        cancelTtsBtn.setDisable(true);
+        cancelTtsBtn.setOpacity(0);
+      });
+    }
+  }
+
+  @FXML
+  private void onCancelTts() {
+    ttsOn = false;
+    cancelTtsBtn.setDisable(true);
+    cancelTtsBtn.setOpacity(0);
+    App.textToSpeech.stop();
   }
 }

@@ -101,6 +101,13 @@ public class TextToSpeech {
   }
 
   /**
+   * Stops the text-to-speech synthesis.
+   */
+  public void stop() {
+    synthesizer.cancelAll();
+  }
+
+  /**
    * It deallocates the speech synthesizer. If you are experiencing an IllegalThreadStateException,
    * avoid using this method and run the speak method without terminating.
    */
