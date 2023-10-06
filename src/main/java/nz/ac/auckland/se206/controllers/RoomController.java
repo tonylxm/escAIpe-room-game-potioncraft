@@ -538,6 +538,7 @@ public abstract class RoomController {
   @FXML
   protected void setText(String text, boolean on, boolean yesNo) {
     textLbl.setText(text);
+    mouseTrackRegion.setDisable(!on);
     if (on) {
       textRect.setOpacity(1);
       textRect.setDisable(false);

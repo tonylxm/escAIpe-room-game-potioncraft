@@ -11,7 +11,7 @@
             <Image url="@../images/treasure-room.jpeg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="436.0" layoutY="284.0">
+      <ImageView fx:id="lightImg" fitHeight="200.0" fitWidth="200.0" layoutX="436.0" layoutY="284.0">
          <image>
             <Image url="@../images/light.png" />
          </image>
