@@ -1,14 +1,17 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.TransitionAnimation;
@@ -21,7 +24,10 @@ public class ChestController {
   private ImageView keyImg;
   @FXML
   private ImageView lightImg;
+  @FXML
+  private Label timerLabel;
 
+  private CountdownTimer timer;
   private Timeline pulse;
 
   private double glower;
@@ -35,6 +41,8 @@ public class ChestController {
    */
   @FXML
   private void initialize() {
+    timer = MainMenuController.getCountdownTimer();
+    timer.setChestLabel(timerLabel);
     setupDragAndDrop(keyImg);
     // Using two different values for the glow to make sure the user 
     // sees both images
