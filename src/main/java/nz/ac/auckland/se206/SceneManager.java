@@ -6,6 +6,7 @@ import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
 import nz.ac.auckland.se206.controllers.CauldronRoomController;
 import nz.ac.auckland.se206.controllers.LibraryRoomController;
+import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.TreasureRoomController;
 
 public class SceneManager {
@@ -32,6 +33,18 @@ public class SceneManager {
   private static CauldronRoomController cauldronRoomControllerInstance;
 
 
+  public static RoomController getCurrentController() {
+    //switch case that returns the controller based on currScene
+    RoomController controller = null;
+    if (currScene == AppUi.LIBRARY_ROOM) {
+      controller = libraryRoomControllerInstance;
+    } else if (currScene == AppUi.TREASURE_ROOM) {
+      controller = treasureRoomControllerInstance;
+    } else if (currScene == AppUi.CAULDRON_ROOM) {
+      controller = cauldronRoomControllerInstance;
+    }
+    return controller;
+  }
 
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);

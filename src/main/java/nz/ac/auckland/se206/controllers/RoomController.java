@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Iterator;
+
+import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
@@ -115,7 +118,9 @@ public abstract class RoomController {
   protected Label notificationText;
   @FXML
   protected ImageView thoughtImage;
-
+  @FXML
+  private Rectangle fadeRectangle;
+  
   protected CountdownTimer countdownTimer;
 
   protected ImageView itemOneImg;
@@ -806,5 +811,13 @@ public abstract class RoomController {
     cancelTtsBtn.setDisable(true);
     cancelTtsBtn.setOpacity(0);
     App.textToSpeech.stop();
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }

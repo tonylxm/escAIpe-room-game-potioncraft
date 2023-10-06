@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Notification;
@@ -45,6 +49,7 @@ public class CauldronController {
   @FXML private ImageView backImg;
   @FXML private ImageView notificationBack;
   @FXML private Label notificationText;
+  @FXML private Rectangle fadeRectangle;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
@@ -341,7 +346,10 @@ public class CauldronController {
   @FXML
   private void goBack() {
     System.out.println("CAULDRON -> CAULDRON_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
+    //TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     System.out.println(cauldronItems);
   }
@@ -493,5 +501,13 @@ public class CauldronController {
     notificationText.setText("Cauldron Emptied!");
     Notification.notifyPopup(notificationBack, notificationText);
     resetItems();
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }

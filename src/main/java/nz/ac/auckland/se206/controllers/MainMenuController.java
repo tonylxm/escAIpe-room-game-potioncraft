@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -766,8 +767,11 @@ public class MainMenuController {
   public void onStartGame() throws IOException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
     disableAndOrFadeTimeBtns(true, 0, false);
-    TransitionAnimation.changeScene(
-        pane, AppUi.CAULDRON_ROOM, true);
+    // TransitionAnimation.changeScene(
+    //     pane, AppUi.CAULDRON_ROOM, true);
+    Scene currentScene = wizardImg.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     
