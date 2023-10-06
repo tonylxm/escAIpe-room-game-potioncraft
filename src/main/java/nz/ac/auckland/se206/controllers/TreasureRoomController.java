@@ -70,7 +70,10 @@ public class TreasureRoomController extends RoomController {
   @FXML
   public void tester(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CHEST");
-    TransitionAnimation.changeScene(pane, AppUi.CHEST, false);
+    //TransitionAnimation.changeScene(pane, AppUi.CHEST, false);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHEST));
+    SceneManager.getChestControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CHEST);
   }
   /** Changing scenes to book view */

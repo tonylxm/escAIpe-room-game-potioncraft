@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
 import nz.ac.auckland.se206.controllers.CauldronRoomController;
+import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.LibraryRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.TreasureRoomController;
@@ -28,11 +29,11 @@ public class SceneManager {
   public static AppUi currScene;
   public static AppUi timerScene;
   private static CauldronController cauldronControllerInstance;
-  private static TreasureRoomController treasureRoomControllerInstance;
   private static BookController bookControllerInstance;
   private static LibraryRoomController  libraryRoomControllerInstance;
   private static TreasureRoomController treasureRoomControllerInstance;
   private static CauldronRoomController cauldronRoomControllerInstance;
+  private static ChestController chestControllerInstance;
 
 
   public static RoomController getCurrentController() {
@@ -113,4 +114,11 @@ public class SceneManager {
     return cauldronRoomControllerInstance;
   }
 
+  public static ChestController getChestControllerInstance() {
+    return chestControllerInstance;
+  }
+
+  public static void setChestControllerInstance(ChestController chestControllerInstance) {
+    SceneManager.chestControllerInstance = chestControllerInstance;
+  }
 }

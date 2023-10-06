@@ -442,6 +442,15 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.CAULDRON_ROOM, cauldronRoomRoot);
         SceneManager.setCauldronRoomControllerInstance(cauldronRoomController);
 
+        //create an instance of ChestController
+        FXMLLoader chestLoader = new FXMLLoader(App.class.getResource("/fxml/chest.fxml"));
+        Parent chestRoot = chestLoader.load();
+        ChestController chestController = chestLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.CHEST, chestRoot);
+        SceneManager.setChestControllerInstance(chestController);
+
         return null;
       }
     };
