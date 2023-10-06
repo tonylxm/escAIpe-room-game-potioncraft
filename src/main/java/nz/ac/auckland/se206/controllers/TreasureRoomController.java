@@ -60,7 +60,7 @@ public class TreasureRoomController extends RoomController {
   }
 
   @FXML
-  public void tester (MouseEvent event) {
+  public void tester(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CHEST");
     TransitionAnimation.changeScene(pane, AppUi.CHEST, false);
     SceneManager.setTimerScene(AppUi.CHEST);

@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.animation.Timeline;
