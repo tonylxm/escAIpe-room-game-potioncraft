@@ -329,6 +329,7 @@ public class CauldronRoomController extends RoomController {
       enableRecipe();
       toggleChat(true, 0);
       toggleBooks(true, 0);
+      itemDefault();
 
       TransitionAnimation.fade(cancelTtsBtn, 0.0);
       cancelTtsBtn.setDisable(true);
