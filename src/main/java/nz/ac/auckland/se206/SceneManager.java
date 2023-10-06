@@ -4,6 +4,7 @@ import java.util.HashMap;
 import javafx.scene.Parent;
 import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
+import nz.ac.auckland.se206.controllers.TreasureRoomController;
 
 public class SceneManager {
 
@@ -17,12 +18,14 @@ public class SceneManager {
     YOU_WIN,
     YOU_LOSE,
     CAULDRON,
+    CHEST
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
   public static AppUi currScene;
   public static AppUi timerScene;
   private static CauldronController cauldronControllerInstance;
+  private static TreasureRoomController treasureRoomControllerInstance;
   private static BookController bookControllerInstance;
 
   public static void addAppUi(AppUi appUi, Parent root) {
@@ -63,5 +66,13 @@ public class SceneManager {
   // Get the BookController instance
   public static BookController getBookControllerInstance() {
     return bookControllerInstance;
+  }
+
+  public static void setTreasureRoomControllerInstance(TreasureRoomController controller) {
+    treasureRoomControllerInstance = controller;
+  }
+
+  public static TreasureRoomController getTreasureRoomControllerInstance() {
+    return treasureRoomControllerInstance;
   }
 }

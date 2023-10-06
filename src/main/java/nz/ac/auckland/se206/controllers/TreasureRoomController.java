@@ -6,6 +6,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TreasureRoomController extends RoomController {
@@ -25,6 +29,8 @@ public class TreasureRoomController extends RoomController {
   private ImageView itemTenImg;
   @FXML
   private Label timerLabel;
+  @FXML
+  private Rectangle chestRect;
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
@@ -36,6 +42,7 @@ public class TreasureRoomController extends RoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg);
+    switchItems(GameState.isChestOpen);
     countdownTimer.setTreasureTimerLabel(timerLabel);
     countdownTimer.setTreasureHintLabel(hintLabel);
     arrowMouseActions(leftShpe);
@@ -52,10 +59,27 @@ public class TreasureRoomController extends RoomController {
     goDirection(pane, AppUi.CAULDRON_ROOM);
   }
 
+  @FXML
+  public void tester(MouseEvent event) {
+    System.out.println("TREASURE_ROOM -> CHEST");
+    TransitionAnimation.changeScene(pane, AppUi.CHEST, false);
+    SceneManager.setTimerScene(AppUi.CHEST);
+  }
   /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
     openBook(AppUi.TREASURE_ROOM, pane);
+  }
+
+  @FXML
+  public void switchItems(boolean chestOpened) {
+    int opacity = chestOpened ? 1 : 0;
+    chestRect.setDisable(chestOpened);
+    itemSixImg.setOpacity(opacity);
+    itemSevenImg.setOpacity(opacity);
+    itemEightImg.setOpacity(opacity);
+    itemNineImg.setOpacity(opacity);
+    itemTenImg.setOpacity(opacity);
   }
 }
