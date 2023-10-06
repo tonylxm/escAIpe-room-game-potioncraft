@@ -16,7 +16,6 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class ChestController {
@@ -26,6 +25,8 @@ public class ChestController {
   private ImageView keyImg;
   @FXML
   private ImageView lightImg;
+  @FXML
+  private ImageView backImg;
   @FXML
   private Label timerLabel;
   @FXML
@@ -63,6 +64,9 @@ public class ChestController {
           }));
     pulse.setCycleCount(Timeline.INDEFINITE);
     pulse.play();
+
+    backImg.setOnMouseEntered(event -> backImg.setEffect(new Glow(1)));
+    backImg.setOnMouseExited(event -> backImg.setEffect(new Glow(0)));
   }
 
   /**
@@ -178,6 +182,16 @@ public class ChestController {
             SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
           }
         });
+  }
+
+  @FXML
+  public void goBack() {
+    System.out.println("CHEST -> TREASURE_ROOM");
+    //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+    SceneManager.getTreasureRoomControllerInstance().fadeIn();
+    SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
   @FXML
