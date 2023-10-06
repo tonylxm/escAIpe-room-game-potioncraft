@@ -2,16 +2,20 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.List;
+
+import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
@@ -78,6 +82,8 @@ public class BookController {
   private ImageView itemFourteenImg;
   @FXML
   private ImageView itemFifteenImg;
+  @FXML 
+  private Rectangle fadeRectangle;
 
   @FXML 
   private CountdownTimer countdownTimer;
@@ -226,7 +232,10 @@ public class BookController {
   @FXML
   private void onGoBack() {
     System.out.println("BOOK -> " + SceneManager.currScene);
-    TransitionAnimation.changeScene(pane, SceneManager.currScene, false);
+    //TransitionAnimation.changeScene(pane, SceneManager.currScene, false);
+    Scene currentScene = backgroundShade.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(SceneManager.currScene));
+    SceneManager.getCurrentController().fadeIn();
   }
 
   /** Uses text to speech to read the required items in the book. */
@@ -290,5 +299,13 @@ public class BookController {
       treasureBackground.setOpacity(1);
       libraryBackground.setOpacity(0);
     }
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }

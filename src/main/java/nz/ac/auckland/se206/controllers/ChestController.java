@@ -3,12 +3,15 @@ package nz.ac.auckland.se206.controllers;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.animation.Timeline;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -25,6 +28,8 @@ public class ChestController {
   private ImageView lightImg;
   @FXML
   private Label timerLabel;
+  @FXML
+  private Rectangle fadeRectangle;
 
   private CountdownTimer timer;
   private Timeline pulse;
@@ -166,9 +171,20 @@ public class ChestController {
                 "The chest has been unlocked! \n New items are available in the treasure room!", 
                 true, false);
             System.out.println("Put the key into the glowing chest");
-            TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
+            //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
+            Scene currentScene = fadeRectangle.getScene();
+            currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+            SceneManager.getTreasureRoomControllerInstance().fadeIn();
             SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
           }
         });
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }
