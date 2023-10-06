@@ -65,6 +65,8 @@ public class CauldronRoomController extends RoomController {
   private ImageView itemFourteenImg;
   @FXML
   private ImageView itemFifteenImg;
+  @FXML
+  private Rectangle fadeRectangle;
 
   private boolean showRecipe = true;
   private CountdownTimer countdownTimer;

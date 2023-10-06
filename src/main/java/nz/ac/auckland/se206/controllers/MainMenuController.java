@@ -354,9 +354,9 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-        SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
-        SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
+        //SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
+        // SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
+        //SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
         // Create an instance of CauldronController
@@ -376,6 +376,33 @@ public class MainMenuController {
         //store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.BOOK, bookRoot);
         SceneManager.setBookControllerInstance(bookController);  
+
+        //create an instance of LibraryRoomController
+        FXMLLoader libraryRoomLoader = new FXMLLoader(App.class.getResource("/fxml/library_room.fxml"));
+        Parent libraryRoomRoot = libraryRoomLoader.load();
+        LibraryRoomController libraryRoomController = libraryRoomLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.LIBRARY_ROOM, libraryRoomRoot);
+        SceneManager.setLibraryRoomControllerInstance(libraryRoomController);
+
+        //create an instance of TreasureRoomController
+        FXMLLoader treasureRoomLoader = new FXMLLoader(App.class.getResource("/fxml/treasure_room.fxml"));
+        Parent treasureRoomRoot = treasureRoomLoader.load();
+        TreasureRoomController treasureRoomController = treasureRoomLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoomRoot);
+        SceneManager.setTreasureRoomControllerInstance(treasureRoomController);
+
+        //create an instance of CauldronRoomController
+        FXMLLoader cauldronRoomLoader = new FXMLLoader(App.class.getResource("/fxml/cauldron_room.fxml"));
+        Parent cauldronRoomRoot = cauldronRoomLoader.load();
+        CauldronRoomController cauldronRoomController = cauldronRoomLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.CAULDRON_ROOM, cauldronRoomRoot);
+        SceneManager.setCauldronRoomControllerInstance(cauldronRoomController);
 
         return null;
       }

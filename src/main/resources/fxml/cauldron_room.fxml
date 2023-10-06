@@ -271,5 +271,6 @@
             <Image url="@../images/thought.gif" />
          </image>
       </ImageView>
+      <Rectangle fx:id="fadeRectangle" arcHeight="5.0" arcWidth="5.0" height="766.0" layoutX="-34.0" layoutY="-40.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1111.0" />
    </children>
 </Pane>

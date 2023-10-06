@@ -4,6 +4,9 @@ import java.util.HashMap;
 import javafx.scene.Parent;
 import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
+import nz.ac.auckland.se206.controllers.CauldronRoomController;
+import nz.ac.auckland.se206.controllers.LibraryRoomController;
+import nz.ac.auckland.se206.controllers.TreasureRoomController;
 
 public class SceneManager {
 
@@ -24,6 +27,11 @@ public class SceneManager {
   public static AppUi timerScene;
   private static CauldronController cauldronControllerInstance;
   private static BookController bookControllerInstance;
+  private static LibraryRoomController  libraryRoomControllerInstance;
+  private static TreasureRoomController treasureRoomControllerInstance;
+  private static CauldronRoomController cauldronRoomControllerInstance;
+
+
 
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);
@@ -64,4 +72,30 @@ public class SceneManager {
   public static BookController getBookControllerInstance() {
     return bookControllerInstance;
   }
+
+  //getters and setters for the rest of the controllers
+  public static void setLibraryRoomControllerInstance(LibraryRoomController controller) {
+    libraryRoomControllerInstance = controller;
+  }
+
+  public static LibraryRoomController getLibraryRoomControllerInstance() {
+    return libraryRoomControllerInstance;
+  }
+
+  public static void setTreasureRoomControllerInstance(TreasureRoomController controller) {
+    treasureRoomControllerInstance = controller;
+  }
+
+  public static TreasureRoomController getTreasureRoomControllerInstance() {
+    return treasureRoomControllerInstance;
+  }
+
+  public static void setCauldronRoomControllerInstance(CauldronRoomController controller) {
+    cauldronRoomControllerInstance = controller;
+  }
+
+  public static CauldronRoomController getCauldronRoomControllerInstance() {
+    return cauldronRoomControllerInstance;
+  }
+
 }
