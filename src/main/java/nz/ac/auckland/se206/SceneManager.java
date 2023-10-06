@@ -21,12 +21,14 @@ public class SceneManager {
     YOU_WIN,
     YOU_LOSE,
     CAULDRON,
+    CHEST
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
   public static AppUi currScene;
   public static AppUi timerScene;
   private static CauldronController cauldronControllerInstance;
+  private static TreasureRoomController treasureRoomControllerInstance;
   private static BookController bookControllerInstance;
   private static LibraryRoomController  libraryRoomControllerInstance;
   private static TreasureRoomController treasureRoomControllerInstance;

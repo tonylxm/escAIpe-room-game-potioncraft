@@ -1,0 +1,174 @@
+package nz.ac.auckland.se206.controllers;
+
+import java.util.concurrent.atomic.AtomicReference;
+
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import nz.ac.auckland.se206.CountdownTimer;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.TransitionAnimation;
+import nz.ac.auckland.se206.SceneManager.AppUi;
+
+public class ChestController {
+  @FXML
+  private Pane pane;
+  @FXML
+  private ImageView keyImg;
+  @FXML
+  private ImageView lightImg;
+  @FXML
+  private Label timerLabel;
+
+  private CountdownTimer timer;
+  private Timeline pulse;
+
+  private double glower;
+  private double glowerTwo;
+  private boolean glowUp;
+  private boolean glowUpTwo;
+
+  /**
+   * Initialising the glow effect and the drag and drop functionality 
+   * for the key and light images.
+   */
+  @FXML
+  private void initialize() {
+    timer = MainMenuController.getCountdownTimer();
+    timer.setChestLabel(timerLabel);
+    setupDragAndDrop(keyImg);
+    // Using two different values for the glow to make sure the user 
+    // sees both images
+    glower = 0.0;
+    glowerTwo = 0.5;
+    glowUp = true;
+    glowUpTwo = true;
+    // Setting up timeline for glowing effect
+    pulse = new Timeline(
+       new KeyFrame(
+          Duration.millis(50),
+          event -> {
+            setGlow();
+          }));
+    pulse.setCycleCount(Timeline.INDEFINITE);
+    pulse.play();
+  }
+
+  /**
+   * Setting the glows for both the key and the light images.
+   * Using two different glows to create a pulsing effect where
+   * each glow is out of phase by 90 degrees.
+   */
+  @FXML
+  private void setGlow() {
+    keyImg.setEffect(new Glow(glower));
+    lightImg.setEffect(new Glow(glowerTwo));
+    changeGlowOne();
+    changeGlowTwo();
+  }
+
+  /**
+   * Changing the value for the glow for the key image.
+   */
+  private void changeGlowOne() {
+    if (glowUp) { 
+      glower += 0.05;
+      if (glower >= 1) {
+        glowUp = false;
+      }
+    } else {
+      glower -= 0.05;
+      if (glower <= 0) {
+        glowUp = true;
+      }
+    }
+  }
+
+  /**
+   * Changing the value of the glow for the light image.
+   */
+  private void changeGlowTwo() {
+    if (glowUpTwo) {
+      glowerTwo += 0.0375;
+      if (glowerTwo >= 0.75) {
+        glowUpTwo = false;
+      }
+    } else {
+      glowerTwo -= 0.0375;
+      if (glowerTwo <= 0) {
+        glowUpTwo = true;
+      }
+    }
+  }
+
+  /**
+   * Setting up drag and drop functionality for the key image.
+   * When dropped on the glowing light image, the key will be put into the chest, unlocking
+   * the other items in the treasure room, then moving to the treasure room.
+   * 
+   * @param itemImageView the image needing to be dragged and dropped
+   */
+  @FXML
+  private void setupDragAndDrop(ImageView itemImageView) {
+    final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
+    final AtomicReference<Double> originalY = new AtomicReference<>(0.0);
+
+    // Setting up draggability
+    itemImageView.setOnMousePressed(
+        event -> {
+          originalX.set(event.getSceneX() - itemImageView.getLayoutX());
+          originalY.set(event.getSceneY() - itemImageView.getLayoutY());
+        });
+
+    // Setting up draggability
+    itemImageView.setOnMouseDragged(
+        event -> {
+          double offsetX = event.getSceneX() - originalX.get();
+          double offsetY = event.getSceneY() - originalY.get();
+
+          itemImageView.setLayoutX(offsetX);
+          itemImageView.setLayoutY(offsetY);
+        });
+
+    // Setting up drop functionality    
+    itemImageView.setOnMouseReleased(
+        event -> {
+          // Define the target position relative to the scene
+          System.out.println("Dropped");
+          double targetX = 530;
+          double targetY = 400;
+
+          // Calculate the distance between the drop position and the target position
+          double distance =
+              Math.sqrt(
+                  Math.pow(event.getSceneX() - targetX, 2)
+                      + Math.pow(event.getSceneY() - targetY, 2));
+
+          // print out the coordinates of where it was dropped
+          System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
+
+          // Set a threshold for the maximum allowed distance
+          double maxDistanceThreshold = 100;
+
+          // If the image is dropped close enough to the target, stopping the glowing animation,
+          // making the items in the treasure room visible, and moving to the treasure room
+          if (distance <= maxDistanceThreshold) {
+            pulse.stop();
+            GameState.isChestOpen = true;
+            SceneManager.getTreasureRoomControllerInstance().switchItems(GameState.isChestOpen);
+            SceneManager.getTreasureRoomControllerInstance().setText(
+                "The chest has been unlocked! \n New items are available in the treasure room!", 
+                true, false);
+            System.out.println("Put the key into the glowing chest");
+            TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
+            SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
+          }
+        });
+  }
+}

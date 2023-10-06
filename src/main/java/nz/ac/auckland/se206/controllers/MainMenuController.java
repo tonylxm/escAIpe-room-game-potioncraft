@@ -185,12 +185,24 @@ public class MainMenuController {
 
     // Setting appropriate interactable features for the settings buttons including hover hints
     difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, Difficulty.EASY);
+    easyBtn.setOnMouseExited(event -> difficultyHoverOff(
+        easyBtn, easyBtnClicked, hintInfinity));
     difficultyMouseActions(mediumBtn, mediumBtnClicked, hintFive, Difficulty.MEDIUM);
+    mediumBtn.setOnMouseExited(event -> difficultyHoverOff(
+        mediumBtn, mediumBtnClicked, hintFive));
     difficultyMouseActions(hardBtn, hardBtnClicked, hintZero, Difficulty.HARD);
+    hardBtn.setOnMouseExited(event -> difficultyHoverOff(
+        hardBtn, hardBtnClicked, hintZero));
 
     timeMouseActions(twoMinBtn, twoMinBtnClicked, twoMin, TimeLimit.TWO_MIN);
+    twoMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
+        twoMinBtn, twoMinBtnClicked, twoMin));
     timeMouseActions(fourMinBtn, fourMinBtnClicked, fourMin, TimeLimit.FOUR_MIN);
+    fourMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
+        fourMinBtn, fourMinBtnClicked, fourMin));
     timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, TimeLimit.SIX_MIN);
+    sixMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
+        sixMinBtn, sixMinBtnClicked, sixMin));
 
     // Pregenerate wizard intro message
     // Task<Void> introTask =
@@ -210,15 +222,12 @@ public class MainMenuController {
   public void difficultyMouseActions(
       ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, Difficulty difficulty) {
     difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
-    difficultyBtn.setOnMouseExited(event -> difficultyHoverOff(
-        difficultyBtn, difficultyBtnClicked, hint));
     difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
   }
 
   public void timeMouseActions(
       ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, TimeLimit time) {
     timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
-    timeBtn.setOnMouseExited(event -> timeLimitHoverOff(timeBtn, timeBtnClicked, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
   }
 
@@ -267,6 +276,11 @@ public class MainMenuController {
         hintInfinity.setOpacity(1);
         hintFive.setOpacity(0);
         hintZero.setOpacity(0);
+        easyBtnClicked = true;
+        interactionHandler.unglowThis(mediumBtn);
+        mediumBtnClicked = false;
+        interactionHandler.unglowThis(hardBtn);
+        hardBtnClicked = false;
         break;
       // Medium level capping hints at 5
       case MEDIUM:
@@ -276,6 +290,11 @@ public class MainMenuController {
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(1);
         hintZero.setOpacity(0);
+        mediumBtnClicked = true;
+        interactionHandler.unglowThis(easyBtn);
+        easyBtnClicked = false;
+        interactionHandler.unglowThis(hardBtn);
+        hardBtnClicked = false;
         break;
       // No hints are allowed to be given on hard level
       case HARD:
@@ -285,6 +304,11 @@ public class MainMenuController {
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(0);
         hintZero.setOpacity(1);
+        hardBtnClicked = true;
+        interactionHandler.unglowThis(easyBtn);
+        easyBtnClicked = false;
+        interactionHandler.unglowThis(mediumBtn);
+        mediumBtnClicked = false;
         break;
     }
     continueBtnEnable();
@@ -302,8 +326,10 @@ public class MainMenuController {
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
         twoMin.setOpacity(1);
+        interactionHandler.unglowThis(fourMinBtn);
         fourMinBtnClicked = false;
         fourMin.setOpacity(0);
+        interactionHandler.unglowThis(sixMinBtn);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("2:00");
@@ -311,10 +337,12 @@ public class MainMenuController {
       // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
         interactionHandler.glowThis(fourMinBtn);
+        interactionHandler.unglowThis(twoMinBtn);
         twoMinBtnClicked = false;
         twoMin.setOpacity(0);
         fourMinBtnClicked = true;
         fourMin.setOpacity(1);
+        interactionHandler.unglowThis(sixMinBtn);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("4:00");
@@ -322,8 +350,10 @@ public class MainMenuController {
       // Using the appropriate glow animation over the 6 minutes image
       case SIX_MIN:
         interactionHandler.glowThis(sixMinBtn);
+        interactionHandler.unglowThis(twoMinBtn);
         twoMinBtnClicked = false;
         twoMin.setOpacity(0);
+        interactionHandler.unglowThis(fourMinBtn);
         fourMinBtnClicked = false;
         fourMin.setOpacity(0);
         sixMinBtnClicked = true;
@@ -360,6 +390,13 @@ public class MainMenuController {
         //SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
+        FXMLLoader treasureLoader = new FXMLLoader(App.class.getResource("/fxml/treasure_room.fxml"));
+        Parent treasureRoot = treasureLoader.load();
+        TreasureRoomController treasureController = treasureLoader.getController();
+        SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoot);
+        SceneManager.setTreasureRoomControllerInstance(treasureController);
+
+
         // Create an instance of CauldronController
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/cauldron.fxml"));
         Parent cauldronRoot = loader.load();

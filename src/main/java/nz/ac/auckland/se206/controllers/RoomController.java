@@ -224,10 +224,15 @@ public abstract class RoomController {
 
     // Setting appropriate interactable features for the items
     itemMouseActions(itemOneImg, oneClicked, itemOne);
+    itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
     itemMouseActions(itemTwoImg, twoClicked, itemTwo);
+    itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
     itemMouseActions(itemThreeImg, threeClicked, itemThree);
+    itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
     itemMouseActions(itemFourImg, fourClicked, itemFour);
+    itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
+    itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
   }
 
   /**
@@ -235,7 +240,6 @@ public abstract class RoomController {
    */
   protected void itemMouseActions(ImageView itemImg, boolean itemClicked, Items.Item item) {
     itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
-    itemImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemImg, itemClicked));
     itemImg.setOnMouseClicked(event -> itemSelect(item));
   }
 
@@ -543,6 +547,7 @@ public abstract class RoomController {
   @FXML
   protected void setText(String text, boolean on, boolean yesNo) {
     textLbl.setText(text);
+    mouseTrackRegion.setDisable(!on);
     if (on) {
       textRect.setOpacity(1);
       textRect.setDisable(false);
