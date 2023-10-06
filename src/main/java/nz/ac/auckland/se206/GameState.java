@@ -16,6 +16,9 @@ public class GameState {
   /** Indicates whether the book riddle has been given. */
   public static boolean isBookRiddleGiven = false;
 
+  /** Indicates whether the chest had been opened or not. */
+  public static boolean isChestOpen = false;
+
   //getter for recipe
   public static ArrayList<Items.Item> getRecipe() {
     return recipe;
