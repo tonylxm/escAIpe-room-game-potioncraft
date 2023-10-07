@@ -18,6 +18,7 @@ public class GameOverController {
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
+    GameState.areItemsCollected = false;
     App.setRoot("main_menu");
   }
 }
