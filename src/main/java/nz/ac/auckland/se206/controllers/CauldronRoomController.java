@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -64,6 +66,8 @@ public class CauldronRoomController extends RoomController {
   private ImageView itemFourteenImg;
   @FXML
   private ImageView itemFifteenImg;
+  @FXML
+  private Rectangle fadeRectangle;
 
   private boolean showRecipe = true;
   private CountdownTimer countdownTimer;
@@ -136,7 +140,10 @@ public class CauldronRoomController extends RoomController {
       itemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("CAULDRON_ROOM -> CAULDRON");
-      TransitionAnimation.changeScene(pane, AppUi.CAULDRON, false);
+      // TransitionAnimation.changeScene(pane, AppUi.CAULDRON, false);
+      Scene currentScene = fadeRectangle.getScene();
+      currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON));
+      SceneManager.getCauldronControllerInstance().fadeIn();
       SceneManager.setTimerScene(AppUi.CAULDRON);
       System.out.println(Items.necessary);
     }
@@ -159,14 +166,14 @@ public class CauldronRoomController extends RoomController {
         protected Void call() throws Exception {
           // Running gpt to get the riddle from the wizard
           toggleChat(false, 1);
-          mouseTrackRegion.setDisable(true);
+          // mouseTrackRegion.setDisable(true);
           disableChat(true, 0.5);
           return null;
         }
       };
       new Thread(waitForAnimationTask).start();
       // TODO: add half sec delay
-      // Thred.sleep(500)
+      // Thread.sleep(500)
       MainMenuController.getChatHandler().appendChatMessage(MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
       // After the riddle scrolling text animation has finished, then allowing
@@ -254,6 +261,7 @@ public class CauldronRoomController extends RoomController {
       new Thread(resolvedTask).start();
       resolvedTask.setOnSucceeded(e -> {
         mouseTrackRegion.setDisable(false);
+        mouseTrackRegion.setCursor(Cursor.HAND);
       });
     }
   }
@@ -290,7 +298,10 @@ public class CauldronRoomController extends RoomController {
       // If you've solved the riddle, you can freely travel between rooms
       System.out.println("CAULDRON_ROOM -> LIBRARY_ROOM");
       itemScroll.setOpacity(0);
-      RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
+      // RoomController.goDirection(pane, AppUi.LIBRARY_ROOM);
+      Scene currentScene = fadeRectangle.getScene();
+      currentScene.setRoot(SceneManager.getUiRoot(AppUi.LIBRARY_ROOM));
+      SceneManager.getLibraryRoomControllerInstance().fadeIn();
     }
   }
 
@@ -308,7 +319,10 @@ public class CauldronRoomController extends RoomController {
       // If you've solved the riddle, you can freely travel between rooms
       System.out.println("CAULDRON_ROOM -> TREASURE_ROOM");
       itemScroll.setOpacity(0);
-      RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
+      //RoomController.goDirection(pane, AppUi.TREASURE_ROOM);
+      Scene currentScene = fadeRectangle.getScene();
+      currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+      SceneManager.getTreasureRoomControllerInstance().fadeIn();
     }
   }
 
@@ -327,6 +341,10 @@ public class CauldronRoomController extends RoomController {
       enableRecipe();
       toggleChat(true, 0);
       toggleBooks(true, 0);
+      itemDefault();
+
+      TransitionAnimation.fade(cancelTtsBtn, 0.0);
+      cancelTtsBtn.setDisable(true);
 
       // Handling closing the "bag" when clicking off inventory
       if (bagOpened) {
@@ -358,6 +376,19 @@ public class CauldronRoomController extends RoomController {
   @FXML
   public void openBook() {
     System.out.println("CAULDRON_ROOM -> BOOK");
-    RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
+    //RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+    SceneManager.getBookControllerInstance().fadeIn();
+    SceneManager.currScene = AppUi.CAULDRON_ROOM;
+    SceneManager.getBookControllerInstance().updateBackground();
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }

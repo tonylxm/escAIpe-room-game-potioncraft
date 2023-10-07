@@ -146,4 +146,8 @@ public class GptPromptEngineering {
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
         + " wise wizard would.";
   }
+
+  public static String getPotionName() {
+    return "Only give one short concise potion name + the word Recipe";
+  }
 }

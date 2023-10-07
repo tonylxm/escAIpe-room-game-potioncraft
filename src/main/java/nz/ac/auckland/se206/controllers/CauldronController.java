@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Notification;
@@ -20,62 +24,38 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
-  @FXML 
-  private Pane pane;
-  @FXML
-  private ImageView batWingImage;
-  @FXML
-  private ImageView crystalImage;
-  @FXML
-  private ImageView insectWingImage;
-  @FXML
-  private ImageView talonImage;
-  @FXML    
-  private ImageView powderImage;
-  @FXML    
-  private ImageView tailImage;
-  @FXML
-  private ImageView featherImage;
-  @FXML    
-  private ImageView scalesImage;
-  @FXML    
-  private ImageView flowerImage;
-  @FXML    
-  private ImageView wreathImage;
-  @FXML    
-  private ImageView boneImage;
-  @FXML    
-  private ImageView fireImage;
-  @FXML
-  private ImageView rootImage;
-  @FXML
-  private ImageView beetleImage;
-  @FXML
-  private ImageView unicornHornImage;
+  @FXML private Pane pane;
+  @FXML private ImageView batWingImage;
+  @FXML private ImageView crystalImage;
+  @FXML private ImageView insectWingImage;
+  @FXML private ImageView talonImage;
+  @FXML private ImageView powderImage;
+  @FXML private ImageView tailImage;
+  @FXML private ImageView featherImage;
+  @FXML private ImageView scalesImage;
+  @FXML private ImageView flowerImage;
+  @FXML private ImageView wreathImage;
+  @FXML private ImageView boneImage;
+  @FXML private ImageView fireImage;
+  @FXML private ImageView rootImage;
+  @FXML private ImageView beetleImage;
+  @FXML private ImageView unicornHornImage;
 
-  @FXML 
-  private ImageView cauldronImageView;
-  @FXML 
-  private Rectangle cauldronOverlay;
-  @FXML 
-  private Button brewBtn;
-  @FXML 
-  private Button emptyBtn;
-  @FXML 
-  private Label timerLabel;
-  @FXML 
-  private ImageView backImg;
-  @FXML 
-  private ImageView notificationBack;
-  @FXML 
-  private Label notificationText;
+  @FXML private ImageView cauldronImageView;
+  @FXML private Rectangle cauldronOverlay;
+  @FXML private Button brewBtn;
+  @FXML private Button emptyBtn;
+  @FXML private Label timerLabel;
+  @FXML private ImageView backImg;
+  @FXML private ImageView notificationBack;
+  @FXML private Label notificationText;
+  @FXML private Rectangle fadeRectangle;
 
   private Map<String, Items.Item> imageViewToItemMap = new HashMap<>();
   private Set<Items.Item> inventory;
 
   // array to store the items dropped into the cauldron
   private ArrayList<Items.Item> cauldronItems = new ArrayList<Items.Item>();
-
 
   private CountdownTimer countdownTimer;
 
@@ -156,7 +136,7 @@ public class CauldronController {
     images.add(rootImage);
     images.add(beetleImage);
     images.add(unicornHornImage);
-    
+
     // setup glow for all images
     for (ImageView image : images) {
       image.setOnMouseEntered(event -> interactionHandler.glowThis(image));
@@ -221,9 +201,7 @@ public class CauldronController {
     }
   }
 
-  /**
-   * Method to update the image states based on the player's inventory
-   */
+  /** Method to update the image states based on the player's inventory */
   public void updateImageStates() {
     // Enable or disable images based on the presence of items in the inventory
     System.out.println("Updating image states");
@@ -315,55 +293,63 @@ public class CauldronController {
     final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
     final AtomicReference<Double> originalY = new AtomicReference<>(0.0);
 
-    itemImageView.setOnMousePressed(event -> {
-      originalX.set(event.getSceneX() - itemImageView.getLayoutX());
-      originalY.set(event.getSceneY() - itemImageView.getLayoutY());
-    });
+    itemImageView.setOnMousePressed(
+        event -> {
+          originalX.set(event.getSceneX() - itemImageView.getLayoutX());
+          originalY.set(event.getSceneY() - itemImageView.getLayoutY());
+        });
 
-    itemImageView.setOnMouseDragged(event -> {
-      double offsetX = event.getSceneX() - originalX.get();
-      double offsetY = event.getSceneY() - originalY.get();
+    itemImageView.setOnMouseDragged(
+        event -> {
+          double offsetX = event.getSceneX() - originalX.get();
+          double offsetY = event.getSceneY() - originalY.get();
 
-      itemImageView.setLayoutX(offsetX);
-      itemImageView.setLayoutY(offsetY);
-    });
+          itemImageView.setLayoutX(offsetX);
+          itemImageView.setLayoutY(offsetY);
+        });
 
-    itemImageView.setOnMouseReleased(event -> {
-      // Define the target position relative to the scene
-      System.out.println("Dropped");
-      double targetX = 520;
-      double targetY = 450;
+    itemImageView.setOnMouseReleased(
+        event -> {
+          // Define the target position relative to the scene
+          System.out.println("Dropped");
+          double targetX = 520;
+          double targetY = 450;
 
-      // Calculate the distance between the drop position and the target position
-      double distance = Math.sqrt(Math.pow(event.getSceneX() - targetX, 2) 
-          + Math.pow(event.getSceneY() - targetY, 2));
+          // Calculate the distance between the drop position and the target position
+          double distance =
+              Math.sqrt(
+                  Math.pow(event.getSceneX() - targetX, 2)
+                      + Math.pow(event.getSceneY() - targetY, 2));
 
-      //print out the coordinates of where it was dropped
-      System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
+          // print out the coordinates of where it was dropped
+          System.out.println("X: " + event.getSceneX() + " Y: " + event.getSceneY());
 
-      // Set a threshold for the maximum allowed distance
-      double maxDistanceThreshold = 150;
+          // Set a threshold for the maximum allowed distance
+          double maxDistanceThreshold = 150;
 
-      if (distance <= maxDistanceThreshold) {
-        System.out.println("Dropped within cauldron bounds");
-        itemImageView.setVisible(false);
-        String imageViewName = itemId;
-        Items.Item item = imageViewToItemMap.get(imageViewName);
+          if (distance <= maxDistanceThreshold) {
+            System.out.println("Dropped within cauldron bounds");
+            itemImageView.setVisible(false);
+            String imageViewName = itemId;
+            Items.Item item = imageViewToItemMap.get(imageViewName);
 
-        if (item != null) {
-          // Add the item to the cauldronItems ArrayList
-          cauldronItems.add(item);
+            if (item != null) {
+              // Add the item to the cauldronItems ArrayList
+              cauldronItems.add(item);
 
-          // You can also update the UI or perform other actions here
-        }
-      }
-    });
+              // You can also update the UI or perform other actions here
+            }
+          }
+        });
   }
 
   @FXML
   private void goBack() {
     System.out.println("CAULDRON -> CAULDRON_ROOM");
-    TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
+    //TransitionAnimation.changeScene(pane, AppUi.CAULDRON_ROOM, false);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     System.out.println(cauldronItems);
   }
@@ -415,24 +401,99 @@ public class CauldronController {
     // just in case
     // batWingImage.setY(54);
 
+    // resetting the images
+    if (cauldronItems.contains(Items.Item.BAT_WINGS)) {
+      batWingImage.setLayoutX(80);
+      batWingImage.setLayoutY(80);
+      batWingImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.CRYSTAL)) {
+      crystalImage.setLayoutX(47);
+      crystalImage.setLayoutY(370);
+      crystalImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.INSECT_WINGS)) {
+      insectWingImage.setLayoutX(790);
+      insectWingImage.setLayoutY(500);
+      insectWingImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.TALON)) {
+      talonImage.setLayoutX(260);
+      talonImage.setLayoutY(130);
+      talonImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.POWDER)) {
+      powderImage.setLayoutX(745);
+      powderImage.setLayoutY(255);
+      powderImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.TAIL)) {
+      tailImage.setLayoutX(410);
+      tailImage.setLayoutY(200);
+      tailImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.FEATHER)) {
+      featherImage.setLayoutX(210);
+      featherImage.setLayoutY(350);
+      featherImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.SCALES)) {
+      scalesImage.setLayoutX(795);
+      scalesImage.setLayoutY(132);
+      scalesImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.FLOWER)) {
+      flowerImage.setLayoutX(235);
+      flowerImage.setLayoutY(500);
+      flowerImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.WREATH)) {
+      wreathImage.setLayoutX(544);
+      wreathImage.setLayoutY(134);
+      wreathImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.BONE)) {
+      boneImage.setLayoutX(740);
+      boneImage.setLayoutY(410);
+      boneImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.FIRE)) {
+      fireImage.setLayoutX(110);
+      fireImage.setLayoutY(530);
+      fireImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.ROOT)) {
+      rootImage.setLayoutX(170);
+      rootImage.setLayoutY(250);
+      rootImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.BEETLE)) {
+      beetleImage.setLayoutX(810);
+      beetleImage.setLayoutY(390);
+      beetleImage.setVisible(true);
+    }
+
+    if (cauldronItems.contains(Items.Item.UNICORN_HORN)) {
+      unicornHornImage.setLayoutX(890);
+      unicornHornImage.setLayoutY(380);
+      unicornHornImage.setVisible(true);
+    }
+
     // resetting the items in the cauldron
     cauldronItems.clear();
-    // resetting the images
-    batWingImage.setVisible(true);
-    crystalImage.setVisible(true);
-    insectWingImage.setVisible(true);
-    talonImage.setVisible(true);
-    powderImage.setVisible(true);
-    tailImage.setVisible(true);
-    featherImage.setVisible(true);
-    scalesImage.setVisible(true);
-    flowerImage.setVisible(true);
-    wreathImage.setVisible(true);
-    boneImage.setVisible(true);
-    fireImage.setVisible(true);
-    rootImage.setVisible(true);
-    beetleImage.setVisible(true);
-    unicornHornImage.setVisible(true);
   }
 
   @FXML
@@ -440,5 +501,13 @@ public class CauldronController {
     notificationText.setText("Cauldron Emptied!");
     Notification.notifyPopup(notificationBack, notificationText);
     resetItems();
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }

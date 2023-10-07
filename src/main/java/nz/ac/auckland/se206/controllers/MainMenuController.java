@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -25,6 +26,7 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class MainMenuController {
   public enum Difficulty {
@@ -147,6 +149,8 @@ public class MainMenuController {
   @FXML
   private ImageView ttsBtn2;
   @FXML
+  private ImageView cancelTtsBtn;
+  @FXML
   private Rectangle mouseTrackRegion;
 
   private boolean easyBtnClicked;
@@ -157,6 +161,7 @@ public class MainMenuController {
   private boolean sixMinBtnClicked;
 
   private String introMsg;
+  private boolean ttsOn;
   private boolean appendIntroMsgFinished;
 
   public void initialize() {
@@ -166,6 +171,7 @@ public class MainMenuController {
     TransitionAnimation.setMasterPane(masterPane);
     difficultySelected = false;
     timeSelected = false;
+    ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
 
@@ -179,12 +185,24 @@ public class MainMenuController {
 
     // Setting appropriate interactable features for the settings buttons including hover hints
     difficultyMouseActions(easyBtn, easyBtnClicked, hintInfinity, Difficulty.EASY);
+    easyBtn.setOnMouseExited(event -> difficultyHoverOff(
+        easyBtn, easyBtnClicked, hintInfinity));
     difficultyMouseActions(mediumBtn, mediumBtnClicked, hintFive, Difficulty.MEDIUM);
+    mediumBtn.setOnMouseExited(event -> difficultyHoverOff(
+        mediumBtn, mediumBtnClicked, hintFive));
     difficultyMouseActions(hardBtn, hardBtnClicked, hintZero, Difficulty.HARD);
+    hardBtn.setOnMouseExited(event -> difficultyHoverOff(
+        hardBtn, hardBtnClicked, hintZero));
 
     timeMouseActions(twoMinBtn, twoMinBtnClicked, twoMin, TimeLimit.TWO_MIN);
+    twoMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
+        twoMinBtn, twoMinBtnClicked, twoMin));
     timeMouseActions(fourMinBtn, fourMinBtnClicked, fourMin, TimeLimit.FOUR_MIN);
+    fourMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
+        fourMinBtn, fourMinBtnClicked, fourMin));
     timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, TimeLimit.SIX_MIN);
+    sixMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
+        sixMinBtn, sixMinBtnClicked, sixMin));
 
     // Pregenerate wizard intro message
     // Task<Void> introTask =
@@ -204,15 +222,12 @@ public class MainMenuController {
   public void difficultyMouseActions(
       ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, Difficulty difficulty) {
     difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
-    difficultyBtn.setOnMouseExited(event -> difficultyHoverOff(
-        difficultyBtn, difficultyBtnClicked, hint));
     difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
   }
 
   public void timeMouseActions(
       ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, TimeLimit time) {
     timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
-    timeBtn.setOnMouseExited(event -> timeLimitHoverOff(timeBtn, timeBtnClicked, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
   }
 
@@ -261,6 +276,11 @@ public class MainMenuController {
         hintInfinity.setOpacity(1);
         hintFive.setOpacity(0);
         hintZero.setOpacity(0);
+        easyBtnClicked = true;
+        interactionHandler.unglowThis(mediumBtn);
+        mediumBtnClicked = false;
+        interactionHandler.unglowThis(hardBtn);
+        hardBtnClicked = false;
         break;
       // Medium level capping hints at 5
       case MEDIUM:
@@ -270,6 +290,11 @@ public class MainMenuController {
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(1);
         hintZero.setOpacity(0);
+        mediumBtnClicked = true;
+        interactionHandler.unglowThis(easyBtn);
+        easyBtnClicked = false;
+        interactionHandler.unglowThis(hardBtn);
+        hardBtnClicked = false;
         break;
       // No hints are allowed to be given on hard level
       case HARD:
@@ -279,6 +304,11 @@ public class MainMenuController {
         hintInfinity.setOpacity(0);
         hintFive.setOpacity(0);
         hintZero.setOpacity(1);
+        hardBtnClicked = true;
+        interactionHandler.unglowThis(easyBtn);
+        easyBtnClicked = false;
+        interactionHandler.unglowThis(mediumBtn);
+        mediumBtnClicked = false;
         break;
     }
     continueBtnEnable();
@@ -296,8 +326,10 @@ public class MainMenuController {
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
         twoMin.setOpacity(1);
+        interactionHandler.unglowThis(fourMinBtn);
         fourMinBtnClicked = false;
         fourMin.setOpacity(0);
+        interactionHandler.unglowThis(sixMinBtn);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("2:00");
@@ -305,10 +337,12 @@ public class MainMenuController {
       // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
         interactionHandler.glowThis(fourMinBtn);
+        interactionHandler.unglowThis(twoMinBtn);
         twoMinBtnClicked = false;
         twoMin.setOpacity(0);
         fourMinBtnClicked = true;
         fourMin.setOpacity(1);
+        interactionHandler.unglowThis(sixMinBtn);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("4:00");
@@ -316,8 +350,10 @@ public class MainMenuController {
       // Using the appropriate glow animation over the 6 minutes image
       case SIX_MIN:
         interactionHandler.glowThis(sixMinBtn);
+        interactionHandler.unglowThis(twoMinBtn);
         twoMinBtnClicked = false;
         twoMin.setOpacity(0);
+        interactionHandler.unglowThis(fourMinBtn);
         fourMinBtnClicked = false;
         fourMin.setOpacity(0);
         sixMinBtnClicked = true;
@@ -349,11 +385,18 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-        SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
-        SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
+        //SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
+        // SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
+        //SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(AppUi.YOU_WIN, App.loadFxml("you-win"));
     
+        FXMLLoader treasureLoader = new FXMLLoader(App.class.getResource("/fxml/treasure_room.fxml"));
+        Parent treasureRoot = treasureLoader.load();
+        TreasureRoomController treasureController = treasureLoader.getController();
+        SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoot);
+        SceneManager.setTreasureRoomControllerInstance(treasureController);
+
+
         // Create an instance of CauldronController
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/cauldron.fxml"));
         Parent cauldronRoot = loader.load();
@@ -371,6 +414,42 @@ public class MainMenuController {
         //store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.BOOK, bookRoot);
         SceneManager.setBookControllerInstance(bookController);  
+
+        //create an instance of LibraryRoomController
+        FXMLLoader libraryRoomLoader = new FXMLLoader(App.class.getResource("/fxml/library_room.fxml"));
+        Parent libraryRoomRoot = libraryRoomLoader.load();
+        LibraryRoomController libraryRoomController = libraryRoomLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.LIBRARY_ROOM, libraryRoomRoot);
+        SceneManager.setLibraryRoomControllerInstance(libraryRoomController);
+
+        //create an instance of TreasureRoomController
+        FXMLLoader treasureRoomLoader = new FXMLLoader(App.class.getResource("/fxml/treasure_room.fxml"));
+        Parent treasureRoomRoot = treasureRoomLoader.load();
+        TreasureRoomController treasureRoomController = treasureRoomLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoomRoot);
+        SceneManager.setTreasureRoomControllerInstance(treasureRoomController);
+
+        //create an instance of CauldronRoomController
+        FXMLLoader cauldronRoomLoader = new FXMLLoader(App.class.getResource("/fxml/cauldron_room.fxml"));
+        Parent cauldronRoomRoot = cauldronRoomLoader.load();
+        CauldronRoomController cauldronRoomController = cauldronRoomLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.CAULDRON_ROOM, cauldronRoomRoot);
+        SceneManager.setCauldronRoomControllerInstance(cauldronRoomController);
+
+        //create an instance of ChestController
+        FXMLLoader chestLoader = new FXMLLoader(App.class.getResource("/fxml/chest.fxml"));
+        Parent chestRoot = chestLoader.load();
+        ChestController chestController = chestLoader.getController();
+
+        //store the controller instance in SceneManager
+        SceneManager.addAppUi(AppUi.CHEST, chestRoot);
+        SceneManager.setChestControllerInstance(chestController);
 
         return null;
       }
@@ -525,10 +604,12 @@ public class MainMenuController {
           TransitionAnimation.fade(textRect, 0.0);
           TransitionAnimation.fade(chatTextArea, 0.0);
           TransitionAnimation.fade(ttsBtn2, 0.0);
+          TransitionAnimation.fade(cancelTtsBtn, 0.0);
           TransitionAnimation.fade(mouseTrackRegion, 0);
           // Disabling the chat text area and tts button
           chatTextArea.setDisable(true);
           ttsBtn2.setDisable(true);
+          cancelTtsBtn.setDisable(true);
           mouseTrackRegion.setDisable(true);
 
           Thread.sleep(1000);
@@ -732,8 +813,11 @@ public class MainMenuController {
   public void onStartGame() throws IOException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
     disableAndOrFadeTimeBtns(true, 0, false);
-    TransitionAnimation.changeScene(
-        pane, AppUi.CAULDRON_ROOM, true);
+    // TransitionAnimation.changeScene(
+    //     pane, AppUi.CAULDRON_ROOM, true);
+    Scene currentScene = wizardImg.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
 
     
@@ -752,17 +836,34 @@ public class MainMenuController {
     timerStartThread.start();
   }
 
-  public void readGameMasterResponse() {
+  @FXML
+  private void onReadGameMasterResponse() {
     // Using concurency to prevent the system freezing
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        // need to update the chat text area with the game master's response 
-        // & riddle
-        App.textToSpeech.speak(chatTextArea.getText());
-        return null;
-      }
-    };
-    new Thread(speakTask, "Speak Thread").start();
+    if (!ttsOn) {
+      ttsOn = true;
+      cancelTtsBtn.setDisable(false);
+      cancelTtsBtn.setOpacity(1);
+      Task<Void> speakTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          App.textToSpeech.speak(chatTextArea.getText());
+          return null;
+        }
+      };
+      new Thread(speakTask).start();
+      speakTask.setOnSucceeded(e -> {
+        ttsOn = false;
+        cancelTtsBtn.setDisable(true);
+        cancelTtsBtn.setOpacity(0);
+      });
+    }
+  }
+
+  @FXML
+  private void onCancelTts() {
+    ttsOn = false;
+    cancelTtsBtn.setDisable(true);
+    cancelTtsBtn.setOpacity(0);
+    App.textToSpeech.stop();
   }
 }

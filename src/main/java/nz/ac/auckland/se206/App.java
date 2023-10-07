@@ -11,8 +11,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
- * class, it should
- * remain as the class that runs the JavaFX application.
+ * class, it should remain as the class that runs the JavaFX application.
  */
 public class App extends Application {
 

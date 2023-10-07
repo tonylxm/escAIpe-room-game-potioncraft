@@ -29,6 +29,7 @@ public class CountdownTimer {
   private Label bookTimerLabel;
   private Label brewingLabel;
   private Label gameOverLabel;
+  private Label chestTimerLabel;
 
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
@@ -127,6 +128,10 @@ public class CountdownTimer {
       if (gameOverLabel != null) {
         gameOverLabel.setText(formatTimerText());
       }
+      
+      if (chestTimerLabel != null) {
+        chestTimerLabel.setText(formatTimerText());
+      }
     }
   }
 
@@ -204,6 +209,10 @@ public class CountdownTimer {
 
   public void setGameOverLabel(Label gameOverLabel) {
     this.gameOverLabel = gameOverLabel;
+  }
+  
+  public void setChestLabel(Label chestTimerLabel) {
+    this.chestTimerLabel = chestTimerLabel;
   }
 
   /**

@@ -34,16 +34,24 @@
             <Image url="@../images/book_parchment.png" />
          </image>
       </ImageView>
-      <Text layoutX="174.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Potion Recipe">
+      <Text fx:id="potionName" layoutX="174.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Potion Recipe">
          <font>
             <Font name="Algerian" size="20.0" />
          </font>
       </Text>
       <ListView id="ListView" fx:id="ingredientList" layoutX="174.0" layoutY="147.0" prefHeight="478.0" prefWidth="318.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edd8af00" height="478.0" layoutX="545.0" layoutY="148.0" stroke="BLACK" strokeType="INSIDE" width="318.0" />
-      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="469.0" layoutY="118.0" onMouseClicked="#readIngredientList" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ttsBtn1" fitHeight="20.0" fitWidth="23.0" layoutX="469.0" layoutY="118.0" onMouseClicked="#onReadIngredientList" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/tts-icon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="cancelTtsBtn" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="455.0" layoutY="102.0" onMouseClicked="#onCancelTts" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/cancel-tts.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -157,6 +165,7 @@
             <Image url="@../images/hourglass-1024x1024.gif" />
          </image>
       </ImageView>
+      <Rectangle fx:id="fadeRectangle" arcHeight="5.0" arcWidth="5.0" height="766.0" layoutX="-24.0" layoutY="-30.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1111.0" />
   </children>
    <effect>
       <Blend />

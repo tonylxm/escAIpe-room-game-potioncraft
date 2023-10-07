@@ -1,11 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TreasureRoomController extends RoomController {
@@ -25,6 +32,10 @@ public class TreasureRoomController extends RoomController {
   private ImageView itemTenImg;
   @FXML
   private Label timerLabel;
+  @FXML
+  private Rectangle fadeRectangle;
+  @FXML
+  private Rectangle chestRect;
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
@@ -36,6 +47,7 @@ public class TreasureRoomController extends RoomController {
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise("Treasure", itemSixImg, itemSevenImg, itemEightImg, itemNineImg, itemTenImg);
+    switchItems(GameState.isChestOpen);
     countdownTimer.setTreasureTimerLabel(timerLabel);
     countdownTimer.setTreasureHintLabel(hintLabel);
     arrowMouseActions(leftShpe);
@@ -49,13 +61,49 @@ public class TreasureRoomController extends RoomController {
     System.out.println("TREASURE_ROOM -> CAULDRON_ROOM");
     setText("", false, false);
     itemScroll.setOpacity(0);
-    goDirection(pane, AppUi.CAULDRON_ROOM);
+    //goDirection(pane, AppUi.CAULDRON_ROOM);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
+    SceneManager.getCauldronRoomControllerInstance().fadeIn();
   }
 
+  @FXML
+  public void tester(MouseEvent event) {
+    System.out.println("TREASURE_ROOM -> CHEST");
+    //TransitionAnimation.changeScene(pane, AppUi.CHEST, false);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHEST));
+    SceneManager.getChestControllerInstance().fadeIn();
+    SceneManager.setTimerScene(AppUi.CHEST);
+  }
   /** Changing scenes to book view */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
-    openBook(AppUi.TREASURE_ROOM, pane);
+    //openBook(AppUi.TREASURE_ROOM, pane);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
+    SceneManager.getBookControllerInstance().fadeIn();
+    SceneManager.currScene = AppUi.TREASURE_ROOM;
+    SceneManager.getBookControllerInstance().updateBackground();
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
+  }
+
+  @FXML
+  public void switchItems(boolean chestOpened) {
+    int opacity = chestOpened ? 1 : 0;
+    chestRect.setDisable(chestOpened);
+    itemSixImg.setOpacity(opacity);
+    itemSevenImg.setOpacity(opacity);
+    itemEightImg.setOpacity(opacity);
+    itemNineImg.setOpacity(opacity);
+    itemTenImg.setOpacity(opacity);
   }
 }

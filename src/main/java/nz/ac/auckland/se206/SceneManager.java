@@ -4,6 +4,11 @@ import java.util.HashMap;
 import javafx.scene.Parent;
 import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
+import nz.ac.auckland.se206.controllers.CauldronRoomController;
+import nz.ac.auckland.se206.controllers.ChestController;
+import nz.ac.auckland.se206.controllers.LibraryRoomController;
+import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.TreasureRoomController;
 
 public class SceneManager {
 
@@ -17,6 +22,7 @@ public class SceneManager {
     YOU_WIN,
     YOU_LOSE,
     CAULDRON,
+    CHEST
   }
 
   public static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
@@ -24,6 +30,24 @@ public class SceneManager {
   public static AppUi timerScene;
   private static CauldronController cauldronControllerInstance;
   private static BookController bookControllerInstance;
+  private static LibraryRoomController  libraryRoomControllerInstance;
+  private static TreasureRoomController treasureRoomControllerInstance;
+  private static CauldronRoomController cauldronRoomControllerInstance;
+  private static ChestController chestControllerInstance;
+
+
+  public static RoomController getCurrentController() {
+    //switch case that returns the controller based on currScene
+    RoomController controller = null;
+    if (currScene == AppUi.LIBRARY_ROOM) {
+      controller = libraryRoomControllerInstance;
+    } else if (currScene == AppUi.TREASURE_ROOM) {
+      controller = treasureRoomControllerInstance;
+    } else if (currScene == AppUi.CAULDRON_ROOM) {
+      controller = cauldronRoomControllerInstance;
+    }
+    return controller;
+  }
 
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);
@@ -63,5 +87,38 @@ public class SceneManager {
   // Get the BookController instance
   public static BookController getBookControllerInstance() {
     return bookControllerInstance;
+  }
+
+  //getters and setters for the rest of the controllers
+  public static void setLibraryRoomControllerInstance(LibraryRoomController controller) {
+    libraryRoomControllerInstance = controller;
+  }
+
+  public static LibraryRoomController getLibraryRoomControllerInstance() {
+    return libraryRoomControllerInstance;
+  }
+
+  public static void setTreasureRoomControllerInstance(TreasureRoomController controller) {
+    treasureRoomControllerInstance = controller;
+  }
+
+  public static TreasureRoomController getTreasureRoomControllerInstance() {
+    return treasureRoomControllerInstance;
+  }
+
+  public static void setCauldronRoomControllerInstance(CauldronRoomController controller) {
+    cauldronRoomControllerInstance = controller;
+  }
+
+  public static CauldronRoomController getCauldronRoomControllerInstance() {
+    return cauldronRoomControllerInstance;
+  }
+
+  public static ChestController getChestControllerInstance() {
+    return chestControllerInstance;
+  }
+
+  public static void setChestControllerInstance(ChestController chestControllerInstance) {
+    SceneManager.chestControllerInstance = chestControllerInstance;
   }
 }
