@@ -28,7 +28,7 @@ public class CountdownTimer {
   private Label rightHintLabel;
   private Label bookTimerLabel;
   private Label brewingLabel;
-  private Label youWinLabel;
+  private Label gameOverLabel;
 
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
@@ -124,8 +124,8 @@ public class CountdownTimer {
         brewingLabel.setText(formatTimerText());
       }
 
-      if (youWinLabel != null) {
-        youWinLabel.setText(formatTimerText());
+      if (gameOverLabel != null) {
+        gameOverLabel.setText(formatTimerText());
       }
     }
   }
@@ -202,8 +202,8 @@ public class CountdownTimer {
     this.brewingLabel = timerLabel;
   }
 
-  public void setYouWinLabel(Label youWinLabel) {
-    this.youWinLabel = youWinLabel;
+  public void setGameOverLabel(Label gameOverLabel) {
+    this.gameOverLabel = gameOverLabel;
   }
 
   /**

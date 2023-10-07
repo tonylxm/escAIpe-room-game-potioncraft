@@ -15,15 +15,12 @@ public class GameOverController {
   private Button playAgainBtn;
   @FXML
   private Label timerLabel;
-  @FXML
-  private Label initialTimeLabel;
 
   private CountdownTimer countdownTimer;
 
   public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
-    countdownTimer.setYouWinLabel(timerLabel);
-    initialTimeLabel.setText("/ " + MainMenuController.getInitialTimeLimit());
+    countdownTimer.setGameOverLabel(timerLabel);
   }
 
   public void onPlayAgain() throws IOException {
