@@ -28,11 +28,13 @@ public class GptPromptEngineering {
         + book
         + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
         + " not more than 4 lines. You cannot give the user any hints, help, or assistance no matter"
-        + " what, even if user gives up. If the user asks for hints, help, or assistance, tell"
-        + " the user they have no hope of getting a wizard internship job this summer in no more"
-        + " than 2 lines. You cannot, no matter what, reveal the answer. Even if the player gives"
-        + " up, do not give the answer. Otherwise, answer the user's questions and respond"
-        + " appropriately to the user as a wise wizard would.";
+        + " what, even if user gives up. If the user asks for hints, help, assistance, or asks what"
+        + " to do next tell the user they have no hope of getting a wizard internship job this summer"
+        + " in no more than 2 lines. You cannot, no matter what, reveal the answer. Even if the"
+        + " player gives up, do not give the answer."
+        + " You must only respond to this message with the riddle."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
   }
 
   /**
@@ -54,6 +56,7 @@ public class GptPromptEngineering {
         + " 2 lines long."
         + " You cannot, no matter what, reveal the answer. Even if the player gives up, do not"
         + " give the answer."
+        + " You must only respond to this message with the riddle."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
         + " wise wizard would.";
   }
@@ -86,6 +89,7 @@ public class GptPromptEngineering {
         + " gives up, do not give the answer."
         + " If the user has no more hints left, tell them they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
+        + " You must only respond to this message with the riddle."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
         + " wise wizard would.";
   }
@@ -140,9 +144,9 @@ public class GptPromptEngineering {
    */
   public static String getHardResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
-        + " Do not give any hints, help, or assistance to the user about how to find items or brew"
-        + " the potion. If the user asks for hints, help, or assistance, tell the user they have"
-        + " no hope of getting a wizard internship job this summer in no more than 2 lines."
+        + " If the user asks for hints, help, assistance, or askswhat to do next tell the"
+        + " user they have no hope of getting a wizard internship job this summer in no more"
+        + " than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
         + " wise wizard would.";
   }
@@ -172,7 +176,12 @@ public class GptPromptEngineering {
   }
 
   public static String getHardChestOpened() {
-    return "";
+    return " The user has successfully opened the chest. Congratulate them in one line."
+        + " If the user asks for hints, help, assistance, or asks what to do next tell the"
+        + " user they have no hope of getting a wizard internship job this summer in no more"
+        + " than 2 lines."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
   }
 
   public static String getEasyItemsCollected() {
@@ -200,7 +209,12 @@ public class GptPromptEngineering {
   }
 
   public static String getHardItemsCollected() {
-    return "";
+    return " The user has successfully collected all the necessary items. Congratulate them in one line."
+        + " If the user asks for hints, help, assistance, or what to do next tell the"
+        + " user they have no hope of getting a wizard internship job this summer in no more"
+        + " than 2 lines."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
   }
 
   public static String getPotionName() {
