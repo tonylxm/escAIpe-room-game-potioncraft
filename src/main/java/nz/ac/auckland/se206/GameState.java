@@ -16,6 +16,8 @@ public class GameState {
   /** Indicates whether the chest had been opened or not. */
   public static boolean isChestOpen = false;
 
+  public static boolean areItemsCollected = false;
+
   //getter for recipe
   public static ArrayList<Items.Item> getRecipe() {
     return recipe;

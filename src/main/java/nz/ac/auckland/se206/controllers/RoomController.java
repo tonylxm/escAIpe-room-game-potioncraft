@@ -22,6 +22,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Inventory;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.Items.Item;
 import nz.ac.auckland.se206.Notification;
@@ -29,9 +31,7 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
-import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public abstract class RoomController {
@@ -353,7 +353,26 @@ public abstract class RoomController {
     if (!readyToAdd) {
       return;
     }
-    MainMenuController.getInventory().add(item);
+    if (!GameState.areItemsCollected) {
+      MainMenuController.getInventory().add(item);
+      Task<Void> collectedItemsTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          ChatMessage msg = new ChatMessage(
+              "Wizard", MainMenuController.getChatHandler().runGpt(
+              MainMenuController.getCollectedItemsMessage()));
+          MainMenuController.getChatHandler().appendChatMessage(
+              msg, chatTextArea, inputText, sendButton);
+          return null;
+        }
+      };
+
+      if (checkCorrectItems()) {
+        GameState.areItemsCollected = true;
+        new Thread(collectedItemsTask).start();
+      }
+    }
+
     setText("", false, false);
     readyToAdd = false;
 
@@ -824,5 +843,34 @@ public abstract class RoomController {
     ft.setFromValue(1);
     ft.setToValue(0);
     ft.play();
+  }
+
+  public TextArea getTextArea() {
+    return chatTextArea;
+  }
+
+  public TextField getInputText() {
+    return inputText;
+  }
+
+  public Button getSendButton() {
+    return sendButton;
+  }
+
+  /**
+   * Function to check if the user has collected all the required items
+   * to be able to brew the potion.
+   * 
+   * @return boolean whether the user has collected all the required items
+   */
+  private boolean checkCorrectItems() {
+    Inventory inventory = MainMenuController.getInventory();
+    int count = 0;
+    for (int i = 0; i < 5; i++) {
+      if (inventory.contains(Items.necessary.get(i))) {
+        count++;
+      }
+    }
+    return count == 5;
   }
 }

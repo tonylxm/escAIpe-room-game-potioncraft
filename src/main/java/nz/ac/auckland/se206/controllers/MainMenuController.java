@@ -26,7 +26,6 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class MainMenuController {
   public enum Difficulty {
@@ -50,6 +49,8 @@ public class MainMenuController {
   private static ChatHandler chatHandler;
   private static ChatMessage riddle;
   private static String resolvedRiddle;
+  private static String openedChest;
+  private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
 
@@ -83,6 +84,14 @@ public class MainMenuController {
 
   public static String getResolvedMessage() {
     return resolvedRiddle;
+  }
+
+  public static String getOpenedChestMessage() {
+    return openedChest;
+  }
+
+  public static String getCollectedItemsMessage() {
+    return collectedItems;
   }
 
   public static CountdownTimer getCountdownTimer() {
@@ -764,6 +773,8 @@ public class MainMenuController {
 
                   // Message to send to GPT after user has resolved the riddle
                   resolvedRiddle = GptPromptEngineering.getEasyResolved();
+                  openedChest = GptPromptEngineering.getEasyChestOpened();
+                  collectedItems = GptPromptEngineering.getEasyItemsCollected();
                   break;
                 case 5:
                   // When on Harry mode, selecting the prompt to give the user 
@@ -774,6 +785,8 @@ public class MainMenuController {
                   
                   // Message to send to GPT after user has resolved the riddle
                   resolvedRiddle = GptPromptEngineering.getMediumResolved();
+                  openedChest = GptPromptEngineering.getMediumChestOpened();
+                  collectedItems = GptPromptEngineering.getMediumItemsCollected();
                   break;
                 case 0:
                   // When on Voldemort mode, selecting the prompt to give the 
@@ -784,6 +797,8 @@ public class MainMenuController {
                   
                   // Message to send to GPT after user has resolved the riddle
                   resolvedRiddle = GptPromptEngineering.getHardResolved();
+                  openedChest = GptPromptEngineering.getHardChestOpened();
+                  collectedItems = GptPromptEngineering.getHardItemsCollected();
                   break;
               }
               return null;
