@@ -48,11 +48,12 @@ public class GptPromptEngineering {
         // Using the randomly generated book in the prompt to generate the correct riddle
         + book
         + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
-        + " not more than 4 lines. You can only give hints, help, or assistance when the user asks"
-        + " for them. If the user guesses incorrectly, ask if they want hints."
-        + " Hints should be no more than 2 lines long."
-        + " You cannot, no matter what, reveal the answer. Even if the player"
-        + " gives up, do not give the answer."
+        + " not more than 4 lines. Only respond with the riddle unless prompted by the user."
+        + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
+        + " If the user guesses incorrectly, ask if they want a hint. Hints should be no more than"
+        + " 2 lines long."
+        + " You cannot, no matter what, reveal the answer. Even if the player gives up, do not"
+        + " give the answer."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
         + " wise wizard would.";
   }
@@ -72,15 +73,15 @@ public class GptPromptEngineering {
         + book
         + ". Give a riddle to the apprentice to figure out which book is the correct one. Make it"
         + " not more than 4 lines. Only respond with the riddle unless prompted by the user."
-        + " You can only give hints, help, or assistance when the user asks"
-        + " for them. If the user guesses incorrectly, ask if they want hints."
-        + " Hints should be no more than 3 lines long."
+        + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
+        + " If the user guesses incorrectly, ask if they want a hint. Hints should be no more than"
+        + " 3 lines long."
         + " The first word of your response must always be HINT no matter what when giving a hint,"
         + " help, or assistance to the user."
         // Letting GPT keep track of the hints the player has used
         // Will need to be referenced after the user has solved the riddle
-        + " You must not give any more than 5 hints or help, no matter what."
-        + " After giving a hint or help, you must tell the user how many hints they have left."
+        + " You must not give any more than 5 hints, no matter what."
+        + " After giving a hint, you must always tell the user how many hints they have left."
         + " You cannot, no matter what, reveal the answer. Even if the player"
         + " gives up, do not give the answer."
         + " If the user has no more hints left, tell them they have no hope of getting a wizard"
@@ -115,16 +116,16 @@ public class GptPromptEngineering {
    */
   public static String getMediumResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
-        + " Hints should either only tell the user to look around the rooms for ingredients from"
-        + " the book for their potion or only tell the user to check the book to make sure"
-        + " ingredients are brewed in"
-        + " the right order. Under no circumstance are you to give hints to solve the riddle."
-        + " The first word of your response must always be HINT no matter what when giving a hint,"
-        + " help, or assistance to the user."
+        + " Hints should now only tell the user to make sure all the items are available and"
+        + " to try opening the chest in the treasure room."
+        + " You must not, under no circumstance, give any other hints."
+        + " The first word of your response must always be HINT no matter what when giving a hint"
+        + " to the user."
         // The user could ask for either hints or help to get assistance
-        + " Only give hints if the user asks for hints, help, or assistance."
+        + " You must only give hints if the user asks for hints, help, assistance, or asks what"
+        + " to do next."
         // Adjusting what should be given in the hints
-        + " These hints and help are counted towards the total 5 hints you can give."
+        + " These hints are counted towards the total 5 hints you can give."
         + " If the user has no more hints left, tell them they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
@@ -157,7 +158,17 @@ public class GptPromptEngineering {
   }
 
   public static String getMediumChestOpened() {
-    return "";
+    return "The user has successfully opened the chest. Congratulate them in one line."
+        + " Hints should now only tell the user to gather all the correct ingredients to be brewed."
+        + " You must never, under no circumstance, give any other hints."
+        + " You must only give hints if the users asks for hints, help, assistance, or asks what"
+        + " to do next."
+        // Adjusting what should be given in the hints
+        + " These hints are counted towards the total 5 hints you can give."
+        + " If the user has no more hints left, tell them that they have no hope of getting a wizard"
+        + " internship job this summer in no more than 2 lines."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
   }
 
   public static String getHardChestOpened() {
@@ -175,13 +186,23 @@ public class GptPromptEngineering {
   }
 
   public static String getMediumItemsCollected() {
-    return "";
+    return "The user has successfully collected all the necessary items. Congratualte them in one line."
+        + " Hints should now only tell the user to make sure the items are brewed in the right"
+        + " order. You must never, under no circumstance, give any other hints."
+        + " You must only give hints if the user asks for hints, help, assistance, or asks what"
+        + " to do next."
+        // Adjusting what should be given in the hints
+        + " These hints are counted towards the total 5 hints you can give."
+        + " If the user has no more hints left, tell them that they have no hope of getting a wizard"
+        + " internship job this summer in no more than 2 lines."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
   }
 
   public static String getHardItemsCollected() {
     return "";
   }
-  
+
   public static String getPotionName() {
     return "Only give one short concise potion name + the word Recipe";
   }

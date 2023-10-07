@@ -26,7 +26,6 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class MainMenuController {
   public enum Difficulty {
