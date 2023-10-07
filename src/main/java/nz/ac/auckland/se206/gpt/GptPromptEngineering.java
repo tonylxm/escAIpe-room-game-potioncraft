@@ -84,6 +84,7 @@ public class GptPromptEngineering {
         // Letting GPT keep track of the hints the player has used
         // Will need to be referenced after the user has solved the riddle
         + " You must not give any more than 5 hints, no matter what."
+        + " Under no circumstances are you allowed to give any extra hints."
         + " After giving a hint, you must always tell the user how many hints they have left."
         + " You cannot, no matter what, reveal the answer. Even if the player"
         + " gives up, do not give the answer."
@@ -130,6 +131,7 @@ public class GptPromptEngineering {
         + " to do next."
         // Adjusting what should be given in the hints
         + " These hints are counted towards the total 5 hints you can give."
+        + " Under no circumstances are you allowed to give any extra hints."
         + " If the user has no more hints left, tell them they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
@@ -169,6 +171,7 @@ public class GptPromptEngineering {
         + " to do next."
         // Adjusting what should be given in the hints
         + " These hints are counted towards the total 5 hints you can give."
+        + " Under no circumstances are you allowed to give any extra hints."
         + " If the user has no more hints left, tell them that they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
@@ -202,6 +205,7 @@ public class GptPromptEngineering {
         + " to do next."
         // Adjusting what should be given in the hints
         + " These hints are counted towards the total 5 hints you can give."
+        + " Under no circumstances are you allowed to give any extra hints."
         + " If the user has no more hints left, tell them that they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
