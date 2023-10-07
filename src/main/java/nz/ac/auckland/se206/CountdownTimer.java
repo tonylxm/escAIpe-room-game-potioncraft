@@ -28,6 +28,7 @@ public class CountdownTimer {
   private Label rightHintLabel;
   private Label bookTimerLabel;
   private Label brewingLabel;
+  private Label youWinLabel;
 
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
@@ -85,7 +86,6 @@ public class CountdownTimer {
   // Stop the timer
   public void stop() {
     timeline.stop();
-    currentSeconds = initialSeconds;
     updateTimerLabel();
   }
 
@@ -122,6 +122,10 @@ public class CountdownTimer {
 
       if (brewingLabel != null) {
         brewingLabel.setText(formatTimerText());
+      }
+
+      if (youWinLabel != null) {
+        youWinLabel.setText(formatTimerText());
       }
     }
   }
@@ -194,18 +198,22 @@ public class CountdownTimer {
     this.bookTimerLabel = bookTimerLabel;
   }
 
+  public void setBrewingLabel(Label timerLabel) {
+    this.brewingLabel = timerLabel;
+  }
+
+  public void setYouWinLabel(Label youWinLabel) {
+    this.youWinLabel = youWinLabel;
+  }
+
   /**
    * Logic that occurs when the timer reaches 0 - sets the scene to the game over
    * scene
    */
   private void handleTimeOut() throws IOException {
     System.out.println("GAME_OVER");
-    App.setRoot("you-lose");
     // Using App.setRoot() so that game over occurs in all scenes
-  }
-
-  public void setBrewingLabel(Label timerLabel) {
-    this.brewingLabel = timerLabel;
+    App.setRoot("you-lose");
   }
 
   /**

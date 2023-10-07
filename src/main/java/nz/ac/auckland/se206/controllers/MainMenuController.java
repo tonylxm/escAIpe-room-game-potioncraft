@@ -50,6 +50,7 @@ public class MainMenuController {
   private static String resolvedRiddle;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
+  private static String initialTimeLimit;
 
   public static int getHints() {
     return hints;
@@ -86,6 +87,10 @@ public class MainMenuController {
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
     return countdownTimer;
+  }
+
+  public static String getInitialTimeLimit() {
+    return initialTimeLimit;
   }
 
   private Difficulty difficulty;
@@ -301,6 +306,7 @@ public class MainMenuController {
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("2:00");
+        initialTimeLimit = "2:00";
         break;
       // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
@@ -312,6 +318,7 @@ public class MainMenuController {
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("4:00");
+        initialTimeLimit = "4:00";
         break;
       // Using the appropriate glow animation over the 6 minutes image
       case SIX_MIN:
@@ -323,6 +330,7 @@ public class MainMenuController {
         sixMinBtnClicked = true;
         sixMin.setOpacity(1);
         CountdownTimer.setTimerLimit("6:00");
+        initialTimeLimit = "6:00";
         break;
     }
     // After selected a time limit, enabling the continue button
