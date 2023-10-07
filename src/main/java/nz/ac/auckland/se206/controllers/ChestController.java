@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
 
 public class ChestController {
   @FXML
@@ -124,6 +126,19 @@ public class ChestController {
     final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
     final AtomicReference<Double> originalY = new AtomicReference<>(0.0);
 
+    Task<Void> chestOpenedTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        ChatMessage msg = new ChatMessage(
+            "Wizard", MainMenuController.getChatHandler().runGpt(
+            MainMenuController.getOpenedChestMessage()));
+        TreasureRoomController tRoom = SceneManager.getTreasureRoomControllerInstance();
+        MainMenuController.getChatHandler().appendChatMessage(
+            msg, tRoom.getTextArea(), tRoom.getInputText(), tRoom.getSendButton());
+        return null;
+      }
+    };
+
     // Setting up draggability
     itemImageView.setOnMousePressed(
         event -> {
@@ -164,6 +179,7 @@ public class ChestController {
           // If the image is dropped close enough to the target, stopping the glowing animation,
           // making the items in the treasure room visible, and moving to the treasure room
           if (distance <= maxDistanceThreshold) {
+            new Thread(chestOpenedTask).start();
             pulse.stop();
             GameState.isChestOpen = true;
             SceneManager.getTreasureRoomControllerInstance().switchItems(GameState.isChestOpen);

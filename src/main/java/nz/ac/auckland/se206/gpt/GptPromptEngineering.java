@@ -97,12 +97,11 @@ public class GptPromptEngineering {
    */
   public static String getEasyResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
-        + " Hints should either only tell the user to look around the rooms for ingredients from"
-        + " the book for their potion or only tell the user to check the book to make sure"
-        + " ingredients are brewed in"
-        + " the right order. Under no circumstance should you give hints to solve the riddle."
+        + " Hints should now only tell the user to make sure all the items are available and"
+        + " to try opening the chest in the treasure room."
+        + " You must not, under no circumstance, give any other hints."
         // The user could ask for either hints or help to get assistance
-        + " Only give hints if the user asks for hints, help, or assistance."
+        + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
         + " wise wizard would.";
   }
@@ -147,6 +146,42 @@ public class GptPromptEngineering {
         + " wise wizard would.";
   }
 
+  public static String getEasyChestOpened() {
+    return "The user has successfully opened the chest. Congratulate them in one line."
+        + " Hints should now only tell the user to gather all the correct ingedients to be brewed."
+        + " You must never, under no circumstance, give any other hints."
+        // The user could ask for either hints or help to get assistance
+        + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
+  }
+
+  public static String getMediumChestOpened() {
+    return "";
+  }
+
+  public static String getHardChestOpened() {
+    return "";
+  }
+
+  public static String getEasyItemsCollected() {
+    return "The user has successfully collected all necessary items. Congratulate them in one line."
+        + " Hints should now only tell the user to make sure the items are brewed in the right"
+        + " order. You must never, under no circumstance, give any other hints."
+        // The user could ask for either hints or help to get assistance
+        + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
+        + " Otherwise, answer the user's questions and respond appropriately to the user as a"
+        + " wise wizard would.";
+  }
+
+  public static String getMediumItemsCollected() {
+    return "";
+  }
+
+  public static String getHardItemsCollected() {
+    return "";
+  }
+  
   public static String getPotionName() {
     return "Only give one short concise potion name + the word Recipe";
   }
