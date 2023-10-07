@@ -12,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TreasureRoomController extends RoomController {
@@ -35,7 +34,7 @@ public class TreasureRoomController extends RoomController {
   @FXML
   private Rectangle fadeRectangle;
   @FXML
-  private Rectangle chestRect;
+  private ImageView chestImg;
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
@@ -51,6 +50,8 @@ public class TreasureRoomController extends RoomController {
     countdownTimer.setTreasureTimerLabel(timerLabel);
     countdownTimer.setTreasureHintLabel(hintLabel);
     arrowMouseActions(leftShpe);
+    chestImg.setOnMouseEntered(event -> interactionHandler.glowThis(chestImg));
+    chestImg.setOnMouseExited(event -> interactionHandler.unglowThis(chestImg));
   }
 
   /**
@@ -68,7 +69,7 @@ public class TreasureRoomController extends RoomController {
   }
 
   @FXML
-  public void tester(MouseEvent event) {
+  public void enterChest(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CHEST");
     //TransitionAnimation.changeScene(pane, AppUi.CHEST, false);
     Scene currentScene = fadeRectangle.getScene();
@@ -99,7 +100,8 @@ public class TreasureRoomController extends RoomController {
   @FXML
   public void switchItems(boolean chestOpened) {
     int opacity = chestOpened ? 1 : 0;
-    chestRect.setDisable(chestOpened);
+    chestImg.setOpacity(1 - opacity);
+    chestImg.setDisable(chestOpened);
     itemSixImg.setOpacity(opacity);
     itemSevenImg.setOpacity(opacity);
     itemEightImg.setOpacity(opacity);

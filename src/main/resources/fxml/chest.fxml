@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,6 +39,14 @@
          <image>
             <Image url="@../images/hourglass-1024x1024.gif" />
          </image>
+      </ImageView>
+      <ImageView fx:id="backImg" fitHeight="55.0" fitWidth="57.0" layoutX="963.0" layoutY="624.0" onMouseClicked="#goBack">
+         <image>
+            <Image url="@../images/back.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Rectangle fx:id="fadeRectangle" arcHeight="5.0" arcWidth="5.0" height="822.0" layoutX="-83.0" layoutY="-62.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1160.0" />
    </children>
