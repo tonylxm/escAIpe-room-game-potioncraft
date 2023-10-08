@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
@@ -58,8 +60,8 @@ public class CauldronController {
   private ArrayList<Items.Item> cauldronItems = new ArrayList<Items.Item>();
 
   private CountdownTimer countdownTimer;
-
   private ShapeInteractionHandler interactionHandler;
+  private SoundEffects soundEffects = new SoundEffects();
 
   @FXML
   private void initialize() {
@@ -329,6 +331,11 @@ public class CauldronController {
 
           if (distance <= maxDistanceThreshold) {
             System.out.println("Dropped within cauldron bounds");
+            try {
+              soundEffects.playSoundEffect("itemIntoCauldron.mp3");
+            } catch (URISyntaxException e) {
+              e.printStackTrace();
+            }
             itemImageView.setVisible(false);
             String imageViewName = itemId;
             Items.Item item = imageViewToItemMap.get(imageViewName);
@@ -355,7 +362,7 @@ public class CauldronController {
   }
 
   @FXML
-  private void onBrewPotion() {
+  private void onBrewPotion() throws URISyntaxException {
     System.out.println(Items.necessary);
     System.out.println(cauldronItems);
     // if more or less than 6 items have been dropped into the cauldron then the
@@ -500,7 +507,7 @@ public class CauldronController {
   }
 
   @FXML
-  private void onEmptyCauldron() {
+  private void onEmptyCauldron() throws URISyntaxException {
     notificationText.setText("Cauldron Emptied!");
     Notification.notifyPopup(notificationBack, notificationText);
     resetItems();

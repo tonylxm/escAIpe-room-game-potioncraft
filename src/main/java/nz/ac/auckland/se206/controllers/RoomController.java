@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Iterator;
 
 import javafx.animation.FadeTransition;
@@ -30,6 +31,7 @@ import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -122,6 +124,7 @@ public abstract class RoomController {
   private Rectangle fadeRectangle;
   
   protected CountdownTimer countdownTimer;
+  protected SoundEffects soundEffects = new SoundEffects();
 
   protected ImageView itemOneImg;
   protected ImageView itemTwoImg;
@@ -349,12 +352,13 @@ public abstract class RoomController {
 
   /** Adding item to inventory if an item is selected */
   @FXML
-  public void addItem() {
+  public void addItem() throws URISyntaxException {
     if (!readyToAdd) {
       return;
     }
     if (!GameState.areItemsCollected) {
       MainMenuController.getInventory().add(item);
+      soundEffects.playSoundEffect("item_collected.wav");
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
@@ -605,9 +609,10 @@ public abstract class RoomController {
 
   /**
    * Dealing with the event where the bag icon is clicked
+   * @throws URISyntaxException
    */
   @FXML
-  public void clickBag() {
+  public void clickBag() throws URISyntaxException {
     // If there are no items in the inventory, can't open the bag
     if (MainMenuController.inventory.size() == 0) {
       notificationText.setText("You have no ingredients in your bag!");
@@ -773,9 +778,10 @@ public abstract class RoomController {
    * @param event
    * @throws ApiProxyException
    * @throws IOException
+   * @throws URISyntaxException
    */
   @FXML
-  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException {
+  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException, URISyntaxException {
     // If Y us pressed, adding the item
     if (event.getCode().toString().equals("Y")) {
       System.out.println("key " + event.getCode() + " pressed");
