@@ -135,9 +135,11 @@ public class ChestController {
         ChatMessage msg = new ChatMessage(
             "Wizard", MainMenuController.getChatHandler().runGpt(
             MainMenuController.getOpenedChestMessage()));
-        TreasureRoomController tRoom = SceneManager.getTreasureRoomControllerInstance();
+        TreasureRoomController treasureController = 
+            SceneManager.getTreasureRoomControllerInstance();
         MainMenuController.getChatHandler().appendChatMessage(
-            msg, tRoom.getTextArea(), tRoom.getInputText(), tRoom.getSendButton());
+            msg, treasureController.getTextArea(), 
+            treasureController.getInputText(), treasureController.getSendButton());
         return null;
       }
     };
