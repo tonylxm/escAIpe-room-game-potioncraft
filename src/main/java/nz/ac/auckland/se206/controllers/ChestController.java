@@ -188,7 +188,7 @@ public class ChestController {
             GameState.isChestOpen = true;
             SceneManager.getTreasureRoomControllerInstance().switchItems(GameState.isChestOpen);
             SceneManager.getTreasureRoomControllerInstance().setText(
-                "The chest has been unlocked! \n New items are available in the treasure room!", 
+                "The chest has been unlocked! \nNew items are available \nin the treasure room!", 
                 true, false);
             System.out.println("Put the key into the glowing chest");
             //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);

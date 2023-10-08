@@ -353,8 +353,8 @@ public abstract class RoomController {
     if (!readyToAdd) {
       return;
     }
+    MainMenuController.getInventory().add(item);
     if (!GameState.areItemsCollected) {
-      MainMenuController.getInventory().add(item);
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
