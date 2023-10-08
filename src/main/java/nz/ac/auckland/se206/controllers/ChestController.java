@@ -89,12 +89,12 @@ public class ChestController {
    */
   private void changeGlowOne() {
     if (glowUp) { 
-      glower += 0.05;
+      glower += 0.1;
       if (glower >= 1) {
         glowUp = false;
       }
     } else {
-      glower -= 0.05;
+      glower -= 0.1;
       if (glower <= 0) {
         glowUp = true;
       }
