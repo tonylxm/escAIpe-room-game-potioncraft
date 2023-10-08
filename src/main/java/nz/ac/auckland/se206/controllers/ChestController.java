@@ -1,11 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.concurrent.atomic.AtomicReference;
-
 import javafx.animation.Timeline;
-import javafx.concurrent.Task;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -59,11 +58,11 @@ public class ChestController {
     glowUpTwo = true;
     // Setting up timeline for glowing effect
     pulse = new Timeline(
-       new KeyFrame(
-          Duration.millis(50),
-          event -> {
-            setGlow();
-          }));
+        new KeyFrame(
+            Duration.millis(50),
+            event -> {
+              setGlow();
+            }));
     pulse.setCycleCount(Timeline.INDEFINITE);
     pulse.play();
 
@@ -136,9 +135,11 @@ public class ChestController {
         ChatMessage msg = new ChatMessage(
             "Wizard", MainMenuController.getChatHandler().runGpt(
             MainMenuController.getOpenedChestMessage()));
-        TreasureRoomController tRoom = SceneManager.getTreasureRoomControllerInstance();
+        TreasureRoomController treasureController = 
+            SceneManager.getTreasureRoomControllerInstance();
         MainMenuController.getChatHandler().appendChatMessage(
-            msg, tRoom.getTextArea(), tRoom.getInputText(), tRoom.getSendButton());
+            msg, treasureController.getTextArea(), 
+            treasureController.getInputText(), treasureController.getSendButton());
         return null;
       }
     };
@@ -211,7 +212,7 @@ public class ChestController {
   }
 
   @FXML
-  public void fadeIn(){
+  public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
     ft.setFromValue(1);
     ft.setToValue(0);

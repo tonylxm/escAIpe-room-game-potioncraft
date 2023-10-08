@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Iterator;
-
 import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -224,15 +223,20 @@ public abstract class RoomController {
 
     // Setting appropriate interactable features for the items
     itemMouseActions(itemOneImg, oneClicked, itemOne);
-    itemOneImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
+    itemOneImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemOneImg, oneClicked));
     itemMouseActions(itemTwoImg, twoClicked, itemTwo);
-    itemTwoImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
+    itemTwoImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemTwoImg, twoClicked));
     itemMouseActions(itemThreeImg, threeClicked, itemThree);
-    itemThreeImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
+    itemThreeImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemThreeImg, threeClicked));
     itemMouseActions(itemFourImg, fourClicked, itemFour);
-    itemFourImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
+    itemFourImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemFourImg, fourClicked));
     itemMouseActions(itemFiveImg, fiveClicked, itemFive);
-    itemFiveImg.setOnMouseExited(event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
+    itemFiveImg.setOnMouseExited(
+        event -> interactionHandler.unglowThis(itemFiveImg, fiveClicked));
   }
 
   /**
@@ -838,7 +842,7 @@ public abstract class RoomController {
   }
 
   @FXML
-  public void fadeIn(){
+  public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
     ft.setFromValue(1);
     ft.setToValue(0);
