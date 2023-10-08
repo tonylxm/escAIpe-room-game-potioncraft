@@ -219,6 +219,55 @@ public class CauldronRoomController extends RoomController {
       ft.setToValue(0);
       ft.play();
 
+      //set on fade finish
+      ft.setOnFinished(event -> {
+        //fade transition for all 3 books
+        FadeTransition ft1 = new FadeTransition(Duration.seconds(1), bookFireRectangle);
+        ft1.setFromValue(1);
+        ft1.setToValue(0);
+        ft1.play();
+
+        FadeTransition ft2 = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
+        ft2.setFromValue(1);
+        ft2.setToValue(0);
+
+        FadeTransition ft3 = new FadeTransition(Duration.seconds(1), bookAirRectangle);
+        ft3.setFromValue(1);
+        ft3.setToValue(0);
+
+        //fade transition for all 3 images
+        FadeTransition ft4 = new FadeTransition(Duration.seconds(1), fireImg);
+        ft4.setFromValue(1);
+        ft4.setToValue(0);
+
+        FadeTransition ft5 = new FadeTransition(Duration.seconds(1), waterImg);
+        ft5.setFromValue(1);
+        ft5.setToValue(0);
+
+        FadeTransition ft6 = new FadeTransition(Duration.seconds(1), airImg);
+        ft6.setFromValue(1);
+        ft6.setToValue(0);
+
+        if (element == "fire") {
+          ft5.play();
+          ft6.play();
+          ft2.play();
+          ft3.play();
+        } else if (element == "water") {
+          ft4.play();
+          ft6.play();
+          ft1.play();
+          ft3.play();
+        } else {
+          ft4.play();
+          ft5.play();
+          ft2.play();
+          ft1.play();
+        }
+
+        
+      });
+
       bookImage.setOpacity(0);
       bookImage.setDisable(true);
       bookRectangle.setDisable(true);
