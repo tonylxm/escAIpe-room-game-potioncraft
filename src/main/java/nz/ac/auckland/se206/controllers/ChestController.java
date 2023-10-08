@@ -2,9 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.animation.Timeline;
-import javafx.concurrent.Task;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
