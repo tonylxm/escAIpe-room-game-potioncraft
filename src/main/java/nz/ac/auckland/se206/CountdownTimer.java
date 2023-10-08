@@ -36,14 +36,14 @@ public class CountdownTimer {
     minutes = Integer.parseInt(time[0]);
     initialSeconds = Integer.parseInt(time[1]);
     currentSeconds = Integer.parseInt(time[1]);
-    setupTimeline();
+    setTimeline();
   }
 
   /**
    * Set up the timer to count down every second and
    * update the appropriate timer label
    */
-  public void setupTimeline() {
+  public void setTimeline() {
     timeline = new Timeline(
         new KeyFrame(
             Duration.seconds(1),
