@@ -46,5 +46,6 @@
             <Image url="@../images/happy_voldemort.gif" />
          </image>
       </ImageView>
+      <Rectangle fx:id="fadeRectangle" arcHeight="5.0" arcWidth="5.0" height="763.0" layoutX="-46.0" layoutY="-55.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1104.0" />
    </children>
 </Pane>

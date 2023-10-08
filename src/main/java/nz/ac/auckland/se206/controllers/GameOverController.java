@@ -1,9 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
@@ -12,6 +16,8 @@ public class GameOverController {
   private Pane pane;
   @FXML
   private Button playAgainBtn;
+  @FXML
+  private Rectangle fadeRectangle;
 
   public void onPlayAgain() throws IOException {
     System.out.println("GAME_OVER -> MAIN_MENU");
@@ -19,5 +25,13 @@ public class GameOverController {
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     App.setRoot("main_menu");
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }
