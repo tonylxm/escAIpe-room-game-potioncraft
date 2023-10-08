@@ -214,6 +214,14 @@ public class CauldronRoomController extends RoomController {
     System.out.println("book " + element +  " clicked");
     if (MainMenuController.getBook() == element) {
       // remove the book from the scene
+      //disable all book rectangles
+      bookAirRectangle.setDisable(true);
+      bookFireRectangle.setDisable(true);
+      bookWaterRectangle.setDisable(true);
+      airImg.setDisable(true);
+      fireImg.setDisable(true);
+      waterImg.setDisable(true);
+
       FadeTransition ft = new FadeTransition(Duration.seconds(1), bookRectangle);
       ft.setFromValue(1);
       ft.setToValue(0);
@@ -225,7 +233,6 @@ public class CauldronRoomController extends RoomController {
         FadeTransition ft1 = new FadeTransition(Duration.seconds(1), bookFireRectangle);
         ft1.setFromValue(1);
         ft1.setToValue(0);
-        ft1.play();
 
         FadeTransition ft2 = new FadeTransition(Duration.seconds(1), bookWaterRectangle);
         ft2.setFromValue(1);
@@ -249,20 +256,26 @@ public class CauldronRoomController extends RoomController {
         ft6.setToValue(0);
 
         if (element == "fire") {
+          if (bookAirRectangle.getOpacity() == 1) {
           ft5.play();
           ft6.play();
           ft2.play();
           ft3.play();
+        }
         } else if (element == "water") {
+          if (bookFireRectangle.getOpacity() == 1) {
           ft4.play();
           ft6.play();
           ft1.play();
           ft3.play();
-        } else {
+          }
+        } else if (element == "air") {
+          if (bookWaterRectangle.getOpacity() == 1) {
           ft4.play();
           ft5.play();
           ft2.play();
           ft1.play();
+          }
         }
 
         
