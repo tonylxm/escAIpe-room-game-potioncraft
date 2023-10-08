@@ -109,7 +109,8 @@ public class GptPromptEngineering {
         // The user could ask for either hints or help to get assistance
         + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   /**
@@ -135,7 +136,8 @@ public class GptPromptEngineering {
         + " If the user has no more hints left, tell them they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   /**
@@ -150,7 +152,8 @@ public class GptPromptEngineering {
         + " user they have no hope of getting a wizard internship job this summer in no more"
         + " than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getEasyChestOpened() {
@@ -160,7 +163,8 @@ public class GptPromptEngineering {
         // The user could ask for either hints or help to get assistance
         + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getMediumChestOpened() {
@@ -175,7 +179,8 @@ public class GptPromptEngineering {
         + " If the user has no more hints left, tell them that they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getHardChestOpened() {
@@ -184,7 +189,8 @@ public class GptPromptEngineering {
         + " user they have no hope of getting a wizard internship job this summer in no more"
         + " than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getEasyItemsCollected() {
@@ -194,7 +200,8 @@ public class GptPromptEngineering {
         // The user could ask for either hints or help to get assistance
         + " Only give hints if the user asks for hints, help, assistance, or asks what to do next."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getMediumItemsCollected() {
@@ -209,7 +216,8 @@ public class GptPromptEngineering {
         + " If the user has no more hints left, tell them that they have no hope of getting a wizard"
         + " internship job this summer in no more than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getHardItemsCollected() {
@@ -218,7 +226,8 @@ public class GptPromptEngineering {
         + " user they have no hope of getting a wizard internship job this summer in no more"
         + " than 2 lines."
         + " Otherwise, answer the user's questions and respond appropriately to the user as a"
-        + " wise wizard would.";
+        + " wise wizard would."
+        + " Only respond with the congratulations unless prompted by the user.";
   }
 
   public static String getPotionName() {
