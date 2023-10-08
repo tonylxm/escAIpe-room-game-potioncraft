@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -21,7 +20,6 @@ import nz.ac.auckland.se206.Notification;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
-import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
   @FXML private Pane pane;
@@ -507,7 +505,7 @@ public class CauldronController {
   }
 
   @FXML
-  public void fadeIn(){
+  public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
     ft.setFromValue(1);
     ft.setToValue(0);

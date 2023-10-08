@@ -77,6 +77,7 @@ public class TreasureRoomController extends RoomController {
     SceneManager.getChestControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CHEST);
   }
+  
   /** Changing scenes to book view */
   @FXML
   public void openBook() {
@@ -90,7 +91,7 @@ public class TreasureRoomController extends RoomController {
   }
 
   @FXML
-  public void fadeIn(){
+  public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
     ft.setFromValue(1);
     ft.setToValue(0);
