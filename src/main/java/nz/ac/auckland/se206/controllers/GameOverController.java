@@ -1,10 +1,14 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
@@ -16,6 +20,8 @@ public class GameOverController {
   private Button playAgainBtn;
   @FXML
   private Label timerLabel;
+  @FXML
+  private Rectangle fadeRectangle;
 
   private CountdownTimer countdownTimer;
 
@@ -30,6 +36,26 @@ public class GameOverController {
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
-    App.setRoot("main_menu");
+    //fade rectangle fades over 1 second
+    FadeTransition ft = new FadeTransition(Duration.seconds(1), fadeRectangle);
+    ft.setFromValue(0);
+    ft.setToValue(1);
+    ft.play();
+    ft.setOnFinished(event -> {
+      try {
+        App.setRoot("main_menu");
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
+    //App.setRoot("main_menu");
+  }
+
+  @FXML
+  public void fadeIn(){
+    FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
+    ft.setFromValue(1);
+    ft.setToValue(0);
+    ft.play();
   }
 }

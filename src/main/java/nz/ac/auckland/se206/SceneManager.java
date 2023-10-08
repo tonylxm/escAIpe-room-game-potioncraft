@@ -6,6 +6,7 @@ import nz.ac.auckland.se206.controllers.BookController;
 import nz.ac.auckland.se206.controllers.CauldronController;
 import nz.ac.auckland.se206.controllers.CauldronRoomController;
 import nz.ac.auckland.se206.controllers.ChestController;
+import nz.ac.auckland.se206.controllers.GameOverController;
 import nz.ac.auckland.se206.controllers.LibraryRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.TreasureRoomController;
@@ -34,6 +35,7 @@ public class SceneManager {
   private static TreasureRoomController treasureRoomControllerInstance;
   private static CauldronRoomController cauldronRoomControllerInstance;
   private static ChestController chestControllerInstance;
+  private static GameOverController gameOverControllerInstance;
 
 
   public static RoomController getCurrentController() {
@@ -67,6 +69,15 @@ public class SceneManager {
 
   public static AppUi getTimerScene() {
     return timerScene;
+  }
+  // Set the GameOverController instance
+  public static void setGameOverControllerInstance(GameOverController controller) {
+    gameOverControllerInstance = controller;
+  }
+
+  // Get the GameOverController instance
+  public static GameOverController getGameOverControllerInstance() {
+    return gameOverControllerInstance;
   }
 
   // Set the CauldronController instance

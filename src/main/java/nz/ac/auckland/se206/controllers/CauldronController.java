@@ -382,7 +382,10 @@ public class CauldronController {
         // set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
         countdownTimer.stop();
-        TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
+        //TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
+        Scene currentScene = fadeRectangle.getScene();
+        currentScene.setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
+        SceneManager.getGameOverControllerInstance().fadeIn();
         SceneManager.setTimerScene(AppUi.YOU_WIN);
 
       } else {
