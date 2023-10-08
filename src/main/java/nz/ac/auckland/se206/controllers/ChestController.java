@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
@@ -16,8 +17,8 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
 
 public class ChestController {
   @FXML
@@ -26,6 +27,8 @@ public class ChestController {
   private ImageView keyImg;
   @FXML
   private ImageView lightImg;
+  @FXML
+  private ImageView backImg;
   @FXML
   private Label timerLabel;
   @FXML
@@ -63,6 +66,9 @@ public class ChestController {
           }));
     pulse.setCycleCount(Timeline.INDEFINITE);
     pulse.play();
+
+    backImg.setOnMouseEntered(event -> backImg.setEffect(new Glow(1)));
+    backImg.setOnMouseExited(event -> backImg.setEffect(new Glow(0)));
   }
 
   /**
@@ -83,12 +89,12 @@ public class ChestController {
    */
   private void changeGlowOne() {
     if (glowUp) { 
-      glower += 0.05;
+      glower += 0.1;
       if (glower >= 1) {
         glowUp = false;
       }
     } else {
-      glower -= 0.05;
+      glower -= 0.1;
       if (glower <= 0) {
         glowUp = true;
       }
@@ -123,6 +129,19 @@ public class ChestController {
   private void setupDragAndDrop(ImageView itemImageView) {
     final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
     final AtomicReference<Double> originalY = new AtomicReference<>(0.0);
+
+    Task<Void> chestOpenedTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        ChatMessage msg = new ChatMessage(
+            "Wizard", MainMenuController.getChatHandler().runGpt(
+            MainMenuController.getOpenedChestMessage()));
+        TreasureRoomController tRoom = SceneManager.getTreasureRoomControllerInstance();
+        MainMenuController.getChatHandler().appendChatMessage(
+            msg, tRoom.getTextArea(), tRoom.getInputText(), tRoom.getSendButton());
+        return null;
+      }
+    };
 
     // Setting up draggability
     itemImageView.setOnMousePressed(
@@ -164,6 +183,7 @@ public class ChestController {
           // If the image is dropped close enough to the target, stopping the glowing animation,
           // making the items in the treasure room visible, and moving to the treasure room
           if (distance <= maxDistanceThreshold) {
+            new Thread(chestOpenedTask).start();
             pulse.stop();
             GameState.isChestOpen = true;
             SceneManager.getTreasureRoomControllerInstance().switchItems(GameState.isChestOpen);
@@ -178,6 +198,16 @@ public class ChestController {
             SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
           }
         });
+  }
+
+  @FXML
+  public void goBack() {
+    System.out.println("CHEST -> TREASURE_ROOM");
+    //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
+    Scene currentScene = fadeRectangle.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
+    SceneManager.getTreasureRoomControllerInstance().fadeIn();
+    SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
   @FXML

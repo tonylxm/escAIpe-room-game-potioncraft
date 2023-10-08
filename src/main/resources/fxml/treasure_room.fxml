@@ -93,12 +93,19 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="159.0" layoutY="268.0" scaleX="-1.0">
+      <ImageView id="wizardChatImage" fx:id="wizardChatImage" disable="true" fitHeight="188.0" fitWidth="200.0" layoutX="159.0" layoutY="268.0" opacity="0.0" scaleX="-1.0">
          <image>
             <Image url="@../images/headshot.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="chestRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="415.0" layoutY="384.0" onMouseClicked="#tester" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <ImageView fx:id="chestImg" fitHeight="286.0" fitWidth="303.0" layoutX="377.0" layoutY="329.0" onMouseClicked="#enterChest">
+         <image>
+            <Image url="@../images/chest.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#ffe1b2" height="219.0" layoutX="116.0" layoutY="456.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <TextArea fx:id="chatTextArea" editable="false" layoutX="127.0" layoutY="464.0" opacity="0.0" prefHeight="155.0" prefWidth="763.0" wrapText="true">
          <font>
