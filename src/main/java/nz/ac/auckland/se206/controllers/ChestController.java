@@ -169,11 +169,6 @@ public class ChestController {
         event -> {
           // Define the target position relative to the scene
           System.out.println("Dropped");
-          try {
-            soundEffects.playSoundEffect("openChest.mp3");
-          } catch (URISyntaxException e) {
-            e.printStackTrace();
-          }
           double targetX = 530;
           double targetY = 400;
 
@@ -200,6 +195,11 @@ public class ChestController {
                 "The chest has been unlocked! \n New items are available in the treasure room!", 
                 true, false);
             System.out.println("Put the key into the glowing chest");
+            try {
+              soundEffects.playSoundEffect("openChest.mp3");
+            } catch (URISyntaxException e) {
+              e.printStackTrace();
+            }
             //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
             Scene currentScene = fadeRectangle.getScene();
             currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));

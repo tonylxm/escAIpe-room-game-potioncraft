@@ -62,13 +62,14 @@ public abstract class RoomController {
     TransitionAnimation.changeScene(pane, room, false);
   }
   
-  public static void openBook(AppUi currScene, Pane pane) {
+  public static void openBook(AppUi currScene, Pane pane) throws URISyntaxException {
     BookController bookController = SceneManager.getBookControllerInstance();
     if (bookController != null) {
       bookController.updateBackground();
     }
     SceneManager.currScene = currScene;
     // Transitioning to the book scene with the appropriate fade animation
+    // soundEffects.playSoundEffect("openBook.wav");
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
@@ -124,7 +125,7 @@ public abstract class RoomController {
   private Rectangle fadeRectangle;
   
   protected CountdownTimer countdownTimer;
-  protected SoundEffects soundEffects = new SoundEffects();
+  protected static SoundEffects soundEffects;
 
   protected ImageView itemOneImg;
   protected ImageView itemTwoImg;
@@ -212,8 +213,8 @@ public abstract class RoomController {
     ttsOn = false;
 
     interactionHandler = new ShapeInteractionHandler();
-
     countdownTimer = MainMenuController.getCountdownTimer();
+    soundEffects = new SoundEffects();
 
     // Disabling the text box and mouse track region
     setText("", false, false);
@@ -358,7 +359,7 @@ public abstract class RoomController {
     }
     if (!GameState.areItemsCollected) {
       MainMenuController.getInventory().add(item);
-      soundEffects.playSoundEffect("item_collected.wav");
+      soundEffects.playSoundEffect("itemCollected.wav");
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
