@@ -115,7 +115,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemElevenImg" fx:id="boneImage" fitHeight="111.0" fitWidth="57.0" layoutX="746.0" layoutY="413.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="itemElevenImg" fx:id="boneImage" fitHeight="111.0" fitWidth="57.0" layoutX="752.0" layoutY="476.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
          <image>
             <Image url="@../images/bone.png" />
          </image>
