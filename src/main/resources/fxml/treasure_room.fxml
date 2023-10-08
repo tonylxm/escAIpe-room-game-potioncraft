@@ -89,6 +89,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <ImageView fx:id="chestImg" fitHeight="286.0" fitWidth="303.0" layoutX="377.0" layoutY="329.0" onMouseClicked="#enterChest">
+         <image>
+            <Image url="@../images/chest.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
       <Rectangle fx:id="mouseTrackRegion" arcHeight="5.0" arcWidth="5.0" disable="true" height="688.0" layoutX="-4.0" layoutY="-4.0" onMouseClicked="#clickOff" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1032.0">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -97,14 +105,6 @@
          <image>
             <Image url="@../images/headshot.png" />
          </image>
-      </ImageView>
-      <ImageView fx:id="chestImg" fitHeight="286.0" fitWidth="303.0" layoutX="377.0" layoutY="329.0" onMouseClicked="#enterChest">
-         <image>
-            <Image url="@../images/chest.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </ImageView>
       <Rectangle id="textRect" fx:id="textRect" arcHeight="5.0" arcWidth="5.0" fill="#ffe1b2" height="219.0" layoutX="116.0" layoutY="456.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="784.0" />
       <TextArea fx:id="chatTextArea" editable="false" layoutX="127.0" layoutY="464.0" opacity="0.0" prefHeight="155.0" prefWidth="763.0" wrapText="true">
@@ -147,7 +147,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Label id="textLbl" fx:id="textLbl" layoutX="162.0" layoutY="512.0" opacity="0.0" prefHeight="107.0" prefWidth="619.0" text="Add to inventory?" wrapText="true">
+      <Label id="textLbl" fx:id="textLbl" layoutX="162.0" layoutY="477.0" opacity="0.0" prefHeight="180.0" prefWidth="619.0" text="Add to inventory?" wrapText="true">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>

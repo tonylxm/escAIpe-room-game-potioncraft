@@ -70,6 +70,7 @@ public class SceneManager {
   public static AppUi getTimerScene() {
     return timerScene;
   }
+  
   // Set the GameOverController instance
   public static void setGameOverControllerInstance(GameOverController controller) {
     gameOverControllerInstance = controller;
