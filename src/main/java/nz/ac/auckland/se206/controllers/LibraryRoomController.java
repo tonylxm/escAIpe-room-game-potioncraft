@@ -47,7 +47,9 @@ public class LibraryRoomController extends RoomController {
     arrowMouseActions(rightShpe);
   }
 
-  /** Changing scenes to the cauldron room */
+  /** 
+   * Changing scenes to the cauldron room.
+   */
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
@@ -59,7 +61,9 @@ public class LibraryRoomController extends RoomController {
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
   }
 
-  /** Changing scenes to book view */
+  /** 
+   * Changing scenes to book view.
+   */
   @FXML
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
@@ -71,6 +75,9 @@ public class LibraryRoomController extends RoomController {
     SceneManager.getBookControllerInstance().updateBackground();
   }
 
+  /**
+   * Changing scenes to the treasure room.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

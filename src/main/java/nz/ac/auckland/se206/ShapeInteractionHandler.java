@@ -12,6 +12,10 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
   private static final Color GLOW_COLOR = Color.BLACK;
   private static final Color HIGH_LIGHT_COLOR = Color.GOLD;
 
+  /**
+   * Handles mouse events for shapes. When the mouse enters a shape, it glows. 
+   * When the mouse exits a shape, it stops glowing.
+   */
   @Override
   public void handle(MouseEvent event) {
     Shape shape = (Shape) event.getSource();
@@ -28,6 +32,7 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
     image.setEffect(new Glow(1.2));
   }
 
+  /** Adding specified glow to shapes in a room. */
   private void glowThis(Shape shape) {
     shape.setStroke(GLOW_COLOR);
     shape.setStrokeWidth(GLOW_STROKE_WIDTH);
@@ -38,6 +43,7 @@ public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
     image.setEffect(new Glow(0));
   }
 
+  /** Turning off the glow of a shape. */
   private void unglowThis(Shape shape) {
     shape.setStrokeWidth(0);
     shape.setStroke(HIGH_LIGHT_COLOR);

@@ -1,9 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.concurrent.atomic.AtomicReference;
-import javafx.animation.Timeline;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -87,11 +87,13 @@ public class ChestController {
    * Changing the value for the glow for the key image.
    */
   private void changeGlowOne() {
+    // Changing the glow value for the key image
     if (glowUp) { 
       glower += 0.1;
       if (glower >= 1) {
         glowUp = false;
       }
+    // Changing the glow value for the key image
     } else {
       glower -= 0.1;
       if (glower <= 0) {
@@ -104,11 +106,13 @@ public class ChestController {
    * Changing the value of the glow for the light image.
    */
   private void changeGlowTwo() {
+    // Changing the glow value for the light image
     if (glowUpTwo) {
       glowerTwo += 0.0375;
       if (glowerTwo >= 0.75) {
         glowUpTwo = false;
       }
+    // Changing the glow value for the light image
     } else {
       glowerTwo -= 0.0375;
       if (glowerTwo <= 0) {
@@ -132,11 +136,14 @@ public class ChestController {
     Task<Void> chestOpenedTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
+        // Sending a new chat message to gpt so that wizard knows that the chest has
+        // been opened
         ChatMessage msg = new ChatMessage(
             "Wizard", MainMenuController.getChatHandler().runGpt(
             MainMenuController.getOpenedChestMessage()));
         TreasureRoomController treasureController = 
             SceneManager.getTreasureRoomControllerInstance();
+        // Adding congratulatory message to the chat in the treasure room
         MainMenuController.getChatHandler().appendChatMessage(
             msg, treasureController.getTextArea(), 
             treasureController.getInputText(), treasureController.getSendButton());
@@ -201,6 +208,9 @@ public class ChestController {
         });
   }
 
+  /**
+   * Moving back to the treasure room.
+   */
   @FXML
   public void goBack() {
     System.out.println("CHEST -> TREASURE_ROOM");
@@ -211,6 +221,9 @@ public class ChestController {
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
+  /**
+   * Fading in the treasure room.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

@@ -24,11 +24,21 @@ public class GameOverController {
 
   private CountdownTimer countdownTimer;
 
+  /**
+   * Initialising the glow effect and the drag and drop functionality
+   * for the key and light images.
+   */
   public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setGameOverLabel(timerLabel);
   }
 
+  /**
+   * When the play again button is pressed, the game state is reset and the
+   * main menu is loaded.
+   * 
+   * @throws IOException
+   */
   public void onPlayAgain() throws IOException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
@@ -47,9 +57,12 @@ public class GameOverController {
         e.printStackTrace();
       }
     });
-    //App.setRoot("main_menu");
   }
 
+  /**
+   * When the fade rectangle is clicked, the game state is reset and the
+   * main menu is loaded.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

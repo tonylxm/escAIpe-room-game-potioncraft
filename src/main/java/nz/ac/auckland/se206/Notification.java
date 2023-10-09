@@ -7,6 +7,12 @@ import javafx.util.Duration;
 
 public class Notification {
 
+  /**
+   * Creates a notification popup that fades in and out.
+   * 
+   * @param notificationBack The ImageView of the notification background.
+   * @param notificationText The Label of the notification text.
+   */
   public static void notifyPopup(ImageView notificationBack, Label notificationText) {
     notificationBack.setDisable(false);
     notificationText.setDisable(false);

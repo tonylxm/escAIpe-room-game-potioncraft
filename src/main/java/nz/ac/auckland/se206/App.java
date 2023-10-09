@@ -22,14 +22,20 @@ public class App extends Application {
     launch();
   }
 
+  /**
+   * Sets the root of the scene to the node associated to the input file. The
+   * method expects that the file is located in "src/main/resources/fxml".
+   *
+   * @param fxml The name of the FXML file (without extension).
+   * @throws IOException If the file is not found.
+   */
   public static void setRoot(String fxml) throws IOException {
     scene.setRoot(loadFxml(fxml));
   }
 
   /**
    * Returns the node associated to the input file. The method expects that the
-   * file is located in
-   * "src/main/resources/fxml".
+   * file is located in "src/main/resources/fxml".
    *
    * @param fxml The name of the FXML file (without extension).
    * @return The node of the input file.
@@ -59,6 +65,9 @@ public class App extends Application {
     root.requestFocus();
   }
 
+  /**
+   * Stops the text to speech element of the game on stop.
+   */
   @Override
   public void stop() {
     textToSpeech.terminate();

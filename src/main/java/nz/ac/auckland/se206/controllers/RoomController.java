@@ -39,18 +39,29 @@ public abstract class RoomController {
   protected static ShapeInteractionHandler interactionHandler;
 
   /**
-   * Handling the event where a button is hovered over
+   * Handling the event where a button is hovered over.
    */
   protected static void btnMouseActions(ImageView btn) {
     btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
     btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
   }
 
+  /**
+   * Handling the event where an arrow is hovered over.
+   * 
+   * @param arrowShpe
+   */
   protected static void arrowMouseActions(Polygon arrowShpe) {
     arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
     arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
   }
 
+  /**
+   * Handling the event where an arrow is clicked.
+   * 
+   * @param pane
+   * @param room
+   */
   public static void goDirection(Pane pane, AppUi room) {
     // Resetting appropriate fields before changing scenes
     readyToAdd = false;
@@ -59,6 +70,12 @@ public abstract class RoomController {
     TransitionAnimation.changeScene(pane, room, false);
   }
   
+  /**
+   * Handling the event where the wizard icon is clicked.
+   * 
+   * @param currScene
+   * @param pane
+   */
   public static void openBook(AppUi currScene, Pane pane) {
     BookController bookController = SceneManager.getBookControllerInstance();
     if (bookController != null) {
@@ -240,7 +257,7 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where an item is hovered over and clicked
+   * Handling the event where an item is hovered over and clicked.
    */
   protected void itemMouseActions(ImageView itemImg, boolean itemClicked, Items.Item item) {
     itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
@@ -351,7 +368,9 @@ public abstract class RoomController {
     interactionHandler.glowThis(itemImg);
   }
 
-  /** Adding item to inventory if an item is selected */
+  /** 
+   * Adding item to inventory if an item is selected.
+   */
   @FXML
   public void addItem() {
     if (!readyToAdd) {
@@ -362,9 +381,12 @@ public abstract class RoomController {
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Sending a message to gpt to let the wizard know that the user
+          // has collected all the items
           ChatMessage msg = new ChatMessage(
               "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getCollectedItemsMessage()));
+          // Adding congratualtions to text area
           MainMenuController.getChatHandler().appendChatMessage(
               msg, chatTextArea, inputText, sendButton);
           return null;
@@ -498,7 +520,7 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where an item is added to bag and formatting image size ratio
+   * Handling the event where an item is added to bag and formatting image size ratio.
    */
   protected void handleAddImg(Image img, ImageView itemImg) {
     // Setting up appropriate image and ratio and appropriate click fields to be added
@@ -509,7 +531,7 @@ public abstract class RoomController {
   }
 
   /**
-   * Not adding a selected item to the inventory
+   * Not adding a selected item to the inventory.
    */
   @FXML
   public void noAdd() {
@@ -545,6 +567,9 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Dealing with the event where the book icon is clicked.
+   */
   public void itemDefault() {
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
@@ -608,7 +633,7 @@ public abstract class RoomController {
   }
 
   /**
-   * Dealing with the event where the bag icon is clicked
+   * Dealing with the event where the bag icon is clicked.
    */
   @FXML
   public void clickBag() {
@@ -632,7 +657,8 @@ public abstract class RoomController {
   }
 
   /**
-   * Dealing with the event where the wizard icon is clicked
+   * Dealing with the event where the wizard icon is clicked.
+   * 
    * @throws ApiProxyException
    */
   @FXML
@@ -646,8 +672,8 @@ public abstract class RoomController {
    * Handling the identical parts of addItem in the treasure room and
    * library room in a single method.
    * 
-   * @param ratio the ratio between the image's width and height
-   * @param image an image of the item to be added to the inventory
+   * @param ratio the ratio between the image's width and height.
+   * @param image an image of the item to be added to the inventory.
    */
   public void itemCollect(double ratio, ImageView image) {
     image.setFitHeight(133 * ratio);
@@ -670,7 +696,8 @@ public abstract class RoomController {
 
   
   /**
-   * Enabling/disabling the chat functionality for the user to be able to talk to the wizard.
+   * Enabling/disabling the chat functionality for the user to be able 
+   * to talk to the wizard.
    */
   protected void toggleChat(boolean disable, int opacity) {
     // Enabling/disabling the approrpiate fields and making everything invisible/visible
@@ -697,6 +724,13 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Disabling the chat functionality for the user to be able
+   * to talk to the wizard.
+   * 
+   * @param disable
+   * @param opacity
+   */
   protected void disableChat(boolean disable, double opacity) {
     inputText.setDisable(disable);
     inputText.setOpacity(opacity);
@@ -707,9 +741,9 @@ public abstract class RoomController {
   /**
    * Sends a message to the GPT model.
    *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @param event the action event triggered by the send button.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
@@ -774,6 +808,7 @@ public abstract class RoomController {
 
   /**
    * Handles when Y or N is pressed on the input text area.
+   * 
    * @param event
    * @throws ApiProxyException
    * @throws IOException
@@ -794,6 +829,7 @@ public abstract class RoomController {
 
   /**
    * Handles when N is pressed on the input text area.
+   * 
    * @param event
    * @throws ApiProxyException
    * @throws IOException
@@ -833,6 +869,9 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Cancels the text to speech.
+   */
   @FXML
   public void onCancelTts() {
     ttsOn = false;
@@ -841,6 +880,9 @@ public abstract class RoomController {
     App.textToSpeech.stop();
   }
 
+  /**
+   * Fades in the scene.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
@@ -849,14 +891,23 @@ public abstract class RoomController {
     ft.play();
   }
 
+  /**
+   * Returns the text area.
+   */
   public TextArea getTextArea() {
     return chatTextArea;
   }
 
+  /**
+   * Returns the input text field.
+   */
   public TextField getInputText() {
     return inputText;
   }
 
+  /**
+   * Returns the send button.
+   */
   public Button getSendButton() {
     return sendButton;
   }
@@ -865,7 +916,7 @@ public abstract class RoomController {
    * Function to check if the user has collected all the required items
    * to be able to brew the potion.
    * 
-   * @return boolean whether the user has collected all the required items
+   * @return boolean whether the user has collected all the required items.
    */
   private boolean checkCorrectItems() {
     Inventory inventory = MainMenuController.getInventory();

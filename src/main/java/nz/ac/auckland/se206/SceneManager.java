@@ -13,6 +13,9 @@ import nz.ac.auckland.se206.controllers.TreasureRoomController;
 
 public class SceneManager {
 
+  /**
+   * Enum for the different scenes in the game.
+   */
   public enum AppUi {
     MAIN_MENU,
     CAULDRON_ROOM,
@@ -38,6 +41,11 @@ public class SceneManager {
   private static GameOverController gameOverControllerInstance;
 
 
+  /**
+   * Returns the current controller based on the current scene.
+   * 
+   * @return
+   */
   public static RoomController getCurrentController() {
     //switch case that returns the controller based on currScene
     RoomController controller = null;
@@ -51,14 +59,31 @@ public class SceneManager {
     return controller;
   }
 
+  /**
+   * Adds scene ui to the sceneMap.
+   * 
+   * @param appUi
+   * @param root
+   */
   public static void addAppUi(AppUi appUi, Parent root) {
     sceneMap.put(appUi, root);
   }
 
+  /**
+   * Returns the root of the scene.
+   * 
+   * @param appUi
+   * @return
+   */
   public static Parent getUiRoot(AppUi appUi) {
     return sceneMap.get(appUi);
   }
 
+  /**
+   * Sets the current scene.
+   * 
+   * @param appUi
+   */
   public static void setTimerScene(AppUi appUi) {
     if (sceneMap.containsKey(appUi)) {
       timerScene = appUi;
@@ -67,69 +92,137 @@ public class SceneManager {
     }
   }
 
+  /**
+   * Returns the current scene.
+   * 
+   * @return
+   */
   public static AppUi getTimerScene() {
     return timerScene;
   }
   
-  // Set the GameOverController instance
+  /**
+   * Sets the GameOverController instance.
+   * 
+   * @param controller
+   */
   public static void setGameOverControllerInstance(GameOverController controller) {
     gameOverControllerInstance = controller;
   }
 
-  // Get the GameOverController instance
+  /**
+   * Returns the GameOverController instance.
+   * 
+   * @return
+   */
   public static GameOverController getGameOverControllerInstance() {
     return gameOverControllerInstance;
   }
 
-  // Set the CauldronController instance
+  /**
+   * Sets the CauldronController instance.
+   * 
+   * @param controller
+   */
   public static void setCauldronControllerInstance(CauldronController controller) {
     cauldronControllerInstance = controller;
   }
 
-  // Get the CauldronController instance
+  /**
+   * Returns the CauldronController instance.
+   * 
+   * @return
+   */
   public static CauldronController getCauldronControllerInstance() {
     return cauldronControllerInstance;
   }
 
-  // Set the BookController instance
+  /**
+   * Sets the BookController instance.
+   * 
+   * @param controller
+   */
   public static void setBookControllerInstance(BookController controller) {
     bookControllerInstance = controller;
   }
 
-  // Get the BookController instance
+  /**
+   * Returns the BookController instance.
+   * 
+   * @return
+   */
   public static BookController getBookControllerInstance() {
     return bookControllerInstance;
   }
 
-  //getters and setters for the rest of the controllers
+  /**
+   * Sets the LibraryRoomController instance.
+   * 
+   * @param controller
+   */
   public static void setLibraryRoomControllerInstance(LibraryRoomController controller) {
     libraryRoomControllerInstance = controller;
   }
 
+  /**
+   * Returns the LibraryRoomController instance.
+   * 
+   * @return
+   */
   public static LibraryRoomController getLibraryRoomControllerInstance() {
     return libraryRoomControllerInstance;
   }
 
+  /**
+   * Sets the TreasureRoomController instance.
+   * 
+   * @param controller
+   */
   public static void setTreasureRoomControllerInstance(TreasureRoomController controller) {
     treasureRoomControllerInstance = controller;
   }
 
+  /**
+   * Returns the TreasureRoomController instance.
+   * 
+   * @return
+   */
   public static TreasureRoomController getTreasureRoomControllerInstance() {
     return treasureRoomControllerInstance;
   }
 
+  /**
+   * Sets the CauldronRoomController instance.
+   * 
+   * @param controller
+   */
   public static void setCauldronRoomControllerInstance(CauldronRoomController controller) {
     cauldronRoomControllerInstance = controller;
   }
 
+  /**
+   * Returns the CauldronRoomController instance.
+   * 
+   * @return
+   */
   public static CauldronRoomController getCauldronRoomControllerInstance() {
     return cauldronRoomControllerInstance;
   }
 
+  /**
+   * Sets the ChestController instance.
+   * 
+   * @param controller
+   */
   public static ChestController getChestControllerInstance() {
     return chestControllerInstance;
   }
 
+  /**
+   * Returns the ChestController instance.
+   * 
+   * @return
+   */
   public static void setChestControllerInstance(ChestController chestControllerInstance) {
     SceneManager.chestControllerInstance = chestControllerInstance;
   }
