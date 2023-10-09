@@ -11,7 +11,7 @@ public class SoundEffects {
   /**
    * Plays a sound effect give the string for the file name that the 
    * sound needs to be played from.
-   * @param fileName
+   * @param fileName the name of the sound file to be played.
    * @throws URISyntaxException
    */
   public void playSoundEffect(String fileName) throws URISyntaxException {

@@ -22,7 +22,6 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.SoundEffects;
-import nz.ac.auckland.se206.TransitionAnimation;
 
 public class CauldronController {
   @FXML private Pane pane;
@@ -64,6 +63,8 @@ public class CauldronController {
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
+   * Initialising the drag and drop functionality for the images.
+   * Initialising the glow for the images.
    */
   @FXML
   private void initialize() {
@@ -207,6 +208,7 @@ public class CauldronController {
 
   /** 
    * Method to update the image states based on the player's inventory. 
+   * Update the visibility and the disable state of the images.
    */
   public void updateImageStates() {
     // Enable or disable images based on the presence of items in the inventory
@@ -295,10 +297,11 @@ public class CauldronController {
   }
 
   /**
-   * Method to set up drag and drop for the images.
-   * 
-   * @param itemImageView
-   * @param itemId
+   * Method to set up drag and drop for the images. Using the 
+   * mouse click, drag, and release features to move the images
+   * to the appropriate places.
+   * @param itemImageView The image of the item to be dragged.
+   * @param itemId The id of the item being dragged.
    */
   @FXML
   private void setupDragAndDrop(ImageView itemImageView, String itemId) {
@@ -361,7 +364,8 @@ public class CauldronController {
   }
 
   /**
-   * Method to go back to the previous scene.
+   * Method to go back to the previous scene. Con only be called when the
+   * user is going to and from the cauldron room.
    */
   @FXML
   private void goBack() {
@@ -375,7 +379,9 @@ public class CauldronController {
   }
 
   /**
-   * Method to brew the potion.
+   * Method to brew the potion. Handling the situations where not enough
+   * items are added, no items are added, too many items are added, or 
+   * if the brewed potion is wrong.
    */
   @FXML
   private void onBrewPotion() throws URISyntaxException {
@@ -420,7 +426,9 @@ public class CauldronController {
   }
 
   /**
-   * Method to reset the items in the cauldron.
+   * Method to reset the items in the cauldron. Resetting the positions
+   * of the various images in the cauldron rather than having their 
+   * position reset to the place dropped.
    */
   @FXML
   private void resetItems() {
@@ -521,7 +529,8 @@ public class CauldronController {
   }
 
   /**
-   * Method to empty the cauldron.
+   * Method to empty the cauldron. Calling the reset items method
+   * to make sure the items are put back into their original positions.
    */
   @FXML
   private void onEmptyCauldron() throws URISyntaxException {
@@ -531,7 +540,8 @@ public class CauldronController {
   }
 
   /**
-   * Method to fade in the scene.
+   * Method to fade in the scene. Using a fade transition to fade in
+   * the scene.
    */
   @FXML
   public void fadeIn() {
