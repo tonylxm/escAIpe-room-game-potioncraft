@@ -823,7 +823,8 @@ public abstract class RoomController {
    * @throws URISyntaxException
    */
   @FXML
-  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException, URISyntaxException {
+  public void onYesPressed(KeyEvent event) 
+      throws ApiProxyException, IOException, URISyntaxException {
     // If Y us pressed, adding the item
     if (event.getCode().toString().equals("Y")) {
       System.out.println("key " + event.getCode() + " pressed");

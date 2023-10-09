@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.net.URISyntaxException;
-
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -18,7 +17,9 @@ public class Notification {
    * @param notificationText the Label of the notification text
    * @throws URISyntaxException
    */
-  public static void notifyPopup(ImageView notificationBack, Label notificationText) throws URISyntaxException {
+  public static void notifyPopup(
+      ImageView notificationBack, Label notificationText) 
+      throws URISyntaxException {
     notificationBack.setDisable(false);
     notificationText.setDisable(false);
     soundEffects.playSoundEffect("notification.mp3");
