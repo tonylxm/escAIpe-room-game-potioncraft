@@ -98,9 +98,18 @@ public class TreasureRoomController extends RoomController {
     ft.play();
   }
 
+  /**
+   * Switching the items in the treasure room when the chest is opened
+   * 
+   * @param chestOpened
+   */
   @FXML
   public void switchItems(boolean chestOpened) {
+    // Setting the integer value for the opacity depending on whether the
+    // chest has been opened or not
     int opacity = chestOpened ? 1 : 0;
+    // Setting various item's to be visible or not depending on whether the
+    // chest has been opened
     chestImg.setOpacity(1 - opacity);
     chestImg.setDisable(chestOpened);
     itemSixImg.setOpacity(opacity);

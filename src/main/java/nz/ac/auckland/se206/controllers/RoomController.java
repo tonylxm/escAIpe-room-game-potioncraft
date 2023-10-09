@@ -362,9 +362,12 @@ public abstract class RoomController {
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Sending a message to gpt to let the wizard know that the user
+          // has collected all the items
           ChatMessage msg = new ChatMessage(
               "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getCollectedItemsMessage()));
+          // Adding congratualtions to text area
           MainMenuController.getChatHandler().appendChatMessage(
               msg, chatTextArea, inputText, sendButton);
           return null;

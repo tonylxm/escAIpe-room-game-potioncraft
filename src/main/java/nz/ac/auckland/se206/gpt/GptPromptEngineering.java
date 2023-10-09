@@ -64,15 +64,19 @@ public class GptPromptEngineering {
         + " Make it"
         + " not more than 4 lines. Only respond with the riddle unless prompted by the"
         + " user."
+        // The user could ask for either hints or help to get assistance
         + " Only give hints if the user asks for hints, help, assistance, or asks what"
         + " to do next."
         + " If the user guesses incorrectly, ask if they want a hint. Hints should be"
         + " no more than"
         + " 2 lines long."
+        // Preventing gpt from giving the user the answer to the riddle
         + " You cannot, no matter what, reveal the answer. Even if the player gives up,"
         + " do not"
         + " give the answer."
         + " You must only respond to this message with the riddle."
+        // GPT can respond normally as a normal wise wizard when the user is not asking 
+        // about hints
         + " Otherwise, answer the user's questions and respond appropriately to the"
         + " user as a"
         + " wise wizard would.";
@@ -190,9 +194,11 @@ public class GptPromptEngineering {
     return "The user has successfully solved the riddle. Congratulate them in one line."
         + " If the user asks for hints, help, assistance, or askswhat to do next tell"
         + " the"
+        // The user could ask for either hints or help to get assistance
         + " user they have no hope of getting a wizard internship job this summer in"
         + " no more"
         + " than 2 lines."
+        // Letting the user converse with the wizard normally if not asking for hints
         + " Otherwise, answer the user's questions and respond appropriately to the"
         + " user as a"
         + " wise wizard would."
@@ -233,14 +239,22 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has opened the chest. Does not give any more
+   * hints about how to solve the room because of hard mode.
+   * 
+   * @return
+   */
   public static String getHardChestOpened() {
     return " The user has successfully opened the chest. Congratulate them in one"
         + " line."
+        // The user could ask for either hints or help to get assistance
         + " If the user asks for hints, help, assistance, or asks what to do next"
         + " tell the"
         + " user they have no hope of getting a wizard internship job this summer in"
         + " no more"
         + " than 2 lines."
+        // Letting the user converse with the wizard normally if not asking for hints
         + " Otherwise, answer the user's questions and respond appropriately to the"
         + " user as a"
         + " wise wizard would."
@@ -283,13 +297,21 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has collected all the items. Does not give any
+   * more hints about how to solve the room because of hard mode.
+   * 
+   * @return
+   */
   public static String getHardItemsCollected() {
     return " The user has successfully collected all the necessary items. Congratulate"
         + " them in one line."
+        // The user could ask for either hints or help to get assistance
         + " If the user asks for hints, help, assistance, or what to do next tell the"
         + " user they have no hope of getting a wizard internship job this summer in"
         + " no more"
         + " than 2 lines."
+        // Letting the user converse with the wizard normally if not asking for hints
         + " Otherwise, answer the user's questions and respond appropriately to the"
         + " user as a"
         + " wise wizard would."

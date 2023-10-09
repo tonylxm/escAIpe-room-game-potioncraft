@@ -236,10 +236,13 @@ public class BookController {
     SceneManager.getCurrentController().fadeIn();
   }
 
-  /** Uses text to speech to read the required items in the book. */
+  /** 
+   * Uses text to speech to read the required items in the book. 
+   */
   @FXML
   public void onReadIngredientList() {
     // Using concurency to prevent the system freezing
+    // Only allowing one instance of text to speech to run at a time
     if (!ttsOn) {
       ttsOn = true;
       cancelTtsBtn.setDisable(false);
@@ -247,6 +250,7 @@ public class BookController {
       Task<Void> speakTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Reading the potion name and the ingredients
           App.textToSpeech.speak(potionName.getText());
           for (int i = 0; i < Items.necessary.size(); i++) {
             if (ttsOn) {
@@ -256,6 +260,7 @@ public class BookController {
           return null;
         }
       };
+      // Starting the task and turning tts off when it is finished
       new Thread(speakTask).start();
       speakTask.setOnSucceeded(e -> {
         ttsOn = false;
