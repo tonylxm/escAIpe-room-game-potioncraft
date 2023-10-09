@@ -472,8 +472,8 @@ public class CauldronController {
     }
 
     if (cauldronItems.contains(Items.Item.BONE)) {
-      boneImage.setLayoutX(740);
-      boneImage.setLayoutY(410);
+      boneImage.setLayoutX(752);
+      boneImage.setLayoutY(476);
       boneImage.setVisible(true);
     }
 
