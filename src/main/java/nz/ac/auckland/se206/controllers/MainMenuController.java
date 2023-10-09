@@ -858,20 +858,8 @@ public class MainMenuController {
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
     soundEffects.playGameTheme();
 
-    
-    Task<Void> timerStartTask = new Task<Void>() {
-
-      @Override
-      protected Void call() throws Exception {
-        Thread.sleep(600);
-        countdownTimer.start();
-        return null;
-      }
-    };
+    countdownTimer.start();
     countdownTimer.updateHintLabel(hints);
-    Thread timerStartThread = new Thread(
-        timerStartTask, "timer start thread");
-    timerStartThread.start();
   }
 
   @FXML
