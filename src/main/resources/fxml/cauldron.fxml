@@ -120,7 +120,7 @@
             <Image url="@../images/bone.png" />
          </image>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
       <ImageView id="itemTwelveImg" fx:id="fireImage" fitHeight="88.0" fitWidth="100.0" layoutX="109.0" layoutY="512.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
@@ -128,7 +128,7 @@
             <Image url="@../images/fire.png" />
          </image>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
       <ImageView id="itemThirteenImg" fx:id="rootImage" fitHeight="82.0" fitWidth="82.0" layoutX="164.0" layoutY="241.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
@@ -136,7 +136,7 @@
             <Image url="@../images/root.png" />
          </image>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
       <ImageView id="itemFourteenImg" fx:id="beetleImage" fitHeight="45.0" fitWidth="65.0" layoutX="811.0" layoutY="383.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
@@ -144,7 +144,7 @@
             <Image url="@../images/beetle.png" />
          </image>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
       <ImageView id="itemFifteenImg" fx:id="unicornHornImage" fitHeight="101.0" fitWidth="100.0" layoutX="888.0" layoutY="373.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
@@ -152,7 +152,7 @@
             <Image url="@../images/unicorn_horn.png" />
          </image>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
       <Rectangle fx:id="cauldronOverlay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="419.0" layoutY="341.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />

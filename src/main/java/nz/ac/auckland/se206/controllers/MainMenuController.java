@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -52,6 +54,7 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
+  private SoundEffects soundEffects;
 
   public static int getHints() {
     return hints;
@@ -185,6 +188,7 @@ public class MainMenuController {
     ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
+    soundEffects = new SoundEffects();
 
     // Initialise booleans for settings selection
     easyBtnClicked = false;
@@ -887,7 +891,7 @@ public class MainMenuController {
    * @throws IOException
    */
   @FXML
-  public void onStartGame() throws IOException {
+  public void onStartGame() throws IOException, URISyntaxException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
     disableAndOrFadeTimeBtns(true, 0, false);
     // TransitionAnimation.changeScene(
@@ -896,21 +900,10 @@ public class MainMenuController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
+    soundEffects.playGameTheme();
 
-    
-    Task<Void> timerStartTask = new Task<Void>() {
-
-      @Override
-      protected Void call() throws Exception {
-        Thread.sleep(2000);
-        countdownTimer.start();
-        return null;
-      }
-    };
+    countdownTimer.start();
     countdownTimer.updateHintLabel(hints);
-    Thread timerStartThread = new Thread(
-        timerStartTask, "timer start thread");
-    timerStartThread.start();
   }
 
   /**

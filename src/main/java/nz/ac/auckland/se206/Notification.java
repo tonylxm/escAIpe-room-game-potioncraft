@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206;
 
+import java.net.URISyntaxException;
+
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -7,15 +9,19 @@ import javafx.util.Duration;
 
 public class Notification {
 
+  public static SoundEffects soundEffects = new SoundEffects();
+
   /**
-   * Creates a notification popup that fades in and out.
-   * 
-   * @param notificationBack The ImageView of the notification background.
-   * @param notificationText The Label of the notification text.
+   * Displays a notification popup for 3 seconds.
+   *
+   * @param notificationBack the ImageView of the notification background
+   * @param notificationText the Label of the notification text
+   * @throws URISyntaxException
    */
-  public static void notifyPopup(ImageView notificationBack, Label notificationText) {
+  public static void notifyPopup(ImageView notificationBack, Label notificationText) throws URISyntaxException {
     notificationBack.setDisable(false);
     notificationText.setDisable(false);
+    soundEffects.playSoundEffect("notification.mp3");
 
     // Create a FadeTransition to gradually change opacity over 3 seconds
     FadeTransition fadeTransition = new FadeTransition(

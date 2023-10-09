@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.net.URISyntaxException;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -16,6 +17,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 
@@ -35,6 +37,7 @@ public class ChestController {
 
   private CountdownTimer timer;
   private Timeline pulse;
+  private SoundEffects soundEffects;
 
   private double glower;
   private double glowerTwo;
@@ -49,6 +52,7 @@ public class ChestController {
   private void initialize() {
     timer = MainMenuController.getCountdownTimer();
     timer.setChestLabel(timerLabel);
+    soundEffects = new SoundEffects();
     setupDragAndDrop(keyImg);
     // Using two different values for the glow to make sure the user 
     // sees both images
@@ -199,6 +203,11 @@ public class ChestController {
                 "The chest has been unlocked! \nNew items are available \nin the treasure room!", 
                 true, false);
             System.out.println("Put the key into the glowing chest");
+            try {
+              soundEffects.playSoundEffect("openChest.mp3");
+            } catch (URISyntaxException e) {
+              e.printStackTrace();
+            }
             //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
             Scene currentScene = fadeRectangle.getScene();
             currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));

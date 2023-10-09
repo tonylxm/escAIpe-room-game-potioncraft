@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.net.URISyntaxException;
+
 import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -126,9 +128,10 @@ public class CauldronRoomController extends RoomController {
    * brew their potions.
    * 
    * @param event
+   * @throws URISyntaxException
    */
   @FXML
-  public void clickCauldron(MouseEvent event) {
+  public void clickCauldron(MouseEvent event) throws URISyntaxException {
     if (!GameState.isBookRiddleResolved) {
       notificationText.setText(
           "The Wizard has some instructions for you! Talk to him first!");
@@ -374,9 +377,10 @@ public class CauldronRoomController extends RoomController {
    * Taking the user to the library room from the room scene.
    * 
    * @param event
+   * @throws URISyntaxException
    */
   @FXML
-  public void goLeftRoom(MouseEvent event) {
+  public void goLeftRoom(MouseEvent event) throws URISyntaxException {
     if (!GameState.isBookRiddleResolved) {
       notificationText.setText(
           "The Wizard has some instructions for you! Talk to him first!");
@@ -396,9 +400,10 @@ public class CauldronRoomController extends RoomController {
    * Taking the user to the treasure room from the room scene.
    * 
    * @param event
+   * @throws URISyntaxException
    */
   @FXML
-  public void goRightRoom(MouseEvent event) {
+  public void goRightRoom(MouseEvent event) throws URISyntaxException {
     if (!GameState.isBookRiddleResolved) {
       notificationText.setText(
           "The Wizard has some instructions for you! Talk to him first!");
@@ -419,9 +424,10 @@ public class CauldronRoomController extends RoomController {
    * anywhere else on the screen.
    *
    * @param event
+   * @throws URISyntaxException
    */
   @FXML
-  public void clickOffCauldronRoom(MouseEvent event) {
+  public void clickOffCauldronRoom(MouseEvent event) throws URISyntaxException {
     if (GameState.isBookRiddleResolved) {
       System.out.println("click off");
       setText("", false, false);
@@ -445,9 +451,10 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Enabling the recipe book button to be able to be clicked on.
+   * @throws URISyntaxException
    */
   @FXML
-  private void enableRecipe() {
+  private void enableRecipe() throws URISyntaxException {
     bookBtn.setDisable(false);
     bookBtn.setOpacity(1);
     // Showing the notification to the user that the recipe book is available
