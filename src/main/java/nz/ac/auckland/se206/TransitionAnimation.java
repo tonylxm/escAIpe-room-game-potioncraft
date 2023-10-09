@@ -13,12 +13,22 @@ public class TransitionAnimation {
   private static double toValue;
   private static Pane masterPane;
 
+  /**
+   * Changing scenes to the appropriate scene.
+   * 
+   * @param pane
+   */
   public static void setMasterPane(Pane pane) {
     masterPane = pane;
   }
 
-  // For fadeIn, set ocpacity = 1.0
-  // For fadeOut, set ocpacity = 0.0
+  /**
+   * Fading in and out of the appropriate scene.
+   * For fadeIn, set ocpacity = 1.0.
+   * For fadeOut, set ocpacity = 0.0.
+   * @param obj
+   * @param opacity
+   */
   public static void fade(Node obj, double opacity) {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), obj);
 

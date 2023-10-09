@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Items {
-  /** Possible items the user can interact with in the room */
+  /** 
+   * Possible items the user can interact with in the room.
+   */
   public enum Item {
     TAIL,
     INSECT_WINGS,
@@ -49,7 +51,7 @@ public class Items {
    * Constructor that adds an appropriate number of random unique items to the available and
    * necessary sets. The available set contains all the items you can interact with within the room.
    * The necessary set contains the items that are needed to complete the room. ***********UPDATE
-   * CHANGED TO A LIST INSTEAD OF A SET - ANDY 14/09/2023
+   * CHANGED TO A LIST INSTEAD OF A SET - ANDY 14/09/2023.
    *
    * @param n is the number of items needed to complete the room. Note that the number of items
    *     available is double those required to complete it. Currently, the maximum value for n is 5,

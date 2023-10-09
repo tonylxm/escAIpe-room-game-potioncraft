@@ -59,6 +59,9 @@ public class CauldronController {
 
   private ShapeInteractionHandler interactionHandler;
 
+  /**
+   * Setting the appropriate fields and listeners when scene is initialised.
+   */
   @FXML
   private void initialize() {
     // Set up the timer
@@ -199,7 +202,9 @@ public class CauldronController {
     }
   }
 
-  /** Method to update the image states based on the player's inventory */
+  /** 
+   * Method to update the image states based on the player's inventory. 
+   */
   public void updateImageStates() {
     // Enable or disable images based on the presence of items in the inventory
     System.out.println("Updating image states");
@@ -286,6 +291,12 @@ public class CauldronController {
     }
   }
 
+  /**
+   * Method to set up drag and drop for the images.
+   * 
+   * @param itemImageView
+   * @param itemId
+   */
   @FXML
   private void setupDragAndDrop(ImageView itemImageView, String itemId) {
     final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
@@ -341,6 +352,9 @@ public class CauldronController {
         });
   }
 
+  /**
+   * Method to go back to the previous scene.
+   */
   @FXML
   private void goBack() {
     System.out.println("CAULDRON -> CAULDRON_ROOM");
@@ -352,6 +366,9 @@ public class CauldronController {
     System.out.println(cauldronItems);
   }
 
+  /**
+   * Method to brew the potion.
+   */
   @FXML
   private void onBrewPotion() {
     System.out.println(Items.necessary);
@@ -394,14 +411,12 @@ public class CauldronController {
     }
   }
 
+  /**
+   * Method to reset the items in the cauldron.
+   */
   @FXML
   private void resetItems() {
     // returning the items to the original position.
-    // I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
-    // batWingImage.setX(84);  it might not even be necessary nvm but keeping
-    // just in case
-    // batWingImage.setY(54);
-
     // resetting the images
     if (cauldronItems.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setLayoutX(80);
@@ -497,6 +512,9 @@ public class CauldronController {
     cauldronItems.clear();
   }
 
+  /**
+   * Method to empty the cauldron.
+   */
   @FXML
   private void onEmptyCauldron() {
     notificationText.setText("Cauldron Emptied!");
@@ -504,6 +522,9 @@ public class CauldronController {
     resetItems();
   }
 
+  /**
+   * Method to fade in the scene.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

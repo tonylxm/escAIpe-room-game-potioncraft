@@ -208,6 +208,9 @@ public class ChestController {
         });
   }
 
+  /**
+   * Moving back to the treasure room.
+   */
   @FXML
   public void goBack() {
     System.out.println("CHEST -> TREASURE_ROOM");
@@ -218,6 +221,9 @@ public class ChestController {
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
+  /**
+   * Fading in the treasure room.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

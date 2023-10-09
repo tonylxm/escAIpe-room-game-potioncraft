@@ -2,7 +2,9 @@ package nz.ac.auckland.se206;
 
 import java.util.ArrayList;
 
-/** Represents the state of the game. */
+/** 
+ * Represents the state of the game. 
+ */
 public class GameState {
 
   private static ArrayList<Items.Item> recipe = new ArrayList<Items.Item>();
@@ -18,9 +20,10 @@ public class GameState {
 
   public static boolean areItemsCollected = false;
 
-  //getter for recipe
+  /**
+   * Returns the recipe.
+   */
   public static ArrayList<Items.Item> getRecipe() {
     return recipe;
   }
-
 }

@@ -16,8 +16,8 @@ public class GptPromptEngineering {
 
   /**
    * GPT generates a riddle for the user to solve to get the correct book. GPT does not 
-   * give the
-   * user any hints no matter what. Prompt for the Voldemort 'hard' mode of the game.
+   * give the user any hints no matter what. Prompt for the Voldemort 'hard' mode of the 
+   * game.
    *
    * @param book
    * @return
@@ -47,9 +47,8 @@ public class GptPromptEngineering {
 
   /**
    * GPT generates a riddle for the user to solve to get the correct book. GPT also 
-   * allows the user
-   * to asks an unrestricted number of hints. Prompt for the Dobby 'easy' mode of the 
-   * game.
+   * allows the user to asks an unrestricted number of hints. Prompt for the Dobby 
+   * 'easy' mode of the game.
    *
    * @param book
    * @return
@@ -84,10 +83,8 @@ public class GptPromptEngineering {
 
   /**
    * GPT generates a riddle for the user to solve to get the correct book. GPT only allows 
-   * the user
-   * to ask five hints, keeping track of them and not giving the user any more after they
-   * have used
-   * up all five. Prompt for the Harry 'medium' mode of the game.
+   * the user to ask five hints, keeping track of them and not giving the user any more 
+   * after they have used up all five. Prompt for the Harry 'medium' mode of the game.
    *
    * @param book
    * @return
@@ -129,8 +126,7 @@ public class GptPromptEngineering {
 
   /**
    * To be sent to GPT after the user selected the correct book. Gives context for what 
-   * future hints
-   * should be about too for the easy mode.
+   * future hints should be about too for the easy mode.
    *
    * @return
    */
@@ -151,10 +147,8 @@ public class GptPromptEngineering {
 
   /**
    * To be sent to GPT after the user selected the correct book. Gives context for 
-   * what future hints
-   * should be about too for the medium mode. Counts the number of hints the user 
-   * has used along
-   * side the ones used for the riddle.
+   * what future hints should be about too for the medium mode. Counts the number of
+   * hints the user has used along side the ones used for the riddle.
    *
    * @return
    */
@@ -185,8 +179,7 @@ public class GptPromptEngineering {
 
   /**
    * To be send to GPT after the user selected the correct book. DOes not give any 
-   * more hints about
-   * how to solve the room because of hard mode.
+   * more hints about how to solve the room because of hard mode.
    *
    * @return
    */
@@ -205,6 +198,12 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has opened the chest. Does not give any more
+   * hints about how to solve the room because of easy mode.
+   * 
+   * @return
+   */
   public static String getEasyChestOpened() {
     return "The user has successfully opened the chest. Congratulate them in one line."
         + " Hints should now only tell the user to gather all the correct ingedients"
@@ -219,6 +218,12 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has opened the chest. Counts the number of hints
+   * the user has used along side the ones used for the riddle.
+   * 
+   * @return
+   */
   public static String getMediumChestOpened() {
     return "The user has successfully opened the chest. Congratulate them in one line."
         + " Hints should now only tell the user to gather all the correct ingredients"
@@ -261,6 +266,12 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has collected all the items. Does not give any
+   * more hints about how to solve the room because of easy mode.
+   * 
+   * @return
+   */
   public static String getEasyItemsCollected() {
     return "The user has successfully collected all necessary items. Congratulate them"
         + " in one line."
@@ -276,6 +287,12 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has collected all the items. Counts the number of
+   * hints the user has used along side the ones used for the riddle.
+   * 
+   * @return
+   */
   public static String getMediumItemsCollected() {
     return "The user has successfully collected all the necessary items. Congratualte"
         + " them in one line."
@@ -318,6 +335,12 @@ public class GptPromptEngineering {
         + " Only respond with the congratulations unless prompted by the user.";
   }
 
+  /**
+   * To be sent to GPT after the user has brewed the potion. Does not give any more
+   * hints about how to solve the room because of easy mode.
+   * 
+   * @return
+   */
   public static String getPotionName() {
     return "Only give one short concise potion name + the word Recipe";
   }

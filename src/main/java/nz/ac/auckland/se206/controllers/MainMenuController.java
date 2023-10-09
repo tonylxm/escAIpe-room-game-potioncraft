@@ -172,6 +172,9 @@ public class MainMenuController {
   private boolean ttsOn;
   private boolean appendIntroMsgFinished;
 
+  /**
+   * Initialises the main menu controller.
+   */
   public void initialize() {
     // Item & inventory generation
     items = new Items(5);
@@ -227,18 +230,40 @@ public class MainMenuController {
     // System.out.println(introMsg);
   }
 
+  /**
+   * Handles the mouse actions for the difficulty and time limit buttons.
+   * 
+   * @param difficultyBtn
+   * @param difficultyBtnClicked
+   * @param hint
+   * @param difficulty
+   */
   public void difficultyMouseActions(
       ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, Difficulty difficulty) {
     difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
     difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
   }
 
+  /**
+   * Handles the mouse actions for the difficulty and time limit buttons.
+   * 
+   * @param timeBtn
+   * @param timeBtnClicked
+   * @param timeTxt
+   * @param time
+   */
   public void timeMouseActions(
       ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, TimeLimit time) {
     timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
   }
 
+  /**
+   * Handles the hover on for the difficulty and time limit buttons.
+   * 
+   * @param settingsBtn
+   * @param hint
+   */
   public void difficultyHoverOn(
       ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
@@ -247,6 +272,13 @@ public class MainMenuController {
     } 
   }
 
+  /**
+   * Handles the hover off for the difficulty and time limit buttons.
+   * 
+   * @param settingsBtn
+   * @param settingsBtnClicked
+   * @param hint
+   */
   public void difficultyHoverOff(
       ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
@@ -255,6 +287,11 @@ public class MainMenuController {
     } 
   }
 
+  /**
+   * Handles the hover on and off for the difficulty and time limit buttons.
+   * @param settingsBtn
+   * @param hint
+   */
   public void timeLimitHoverOn(ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
     if (!timeSelected) {
@@ -262,6 +299,13 @@ public class MainMenuController {
     } 
   }
 
+  /**
+   * Handles the hover off for the difficulty and time limit buttons.
+   * 
+   * @param settingsBtn
+   * @param settingsBtnClicked
+   * @param timeLimit
+   */
   public void timeLimitHoverOff(
       ImageView settingsBtn, boolean settingsBtnClicked, Text timeLimit) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
@@ -272,6 +316,7 @@ public class MainMenuController {
 
   /**
    * Displays the appropriate number of hints when hovering over a difficulty.
+   * 
    * @param gameDifficulty
    */
   public void difficultySelect(Difficulty gameDifficulty) {
@@ -324,6 +369,7 @@ public class MainMenuController {
 
   /**
    * Displays the appropriate time limit when hovering over a time limit.
+   * 
    * @param time
    */
   public void timeSelect(TimeLimit time) {
@@ -374,7 +420,7 @@ public class MainMenuController {
   }
 
   /**
-   * Handles starting a new game by creating new instances of the required scenes
+   * Handles starting a new game by creating new instances of the required scenes.
    */
   @FXML
   public void playGame() throws InterruptedException, IOException {
@@ -499,7 +545,7 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate settings
+   * Handles continuing a game by loading the appropriate settings.
    */
   @FXML
   public void onContinueGame() {
@@ -523,7 +569,7 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate settings
+   * Handles continuing a game by loading the appropriate settings.
    */
   @FXML
   public void onContinueGameOne() {
@@ -589,7 +635,7 @@ public class MainMenuController {
   }
 
   /**
-   * Handles click off for after the intro message is displayed
+   * Handles click off for after the intro message is displayed.
    * 
    * @param event
    * @throws InterruptedException
@@ -627,7 +673,7 @@ public class MainMenuController {
   }
   
   /**
-   * Generating a random book for the user to guess through the riddle
+   * Generating a random book for the user to guess through the riddle.
    * 
    * @return
    */
@@ -638,10 +684,10 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the difficulty buttons
+   * Approprately disables or enables the difficulty buttons.
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
-   *                 false then enable buttons
+   *                 false then enable buttons.
    * @param ocpacity
    * @param fade
    */
@@ -670,10 +716,10 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the time buttons
+   * Approprately disables or enables the time buttons.
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
-   *                 false then enable buttons
+   *                 false then enable buttons.
    * @param ocpacity
    * @param fade
    */
@@ -701,36 +747,54 @@ public class MainMenuController {
     }
   }
 
+  /**
+   * Handles the difficulty selection.
+   */
   @FXML
   public void setEasy() {
     difficulty = Difficulty.EASY;
     continueBtnEnable();
   }
 
+  /**
+   * Handles the difficulty selection.
+   */
   @FXML
   public void setMedium() {
     difficulty = Difficulty.MEDIUM;
     continueBtnEnable();
   }
 
+  /**
+   * Handles the difficulty selection.
+   */
   @FXML
   public void setHard() {
     difficulty = Difficulty.HARD;
     continueBtnEnable();
   }
 
+  /**
+   * Handles the time limit selection.
+   */
   @FXML
   public void setTwoMin() {
     timeLimit = TimeLimit.TWO_MIN;
     CountdownTimer.setTimerLimit("2:00");
   }
 
+  /**
+   * Handles the time limit selection.
+   */
   @FXML
   public void setFourMin() {
     timeLimit = TimeLimit.FOUR_MIN;
     CountdownTimer.setTimerLimit("4:00");
   }
 
+  /**
+   *  Handles the time limit selection.
+   */
   @FXML
   public void setSixMin() {
     timeLimit = TimeLimit.SIX_MIN;
@@ -738,7 +802,7 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtn and set visible
+   * Enable continueBtn and set visible.
    */
   public void continueBtnEnable() {
     continueBtn.setDisable(false);
@@ -746,9 +810,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtn, set invisible and pregenerate book riddle
+   * Enable continueBtn, set invisible and pregenerate book riddle.
    */
-
   public void continueBtnDisable() {
     continueBtn.setDisable(true);
     continueBtn.setOpacity(0.0);
@@ -803,7 +866,7 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtnOne and set visible
+   * Enable continueBtnOne and set visible.
    */
   public void continueBtnOneEnable() {
     continueBtnOne.setDisable(false);
@@ -811,13 +874,18 @@ public class MainMenuController {
   }
 
   /**
-   * Enable startBtn and set visible
+   * Enable startBtn and set visible.
    */
   public void startBtnEnable() {
     startBtn.setDisable(false);
     startBtn.setOpacity(1.0);
   }
 
+  /**
+   * Handles the start button to start the game.
+   * 
+   * @throws IOException
+   */
   @FXML
   public void onStartGame() throws IOException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
@@ -845,6 +913,9 @@ public class MainMenuController {
     timerStartThread.start();
   }
 
+  /**
+   * Handles the text to speech button.
+   */
   @FXML
   private void onReadGameMasterResponse() {
     // Using concurency to prevent the system freezing
@@ -868,6 +939,9 @@ public class MainMenuController {
     }
   }
 
+  /**
+   * Handles the cancel text to speech button.
+   */
   @FXML
   private void onCancelTts() {
     ttsOn = false;

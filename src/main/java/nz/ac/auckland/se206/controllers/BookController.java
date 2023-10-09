@@ -96,7 +96,7 @@ public class BookController {
    * images for the required items.
    *
    * @param <T>
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
    */
   @FXML
   public void initialize() throws ApiProxyException {
@@ -214,6 +214,11 @@ public class BookController {
             });
   }
 
+  /**
+   * Writes the recipe ingredients to the list view.
+   * 
+   * @param necessary
+   */
   private void writeRecipeIngredients(List<Items.Item> necessary) {
     for (int i = 0; i < necessary.size(); i++) {
       ingredientList.getItems().add(Integer.toString(i + 1) + ". " + necessary.get(i).toString());
@@ -223,9 +228,9 @@ public class BookController {
   /**
    * Navigates back to the previous view.
    *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @param event the action event triggered by the go back button.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
    */
   @FXML
   private void onGoBack() {
@@ -270,6 +275,9 @@ public class BookController {
     }
   }
 
+  /**
+   * Cancels the text to speech.
+   */
   @FXML
   private void onCancelTts() {
     ttsOn = false;
@@ -279,7 +287,9 @@ public class BookController {
     ttsOn = false;
   }
 
-  /** Setting the appropriate scene when transitioning to the book view. */
+  /** 
+   * Setting the appropriate scene when transitioning to the book view. 
+   */
   public void updateBackground() {
     AppUi scene = SceneManager.getTimerScene();
     // Going from the cauldron room to the book
@@ -304,6 +314,9 @@ public class BookController {
     }
   }
 
+  /**
+   * Changing scenes to the cauldron room.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
