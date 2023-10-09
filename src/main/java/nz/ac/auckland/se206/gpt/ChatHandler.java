@@ -15,6 +15,11 @@ public class ChatHandler {
   private Choice result;
   private Task<Void> appendTask;
 
+  /**
+   * Initialises the chat handler.
+   * 
+   * @throws ApiProxyException
+   */
   @FXML
   public void initialize() throws ApiProxyException {
     chatCompletionRequest =
@@ -22,6 +27,11 @@ public class ChatHandler {
           .setTopP(0.5).setMaxTokens(100);
   }
 
+  /**
+   * Initialises the chat handler for the potion name.
+   * 
+   * @throws ApiProxyException
+   */
   @FXML
   public void potionNameInitialize() throws ApiProxyException {
     chatCompletionRequest =
@@ -72,9 +82,6 @@ public class ChatHandler {
         displayRole = msg.getRole();
         break;
     }
-
-    // chatTextArea.appendText(displayRole + ": ");
-
     chatTextArea.setText(msg.getContent() + "\n\n");
 
     // Appending the message character by character to the chat text area
@@ -82,11 +89,6 @@ public class ChatHandler {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            // for (char c : msg.getContent().toCharArray()) {
-            //   chatTextArea.appendText(String.valueOf(c));
-            //   Thread.sleep(20);
-            // }
-            // chatTextArea.appendText("\n\n");
             return null;
           }
         };
@@ -106,18 +108,38 @@ public class ChatHandler {
     }
   }
 
+  /**
+   * Appends a chat message to the chat text area.
+   *
+   * @param msg the chat message to append
+   */
   public void setResult(Choice result) {
     this.result = result;
   }
 
+  /**
+   * Appends a chat message to the chat text area.
+   *
+   * @param msg the chat message to append
+   */
   public Choice getResult() {
     return result;
   }
 
+  /**
+   * Appends a chat message to the chat text area.
+   *
+   * @param msg the chat message to append
+   */
   public Task<Void> getAppendTask() {
     return appendTask;
   }
 
+  /**
+   * Appends a chat message to the chat text area.
+   *
+   * @param msg the chat message to append
+   */
   public void setAppendTask(Task<Void> appendTask) {
     this.appendTask = appendTask;
   }

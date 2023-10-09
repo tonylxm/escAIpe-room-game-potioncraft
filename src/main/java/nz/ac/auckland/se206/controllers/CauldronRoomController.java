@@ -74,6 +74,9 @@ public class CauldronRoomController extends RoomController {
   private boolean showRecipe = true;
   private CountdownTimer countdownTimer;
 
+  /**
+   * Setting the appropriate fields and listeners when scene is initialised.
+   */
   public void initialize() {
     // Initialising everything from the superclass
     genericInitialise("Cauldron", itemElevenImg, itemTwelveImg, 
@@ -102,6 +105,7 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Setting the text for the riddle select label.
+   * 
    * @param disable
    * @param opacity
    */
@@ -198,21 +202,42 @@ public class CauldronRoomController extends RoomController {
     }
   }
 
+  /**
+   * Handling the user clicking on the book fire.
+   * 
+   * @param event
+   */
   @FXML
   public void clickBookFire(MouseEvent event) {
     handleClickBooks("fire", bookFireImage, bookFireRectangle);
   }
 
+  /**
+   * Handling the user clicking on the book water.
+   * 
+   * @param event
+   */
   @FXML
   public void clickBookWater(MouseEvent event) {
     handleClickBooks("water", bookWaterImage, bookWaterRectangle);
   }
 
+  /**
+   * Handling the user clicking on the book air.
+   * @param event
+   */
   @FXML
   public void clickBookAir(MouseEvent event) {
     handleClickBooks("air", bookAirImage, bookAirRectangle);
   }
 
+  /**
+   * Handling the user clicking on the book fire.
+   * 
+   * @param element
+   * @param bookImage
+   * @param bookRectangle
+   */
   private void handleClickBooks(
       String element, ImageView bookImage, ImageView bookRectangle) {
     System.out.println("book " + element +  " clicked");
@@ -350,6 +375,7 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Taking the user to the library room from the room scene.
+   * 
    * @param event
    * @throws URISyntaxException
    */
@@ -372,6 +398,7 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Taking the user to the treasure room from the room scene.
+   * 
    * @param event
    * @throws URISyntaxException
    */
@@ -394,7 +421,7 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Handling events where menus or views need to be exited by clicking 
-   * anywhere else on the screen
+   * anywhere else on the screen.
    *
    * @param event
    * @throws URISyntaxException
@@ -452,6 +479,9 @@ public class CauldronRoomController extends RoomController {
     SceneManager.getBookControllerInstance().updateBackground();
   }
 
+  /**
+   * Fading in the cauldron room scene.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

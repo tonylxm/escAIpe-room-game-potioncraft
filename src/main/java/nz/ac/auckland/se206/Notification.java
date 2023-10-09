@@ -12,7 +12,8 @@ public class Notification {
   public static SoundEffects soundEffects = new SoundEffects();
 
   /**
-   * Displays a notification popup for 3 seconds
+   * Displays a notification popup for 3 seconds.
+   *
    * @param notificationBack the ImageView of the notification background
    * @param notificationText the Label of the notification text
    * @throws URISyntaxException

@@ -55,7 +55,7 @@ public class TreasureRoomController extends RoomController {
   }
 
   /**
-   * Changing scenes to the cauldron room
+   * Changing scenes to the cauldron room.
    */
   @FXML
   public void goLeft(MouseEvent event) {
@@ -68,6 +68,11 @@ public class TreasureRoomController extends RoomController {
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
   }
 
+  /**
+   * Changing scenes to the chest room.
+   * 
+   * @param event
+   */
   @FXML
   public void enterChest(MouseEvent event) {
     System.out.println("TREASURE_ROOM -> CHEST");
@@ -78,7 +83,9 @@ public class TreasureRoomController extends RoomController {
     SceneManager.setTimerScene(AppUi.CHEST);
   }
   
-  /** Changing scenes to book view */
+  /** 
+   * Changing scenes to book view .
+   */
   @FXML
   public void openBook() {
     System.out.println("TREASURE_ROOM -> BOOK");
@@ -90,6 +97,9 @@ public class TreasureRoomController extends RoomController {
     SceneManager.getBookControllerInstance().updateBackground();
   }
 
+  /**
+   * Changing scenes to the inventory room.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
@@ -98,9 +108,18 @@ public class TreasureRoomController extends RoomController {
     ft.play();
   }
 
+  /**
+   * Switching the items in the treasure room when the chest is opened.
+   * 
+   * @param chestOpened
+   */
   @FXML
   public void switchItems(boolean chestOpened) {
+    // Setting the integer value for the opacity depending on whether the
+    // chest has been opened or not
     int opacity = chestOpened ? 1 : 0;
+    // Setting various item's to be visible or not depending on whether the
+    // chest has been opened
     chestImg.setOpacity(1 - opacity);
     chestImg.setDisable(chestOpened);
     itemSixImg.setOpacity(opacity);

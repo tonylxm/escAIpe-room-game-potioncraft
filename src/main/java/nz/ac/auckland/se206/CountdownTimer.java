@@ -12,6 +12,11 @@ public class CountdownTimer {
   private static int initialSeconds;
   private static int currentSeconds;
 
+  /**
+   * Sets the timer limit based on the time limit string.
+   * 
+   * @param timeLimit
+   */
   public static void setTimerLimit(String timeLimit) {
     String[] time = timeLimit.split(":");
     minutes = Integer.parseInt(time[0]);
@@ -31,6 +36,11 @@ public class CountdownTimer {
   private Label gameOverLabel;
   private Label chestTimerLabel;
 
+  /**
+   * Constructor for the timer.
+   * 
+   * @param timeLimit
+   */
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
     minutes = Integer.parseInt(time[0]);
@@ -41,7 +51,7 @@ public class CountdownTimer {
 
   /**
    * Set up the timer to count down every second and
-   * update the appropriate timer label
+   * update the appropriate timer label.
    */
   public void setTimeline() {
     timeline = new Timeline(
@@ -61,7 +71,7 @@ public class CountdownTimer {
 
   /**
    * Logic that occurs every second. If the timer reaches 0, the game over scene
-   * is
+   * is.
    * 
    * @throws IOException
    */
@@ -90,9 +100,9 @@ public class CountdownTimer {
     updateTimerLabel();
   }
 
-  // Logic that occurs every second that updates the timer label. Make sure to
-  // name the timer labels
-  // timerLabel!!!
+  /**
+   * Logic that occurs every second that updates the timer label.
+   */
   private void updateTimerLabel() {
     Parent currentSceneRoot = SceneManager.getUiRoot(SceneManager.getTimerScene());
 
@@ -136,7 +146,8 @@ public class CountdownTimer {
   }
 
   /**
-   * Formats the timer text to be displayed in the format mm:ss
+   * Formats the timer text to be displayed in the format mm:ss.
+   * 
    * @return
    */
   public String formatTimerText() {
@@ -156,6 +167,15 @@ public class CountdownTimer {
     }
   }
 
+  /**
+   * Sets the timer label to red on certain timer values.
+   * 
+   * @param timer1
+   * @param timer2
+   * @param timer3
+   * @param timer4
+   * @param timer5
+   */
   public void setTimerRed(Label timer1, Label timer2, Label timer3, 
       Label timer4, Label timer5) {
     timer1.setStyle("-fx-text-fill: red");
@@ -165,6 +185,15 @@ public class CountdownTimer {
     timer5.setStyle("-fx-text-fill: red");
   }
 
+  /**
+   * Sets the timer label to black.
+   * 
+   * @param timer1
+   * @param timer2
+   * @param timer3
+   * @param timer4
+   * @param timer5
+   */
   public void setTimerBlack(Label timer1, Label timer2, Label timer3, 
       Label timer4, Label timer5) {
     timer1.setStyle("-fx-text-fill: black");
@@ -174,50 +203,99 @@ public class CountdownTimer {
     timer5.setStyle("-fx-text-fill: black");
   }
 
-  // Getters and setters
+  /**
+   * Sets the timer label for the cauldron room.
+   * 
+   * @param cauldronTimerLabel
+   */
   public void setCauldronTimerLabel(Label cauldronTimerLabel) {
     this.cauldronTimerLabel = cauldronTimerLabel;
   }
 
+  /**
+   * Sets the hint label for the cauldron room.
+   * 
+   * @param cauldronHintLabel
+   */
   public void setCauldronHintLabel(Label cauldronHintLabel) {
     this.cauldronHintLabel = cauldronHintLabel;
   }
 
+  /**
+   * Sets the timer label for the library room.
+   * 
+   * @param libraryTimerLabel
+   */
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
     this.libraryTimerLabel = libraryTimerLabel;
   }
 
+  /**
+   * Sets the hint label for the library room.
+   * 
+   * @param libraryHintLabel
+   */
   public void setLibraryHintLabel(Label libraryHintLabel) {
     this.libraryHintLabel = libraryHintLabel;
   }
 
+  /**
+   * Sets the timer label for the treasure room.
+   * 
+   * @param rightTimerLabel
+   */
   public void setTreasureTimerLabel(Label rightTimerLabel) {
     this.rightTimerLabel = rightTimerLabel;
   }
 
+  /**
+   * Sets the hint label for the treasure room.
+   * 
+   * @param rightHintLabel
+   */
   public void setTreasureHintLabel(Label rightHintLabel) {
     this.rightHintLabel = rightHintLabel;
   }
 
+  /**
+   * Sets the timer label for the book view.
+   * 
+   * @param bookTimerLabel
+   */
   public void setBookTimerLabel(Label bookTimerLabel) {
     this.bookTimerLabel = bookTimerLabel;
   }
 
+  /**
+   * Sets the timer label for the brewing view.
+   * 
+   * @param timerLabel
+   */
   public void setBrewingLabel(Label timerLabel) {
     this.brewingLabel = timerLabel;
   }
 
+  /**
+   * Sets the timer label for the game over view.
+   * 
+   * @param gameOverLabel
+   */
   public void setGameOverLabel(Label gameOverLabel) {
     this.gameOverLabel = gameOverLabel;
   }
   
+  /**
+   * Sets the timer label for the chest view.
+   * 
+   * @param chestTimerLabel
+   */
   public void setChestLabel(Label chestTimerLabel) {
     this.chestTimerLabel = chestTimerLabel;
   }
 
   /**
    * Logic that occurs when the timer reaches 0 - sets the scene to the game over
-   * scene
+   * scene.
    */
   private void handleTimeOut() throws IOException {
     System.out.println("GAME_OVER");
@@ -226,7 +304,7 @@ public class CountdownTimer {
   }
 
   /**
-   * Updates the hint label to display the number of hints left
+   * Updates the hint label to display the number of hints left.
    * @param hints
    */
   public void updateHintLabel(int hints) {
