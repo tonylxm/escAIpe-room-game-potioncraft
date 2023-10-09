@@ -393,9 +393,6 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        //SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-        // SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
-        //SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
         SceneManager.addAppUi(
             AppUi.YOU_WIN, App.loadFxml("you-win"));
 
@@ -576,32 +573,11 @@ public class MainMenuController {
    * @param msg the chat message to append
    */
   public void appendIntroMessage(ChatMessage msg, TextArea chatTextArea) {
-    // Adding the role of the chatter to the start of each message
-    String displayRole;
-    switch (msg.getRole()) {
-      case "assistant":
-        displayRole = "Wizard";
-        break;
-      case "user":
-        displayRole = "You";
-        break;
-      default:
-        displayRole = msg.getRole();
-        break;
-    }
-
     chatTextArea.setText(msg.getContent());
-    // chatTextArea.appendText(displayRole + ": ");
-
     // Appending the message character by character to the chat text area
     Task<Void> appendIntroTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
-        // Adding each character of the message to the chat text area
-        // for (char c : msg.getContent().toCharArray()) {
-        //   chatTextArea.appendText(String.valueOf(c));
-        //   Thread.sleep(20);
-        // }
         // After completion, letting user click off
         System.out.println("finished");
         mouseTrackRegion.setDisable(false);

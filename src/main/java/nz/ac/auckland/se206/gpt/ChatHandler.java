@@ -72,9 +72,6 @@ public class ChatHandler {
         displayRole = msg.getRole();
         break;
     }
-
-    // chatTextArea.appendText(displayRole + ": ");
-
     chatTextArea.setText(msg.getContent() + "\n\n");
 
     // Appending the message character by character to the chat text area
@@ -82,11 +79,6 @@ public class ChatHandler {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            // for (char c : msg.getContent().toCharArray()) {
-            //   chatTextArea.appendText(String.valueOf(c));
-            //   Thread.sleep(20);
-            // }
-            // chatTextArea.appendText("\n\n");
             return null;
           }
         };

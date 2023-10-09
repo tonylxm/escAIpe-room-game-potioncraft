@@ -47,7 +47,6 @@ public class GameOverController {
         e.printStackTrace();
       }
     });
-    //App.setRoot("main_menu");
   }
 
   @FXML
