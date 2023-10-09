@@ -431,85 +431,85 @@ public class CauldronController {
       batWingImage.setLayoutY(80);
       batWingImage.setVisible(true);
     }
-
+    // Resetting the crystal image
     if (cauldronItems.contains(Items.Item.CRYSTAL)) {
       crystalImage.setLayoutX(47);
       crystalImage.setLayoutY(370);
       crystalImage.setVisible(true);
     }
-
+    // Resetting the insect wings image
     if (cauldronItems.contains(Items.Item.INSECT_WINGS)) {
       insectWingImage.setLayoutX(790);
       insectWingImage.setLayoutY(500);
       insectWingImage.setVisible(true);
     }
-
+    // Resetting the talon image
     if (cauldronItems.contains(Items.Item.TALON)) {
       talonImage.setLayoutX(260);
       talonImage.setLayoutY(130);
       talonImage.setVisible(true);
     }
-
+    // Resetting the powder image
     if (cauldronItems.contains(Items.Item.POWDER)) {
       powderImage.setLayoutX(745);
       powderImage.setLayoutY(255);
       powderImage.setVisible(true);
     }
-
+    // Resetting the tail image
     if (cauldronItems.contains(Items.Item.TAIL)) {
       tailImage.setLayoutX(410);
       tailImage.setLayoutY(200);
       tailImage.setVisible(true);
     }
-
+    // Restting the feather image
     if (cauldronItems.contains(Items.Item.FEATHER)) {
       featherImage.setLayoutX(210);
       featherImage.setLayoutY(350);
       featherImage.setVisible(true);
     }
-
+    // Restting th escales image
     if (cauldronItems.contains(Items.Item.SCALES)) {
       scalesImage.setLayoutX(795);
       scalesImage.setLayoutY(132);
       scalesImage.setVisible(true);
     }
-
+    // Resetting the flower image
     if (cauldronItems.contains(Items.Item.FLOWER)) {
       flowerImage.setLayoutX(235);
       flowerImage.setLayoutY(500);
       flowerImage.setVisible(true);
     }
-
+    // Resetting the wreath image
     if (cauldronItems.contains(Items.Item.WREATH)) {
       wreathImage.setLayoutX(544);
       wreathImage.setLayoutY(134);
       wreathImage.setVisible(true);
     }
-
+    // Resetting the bone image
     if (cauldronItems.contains(Items.Item.BONE)) {
       boneImage.setLayoutX(752);
       boneImage.setLayoutY(476);
       boneImage.setVisible(true);
     }
-
+    // Resetting the fire image
     if (cauldronItems.contains(Items.Item.FIRE)) {
       fireImage.setLayoutX(110);
       fireImage.setLayoutY(530);
       fireImage.setVisible(true);
     }
-
+    // Resetting the root image
     if (cauldronItems.contains(Items.Item.ROOT)) {
       rootImage.setLayoutX(170);
       rootImage.setLayoutY(250);
       rootImage.setVisible(true);
     }
-
+    // Resetting the beetle image
     if (cauldronItems.contains(Items.Item.BEETLE)) {
       beetleImage.setLayoutX(810);
       beetleImage.setLayoutY(390);
       beetleImage.setVisible(true);
     }
-
+    // Resetting the unicorn horn image
     if (cauldronItems.contains(Items.Item.UNICORN_HORN)) {
       unicornHornImage.setLayoutX(890);
       unicornHornImage.setLayoutY(380);

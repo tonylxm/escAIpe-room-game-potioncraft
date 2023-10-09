@@ -8,17 +8,32 @@ import javafx.scene.media.MediaPlayer;
 public class SoundEffects {
   private MediaPlayer player;
 
+  /**
+   * Plays a sound effect give the string for the file name that the 
+   * sound needs to be played from.
+   * @param fileName
+   * @throws URISyntaxException
+   */
   public void playSoundEffect(String fileName) throws URISyntaxException {
+    // Playing the sound effect
     Media soundEffect = new Media(App.class.getResource("/sounds/" + fileName).toURI().toString());
     if (player != null) {
       player.stop();
     }
+    // Using concurrency to play sound effect in the background
     player = new MediaPlayer(soundEffect);
     player.play();
   }
 
+  /**
+   * Plays the harry potter theme song. Making sure the theme is only played
+   * in the background so that is is only in the background.
+   * @throws URISyntaxException
+   */
   public void playGameTheme() throws URISyntaxException {
+    // Playing the harry potter theme
     Media music = new Media(App.class.getResource("/sounds/gameTheme.mp3").toURI().toString());
+    // Using concurrency to play music in the background
     Task<Void> musicTask =
         new Task<Void>() {
           @Override
