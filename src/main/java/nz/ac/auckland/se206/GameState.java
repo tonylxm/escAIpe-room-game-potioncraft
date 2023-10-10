@@ -21,7 +21,9 @@ public class GameState {
   public static boolean areItemsCollected = false;
 
   /**
-   * Returns the recipe.
+   * Returns the recipe. Used when needing to get the recipe from the
+   * RecipeBook and makiong sure everything in the cauldon is in the 
+   * correct order.
    */
   public static ArrayList<Items.Item> getRecipe() {
     return recipe;

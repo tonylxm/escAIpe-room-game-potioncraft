@@ -14,9 +14,10 @@ public class TransitionAnimation {
   private static Pane masterPane;
 
   /**
-   * Changing scenes to the appropriate scene.
-   * 
-   * @param pane
+   * Changing scenes to the appropriate scene. Used to change scenes.
+   * Only changes scenes if the current scene is not the same as the
+   * scene to change to.
+   * @param pane the pane to change to.
    */
   public static void setMasterPane(Pane pane) {
     masterPane = pane;
@@ -26,8 +27,8 @@ public class TransitionAnimation {
    * Fading in and out of the appropriate scene.
    * For fadeIn, set ocpacity = 1.0.
    * For fadeOut, set ocpacity = 0.0.
-   * @param obj
-   * @param opacity
+   * @param obj the node to fade.
+   * @param opacity the opacity to fade to.
    */
   public static void fade(Node obj, double opacity) {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), obj);
@@ -52,11 +53,11 @@ public class TransitionAnimation {
   }
 
   /**
-   * Fading to black inbetween scenes to have a smooth transition.
-   * 
-   * @param obj
-   * @param appUi
-   * @param mainMenu
+   * Fading to black inbetween scenes to have a smooth transition. Used to change scenes.
+   * Only changes scenes if the current scene is not the same as the scene to change to.
+   * @param obj the node to fade.
+   * @param appUi the scene to change to.
+   * @param mainMenu whether the scene to change to is the main menu or not.
    */
   public static void changeScene(Node obj, AppUi appUi, boolean mainMenu) {
     double s1;

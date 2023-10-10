@@ -12,7 +12,7 @@ public class SoundEffects {
    * Plays a sound effect give the string for the file name that the 
    * sound needs to be played from.
    * @param fileName the name of the sound file to be played.
-   * @throws URISyntaxException
+   * @throws URISyntaxException if the file is not found.
    */
   public void playSoundEffect(String fileName) throws URISyntaxException {
     // Playing the sound effect
@@ -28,7 +28,7 @@ public class SoundEffects {
   /**
    * Plays the harry potter theme song. Making sure the theme is only played
    * in the background so that is is only in the background.
-   * @throws URISyntaxException
+   * @throws URISyntaxException if the file is not found.
    */
   public void playGameTheme() throws URISyntaxException {
     // Playing the harry potter theme
