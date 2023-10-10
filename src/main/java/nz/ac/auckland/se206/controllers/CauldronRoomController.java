@@ -23,6 +23,13 @@ import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 
+/**
+ * Controller for the cauldron room scene. Handles all the interactions
+ * between the user and the cauldron room scene.
+ * Contains methods for handling the user clicking on the cauldron,
+ * wizard, arrows, book button, bag button, book fire, book water,
+ * book air.
+ */
 public class CauldronRoomController extends RoomController {
   @FXML
   private Pane pane;
@@ -128,6 +135,7 @@ public class CauldronRoomController extends RoomController {
   /**
    * Taking user to the cauldron scene from the room scene to be able to 
    * brew their potions.
+   * 
    * @param event The mouse event.
    * @throws URISyntaxException If the URI is invalid.
    */

@@ -21,6 +21,11 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 
+/**
+ * Controller for the chest room. This class handles all the actions that 
+ * can be done in the chest room. This includes changing scenes to the 
+ * treasure room, opening the chest and fading in the scene.
+ */
 public class ChestController {
   @FXML
   private Pane pane;

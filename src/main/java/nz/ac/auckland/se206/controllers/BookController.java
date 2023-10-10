@@ -24,6 +24,12 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * Controller for the book view. This view is displayed when the player
+ * clicks on the book in the cauldron room, library room or treasure room.
+ * This view displays the recipe for the potion that the player needs to
+ * brew to complete the game.
+ */
 public class BookController {
   @FXML 
   private Pane pane;

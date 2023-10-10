@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Items class that contains the items that are available and necessary to complete the room. The
+ * items are stored in a set to ensure that there are no duplicates. The items are randomly selected
+ * from the list of items.
+ */
 public class Items {
   /** 
    * Possible items the user can interact with in the room. Only the items in the available set

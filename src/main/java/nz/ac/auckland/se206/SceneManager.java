@@ -11,6 +11,18 @@ import nz.ac.auckland.se206.controllers.LibraryRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.TreasureRoomController;
 
+/**
+ * SceneManager class for the scene manager. Used to manage the scenes in the game.
+ * Contains methods for adding scenes to the sceneMap, getting the root of the scene,
+ * setting the current scene, getting the current scene, getting the current controller,
+ * setting the GameOverController instance, getting the GameOverController instance,
+ * setting the CauldronController instance, getting the CauldronController instance,
+ * setting the BookController instance, getting the BookController instance,
+ * setting the LibraryRoomController instance, getting the LibraryRoomController instance,
+ * setting the TreasureRoomController instance, getting the TreasureRoomController instance,
+ * setting the CauldronRoomController instance, getting the CauldronRoomController instance,
+ * setting the ChestController instance, getting the ChestController instance.
+ */
 public class SceneManager {
 
   /**

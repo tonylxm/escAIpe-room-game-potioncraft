@@ -6,6 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+/**
+ * Notification class for displaying a notification popup. The notification popup is a 
+ * transparent black background with white text. The notification popup is displayed in 
+ * the middle of the screen. The notification popup is displayed on top of all other 
+ * nodes.
+ */
 public class Notification {
 
   public static SoundEffects soundEffects = new SoundEffects();

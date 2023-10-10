@@ -12,6 +12,11 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 
+/**
+ * Controller for the game over screen. This screen is displayed when the
+ * player runs out of time or when the player has collected all the items
+ * and solved the riddle and brews the potion.
+ */
 public class GameOverController {
   @FXML
   private Pane pane;

@@ -8,6 +8,11 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/**
+ * TransitionAnimation class for fading in and out of scenes. Used to change scenes.
+ * Only changes scenes if the current scene is not the same as the scene to change to.
+ * Contains methods for fading in and out of scenes and changing scenes.
+ */
 public class TransitionAnimation {
   private static double fromValue;
   private static double toValue;

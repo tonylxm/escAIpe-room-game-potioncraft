@@ -10,6 +10,11 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
+/**
+ * Class for handling the wizard's chat messages. This class handles the wizard's
+ * responses to the user. It also handles the wizard's responses to the user
+ * so that the wizard appears to be typing.
+ */
 public class ChatHandler {
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;

@@ -7,6 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * CountdownTimer class for the timer. Used to set the timer limit, start the
+ * timer, stop the timer, and update the timer label. Contains methods for
+ * setting the timer limit, starting the timer, stopping the timer, and
+ * updating the timer label.
+ */
 public class CountdownTimer {
   private static int minutes;
   private static int initialSeconds;
@@ -91,14 +97,22 @@ public class CountdownTimer {
     currentSeconds--;
   }
 
-  // Start the timer
+  /**
+   * Starts the timer and updates the timer label. Only called when the timer
+   * reaches 0. This is because the timer is only used in the treasure room.
+   * This is because the timer is only used in the treasure room.
+   */
   public void start() {
     currentSeconds = initialSeconds;
     updateTimerLabel();
     timeline.play();
   }
 
-  // Stop the timer
+  /**
+   * Stops the timer and updates the timer label. Only called when the timer
+   * reaches 0. This is because the timer is only used in the treasure room.
+   * This is because the timer is only used in the treasure room.
+   */
   public void stop() {
     timeline.stop();
     updateTimerLabel();

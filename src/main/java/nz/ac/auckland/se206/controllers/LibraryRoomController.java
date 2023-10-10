@@ -13,6 +13,11 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/**
+ * Controller for the library room. This class handles all the actions that can be done in the
+ * library room. This includes changing scenes to the cauldron room, opening the book and fading in
+ * the scene.
+ */
 public class LibraryRoomController extends RoomController {
   @FXML 
   private Pane pane;
