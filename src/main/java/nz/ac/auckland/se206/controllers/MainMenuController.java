@@ -175,7 +175,7 @@ public class MainMenuController {
   private boolean ttsOn;
   private boolean appendIntroMsgFinished;
 
-  public void initialize() {
+  public void initialize() throws URISyntaxException {
     // Item & inventory generation
     items = new Items(5);
     inventory = new Inventory();
@@ -186,6 +186,7 @@ public class MainMenuController {
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
     soundEffects = new SoundEffects();
+    soundEffects.playTheme("mainMenuTheme.mp3");
 
     // Initialise booleans for settings selection
     easyBtnClicked = false;
@@ -536,6 +537,7 @@ public class MainMenuController {
   public void onContinueGameOne() {
     continueBtnOne.setDisable(true);
     continueBtnOne.setOpacity(0.4);
+
     // Using a task to make sure game does not freeze
     Task<Void> fadeInStartBtnTask = new Task<Void>() {
       @Override
@@ -856,7 +858,8 @@ public class MainMenuController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    soundEffects.playGameTheme();
+    soundEffects.stop();
+    soundEffects.playTheme("gameTheme.mp3");
 
     countdownTimer.start();
     countdownTimer.updateHintLabel(hints);

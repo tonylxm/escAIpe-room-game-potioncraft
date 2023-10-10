@@ -31,6 +31,8 @@ public class CountdownTimer {
   private Label gameOverLabel;
   private Label chestTimerLabel;
 
+  private SoundEffects soundEffects = new SoundEffects();
+
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
     minutes = Integer.parseInt(time[0]);
@@ -221,6 +223,7 @@ public class CountdownTimer {
    */
   private void handleTimeOut() throws IOException {
     System.out.println("GAME_OVER");
+    soundEffects.stop();
     // Using App.setRoot() so that game over occurs in all scenes
     App.setRoot("you-lose");
   }

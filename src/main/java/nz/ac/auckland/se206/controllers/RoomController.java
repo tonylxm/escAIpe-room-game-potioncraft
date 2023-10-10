@@ -67,8 +67,9 @@ public abstract class RoomController {
       bookController.updateBackground();
     }
     SceneManager.currScene = currScene;
-    // Transitioning to the book scene with the appropriate fade animation
+    // TODO - fix this does not work
     // soundEffects.playSoundEffect("openBook.wav");
+    // Transitioning to the book scene with the appropriate fade animation
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
