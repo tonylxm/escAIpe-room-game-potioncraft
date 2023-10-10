@@ -54,7 +54,7 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
-  private SoundEffects soundEffects;
+  // private SoundEffects soundEffects;
 
   public static int getHints() {
     return hints;
@@ -185,8 +185,7 @@ public class MainMenuController {
     ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
-    soundEffects = new SoundEffects();
-    soundEffects.playTheme("mainMenuTheme.mp3");
+    SoundEffects.playTheme("mainMenuTheme.mp3");
 
     // Initialise booleans for settings selection
     easyBtnClicked = false;
@@ -858,8 +857,8 @@ public class MainMenuController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    soundEffects.stop();
-    soundEffects.playTheme("gameTheme.mp3");
+    SoundEffects.stop();
+    SoundEffects.playTheme("gameTheme.mp3");
 
     countdownTimer.start();
     countdownTimer.updateHintLabel(hints);

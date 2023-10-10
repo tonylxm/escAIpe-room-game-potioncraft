@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SoundEffects;
 
 public class GameOverController {
   @FXML
@@ -35,6 +36,7 @@ public class GameOverController {
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
+    SoundEffects.stop();
     //fade rectangle fades over 1 second
     FadeTransition ft = new FadeTransition(Duration.seconds(1), fadeRectangle);
     ft.setFromValue(0);

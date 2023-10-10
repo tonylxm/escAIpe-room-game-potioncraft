@@ -68,7 +68,7 @@ public abstract class RoomController {
     }
     SceneManager.currScene = currScene;
     // TODO - fix this does not work
-    // soundEffects.playSoundEffect("openBook.wav");
+    SoundEffects.playSoundEffect("openBook.wav");
     // Transitioning to the book scene with the appropriate fade animation
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
@@ -125,7 +125,6 @@ public abstract class RoomController {
   private Rectangle fadeRectangle;
   
   protected CountdownTimer countdownTimer;
-  protected static SoundEffects soundEffects;
 
   protected ImageView itemOneImg;
   protected ImageView itemTwoImg;
@@ -214,7 +213,6 @@ public abstract class RoomController {
 
     interactionHandler = new ShapeInteractionHandler();
     countdownTimer = MainMenuController.getCountdownTimer();
-    soundEffects = new SoundEffects();
 
     // Disabling the text box and mouse track region
     setText("", false, false);
@@ -365,7 +363,7 @@ public abstract class RoomController {
     MainMenuController.getInventory().add(item);
     if (!GameState.areItemsCollected) {
       MainMenuController.getInventory().add(item);
-      soundEffects.playSoundEffect("itemCollected.wav");
+      SoundEffects.playSoundEffect("itemCollected.wav");
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {

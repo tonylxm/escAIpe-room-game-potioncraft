@@ -60,7 +60,6 @@ public class CauldronController {
 
   private CountdownTimer countdownTimer;
   private ShapeInteractionHandler interactionHandler;
-  private SoundEffects soundEffects = new SoundEffects();
 
   @FXML
   private void initialize() {
@@ -331,7 +330,7 @@ public class CauldronController {
           if (distance <= maxDistanceThreshold) {
             System.out.println("Dropped within cauldron bounds");
             try {
-              soundEffects.playSoundEffect("itemIntoCauldron.mp3");
+              SoundEffects.playSoundEffect("itemIntoCauldron.mp3");
             } catch (URISyntaxException e) {
               e.printStackTrace();
             }
@@ -388,7 +387,6 @@ public class CauldronController {
         // set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
         countdownTimer.stop();
-        soundEffects.stop();
         //TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
         Scene currentScene = fadeRectangle.getScene();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
