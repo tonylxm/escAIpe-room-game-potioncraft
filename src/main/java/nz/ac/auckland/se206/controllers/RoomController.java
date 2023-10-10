@@ -39,6 +39,7 @@ public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
   protected static ShapeInteractionHandler interactionHandler;
+  protected static SoundEffects soundEffects;
 
   /**
    * Handling the event where a button is hovered over. Only used for the
@@ -151,7 +152,6 @@ public abstract class RoomController {
   private Rectangle fadeRectangle;
   
   protected CountdownTimer countdownTimer;
-  protected static SoundEffects soundEffects;
 
   protected ImageView itemOneImg;
   protected ImageView itemTwoImg;

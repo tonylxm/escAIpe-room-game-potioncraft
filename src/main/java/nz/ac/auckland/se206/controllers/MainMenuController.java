@@ -54,7 +54,6 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
-  private SoundEffects soundEffects;
 
   /**
    * Returns the number of hints the user has selected. 
@@ -170,6 +169,7 @@ public class MainMenuController {
   private Difficulty difficulty;
   private TimeLimit timeLimit;
   private String[] options = {"fire", "water", "air"};
+  private SoundEffects soundEffects;
 
   private boolean difficultySelected;
   private boolean timeSelected;
