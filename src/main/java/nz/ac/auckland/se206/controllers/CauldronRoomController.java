@@ -75,6 +75,8 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Setting the appropriate fields and listeners when scene is initialised.
+   * Setting the appropriate game states for the riddle and the books when
+   * the scene is initialised.
    */
   public void initialize() {
     // Initialising everything from the superclass
@@ -103,10 +105,11 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Setting the text for the riddle select label.
+   * Setting the text for the riddle select label. Makes the book images
+   * visible and interactable depending on the disable value.
    * 
-   * @param disable
-   * @param opacity
+   * @param disable Whether the books should be disabled or not.
+   * @param opacity The opacity of the books.
    */
   private void toggleBooks(boolean disable, int opacity) {
     // Making books interactable or not based on the diasble
@@ -125,9 +128,8 @@ public class CauldronRoomController extends RoomController {
   /**
    * Taking user to the cauldron scene from the room scene to be able to 
    * brew their potions.
-   * 
-   * @param event
-   * @throws URISyntaxException
+   * @param event The mouse event.
+   * @throws URISyntaxException If the URI is invalid.
    */
   @FXML
   public void clickCauldron(MouseEvent event) throws URISyntaxException {
@@ -160,8 +162,8 @@ public class CauldronRoomController extends RoomController {
    * Also, if the user hasn't been prompted with the riddle yet,
    * showing it to them too.
    * 
-   * @param event
-   * @throws InterruptedException
+   * @param event The mouse event.
+   * @throws InterruptedException If the thread is interrupted.
    */
   @FXML
   public void clickCauldronRoomWizard(MouseEvent event) throws InterruptedException {
@@ -202,9 +204,10 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Handling the user clicking on the book fire.
+   * Handling the user clicking on the book fire. Calling the handleClickBooks
+   * method to handle the user clicking on the book fire.
    * 
-   * @param event
+   * @param event The mouse event.
    */
   @FXML
   public void clickBookFire(MouseEvent event) {
@@ -212,9 +215,10 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Handling the user clicking on the book water.
+   * Handling the user clicking on the book water. Calling the handleClickBooks
+   * method to handle the user clicking on the book water.
    * 
-   * @param event
+   * @param event The mouse event.
    */
   @FXML
   public void clickBookWater(MouseEvent event) {
@@ -222,8 +226,10 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Handling the user clicking on the book air.
-   * @param event
+   * Handling the user clicking on the book air. Calling the handleClickBooks
+   * method to handle the user clicking on the book air.
+   * 
+   * @param event The mouse event.
    */
   @FXML
   public void clickBookAir(MouseEvent event) {
@@ -231,11 +237,13 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Handling the user clicking on the book fire.
+   * Handling the user clicking any of the books, and depending on which book
+   * is the correct book, fading out the other two books and their rectangles.
+   * Handling the situations appropriately.
    * 
-   * @param element
-   * @param bookImage
-   * @param bookRectangle
+   * @param element The element of the book.
+   * @param bookImage The book image.
+   * @param bookRectangle The book rectangle.
    */
   private void handleClickBooks(
       String element, ImageView bookImage, ImageView bookRectangle) {
@@ -355,7 +363,9 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Enabling the items to be able to be clicked on.
+   * Enabling the items to be able to be clicked on. Turning off
+   * the disable feature for each item and making them visible
+   * to the user.
    */
   private void enableItems() {
     // Allowing all items to be interactable
@@ -373,10 +383,12 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Taking the user to the library room from the room scene.
+   * Taking the user to the library room from the room scene. Only
+   * called when the user is clicking the left room arrow to move
+   * scenes.
    * 
-   * @param event
-   * @throws URISyntaxException
+   * @param event The mouse event.
+   * @throws URISyntaxException If the URI is invalid.
    */
   @FXML
   public void goLeftRoom(MouseEvent event) throws URISyntaxException {
@@ -396,10 +408,12 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Taking the user to the treasure room from the room scene.
+   * Taking the user to the treasure room from the room scene. Only
+   * called when the user is clicking the right room arrow to move
+   * scenes.
    * 
-   * @param event
-   * @throws URISyntaxException
+   * @param event The mouse event.
+   * @throws URISyntaxException If the URI is invalid.
    */
   @FXML
   public void goRightRoom(MouseEvent event) throws URISyntaxException {
@@ -420,10 +434,11 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Handling events where menus or views need to be exited by clicking 
-   * anywhere else on the screen.
-   *
-   * @param event
-   * @throws URISyntaxException
+   * anywhere else on the screen. In this case, the user is clicking off
+   * the cauldron room.
+   * 
+   * @param event The mouse event.
+   * @throws URISyntaxException If the URI is invalid.
    */
   @FXML
   public void clickOffCauldronRoom(MouseEvent event) throws URISyntaxException {
@@ -450,7 +465,10 @@ public class CauldronRoomController extends RoomController {
 
   /**
    * Enabling the recipe book button to be able to be clicked on.
-   * @throws URISyntaxException
+   * Making the button visible to the user. Also, showing the
+   * notification to the user that the recipe book is available.
+   * 
+   * @throws URISyntaxException If the URI is invalid.
    */
   @FXML
   private void enableRecipe() throws URISyntaxException {
@@ -465,7 +483,8 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Taking the user to the book scene from the room scene.
+   * Taking the user to the book scene from the room scene. Only
+   * called when the user is clicking the recipe book button.
    */
   @FXML
   public void openBook() {
@@ -479,7 +498,8 @@ public class CauldronRoomController extends RoomController {
   }
 
   /**
-   * Fading in the cauldron room scene.
+   * Fading in the cauldron room scene. Called when the user is
+   * transitioning from another scene to the cauldron room scene.
    */
   @FXML
   public void fadeIn() {

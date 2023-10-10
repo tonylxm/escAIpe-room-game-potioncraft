@@ -54,48 +54,113 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
-  private SoundEffects soundEffects;
 
+  /**
+   * Returns the number of hints the user has selected. 
+   * -1 for unlimited hints, 5 for 5 hints and 0 for no hints.
+   * 
+   * @return the number of hints the user has selected.
+   */
   public static int getHints() {
     return hints;
   }
 
+  /**
+   * Setting the number of hints that the user has selected.
+   * Only used when loading a saved game.
+   * 
+   * @param changedHints the nunber of hints to be changed to.
+   */
   public static void setHints(int changedHints) {
     hints = changedHints;
   }
 
+  /**
+   * Returning the items that the user has collected.
+   * Only used when loading a saved game.
+   * 
+   * @return the items that the user has collected.
+   */
   public static Items getItems() {
     return items;
   }
 
+  /**
+   * Setting the items that the user has collected.
+   * Every item that the user has added to the inventory themselves.
+   * 
+   * @return the items that the user has collected.
+   */
   public static Inventory getInventory() {
     return inventory;
   }
 
+  /**
+   * Returning the correct book needed for the user to complete the riddle.
+   * Only used when loading a saved game.
+   * 
+   * @return the correct book needed for the user to complete the riddle.
+   */
   public static String getBook() {
     return book;
   }
 
+  /**
+   * Returning the chat handler. Only used when loading a saved game.
+   * Chat handler is used to generate the chat messages.
+   * 
+   * @return the chat handler.
+   */
   public static ChatHandler getChatHandler() {
     return chatHandler;
   }
 
+  /**
+   * Returning the riddle that the user needs to solve. Only used when loading a 
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the riddle that the user needs to solve.
+   */
   public static ChatMessage getRiddle() {
     return riddle;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the riddle that the user needs to solve.
+   */
   public static String getResolvedMessage() {
     return resolvedRiddle;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the message that the user sees when they open the chest.
+   */
   public static String getOpenedChestMessage() {
     return openedChest;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the items that the user has collected.
+   */
   public static String getCollectedItemsMessage() {
     return collectedItems;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the countdown timer.
+   */
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
     return countdownTimer;
@@ -104,6 +169,7 @@ public class MainMenuController {
   private Difficulty difficulty;
   private TimeLimit timeLimit;
   private String[] options = {"fire", "water", "air"};
+  private SoundEffects soundEffects;
 
   private boolean difficultySelected;
   private boolean timeSelected;
@@ -176,7 +242,9 @@ public class MainMenuController {
   private boolean appendIntroMsgFinished;
 
   /**
-   * Initialises the main menu controller.
+   * Initialises the main menu controller. Only called when the main menu is loaded.
+   * Initialises the items, inventory, chat handler, sound effects, interaction handler,
+   * and the appropriate booleans for the settings buttons.
    */
   public void initialize() {
     // Item & inventory generation
@@ -235,12 +303,14 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the mouse actions for the difficulty and time limit buttons.
+   * Handles the mouse actions for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
    * 
-   * @param difficultyBtn
-   * @param difficultyBtnClicked
-   * @param hint
-   * @param difficulty
+   * @param difficultyBtn The difficulty button that the mouse is hovering over.
+   * @param difficultyBtnClicked The boolean that represents whether the difficulty button is
+   *                             clicked or not.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
+   * @param difficulty The difficulty that is selected when the button is clicked.
    */
   public void difficultyMouseActions(
       ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, Difficulty difficulty) {
@@ -249,12 +319,14 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the mouse actions for the difficulty and time limit buttons.
+   * Handles the mouse actions for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
    * 
-   * @param timeBtn
-   * @param timeBtnClicked
-   * @param timeTxt
-   * @param time
+   * @param timeBtn The time limit button that the mouse is hovering over.
+   * @param timeBtnClicked The boolean that represents whether the time limit button is
+   *                      clicked or not.
+   * @param timeTxt The time limit that is displayed when the mouse hovers over the button.
+   * @param time The time limit that is selected when the button is clicked.
    */
   public void timeMouseActions(
       ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, TimeLimit time) {
@@ -263,10 +335,11 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the hover on for the difficulty and time limit buttons.
+   * Handles the hover on for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button.
    * 
-   * @param settingsBtn
-   * @param hint
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
    */
   public void difficultyHoverOn(
       ImageView settingsBtn, Text hint) {
@@ -277,11 +350,13 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the hover off for the difficulty and time limit buttons.
+   * Handles the hover off for the difficulty and time limit buttons. Only called when the
+   * mouse exits the button. Only called when the mouse enters the button.
    * 
-   * @param settingsBtn
-   * @param settingsBtnClicked
-   * @param hint
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param settingsBtnClicked The boolean that represents whether the difficulty or time limit
+   *                          button is clicked or not.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
    */
   public void difficultyHoverOff(
       ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
@@ -292,9 +367,11 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the hover on and off for the difficulty and time limit buttons.
-   * @param settingsBtn
-   * @param hint
+   * Handles the hover on and off for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
+   * 
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
    */
   public void timeLimitHoverOn(ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
@@ -304,11 +381,13 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the hover off for the difficulty and time limit buttons.
+   * Handles the hover off for the difficulty and time limit buttons. Only called when the
+   * mouse exits the button. Only called when the mouse enters the button.
    * 
-   * @param settingsBtn
-   * @param settingsBtnClicked
-   * @param timeLimit
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param settingsBtnClicked The boolean that represents whether the difficulty or time limit
+   *                         button is clicked or not.
+   * @param timeLimit The time limit that is displayed when the mouse hovers over the button.
    */
   public void timeLimitHoverOff(
       ImageView settingsBtn, boolean settingsBtnClicked, Text timeLimit) {
@@ -319,9 +398,10 @@ public class MainMenuController {
   }
 
   /**
-   * Displays the appropriate number of hints when hovering over a difficulty.
+   * Displays the appropriate number of hints when hovering over a difficulty. Only called when the
+   * mouse enters the button.
    * 
-   * @param gameDifficulty
+   * @param gameDifficulty The difficulty that is selected when the button is clicked.
    */
   public void difficultySelect(Difficulty gameDifficulty) {
     difficultySelected = true;
@@ -372,9 +452,10 @@ public class MainMenuController {
   }
 
   /**
-   * Displays the appropriate time limit when hovering over a time limit.
+   * Displays the appropriate time limit when hovering over a time limit. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
    * 
-   * @param time
+   * @param time The time limit that is selected when the button is clicked.
    */
   public void timeSelect(TimeLimit time) {
     timeSelected = true;
@@ -424,7 +505,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles starting a new game by creating new instances of the required scenes.
+   * Handles starting a new game by creating new instances of the required scenes. Only called when
+   * the play button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void playGame() throws InterruptedException, IOException {
@@ -549,7 +631,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate settings.
+   * Handles continuing a game by loading the appropriate settings. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void onContinueGame() {
@@ -573,7 +656,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate settings.
+   * Handles continuing a game by loading the appropriate settings. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void onContinueGameOne() {
@@ -618,9 +702,10 @@ public class MainMenuController {
   }
 
   /**
-   * Appends intro message to the chat text area.
-   *
-   * @param msg the chat message to append
+   * Appends intro message to the chat text area. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   * 
+   * @param msg the chat message to append.
    */
   public void appendIntroMessage(ChatMessage msg, TextArea chatTextArea) {
     chatTextArea.setText(msg.getContent());
@@ -639,10 +724,12 @@ public class MainMenuController {
   }
 
   /**
-   * Handles click off for after the intro message is displayed.
+   * Handles click off for after the intro message is displayed. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button. Clicking off
+   * will let the user interact with the other buttons in the scene.
    * 
-   * @param event
-   * @throws InterruptedException
+   * @param event the mouse event.
+   * @throws InterruptedException the exception thrown when the thread is interrupted.
    */
   @FXML
   public void clickOff(MouseEvent event) throws InterruptedException {
@@ -677,9 +764,10 @@ public class MainMenuController {
   }
   
   /**
-   * Generating a random book for the user to guess through the riddle.
+   * Generating a random book for the user to guess through the riddle. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
-   * @return
+   * @return the random book that the user needs to guess.
    */
   private String getRandomBook() {
     int randomIndex = (int) (Math.random() * options.length);
@@ -688,12 +776,14 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the difficulty buttons.
+   * Approprately disables or enables the difficulty buttons. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
    *                 false then enable buttons.
-   * @param ocpacity
-   * @param fade
+   * @param ocpacity the opacity of the buttons.
+   * @param fade    stands for true of false, if true then fade buttons, if
+   *                false then do not fade buttons.
    */
   public void disableAndOrFadeDifficultyBtns(
       boolean tf, double opacity, boolean fade) {
@@ -720,12 +810,14 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the time buttons.
+   * Approprately disables or enables the time buttons. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
    *                 false then enable buttons.
-   * @param ocpacity
-   * @param fade
+   * @param ocpacity the opacity of the buttons.
+   * @param fade   stands for true of false, if true then fade buttons, if
+   *               false then do not fade buttons.
    */
   public void disableAndOrFadeTimeBtns(
       boolean tf, double opacity, boolean fade) {
@@ -752,7 +844,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the difficulty selection.
+   * Handles the difficulty selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void setEasy() {
@@ -761,7 +854,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the difficulty selection.
+   * Handles the difficulty selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void setMedium() {
@@ -770,7 +864,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the difficulty selection.
+   * Handles the difficulty selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void setHard() {
@@ -779,7 +874,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the time limit selection.
+   * Handles the time limit selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void setTwoMin() {
@@ -788,7 +884,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the time limit selection.
+   * Handles the time limit selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void setFourMin() {
@@ -797,7 +894,8 @@ public class MainMenuController {
   }
 
   /**
-   *  Handles the time limit selection.
+   *  Handles the time limit selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void setSixMin() {
@@ -806,7 +904,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtn and set visible.
+   * Enable continueBtn and set visible. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void continueBtnEnable() {
     continueBtn.setDisable(false);
@@ -814,7 +913,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtn, set invisible and pregenerate book riddle.
+   * Enable continueBtn, set invisible and pregenerate book riddle. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void continueBtnDisable() {
     continueBtn.setDisable(true);
@@ -870,7 +970,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtnOne and set visible.
+   * Enable continueBtnOne and set visible. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void continueBtnOneEnable() {
     continueBtnOne.setDisable(false);
@@ -878,7 +979,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable startBtn and set visible.
+   * Enable startBtn and set visible. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void startBtnEnable() {
     startBtn.setDisable(false);
@@ -886,9 +988,10 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the start button to start the game.
+   * Handles the start button to start the game. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
-   * @throws IOException
+   * @throws IOException the exception thrown when the file is not found.
    */
   @FXML
   public void onStartGame() throws IOException, URISyntaxException {
@@ -907,7 +1010,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the text to speech button.
+   * Handles the text to speech button. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   private void onReadGameMasterResponse() {
@@ -933,7 +1037,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles the cancel text to speech button.
+   * Handles the cancel text to speech button. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   private void onCancelTts() {

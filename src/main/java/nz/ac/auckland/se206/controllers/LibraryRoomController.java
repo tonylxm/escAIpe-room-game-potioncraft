@@ -48,7 +48,11 @@ public class LibraryRoomController extends RoomController {
   }
 
   /** 
-   * Changing scenes to the cauldron room.
+   * Changing scenes to the cauldron room. Only called when the arrow is clicked.
+   * The go right is the only scene transition in the scene, so only needs to handle going to the 
+   * cauldron room.
+   * 
+   * @param event the mouse event that triggered the method.
    */
   @FXML
   public void goRight(MouseEvent event) {
@@ -62,7 +66,8 @@ public class LibraryRoomController extends RoomController {
   }
 
   /** 
-   * Changing scenes to book view.
+   * Changing scenes to book view. Only called when the book is clicked.
+   * Making sure the book is not already clicked. If it is, then the book is opened.
    */
   @FXML
   public void openBook() {
@@ -76,7 +81,8 @@ public class LibraryRoomController extends RoomController {
   }
 
   /**
-   * Changing scenes to the treasure room.
+   * Changing scenes to the library room. Using the rectangle image
+   * and the fade transition to fade the scene properly.
    */
   @FXML
   public void fadeIn() {

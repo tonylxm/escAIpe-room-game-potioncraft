@@ -2,9 +2,6 @@ package nz.ac.auckland.se206;
 
 import java.util.ArrayList;
 
-/** 
- * Represents the state of the game. 
- */
 public class GameState {
 
   private static ArrayList<Items.Item> recipe = new ArrayList<Items.Item>();
@@ -21,7 +18,11 @@ public class GameState {
   public static boolean areItemsCollected = false;
 
   /**
-   * Returns the recipe.
+   * Returns the recipe. Used when needing to get the recipe from the
+   * RecipeBook and makiong sure everything in the cauldon is in the 
+   * correct order.
+   * 
+   * @return the recipe.
    */
   public static ArrayList<Items.Item> getRecipe() {
     return recipe;

@@ -17,8 +17,8 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 
 public class ChestController {
@@ -88,7 +88,9 @@ public class ChestController {
   }
 
   /**
-   * Changing the value for the glow for the key image.
+   * Changing the value for the glow for the key image. Making sure
+   * the glow value is either increasing or decreasing depending on
+   * the glowUp value.
    */
   private void changeGlowOne() {
     // Changing the glow value for the key image
@@ -107,7 +109,9 @@ public class ChestController {
   }
 
   /**
-   * Changing the value of the glow for the light image.
+   * Changing the value of the glow for the light image. Making sure
+   * the glow value is either increasing or decreasing depending on
+   * the glowUpTwo value.
    */
   private void changeGlowTwo() {
     // Changing the glow value for the light image
@@ -130,7 +134,7 @@ public class ChestController {
    * When dropped on the glowing light image, the key will be put into the chest, unlocking
    * the other items in the treasure room, then moving to the treasure room.
    * 
-   * @param itemImageView the image needing to be dragged and dropped
+   * @param itemImageView the image needing to be dragged and dropped.
    */
   @FXML
   private void setupDragAndDrop(ImageView itemImageView) {
@@ -218,7 +222,8 @@ public class ChestController {
   }
 
   /**
-   * Moving back to the treasure room.
+   * Moving back to the treasure room. Only used when the chest has been opened.
+   * Does not need to be called after the user has opened the chest properly.
    */
   @FXML
   public void goBack() {
@@ -231,7 +236,8 @@ public class ChestController {
   }
 
   /**
-   * Fading in the treasure room.
+   * Fading in the treasure room. Only used when the chest has been opened.
+   * Only handling the treasure room because the chest is only opened from the treasure room.
    */
   @FXML
   public void fadeIn() {
