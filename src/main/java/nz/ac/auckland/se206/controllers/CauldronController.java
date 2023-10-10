@@ -300,6 +300,7 @@ public class CauldronController {
    * Method to set up drag and drop for the images. Using the 
    * mouse click, drag, and release features to move the images
    * to the appropriate places.
+   * 
    * @param itemImageView The image of the item to be dragged.
    * @param itemId The id of the item being dragged.
    */

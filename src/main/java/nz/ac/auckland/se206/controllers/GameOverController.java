@@ -36,6 +36,7 @@ public class GameOverController {
   /**
    * When the play again button is pressed, the game state is reset and the
    * main menu is loaded.
+   * 
    * @throws IOException if the main menu fxml file cannot be found.
    */
   public void onPlayAgain() throws IOException {

@@ -20,6 +20,7 @@ public class Inventory {
   /** 
    * Adds an item to the inventory given the item. Uses a hashset
    * to ensure that there are no duplicates.
+   * 
    * @param item The item to add.
    */
   public void add(Items.Item item) {
@@ -30,6 +31,7 @@ public class Inventory {
    * Removes an item from the inventory given the item. Uses a hashset
    * to ensure that there are no duplicates and that the item is in the
    * inventory.
+   * 
    * @param item The item to remove.
    */
   public void remove(Items.Item item) {
@@ -39,7 +41,9 @@ public class Inventory {
   /** 
    * Checks if an item is in the inventory. Only returns true if the item
    * is in the inventory.
+   * 
    * @param item The item to check.
+   * @return True if the item is in the inventory, false otherwise.
    */
   public boolean contains(Items.Item item) {
     return inventory.contains(item);
@@ -48,6 +52,8 @@ public class Inventory {
   /** 
    * Returns the number of items in the inventory. Used to check if the
    * inventory is empty or not.
+   * 
+   * @return The number of items in the inventory.
    */
   public int size() {
     return inventory.size();
@@ -56,6 +62,8 @@ public class Inventory {
   /** 
    * Returns the inventory. Can be used to check what items are in the
    * inventory. Checks if the inventory is empty or not.
+   * 
+   * @return The inventory.
    */
   public Set<Items.Item> getInventory() {
     return inventory;
@@ -64,6 +72,7 @@ public class Inventory {
   /**
    * Sets the inventory. Used to set the inventory to a new inventory.
    * Used when loading a save file. Checks if the inventory is empty or not.
+   * 
    * @param inventory The inventory to set.
    */
   public void setInventory(Set<Items.Item> inventory) {
@@ -73,6 +82,8 @@ public class Inventory {
   /**
    * Returns the box. Used to get the box for the inventory. Can add the
    * box to the scene for the scrolling bag.
+   * 
+   * @return The box.
    */
   public VBox getBox() {
     return box;
@@ -81,6 +92,7 @@ public class Inventory {
   /**
    * Sets the box. Used to set the box for the inventory. Used when loading
    * a save file. Items are added to the box in the addItem method.
+   * 
    * @param box The box to set.
    */
   public void setBox(VBox box) {

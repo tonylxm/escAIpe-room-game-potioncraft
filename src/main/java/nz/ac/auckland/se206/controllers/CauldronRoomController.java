@@ -107,6 +107,7 @@ public class CauldronRoomController extends RoomController {
   /**
    * Setting the text for the riddle select label. Makes the book images
    * visible and interactable depending on the disable value.
+   * 
    * @param disable Whether the books should be disabled or not.
    * @param opacity The opacity of the books.
    */
@@ -160,6 +161,7 @@ public class CauldronRoomController extends RoomController {
    * Talking the user to the wizard's chat functionality.
    * Also, if the user hasn't been prompted with the riddle yet,
    * showing it to them too.
+   * 
    * @param event The mouse event.
    * @throws InterruptedException If the thread is interrupted.
    */
@@ -204,6 +206,7 @@ public class CauldronRoomController extends RoomController {
   /**
    * Handling the user clicking on the book fire. Calling the handleClickBooks
    * method to handle the user clicking on the book fire.
+   * 
    * @param event The mouse event.
    */
   @FXML
@@ -214,6 +217,7 @@ public class CauldronRoomController extends RoomController {
   /**
    * Handling the user clicking on the book water. Calling the handleClickBooks
    * method to handle the user clicking on the book water.
+   * 
    * @param event The mouse event.
    */
   @FXML
@@ -224,6 +228,7 @@ public class CauldronRoomController extends RoomController {
   /**
    * Handling the user clicking on the book air. Calling the handleClickBooks
    * method to handle the user clicking on the book air.
+   * 
    * @param event The mouse event.
    */
   @FXML
@@ -235,6 +240,7 @@ public class CauldronRoomController extends RoomController {
    * Handling the user clicking any of the books, and depending on which book
    * is the correct book, fading out the other two books and their rectangles.
    * Handling the situations appropriately.
+   * 
    * @param element The element of the book.
    * @param bookImage The book image.
    * @param bookRectangle The book rectangle.
@@ -380,6 +386,7 @@ public class CauldronRoomController extends RoomController {
    * Taking the user to the library room from the room scene. Only
    * called when the user is clicking the left room arrow to move
    * scenes.
+   * 
    * @param event The mouse event.
    * @throws URISyntaxException If the URI is invalid.
    */
@@ -404,6 +411,7 @@ public class CauldronRoomController extends RoomController {
    * Taking the user to the treasure room from the room scene. Only
    * called when the user is clicking the right room arrow to move
    * scenes.
+   * 
    * @param event The mouse event.
    * @throws URISyntaxException If the URI is invalid.
    */
@@ -428,6 +436,7 @@ public class CauldronRoomController extends RoomController {
    * Handling events where menus or views need to be exited by clicking 
    * anywhere else on the screen. In this case, the user is clicking off
    * the cauldron room.
+   * 
    * @param event The mouse event.
    * @throws URISyntaxException If the URI is invalid.
    */
@@ -458,6 +467,7 @@ public class CauldronRoomController extends RoomController {
    * Enabling the recipe book button to be able to be clicked on.
    * Making the button visible to the user. Also, showing the
    * notification to the user that the recipe book is available.
+   * 
    * @throws URISyntaxException If the URI is invalid.
    */
   @FXML

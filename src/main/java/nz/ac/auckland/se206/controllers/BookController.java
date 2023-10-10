@@ -93,6 +93,7 @@ public class BookController {
   /**
    * Initializes the chat view, loading the riddle. Also initialises ways to view the appropriate
    * images for the required items.
+   * 
    * @throws ApiProxyException if there is an error communicating with the API proxy.
    */
   @FXML
@@ -214,6 +215,7 @@ public class BookController {
   /**
    * Writes the recipe ingredients to the list view. Adding the ingredients
    * to the book to make sure the user can see them properly.
+   * 
    * @param necessary the list of items that are needed to complete the room.
    */
   private void writeRecipeIngredients(List<Items.Item> necessary) {
@@ -225,6 +227,7 @@ public class BookController {
   /**
    * Navigates back to the previous view. Also prints out the transition in the
    * terminal to show what scenes are being transitioned to and from.
+   * 
    * @param event the action event triggered by the go back button.
    * @throws ApiProxyException if there is an error communicating with the API proxy.
    * @throws IOException if there is an I/O error.
