@@ -36,20 +36,8 @@ public class GameOverController {
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
-    SoundEffects.stop();
-    //fade rectangle fades over 1 second
-    FadeTransition ft = new FadeTransition(Duration.seconds(1), fadeRectangle);
-    ft.setFromValue(0);
-    ft.setToValue(1);
-    ft.play();
-    ft.setOnFinished(event -> {
-      try {
-        App.setRoot("main_menu");
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    });
-    //App.setRoot("main_menu");
+    // fade rectangle fades over 1 second
+    App.setRoot("main_menu");
   }
 
   @FXML

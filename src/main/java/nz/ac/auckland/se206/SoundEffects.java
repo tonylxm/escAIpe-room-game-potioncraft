@@ -7,20 +7,21 @@ import javafx.scene.media.MediaPlayer;
 
 public class SoundEffects {
   private static MediaPlayer player;
+  private static Media sound;
 
   public static void playSoundEffect(String fileName) throws URISyntaxException {
-    Media soundEffect = new Media(App.class.getResource("/sounds/" + fileName).toURI().toString());
-    player = new MediaPlayer(soundEffect);
+    sound = new Media(App.class.getResource("/sounds/" + fileName).toURI().toString());
+    player = new MediaPlayer(sound);
     player.play();
   }
 
   public static void playTheme(String themeName) throws URISyntaxException {
-    Media music = new Media(App.class.getResource("/sounds/" + themeName).toURI().toString());
+    sound = new Media(App.class.getResource("/sounds/" + themeName).toURI().toString());
     Task<Void> musicTask =
         new Task<Void>() {
           @Override
           public Void call() throws Exception {
-            player = new MediaPlayer(music);
+            player = new MediaPlayer(sound);
             player.play();
             return null;
           }
@@ -32,7 +33,7 @@ public class SoundEffects {
     for (int i = 0; i < 10; i++) {
       player.setVolume(player.getVolume() - 0.1);
     }
-    player.stop();  // Not stopping on replay
+    player.stop();
     System.out.println("Sound stopped");
   }
 }

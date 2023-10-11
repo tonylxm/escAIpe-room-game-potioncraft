@@ -223,7 +223,7 @@ public class CountdownTimer {
    */
   private void handleTimeOut() throws IOException {
     System.out.println("GAME_OVER");
-    soundEffects.stop();
+    SoundEffects.stop();
     // Using App.setRoot() so that game over occurs in all scenes
     App.setRoot("you-lose");
   }
@@ -235,7 +235,7 @@ public class CountdownTimer {
   public void updateHintLabel(int hints) {
     String text;
     // Setting the appropriate text for the hint label based on the
-    // number of hjints remaining
+    // number of hints remaining
     if (hints < 0) {
       text = "∞ hints";
     } else if (hints == 0) {

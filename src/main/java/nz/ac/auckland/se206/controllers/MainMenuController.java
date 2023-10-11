@@ -54,7 +54,6 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
-  // private SoundEffects soundEffects;
 
   public static int getHints() {
     return hints;
@@ -397,13 +396,7 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        //SceneManager.addAppUi(AppUi.CAULDRON_ROOM, App.loadFxml("cauldron_room"));
-        // SceneManager.addAppUi(AppUi.LIBRARY_ROOM, App.loadFxml("library_room"));
-        //SceneManager.addAppUi(AppUi.TREASURE_ROOM, App.loadFxml("treasure_room"));
-        SceneManager.addAppUi(
-            AppUi.YOU_WIN, App.loadFxml("you-win"));
-
-        //Create instance of you-win
+        // Create instance of you-win
         FXMLLoader youWinLoader = new FXMLLoader(
             App.class.getResource("/fxml/you-win.fxml"));
         Parent youWinRoot = youWinLoader.load();
@@ -413,11 +406,13 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.YOU_WIN, youWinRoot);
         SceneManager.setGameOverControllerInstance(youWinController);
 
-    
+        // Create an instance of TreasureController
         FXMLLoader treasureLoader = new FXMLLoader(
             App.class.getResource("/fxml/treasure_room.fxml"));
         Parent treasureRoot = treasureLoader.load();
         TreasureRoomController treasureController = treasureLoader.getController();
+
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoot);
         SceneManager.setTreasureRoomControllerInstance(treasureController);
 
