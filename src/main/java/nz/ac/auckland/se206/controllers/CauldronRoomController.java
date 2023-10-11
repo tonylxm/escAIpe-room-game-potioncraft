@@ -465,6 +465,7 @@ public class CauldronRoomController extends RoomController {
       // Handling closing the "bag" when clicking off inventory
       if (bagOpened) {
         itemScroll.setOpacity(0);
+        soundEffects.playSoundEffect("closeBag.mp3");
         bagOpened = false;
         System.out.println("Bag closed");
       }
