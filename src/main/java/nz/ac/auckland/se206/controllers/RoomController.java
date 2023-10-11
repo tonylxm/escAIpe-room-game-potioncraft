@@ -576,9 +576,10 @@ public abstract class RoomController {
    * a region outside of the inventory or text box.
    * 
    * @param event the mouse event triggered by clicking off the inventory or text box.
+   * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML
-  public void clickOff(MouseEvent event) {
+  public void clickOff(MouseEvent event) throws URISyntaxException {
     System.out.println("click off");
     setText("", false, false);
     toggleChat(true, 0);
@@ -587,6 +588,7 @@ public abstract class RoomController {
     itemDefault();
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
+      soundEffects.playSoundEffect("closeBag.mp3");
       itemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("Bag closed");
@@ -681,6 +683,7 @@ public abstract class RoomController {
 
     // If the bag isn't opened already, open it
     if (!bagOpened) {
+      soundEffects.playSoundEffect("openBag.mp3");
       itemScroll.setVvalue(0);
       itemScroll.setContent(null);
       itemScroll.setContent(MainMenuController.getInventory().getBox());
