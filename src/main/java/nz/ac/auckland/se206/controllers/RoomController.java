@@ -39,6 +39,7 @@ public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
   protected static ShapeInteractionHandler interactionHandler;
+  protected static SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Handling the event where a button is hovered over
@@ -67,8 +68,7 @@ public abstract class RoomController {
       bookController.updateBackground();
     }
     SceneManager.currScene = currScene;
-    // TODO - fix this does not work
-    SoundEffects.playSoundEffect("openBook.wav");
+    soundEffects.playSound("bookOpen.wav");
     // Transitioning to the book scene with the appropriate fade animation
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
@@ -363,7 +363,7 @@ public abstract class RoomController {
     MainMenuController.getInventory().add(item);
     if (!GameState.areItemsCollected) {
       MainMenuController.getInventory().add(item);
-      SoundEffects.playSoundEffect("itemCollected.wav");
+      soundEffects.playSound("itemCollected.wav");
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {

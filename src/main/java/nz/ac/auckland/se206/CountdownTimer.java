@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Parent;
@@ -52,7 +54,7 @@ public class CountdownTimer {
             event -> {
               try {
                 oneSecondPassed();
-              } catch (IOException e) {
+              } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
               }
               updateTimerLabel();
@@ -66,8 +68,9 @@ public class CountdownTimer {
    * is
    * 
    * @throws IOException
+   * @throws URISyntaxException
    */
-  public void oneSecondPassed() throws IOException {
+  public void oneSecondPassed() throws IOException, URISyntaxException {
     if (currentSeconds == 0 && minutes == 0) {
       handleTimeOut();
       timeline.stop();
@@ -220,10 +223,11 @@ public class CountdownTimer {
   /**
    * Logic that occurs when the timer reaches 0 - sets the scene to the game over
    * scene
+   * @throws URISyntaxException
    */
-  private void handleTimeOut() throws IOException {
+  private void handleTimeOut() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER");
-    SoundEffects.stop();
+    soundEffects.playSound("lose.mp3");
     // Using App.setRoot() so that game over occurs in all scenes
     App.setRoot("you-lose");
   }

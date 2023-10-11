@@ -37,7 +37,7 @@ public class ChestController {
 
   private CountdownTimer timer;
   private Timeline pulse;
-  private SoundEffects soundEffects;
+  private SoundEffects soundEffects = new SoundEffects();;
 
   private double glower;
   private double glowerTwo;
@@ -52,7 +52,6 @@ public class ChestController {
   private void initialize() {
     timer = MainMenuController.getCountdownTimer();
     timer.setChestLabel(timerLabel);
-    soundEffects = new SoundEffects();
     setupDragAndDrop(keyImg);
     // Using two different values for the glow to make sure the user 
     // sees both images
@@ -197,7 +196,7 @@ public class ChestController {
                 true, false);
             System.out.println("Put the key into the glowing chest");
             try {
-              soundEffects.playSoundEffect("openChest.mp3");
+              soundEffects.playSound("openChest.mp3");
             } catch (URISyntaxException e) {
               e.printStackTrace();
             }

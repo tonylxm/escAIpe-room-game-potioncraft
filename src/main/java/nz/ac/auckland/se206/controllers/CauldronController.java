@@ -60,6 +60,7 @@ public class CauldronController {
 
   private CountdownTimer countdownTimer;
   private ShapeInteractionHandler interactionHandler;
+  private SoundEffects soundEffects = new SoundEffects();
 
   @FXML
   private void initialize() {
@@ -330,7 +331,7 @@ public class CauldronController {
           if (distance <= maxDistanceThreshold) {
             System.out.println("Dropped within cauldron bounds");
             try {
-              SoundEffects.playSoundEffect("itemIntoCauldron.mp3");
+              soundEffects.playSound("itemIntoCauldron.mp3");
             } catch (URISyntaxException e) {
               e.printStackTrace();
             }
@@ -372,11 +373,10 @@ public class CauldronController {
       }
       if (cauldronItems.size() < 5) {
         notificationText.setText("Add more ingredients!");
-        SoundEffects.playSoundEffect("spell.mp3");
         resetItems();
       } else if (cauldronItems.size() > 5) {
         notificationText.setText("Too many ingredients!");
-         SoundEffects.playSoundEffect("spell.mp3");
+         soundEffects.playSound("spell.mp3");
         resetItems();
       }
       Notification.notifyPopup(notificationBack, notificationText);
@@ -384,7 +384,7 @@ public class CauldronController {
     }
 
     if (cauldronItems.size() == 5) {
-      SoundEffects.playSoundEffect("spell.mp3");
+      soundEffects.playSound("spell.mp3");
       // check if the order of the items is correct by comparing cauldronItems with
       // Items.necessary
       if (cauldronItems.equals(Items.necessary)) {
@@ -392,6 +392,7 @@ public class CauldronController {
         // set scene to you win
         System.out.println("CAULDRON -> YOU_WIN");
         countdownTimer.stop();
+        soundEffects.playSound("win.mp3");
         //TransitionAnimation.changeScene(pane, AppUi.YOU_WIN, false);
         Scene currentScene = fadeRectangle.getScene();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.YOU_WIN));
@@ -512,7 +513,7 @@ public class CauldronController {
 
   @FXML
   private void onEmptyCauldron() throws URISyntaxException {
-    SoundEffects.playSoundEffect("empty.mp3");
+    soundEffects.playSound("empty.mp3");
     resetItems();
   }
 

@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +13,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SoundEffects;
 
 public class GameOverController {
   @FXML
@@ -23,19 +26,21 @@ public class GameOverController {
   private Rectangle fadeRectangle;
 
   private CountdownTimer countdownTimer;
+  private SoundEffects soundEffects = new SoundEffects();
 
   public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setGameOverLabel(timerLabel);
   }
 
-  public void onPlayAgain() throws IOException {
+  public void onPlayAgain() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
     // fade rectangle fades over 1 second
+    MainMenuController.soundEffects.stop();
     App.setRoot("main_menu");
   }
 

@@ -54,6 +54,7 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
+  public static SoundEffects soundEffects = new SoundEffects();
 
   public static int getHints() {
     return hints;
@@ -184,7 +185,7 @@ public class MainMenuController {
     ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
-    SoundEffects.playTheme("mainMenuTheme.mp3");
+    soundEffects.playSound("mainMenuTheme.mp3");
 
     // Initialise booleans for settings selection
     easyBtnClicked = false;
@@ -332,7 +333,7 @@ public class MainMenuController {
   public void timeSelect(TimeLimit time) {
     timeSelected = true;
     switch (time) {
-      // Using the appropriate glow animation over the 2 minuts image
+      // Using the appropriate glow animation over the 2 minutes image
       case TWO_MIN:
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
@@ -343,7 +344,7 @@ public class MainMenuController {
         interactionHandler.unglowThis(sixMinBtn);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
-        CountdownTimer.setTimerLimit("2:00");
+        CountdownTimer.setTimerLimit("0:05");
         break;
       // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
@@ -852,8 +853,8 @@ public class MainMenuController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    SoundEffects.stop();
-    SoundEffects.playTheme("gameTheme.mp3");
+    soundEffects.stop();
+    soundEffects.playSound("gameTheme.mp3");
 
     countdownTimer.start();
     countdownTimer.updateHintLabel(hints);

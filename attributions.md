@@ -32,3 +32,6 @@ cancel-tts - https://pngtree.com/so/no-sign
 AUDIO
 mainMenuTheme.mp3 - https://youtu.be/AAVyEELrAko
 gameTheme.mp3 - https://youtu.be/wtHra9tFISY 
+ 
+win.mp3 - https://youtu.be/71xBu_VHTfY
+lose.mp3 - https://youtu.be/4CdoxjhKotk
