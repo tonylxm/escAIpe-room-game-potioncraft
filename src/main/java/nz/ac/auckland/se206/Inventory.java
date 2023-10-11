@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 import javafx.scene.layout.VBox;
 
+/**
+ * Inventory class for the inventory. Used to store items in the inventory.
+ * Contains methods for adding and removing items from the inventory.
+ */
 public class Inventory {
   private Set<Items.Item> inventory;
   private VBox box;

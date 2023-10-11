@@ -7,6 +7,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
+/**
+ * ShapeInteractionHandler class for handling mouse events for shapes. This class handles 
+ * all the mouse events for shapes. This includes making the shapes glow when the mouse
+ * enters the shape and making the shapes stop glowing when the mouse exits the shape.
+ * This class is used for all shapes and images.
+ */
 public class ShapeInteractionHandler implements EventHandler<MouseEvent> {
   private static final double GLOW_STROKE_WIDTH = 5;
   private static final Color GLOW_COLOR = Color.BLACK;

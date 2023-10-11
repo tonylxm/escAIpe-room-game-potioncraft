@@ -23,6 +23,12 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.SoundEffects;
 
+/**
+ * Controller for the cauldron room. This class handles all the actions that
+ * can be done in the cauldron room. This includes changing scenes to the
+ * cauldron room, brewing the potion, emptying the cauldron, and fading in
+ * the scene.
+ */
 public class CauldronController {
   @FXML private Pane pane;
   @FXML private ImageView batWingImage;

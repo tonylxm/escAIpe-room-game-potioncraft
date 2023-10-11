@@ -35,6 +35,12 @@ import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The RoomController class is the superclass for all of the room controllers.
+ * It contains all of the methods that are common in all of the room controllers
+ * to avoid code duplication. It also contains the methods that are used for
+ * interacting with the wizard.
+ */
 public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;

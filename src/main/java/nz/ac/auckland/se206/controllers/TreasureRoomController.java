@@ -14,6 +14,11 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/**
+ * Controller for the treasure room. This class handles all the actions that
+ * can be done in the treasure room. This includes changing scenes to the
+ * cauldron room, opening the book and fading in the scene.
+ */
 public class TreasureRoomController extends RoomController {
   @FXML
   private Pane pane;

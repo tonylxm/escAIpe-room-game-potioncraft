@@ -28,13 +28,30 @@ import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * Controller for the main menu screen. This screen is displayed when the
+ * game is first launched. The user can select the difficulty and time limit
+ * for the game. The user can also continue a saved game.
+ */
 public class MainMenuController {
+
+  /**
+   * Enum for the difficulty of the game. EASY, MEDIUM and HARD.
+   * EASY grants unlimited hints, MEDIUM grants 5 hints and HARD grants 0 hints.
+   * The hints are used to help the user solve the riddle and other parts of
+   * the game.
+   */
   public enum Difficulty {
     EASY,
     MEDIUM,
     HARD
   }
 
+  /**
+   * Enum for the time limit of the game. TWO_MIN, FOUR_MIN and SIX_MIN.
+   * TWO_MIN grants 2 minutes, FOUR_MIN grants 4 minutes and SIX_MIN grants
+   * 6 minutes.
+   */
   public enum TimeLimit {
     TWO_MIN,
     FOUR_MIN,
@@ -1046,5 +1063,25 @@ public class MainMenuController {
     cancelTtsBtn.setDisable(true);
     cancelTtsBtn.setOpacity(0);
     App.textToSpeech.stop();
+  }
+
+  /**
+   * Handles the exit button. Only called when the exit button is clicked.
+   * Only called when the mouse enters the button.
+   * 
+   * @return the difficulty selected.
+   */
+  public Difficulty geDifficulty() {
+    return difficulty;
+  }
+
+  /**
+   * Handles the exit button. Only called when the exit button is clicked.
+   * Only called when the mouse enters the button.
+   * 
+   * @return the time limit selected.
+   */
+  public TimeLimit getTimeLimit() {
+    return timeLimit;
   }
 }

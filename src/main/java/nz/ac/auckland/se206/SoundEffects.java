@@ -5,6 +5,11 @@ import javafx.concurrent.Task;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * Class for playing sound effects and music in the game. Only one sound effect
+ * can be played at a time. The music is played in the background and can be
+ * played at the same time as a sound effect.
+ */
 public class SoundEffects {
   private MediaPlayer player;
 
