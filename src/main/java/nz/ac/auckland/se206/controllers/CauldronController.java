@@ -372,14 +372,19 @@ public class CauldronController {
       }
       if (cauldronItems.size() < 5) {
         notificationText.setText("Add more ingredients!");
+        SoundEffects.playSoundEffect("spell.mp3");
+        resetItems();
       } else if (cauldronItems.size() > 5) {
         notificationText.setText("Too many ingredients!");
+         SoundEffects.playSoundEffect("spell.mp3");
+        resetItems();
       }
       Notification.notifyPopup(notificationBack, notificationText);
       return;
     }
 
     if (cauldronItems.size() == 5) {
+      SoundEffects.playSoundEffect("spell.mp3");
       // check if the order of the items is correct by comparing cauldronItems with
       // Items.necessary
       if (cauldronItems.equals(Items.necessary)) {
@@ -395,8 +400,9 @@ public class CauldronController {
 
       } else {
         System.out.println("Potion not brewed");
-        notificationText.setText("Wrong recipe!");
+        notificationText.setText("Wrong order!");
         Notification.notifyPopup(notificationBack, notificationText);
+        resetItems();
       }
     }
   }
@@ -506,8 +512,7 @@ public class CauldronController {
 
   @FXML
   private void onEmptyCauldron() throws URISyntaxException {
-    notificationText.setText("Cauldron Emptied!");
-    Notification.notifyPopup(notificationBack, notificationText);
+    SoundEffects.playSoundEffect("empty.mp3");
     resetItems();
   }
 

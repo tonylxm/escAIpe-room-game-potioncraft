@@ -11,7 +11,6 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.SoundEffects;
 
 public class GameOverController {
   @FXML
