@@ -344,7 +344,7 @@ public class MainMenuController {
         interactionHandler.unglowThis(sixMinBtn);
         sixMinBtnClicked = false;
         sixMin.setOpacity(0);
-        CountdownTimer.setTimerLimit("0:05");
+        CountdownTimer.setTimerLimit("2:00");
         break;
       // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
