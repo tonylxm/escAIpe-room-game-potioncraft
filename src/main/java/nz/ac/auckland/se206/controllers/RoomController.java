@@ -85,26 +85,6 @@ public abstract class RoomController {
     SceneManager.setTimerScene(room);
     TransitionAnimation.changeScene(pane, room, false);
   }
-  
-  /**
-   * Handling the event where the wizard icon is clicked. Only used for the
-   * wizard icon in the library and treasure room. When clicked, the scene
-   * is changed to the appropriate scene.
-   * 
-   * @param currScene the current scene.
-   * @param pane the pane to be hovered over.
-   * @throws URISyntaxException the URI syntax exception. 
-   */
-  public static void openBook(AppUi currScene, Pane pane) throws URISyntaxException {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      bookController.updateBackground();
-    }
-    SceneManager.currScene = currScene;
-    // Transitioning to the book scene with the appropriate fade animation
-    // soundEffects.playSoundEffect("openBook.wav");
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
-  }
 
   protected Items.Item item;
 

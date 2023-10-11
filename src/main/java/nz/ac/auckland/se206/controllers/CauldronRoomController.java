@@ -493,11 +493,13 @@ public class CauldronRoomController extends RoomController {
   /**
    * Taking the user to the book scene from the room scene. Only
    * called when the user is clicking the recipe book button.
+   * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML
-  public void openBook() {
+  public void openBook() throws URISyntaxException {
     System.out.println("CAULDRON_ROOM -> BOOK");
     //RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
+    soundEffects.playSoundEffect("openBook.wav");
     Scene currentScene = fadeRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
     SceneManager.getBookControllerInstance().fadeIn();
