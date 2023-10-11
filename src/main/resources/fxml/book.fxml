@@ -142,7 +142,7 @@
             <Font name="Algerian" size="20.0" />
          </font>
       </Text>
-      <ImageView fx:id="backBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="626.0" onMouseClicked="#onGoBack" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backBtn" fitHeight="45.0" fitWidth="45.0" layoutX="965.0" layoutY="625.0" onMouseClicked="#onGoBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/back.png" />
          </image>
