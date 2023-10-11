@@ -22,8 +22,13 @@ import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.ShapeInteractionHandler;
 import nz.ac.auckland.se206.SoundEffects;
-import nz.ac.auckland.se206.TransitionAnimation;
 
+/**
+ * Controller for the cauldron room. This class handles all the actions that
+ * can be done in the cauldron room. This includes changing scenes to the
+ * cauldron room, brewing the potion, emptying the cauldron, and fading in
+ * the scene.
+ */
 public class CauldronController {
   @FXML private Pane pane;
   @FXML private ImageView batWingImage;
@@ -62,6 +67,11 @@ public class CauldronController {
   private ShapeInteractionHandler interactionHandler;
   private SoundEffects soundEffects = new SoundEffects();
 
+  /**
+   * Setting the appropriate fields and listeners when scene is initialised.
+   * Initialising the drag and drop functionality for the images.
+   * Initialising the glow for the images.
+   */
   @FXML
   private void initialize() {
     // Set up the timer
@@ -202,7 +212,10 @@ public class CauldronController {
     }
   }
 
-  /** Method to update the image states based on the player's inventory */
+  /** 
+   * Method to update the image states based on the player's inventory. 
+   * Update the visibility and the disable state of the images.
+   */
   public void updateImageStates() {
     // Enable or disable images based on the presence of items in the inventory
     System.out.println("Updating image states");
@@ -289,6 +302,14 @@ public class CauldronController {
     }
   }
 
+  /**
+   * Method to set up drag and drop for the images. Using the 
+   * mouse click, drag, and release features to move the images
+   * to the appropriate places.
+   * 
+   * @param itemImageView The image of the item to be dragged.
+   * @param itemId The id of the item being dragged.
+   */
   @FXML
   private void setupDragAndDrop(ImageView itemImageView, String itemId) {
     final AtomicReference<Double> originalX = new AtomicReference<>(0.0);
@@ -349,6 +370,10 @@ public class CauldronController {
         });
   }
 
+  /**
+   * Method to go back to the previous scene. Con only be called when the
+   * user is going to and from the cauldron room.
+   */
   @FXML
   private void goBack() {
     System.out.println("CAULDRON -> CAULDRON_ROOM");
@@ -360,6 +385,11 @@ public class CauldronController {
     System.out.println(cauldronItems);
   }
 
+  /**
+   * Method to brew the potion. Handling the situations where not enough
+   * items are added, no items are added, too many items are added, or 
+   * if the brewed potion is wrong.
+   */
   @FXML
   private void onBrewPotion() throws URISyntaxException {
     System.out.println(Items.necessary);
@@ -408,99 +438,99 @@ public class CauldronController {
     }
   }
 
+  /**
+   * Method to reset the items in the cauldron. Resetting the positions
+   * of the various images in the cauldron rather than having their 
+   * position reset to the place dropped.
+   */
   @FXML
   private void resetItems() {
     // returning the items to the original position.
-    // I KNOW I DID IT REALLY CANCER WAY LMAO but i ceebs using brain rn
-    // batWingImage.setX(84);  it might not even be necessary nvm but keeping
-    // just in case
-    // batWingImage.setY(54);
-
     // resetting the images
     if (cauldronItems.contains(Items.Item.BAT_WINGS)) {
       batWingImage.setLayoutX(80);
       batWingImage.setLayoutY(80);
       batWingImage.setVisible(true);
     }
-
+    // Resetting the crystal image
     if (cauldronItems.contains(Items.Item.CRYSTAL)) {
       crystalImage.setLayoutX(47);
       crystalImage.setLayoutY(370);
       crystalImage.setVisible(true);
     }
-
+    // Resetting the insect wings image
     if (cauldronItems.contains(Items.Item.INSECT_WINGS)) {
       insectWingImage.setLayoutX(790);
       insectWingImage.setLayoutY(500);
       insectWingImage.setVisible(true);
     }
-
+    // Resetting the talon image
     if (cauldronItems.contains(Items.Item.TALON)) {
       talonImage.setLayoutX(260);
       talonImage.setLayoutY(130);
       talonImage.setVisible(true);
     }
-
+    // Resetting the powder image
     if (cauldronItems.contains(Items.Item.POWDER)) {
       powderImage.setLayoutX(745);
       powderImage.setLayoutY(255);
       powderImage.setVisible(true);
     }
-
+    // Resetting the tail image
     if (cauldronItems.contains(Items.Item.TAIL)) {
       tailImage.setLayoutX(410);
       tailImage.setLayoutY(200);
       tailImage.setVisible(true);
     }
-
+    // Restting the feather image
     if (cauldronItems.contains(Items.Item.FEATHER)) {
       featherImage.setLayoutX(210);
       featherImage.setLayoutY(350);
       featherImage.setVisible(true);
     }
-
+    // Restting th escales image
     if (cauldronItems.contains(Items.Item.SCALES)) {
       scalesImage.setLayoutX(795);
       scalesImage.setLayoutY(132);
       scalesImage.setVisible(true);
     }
-
+    // Resetting the flower image
     if (cauldronItems.contains(Items.Item.FLOWER)) {
       flowerImage.setLayoutX(235);
       flowerImage.setLayoutY(500);
       flowerImage.setVisible(true);
     }
-
+    // Resetting the wreath image
     if (cauldronItems.contains(Items.Item.WREATH)) {
       wreathImage.setLayoutX(544);
       wreathImage.setLayoutY(134);
       wreathImage.setVisible(true);
     }
-
+    // Resetting the bone image
     if (cauldronItems.contains(Items.Item.BONE)) {
       boneImage.setLayoutX(752);
       boneImage.setLayoutY(476);
       boneImage.setVisible(true);
     }
-
+    // Resetting the fire image
     if (cauldronItems.contains(Items.Item.FIRE)) {
       fireImage.setLayoutX(110);
       fireImage.setLayoutY(530);
       fireImage.setVisible(true);
     }
-
+    // Resetting the root image
     if (cauldronItems.contains(Items.Item.ROOT)) {
       rootImage.setLayoutX(170);
       rootImage.setLayoutY(250);
       rootImage.setVisible(true);
     }
-
+    // Resetting the beetle image
     if (cauldronItems.contains(Items.Item.BEETLE)) {
       beetleImage.setLayoutX(810);
       beetleImage.setLayoutY(390);
       beetleImage.setVisible(true);
     }
-
+    // Resetting the unicorn horn image
     if (cauldronItems.contains(Items.Item.UNICORN_HORN)) {
       unicornHornImage.setLayoutX(890);
       unicornHornImage.setLayoutY(380);
@@ -511,12 +541,20 @@ public class CauldronController {
     cauldronItems.clear();
   }
 
+  /**
+   * Method to empty the cauldron. Calling the reset items method
+   * to make sure the items are put back into their original positions.
+   */
   @FXML
   private void onEmptyCauldron() throws URISyntaxException {
     soundEffects.playSound("empty.mp3");
     resetItems();
   }
 
+  /**
+   * Method to fade in the scene. Using a fade transition to fade in
+   * the scene.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

@@ -15,6 +15,11 @@ import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SoundEffects;
 
+/**
+ * Controller for the game over screen. This screen is displayed when the
+ * player runs out of time or when the player has collected all the items
+ * and solved the riddle and brews the potion.
+ */
 public class GameOverController {
   @FXML
   private Pane pane;
@@ -28,22 +33,37 @@ public class GameOverController {
   private CountdownTimer countdownTimer;
   private SoundEffects soundEffects = new SoundEffects();
 
+  /**
+   * Initialising the glow effect and the drag and drop functionality
+   * for the key and light images.
+   */
   public void initialize() {
     countdownTimer = MainMenuController.getCountdownTimer();
     countdownTimer.setGameOverLabel(timerLabel);
   }
 
+  /**
+   * When the play again button is pressed, the game state is reset and the
+   * main menu is loaded.
+   * 
+   * @throws IOException if the main menu fxml file cannot be found.
+   * @throws URISyntaxException if the sound file is not found.
+   */
   public void onPlayAgain() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
-    // fade rectangle fades over 1 second
+
     MainMenuController.soundEffects.stop();
     App.setRoot("main_menu");
   }
 
+  /**
+   * When the fade rectangle is clicked, the game state is reset and the
+   * main menu is loaded.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

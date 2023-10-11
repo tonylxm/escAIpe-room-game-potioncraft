@@ -9,11 +9,24 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * CountdownTimer class for the timer. Used to set the timer limit, start the
+ * timer, stop the timer, and update the timer label. Contains methods for
+ * setting the timer limit, starting the timer, stopping the timer, and
+ * updating the timer label.
+ */
 public class CountdownTimer {
   private static int minutes;
   private static int initialSeconds;
   private static int currentSeconds;
 
+  /**
+   * Sets the timer limit based on the time limit string. Called when the timer
+   * is first created. This is because the timer is only used in the treasure
+   * room.
+   * 
+   * @param timeLimit the time limit string.
+   */
   public static void setTimerLimit(String timeLimit) {
     String[] time = timeLimit.split(":");
     minutes = Integer.parseInt(time[0]);
@@ -32,9 +45,14 @@ public class CountdownTimer {
   private Label brewingLabel;
   private Label gameOverLabel;
   private Label chestTimerLabel;
-
   private SoundEffects soundEffects = new SoundEffects();
 
+  /**
+   * Constructor for the timer. Sets the timer limit based on the time limit string.
+   * Calls setTimeline() to set up the timer. Only called when the timer reaches 0.
+   * 
+   * @param timeLimit the time limit string.
+   */
   public CountdownTimer(String timeLimit) {
     String[] time = timeLimit.split(":");
     minutes = Integer.parseInt(time[0]);
@@ -45,7 +63,8 @@ public class CountdownTimer {
 
   /**
    * Set up the timer to count down every second and
-   * update the appropriate timer label
+   * update the appropriate timer label. If the timer reaches 0, the game over
+   * scene is loaded.
    */
   public void setTimeline() {
     timeline = new Timeline(
@@ -65,10 +84,10 @@ public class CountdownTimer {
 
   /**
    * Logic that occurs every second. If the timer reaches 0, the game over scene
-   * is
+   * is. Otherwise, the timer label is updated. If the seconds are less than 10,
    * 
-   * @throws IOException
-   * @throws URISyntaxException
+   * @throws IOException thrown if the game over scene cannot be loaded.
+   * @throws URISyntaxException if the sound file is not found.
    */
   public void oneSecondPassed() throws IOException, URISyntaxException {
     if (currentSeconds == 0 && minutes == 0) {
@@ -82,22 +101,33 @@ public class CountdownTimer {
     currentSeconds--;
   }
 
-  // Start the timer
+  /**
+   * Starts the timer and updates the timer label. Only called when the timer
+   * reaches 0. This is because the timer is only used in the treasure room.
+   * This is because the timer is only used in the treasure room.
+   */
   public void start() {
     currentSeconds = initialSeconds;
     updateTimerLabel();
     timeline.play();
   }
 
-  // Stop the timer
+  /**
+   * Stops the timer and updates the timer label. Only called when the timer
+   * reaches 0. This is because the timer is only used in the treasure room.
+   * This is because the timer is only used in the treasure room.
+   */
   public void stop() {
     timeline.stop();
     updateTimerLabel();
   }
 
-  // Logic that occurs every second that updates the timer label. Make sure to
-  // name the timer labels
-  // timerLabel!!!
+  /**
+   * Logic that occurs every second that updates the timer label. If the seconds
+   * are less than 10, the seconds are displayed as 0s. If the minutes are 0 and
+   * the seconds are odd, the timer label is red. If the minutes are 0 and the
+   * seconds are even, the timer label is black.
+   */
   private void updateTimerLabel() {
     Parent currentSceneRoot = SceneManager.getUiRoot(SceneManager.getTimerScene());
 
@@ -141,8 +171,12 @@ public class CountdownTimer {
   }
 
   /**
-   * Formats the timer text to be displayed in the format mm:ss
-   * @return
+   * Formats the timer text to be displayed in the format mm:ss. If the seconds
+   * are less than 10, the seconds are displayed as 0s. If the minutes are 0 and
+   * the seconds are odd, the timer label is red. If the minutes are 0 and the
+   * seconds are even, the timer label is black.
+   * 
+   * @return the formatted timer text.
    */
   public String formatTimerText() {
     // In order to properly format the time no matter how long is left
@@ -161,6 +195,17 @@ public class CountdownTimer {
     }
   }
 
+  /**
+   * Sets the timer label to red on certain timer values. Only called when the
+   * timer reaches 0. This is because the timer is only used in the treasure
+   * room.
+   * 
+   * @param timer1 the timer label for the cauldron room.
+   * @param timer2 the timer label for the library room.
+   * @param timer3 the timer label for the treasure room.
+   * @param timer4 the timer label for the book view.
+   * @param timer5 the timer label for the brewing view.
+   */
   public void setTimerRed(Label timer1, Label timer2, Label timer3, 
       Label timer4, Label timer5) {
     timer1.setStyle("-fx-text-fill: red");
@@ -170,6 +215,16 @@ public class CountdownTimer {
     timer5.setStyle("-fx-text-fill: red");
   }
 
+  /**
+   * Sets the timer label to black. Only called when the timer reaches 0. This
+   * is because the timer is only used in the treasure room.
+   * 
+   * @param timer1 the timer label for the cauldron room.
+   * @param timer2 the timer label for the library room.
+   * @param timer3 the timer label for the treasure room.
+   * @param timer4 the timer label for the book view.
+   * @param timer5 the timer label for the brewing view.
+   */
   public void setTimerBlack(Label timer1, Label timer2, Label timer3, 
       Label timer4, Label timer5) {
     timer1.setStyle("-fx-text-fill: black");
@@ -179,51 +234,120 @@ public class CountdownTimer {
     timer5.setStyle("-fx-text-fill: black");
   }
 
-  // Getters and setters
+  /**
+   * Sets the timer label for the cauldron room. Only called when the cauldron
+   * room is opened. This is because the cauldron room is the only way to get to
+   * the cauldron room.
+   * 
+   * @param cauldronTimerLabel the timer label for the cauldron room.
+   */
   public void setCauldronTimerLabel(Label cauldronTimerLabel) {
     this.cauldronTimerLabel = cauldronTimerLabel;
   }
 
+  /**
+   * Sets the hint label for the cauldron room. Only called when the cauldron
+   * room is opened. This is because the cauldron room is the only way to get to
+   * the cauldron room.
+   * 
+   * @param cauldronHintLabel the hint label for the cauldron room.
+   */
   public void setCauldronHintLabel(Label cauldronHintLabel) {
     this.cauldronHintLabel = cauldronHintLabel;
   }
 
+  /**
+   * Sets the timer label for the library room. Only called when the library room
+   * is opened. This is because the library room is the only way to get to the
+   * library room.
+   * 
+   * @param libraryTimerLabel the timer label for the library room.
+   */
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
     this.libraryTimerLabel = libraryTimerLabel;
   }
 
+  /**
+   * Sets the hint label for the library room. Only called when the library room
+   * is opened. This is because the library room is the only way to get to the
+   * library room.
+   * 
+   * @param libraryHintLabel the hint label for the library room.
+   */
   public void setLibraryHintLabel(Label libraryHintLabel) {
     this.libraryHintLabel = libraryHintLabel;
   }
 
+  /**
+   * Sets the timer label for the treasure room. Only called when the treasure
+   * room is opened. This is because the treasure room is the only way to get to
+   * the treasure room.
+   * 
+   * @param rightTimerLabel the timer label for the treasure room.
+   */
   public void setTreasureTimerLabel(Label rightTimerLabel) {
     this.rightTimerLabel = rightTimerLabel;
   }
 
+  /**
+   * Sets the hint label for the treasure room. Only called when the treasure
+   * room is opened. This is because the treasure room is the only way to get to
+   * the treasure room.
+   * 
+   * @param rightHintLabel the hint label for the treasure room.
+   */
   public void setTreasureHintLabel(Label rightHintLabel) {
     this.rightHintLabel = rightHintLabel;
   }
 
+  /**
+   * Sets the timer label for the book view. Only called when the book view is
+   * opened. This is because the book view is the only way to get to the book
+   * view.
+   * 
+   * @param bookTimerLabel the timer label for the book view.
+   */
   public void setBookTimerLabel(Label bookTimerLabel) {
     this.bookTimerLabel = bookTimerLabel;
   }
 
+  /**
+   * Sets the timer label for the brewing view. Only called when the brewing
+   * view is opened. This is because the brewing view is the only way to get to
+   * the brewing view.
+   * 
+   * @param timerLabel the timer label for the brewing view.
+   */
   public void setBrewingLabel(Label timerLabel) {
     this.brewingLabel = timerLabel;
   }
 
+  /**
+   * Sets the timer label for the game over view. Only called when the timer
+   * reaches 0. This is because the timer is only used in the treasure room.
+   * 
+   * @param gameOverLabel the timer label for the game over view.
+   */
   public void setGameOverLabel(Label gameOverLabel) {
     this.gameOverLabel = gameOverLabel;
   }
   
+  /**
+   * Sets the timer label for the chest view. Only called when the chest is
+   * clicked. This is because the chest is the only way to get to the chest
+   * view.
+   * 
+   * @param chestTimerLabel the timer label for the chest view.
+   */
   public void setChestLabel(Label chestTimerLabel) {
     this.chestTimerLabel = chestTimerLabel;
   }
 
   /**
    * Logic that occurs when the timer reaches 0 - sets the scene to the game over
-   * scene
-   * @throws URISyntaxException
+   * scene. Only called when the timer reaches 0. This is because the timer is
+   * only used in the treasure room.
+   * @throws URISyntaxException  if the sound file is not found.
    */
   private void handleTimeOut() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER");
@@ -233,8 +357,12 @@ public class CountdownTimer {
   }
 
   /**
-   * Updates the hint label to display the number of hints left
-   * @param hints
+   * Updates the hint label to display the number of hints left. If the number
+   * of hints is less than 0, the hint label displays "∞ hints". If the number
+   * of hints is 0, the hint label displays "No hints". Otherwise, the hint
+   * label displays the number of hints left.
+   * 
+   * @param hints the number of hints left.
    */
   public void updateHintLabel(int hints) {
     String text;

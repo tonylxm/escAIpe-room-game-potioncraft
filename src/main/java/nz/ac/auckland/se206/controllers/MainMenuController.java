@@ -28,13 +28,30 @@ import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * Controller for the main menu screen. This screen is displayed when the
+ * game is first launched. The user can select the difficulty and time limit
+ * for the game. The user can also continue a saved game.
+ */
 public class MainMenuController {
+
+  /**
+   * Enum for the difficulty of the game. EASY, MEDIUM and HARD.
+   * EASY grants unlimited hints, MEDIUM grants 5 hints and HARD grants 0 hints.
+   * The hints are used to help the user solve the riddle and other parts of
+   * the game.
+   */
   public enum Difficulty {
     EASY,
     MEDIUM,
     HARD
   }
 
+  /**
+   * Enum for the time limit of the game. TWO_MIN, FOUR_MIN and SIX_MIN.
+   * TWO_MIN grants 2 minutes, FOUR_MIN grants 4 minutes and SIX_MIN grants
+   * 6 minutes.
+   */
   public enum TimeLimit {
     TWO_MIN,
     FOUR_MIN,
@@ -56,46 +73,112 @@ public class MainMenuController {
   private static ShapeInteractionHandler interactionHandler;
   public static SoundEffects soundEffects = new SoundEffects();
 
+  /**
+   * Returns the number of hints the user has selected. 
+   * -1 for unlimited hints, 5 for 5 hints and 0 for no hints.
+   * 
+   * @return the number of hints the user has selected.
+   */
   public static int getHints() {
     return hints;
   }
 
+  /**
+   * Setting the number of hints that the user has selected.
+   * Only used when loading a saved game.
+   * 
+   * @param changedHints the nunber of hints to be changed to.
+   */
   public static void setHints(int changedHints) {
     hints = changedHints;
   }
 
+  /**
+   * Returning the items that the user has collected.
+   * Only used when loading a saved game.
+   * 
+   * @return the items that the user has collected.
+   */
   public static Items getItems() {
     return items;
   }
 
+  /**
+   * Setting the items that the user has collected.
+   * Every item that the user has added to the inventory themselves.
+   * 
+   * @return the items that the user has collected.
+   */
   public static Inventory getInventory() {
     return inventory;
   }
 
+  /**
+   * Returning the correct book needed for the user to complete the riddle.
+   * Only used when loading a saved game.
+   * 
+   * @return the correct book needed for the user to complete the riddle.
+   */
   public static String getBook() {
     return book;
   }
 
+  /**
+   * Returning the chat handler. Only used when loading a saved game.
+   * Chat handler is used to generate the chat messages.
+   * 
+   * @return the chat handler.
+   */
   public static ChatHandler getChatHandler() {
     return chatHandler;
   }
 
+  /**
+   * Returning the riddle that the user needs to solve. Only used when loading a 
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the riddle that the user needs to solve.
+   */
   public static ChatMessage getRiddle() {
     return riddle;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the riddle that the user needs to solve.
+   */
   public static String getResolvedMessage() {
     return resolvedRiddle;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the message that the user sees when they open the chest.
+   */
   public static String getOpenedChestMessage() {
     return openedChest;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the items that the user has collected.
+   */
   public static String getCollectedItemsMessage() {
     return collectedItems;
   }
 
+  /**
+   * Setting the riddle that the user needs to solve. Only used when loading a
+   * saved game. Chat handler is used to generate the chat messages.
+   * 
+   * @return the countdown timer.
+   */
   public static CountdownTimer getCountdownTimer() {
     System.out.println("getting timer");
     return countdownTimer;
@@ -104,6 +187,7 @@ public class MainMenuController {
   private Difficulty difficulty;
   private TimeLimit timeLimit;
   private String[] options = {"fire", "water", "air"};
+  private SoundEffects soundEffects;
 
   private boolean difficultySelected;
   private boolean timeSelected;
@@ -175,6 +259,13 @@ public class MainMenuController {
   private boolean ttsOn;
   private boolean appendIntroMsgFinished;
 
+  /**
+   * Initialises the main menu controller. Only called when the main menu is loaded.
+   * Initialises the items, inventory, chat handler, sound effects, interaction handler,
+   * and the appropriate booleans for the settings buttons.
+   *
+   * @throws URISyntaxException if the sound file is not found.
+   */
   public void initialize() throws URISyntaxException {
     // Item & inventory generation
     items = new Items(5);
@@ -231,18 +322,45 @@ public class MainMenuController {
     // System.out.println(introMsg);
   }
 
+  /**
+   * Handles the mouse actions for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
+   * 
+   * @param difficultyBtn The difficulty button that the mouse is hovering over.
+   * @param difficultyBtnClicked The boolean that represents whether the difficulty button is
+   *                             clicked or not.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
+   * @param difficulty The difficulty that is selected when the button is clicked.
+   */
   public void difficultyMouseActions(
       ImageView difficultyBtn, boolean difficultyBtnClicked, Text hint, Difficulty difficulty) {
     difficultyBtn.setOnMouseEntered(event -> difficultyHoverOn(difficultyBtn, hint));
     difficultyBtn.setOnMouseClicked(event -> difficultySelect(difficulty));
   }
 
+  /**
+   * Handles the mouse actions for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
+   * 
+   * @param timeBtn The time limit button that the mouse is hovering over.
+   * @param timeBtnClicked The boolean that represents whether the time limit button is
+   *                      clicked or not.
+   * @param timeTxt The time limit that is displayed when the mouse hovers over the button.
+   * @param time The time limit that is selected when the button is clicked.
+   */
   public void timeMouseActions(
       ImageView timeBtn, boolean timeBtnClicked, Text timeTxt, TimeLimit time) {
     timeBtn.setOnMouseEntered(event -> timeLimitHoverOn(timeBtn, timeTxt));
     timeBtn.setOnMouseClicked(event -> timeSelect(time));
   }
 
+  /**
+   * Handles the hover on for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button.
+   * 
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
+   */
   public void difficultyHoverOn(
       ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
@@ -251,6 +369,15 @@ public class MainMenuController {
     } 
   }
 
+  /**
+   * Handles the hover off for the difficulty and time limit buttons. Only called when the
+   * mouse exits the button. Only called when the mouse enters the button.
+   * 
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param settingsBtnClicked The boolean that represents whether the difficulty or time limit
+   *                          button is clicked or not.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
+   */
   public void difficultyHoverOff(
       ImageView settingsBtn, boolean settingsBtnClicked, Text hint) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
@@ -259,6 +386,13 @@ public class MainMenuController {
     } 
   }
 
+  /**
+   * Handles the hover on and off for the difficulty and time limit buttons. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
+   * 
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param hint The hint that is displayed when the mouse hovers over the button.
+   */
   public void timeLimitHoverOn(ImageView settingsBtn, Text hint) {
     interactionHandler.glowThis(settingsBtn);
     if (!timeSelected) {
@@ -266,6 +400,15 @@ public class MainMenuController {
     } 
   }
 
+  /**
+   * Handles the hover off for the difficulty and time limit buttons. Only called when the
+   * mouse exits the button. Only called when the mouse enters the button.
+   * 
+   * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
+   * @param settingsBtnClicked The boolean that represents whether the difficulty or time limit
+   *                         button is clicked or not.
+   * @param timeLimit The time limit that is displayed when the mouse hovers over the button.
+   */
   public void timeLimitHoverOff(
       ImageView settingsBtn, boolean settingsBtnClicked, Text timeLimit) {
     interactionHandler.unglowThis(settingsBtn, settingsBtnClicked);
@@ -275,8 +418,10 @@ public class MainMenuController {
   }
 
   /**
-   * Displays the appropriate number of hints when hovering over a difficulty.
-   * @param gameDifficulty
+   * Displays the appropriate number of hints when hovering over a difficulty. Only called when the
+   * mouse enters the button.
+   * 
+   * @param gameDifficulty The difficulty that is selected when the button is clicked.
    */
   public void difficultySelect(Difficulty gameDifficulty) {
     difficultySelected = true;
@@ -327,8 +472,10 @@ public class MainMenuController {
   }
 
   /**
-   * Displays the appropriate time limit when hovering over a time limit.
-   * @param time
+   * Displays the appropriate time limit when hovering over a time limit. Only called when the
+   * mouse enters the button. Only called when the mouse enters the button.
+   * 
+   * @param time The time limit that is selected when the button is clicked.
    */
   public void timeSelect(TimeLimit time) {
     timeSelected = true;
@@ -378,7 +525,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles starting a new game by creating new instances of the required scenes
+   * Handles starting a new game by creating new instances of the required scenes. Only called when
+   * the play button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void playGame() throws InterruptedException, IOException {
@@ -397,13 +545,14 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
+
         // Create instance of you-win
         FXMLLoader youWinLoader = new FXMLLoader(
             App.class.getResource("/fxml/you-win.fxml"));
         Parent youWinRoot = youWinLoader.load();
         GameOverController youWinController = youWinLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.YOU_WIN, youWinRoot);
         SceneManager.setGameOverControllerInstance(youWinController);
 
@@ -428,53 +577,53 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.CAULDRON, cauldronRoot);
         SceneManager.setCauldronControllerInstance(cauldronController);
 
-        //create an instance of BookController
+        // Create an instance of BookController
         FXMLLoader bookLoader = new FXMLLoader(
             App.class.getResource("/fxml/book.fxml"));
         Parent bookRoot = bookLoader.load();
         BookController bookController = bookLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Dtore the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.BOOK, bookRoot);
         SceneManager.setBookControllerInstance(bookController);  
 
-        //create an instance of LibraryRoomController
+        // Create an instance of LibraryRoomController
         FXMLLoader libraryRoomLoader = new FXMLLoader(
             App.class.getResource("/fxml/library_room.fxml"));
         Parent libraryRoomRoot = libraryRoomLoader.load();
         LibraryRoomController libraryRoomController = libraryRoomLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, libraryRoomRoot);
         SceneManager.setLibraryRoomControllerInstance(libraryRoomController);
 
-        //create an instance of TreasureRoomController
+        // Create an instance of TreasureRoomController
         FXMLLoader treasureRoomLoader = new FXMLLoader(
             App.class.getResource("/fxml/treasure_room.fxml"));
         Parent treasureRoomRoot = treasureRoomLoader.load();
         TreasureRoomController treasureRoomController = treasureRoomLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoomRoot);
         SceneManager.setTreasureRoomControllerInstance(treasureRoomController);
 
-        //create an instance of CauldronRoomController
+        // Create an instance of CauldronRoomController
         FXMLLoader cauldronRoomLoader = new FXMLLoader(
             App.class.getResource("/fxml/cauldron_room.fxml"));
         Parent cauldronRoomRoot = cauldronRoomLoader.load();
         CauldronRoomController cauldronRoomController = cauldronRoomLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.CAULDRON_ROOM, cauldronRoomRoot);
         SceneManager.setCauldronRoomControllerInstance(cauldronRoomController);
 
-        //create an instance of ChestController
+        // Create an instance of ChestController
         FXMLLoader chestLoader = new FXMLLoader(
             App.class.getResource("/fxml/chest.fxml"));
         Parent chestRoot = chestLoader.load();
         ChestController chestController = chestLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.CHEST, chestRoot);
         SceneManager.setChestControllerInstance(chestController);
 
@@ -502,7 +651,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate settings
+   * Handles continuing a game by loading the appropriate settings. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void onContinueGame() {
@@ -526,7 +676,8 @@ public class MainMenuController {
   }
 
   /**
-   * Handles continuing a game by loading the appropriate settings
+   * Handles continuing a game by loading the appropriate settings. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
   public void onContinueGameOne() {
@@ -572,37 +723,17 @@ public class MainMenuController {
   }
 
   /**
-   * Appends intro message to the chat text area.
-   *
-   * @param msg the chat message to append
+   * Appends intro message to the chat text area. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   * 
+   * @param msg the chat message to append.
    */
   public void appendIntroMessage(ChatMessage msg, TextArea chatTextArea) {
-    // Adding the role of the chatter to the start of each message
-    String displayRole;
-    switch (msg.getRole()) {
-      case "assistant":
-        displayRole = "Wizard";
-        break;
-      case "user":
-        displayRole = "You";
-        break;
-      default:
-        displayRole = msg.getRole();
-        break;
-    }
-
     chatTextArea.setText(msg.getContent());
-    // chatTextArea.appendText(displayRole + ": ");
-
     // Appending the message character by character to the chat text area
     Task<Void> appendIntroTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
-        // Adding each character of the message to the chat text area
-        // for (char c : msg.getContent().toCharArray()) {
-        //   chatTextArea.appendText(String.valueOf(c));
-        //   Thread.sleep(20);
-        // }
         // After completion, letting user click off
         System.out.println("finished");
         mouseTrackRegion.setDisable(false);
@@ -614,10 +745,12 @@ public class MainMenuController {
   }
 
   /**
-   * Handles click off for after the intro message is displayed
+   * Handles click off for after the intro message is displayed. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button. Clicking off
+   * will let the user interact with the other buttons in the scene.
    * 
-   * @param event
-   * @throws InterruptedException
+   * @param event the mouse event.
+   * @throws InterruptedException the exception thrown when the thread is interrupted.
    */
   @FXML
   public void clickOff(MouseEvent event) throws InterruptedException {
@@ -652,9 +785,10 @@ public class MainMenuController {
   }
   
   /**
-   * Generating a random book for the user to guess through the riddle
+   * Generating a random book for the user to guess through the riddle. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
-   * @return
+   * @return the random book that the user needs to guess.
    */
   private String getRandomBook() {
     int randomIndex = (int) (Math.random() * options.length);
@@ -663,12 +797,14 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the difficulty buttons
+   * Approprately disables or enables the difficulty buttons. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
-   *                 false then enable buttons
-   * @param ocpacity
-   * @param fade
+   *                 false then enable buttons.
+   * @param ocpacity the opacity of the buttons.
+   * @param fade    stands for true of false, if true then fade buttons, if
+   *                false then do not fade buttons.
    */
   public void disableAndOrFadeDifficultyBtns(
       boolean tf, double opacity, boolean fade) {
@@ -695,12 +831,14 @@ public class MainMenuController {
   }
 
   /**
-   * Approprately disables or enables the time buttons
+   * Approprately disables or enables the time buttons. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    * 
    * @param tf       stands for true of false, if true then disable buttons, if
-   *                 false then enable buttons
-   * @param ocpacity
-   * @param fade
+   *                 false then enable buttons.
+   * @param ocpacity the opacity of the buttons.
+   * @param fade   stands for true of false, if true then fade buttons, if
+   *               false then do not fade buttons.
    */
   public void disableAndOrFadeTimeBtns(
       boolean tf, double opacity, boolean fade) {
@@ -726,36 +864,60 @@ public class MainMenuController {
     }
   }
 
+  /**
+   * Handles the difficulty selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   public void setEasy() {
     difficulty = Difficulty.EASY;
     continueBtnEnable();
   }
 
+  /**
+   * Handles the difficulty selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   public void setMedium() {
     difficulty = Difficulty.MEDIUM;
     continueBtnEnable();
   }
 
+  /**
+   * Handles the difficulty selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   public void setHard() {
     difficulty = Difficulty.HARD;
     continueBtnEnable();
   }
 
+  /**
+   * Handles the time limit selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   public void setTwoMin() {
     timeLimit = TimeLimit.TWO_MIN;
     CountdownTimer.setTimerLimit("2:00");
   }
 
+  /**
+   * Handles the time limit selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   public void setFourMin() {
     timeLimit = TimeLimit.FOUR_MIN;
     CountdownTimer.setTimerLimit("4:00");
   }
 
+  /**
+   *  Handles the time limit selection. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   public void setSixMin() {
     timeLimit = TimeLimit.SIX_MIN;
@@ -763,7 +925,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtn and set visible
+   * Enable continueBtn and set visible. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void continueBtnEnable() {
     continueBtn.setDisable(false);
@@ -771,9 +934,9 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtn, set invisible and pregenerate book riddle
+   * Enable continueBtn, set invisible and pregenerate book riddle. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
-
   public void continueBtnDisable() {
     continueBtn.setDisable(true);
     continueBtn.setOpacity(0.0);
@@ -828,7 +991,8 @@ public class MainMenuController {
   }
 
   /**
-   * Enable continueBtnOne and set visible
+   * Enable continueBtnOne and set visible. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void continueBtnOneEnable() {
     continueBtnOne.setDisable(false);
@@ -836,13 +1000,20 @@ public class MainMenuController {
   }
 
   /**
-   * Enable startBtn and set visible
+   * Enable startBtn and set visible. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
    */
   public void startBtnEnable() {
     startBtn.setDisable(false);
     startBtn.setOpacity(1.0);
   }
 
+  /**
+   * Handles the start button to start the game. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   * 
+   * @throws IOException the exception thrown when the file is not found.
+   */
   @FXML
   public void onStartGame() throws IOException, URISyntaxException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
@@ -860,6 +1031,10 @@ public class MainMenuController {
     countdownTimer.updateHintLabel(hints);
   }
 
+  /**
+   * Handles the text to speech button. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   private void onReadGameMasterResponse() {
     // Using concurency to prevent the system freezing
@@ -883,11 +1058,35 @@ public class MainMenuController {
     }
   }
 
+  /**
+   * Handles the cancel text to speech button. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
   @FXML
   private void onCancelTts() {
     ttsOn = false;
     cancelTtsBtn.setDisable(true);
     cancelTtsBtn.setOpacity(0);
     App.textToSpeech.stop();
+  }
+
+  /**
+   * Handles the exit button. Only called when the exit button is clicked.
+   * Only called when the mouse enters the button.
+   * 
+   * @return the difficulty selected.
+   */
+  public Difficulty geDifficulty() {
+    return difficulty;
+  }
+
+  /**
+   * Handles the exit button. Only called when the exit button is clicked.
+   * Only called when the mouse enters the button.
+   * 
+   * @return the time limit selected.
+   */
+  public TimeLimit getTimeLimit() {
+    return timeLimit;
   }
 }

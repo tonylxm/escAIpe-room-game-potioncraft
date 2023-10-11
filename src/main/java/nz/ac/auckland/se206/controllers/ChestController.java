@@ -2,9 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.net.URISyntaxException;
 import java.util.concurrent.atomic.AtomicReference;
-import javafx.animation.Timeline;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -17,10 +17,15 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
-import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 
+/**
+ * Controller for the chest room. This class handles all the actions that 
+ * can be done in the chest room. This includes changing scenes to the 
+ * treasure room, opening the chest and fading in the scene.
+ */
 public class ChestController {
   @FXML
   private Pane pane;
@@ -87,14 +92,18 @@ public class ChestController {
   }
 
   /**
-   * Changing the value for the glow for the key image.
+   * Changing the value for the glow for the key image. Making sure
+   * the glow value is either increasing or decreasing depending on
+   * the glowUp value.
    */
   private void changeGlowOne() {
+    // Changing the glow value for the key image
     if (glowUp) { 
       glower += 0.1;
       if (glower >= 1) {
         glowUp = false;
       }
+    // Changing the glow value for the key image
     } else {
       glower -= 0.1;
       if (glower <= 0) {
@@ -104,14 +113,18 @@ public class ChestController {
   }
 
   /**
-   * Changing the value of the glow for the light image.
+   * Changing the value of the glow for the light image. Making sure
+   * the glow value is either increasing or decreasing depending on
+   * the glowUpTwo value.
    */
   private void changeGlowTwo() {
+    // Changing the glow value for the light image
     if (glowUpTwo) {
       glowerTwo += 0.0375;
       if (glowerTwo >= 0.75) {
         glowUpTwo = false;
       }
+    // Changing the glow value for the light image
     } else {
       glowerTwo -= 0.0375;
       if (glowerTwo <= 0) {
@@ -125,7 +138,7 @@ public class ChestController {
    * When dropped on the glowing light image, the key will be put into the chest, unlocking
    * the other items in the treasure room, then moving to the treasure room.
    * 
-   * @param itemImageView the image needing to be dragged and dropped
+   * @param itemImageView the image needing to be dragged and dropped.
    */
   @FXML
   private void setupDragAndDrop(ImageView itemImageView) {
@@ -135,11 +148,14 @@ public class ChestController {
     Task<Void> chestOpenedTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
+        // Sending a new chat message to gpt so that wizard knows that the chest has
+        // been opened
         ChatMessage msg = new ChatMessage(
             "Wizard", MainMenuController.getChatHandler().runGpt(
             MainMenuController.getOpenedChestMessage()));
         TreasureRoomController treasureController = 
             SceneManager.getTreasureRoomControllerInstance();
+        // Adding congratulatory message to the chat in the treasure room
         MainMenuController.getChatHandler().appendChatMessage(
             msg, treasureController.getTextArea(), 
             treasureController.getInputText(), treasureController.getSendButton());
@@ -209,6 +225,10 @@ public class ChestController {
         });
   }
 
+  /**
+   * Moving back to the treasure room. Only used when the chest has been opened.
+   * Does not need to be called after the user has opened the chest properly.
+   */
   @FXML
   public void goBack() {
     System.out.println("CHEST -> TREASURE_ROOM");
@@ -219,6 +239,10 @@ public class ChestController {
     SceneManager.setTimerScene(AppUi.TREASURE_ROOM);
   }
 
+  /**
+   * Fading in the treasure room. Only used when the chest has been opened.
+   * Only handling the treasure room because the chest is only opened from the treasure room.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

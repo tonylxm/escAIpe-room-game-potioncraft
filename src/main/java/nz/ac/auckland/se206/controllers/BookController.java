@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.List;
-
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,7 +24,12 @@ import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-/** Controller class for the book view. */
+/**
+ * Controller for the book view. This view is displayed when the player
+ * clicks on the book in the cauldron room, library room or treasure room.
+ * This view displays the recipe for the potion that the player needs to
+ * brew to complete the game.
+ */
 public class BookController {
   @FXML 
   private Pane pane;
@@ -95,9 +99,8 @@ public class BookController {
   /**
    * Initializes the chat view, loading the riddle. Also initialises ways to view the appropriate
    * images for the required items.
-   *
-   * @param <T>
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * 
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
    */
   @FXML
   public void initialize() throws ApiProxyException {
@@ -215,6 +218,12 @@ public class BookController {
             });
   }
 
+  /**
+   * Writes the recipe ingredients to the list view. Adding the ingredients
+   * to the book to make sure the user can see them properly.
+   * 
+   * @param necessary the list of items that are needed to complete the room.
+   */
   private void writeRecipeIngredients(List<Items.Item> necessary) {
     for (int i = 0; i < necessary.size(); i++) {
       ingredientList.getItems().add(Integer.toString(i + 1) + ". " + necessary.get(i).toString());
@@ -222,11 +231,12 @@ public class BookController {
   }
 
   /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * Navigates back to the previous view. Also prints out the transition in the
+   * terminal to show what scenes are being transitioned to and from.
+   * 
+   * @param event the action event triggered by the go back button.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
    */
   @FXML
   private void onGoBack() {
@@ -237,10 +247,15 @@ public class BookController {
     SceneManager.getCurrentController().fadeIn();
   }
 
-  /** Uses text to speech to read the required items in the book. */
+  /** 
+   * Uses text to speech to read the required items in the book. Only reading
+   * the items if the text to speech is not already running because otherwise
+   * would be unplayable.
+   */
   @FXML
   public void onReadIngredientList() {
     // Using concurency to prevent the system freezing
+    // Only allowing one instance of text to speech to run at a time
     if (!ttsOn) {
       ttsOn = true;
       cancelTtsBtn.setDisable(false);
@@ -248,6 +263,7 @@ public class BookController {
       Task<Void> speakTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Reading the potion name and the ingredients
           App.textToSpeech.speak(potionName.getText());
           for (int i = 0; i < Items.necessary.size(); i++) {
             if (ttsOn) {
@@ -257,6 +273,7 @@ public class BookController {
           return null;
         }
       };
+      // Starting the task and turning tts off when it is finished
       new Thread(speakTask).start();
       speakTask.setOnSucceeded(e -> {
         ttsOn = false;
@@ -266,6 +283,10 @@ public class BookController {
     }
   }
 
+  /**
+   * Cancels the text to speech. Used to make sure that other places
+   * using the text to speech feature do not cause any unwanted behaviour.
+   */
   @FXML
   private void onCancelTts() {
     ttsOn = false;
@@ -275,7 +296,11 @@ public class BookController {
     ttsOn = false;
   }
 
-  /** Setting the appropriate scene when transitioning to the book view. */
+  /** 
+   * Setting the appropriate scene when transitioning to the book view. 
+   * Updating the background to be the appropriate image from the 
+   * parent scene.
+   */
   public void updateBackground() {
     AppUi scene = SceneManager.getTimerScene();
     // Going from the cauldron room to the book
@@ -300,8 +325,12 @@ public class BookController {
     }
   }
 
+  /**
+   * Doing a fade animation using the rectangle to fade the background
+   * to the scene that is being transitioned to.
+   */
   @FXML
-  public void fadeIn(){
+  public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
     ft.setFromValue(1);
     ft.setToValue(0);

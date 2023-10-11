@@ -13,6 +13,11 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
+/**
+ * Controller for the library room. This class handles all the actions that can be done in the
+ * library room. This includes changing scenes to the cauldron room, opening the book and fading in
+ * the scene.
+ */
 public class LibraryRoomController extends RoomController {
   @FXML 
   private Pane pane;
@@ -47,7 +52,13 @@ public class LibraryRoomController extends RoomController {
     arrowMouseActions(rightShpe);
   }
 
-  /** Changing scenes to the cauldron room */
+  /** 
+   * Changing scenes to the cauldron room. Only called when the arrow is clicked.
+   * The go right is the only scene transition in the scene, so only needs to handle going to the 
+   * cauldron room.
+   * 
+   * @param event the mouse event that triggered the method.
+   */
   @FXML
   public void goRight(MouseEvent event) {
     System.out.println("LIBRARY_ROOM -> CAULDRON_ROOM");
@@ -59,7 +70,10 @@ public class LibraryRoomController extends RoomController {
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
   }
 
-  /** Changing scenes to book view */
+  /** 
+   * Changing scenes to book view. Only called when the book is clicked.
+   * Making sure the book is not already clicked. If it is, then the book is opened.
+   */
   @FXML
   public void openBook() {
     System.out.println("LIBRARY_ROOM -> BOOK");
@@ -71,6 +85,10 @@ public class LibraryRoomController extends RoomController {
     SceneManager.getBookControllerInstance().updateBackground();
   }
 
+  /**
+   * Changing scenes to the library room. Using the rectangle image
+   * and the fade transition to fade the scene properly.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);

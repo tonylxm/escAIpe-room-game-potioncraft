@@ -35,6 +35,12 @@ import nz.ac.auckland.se206.TransitionAnimation;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The RoomController class is the superclass for all of the room controllers.
+ * It contains all of the methods that are common in all of the room controllers
+ * to avoid code duplication. It also contains the methods that are used for
+ * interacting with the wizard.
+ */
 public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
@@ -42,18 +48,36 @@ public abstract class RoomController {
   protected static SoundEffects soundEffects = new SoundEffects();
 
   /**
-   * Handling the event where a button is hovered over
+   * Handling the event where a button is hovered over. Only used for the
+   * book, bag and wizard icons.
+   * 
+   * @param btn the button to be hovered over.
    */
   protected static void btnMouseActions(ImageView btn) {
     btn.setOnMouseEntered(event -> interactionHandler.glowThis(btn));
     btn.setOnMouseExited(event -> interactionHandler.unglowThis(btn));
   }
 
+  /**
+   * Handling the event where an arrow is hovered over. Only used for the
+   * arrows in the library and treasure room. When hovered over, the opacity
+   * of the arrow is increased.
+   * 
+   * @param arrowShpe the arrow shape to be hovered over.
+   */
   protected static void arrowMouseActions(Polygon arrowShpe) {
     arrowShpe.setOnMouseEntered(event -> arrowShpe.setOpacity(0.9));
     arrowShpe.setOnMouseExited(event -> arrowShpe.setOpacity(0.6));
   }
 
+  /**
+   * Handling the event where an arrow is clicked. Only used for the
+   * arrows in the library and treasure room. When clicked, the scene
+   * is changed to the appropriate scene.
+   * 
+   * @param pane the pane to be hovered over.
+   * @param room the room to be changed to.
+   */
   public static void goDirection(Pane pane, AppUi room) {
     // Resetting appropriate fields before changing scenes
     readyToAdd = false;
@@ -62,6 +86,15 @@ public abstract class RoomController {
     TransitionAnimation.changeScene(pane, room, false);
   }
   
+  /**
+   * Handling the event where the wizard icon is clicked. Only used for the
+   * wizard icon in the library and treasure room. When clicked, the scene
+   * is changed to the appropriate scene.
+   * 
+   * @param currScene the current scene.
+   * @param pane the pane to be hovered over.
+   * @throws URISyntaxException the URI syntax exception. 
+   */
   public static void openBook(AppUi currScene, Pane pane) throws URISyntaxException {
     BookController bookController = SceneManager.getBookControllerInstance();
     if (bookController != null) {
@@ -163,7 +196,15 @@ public abstract class RoomController {
 
   /**
    * Initialising the fields that are common in all of the item
-   * rooms to avoid code duplication.
+   * rooms to avoid code duplication. Used in the cauldron, library 
+   * and treasure room controllers.
+   * 
+   * @param roomName the name of the room.
+   * @param itemOneImg the image view of the first item.
+   * @param itemTwoImg the image view of the second item.
+   * @param itemThreeImg the image view of the third item.
+   * @param itemFourImg the image view of the fourth item.
+   * @param itemFiveImg the image view of the fifth item.
    */
   protected void genericInitialise(
       String roomName, ImageView itemOneImg, ImageView itemTwoImg, 
@@ -243,7 +284,13 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where an item is hovered over and clicked
+   * Handling the event where an item is hovered over and clicked. Only used for the
+   * items in the library and treasure room. When hovered over, the item glows and
+   * when clicked, the item is selected.
+   * 
+   * @param itemImg the image view of the item to be hovered over and clicked.
+   * @param itemClicked whether the item has already been clicked by user.
+   * @param item the item to be hovered over and clicked.
    */
   protected void itemMouseActions(ImageView itemImg, boolean itemClicked, Items.Item item) {
     itemImg.setOnMouseEntered(event -> interactionHandler.glowThis(itemImg));
@@ -254,8 +301,8 @@ public abstract class RoomController {
    * Selecting the item and prompting user and prompting user to either add or not
    * add the item to their inventory. Does nothing if the item has already been 
    * added to the inventory.
-   *
-   * @param item the item clicked by user
+   * 
+   * @param item the item clicked by user.
    */
   @FXML
   public void itemSelect(Items.Item item) {
@@ -342,10 +389,10 @@ public abstract class RoomController {
    * Handling the event where an item is selected and prompting user and 
    * prompting user to either add or not add the item to their inventory. 
    * Does nothing if the item has already been added to the inventory.
-   *
-   * @param itemAdded whether the item has already been added to the inventory
-   * @param itemImg the image of the item clicked by user
-   * @param itemClicked whether the item has already been clicked by user
+   * 
+   * @param itemAdded whether the item has already been added to the inventory.
+   * @param itemImg the image of the item clicked by user.
+   * @param itemClicked whether the item has already been clicked by user.
    */
   private void handleSelect(boolean itemAdded, ImageView itemImg) {
     if (itemAdded) {
@@ -354,7 +401,12 @@ public abstract class RoomController {
     interactionHandler.glowThis(itemImg);
   }
 
-  /** Adding item to inventory if an item is selected */
+  /** 
+   * Adding item to inventory if an item is selected. Otherwise, does nothing.
+   * Called when the user clicks on the yes label.
+   * 
+   * @throws URISyntaxException the URI syntax exception.
+   */
   @FXML
   public void addItem() throws URISyntaxException {
     if (!readyToAdd) {
@@ -367,9 +419,12 @@ public abstract class RoomController {
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
+          // Sending a message to gpt to let the wizard know that the user
+          // has collected all the items
           ChatMessage msg = new ChatMessage(
               "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getCollectedItemsMessage()));
+          // Adding congratualtions to text area
           MainMenuController.getChatHandler().appendChatMessage(
               msg, chatTextArea, inputText, sendButton);
           return null;
@@ -503,7 +558,11 @@ public abstract class RoomController {
   }
 
   /**
-   * Handling the event where an item is added to bag and formatting image size ratio
+   * Handling the event where an item is added to bag and formatting image size ratio.
+   * Only used for the items in the library and treasure room.
+   * 
+   * @param img the image of the item to be added to the inventory.
+   * @param itemImg the image view of the item to be added to the inventory.
    */
   protected void handleAddImg(Image img, ImageView itemImg) {
     // Setting up appropriate image and ratio and appropriate click fields to be added
@@ -514,7 +573,8 @@ public abstract class RoomController {
   }
 
   /**
-   * Not adding a selected item to the inventory
+   * Not adding a selected item to the inventory. Called when the user clicks on the no label.
+   * Does nothing if no item is selected. 
    */
   @FXML
   public void noAdd() {
@@ -533,6 +593,8 @@ public abstract class RoomController {
   /**
    * Dealing with closing the inventory or text box by clicking
    * a region outside of the inventory or text box.
+   * 
+   * @param event the mouse event triggered by clicking off the inventory or text box.
    */
   @FXML
   public void clickOff(MouseEvent event) {
@@ -550,6 +612,11 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Dealing with the event where the book icon is clicked. Only used for the
+   * book icon in the library and treasure room. When clicked, the scene
+   * is changed to the appropriate scene.
+   */
   public void itemDefault() {
     // Turning off the glow effect for all items
     interactionHandler.unglowThis(itemOneImg);
@@ -567,10 +634,13 @@ public abstract class RoomController {
   }
   
   /**
-   * Making text box appear or dissapear with given text.
-   *
-   * @param text the text to be displayed
-   * @param on   whether the text box should be visible or not
+   * Making text box appear or dissapear with given text. Only used for the
+   * text box in the library and treasure room. When clicked, the scene 
+   * is changed to the appropriate scene.
+   * 
+   * @param text the text to be displayed.
+   * @param on   whether the text box should be visible or not.
+   * @param yesNo whether the yes and no labels should be visible or not.
    */
   @FXML
   protected void setText(String text, boolean on, boolean yesNo) {
@@ -613,8 +683,11 @@ public abstract class RoomController {
   }
 
   /**
-   * Dealing with the event where the bag icon is clicked
-   * @throws URISyntaxException
+   * Dealing with the event where the bag icon is clicked. Only used for the
+   * bag icon in the library and treasure room. When clicked, the scene
+   * is changed to the appropriate scene.
+   * 
+   * @throws URISyntaxException the URI syntax exception.
    */
   @FXML
   public void clickBag() throws URISyntaxException {
@@ -638,8 +711,12 @@ public abstract class RoomController {
   }
 
   /**
-   * Dealing with the event where the wizard icon is clicked
-   * @throws ApiProxyException
+   * Dealing with the event where the wizard icon is clicked. Only used for the
+   * wizard icon in the library and treasure room. When clicked, the scene
+   * is changed to the appropriate scene.
+   * 
+   * @param event the mouse event triggered by the wizard icon.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
    */
   @FXML
   public void clickWizard(MouseEvent event) throws ApiProxyException {
@@ -652,8 +729,8 @@ public abstract class RoomController {
    * Handling the identical parts of addItem in the treasure room and
    * library room in a single method.
    * 
-   * @param ratio the ratio between the image's width and height
-   * @param image an image of the item to be added to the inventory
+   * @param ratio the ratio between the image's width and height.
+   * @param image an image of the item to be added to the inventory.
    */
   public void itemCollect(double ratio, ImageView image) {
     image.setFitHeight(133 * ratio);
@@ -676,7 +753,11 @@ public abstract class RoomController {
 
   
   /**
-   * Enabling/disabling the chat functionality for the user to be able to talk to the wizard.
+   * Enabling/disabling the chat functionality for the user to be able 
+   * to talk to the wizard.
+   * 
+   * @param disable whether the chat functionality should be disabled or not.
+   * @param opacity the opacity of the chat functionality.
    */
   protected void toggleChat(boolean disable, int opacity) {
     // Enabling/disabling the approrpiate fields and making everything invisible/visible
@@ -703,6 +784,13 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Disabling the chat functionality for the user to be able
+   * to talk to the wizard. Used when the wizard is talking.
+   * 
+   * @param disable whether the chat functionality should be disabled or not.
+   * @param opacity the opacity of the chat functionality.
+   */
   protected void disableChat(boolean disable, double opacity) {
     inputText.setDisable(disable);
     inputText.setOpacity(opacity);
@@ -711,11 +799,13 @@ public abstract class RoomController {
   }
 
   /**
-   * Sends a message to the GPT model.
-   *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * Sends a message to the GPT model. Called when the user clicks on the send button.
+   * The message is then displayed in the chat text area. The GPT model then responds
+   * with a message which is also displayed in the chat text area.
+   * 
+   * @param event the action event triggered by the send button.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
@@ -765,9 +855,14 @@ public abstract class RoomController {
   }
 
   /**
-   * Handles when ENTER is pressed on the input text area.
-   *
-   * @throws IOException
+   * Handles when ENTER is pressed on the input text area. Only used for the
+   * input text area in the library and treasure room. When ENTER is pressed,
+   * the message is sent to the GPT model. The message is then displayed in the
+   * chat text area. The GPT model then responds with a message which is also
+   * displayed in the chat text area.
+   * 
+   * @param event the key event triggered by the input text area.
+   * @throws IOException if there is an I/O error.
    */
   @FXML
   public void onEnterPressed(KeyEvent event) throws ApiProxyException, IOException {
@@ -779,14 +874,20 @@ public abstract class RoomController {
   }
 
   /**
-   * Handles when Y or N is pressed on the input text area.
-   * @param event
-   * @throws ApiProxyException
-   * @throws IOException
-   * @throws URISyntaxException
+   * Handles when Y or N is pressed on the input text area. Only used for the
+   * input text area in the library and treasure room. When Y or N is pressed,
+   * the message is sent to the GPT model. The message is then displayed in the
+   * chat text area. The GPT model then responds with a message which is also
+   * displayed in the chat text area.
+   * 
+   * @param event the key event triggered by the input text area.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
+   * @throws URISyntaxException if there is an error in the URI syntax.
    */
   @FXML
-  public void onYesPressed(KeyEvent event) throws ApiProxyException, IOException, URISyntaxException {
+  public void onYesPressed(KeyEvent event) 
+      throws ApiProxyException, IOException, URISyntaxException {
     // If Y us pressed, adding the item
     if (event.getCode().toString().equals("Y")) {
       System.out.println("key " + event.getCode() + " pressed");
@@ -800,10 +901,15 @@ public abstract class RoomController {
   }
 
   /**
-   * Handles when N is pressed on the input text area.
-   * @param event
-   * @throws ApiProxyException
-   * @throws IOException
+   * Handles when N is pressed on the input text area. Only used for the
+   * input text area in the library and treasure room. When N is pressed,
+   * the message is sent to the GPT model. The message is then displayed in the
+   * chat text area. The GPT model then responds with a message which is also
+   * displayed in the chat text area.
+   * 
+   * @param event the key event triggered by the input text area.
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
    */
   @FXML
   public void onNoPressed(KeyEvent event) throws ApiProxyException, IOException {
@@ -815,7 +921,9 @@ public abstract class RoomController {
   }
 
   /** 
-   * Uses text to speech to read the game master's response to the user's message. 
+   * Uses text to speech to read the game master's response to the user's message.
+   * Does nothing if there is no response from the game master. Only used for the
+   * text to speech button in the library and treasure room. 
    */
   @FXML
   private void onReadGameMasterResponse() {
@@ -840,6 +948,10 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Cancels the text to speech. Only used for the cancel text to speech button
+   * in the library and treasure room. 
+   */
   @FXML
   public void onCancelTts() {
     ttsOn = false;
@@ -848,6 +960,10 @@ public abstract class RoomController {
     App.textToSpeech.stop();
   }
 
+  /**
+   * Fades in the scene. Only used for the fade rectangle in the library and treasure room.
+   * Called when the scene is loaded.
+   */
   @FXML
   public void fadeIn() {
     FadeTransition ft = new FadeTransition(Duration.seconds(0.6), fadeRectangle);
@@ -856,23 +972,41 @@ public abstract class RoomController {
     ft.play();
   }
 
+  /**
+   * Returns the text area. Only used for the text area in the library and treasure room.
+   * Lets the program change the text area's text.
+   * 
+   * @return TextArea the text area.
+   */
   public TextArea getTextArea() {
     return chatTextArea;
   }
 
+  /**
+   * Returns the input text field. Only used for the input text field in the library and
+   * treasure room. Lets the program change the input text field's text.
+   * 
+   * @return TextField the input text field.
+   */
   public TextField getInputText() {
     return inputText;
   }
 
+  /**
+   * Returns the send button. Only used for the send button in the library and treasure room.
+   * Lets the program change the send button's text.
+   * 
+   * @return Button the send button.
+   */
   public Button getSendButton() {
     return sendButton;
   }
 
   /**
    * Function to check if the user has collected all the required items
-   * to be able to brew the potion.
+   * to be able to brew the potion. Only used for the library and treasure room.
    * 
-   * @return boolean whether the user has collected all the required items
+   * @return boolean whether the user has collected all the required items.
    */
   private boolean checkCorrectItems() {
     Inventory inventory = MainMenuController.getInventory();
