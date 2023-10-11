@@ -44,7 +44,8 @@ public class GameOverController {
    * 
    * @throws IOException if the main menu fxml file cannot be found.
    */
-  public void onPlayAgain() throws IOException {
+  @FXML
+  private void onPlayAgain() throws IOException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
