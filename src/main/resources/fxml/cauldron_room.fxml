@@ -246,7 +246,7 @@
             <Font name="Algerian" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="hintLabel" layoutX="52.0" layoutY="26.0" prefHeight="67.0" prefWidth="200.0" text="hints left">
+      <Label fx:id="hintLabel" layoutX="52.0" layoutY="26.0" onMouseClicked="#onHintClicked" prefHeight="67.0" prefWidth="200.0" text="hints left">
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
