@@ -130,6 +130,16 @@ public class GptPromptEngineering {
    * 
    * @return the prompt for easy mode.
    */
+  public static String getUnresolved() {
+    return "The user has unsuccessfully solved the book riddle. Tell them to try again in one line.";
+  }
+
+  /**
+   * To be sent to GPT after the user selected the correct book. Gives context for what 
+   * future hints should be about too for the easy mode.
+   * 
+   * @return the prompt for easy mode.
+   */
   public static String getEasyResolved() {
     return "The user has successfully solved the riddle. Congratulate them in one line."
         + " Hints should now only tell the user to make sure all the items are"

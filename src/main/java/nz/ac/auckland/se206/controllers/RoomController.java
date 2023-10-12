@@ -903,6 +903,18 @@ public abstract class RoomController {
     }
   }
 
+  @FXML
+  private void onHintClicked() throws ApiProxyException, IOException, URISyntaxException {
+    if (!GameState.isBookRiddleResolved) {
+      notificationText.setText("The Wizard has some instructions for you! Talk to him first!");
+      Notification.notifyPopup(notificationBack, notificationText);
+    } else {     
+      toggleChat(false, 1);
+      inputText.setText("Hint please");
+      onSendMessage(new ActionEvent());
+    }
+  }
+
   /** 
    * Uses text to speech to read the game master's response to the user's message.
    * Does nothing if there is no response from the game master. Only used for the

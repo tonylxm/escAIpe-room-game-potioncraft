@@ -188,8 +188,6 @@ public class CauldronRoomController extends RoomController {
         }
       };
       new Thread(waitForAnimationTask).start();
-      // TODO: add half sec delay
-      // Thread.sleep(500)
       MainMenuController.getChatHandler().appendChatMessage(
           MainMenuController.getRiddle(), chatTextArea, inputText, sendButton);
 
@@ -216,9 +214,10 @@ public class CauldronRoomController extends RoomController {
    * method to handle the user clicking on the book fire.
    * 
    * @param event The mouse event.
+   * @throws URISyntaxException
    */
   @FXML
-  public void clickBookFire(MouseEvent event) {
+  public void clickBookFire(MouseEvent event) throws URISyntaxException {
     handleClickBooks("fire", bookFireImage, bookFireRectangle);
   }
 
@@ -227,9 +226,10 @@ public class CauldronRoomController extends RoomController {
    * method to handle the user clicking on the book water.
    * 
    * @param event The mouse event.
+   * @throws URISyntaxException
    */
   @FXML
-  public void clickBookWater(MouseEvent event) {
+  public void clickBookWater(MouseEvent event) throws URISyntaxException {
     handleClickBooks("water", bookWaterImage, bookWaterRectangle);
   }
 
@@ -238,9 +238,10 @@ public class CauldronRoomController extends RoomController {
    * method to handle the user clicking on the book air.
    * 
    * @param event The mouse event.
+   * @throws URISyntaxException
    */
   @FXML
-  public void clickBookAir(MouseEvent event) {
+  public void clickBookAir(MouseEvent event) throws URISyntaxException {
     handleClickBooks("air", bookAirImage, bookAirRectangle);
   }
 
@@ -252,11 +253,13 @@ public class CauldronRoomController extends RoomController {
    * @param element The element of the book.
    * @param bookImage The book image.
    * @param bookRectangle The book rectangle.
+   * @throws URISyntaxException
    */
   private void handleClickBooks(
-      String element, ImageView bookImage, ImageView bookRectangle) {
+      String element, ImageView bookImage, ImageView bookRectangle) throws URISyntaxException {
     System.out.println("book " + element +  " clicked");
     if (MainMenuController.getBook() == element) {
+      soundEffects.playSound("correct.wav");
       // remove the book from the scene
       //disable all book rectangles
       bookAirRectangle.setDisable(true);
@@ -271,7 +274,7 @@ public class CauldronRoomController extends RoomController {
       ft.setToValue(0);
       ft.play();
 
-      //set on fade finish
+      // set on fade finish
       ft.setOnFinished(event -> {
         //fade transition for all 3 books
         FadeTransition ft1 = new FadeTransition(Duration.seconds(1), bookFireRectangle);
@@ -320,7 +323,7 @@ public class CauldronRoomController extends RoomController {
             ft2.play();
             ft1.play();
           }
-        }    
+        } 
       });
 
       bookImage.setOpacity(0);
@@ -361,13 +364,15 @@ public class CauldronRoomController extends RoomController {
           return null;
         }
       };
-      // TODO: change to after appendTask is completed
       new Thread(resolvedTask).start();
       resolvedTask.setOnSucceeded(e -> {
-        mouseTrackRegion.setDisable(false);
         mouseTrackRegion.setCursor(Cursor.HAND);
+        mouseTrackRegion.setDisable(false);
       });
-    }
+    } else {
+      // Wrong book selected
+      soundEffects.playSound("incorrect.wav");
+    }  
   }
 
   /**
