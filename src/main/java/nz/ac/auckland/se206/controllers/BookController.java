@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
@@ -19,6 +20,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.Items;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SoundEffects;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatHandler;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -95,6 +97,7 @@ public class BookController {
 
   private boolean ttsOn;
   private ChatHandler potionNameHandler;
+  private SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Initializes the chat view, loading the riddle. Also initialises ways to view the appropriate
@@ -235,13 +238,15 @@ public class BookController {
    * terminal to show what scenes are being transitioned to and from.
    * 
    * @param event the action event triggered by the go back button.
+   * @throws URISyntaxException If the sound file cannot be found.
    * @throws ApiProxyException if there is an error communicating with the API proxy.
    * @throws IOException if there is an I/O error.
    */
   @FXML
-  private void onGoBack() {
+  private void onGoBack() throws URISyntaxException {
     System.out.println("BOOK -> " + SceneManager.currScene);
     //TransitionAnimation.changeScene(pane, SceneManager.currScene, false);
+    soundEffects.playSound("closeBook.mp3");
     Scene currentScene = backgroundShade.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(SceneManager.currScene));
     SceneManager.getCurrentController().fadeIn();

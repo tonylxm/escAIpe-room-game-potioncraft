@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.net.URISyntaxException;
+
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -96,11 +98,13 @@ public class TreasureRoomController extends RoomController {
   /** 
    * Changing scenes to book view. Only called when the book is clicked.
    * This is because the book is the only way to get to the book view.
+   * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML
-  public void openBook() {
+  public void openBook() throws URISyntaxException {
     System.out.println("TREASURE_ROOM -> BOOK");
     //openBook(AppUi.TREASURE_ROOM, pane);
+    soundEffects.playSound("openBook.wav");
     Scene currentScene = fadeRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
     SceneManager.getBookControllerInstance().fadeIn();

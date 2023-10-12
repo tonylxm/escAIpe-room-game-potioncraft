@@ -85,26 +85,6 @@ public abstract class RoomController {
     SceneManager.setTimerScene(room);
     TransitionAnimation.changeScene(pane, room, false);
   }
-  
-  /**
-   * Handling the event where the wizard icon is clicked. Only used for the
-   * wizard icon in the library and treasure room. When clicked, the scene
-   * is changed to the appropriate scene.
-   * 
-   * @param currScene the current scene.
-   * @param pane the pane to be hovered over.
-   * @throws URISyntaxException the URI syntax exception. 
-   */
-  public static void openBook(AppUi currScene, Pane pane) throws URISyntaxException {
-    BookController bookController = SceneManager.getBookControllerInstance();
-    if (bookController != null) {
-      bookController.updateBackground();
-    }
-    SceneManager.currScene = currScene;
-    soundEffects.playSound("bookOpen.wav");
-    // Transitioning to the book scene with the appropriate fade animation
-    TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
-  }
 
   protected Items.Item item;
 
@@ -595,9 +575,10 @@ public abstract class RoomController {
    * a region outside of the inventory or text box.
    * 
    * @param event the mouse event triggered by clicking off the inventory or text box.
+   * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML
-  public void clickOff(MouseEvent event) {
+  public void clickOff(MouseEvent event) throws URISyntaxException {
     System.out.println("click off");
     setText("", false, false);
     toggleChat(true, 0);
@@ -606,6 +587,7 @@ public abstract class RoomController {
     itemDefault();
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
+      soundEffects.playSound("closeBag.mp3");
       itemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("Bag closed");
@@ -700,6 +682,7 @@ public abstract class RoomController {
 
     // If the bag isn't opened already, open it
     if (!bagOpened) {
+      soundEffects.playSound("openBag.mp3");
       itemScroll.setVvalue(0);
       itemScroll.setContent(null);
       itemScroll.setContent(MainMenuController.getInventory().getBox());

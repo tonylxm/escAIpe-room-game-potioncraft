@@ -180,7 +180,6 @@ public class MainMenuController {
    * @return the countdown timer.
    */
   public static CountdownTimer getCountdownTimer() {
-    System.out.println("getting timer");
     return countdownTimer;
   }
 
