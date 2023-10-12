@@ -42,7 +42,7 @@ public class ChestController {
 
   private CountdownTimer timer;
   private Timeline pulse;
-  private SoundEffects soundEffects = new SoundEffects();;
+  private SoundEffects soundEffects;
 
   private double glower;
   private double glowerTwo;
@@ -57,6 +57,7 @@ public class ChestController {
   private void initialize() {
     timer = MainMenuController.getCountdownTimer();
     timer.setChestLabel(timerLabel);
+    soundEffects = new SoundEffects();
     setupDragAndDrop(keyImg);
     // Using two different values for the glow to make sure the user 
     // sees both images
