@@ -26,7 +26,7 @@ public class SoundEffects {
   }
   
   /**
-   * Stops all sound being played
+   * Stops all sound being played. 
    */
   public void stop() {
     player.stop();
