@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +13,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SoundEffects;
 
 /**
  * Controller for the game over screen. This screen is displayed when the
@@ -28,6 +31,7 @@ public class GameOverController {
   private Rectangle fadeRectangle;
 
   private CountdownTimer countdownTimer;
+  private SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Initialising the glow effect and the drag and drop functionality
@@ -43,25 +47,17 @@ public class GameOverController {
    * main menu is loaded.
    * 
    * @throws IOException if the main menu fxml file cannot be found.
+   * @throws URISyntaxException if the sound file is not found.
    */
-  public void onPlayAgain() throws IOException {
+  public void onPlayAgain() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
-    //fade rectangle fades over 1 second
-    FadeTransition ft = new FadeTransition(Duration.seconds(1), fadeRectangle);
-    ft.setFromValue(0);
-    ft.setToValue(1);
-    ft.play();
-    ft.setOnFinished(event -> {
-      try {
-        App.setRoot("main_menu");
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    });
+
+    MainMenuController.soundEffects.stop();
+    App.setRoot("main_menu");
   }
 
   /**

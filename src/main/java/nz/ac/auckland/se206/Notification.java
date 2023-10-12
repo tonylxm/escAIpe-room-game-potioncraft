@@ -30,7 +30,7 @@ public class Notification {
       throws URISyntaxException {
     notificationBack.setDisable(false);
     notificationText.setDisable(false);
-    soundEffects.playSoundEffect("notification.mp3");
+    soundEffects.playSound("notification.mp3");
 
     // Create a FadeTransition to gradually change opacity over 3 seconds
     FadeTransition fadeTransition = new FadeTransition(

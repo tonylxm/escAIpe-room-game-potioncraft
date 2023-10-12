@@ -71,6 +71,7 @@ public class MainMenuController {
   private static String collectedItems;
   private static int hints;
   private static ShapeInteractionHandler interactionHandler;
+  public static SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Returns the number of hints the user has selected. 
@@ -185,7 +186,6 @@ public class MainMenuController {
   private Difficulty difficulty;
   private TimeLimit timeLimit;
   private String[] options = {"fire", "water", "air"};
-  private SoundEffects soundEffects;
 
   private boolean difficultySelected;
   private boolean timeSelected;
@@ -261,8 +261,10 @@ public class MainMenuController {
    * Initialises the main menu controller. Only called when the main menu is loaded.
    * Initialises the items, inventory, chat handler, sound effects, interaction handler,
    * and the appropriate booleans for the settings buttons.
+   *
+   * @throws URISyntaxException if the sound file is not found.
    */
-  public void initialize() {
+  public void initialize() throws URISyntaxException {
     // Item & inventory generation
     items = new Items(5);
     inventory = new Inventory();
@@ -272,7 +274,7 @@ public class MainMenuController {
     ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
-    soundEffects = new SoundEffects();
+    soundEffects.playSound("mainMenuTheme.mp3");
 
     // Initialise booleans for settings selection
     easyBtnClicked = false;
@@ -476,7 +478,7 @@ public class MainMenuController {
   public void timeSelect(TimeLimit time) {
     timeSelected = true;
     switch (time) {
-      // Using the appropriate glow animation over the 2 minuts image
+      // Using the appropriate glow animation over the 2 minutes image
       case TWO_MIN:
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
@@ -541,24 +543,24 @@ public class MainMenuController {
 
       @Override
       protected Void call() throws Exception {
-        SceneManager.addAppUi(
-            AppUi.YOU_WIN, App.loadFxml("you-win"));
 
-        //Create instance of you-win
+        // Create instance of you-win
         FXMLLoader youWinLoader = new FXMLLoader(
             App.class.getResource("/fxml/you-win.fxml"));
         Parent youWinRoot = youWinLoader.load();
         GameOverController youWinController = youWinLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.YOU_WIN, youWinRoot);
         SceneManager.setGameOverControllerInstance(youWinController);
 
-    
+        // Create an instance of TreasureController
         FXMLLoader treasureLoader = new FXMLLoader(
             App.class.getResource("/fxml/treasure_room.fxml"));
         Parent treasureRoot = treasureLoader.load();
         TreasureRoomController treasureController = treasureLoader.getController();
+
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoot);
         SceneManager.setTreasureRoomControllerInstance(treasureController);
 
@@ -573,53 +575,53 @@ public class MainMenuController {
         SceneManager.addAppUi(AppUi.CAULDRON, cauldronRoot);
         SceneManager.setCauldronControllerInstance(cauldronController);
 
-        //create an instance of BookController
+        // Create an instance of BookController
         FXMLLoader bookLoader = new FXMLLoader(
             App.class.getResource("/fxml/book.fxml"));
         Parent bookRoot = bookLoader.load();
         BookController bookController = bookLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Dtore the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.BOOK, bookRoot);
         SceneManager.setBookControllerInstance(bookController);  
 
-        //create an instance of LibraryRoomController
+        // Create an instance of LibraryRoomController
         FXMLLoader libraryRoomLoader = new FXMLLoader(
             App.class.getResource("/fxml/library_room.fxml"));
         Parent libraryRoomRoot = libraryRoomLoader.load();
         LibraryRoomController libraryRoomController = libraryRoomLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.LIBRARY_ROOM, libraryRoomRoot);
         SceneManager.setLibraryRoomControllerInstance(libraryRoomController);
 
-        //create an instance of TreasureRoomController
+        // Create an instance of TreasureRoomController
         FXMLLoader treasureRoomLoader = new FXMLLoader(
             App.class.getResource("/fxml/treasure_room.fxml"));
         Parent treasureRoomRoot = treasureRoomLoader.load();
         TreasureRoomController treasureRoomController = treasureRoomLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.TREASURE_ROOM, treasureRoomRoot);
         SceneManager.setTreasureRoomControllerInstance(treasureRoomController);
 
-        //create an instance of CauldronRoomController
+        // Create an instance of CauldronRoomController
         FXMLLoader cauldronRoomLoader = new FXMLLoader(
             App.class.getResource("/fxml/cauldron_room.fxml"));
         Parent cauldronRoomRoot = cauldronRoomLoader.load();
         CauldronRoomController cauldronRoomController = cauldronRoomLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.CAULDRON_ROOM, cauldronRoomRoot);
         SceneManager.setCauldronRoomControllerInstance(cauldronRoomController);
 
-        //create an instance of ChestController
+        // Create an instance of ChestController
         FXMLLoader chestLoader = new FXMLLoader(
             App.class.getResource("/fxml/chest.fxml"));
         Parent chestRoot = chestLoader.load();
         ChestController chestController = chestLoader.getController();
 
-        //store the controller instance in SceneManager
+        // Store the controller instance in SceneManager
         SceneManager.addAppUi(AppUi.CHEST, chestRoot);
         SceneManager.setChestControllerInstance(chestController);
 
@@ -679,6 +681,7 @@ public class MainMenuController {
   public void onContinueGameOne() {
     continueBtnOne.setDisable(true);
     continueBtnOne.setOpacity(0.4);
+
     // Using a task to make sure game does not freeze
     Task<Void> fadeInStartBtnTask = new Task<Void>() {
       @Override
@@ -1019,7 +1022,8 @@ public class MainMenuController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CAULDRON_ROOM));
     SceneManager.getCauldronRoomControllerInstance().fadeIn();
     SceneManager.setTimerScene(AppUi.CAULDRON_ROOM);
-    soundEffects.playGameTheme();
+    soundEffects.stop();
+    soundEffects.playSound("gameTheme.mp3");
 
     countdownTimer.start();
     countdownTimer.updateHintLabel(hints);
