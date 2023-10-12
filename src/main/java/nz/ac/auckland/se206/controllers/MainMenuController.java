@@ -1071,7 +1071,7 @@ public class MainMenuController {
    * 
    * @return the difficulty selected.
    */
-  public Difficulty geDifficulty() {
+  public Difficulty getDifficulty() {
     return difficulty;
   }
 
