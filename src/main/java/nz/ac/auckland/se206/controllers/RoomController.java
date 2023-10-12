@@ -45,7 +45,7 @@ public abstract class RoomController {
   protected static boolean bagOpened;
   protected static boolean readyToAdd;
   protected static ShapeInteractionHandler interactionHandler;
-  protected static SoundEffects soundEffects;
+  protected static SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Handling the event where a button is hovered over. Only used for the
@@ -101,8 +101,8 @@ public abstract class RoomController {
       bookController.updateBackground();
     }
     SceneManager.currScene = currScene;
+    soundEffects.playSound("bookOpen.wav");
     // Transitioning to the book scene with the appropriate fade animation
-    // soundEffects.playSoundEffect("openBook.wav");
     TransitionAnimation.changeScene(pane, AppUi.BOOK, false);
   }
 
@@ -254,7 +254,6 @@ public abstract class RoomController {
 
     interactionHandler = new ShapeInteractionHandler();
     countdownTimer = MainMenuController.getCountdownTimer();
-    soundEffects = new SoundEffects();
 
     // Disabling the text box and mouse track region
     setText("", false, false);
@@ -416,7 +415,7 @@ public abstract class RoomController {
     MainMenuController.getInventory().add(item);
     if (!GameState.areItemsCollected) {
       MainMenuController.getInventory().add(item);
-      soundEffects.playSoundEffect("itemCollected.wav");
+      soundEffects.playSound("itemCollected.wav");
       Task<Void> collectedItemsTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {

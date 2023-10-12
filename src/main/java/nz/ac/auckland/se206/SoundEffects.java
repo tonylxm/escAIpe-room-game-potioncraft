@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.net.URISyntaxException;
-import javafx.concurrent.Task;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -18,38 +17,19 @@ public class SoundEffects {
    * sound needs to be played from.
    * 
    * @param fileName the name of the sound file to be played.
-   * @throws URISyntaxException if the file is not found.
+   * @throws URISyntaxException if the sound file is not found.
    */
-  public void playSoundEffect(String fileName) throws URISyntaxException {
-    // Playing the sound effect
-    Media soundEffect = new Media(App.class.getResource("/sounds/" + fileName).toURI().toString());
-    if (player != null) {
-      player.stop();
-    }
-    // Using concurrency to play sound effect in the background
-    player = new MediaPlayer(soundEffect);
+  public void playSound(String fileName) throws URISyntaxException {
+    Media sound = new Media(App.class.getResource("/sounds/" + fileName).toURI().toString());
+    player = new MediaPlayer(sound);
     player.play();
   }
-
+  
   /**
-   * Plays the harry potter theme song. Making sure the theme is only played
-   * in the background so that is is only in the background.
-   * 
-   * @throws URISyntaxException if the file is not found.
+   * Stops all sound being played
    */
-  public void playGameTheme() throws URISyntaxException {
-    // Playing the harry potter theme
-    Media music = new Media(App.class.getResource("/sounds/gameTheme.mp3").toURI().toString());
-    // Using concurrency to play music in the background
-    Task<Void> musicTask =
-        new Task<Void>() {
-          @Override
-          public Void call() throws Exception {
-            player = new MediaPlayer(music);
-            player.play();
-            return null;
-          }
-        };
-    new Thread(musicTask, "Game Theme Thread").start();
+  public void stop() {
+    player.stop();
+    System.out.println("Sound stopped");
   }
 }
