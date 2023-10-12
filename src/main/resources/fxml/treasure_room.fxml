@@ -178,7 +178,7 @@
             <Font name="Algerian" size="42.0" />
          </font>
       </Label>
-      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="27.0" layoutY="15.0">
+      <ImageView fitHeight="88.0" fitWidth="270.0" layoutX="19.0" layoutY="15.0">
          <image>
             <Image url="@../images/scroll-png-transparent-image--6.png" />
          </image>
@@ -187,6 +187,9 @@
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="927.0" layoutY="25.0">
          <image>

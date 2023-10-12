@@ -250,6 +250,9 @@
          <font>
             <Font name="Algerian" size="30.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <ImageView fx:id="fireImg" fitHeight="78.0" fitWidth="77.0" layoutX="403.0" layoutY="252.0" mouseTransparent="true" opacity="0.0">
          <image>
