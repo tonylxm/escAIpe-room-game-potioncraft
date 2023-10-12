@@ -216,6 +216,11 @@ public class ChestController {
             } catch (URISyntaxException e) {
               e.printStackTrace();
             }
+
+            // Resetting the position of the key image after it has been dropped
+            keyImg.setLayoutX(78);
+            keyImg.setLayoutY(422);
+            
             //TransitionAnimation.changeScene(pane, AppUi.TREASURE_ROOM, false);
             Scene currentScene = fadeRectangle.getScene();
             currentScene.setRoot(SceneManager.getUiRoot(AppUi.TREASURE_ROOM));
