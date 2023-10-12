@@ -238,7 +238,7 @@
       </ImageView>
       <ImageView fx:id="notificationBack" disable="true" fitHeight="240.0" fitWidth="288.0" layoutX="359.0" layoutY="-18.0" opacity="0.0">
          <image>
-            <Image url="@../images/pngtree-game-notification-quest-banner-glow-vector-art-png-image_6627978.png" />
+            <Image url="@../images/notification-banner.png" />
          </image>
       </ImageView>
       <Label fx:id="notificationText" disable="true" layoutX="389.0" layoutY="52.0" prefHeight="101.0" prefWidth="229.0" wrapText="true">
