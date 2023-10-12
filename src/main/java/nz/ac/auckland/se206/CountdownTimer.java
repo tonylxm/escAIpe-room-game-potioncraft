@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Parent;
@@ -43,6 +45,7 @@ public class CountdownTimer {
   private Label brewingLabel;
   private Label gameOverLabel;
   private Label chestTimerLabel;
+  private SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Constructor for the timer. Sets the timer limit based on the time limit string.
@@ -70,7 +73,7 @@ public class CountdownTimer {
             event -> {
               try {
                 oneSecondPassed();
-              } catch (IOException e) {
+              } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
               }
               updateTimerLabel();
@@ -84,8 +87,9 @@ public class CountdownTimer {
    * is. Otherwise, the timer label is updated. If the seconds are less than 10,
    * 
    * @throws IOException thrown if the game over scene cannot be loaded.
+   * @throws URISyntaxException if the sound file is not found.
    */
-  public void oneSecondPassed() throws IOException {
+  public void oneSecondPassed() throws IOException, URISyntaxException {
     if (currentSeconds == 0 && minutes == 0) {
       handleTimeOut();
       timeline.stop();
@@ -343,9 +347,11 @@ public class CountdownTimer {
    * Logic that occurs when the timer reaches 0 - sets the scene to the game over
    * scene. Only called when the timer reaches 0. This is because the timer is
    * only used in the treasure room.
+   * @throws URISyntaxException  if the sound file is not found.
    */
-  private void handleTimeOut() throws IOException {
+  private void handleTimeOut() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER");
+    soundEffects.playSound("lose.mp3");
     // Using App.setRoot() so that game over occurs in all scenes
     App.setRoot("you-lose");
   }
@@ -361,7 +367,7 @@ public class CountdownTimer {
   public void updateHintLabel(int hints) {
     String text;
     // Setting the appropriate text for the hint label based on the
-    // number of hjints remaining
+    // number of hints remaining
     if (hints < 0) {
       text = "∞ hints";
     } else if (hints == 0) {
