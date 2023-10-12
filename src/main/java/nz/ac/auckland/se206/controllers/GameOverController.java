@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +12,6 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.SoundEffects;
 
 /**
  * Controller for the game over screen. This screen is displayed when the
@@ -31,7 +29,6 @@ public class GameOverController {
   private Rectangle fadeRectangle;
 
   private CountdownTimer countdownTimer;
-  private SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Initialising the glow effect and the drag and drop functionality
@@ -51,12 +48,15 @@ public class GameOverController {
    */
   @FXML
   public void onPlayAgain() throws IOException, URISyntaxException {
+    // Reset game state
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
 
+    // Stopping the currently playing sound effects and music and setting 
+    // the scene to the main menu again.
     MainMenuController.soundEffects.stop();
     App.setRoot("main_menu");
   }
