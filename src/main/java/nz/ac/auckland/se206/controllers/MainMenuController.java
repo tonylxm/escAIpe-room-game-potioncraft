@@ -187,7 +187,6 @@ public class MainMenuController {
   private Difficulty difficulty;
   private TimeLimit timeLimit;
   private String[] options = {"fire", "water", "air"};
-  private SoundEffects soundEffects;
 
   private boolean difficultySelected;
   private boolean timeSelected;
