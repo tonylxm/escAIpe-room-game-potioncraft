@@ -587,7 +587,7 @@ public abstract class RoomController {
     itemDefault();
     // Handling closing the "bag" when clicking off inventory
     if (bagOpened) {
-      soundEffects.playSoundEffect("closeBag.mp3");
+      soundEffects.playSound("closeBag.mp3");
       itemScroll.setOpacity(0);
       bagOpened = false;
       System.out.println("Bag closed");
@@ -682,7 +682,7 @@ public abstract class RoomController {
 
     // If the bag isn't opened already, open it
     if (!bagOpened) {
-      soundEffects.playSoundEffect("openBag.mp3");
+      soundEffects.playSound("openBag.mp3");
       itemScroll.setVvalue(0);
       itemScroll.setContent(null);
       itemScroll.setContent(MainMenuController.getInventory().getBox());

@@ -104,7 +104,7 @@ public class TreasureRoomController extends RoomController {
   public void openBook() throws URISyntaxException {
     System.out.println("TREASURE_ROOM -> BOOK");
     //openBook(AppUi.TREASURE_ROOM, pane);
-    soundEffects.playSoundEffect("openBook.wav");
+    soundEffects.playSound("openBook.wav");
     Scene currentScene = fadeRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
     SceneManager.getBookControllerInstance().fadeIn();

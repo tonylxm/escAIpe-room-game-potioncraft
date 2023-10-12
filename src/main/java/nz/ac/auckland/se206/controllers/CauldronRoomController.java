@@ -465,7 +465,7 @@ public class CauldronRoomController extends RoomController {
       // Handling closing the "bag" when clicking off inventory
       if (bagOpened) {
         itemScroll.setOpacity(0);
-        soundEffects.playSoundEffect("closeBag.mp3");
+        soundEffects.playSound("closeBag.mp3");
         bagOpened = false;
         System.out.println("Bag closed");
       }
@@ -500,7 +500,7 @@ public class CauldronRoomController extends RoomController {
   public void openBook() throws URISyntaxException {
     System.out.println("CAULDRON_ROOM -> BOOK");
     //RoomController.openBook(AppUi.CAULDRON_ROOM, pane);
-    soundEffects.playSoundEffect("openBook.wav");
+    soundEffects.playSound("openBook.wav");
     Scene currentScene = fadeRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
     SceneManager.getBookControllerInstance().fadeIn();

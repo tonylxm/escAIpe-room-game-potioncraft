@@ -246,7 +246,7 @@ public class BookController {
   private void onGoBack() throws URISyntaxException {
     System.out.println("BOOK -> " + SceneManager.currScene);
     //TransitionAnimation.changeScene(pane, SceneManager.currScene, false);
-    soundEffects.playSoundEffect("closeBook.mp3");
+    soundEffects.playSound("closeBook.mp3");
     Scene currentScene = backgroundShade.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(SceneManager.currScene));
     SceneManager.getCurrentController().fadeIn();

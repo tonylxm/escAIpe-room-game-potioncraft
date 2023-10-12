@@ -81,7 +81,7 @@ public class LibraryRoomController extends RoomController {
   public void openBook() throws URISyntaxException {
     System.out.println("LIBRARY_ROOM -> BOOK");
     //openBook(AppUi.LIBRARY_ROOM, pane);
-    soundEffects.playSoundEffect("openBook.wav");
+    soundEffects.playSound("openBook.wav");
     Scene currentScene = fadeRectangle.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.BOOK));
     SceneManager.getBookControllerInstance().fadeIn();
