@@ -369,6 +369,8 @@ public class CountdownTimer {
     // number of hints remaining
     if (hints < 0) {
       text = "∞ hints";
+    } else if (hints == 1) {
+      text = "1 hint";
     } else if (hints == 0) {
       text = "No hints";
     } else {

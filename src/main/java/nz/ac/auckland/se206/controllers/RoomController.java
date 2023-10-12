@@ -905,9 +905,8 @@ public abstract class RoomController {
 
   @FXML
   private void onHintClicked() throws ApiProxyException, IOException {
-    System.out.println("Hint clicked");
     toggleChat(false, 1);
-    inputText.setText("Hint");
+    inputText.setText("Hint please");
     onSendMessage(new ActionEvent());
   }
 
