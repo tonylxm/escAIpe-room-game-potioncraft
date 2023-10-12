@@ -48,12 +48,15 @@ public class GameOverController {
    */
   @FXML
   public void onPlayAgain() throws IOException, URISyntaxException {
+    // Reset game state
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;
     GameState.isBookRiddleResolved = false;
     GameState.isChestOpen = false;
     GameState.areItemsCollected = false;
 
+    // Stopping the currently playing sound effects and music and setting 
+    // the scene to the main menu again.
     MainMenuController.soundEffects.stop();
     App.setRoot("main_menu");
   }
