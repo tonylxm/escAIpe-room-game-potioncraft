@@ -47,7 +47,7 @@ public class GameOverController {
    * @throws URISyntaxException if the sound file is not found.
    */
   @FXML
-  public void onPlayAgain() throws IOException, URISyntaxException {
+  private void onPlayAgain() throws IOException, URISyntaxException {
     // Reset game state
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;

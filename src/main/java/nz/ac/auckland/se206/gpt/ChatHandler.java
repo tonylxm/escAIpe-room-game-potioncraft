@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
@@ -19,6 +21,7 @@ public class ChatHandler {
   private ChatCompletionRequest chatCompletionRequest;
   private Choice result;
   private Task<Void> appendTask;
+  private boolean ttsOn;
 
   /**
    * Initialises the chat handler. This is the default chat handler for the
@@ -31,6 +34,7 @@ public class ChatHandler {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2)
           .setTopP(0.5).setMaxTokens(100);
+    ttsOn = false;
   }
 
   /**
@@ -158,5 +162,42 @@ public class ChatHandler {
    */
   public void setAppendTask(Task<Void> appendTask) {
     this.appendTask = appendTask;
+  }
+
+  /**
+   * Handles the text to speech button. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
+  public void onReadGameMasterResponse(TextArea chatTextArea, ImageView cancelTtsBtn) {
+    // Using concurency to prevent the system freezing
+    if (!ttsOn) {
+      ttsOn = true;
+      cancelTtsBtn.setDisable(false);
+      cancelTtsBtn.setOpacity(1);
+      Task<Void> speakTask = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+          App.textToSpeech.speak(chatTextArea.getText());
+          return null;
+        }
+      };
+      new Thread(speakTask).start();
+      speakTask.setOnSucceeded(e -> {
+        ttsOn = false;
+        cancelTtsBtn.setDisable(true);
+        cancelTtsBtn.setOpacity(0);
+      });
+    }
+  }
+
+  /**
+   * Handles the cancel text to speech button. Only called when the
+   * continue button is clicked. Only called when the mouse enters the button.
+   */
+  public void onCancelTts(ImageView cancelTtsBtn) {
+    ttsOn = false;
+    cancelTtsBtn.setDisable(true);
+    cancelTtsBtn.setOpacity(0);
+    App.textToSpeech.stop();
   }
 }
