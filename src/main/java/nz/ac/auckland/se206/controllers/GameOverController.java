@@ -12,7 +12,6 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.SoundEffects;
 
 /**
  * Controller for the game over screen. This screen is displayed when the
@@ -30,7 +29,6 @@ public class GameOverController {
   private Rectangle fadeRectangle;
 
   private CountdownTimer countdownTimer;
-  private SoundEffects soundEffects = new SoundEffects();
 
   /**
    * Initialising the glow effect and the drag and drop functionality
