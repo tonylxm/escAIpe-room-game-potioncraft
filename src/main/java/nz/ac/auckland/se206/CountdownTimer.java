@@ -2,7 +2,6 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Parent;

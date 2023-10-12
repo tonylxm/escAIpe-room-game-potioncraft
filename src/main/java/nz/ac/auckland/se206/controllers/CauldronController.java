@@ -406,7 +406,7 @@ public class CauldronController {
         resetItems();
       } else if (cauldronItems.size() > 5) {
         notificationText.setText("Too many ingredients!");
-         soundEffects.playSound("spell.mp3");
+        soundEffects.playSound("spell.mp3");
         resetItems();
       }
       Notification.notifyPopup(notificationBack, notificationText);
