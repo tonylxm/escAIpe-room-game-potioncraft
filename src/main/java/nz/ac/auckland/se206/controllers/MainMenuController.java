@@ -180,6 +180,7 @@ public class MainMenuController {
    * @return the countdown timer.
    */
   public static CountdownTimer getCountdownTimer() {
+    System.out.println("getting timer");
     return countdownTimer;
   }
 
@@ -304,20 +305,6 @@ public class MainMenuController {
     timeMouseActions(sixMinBtn, sixMinBtnClicked, sixMin, TimeLimit.SIX_MIN);
     sixMinBtn.setOnMouseExited(event -> timeLimitHoverOff(
         sixMinBtn, sixMinBtnClicked, sixMin));
-
-    // Pregenerate wizard intro message
-    // Task<Void> introTask =
-    //     new Task<Void>() {
-    //       @Override
-    //       protected Void call() throws Exception {
-    //         // FIX no click off
-    //         introMsg = new ChatMessage("Wizard", 
-    //             chatHandler.runGpt(GptPromptEngineering.getIntroMsg()));
-    //         return null;
-    //       }
-    //     };
-    // new Thread(introTask).start();
-    // System.out.println(introMsg);
   }
 
   /**
