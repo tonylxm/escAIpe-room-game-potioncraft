@@ -527,7 +527,7 @@ public class MainMenuController {
    * the play button is clicked. Only called when the mouse enters the button.
    */
   @FXML
-  public void playGame() throws InterruptedException, IOException {
+  private void onPlayGame() throws InterruptedException, IOException {
     // Initialising the book and the chat handler whenever a new game is started from the
     // play button to have enough time to intialise the chat messages
     chatHandler = new ChatHandler();
@@ -653,7 +653,7 @@ public class MainMenuController {
    * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
-  public void onContinueGame() {
+  private void onContinueGame() {
     continueBtn.setDisable(true);
     continueBtn.setOpacity(0.4);
     // Using a task to make sure game does not freeze
@@ -678,7 +678,7 @@ public class MainMenuController {
    * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
-  public void onContinueGameOne() {
+  private void onContinueGameOne() {
     continueBtnOne.setDisable(true);
     continueBtnOne.setOpacity(0.4);
 
@@ -1013,7 +1013,7 @@ public class MainMenuController {
    * @throws IOException the exception thrown when the file is not found.
    */
   @FXML
-  public void onStartGame() throws IOException, URISyntaxException {
+  private void onStartGame() throws IOException, URISyntaxException {
     System.out.println("MAIN MENU -> CAULDRON_ROOM");
     disableAndOrFadeTimeBtns(true, 0, false);
     // TransitionAnimation.changeScene(
@@ -1074,7 +1074,7 @@ public class MainMenuController {
    * 
    * @return the difficulty selected.
    */
-  public Difficulty geDifficulty() {
+  public Difficulty getDifficulty() {
     return difficulty;
   }
 

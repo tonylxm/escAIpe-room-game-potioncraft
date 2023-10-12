@@ -49,6 +49,7 @@ public class GameOverController {
    * @throws IOException if the main menu fxml file cannot be found.
    * @throws URISyntaxException if the sound file is not found.
    */
+  @FXML
   public void onPlayAgain() throws IOException, URISyntaxException {
     System.out.println("GAME_OVER -> MAIN_MENU");
     GameState.isBookRiddleGiven = false;

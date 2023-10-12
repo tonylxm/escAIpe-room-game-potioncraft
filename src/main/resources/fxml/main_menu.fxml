@@ -20,7 +20,7 @@
                   <Image url="@../images/cauldron-room.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="playBtn" layoutX="450.0" layoutY="609.0" mnemonicParsing="false" onAction="#playGame" text="PLAY" textFill="WHITE">
+            <Button fx:id="playBtn" layoutX="450.0" layoutY="609.0" mnemonicParsing="false" onAction="#onPlayGame" text="PLAY" textFill="WHITE">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>
