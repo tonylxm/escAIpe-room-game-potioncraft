@@ -403,11 +403,9 @@ public class CauldronController {
       }
       if (cauldronItems.size() < 5) {
         notificationText.setText("Add more ingredients!");
-        resetItems();
       } else if (cauldronItems.size() > 5) {
         notificationText.setText("Too many ingredients!");
         soundEffects.playSound("spell.mp3");
-        resetItems();
       }
       Notification.notifyPopup(notificationBack, notificationText);
       return;
@@ -433,7 +431,6 @@ public class CauldronController {
         System.out.println("Potion not brewed");
         notificationText.setText("Wrong order!");
         Notification.notifyPopup(notificationBack, notificationText);
-        resetItems();
       }
     }
   }
