@@ -910,25 +910,7 @@ public abstract class RoomController {
    */
   @FXML
   private void onReadGameMasterResponse() {
-    // Using concurency to prevent the system freezing
-    if (!ttsOn) {
-      ttsOn = true;
-      cancelTtsBtn.setDisable(false);
-      cancelTtsBtn.setOpacity(1);
-      Task<Void> speakTask = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-          App.textToSpeech.speak(chatTextArea.getText());
-          return null;
-        }
-      };
-      new Thread(speakTask).start();
-      speakTask.setOnSucceeded(e -> {
-        ttsOn = false;
-        cancelTtsBtn.setDisable(true);
-        cancelTtsBtn.setOpacity(0);
-      });
-    }
+    MainMenuController.getChatHandler().onReadGameMasterResponse(chatTextArea, cancelTtsBtn);
   }
 
   /**
@@ -936,11 +918,8 @@ public abstract class RoomController {
    * in the library and treasure room. 
    */
   @FXML
-  public void onCancelTts() {
-    ttsOn = false;
-    cancelTtsBtn.setDisable(true);
-    cancelTtsBtn.setOpacity(0);
-    App.textToSpeech.stop();
+  private void onCancelTts() {
+    MainMenuController.getChatHandler().onCancelTts(cancelTtsBtn);
   }
 
   /**

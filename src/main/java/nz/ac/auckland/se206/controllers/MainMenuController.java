@@ -255,7 +255,6 @@ public class MainMenuController {
   private boolean sixMinBtnClicked;
 
   private String introMsg;
-  private boolean ttsOn;
   private boolean appendIntroMsgFinished;
 
   /**
@@ -272,7 +271,6 @@ public class MainMenuController {
     TransitionAnimation.setMasterPane(masterPane);
     difficultySelected = false;
     timeSelected = false;
-    ttsOn = false;
     appendIntroMsgFinished = false;
     interactionHandler = new ShapeInteractionHandler();
     soundEffects.playSound("mainMenuTheme.mp3");
@@ -1022,25 +1020,7 @@ public class MainMenuController {
    */
   @FXML
   private void onReadGameMasterResponse() {
-    // Using concurency to prevent the system freezing
-    if (!ttsOn) {
-      ttsOn = true;
-      cancelTtsBtn.setDisable(false);
-      cancelTtsBtn.setOpacity(1);
-      Task<Void> speakTask = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-          App.textToSpeech.speak(chatTextArea.getText());
-          return null;
-        }
-      };
-      new Thread(speakTask).start();
-      speakTask.setOnSucceeded(e -> {
-        ttsOn = false;
-        cancelTtsBtn.setDisable(true);
-        cancelTtsBtn.setOpacity(0);
-      });
-    }
+    chatHandler.onReadGameMasterResponse(chatTextArea, cancelTtsBtn);
   }
 
   /**
@@ -1049,10 +1029,7 @@ public class MainMenuController {
    */
   @FXML
   private void onCancelTts() {
-    ttsOn = false;
-    cancelTtsBtn.setDisable(true);
-    cancelTtsBtn.setOpacity(0);
-    App.textToSpeech.stop();
+    chatHandler.onCancelTts(cancelTtsBtn);
   }
 
   /**
