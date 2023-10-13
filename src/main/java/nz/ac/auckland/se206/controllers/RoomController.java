@@ -582,6 +582,8 @@ public abstract class RoomController {
     System.out.println("click off");
     setText("", false, false);
     toggleChat(true, 0);
+    loadingImage.setOpacity(0);
+    loadingImage.setDisable(true);
     TransitionAnimation.fade(cancelTtsBtn, 0.0);
     cancelTtsBtn.setDisable(true);
     itemDefault();

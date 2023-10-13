@@ -463,6 +463,8 @@ public class CauldronRoomController extends RoomController {
       toggleChat(true, 0);
       toggleBooks(true, 0);
       itemDefault();
+      loadingImage.setOpacity(0);
+      loadingImage.setDisable(true);
 
       TransitionAnimation.fade(cancelTtsBtn, 0.0);
       cancelTtsBtn.setDisable(true);
