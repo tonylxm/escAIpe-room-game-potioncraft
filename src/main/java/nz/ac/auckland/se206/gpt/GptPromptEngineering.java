@@ -131,7 +131,8 @@ public class GptPromptEngineering {
    * @return the prompt for easy mode.
    */
   public static String getUnresolved() {
-    return "The user has unsuccessfully solved the book riddle. Tell them to try again in one line.";
+    return "The user has unsuccessfully solved the book riddle."
+        + " Tell them to try again in one line.";
   }
 
   /**

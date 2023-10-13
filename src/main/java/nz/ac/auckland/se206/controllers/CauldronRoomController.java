@@ -214,7 +214,7 @@ public class CauldronRoomController extends RoomController {
    * method to handle the user clicking on the book fire.
    * 
    * @param event The mouse event.
-   * @throws URISyntaxException
+   * @throws URISyntaxException The URI is invalid.
    */
   @FXML
   public void clickBookFire(MouseEvent event) throws URISyntaxException {
@@ -226,7 +226,7 @@ public class CauldronRoomController extends RoomController {
    * method to handle the user clicking on the book water.
    * 
    * @param event The mouse event.
-   * @throws URISyntaxException
+   * @throws URISyntaxException The URI is invalid.
    */
   @FXML
   public void clickBookWater(MouseEvent event) throws URISyntaxException {
@@ -238,7 +238,7 @@ public class CauldronRoomController extends RoomController {
    * method to handle the user clicking on the book air.
    * 
    * @param event The mouse event.
-   * @throws URISyntaxException
+   * @throws URISyntaxException The URI is invalid.
    */
   @FXML
   public void clickBookAir(MouseEvent event) throws URISyntaxException {
@@ -253,7 +253,7 @@ public class CauldronRoomController extends RoomController {
    * @param element The element of the book.
    * @param bookImage The book image.
    * @param bookRectangle The book rectangle.
-   * @throws URISyntaxException
+   * @throws URISyntaxException If the URI is invalid.
    */
   private void handleClickBooks(
       String element, ImageView bookImage, ImageView bookRectangle) throws URISyntaxException {
@@ -501,6 +501,7 @@ public class CauldronRoomController extends RoomController {
   /**
    * Taking the user to the book scene from the room scene. Only
    * called when the user is clicking the recipe book button.
+   * 
    * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML

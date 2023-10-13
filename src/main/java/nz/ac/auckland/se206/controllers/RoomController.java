@@ -905,12 +905,22 @@ public abstract class RoomController {
     }
   }
 
+  /**
+   * Automatically gives hints if hints can be given when hint label is clicked.
+   * Used in all three main room scenes. Implemented for user intuitivity.
+   * 
+   * @throws ApiProxyException if there is an error communicating with the API proxy.
+   * @throws IOException if there is an I/O error.
+   * @throws URISyntaxException if there is an error in the URI syntax.
+   */
   @FXML
   private void onHintClicked() throws ApiProxyException, IOException, URISyntaxException {
     if (!GameState.isBookRiddleResolved) {
+      // Cannot give hints if you have not interacted with the wizard already
       notificationText.setText("The Wizard has some instructions for you! Talk to him first!");
       Notification.notifyPopup(notificationBack, notificationText);
     } else {     
+      // Sending hint message to GPT to get a hint back
       toggleChat(false, 1);
       inputText.setText("Hint please");
       onSendMessage(new ActionEvent());
@@ -993,5 +1003,16 @@ public abstract class RoomController {
       }
     }
     return count == 5;
+  }
+
+  /**
+   * Returns the text to speech button. Only used for the text to speech button in the
+   * different rooms of the game. Lets the program know if the text to speech function
+   * is being used or not.
+   * 
+   * @return boolean whether the text to speech function is being used or not.
+   */
+  public boolean getTestToSpeechState() {
+    return ttsOn;
   }
 }
