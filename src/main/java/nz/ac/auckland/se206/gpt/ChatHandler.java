@@ -26,7 +26,7 @@ public class ChatHandler {
   /**
    * Initialises the chat handler. This is the default chat handler for the
    * wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @throws ApiProxyException If there is an error communicating with the API proxy.
    */
   @FXML
@@ -40,7 +40,7 @@ public class ChatHandler {
   /**
    * Initialises the chat handler for the potion name. This is used for the
    * wizard's responses to the user when the user is naming a potion.
-   * 
+   *
    * @throws ApiProxyException If there is an error communicating with the API proxy.
    */
   @FXML
@@ -53,7 +53,7 @@ public class ChatHandler {
   /**
    * Runs the GPT model with a given chat message. This is the default chat
    * handler for the wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @param msgContent the chat message to process.
    * @return the response chat message.
    * @throws ApiProxyException if there is an error communicating with the API proxy.
@@ -77,7 +77,7 @@ public class ChatHandler {
   /**
    * Appends a chat message to the chat text area. This is the default chat
    * handler for the wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @param msg the chat message to append.
    * @param chatTextArea the chat text area to append the message to.
    * @param inputText the input text field to disable while the wizard is typing.
@@ -127,7 +127,7 @@ public class ChatHandler {
   /**
    * Appends a chat message to the chat text area. This is the default chat
    * handler for the wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @param result the chat message to append.
    */
   public void setResult(Choice result) {
@@ -137,7 +137,7 @@ public class ChatHandler {
   /**
    * Appends a chat message to the chat text area. This is the default chat
    * handler for the wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @return the chat message to append.
    */
   public Choice getResult() {
@@ -147,7 +147,7 @@ public class ChatHandler {
   /**
    * Appends a chat message to the chat text area. This is the default chat
    * handler for the wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @return the chat message to append.
    */
   public Task<Void> getAppendTask() {
@@ -157,7 +157,7 @@ public class ChatHandler {
   /**
    * Appends a chat message to the chat text area. This is the default chat
    * handler for the wizard. It is used for the wizard's responses to the user.
-   * 
+   *
    * @param appendTask the chat message to append.
    */
   public void setAppendTask(Task<Void> appendTask) {

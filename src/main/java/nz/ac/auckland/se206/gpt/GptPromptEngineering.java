@@ -5,7 +5,7 @@ public class GptPromptEngineering {
   /**
    * GPT generates a prompt for the user to introduce themselves to the wizard. Prompt for the
    * Voldemort 'hard' mode of the game.
-   * 
+   *
    * @return the prompt.
    */
   public static String getIntroMsg() {
@@ -18,7 +18,7 @@ public class GptPromptEngineering {
    * GPT generates a riddle for the user to solve to get the correct book. GPT does not 
    * give the user any hints no matter what. Prompt for the Voldemort 'hard' mode of the 
    * game.
-   * 
+   *
    * @param book the correct book to be used in the riddle.
    * @return the prompt for hard mode.
    */
@@ -49,7 +49,7 @@ public class GptPromptEngineering {
    * GPT generates a riddle for the user to solve to get the correct book. GPT also 
    * allows the user to asks an unrestricted number of hints. Prompt for the Dobby 
    * 'easy' mode of the game.
-   * 
+   *
    * @param book the correct book to be used in the riddle.
    * @return the prompt for easy mode.
    */
@@ -85,7 +85,7 @@ public class GptPromptEngineering {
    * GPT generates a riddle for the user to solve to get the correct book. GPT only allows 
    * the user to ask five hints, keeping track of them and not giving the user any more 
    * after they have used up all five. Prompt for the Harry 'medium' mode of the game.
-   * 
+   *
    * @param book the correct book to be used in the riddle.
    * @return the prompt for medium mode.
    */
@@ -127,7 +127,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user selected the correct book. Gives context for what 
    * future hints should be about too for the easy mode.
-   * 
+   *
    * @return the prompt for easy mode.
    */
   public static String getUnresolved() {
@@ -138,7 +138,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user selected the correct book. Gives context for what 
    * future hints should be about too for the easy mode.
-   * 
+   *
    * @return the prompt for easy mode.
    */
   public static String getEasyResolved() {
@@ -160,7 +160,7 @@ public class GptPromptEngineering {
    * To be sent to GPT after the user selected the correct book. Gives context for 
    * what future hints should be about too for the medium mode. Counts the number of
    * hints the user has used along side the ones used for the riddle.
-   * 
+   *
    * @return the prompt for medium mode.
    */
   public static String getMediumResolved() {
@@ -191,7 +191,7 @@ public class GptPromptEngineering {
   /**
    * To be send to GPT after the user selected the correct book. DOes not give any 
    * more hints about how to solve the room because of hard mode.
-   * 
+   *
    * @return the prompt for hard mode.
    */
   public static String getHardResolved() {
@@ -212,7 +212,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has opened the chest. Does not give any more
    * hints about how to solve the room because of easy mode.
-   * 
+   *
    * @return the prompt for easy mode.
    */
   public static String getEasyChestOpened() {
@@ -232,7 +232,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has opened the chest. Counts the number of hints
    * the user has used along side the ones used for the riddle.
-   * 
+   *
    * @return the prompt for medium mode.
    */
   public static String getMediumChestOpened() {
@@ -258,7 +258,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has opened the chest. Does not give any more
    * hints about how to solve the room because of hard mode.
-   * 
+   *
    * @return the prompt for hard mode.
    */
   public static String getHardChestOpened() {
@@ -280,7 +280,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has collected all the items. Does not give any
    * more hints about how to solve the room because of easy mode.
-   * 
+   *
    * @return the prompt for easy mode.
    */
   public static String getEasyItemsCollected() {
@@ -301,7 +301,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has collected all the items. Counts the number of
    * hints the user has used along side the ones used for the riddle.
-   * 
+   *
    * @return the prompt for medium mode.
    */
   public static String getMediumItemsCollected() {
@@ -328,7 +328,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has collected all the items. Does not give any
    * more hints about how to solve the room because of hard mode.
-   * 
+   *
    * @return the prompt for hard mode.
    */
   public static String getHardItemsCollected() {
@@ -349,7 +349,7 @@ public class GptPromptEngineering {
   /**
    * To be sent to GPT after the user has brewed the potion. Does not give any more
    * hints about how to solve the room because of easy mode.
-   * 
+   *
    * @return the prompt for potion name.
    */
   public static String getPotionName() {

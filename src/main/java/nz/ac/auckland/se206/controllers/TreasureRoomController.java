@@ -97,6 +97,7 @@ public class TreasureRoomController extends RoomController {
   /** 
    * Changing scenes to book view. Only called when the book is clicked.
    * This is because the book is the only way to get to the book view.
+   *
    * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML

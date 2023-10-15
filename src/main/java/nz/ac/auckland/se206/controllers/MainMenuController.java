@@ -898,7 +898,7 @@ public class MainMenuController {
   }
 
   /**
-   *  Handles the time limit selection. Only called when the
+   * Handles the time limit selection. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
@@ -994,7 +994,7 @@ public class MainMenuController {
   /**
    * Handles the start button to start the game. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
-   * 
+   *
    * @throws IOException the exception thrown when the file is not found.
    */
   @FXML
@@ -1035,7 +1035,7 @@ public class MainMenuController {
   /**
    * Handles the exit button. Only called when the exit button is clicked.
    * Only called when the mouse enters the button.
-   * 
+   *
    * @return the difficulty selected.
    */
   public Difficulty getDifficulty() {
