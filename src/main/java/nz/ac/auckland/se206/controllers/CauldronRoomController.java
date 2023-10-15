@@ -356,6 +356,9 @@ public class CauldronRoomController extends RoomController {
         protected Void call() throws Exception {
           // Running gpt after the riddle has been resolved to congratulate
           // the user and tell GPT what hints to give next
+          loadingImage.setOpacity(1);
+          loadingImage.setDisable(false);
+          chatTextArea.setText("");
           ChatMessage msg = new ChatMessage(
               "Wizard", MainMenuController.getChatHandler().runGpt(
               MainMenuController.getResolvedMessage()));
@@ -368,6 +371,8 @@ public class CauldronRoomController extends RoomController {
       resolvedTask.setOnSucceeded(e -> {
         mouseTrackRegion.setCursor(Cursor.HAND);
         mouseTrackRegion.setDisable(false);
+        loadingImage.setOpacity(0);
+        loadingImage.setDisable(true);
       });
     } else {
       // Wrong book selected
