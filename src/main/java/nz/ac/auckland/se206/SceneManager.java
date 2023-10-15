@@ -73,7 +73,7 @@ public class SceneManager {
   /**
    * Adds scene ui to the sceneMap. Used to add the scene ui to the sceneMap.
    * Doesn't return anything. Only adds the scene ui to the sceneMap.
-   * 
+   *
    * @param appUi the scene ui.
    * @param root the root of the scene.
    */
@@ -84,7 +84,7 @@ public class SceneManager {
   /**
    * Returns the root of the scene. Used to get the root of the scene. Doesn't return anything.
    * Returns the root of the scene.
-   * 
+   *
    * @param appUi the root of the scene.
    * @return the root of the scene.
    */
@@ -95,7 +95,7 @@ public class SceneManager {
   /**
    * Sets the current scene. Used to set the current scene. Doesn't return anything.
    * Only sets the current scene. 
-   * 
+   *
    * @param appUi the current scene.
    */
   public static void setTimerScene(AppUi appUi) {
@@ -109,7 +109,7 @@ public class SceneManager {
   /**
    * Returns the current scene. Used to get the current scene. Doesn't return anything.
    * Returns the current scene.
-   * 
+   *
    * @return the current scene.
    */
   public static AppUi getTimerScene() {
@@ -119,7 +119,7 @@ public class SceneManager {
   /**
    * Sets the GameOverController instance. Used to set the GameOverController instance.
    * Doesn't return anything. Only sets the GameOverController instance.
-   * 
+   *
    * @param controller the GameOverController instance.
    */
   public static void setGameOverControllerInstance(GameOverController controller) {
@@ -129,7 +129,7 @@ public class SceneManager {
   /**
    * Returns the GameOverController instance. Used to get the GameOverController instance.
    * Doesn't return anything. Returns the GameOverController instance.
-   * 
+   *
    * @return the GameOverController instance.
    */
   public static GameOverController getGameOverControllerInstance() {
@@ -139,7 +139,7 @@ public class SceneManager {
   /**
    * Sets the CauldronController instance. Used to set the CauldronController instance.
    * Doesn't return anything. Only sets the CauldronController instance.
-   * 
+   *
    * @param controller the CauldronController instance.
    */
   public static void setCauldronControllerInstance(CauldronController controller) {
@@ -149,7 +149,7 @@ public class SceneManager {
   /**
    * Returns the CauldronController instance. Used to get the CauldronController instance.
    * Doesn't return anything. Returns the CauldronController instance.
-   * 
+   *
    * @return the CauldronController instance.
    */
   public static CauldronController getCauldronControllerInstance() {
@@ -159,7 +159,7 @@ public class SceneManager {
   /**
    * Sets the BookController instance. Used to set the BookController instance.
    * Doesn't return anything. Only sets the BookController instance.
-   * 
+   *
    * @param controller the BookController instance.
    */
   public static void setBookControllerInstance(BookController controller) {
@@ -169,7 +169,7 @@ public class SceneManager {
   /**
    * Returns the BookController instance. Only returns the BookController instance.
    * Doesn't return anythingelse.
-   * 
+   *
    * @return the BookController instance.
    */
   public static BookController getBookControllerInstance() {
@@ -179,7 +179,7 @@ public class SceneManager {
   /**
    * Sets the LibraryRoomController instance. Used to set the LibraryRoomController instance.
    * Doesn't return anything. 
-   * 
+   *
    * @param controller the LibraryRoomController instance.
    */
   public static void setLibraryRoomControllerInstance(LibraryRoomController controller) {
@@ -189,7 +189,7 @@ public class SceneManager {
   /**
    * Returns the LibraryRoomController instance. Used to set the LibraryRoomController instance.
    * Doesn't return anything. Returns the LibraryRoomController instance.
-   * 
+   *
    * @return the LibraryRoomController instance.
    */
   public static LibraryRoomController getLibraryRoomControllerInstance() {
@@ -199,7 +199,7 @@ public class SceneManager {
   /**
    * Sets the TreasureRoomController instance. Used to set the TreasureRoomController instance.
    * Doesn't return anything.
-   * 
+   *
    * @param controller the TreasureRoomController instance.
    */
   public static void setTreasureRoomControllerInstance(TreasureRoomController controller) {
@@ -209,7 +209,7 @@ public class SceneManager {
   /**
    * Returns the TreasureRoomController instance. Used to set the TreasureRoomController instance.
    * Doesn't return anything. Returns the TreasureRoomController instance.
-   * 
+   *
    * @return the TreasureRoomController instance.
    */
   public static TreasureRoomController getTreasureRoomControllerInstance() {
@@ -219,7 +219,7 @@ public class SceneManager {
   /**
    * Sets the CauldronRoomController instance. Used to set the CauldronRoomController instance.
    * Doesn't return anything.
-   * 
+   *
    * @param controller the CauldronRoomController instance.
    */
   public static void setCauldronRoomControllerInstance(CauldronRoomController controller) {
@@ -229,7 +229,7 @@ public class SceneManager {
   /**
    * Returns the CauldronRoomController instance. Used to set the CauldronRoomController instance.
    * Doesn't return anything. Returns the CauldronRoomController instance.
-   * 
+   *
    * @return the CauldronRoomController instance.
    */
   public static CauldronRoomController getCauldronRoomControllerInstance() {
@@ -239,7 +239,7 @@ public class SceneManager {
   /**
    * Sets the ChestController instance. Used to set the ChestController instance.
    * Returns the ChestController instance.
-   * 
+   *
    * @return the ChestController instance.
    */
   public static ChestController getChestControllerInstance() {
@@ -249,7 +249,7 @@ public class SceneManager {
   /**
    * Returns the ChestController instance. Used to set the ChestController instance.
    * Doesn't return anything.
-   * 
+   *
    * @param chestControllerInstance the ChestController instance.
    */
   public static void setChestControllerInstance(ChestController chestControllerInstance) {

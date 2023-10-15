@@ -138,7 +138,7 @@ public class ChestController {
    * Setting up drag and drop functionality for the key image.
    * When dropped on the glowing light image, the key will be put into the chest, unlocking
    * the other items in the treasure room, then moving to the treasure room.
-   * 
+   *
    * @param itemImageView the image needing to be dragged and dropped.
    */
   @FXML

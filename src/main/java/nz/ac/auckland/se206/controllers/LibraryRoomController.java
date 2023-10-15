@@ -57,7 +57,7 @@ public class LibraryRoomController extends RoomController {
    * Changing scenes to the cauldron room. Only called when the arrow is clicked.
    * The go right is the only scene transition in the scene, so only needs to handle going to the 
    * cauldron room.
-   * 
+   *
    * @param event the mouse event that triggered the method.
    */
   @FXML
@@ -74,6 +74,7 @@ public class LibraryRoomController extends RoomController {
   /** 
    * Changing scenes to book view. Only called when the book is clicked.
    * Making sure the book is not already clicked. If it is, then the book is opened.
+   *
    * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML
