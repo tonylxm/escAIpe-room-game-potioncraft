@@ -396,8 +396,8 @@ public class MainMenuController {
   public void difficultySelect(Difficulty gameDifficulty) {
     difficultySelected = true;
     switch (gameDifficulty) {
-        // Easiest level granting unlimited hints
       case EASY:
+        // Easiest level granting unlimited hints
         interactionHandler.glowThis(easyBtn);
         hints = -1;
         hintInfinity.setOpacity(1);
@@ -409,8 +409,8 @@ public class MainMenuController {
         interactionHandler.unglowThis(hardBtn);
         hardBtnClicked = false;
         break;
-        // Medium level capping hints at 5
       case MEDIUM:
+        // Medium level capping hints at 5
         difficulty = Difficulty.MEDIUM;
         interactionHandler.glowThis(mediumBtn);
         hints = 5;
@@ -423,8 +423,8 @@ public class MainMenuController {
         interactionHandler.unglowThis(hardBtn);
         hardBtnClicked = false;
         break;
-        // No hints are allowed to be given on hard level
       case HARD:
+        // No hints are allowed to be given on hard level
         difficulty = Difficulty.HARD;
         interactionHandler.glowThis(hardBtn);
         hints = 0;
