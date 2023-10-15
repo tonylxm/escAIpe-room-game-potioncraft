@@ -37,7 +37,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView id="itemElevenImg" fx:id="itemElevenImg" disable="true" fitHeight="88.0" fitWidth="35.0" layoutX="134.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" rotate="-165.7" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
+      <ImageView id="itemElevenImg" fx:id="itemElevenImg" disable="true" fitHeight="88.0" fitWidth="35.0" layoutX="134.0" layoutY="212.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" rotate="-165.7" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
          <image>
             <Image url="@../images/bone.png" />
          </image>
