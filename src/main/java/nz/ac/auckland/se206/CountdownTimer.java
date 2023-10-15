@@ -23,7 +23,7 @@ public class CountdownTimer {
    * Sets the timer limit based on the time limit string. Called when the timer
    * is first created. This is because the timer is only used in the treasure
    * room.
-   * 
+   *
    * @param timeLimit the time limit string.
    */
   public static void setTimerLimit(String timeLimit) {
@@ -49,7 +49,7 @@ public class CountdownTimer {
   /**
    * Constructor for the timer. Sets the timer limit based on the time limit string.
    * Calls setTimeline() to set up the timer. Only called when the timer reaches 0.
-   * 
+   *
    * @param timeLimit the time limit string.
    */
   public CountdownTimer(String timeLimit) {
@@ -84,7 +84,7 @@ public class CountdownTimer {
   /**
    * Logic that occurs every second. If the timer reaches 0, the game over scene
    * is. Otherwise, the timer label is updated. If the seconds are less than 10,
-   * 
+   *
    * @throws IOException thrown if the game over scene cannot be loaded.
    * @throws URISyntaxException if the sound file is not found.
    */
@@ -174,7 +174,7 @@ public class CountdownTimer {
    * are less than 10, the seconds are displayed as 0s. If the minutes are 0 and
    * the seconds are odd, the timer label is red. If the minutes are 0 and the
    * seconds are even, the timer label is black.
-   * 
+   *
    * @return the formatted timer text.
    */
   public String formatTimerText() {
@@ -198,7 +198,7 @@ public class CountdownTimer {
    * Sets the timer label to red on certain timer values. Only called when the
    * timer reaches 0. This is because the timer is only used in the treasure
    * room.
-   * 
+   *
    * @param timer1 the timer label for the cauldron room.
    * @param timer2 the timer label for the library room.
    * @param timer3 the timer label for the treasure room.
@@ -217,7 +217,7 @@ public class CountdownTimer {
   /**
    * Sets the timer label to black. Only called when the timer reaches 0. This
    * is because the timer is only used in the treasure room.
-   * 
+   *
    * @param timer1 the timer label for the cauldron room.
    * @param timer2 the timer label for the library room.
    * @param timer3 the timer label for the treasure room.
@@ -237,7 +237,7 @@ public class CountdownTimer {
    * Sets the timer label for the cauldron room. Only called when the cauldron
    * room is opened. This is because the cauldron room is the only way to get to
    * the cauldron room.
-   * 
+   *
    * @param cauldronTimerLabel the timer label for the cauldron room.
    */
   public void setCauldronTimerLabel(Label cauldronTimerLabel) {
@@ -248,7 +248,7 @@ public class CountdownTimer {
    * Sets the hint label for the cauldron room. Only called when the cauldron
    * room is opened. This is because the cauldron room is the only way to get to
    * the cauldron room.
-   * 
+   *
    * @param cauldronHintLabel the hint label for the cauldron room.
    */
   public void setCauldronHintLabel(Label cauldronHintLabel) {
@@ -259,7 +259,7 @@ public class CountdownTimer {
    * Sets the timer label for the library room. Only called when the library room
    * is opened. This is because the library room is the only way to get to the
    * library room.
-   * 
+   *
    * @param libraryTimerLabel the timer label for the library room.
    */
   public void setLibraryTimerLabel(Label libraryTimerLabel) {
@@ -270,7 +270,7 @@ public class CountdownTimer {
    * Sets the hint label for the library room. Only called when the library room
    * is opened. This is because the library room is the only way to get to the
    * library room.
-   * 
+   *
    * @param libraryHintLabel the hint label for the library room.
    */
   public void setLibraryHintLabel(Label libraryHintLabel) {
@@ -281,7 +281,7 @@ public class CountdownTimer {
    * Sets the timer label for the treasure room. Only called when the treasure
    * room is opened. This is because the treasure room is the only way to get to
    * the treasure room.
-   * 
+   *
    * @param rightTimerLabel the timer label for the treasure room.
    */
   public void setTreasureTimerLabel(Label rightTimerLabel) {
@@ -292,7 +292,7 @@ public class CountdownTimer {
    * Sets the hint label for the treasure room. Only called when the treasure
    * room is opened. This is because the treasure room is the only way to get to
    * the treasure room.
-   * 
+   *
    * @param rightHintLabel the hint label for the treasure room.
    */
   public void setTreasureHintLabel(Label rightHintLabel) {
@@ -303,7 +303,7 @@ public class CountdownTimer {
    * Sets the timer label for the book view. Only called when the book view is
    * opened. This is because the book view is the only way to get to the book
    * view.
-   * 
+   *
    * @param bookTimerLabel the timer label for the book view.
    */
   public void setBookTimerLabel(Label bookTimerLabel) {
@@ -314,7 +314,7 @@ public class CountdownTimer {
    * Sets the timer label for the brewing view. Only called when the brewing
    * view is opened. This is because the brewing view is the only way to get to
    * the brewing view.
-   * 
+   *
    * @param timerLabel the timer label for the brewing view.
    */
   public void setBrewingLabel(Label timerLabel) {
@@ -324,7 +324,7 @@ public class CountdownTimer {
   /**
    * Sets the timer label for the game over view. Only called when the timer
    * reaches 0. This is because the timer is only used in the treasure room.
-   * 
+   *
    * @param gameOverLabel the timer label for the game over view.
    */
   public void setGameOverLabel(Label gameOverLabel) {
@@ -335,7 +335,7 @@ public class CountdownTimer {
    * Sets the timer label for the chest view. Only called when the chest is
    * clicked. This is because the chest is the only way to get to the chest
    * view.
-   * 
+   *
    * @param chestTimerLabel the timer label for the chest view.
    */
   public void setChestLabel(Label chestTimerLabel) {
@@ -360,7 +360,7 @@ public class CountdownTimer {
    * of hints is less than 0, the hint label displays "∞ hints". If the number
    * of hints is 0, the hint label displays "No hints". Otherwise, the hint
    * label displays the number of hints left.
-   * 
+   *
    * @param hints the number of hints left.
    */
   public void updateHintLabel(int hints) {

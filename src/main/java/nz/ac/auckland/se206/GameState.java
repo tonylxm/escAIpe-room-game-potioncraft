@@ -21,7 +21,7 @@ public class GameState {
    * Returns the recipe. Used when needing to get the recipe from the
    * RecipeBook and makiong sure everything in the cauldon is in the 
    * correct order.
-   * 
+   *
    * @return the recipe.
    */
   public static ArrayList<Items.Item> getRecipe() {
