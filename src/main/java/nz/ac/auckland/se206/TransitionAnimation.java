@@ -22,7 +22,7 @@ public class TransitionAnimation {
    * Changing scenes to the appropriate scene. Used to change scenes.
    * Only changes scenes if the current scene is not the same as the
    * scene to change to.
-   * 
+   *
    * @param pane the pane to change to.
    */
   public static void setMasterPane(Pane pane) {
@@ -33,7 +33,7 @@ public class TransitionAnimation {
    * Fading in and out of the appropriate scene.
    * For fadeIn, set ocpacity = 1.0.
    * For fadeOut, set ocpacity = 0.0.
-   * 
+   *
    * @param obj the node to fade.
    * @param opacity the opacity to fade to.
    */
@@ -62,7 +62,7 @@ public class TransitionAnimation {
   /**
    * Fading to black inbetween scenes to have a smooth transition. Used to change scenes.
    * Only changes scenes if the current scene is not the same as the scene to change to.
-   * 
+   *
    * @param obj the node to fade.
    * @param appUi the scene to change to.
    * @param mainMenu whether the scene to change to is the main menu or not.
