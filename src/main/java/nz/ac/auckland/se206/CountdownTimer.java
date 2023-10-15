@@ -346,6 +346,7 @@ public class CountdownTimer {
    * Logic that occurs when the timer reaches 0 - sets the scene to the game over
    * scene. Only called when the timer reaches 0. This is because the timer is
    * only used in the treasure room.
+   *
    * @throws URISyntaxException  if the sound file is not found.
    */
   private void handleTimeOut() throws IOException, URISyntaxException {

@@ -76,7 +76,7 @@ public class MainMenuController {
   /**
    * Returns the number of hints the user has selected. 
    * -1 for unlimited hints, 5 for 5 hints and 0 for no hints.
-   * 
+   *
    * @return the number of hints the user has selected.
    */
   public static int getHints() {
@@ -86,7 +86,7 @@ public class MainMenuController {
   /**
    * Setting the number of hints that the user has selected.
    * Only used when loading a saved game.
-   * 
+   *
    * @param changedHints the nunber of hints to be changed to.
    */
   public static void setHints(int changedHints) {
@@ -96,7 +96,7 @@ public class MainMenuController {
   /**
    * Returning the items that the user has collected.
    * Only used when loading a saved game.
-   * 
+   *
    * @return the items that the user has collected.
    */
   public static Items getItems() {
@@ -106,7 +106,7 @@ public class MainMenuController {
   /**
    * Setting the items that the user has collected.
    * Every item that the user has added to the inventory themselves.
-   * 
+   *
    * @return the items that the user has collected.
    */
   public static Inventory getInventory() {
@@ -116,7 +116,7 @@ public class MainMenuController {
   /**
    * Returning the correct book needed for the user to complete the riddle.
    * Only used when loading a saved game.
-   * 
+   *
    * @return the correct book needed for the user to complete the riddle.
    */
   public static String getBook() {
@@ -126,7 +126,7 @@ public class MainMenuController {
   /**
    * Returning the chat handler. Only used when loading a saved game.
    * Chat handler is used to generate the chat messages.
-   * 
+   *
    * @return the chat handler.
    */
   public static ChatHandler getChatHandler() {
@@ -136,7 +136,7 @@ public class MainMenuController {
   /**
    * Returning the riddle that the user needs to solve. Only used when loading a 
    * saved game. Chat handler is used to generate the chat messages.
-   * 
+   *
    * @return the riddle that the user needs to solve.
    */
   public static ChatMessage getRiddle() {
@@ -146,7 +146,7 @@ public class MainMenuController {
   /**
    * Setting the riddle that the user needs to solve. Only used when loading a
    * saved game. Chat handler is used to generate the chat messages.
-   * 
+   *
    * @return the riddle that the user needs to solve.
    */
   public static String getResolvedMessage() {
@@ -156,7 +156,7 @@ public class MainMenuController {
   /**
    * Setting the riddle that the user needs to solve. Only used when loading a
    * saved game. Chat handler is used to generate the chat messages.
-   * 
+   *
    * @return the message that the user sees when they open the chest.
    */
   public static String getOpenedChestMessage() {
@@ -166,7 +166,7 @@ public class MainMenuController {
   /**
    * Setting the riddle that the user needs to solve. Only used when loading a
    * saved game. Chat handler is used to generate the chat messages.
-   * 
+   *
    * @return the items that the user has collected.
    */
   public static String getCollectedItemsMessage() {
@@ -176,7 +176,7 @@ public class MainMenuController {
   /**
    * Setting the riddle that the user needs to solve. Only used when loading a
    * saved game. Chat handler is used to generate the chat messages.
-   * 
+   *
    * @return the countdown timer.
    */
   public static CountdownTimer getCountdownTimer() {
@@ -308,7 +308,7 @@ public class MainMenuController {
   /**
    * Handles the mouse actions for the difficulty and time limit buttons. Only called when the
    * mouse enters the button. Only called when the mouse enters the button.
-   * 
+   *
    * @param difficultyBtn The difficulty button that the mouse is hovering over.
    * @param difficultyBtnClicked The boolean that represents whether the difficulty button is
    *                             clicked or not.
@@ -324,7 +324,7 @@ public class MainMenuController {
   /**
    * Handles the mouse actions for the difficulty and time limit buttons. Only called when the
    * mouse enters the button. Only called when the mouse enters the button.
-   * 
+   *
    * @param timeBtn The time limit button that the mouse is hovering over.
    * @param timeBtnClicked The boolean that represents whether the time limit button is
    *                      clicked or not.
@@ -340,7 +340,7 @@ public class MainMenuController {
   /**
    * Handles the hover on for the difficulty and time limit buttons. Only called when the
    * mouse enters the button.
-   * 
+   *
    * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
    * @param hint The hint that is displayed when the mouse hovers over the button.
    */
@@ -355,7 +355,7 @@ public class MainMenuController {
   /**
    * Handles the hover off for the difficulty and time limit buttons. Only called when the
    * mouse exits the button. Only called when the mouse enters the button.
-   * 
+   *
    * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
    * @param settingsBtnClicked The boolean that represents whether the difficulty or time limit
    *                          button is clicked or not.
@@ -372,7 +372,7 @@ public class MainMenuController {
   /**
    * Handles the hover on and off for the difficulty and time limit buttons. Only called when the
    * mouse enters the button. Only called when the mouse enters the button.
-   * 
+   *
    * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
    * @param hint The hint that is displayed when the mouse hovers over the button.
    */
@@ -386,7 +386,7 @@ public class MainMenuController {
   /**
    * Handles the hover off for the difficulty and time limit buttons. Only called when the
    * mouse exits the button. Only called when the mouse enters the button.
-   * 
+   *
    * @param settingsBtn The difficulty or time limit button that the mouse is hovering over.
    * @param settingsBtnClicked The boolean that represents whether the difficulty or time limit
    *                         button is clicked or not.
@@ -403,7 +403,7 @@ public class MainMenuController {
   /**
    * Displays the appropriate number of hints when hovering over a difficulty. Only called when the
    * mouse enters the button.
-   * 
+   *
    * @param gameDifficulty The difficulty that is selected when the button is clicked.
    */
   public void difficultySelect(Difficulty gameDifficulty) {
@@ -457,7 +457,7 @@ public class MainMenuController {
   /**
    * Displays the appropriate time limit when hovering over a time limit. Only called when the
    * mouse enters the button. Only called when the mouse enters the button.
-   * 
+   *
    * @param time The time limit that is selected when the button is clicked.
    */
   public void timeSelect(TimeLimit time) {
@@ -708,7 +708,7 @@ public class MainMenuController {
   /**
    * Appends intro message to the chat text area. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
-   * 
+   *
    * @param msg the chat message to append.
    */
   public void appendIntroMessage(ChatMessage msg, TextArea chatTextArea) {
@@ -731,7 +731,7 @@ public class MainMenuController {
    * Handles click off for after the intro message is displayed. Only called when the
    * continue button is clicked. Only called when the mouse enters the button. Clicking off
    * will let the user interact with the other buttons in the scene.
-   * 
+   *
    * @param event the mouse event.
    * @throws InterruptedException the exception thrown when the thread is interrupted.
    */
@@ -770,7 +770,7 @@ public class MainMenuController {
   /**
    * Generating a random book for the user to guess through the riddle. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
-   * 
+   *
    * @return the random book that the user needs to guess.
    */
   private String getRandomBook() {
@@ -782,7 +782,7 @@ public class MainMenuController {
   /**
    * Approprately disables or enables the difficulty buttons. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
-   * 
+   *
    * @param tf       stands for true of false, if true then disable buttons, if
    *                 false then enable buttons.
    * @param ocpacity the opacity of the buttons.
@@ -816,7 +816,7 @@ public class MainMenuController {
   /**
    * Approprately disables or enables the time buttons. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
-   * 
+   *
    * @param tf       stands for true of false, if true then disable buttons, if
    *                 false then enable buttons.
    * @param ocpacity the opacity of the buttons.
@@ -898,7 +898,7 @@ public class MainMenuController {
   }
 
   /**
-   *  Handles the time limit selection. Only called when the
+   * Handles the time limit selection. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
    */
   @FXML
@@ -994,7 +994,7 @@ public class MainMenuController {
   /**
    * Handles the start button to start the game. Only called when the
    * continue button is clicked. Only called when the mouse enters the button.
-   * 
+   *
    * @throws IOException the exception thrown when the file is not found.
    */
   @FXML
@@ -1035,7 +1035,7 @@ public class MainMenuController {
   /**
    * Handles the exit button. Only called when the exit button is clicked.
    * Only called when the mouse enters the button.
-   * 
+   *
    * @return the difficulty selected.
    */
   public Difficulty getDifficulty() {
@@ -1045,7 +1045,7 @@ public class MainMenuController {
   /**
    * Handles the exit button. Only called when the exit button is clicked.
    * Only called when the mouse enters the button.
-   * 
+   *
    * @return the time limit selected.
    */
   public TimeLimit getTimeLimit() {

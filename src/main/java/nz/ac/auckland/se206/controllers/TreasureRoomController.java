@@ -64,7 +64,7 @@ public class TreasureRoomController extends RoomController {
    * Changing scenes to the cauldron room. Only called when the left arrow is
    * clicked. This is because the right arrow is disabled. This is because
    * the treasure room is the last room in the game. 
-   * 
+   *
    * @param event Mouse event.
    */
   @FXML
@@ -81,7 +81,7 @@ public class TreasureRoomController extends RoomController {
   /**
    * Changing scenes to the chest room. Only called when the chest is clicked.
    * This is because the chest is the only way to get to the chest room.
-   * 
+   *
    * @param event Mouse event.
    */
   @FXML
@@ -97,6 +97,7 @@ public class TreasureRoomController extends RoomController {
   /** 
    * Changing scenes to book view. Only called when the book is clicked.
    * This is because the book is the only way to get to the book view.
+   *
    * @throws URISyntaxException If the sound file cannot be found.
    */
   @FXML
@@ -128,7 +129,7 @@ public class TreasureRoomController extends RoomController {
    * Switching the items in the treasure room when the chest is opened. This
    * is done by setting the opacity of the items to 0 or 1 depending on
    * whether the chest has been opened or not.
-   * 
+   *
    * @param chestOpened Boolean value for whether the chest has been opened.
    */
   @FXML
