@@ -450,7 +450,7 @@ public class MainMenuController {
   public void timeSelect(TimeLimit time) {
     timeSelected = true;
     switch (time) {
-        // Using the appropriate glow animation over the 2 minutes image
+      // Using the appropriate glow animation over the 2 minutes image
       case TWO_MIN:
         interactionHandler.glowThis(twoMinBtn);
         twoMinBtnClicked = true;
@@ -463,7 +463,7 @@ public class MainMenuController {
         sixMin.setOpacity(0);
         CountdownTimer.setTimerLimit("2:00");
         break;
-        // Using the appropriate glow animation over the 4 minutes image
+      // Using the appropriate glow animation over the 4 minutes image
       case FOUR_MIN:
         interactionHandler.glowThis(fourMinBtn);
         interactionHandler.unglowThis(twoMinBtn);
@@ -772,7 +772,6 @@ public class MainMenuController {
    * is clicked. Only called when the mouse enters the button.
    *
    * @param tf stands for true of false, if true then disable buttons, if false then enable buttons.
-   * @param ocpacity the opacity of the buttons.
    * @param fade stands for true of false, if true then fade buttons, if false then do not fade
    *     buttons.
    */
@@ -804,7 +803,6 @@ public class MainMenuController {
    * clicked. Only called when the mouse enters the button.
    *
    * @param tf stands for true of false, if true then disable buttons, if false then enable buttons.
-   * @param ocpacity the opacity of the buttons.
    * @param fade stands for true of false, if true then fade buttons, if false then do not fade
    *     buttons.
    */
