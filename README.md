@@ -2,7 +2,7 @@
 Project for SOFTENG 206 (Software Engineering Design 1) in Part II of our Software Engineering degree @The University of Auckland.
 
 # Project Video
-https://github.com/tonylxm/escAIpe-room-game-potioncraft/assets/126369686/2c44a28b-9aae-4cf7-8dd6-ae3fa40ef60f
+https://github.com/tonylxm/escAIpe-room-game-potioncraft/assets/126369686/6607e453-bb29-45e4-afe0-21edc7efb74d
 
 # Developers:
 - Tony Lim
@@ -18,7 +18,7 @@ https://github.com/tonylxm/escAIpe-room-game-potioncraft/assets/126369686/2c44a2
 - Design your own escape room and riddles to solve
 - Riddles and interactions must be generated programmatically by GPT
 - Presence of an intelligent 'Game Master' utilising OpenAI's API
-- Incorporate text-to-speech
+- Incorporate text-to-speech for accessibility
 - Application menu with difficulty levels and time limits
 - Inclusion of randomness in game design for replayability
 
