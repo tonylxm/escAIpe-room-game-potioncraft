@@ -45,6 +45,9 @@ https://github.com/tonylxm/escAIpe-room-game-potioncraft/assets/126369686/1ddb7d
 
  these are your credentials to invoke GradeStyle
 
+## Clone the repo into your IDE
+
+`git clone https://github.com/tonylxm/escAIpe-room-game-potioncraft.git`
 ## To run the game
 
 `./mvnw clean javafx:run`
